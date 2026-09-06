@@ -1,0 +1,136 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{--pink:#e8336f;--green:#34c759;--teal:#30b0c7;--purple:#af52de;--ink:#0b0b0f;--ink2:#5c5f66;--ink3:#8b8e95;--blue:#0a84ff}
+*{box-sizing:border-box}
+body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{width:520px;height:960px;padding:70px 74px;display:none}
+.wrap.show{display:block}
+.phone{position:relative;width:372px;height:762px;border-radius:56px;background:#101114;padding:12px;box-shadow:0 50px 90px rgba(11,11,15,.28),0 10px 26px rgba(11,11,15,.18)}
+.phone::after{content:"";position:absolute;inset:0;border-radius:56px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
+.screen{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#f5f6f8}
+.island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:104px;height:32px;border-radius:18px;background:#000;z-index:5}
+.status{position:absolute;top:18px;left:28px;right:28px;display:flex;justify-content:space-between;font-size:15px;font-weight:600;color:#0b0b0f;z-index:4}
+.status.w{color:#fff}
+/* ---- home dashboard */
+.home{padding:64px 18px 0}
+.home .hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.home .brand{display:flex;align-items:center;gap:8px;font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.home .brand img{width:30px;height:30px}
+.home .streak{border:1px solid #d9dbe2;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;color:var(--purple)}
+.home .date{font-size:12px;color:var(--ink3);font-weight:600;margin:4px 0 8px}
+.week{display:flex;justify-content:space-between;margin-bottom:14px}
+.week div{width:38px;text-align:center;font-size:10px;color:var(--ink3);font-weight:600}
+.week b{display:grid;place-items:center;width:34px;height:34px;margin:4px auto 0;border-radius:50%;border:1.5px dashed #cfd2da;font-size:12px;color:var(--ink);font-weight:700}
+.week .on b{border:3px solid var(--pink);border-style:solid}
+.card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.card .k{font-size:15px;font-weight:700;color:var(--ink)}
+.cal{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal .big{font-size:40px;font-weight:800;color:var(--pink);letter-spacing:-.03em;line-height:1}
+.cal .big small{font-size:15px;color:var(--ink3);font-weight:600;letter-spacing:0}
+.ring{width:84px;height:84px;border-radius:50%;background:conic-gradient(var(--pink) 0 25%,#f9dbe5 25% 100%);display:grid;place-items:center}
+.ring::after{content:"";width:58px;height:58px;border-radius:50%;background:#fff}
+.macros{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.mc{background:#fff;border-radius:18px;padding:12px 12px 10px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.mc .k{font-size:13px;font-weight:700;color:var(--ink)}
+.mc .v{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:2px 0 8px}
+.mc .v small{font-size:10px;color:var(--ink3);font-weight:600}
+.mc .r{width:46px;height:46px;border-radius:50%;margin:0 auto;display:grid;place-items:center}
+.mc .r::after{content:"";width:32px;height:32px;border-radius:50%;background:#fff}
+.mc.p .v{color:var(--green)}.mc.p .r{background:conic-gradient(var(--green) 0 6%,#dff5e4 6% 100%)}
+.mc.c .v{color:var(--teal)}.mc.c .r{background:conic-gradient(var(--teal) 0 35%,#dcf1f5 35% 100%)}
+.mc.f .v{color:var(--purple)}.mc.f .r{background:conic-gradient(var(--purple) 0 31%,#eee0f8 31% 100%)}
+.recent .t{font-size:17px;font-weight:800;letter-spacing:-.01em;margin:4px 0 10px;color:var(--ink)}
+.meal{display:flex;gap:12px;align-items:center;background:#fff;border-radius:18px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.meal img{width:70px;height:70px;border-radius:12px;object-fit:cover}
+.meal .n{font-size:14px;font-weight:700;color:var(--ink)}
+.meal .s{font-size:11px;color:var(--ink3);margin:2px 0}
+.meal .c{font-size:15px;font-weight:800;color:var(--pink)}
+.meal .m{font-size:10.5px;color:var(--ink2);font-weight:600}
+.tab{position:absolute;left:14px;right:14px;bottom:18px;height:64px;background:#fff;border-radius:999px;box-shadow:0 8px 24px rgba(11,11,15,.12);display:flex;align-items:center;justify-content:space-around;font-size:10px;font-weight:700;color:var(--ink2)}
+.tab .fab{width:58px;height:58px;border-radius:50%;background:var(--blue);color:#fff;font-size:30px;display:grid;place-items:center;margin-top:-26px;box-shadow:0 10px 20px rgba(10,132,255,.35)}
+.tab .on{color:var(--blue)}
+/* ---- result (breakdown) */
+.res .ph{height:250px;overflow:hidden}
+.res .ph img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.res .nav{position:absolute;top:66px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff;font-weight:600;font-size:16px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.res .nav .c{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:17px}
+.sheet{position:absolute;left:0;right:0;top:226px;bottom:0;background:#f5f6f8;border-radius:32px 32px 0 0;padding:18px 18px 0}
+.sheet .time{font-size:11px;color:var(--ink3);font-weight:700}
+.sheet .ttl{font-size:21px;font-weight:800;letter-spacing:-.02em;margin:2px 0 12px;color:var(--ink)}
+.rows{background:#fff;border-radius:18px;padding:2px 14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.row{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;padding:10px 0;border-top:1px solid #eef0f3;color:var(--ink)}
+.row:first-child{border-top:0}
+.row b{margin-left:auto;font-weight:800}
+.row small{font-size:11px;color:var(--ink3);font-weight:600}
+.row .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.items-h{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink2);margin:14px 0 8px}
+.items-h span{background:#e9eaee;border-radius:999px;padding:1px 8px;font-size:11px}
+.rows.items .row b{color:var(--pink)}
+.fix{margin-top:14px;background:#0b0b0f;color:#fff;border-radius:999px;text-align:center;padding:14px;font-size:15px;font-weight:700}
+/* ---- scanner */
+.scan .screen{background:#000}
+.scan .screen>img{width:100%;height:100%;object-fit:cover;display:block}
+.scan .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.62) 100%)}
+.scan .top{position:absolute;top:66px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff}
+.scan .top .c{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:17px}
+.scan .top .t{display:flex;align-items:center;gap:7px;font-weight:700;font-size:18px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.scan .top .t img{width:20px;height:20px}
+.br{position:absolute;left:50px;right:50px;top:215px;height:315px}
+.br i{position:absolute;width:48px;height:48px;border:3.5px solid #fff}
+.br i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
+.br i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-radius:0 12px 0 0}
+.br i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-radius:0 0 0 12px}
+.br i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 12px 0}
+.modes{position:absolute;left:16px;right:16px;bottom:124px;display:flex;gap:7px}
+.modes span{flex:1;text-align:center;font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.2);border-radius:16px;padding:12px 0}
+.modes span.on{background:#fff;color:#0b0b0f}
+.shutter{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:70px;height:70px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.35)}
+.homebar{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.75)}
+.homebar.d{background:#0b0b0f;opacity:.8}
+</style></head><body>
+<div class="wrap" id="home"><div class="phone"><div class="screen">
+  <div class="island"></div><div class="status"><span>9:41</span><span>●●● ⌂ ▮</span></div>
+  <div class="home">
+    <div class="hdr"><div class="brand"><img src="mark-black.png">Eat IQ</div><div class="streak">🔥 12</div></div>
+    <div class="date">Sep 6 – 12</div>
+    <div class="week"><div>Sun<b>6</b></div><div>Mon<b>7</b></div><div>Tue<b>8</b></div><div>Wed<b>9</b></div><div>Thu<b>10</b></div><div class="on">Fri<b>11</b></div><div>Sat<b>12</b></div></div>
+    <div class="card" style="margin-bottom:12px"><div class="k">Calories</div><div class="cal"><div class="big">615<small> /2,450 CAL</small></div><div class="ring"></div></div></div>
+    <div class="macros"><div class="mc p"><div class="k">Protein</div><div class="v">11<small>/191g</small></div><div class="r"></div></div><div class="mc c"><div class="k">Carbs</div><div class="v">93<small>/268g</small></div><div class="r"></div></div><div class="mc f"><div class="k">Fat</div><div class="v">21<small>/68g</small></div><div class="r"></div></div></div>
+    <div class="recent"><div class="t">Recently uploaded</div><div class="meal"><img src="food.jpg"><div><div class="n">Pancakes with blueberries</div><div class="s">Pancakes · Syrup · Blueberries</div><div class="c">615 <span style="font-size:10px;color:#8b8e95">CAL</span></div><div class="m">P 11g · C 93g · F 21g</div></div></div></div>
+  </div>
+  <div class="tab"><span class="on">⌂<br>Home</span><span>▮▮<br>Progress</span><span class="fab">+</span><span>✦<br>Streaks</span><span>●<br>Profile</span></div>
+</div></div></div>
+
+<div class="wrap" id="result"><div class="phone"><div class="screen res">
+  <div class="ph"><img src="food.jpg"></div>
+  <div class="island"></div><div class="status w"><span>9:41</span><span>●●● ⌂ ▮</span></div>
+  <div class="nav"><span class="c">←</span><span></span><span class="c">···</span></div>
+  <div class="sheet">
+    <div class="time">9:41 AM · BREAKFAST</div>
+    <div class="ttl">Pancakes with blueberries &amp; syrup</div>
+    <div class="rows">
+      <div class="row"><span class="dot" style="background:var(--pink)"></span>Calories<b>615 <small>cal</small></b></div>
+      <div class="row"><span class="dot" style="background:var(--green)"></span>Protein<b>11 <small>g</small></b></div>
+      <div class="row"><span class="dot" style="background:var(--teal)"></span>Carbs<b>93 <small>g</small></b></div>
+      <div class="row"><span class="dot" style="background:var(--purple)"></span>Fat<b>21 <small>g</small></b></div>
+    </div>
+    <div class="items-h">Items <span>3</span></div>
+    <div class="rows items">
+      <div class="row">Pancakes <small>3 · 240g</small><b>595 <small>cal</small></b></div>
+      <div class="row">Syrup <small>1 tbsp</small><b>12 <small>cal</small></b></div>
+      <div class="row">Blueberries <small>15g</small><b>8 <small>cal</small></b></div>
+    </div>
+    <div class="fix">✎ Fix results</div>
+  </div>
+  <div class="homebar d"></div>
+</div></div></div>
+
+<div class="wrap" id="scan"><div class="phone scan"><div class="screen">
+  <img src="food3.jpg">
+  <div class="shade"></div><div class="island"></div><div class="status w"><span>9:41</span><span>●●● ⌂ ▮</span></div>
+  <div class="top"><span class="c">←</span><span class="t"><img src="mark-white.png">Scanner</span><span class="c">···</span></div>
+  <div class="br"><i></i><i></i><i></i><i></i></div>
+  <div class="modes"><span class="on">Scan Food</span><span>Barcode</span><span>Food label</span></div>
+  <div class="shutter"></div><div class="homebar"></div>
+</div></div></div>
+<script>document.getElementById(location.hash.slice(1)||'home').classList.add('show')</script>
+</body></html>
