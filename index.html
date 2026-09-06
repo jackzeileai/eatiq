@@ -116,22 +116,19 @@
   /* why: Eat IQ vs a typical tracker */
   .why{background:var(--ink);color:#fff;border-radius:40px;margin:0 20px}
   .why h2{color:#fff;font-size:44px;max-width:16em;margin-left:auto;margin-right:auto}
-  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:980px;margin:0 auto}
-  .vcard{border-radius:28px;padding:34px 34px 30px}
-  .vcard.good{background:#fff;color:var(--ink)}
-  .vcard.bad{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
-  .vh{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px;opacity:.55}
-  .vcard.good .vh{opacity:1;color:var(--ink3)}
-  .vcard ul{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-  .vcard li{display:flex;align-items:center;gap:14px;font-size:24px;font-weight:800;letter-spacing:-.025em;line-height:1.15}
-  .vcard li::before{content:"";flex:none;width:30px;height:30px;border-radius:50%}
-  .vcard.good li::before{background:var(--green);-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><circle cx='15' cy='15' r='15' fill='black'/><path d='M9 15.5l4 4 8-8.5' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><circle cx='15' cy='15' r='15' fill='black'/><path d='M9 15.5l4 4 8-8.5' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
-  .vcard.bad li::before{background:#ff453a;opacity:.9;-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><circle cx='15' cy='15' r='15' fill='black'/><path d='M10.5 10.5l9 9M19.5 10.5l-9 9' stroke='white' stroke-width='3' stroke-linecap='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><circle cx='15' cy='15' r='15' fill='black'/><path d='M10.5 10.5l9 9M19.5 10.5l-9 9' stroke='white' stroke-width='3' stroke-linecap='round'/></svg>") center/contain no-repeat}
-  .vcard.bad li{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.35);text-decoration-thickness:2px}
-  .vt{margin-top:28px;padding-top:22px;border-top:1px solid rgba(0,0,0,.08);font-size:40px;font-weight:900;letter-spacing:-.04em}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:960px;margin:0 auto}
+  .vcard{border-radius:28px;padding:36px 36px 32px}
+  .vcard.good{background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(255,255,255,.4)}
+  .vcard.bad{background:#17171b;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
+  .vh{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:24px;color:var(--ink3)}
+  .vcard.bad .vh{color:rgba(255,255,255,.4)}
+  .vcard ul{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+  .vcard li{display:flex;align-items:center;gap:14px;font-size:23px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .vcard .ic{flex:none;width:28px;height:28px}
+  .vt{margin-top:30px;padding-top:24px;border-top:1px solid rgba(0,0,0,.08);font-size:44px;font-weight:900;letter-spacing:-.045em;line-height:1}
   .vcard.good .vt{color:var(--green)}
-  .vcard.bad .vt{border-top-color:rgba(255,255,255,.1);color:rgba(255,255,255,.4)}
-  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:12px}.why{margin:0 12px;border-radius:28px}.why h2{font-size:30px}.vcard{padding:26px 24px 22px}.vcard li{font-size:20px}.vt{font-size:32px}}
+  .vcard.bad .vt{border-top-color:rgba(255,255,255,.08);color:rgba(255,255,255,.3)}
+  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:12px}.why{margin:0 12px;border-radius:28px}.why h2{font-size:30px}.vcard{padding:26px 24px 22px}.vcard li{font-size:19px}.vt{font-size:34px}}
 
   /* faq */
   .faq{max-width:760px;margin:0 auto}
@@ -184,7 +181,7 @@
         <span class="fine">Free to download · 3-day free trial of Pro</span>
       </div>
     </div>
-    <img class="hero-img" src="assets/hero-v12.webp" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2257" height="1986" fetchpriority="high">
+    <img class="hero-img" src="assets/hero-v13.webp" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2405" height="1984" fetchpriority="high">
   </div>
 </header>
 
@@ -214,7 +211,7 @@
         <p>Pancakes, syrup, blueberries — each with its own weight and calories. When one line looks off, fix that line instead of throwing out the whole estimate.</p>
         <ul><li>Retune portions in grams, ounces, cups or the food's own unit</li><li>Macros update with every edit</li><li>Corrections are remembered next time</li></ul>
       </div>
-      <div class="art"><img src="assets/hand-result-v12.webp" alt="A hand holding an iPhone showing a scanned plate of pancakes broken down into ingredients" loading="lazy" width="1100" height="1375"></div>
+      <div class="art"><img src="assets/hand-result-v13.webp" alt="A hand holding an iPhone showing a scanned plate of pancakes broken down into ingredients" loading="lazy" width="1100" height="1375"></div>
     </div>
 
     <div class="feat flip">
@@ -224,7 +221,7 @@
         <p>Calories and macros as rings that fill as you eat. Streaks earned from what you actually logged, not from opening the app.</p>
         <ul><li>Rollover: up to 200 unused calories carry into tomorrow</li><li>Progress by week, month or year</li><li>Light and dark themes</li></ul>
       </div>
-      <div class="art"><img src="assets/hand-home-v12.webp" alt="A hand holding an iPhone showing the Eat IQ home screen with calorie and macro rings" loading="lazy" width="1100" height="1375"></div>
+      <div class="art"><img src="assets/hand-home-v13.webp" alt="A hand holding an iPhone showing the Eat IQ home screen with calorie and macro rings" loading="lazy" width="1100" height="1375"></div>
     </div>
 
     <div class="feat">
@@ -234,7 +231,7 @@
         <p>Scan a barcode or a nutrition label. Search brands, restaurant menu items and whole foods. Type or say "two eggs and toast" and get the same breakdown.</p>
         <ul><li>Apple Health sync that carries edits and deletes across</li><li>Re-log anything from your Frequent list in one tap</li><li>Your meals back up to your account</li></ul>
       </div>
-      <div class="art"><img src="assets/hand-search-v12.webp" alt="A hand holding an iPhone showing food search results for chicken breast" loading="lazy" width="1100" height="1375"></div>
+      <div class="art"><img src="assets/hand-search-v13.webp" alt="A hand holding an iPhone showing food search results for chicken breast" loading="lazy" width="1100" height="1375"></div>
     </div>
 
     <div class="midcta">
@@ -252,20 +249,20 @@
       <div class="vcard good">
         <div class="vh"><img src="assets/mark-black.png" alt="" width="20" height="20">Eat IQ</div>
         <ul>
-          <li>Snap a photo</li>
-          <li>Every ingredient, listed</li>
-          <li>Fix any line</li>
-          <li>Synced to Apple Health</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Snap a photo</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Every ingredient, listed</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Fix any line</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Synced to Apple Health</li>
         </ul>
         <div class="vt">10 seconds</div>
       </div>
       <div class="vcard bad">
         <div class="vh">Typical tracker</div>
         <ul>
-          <li>Search a database</li>
-          <li>Guess the serving size</li>
-          <li>Repeat for every ingredient</li>
-          <li>Give up on the sauce</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>Search a database</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>Guess the serving size</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>Repeat for every ingredient</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>Give up on the sauce</li>
         </ul>
         <div class="vt">4 minutes</div>
       </div>
@@ -293,7 +290,7 @@
     <p>Free to download. Three days of Pro on us. Cancel anytime.</p>
     <a class="badge xl" href="https://geteatiq.com/download" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
     <div class="fine">By subscribing you agree to our <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>. iPhone, iOS 18 or later.</div>
-    <img class="art" src="assets/hero-v12.webp" alt="" loading="lazy">
+    <img class="art" src="assets/hero-v13.webp" alt="" loading="lazy">
   </div></div>
 </section>
 
