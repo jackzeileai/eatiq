@@ -45,7 +45,7 @@
 
   /* hero */
   .hero{padding:48px 0 0;overflow:hidden}
-  .hero .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:center}
+  .hero .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:12px;align-items:center}
   .kicker{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin:0 0 18px}
   h1{font-size:66px;line-height:1.0;letter-spacing:-.045em;margin:0 0 22px;font-weight:900;text-wrap:balance}
   h1 span{color:var(--ink3);font-weight:800}
@@ -79,15 +79,15 @@
   .sec-h p{color:var(--ink2);font-size:19px;margin:0}
 
   /* dishes: in-app result screens, one per plate. Snap-scrolls on phones, fits in a row on desktop */
-  .dishes{display:flex;gap:22px;padding:8px 28px 24px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1280px;margin:0 auto}
+  .dishes{display:flex;gap:6px;padding:8px 28px 24px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1400px;margin:0 auto}
   .dishes::-webkit-scrollbar{display:none}
-  .dish{flex:0 0 218px;scroll-snap-align:center;text-align:center}
+  .dish{flex:0 0 262px;scroll-snap-align:center;text-align:center}
   .dish img{width:100%;height:auto;transition:transform .35s ease}
   .dish:hover img{transform:translateY(-6px)}
   .dish span{display:block;margin-top:10px;font-size:15px;font-weight:800;letter-spacing:-.01em}
   .dish span small{display:block;font-size:13px;font-weight:600;color:var(--ink3)}
-  @media (min-width:1240px){.dishes{justify-content:center;overflow:visible}}
-  @media (max-width:760px){.dishes{gap:14px;padding:4px 20px 16px}.dish{flex:0 0 66vw;max-width:260px}}
+  @media (min-width:1360px){.dishes{justify-content:center;overflow:visible}}
+  @media (max-width:760px){.dishes{gap:4px;padding:4px 16px 16px}.dish{flex:0 0 74vw;max-width:300px}}
 
   /* feature rows */
   .feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:36px 0}
@@ -168,7 +168,7 @@
         <span class="fine">Free to download · 3-day free trial of Pro</span>
       </div>
     </div>
-    <img class="hero-img" src="assets/hero.webp" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2410" height="2092" fetchpriority="high">
+    <img class="hero-img" src="assets/hero-v3.webp" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2410" height="2092" fetchpriority="high">
   </div>
 </header>
 
@@ -256,7 +256,7 @@
     <p>Free to download. Three days of Pro on us. Cancel anytime.</p>
     <a class="badge xl" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
     <div class="fine">By subscribing you agree to our <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>. iPhone, iOS 18 or later.</div>
-    <img class="art" src="assets/hero.webp" alt="" loading="lazy">
+    <img class="art" src="assets/hero-v3.webp" alt="" loading="lazy">
   </div></div>
 </section>
 
