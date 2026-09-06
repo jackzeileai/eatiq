@@ -82,9 +82,9 @@
   .dishes{display:flex;gap:26px;padding:8px 28px 24px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1440px;margin:0 auto}
   .dishes::-webkit-scrollbar{display:none}
   .dish{flex:0 0 226px;scroll-snap-align:center;text-align:center}
-  .dish img{width:100%;height:auto;transition:transform .35s ease;filter:drop-shadow(0 26px 34px rgba(11,11,15,.20))}
+  .dish img{width:100%;height:auto;transition:transform .35s ease}
   .dish:hover img{transform:translateY(-6px)}
-  .dish span{display:block;margin-top:34px;font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .dish span{display:block;margin-top:18px;font-size:15px;font-weight:800;letter-spacing:-.01em}
   .dish span small{display:block;font-size:13px;font-weight:600;color:var(--ink3)}
   @media (min-width:1380px){.dishes{justify-content:center;overflow:visible}}
   @media (max-width:760px){.dishes{gap:16px;padding:4px 20px 24px}.dish{flex:0 0 66vw;max-width:280px}}
@@ -100,7 +100,7 @@
   .feat li::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);margin-top:1px;
     -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><circle cx='11' cy='11' r='11' fill='black'/><path d='M6.5 11.5l3 3L15.5 8.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><circle cx='11' cy='11' r='11' fill='black'/><path d='M6.5 11.5l3 3L15.5 8.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
   .feat .art{position:relative;border-radius:var(--r);background:var(--bg2);min-height:640px;display:grid;place-items:center;overflow:hidden;padding:40px 0}
-  .feat .art img{width:min(66%,300px);height:auto;filter:drop-shadow(0 30px 40px rgba(11,11,15,.22))}
+  .feat .art img{width:min(66%,300px);height:auto}
   .feat .art.pink{background:linear-gradient(160deg,#ffe9f0,#fff5f8)}
   .feat .art.mint{background:linear-gradient(160deg,#e6f8ec,#f3fbf6)}
   .feat .art.sky{background:linear-gradient(160deg,#e4f4f8,#f2fafc)}
@@ -174,7 +174,7 @@
         <span class="fine">Free to download · 3-day free trial of Pro</span>
       </div>
     </div>
-    <img class="hero-img" src="assets/hero-v5.webp" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2461" height="2130" fetchpriority="high">
+    <img class="hero-img" src="assets/hero-v7.webp" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2399" height="2000" fetchpriority="high">
   </div>
 </header>
 
@@ -187,11 +187,11 @@
     <div class="sec-h"><div class="kicker">Any plate</div><h2>Whatever you're actually eating.</h2><p>Home cooking, takeout, a restaurant, a packaged snack. Point the camera and this is what comes back.</p></div>
   </div>
   <div class="dishes" role="list">
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-burger-v6.webp" alt="Cheeseburger and fries broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Cheeseburger &amp; fries<small>1,140 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-poke-v6.webp" alt="Salmon poke bowl broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Salmon poke bowl<small>640 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-pasta-v6.webp" alt="Pasta carbonara broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Carbonara<small>780 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-toast-v6.webp" alt="Avocado toast broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Avocado toast<small>420 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-sushi-v6.webp" alt="Sushi platter broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Sushi platter<small>560 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-burger-v7.webp" alt="Cheeseburger and fries broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Cheeseburger &amp; fries<small>1,140 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-poke-v7.webp" alt="Salmon poke bowl broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Salmon poke bowl<small>640 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-pasta-v7.webp" alt="Pasta carbonara broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Carbonara<small>780 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-toast-v7.webp" alt="Avocado toast broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Avocado toast<small>420 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-sushi-v7.webp" alt="Sushi platter broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Sushi platter<small>560 cal</small></span></a>
   </div>
 </section>
 
@@ -206,7 +206,7 @@
         <p>Pancakes, syrup, blueberries — each with its own weight and calories. When one line looks off, fix that line instead of throwing out the whole estimate.</p>
         <ul><li>Retune portions in grams, ounces, cups or the food's own unit</li><li>Macros update with every edit</li><li>Corrections are remembered next time</li></ul>
       </div>
-      <div class="art pink"><img src="assets/phone-result-v6.webp" alt="Meal breakdown screen" loading="lazy"></div>
+      <div class="art pink"><img src="assets/phone-result-v7.webp" alt="Meal breakdown screen" loading="lazy"></div>
     </div>
 
     <div class="feat flip">
@@ -216,7 +216,7 @@
         <p>Calories and macros as rings that fill as you eat. Streaks earned from what you actually logged, not from opening the app.</p>
         <ul><li>Rollover: up to 200 unused calories carry into tomorrow</li><li>Progress by week, month or year</li><li>Light and dark themes</li></ul>
       </div>
-      <div class="art mint"><img src="assets/phone-home-v6.webp" alt="Home screen with calorie and macro rings" loading="lazy"></div>
+      <div class="art mint"><img src="assets/phone-home-v7.webp" alt="Home screen with calorie and macro rings" loading="lazy"></div>
     </div>
 
     <div class="feat">
@@ -226,7 +226,7 @@
         <p>Scan a barcode or a nutrition label. Search brands, restaurant menu items and whole foods. Type or say "two eggs and toast" and get the same breakdown.</p>
         <ul><li>Apple Health sync that carries edits and deletes across</li><li>Re-log anything from your Frequent list in one tap</li><li>Your meals back up to your account</li></ul>
       </div>
-      <div class="art sky"><img src="assets/phone-scan-v6.webp" alt="Scanner screen" loading="lazy"></div>
+      <div class="art sky"><img src="assets/phone-scan-v7.webp" alt="Scanner screen" loading="lazy"></div>
     </div>
 
     <div class="midcta">
@@ -268,7 +268,7 @@
     <p>Free to download. Three days of Pro on us. Cancel anytime.</p>
     <a class="badge xl" href="https://geteatiq.com/download" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
     <div class="fine">By subscribing you agree to our <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>. iPhone, iOS 18 or later.</div>
-    <img class="art" src="assets/hero-v5.webp" alt="" loading="lazy">
+    <img class="art" src="assets/hero-v7.webp" alt="" loading="lazy">
   </div></div>
 </section>
 

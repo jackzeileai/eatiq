@@ -2,16 +2,16 @@
 :root{--pink:#e8336f;--green:#34c759;--teal:#30b0c7;--purple:#af52de;--ink:#0b0b0f;--ink2:#5c5f66;--ink3:#8b8e95;--blue:#0a84ff}
 *{box-sizing:border-box}
 body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{width:620px;height:1140px;padding:90px 124px;display:none}
+.wrap{width:402px;height:874px;padding:0;display:none}
 .wrap.show{display:block}
-.phone{position:relative;width:372px;height:762px;border-radius:56px;background:#101114;padding:12px;box-shadow:0 50px 90px rgba(11,11,15,.28),0 10px 26px rgba(11,11,15,.18)}
-.phone::after{content:"";position:absolute;inset:0;border-radius:56px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
-.screen{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#f5f6f8}
-.island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:104px;height:32px;border-radius:18px;background:#000;z-index:5}
-.status{position:absolute;top:18px;left:28px;right:28px;display:flex;justify-content:space-between;font-size:15px;font-weight:600;color:#0b0b0f;z-index:4}
+.phone{position:relative;width:402px;height:874px;border-radius:0;background:none;padding:0;box-shadow:none}
+.phone::after{display:none}
+.screen{position:relative;width:100%;height:100%;border-radius:0;overflow:hidden;background:#f5f6f8}
+.island{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:126px;height:37px;border-radius:20px;background:#000;z-index:5}
+.status{position:absolute;top:22px;left:34px;right:34px;display:flex;justify-content:space-between;font-size:15px;font-weight:600;color:#0b0b0f;z-index:4}
 .status.w{color:#fff}
 /* ---- home dashboard */
-.home{padding:64px 18px 0}
+.home{padding:76px 20px 0}
 .home .hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .home .brand{display:flex;align-items:center;gap:8px;font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
 .home .brand img{width:30px;height:30px}
@@ -45,19 +45,19 @@ body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFon
 .meal .s{font-size:11px;color:var(--ink3);margin:2px 0}
 .meal .c{font-size:15px;font-weight:800;color:var(--pink)}
 .meal .m{font-size:10.5px;color:var(--ink2);font-weight:600}
-.tab{position:absolute;left:14px;right:14px;bottom:18px;height:64px;background:#fff;border-radius:999px;box-shadow:0 8px 24px rgba(11,11,15,.12);display:flex;align-items:center;justify-content:space-around;font-size:10px;font-weight:700;color:var(--ink2)}
+.tab{position:absolute;left:16px;right:16px;bottom:24px;height:68px;background:#fff;border-radius:999px;box-shadow:0 8px 24px rgba(11,11,15,.12);display:flex;align-items:center;justify-content:space-around;font-size:10px;font-weight:700;color:var(--ink2)}
 .tab .fab{width:58px;height:58px;border-radius:50%;background:var(--blue);color:#fff;font-size:30px;display:grid;place-items:center;margin-top:-26px;box-shadow:0 10px 20px rgba(10,132,255,.35)}
 .tab .on{color:var(--blue)}
 /* ---- result (breakdown) */
-.res .ph{height:250px;overflow:hidden}
+.res .ph{height:300px;overflow:hidden}
 .res .ph img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
-.res .nav{position:absolute;top:66px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff;font-weight:600;font-size:16px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.res .nav{position:absolute;top:74px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff;font-weight:600;font-size:16px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
 .res .nav .c{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:17px}
-.sheet{position:absolute;left:0;right:0;top:226px;bottom:0;background:#f5f6f8;border-radius:32px 32px 0 0;padding:18px 18px 0}
+.sheet{position:absolute;left:0;right:0;top:272px;bottom:0;background:#f5f6f8;border-radius:32px 32px 0 0;padding:18px 18px 0}
 .sheet .time{font-size:11px;color:var(--ink3);font-weight:700}
 .sheet .ttl{font-size:21px;font-weight:800;letter-spacing:-.02em;margin:2px 0 12px;color:var(--ink)}
 .rows{background:#fff;border-radius:18px;padding:2px 14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
-.row{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;padding:10px 0;border-top:1px solid #eef0f3;color:var(--ink)}
+.row{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;padding:12px 0;border-top:1px solid #eef0f3;color:var(--ink)}
 .row:first-child{border-top:0}
 .row b{margin-left:auto;font-weight:800}
 .row small{font-size:11px;color:var(--ink3);font-weight:600}
@@ -70,22 +70,41 @@ body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFon
 .scan .screen{background:#000}
 .scan .screen>img{width:100%;height:100%;object-fit:cover;display:block}
 .scan .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.62) 100%)}
-.scan .top{position:absolute;top:66px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff}
+.scan .top{position:absolute;top:74px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff}
 .scan .top .c{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:17px}
 .scan .top .t{display:flex;align-items:center;gap:7px;font-weight:700;font-size:18px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
 .scan .top .t img{width:20px;height:20px}
-.br{position:absolute;left:50px;right:50px;top:215px;height:315px}
+.br{position:absolute;left:54px;right:54px;top:250px;height:360px}
 .br i{position:absolute;width:48px;height:48px;border:3.5px solid #fff}
 .br i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
 .br i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-radius:0 12px 0 0}
 .br i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-radius:0 0 0 12px}
 .br i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 12px 0}
-.modes{position:absolute;left:16px;right:16px;bottom:124px;display:flex;gap:7px}
+.modes{position:absolute;left:18px;right:18px;bottom:140px;display:flex;gap:7px}
 .modes span{flex:1;text-align:center;font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.2);border-radius:16px;padding:12px 0}
 .modes span.on{background:#fff;color:#0b0b0f}
-.shutter{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:70px;height:70px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.35)}
+.shutter{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);width:70px;height:70px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.35)}
 .homebar{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.75)}
 .homebar.d{background:#0b0b0f;opacity:.8}
+
+.tag{display:inline-block;background:#e8e9ee;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700;color:#5c5f66;margin-bottom:10px}
+.ttl2{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.ttl2 h3{margin:0;font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.15;color:var(--ink)}
+.step{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e6e7ec;border-radius:999px;padding:7px 13px;font-size:15px;font-weight:700;color:var(--ink);white-space:nowrap}
+.step span{color:#8b8e95;font-weight:600}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.tile{background:#fff;border-radius:18px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.tile .ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.tile .k{font-size:13px;color:#8b8e95;font-weight:600}
+.tile .v{font-size:19px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+.tile .ic.cal{background:#fde7ee}.tile .ic.pro{background:#e3f7e8}.tile .ic.car{background:#e2f4f8}.tile .ic.fat{background:#f1e6fa}
+.ic i{width:13px;height:13px;border-radius:50%;display:block}
+.ic.cal i{background:var(--pink)}.ic.pro i{background:var(--green)}.ic.car i{background:var(--teal)}.ic.fat i{background:var(--purple)}
+.btns{display:flex;gap:12px;margin-top:18px}
+.btns div{flex:1;text-align:center;border-radius:999px;padding:15px 0;font-size:15px;font-weight:700}
+.btns .fixb{background:#fff;border:1px solid #e6e7ec;color:var(--ink)}
+.btns .done{background:#0b0b0f;color:#fff}
+.home2{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:130px;height:5px;border-radius:3px;background:#0b0b0f;opacity:.8}
 </style></head><body>
 <div class="wrap" id="home"><div class="phone"><div class="screen">
   <div class="island"></div><div class="status"><span>9:41</span><span>●●● ⌂ ▮</span></div>
@@ -126,6 +145,32 @@ body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFon
 
 <div class="wrap" id="scan"><div class="phone scan"><div class="screen">
   <img src="food3.jpg">
+  <div class="shade"></div><div class="island"></div><div class="status w"><span>9:41</span><span>●●● ⌂ ▮</span></div>
+  <div class="top"><span class="c">←</span><span class="t"><img src="mark-white.png">Scanner</span><span class="c">···</span></div>
+  <div class="br"><i></i><i></i><i></i><i></i></div>
+  <div class="modes"><span class="on">Scan Food</span><span>Barcode</span><span>Food label</span></div>
+  <div class="shutter"></div><div class="homebar"></div>
+</div></div></div>
+
+<div class="wrap" id="nutri"><div class="phone"><div class="screen res">
+  <div class="ph" style="height:340px"><img src="food.jpg"></div>
+  <div class="island"></div><div class="status w"><span>9:41</span><span>●●● ⌂ ▮</span></div>
+  <div class="nav"><span class="c">←</span><span>Nutrition</span><span class="c">···</span></div>
+  <div class="sheet" style="top:308px;padding:22px 20px 0">
+    <span class="tag">Breakfast</span>
+    <div class="ttl2"><h3>Pancakes with blueberries &amp; syrup</h3><div class="step"><span>−</span>1<span>+</span></div></div>
+    <div class="tiles">
+      <div class="tile"><span class="ic cal"><i></i></span><div><div class="k">Calories</div><div class="v">615</div></div></div>
+      <div class="tile"><span class="ic car"><i></i></span><div><div class="k">Carbs</div><div class="v">93g</div></div></div>
+      <div class="tile"><span class="ic pro"><i></i></span><div><div class="k">Protein</div><div class="v">11g</div></div></div>
+      <div class="tile"><span class="ic fat"><i></i></span><div><div class="k">Fat</div><div class="v">21g</div></div></div>
+    </div>
+    <div class="btns"><div class="fixb">✎ Fix results</div><div class="done">Done</div></div>
+  </div>
+  <div class="home2"></div>
+</div></div></div>
+<div class="wrap" id="scanpk"><div class="phone scan"><div class="screen">
+  <img src="food.jpg">
   <div class="shade"></div><div class="island"></div><div class="status w"><span>9:41</span><span>●●● ⌂ ▮</span></div>
   <div class="top"><span class="c">←</span><span class="t"><img src="mark-white.png">Scanner</span><span class="c">···</span></div>
   <div class="br"><i></i><i></i><i></i><i></i></div>
