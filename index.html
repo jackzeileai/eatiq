@@ -114,7 +114,8 @@
 
   /* why: old way vs Eat IQ */
   .why{background:var(--ink);color:#fff;border-radius:40px;margin:0 20px}
-  .why h2{color:#fff}
+  .why h2{color:#fff;font-size:44px;max-width:16em;margin-left:auto;margin-right:auto}
+  @media (max-width:760px){.why h2{font-size:30px}}
   .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1000px;margin:0 auto}
   .vcard{border-radius:26px;padding:30px 30px 26px;display:flex;flex-direction:column}
   .vcard.old{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
