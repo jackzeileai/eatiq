@@ -112,16 +112,33 @@
   .midcta .fine{font-size:14px;color:var(--ink3);font-weight:500}
   @media (max-width:760px){.midcta{padding:32px 0 0}.midcta h3{font-size:28px}}
 
-  /* why */
+  /* why: old way vs Eat IQ */
   .why{background:var(--ink);color:#fff;border-radius:40px;margin:0 20px}
   .why h2{color:#fff}
-  .why .sec-h p{color:rgba(255,255,255,.65)}
-  .why3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .wcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:30px 28px}
-  .wcard .n{font-size:44px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:14px;background:linear-gradient(90deg,#fff,#9a9ba3);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .wcard h3{margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-.02em}
-  .wcard p{margin:0;color:rgba(255,255,255,.65);font-size:16px}
-  @media (max-width:800px){.why3{grid-template-columns:1fr;gap:12px}.why{margin:0 12px;border-radius:28px}.wcard{padding:24px 22px}.wcard .n{font-size:36px}}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1000px;margin:0 auto}
+  .vcard{border-radius:26px;padding:30px 30px 26px;display:flex;flex-direction:column}
+  .vcard.old{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
+  .vcard.new{background:#fff;color:var(--ink)}
+  .vh{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-bottom:18px}
+  .vcard.new .vh{opacity:1;color:var(--ink3)}
+  .vcard.new .vh img{width:18px;height:18px;filter:invert(1)}
+  .vcard ol{list-style:none;margin:0;padding:0;counter-reset:st}
+  .vcard ol li{counter-increment:st;display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-top:1px solid rgba(255,255,255,.08);font-size:16.5px;line-height:1.4}
+  .vcard.new ol li{border-top-color:var(--line);font-size:22px;font-weight:800;letter-spacing:-.02em;padding:16px 0}
+  .vcard ol li::before{content:counter(st);flex:none;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:12.5px;font-weight:800;margin-top:1px}
+  .vcard.new ol li::before{background:var(--ink);color:#fff;margin-top:4px}
+  .vcard ol li span{flex:1}
+  .vcard ol li em{font-style:normal;font-weight:700;opacity:.5;font-variant-numeric:tabular-nums}
+  .vcard.new ol li em{opacity:1;color:var(--green);font-size:16px;align-self:center}
+  .vcard ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:8px}
+  .vcard ul li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;font-weight:600;color:var(--ink2)}
+  .vcard ul li::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;background:var(--ink);margin-top:2px;
+    -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><circle cx='11' cy='11' r='11' fill='black'/><path d='M6.5 11.5l3 3L15.5 8.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><circle cx='11' cy='11' r='11' fill='black'/><path d='M6.5 11.5l3 3L15.5 8.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
+  .vt{margin-top:auto;padding-top:22px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:14px;opacity:.6}
+  .vt b{font-size:30px;font-weight:900;letter-spacing:-.03em;opacity:1}
+  .vcard.new .vt{opacity:1;color:var(--ink3)}
+  .vcard.new .vt b{color:var(--ink)}
+  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:12px}.why{margin:0 12px;border-radius:28px}.vcard{padding:24px 22px 22px}.vcard.new ol li{font-size:19px}}
 
   /* faq */
   .faq{max-width:760px;margin:0 auto}
@@ -239,11 +256,30 @@
 
 <section class="why">
   <div class="wrap">
-    <div class="sec-h"><div class="kicker" style="color:rgba(255,255,255,.5)">Why Eat IQ</div><h2>Most trackers hand you one number.</h2><p>Eat IQ shows its work.</p></div>
-    <div class="why3">
-      <div class="wcard"><div class="n">10s</div><h3>Faster than searching</h3><p>No weighing, no serving-size guessing, no scrolling a database. Snap and it's logged.</p></div>
-      <div class="wcard"><div class="n">100%</div><h3>Editable</h3><p>The weight it measured, the unit it used, the database row behind the numbers — and every line can be changed.</p></div>
-      <div class="wcard"><div class="n">1</div><h3>Source of truth</h3><p>Meals go into Apple Health with edits and deletes carried across. Workouts from Health count toward your goal.</p></div>
+    <div class="sec-h"><div class="kicker" style="color:rgba(255,255,255,.5)">Why people stick with it</div><h2>The reason people quit tracking is the logging. So we removed it.</h2></div>
+    <div class="vs">
+      <div class="vcard old">
+        <div class="vh">Logging a meal in a typical tracker</div>
+        <ol>
+          <li><span>Search the database for the first ingredient</span><em>45s</em></li>
+          <li><span>Pick a serving size, guess the weight</span><em>30s</em></li>
+          <li><span>Repeat for the bun, the bacon, the cheese, the fries</span><em>2m</em></li>
+          <li><span>Give up on the sauce and the side</span><em>—</em></li>
+        </ol>
+        <div class="vt"><span>About</span><b>4 minutes</b><span>and it's still a guess</span></div>
+      </div>
+      <div class="vcard new">
+        <div class="vh"><img src="assets/mark-white.png" alt="" width="18" height="18">Logging a meal in Eat IQ</div>
+        <ol>
+          <li><span>Snap a photo</span><em>10s</em></li>
+        </ol>
+        <ul>
+          <li>Every ingredient on its own line, with a weight</li>
+          <li>Fix any single line if it looks off</li>
+          <li>Written to Apple Health automatically</li>
+        </ul>
+        <div class="vt"><span>About</span><b>10 seconds</b><span>and you can see the work</span></div>
+      </div>
     </div>
   </div>
 </section>
