@@ -1,0 +1,97 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{--pink:#e8336f;--green:#34c759;--teal:#30b0c7;--purple:#af52de;--ink:#0b0b0f;--ink3:#8b8e95}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.stage{position:relative;width:1060px;height:940px;overflow:hidden}
+.phone{position:absolute;width:372px;height:762px;border-radius:56px;background:#101114;padding:12px;box-shadow:0 50px 90px rgba(11,11,15,.28),0 10px 26px rgba(11,11,15,.18)}
+.phone::after{content:"";position:absolute;inset:0;border-radius:56px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
+.screen{position:relative;width:100%;height:100%;border-radius:46px;overflow:hidden;background:#000}
+.screen>img{width:100%;height:100%;object-fit:cover;display:block}
+.island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:104px;height:32px;border-radius:18px;background:#000;z-index:5}
+.status{position:absolute;top:18px;left:28px;right:28px;display:flex;justify-content:space-between;font-size:15px;font-weight:600;color:#fff;z-index:4}
+.status.dark{color:#0b0b0f}
+/* phone 1: scanner */
+.p1{left:30px;top:130px;transform:rotate(-7deg)}
+.p1 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.62) 100%)}
+.p1 .top{position:absolute;top:66px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff}
+.p1 .top .c{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);display:grid;place-items:center;font-size:17px}
+.p1 .top .t{display:flex;align-items:center;gap:7px;font-weight:700;font-size:18px;letter-spacing:-.01em;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.p1 .top .t img{width:20px;height:20px}
+.br{position:absolute;left:50px;right:50px;top:215px;height:315px}
+.br i{position:absolute;width:48px;height:48px;border:3.5px solid #fff}
+.br i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
+.br i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-radius:0 12px 0 0}
+.br i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-radius:0 0 0 12px}
+.br i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 12px 0}
+.modes{position:absolute;left:16px;right:16px;bottom:124px;display:flex;gap:7px}
+.modes span{flex:1;text-align:center;font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border-radius:16px;padding:12px 0}
+.modes span.on{background:#fff;color:#0b0b0f}
+.shutter{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:70px;height:70px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.35)}
+.home{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:120px;height:5px;border-radius:3px;background:rgba(255,255,255,.75)}
+/* arrow */
+.arrow{position:absolute;left:430px;top:430px;width:170px;height:124px}
+/* phone 2: result */
+.p2{left:640px;top:40px;transform:rotate(6deg)}
+.p2 .screen{background:#f5f6f8}
+.p2 .ph{height:340px;overflow:hidden}
+.p2 .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.p2 .status{color:#fff}
+.p2 .nav{position:absolute;top:66px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff;font-weight:600;font-size:16px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.p2 .nav .c{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(8px);display:grid;place-items:center;font-size:17px}
+.sheet{position:absolute;left:0;right:0;top:308px;bottom:0;background:#f5f6f8;border-radius:32px 32px 0 0;padding:20px 18px 0}
+.tag{display:inline-block;background:#e8e9ee;border-radius:8px;padding:3px 9px;font-size:11px;font-weight:700;color:#5c5f66;margin-bottom:8px}
+.ttl{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.ttl h3{margin:0;font-size:21px;font-weight:800;letter-spacing:-.02em;line-height:1.15;color:var(--ink)}
+.step{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e6e7ec;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap}
+.step span{color:#8b8e95;font-weight:600}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.tile{background:#fff;border-radius:16px;padding:12px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.tile .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
+.tile .k{font-size:12px;color:#8b8e95;font-weight:600}
+.tile .v{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+.tile .ic.cal{background:#fde7ee}.tile .ic.pro{background:#e3f7e8}.tile .ic.car{background:#e2f4f8}.tile .ic.fat{background:#f1e6fa}
+.ic i{width:12px;height:12px;border-radius:50%;display:block}
+.ic.cal i{background:var(--pink)}.ic.pro i{background:var(--green)}.ic.car i{background:var(--teal)}.ic.fat i{background:var(--purple)}
+.btns{display:flex;gap:10px;margin-top:16px}
+.btns div{flex:1;text-align:center;border-radius:999px;padding:13px 0;font-size:14px;font-weight:700}
+.btns .fix{background:#fff;border:1px solid #e6e7ec;color:var(--ink)}
+.btns .done{background:#0b0b0f;color:#fff}
+.home2{position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:120px;height:5px;border-radius:3px;background:#0b0b0f;opacity:.8}
+/* floating chips */
+.chip{position:absolute;background:#fff;border-radius:16px;padding:10px 16px;font-size:14px;font-weight:700;color:var(--ink);box-shadow:0 18px 40px rgba(11,11,15,.18),0 0 0 1px rgba(11,11,15,.04);text-align:center;line-height:1.2;z-index:9}
+.chip small{display:block;font-size:13px;font-weight:700}
+</style></head><body>
+<div class="stage">
+  <div class="phone p1"><div class="screen">
+    <img src="food.jpg">
+    <div class="shade"></div><div class="island"></div>
+    <div class="status"><span>9:41</span><span>●●● ⌂ ▮</span></div>
+    <div class="top"><span class="c">←</span><span class="t"><img src="mark-white.png">Scanner</span><span class="c">···</span></div>
+    <div class="br"><i></i><i></i><i></i><i></i></div>
+    <div class="modes"><span class="on">Scan Food</span><span>Barcode</span><span>Food label</span></div>
+    <div class="shutter"></div><div class="home"></div>
+  </div></div>
+  <svg class="arrow" viewBox="0 0 150 110" fill="none" stroke="#0b0b0f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20c14 30 30 58 52 46 16-9 3-38-14-26-16 12 2 44 26 48 22 4 40-14 60-8"/><path d="M118 66l18 14-20 8"/></svg>
+  <div class="phone p2"><div class="screen">
+    <div class="ph"><img src="food.jpg"></div>
+    <div class="island"></div>
+    <div class="status"><span>9:41</span><span>●●● ⌂ ▮</span></div>
+    <div class="nav"><span class="c">←</span><span>Nutrition</span><span class="c">···</span></div>
+    <div class="sheet">
+      <span class="tag">Breakfast</span>
+      <div class="ttl"><h3>Pancakes with blueberries &amp; syrup</h3><div class="step"><span>−</span>1<span>+</span></div></div>
+      <div class="tiles">
+        <div class="tile"><span class="ic cal"><i></i></span><div><div class="k">Calories</div><div class="v">615</div></div></div>
+        <div class="tile"><span class="ic car"><i></i></span><div><div class="k">Carbs</div><div class="v">93g</div></div></div>
+        <div class="tile"><span class="ic pro"><i></i></span><div><div class="k">Protein</div><div class="v">11g</div></div></div>
+        <div class="tile"><span class="ic fat"><i></i></span><div><div class="k">Fat</div><div class="v">21g</div></div></div>
+      </div>
+      <div class="btns"><div class="fix">✎ Fix results</div><div class="done">Done</div></div>
+    </div>
+    <div class="home2"></div>
+  </div></div>
+  <div class="chip" style="left:560px;top:30px">Pancakes<small>595 cal</small></div>
+  <div class="chip" style="left:965px;top:260px">Syrup<small>12 cal</small></div>
+  <div class="chip" style="left:540px;top:280px">Blueberries<small>8 cal</small></div>
+</div>
+</body></html>
