@@ -61,8 +61,9 @@
     .lede{font-size:17px;margin:0 auto 24px}
     .cta{align-items:center}
     .badge.xl img{height:72px}
-    .hero-img{width:min(100%,520px);margin:0 auto}
+    .hero-img{width:min(100%,520px);margin:22px auto 0}
   }
+  @media (max-width:760px){.strip{padding:34px 0 0}}
   @media (max-width:400px){h1{font-size:38px}}
 
   /* proof strip */
@@ -79,15 +80,15 @@
   .sec-h p{color:var(--ink2);font-size:19px;margin:0}
 
   /* dishes: in-app result screens, one per plate. Snap-scrolls on phones, fits in a row on desktop */
-  .dishes{display:flex;gap:26px;padding:4px 28px 0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1440px;margin:0 auto}
+  .dishes{display:flex;gap:36px;padding:4px 28px 0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1440px;margin:0 auto}
   .dishes::-webkit-scrollbar{display:none}
-  .dish{flex:0 0 226px;scroll-snap-align:center;text-align:center}
+  .dish{flex:0 0 340px;scroll-snap-align:center;text-align:center}
   .dish img{width:100%;height:auto;transition:transform .35s ease}
   .dish:hover img{transform:translateY(-6px)}
   .dish span{display:block;margin-top:18px;font-size:15px;font-weight:800;letter-spacing:-.01em}
   .dish span small{display:block;font-size:13px;font-weight:600;color:var(--ink3)}
-  @media (min-width:1380px){.dishes{justify-content:center;overflow:visible}}
-  @media (max-width:760px){.dishes{gap:16px;padding:4px 20px 24px}.dish{flex:0 0 66vw;max-width:280px}}
+  @media (min-width:1180px){.dishes{justify-content:center;overflow:visible}}
+  @media (max-width:760px){.dishes{gap:18px;padding:4px 20px 24px}.dish{flex:0 0 76vw;max-width:320px}}
 
   /* feature rows */
   .feat{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:28px 0}
@@ -112,34 +113,25 @@
   .midcta .fine{font-size:14px;color:var(--ink3);font-weight:500}
   @media (max-width:760px){.midcta{padding:32px 0 0}.midcta h3{font-size:28px}}
 
-  /* why: old way vs Eat IQ */
+  /* why: Eat IQ vs a typical tracker */
   .why{background:var(--ink);color:#fff;border-radius:40px;margin:0 20px}
   .why h2{color:#fff;font-size:44px;max-width:16em;margin-left:auto;margin-right:auto}
-  @media (max-width:760px){.why h2{font-size:30px}}
-  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1000px;margin:0 auto}
-  .vcard{border-radius:26px;padding:30px 30px 26px;display:flex;flex-direction:column}
-  .vcard.old{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
-  .vcard.new{background:#fff;color:var(--ink)}
-  .vh{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-bottom:18px}
-  .vcard.new .vh{opacity:1;color:var(--ink3)}
-  .vcard.new .vh img{width:18px;height:18px;filter:invert(1)}
-  .vcard ol{list-style:none;margin:0;padding:0;counter-reset:st}
-  .vcard ol li{counter-increment:st;display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-top:1px solid rgba(255,255,255,.08);font-size:16.5px;line-height:1.4}
-  .vcard.new ol li{border-top-color:var(--line);font-size:22px;font-weight:800;letter-spacing:-.02em;padding:16px 0}
-  .vcard ol li::before{content:counter(st);flex:none;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:12.5px;font-weight:800;margin-top:1px}
-  .vcard.new ol li::before{background:var(--ink);color:#fff;margin-top:4px}
-  .vcard ol li span{flex:1}
-  .vcard ol li em{font-style:normal;font-weight:700;opacity:.5;font-variant-numeric:tabular-nums}
-  .vcard.new ol li em{opacity:1;color:var(--green);font-size:16px;align-self:center}
-  .vcard ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:8px}
-  .vcard ul li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;font-weight:600;color:var(--ink2)}
-  .vcard ul li::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;background:var(--ink);margin-top:2px;
-    -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><circle cx='11' cy='11' r='11' fill='black'/><path d='M6.5 11.5l3 3L15.5 8.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><circle cx='11' cy='11' r='11' fill='black'/><path d='M6.5 11.5l3 3L15.5 8.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
-  .vt{margin-top:auto;padding-top:22px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:14px;opacity:.6}
-  .vt b{font-size:30px;font-weight:900;letter-spacing:-.03em;opacity:1}
-  .vcard.new .vt{opacity:1;color:var(--ink3)}
-  .vcard.new .vt b{color:var(--ink)}
-  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:12px}.why{margin:0 12px;border-radius:28px}.vcard{padding:24px 22px 22px}.vcard.new ol li{font-size:19px}}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:980px;margin:0 auto}
+  .vcard{border-radius:28px;padding:34px 34px 30px}
+  .vcard.good{background:#fff;color:var(--ink)}
+  .vcard.bad{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
+  .vh{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px;opacity:.55}
+  .vcard.good .vh{opacity:1;color:var(--ink3)}
+  .vcard ul{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+  .vcard li{display:flex;align-items:center;gap:14px;font-size:24px;font-weight:800;letter-spacing:-.025em;line-height:1.15}
+  .vcard li::before{content:"";flex:none;width:30px;height:30px;border-radius:50%}
+  .vcard.good li::before{background:var(--green);-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><circle cx='15' cy='15' r='15' fill='black'/><path d='M9 15.5l4 4 8-8.5' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><circle cx='15' cy='15' r='15' fill='black'/><path d='M9 15.5l4 4 8-8.5' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
+  .vcard.bad li::before{background:#ff453a;opacity:.9;-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><circle cx='15' cy='15' r='15' fill='black'/><path d='M10.5 10.5l9 9M19.5 10.5l-9 9' stroke='white' stroke-width='3' stroke-linecap='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><circle cx='15' cy='15' r='15' fill='black'/><path d='M10.5 10.5l9 9M19.5 10.5l-9 9' stroke='white' stroke-width='3' stroke-linecap='round'/></svg>") center/contain no-repeat}
+  .vcard.bad li{text-decoration:line-through;text-decoration-color:rgba(255,255,255,.35);text-decoration-thickness:2px}
+  .vt{margin-top:28px;padding-top:22px;border-top:1px solid rgba(0,0,0,.08);font-size:40px;font-weight:900;letter-spacing:-.04em}
+  .vcard.good .vt{color:var(--green)}
+  .vcard.bad .vt{border-top-color:rgba(255,255,255,.1);color:rgba(255,255,255,.4)}
+  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:12px}.why{margin:0 12px;border-radius:28px}.why h2{font-size:30px}.vcard{padding:26px 24px 22px}.vcard li{font-size:20px}.vt{font-size:32px}}
 
   /* faq */
   .faq{max-width:760px;margin:0 auto}
@@ -192,7 +184,7 @@
         <span class="fine">Free to download · 3-day free trial of Pro</span>
       </div>
     </div>
-    <img class="hero-img" src="assets/hero-v7.webp" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2399" height="2000" fetchpriority="high">
+    <img class="hero-img" src="assets/hero-v11.webp" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2387" height="1986" fetchpriority="high">
   </div>
 </header>
 
@@ -202,14 +194,12 @@
 
 <section id="plates">
   <div class="wrap">
-    <div class="sec-h"><div class="kicker">Any plate</div><h2>Whatever you're actually eating.</h2><p>Home cooking, takeout, a restaurant, a packaged snack. Point the camera and this is what comes back.</p></div>
+    <div class="sec-h"><div class="kicker">Any plate</div><h2>Whatever you're actually eating.</h2><p>Home cooking, takeout, a restaurant, a packaged snack. Point the camera. These are real scans, numbers untouched.</p></div>
   </div>
   <div class="dishes" role="list">
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-burger-v7.webp" alt="Cheeseburger and fries broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Cheeseburger &amp; fries<small>1,140 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-poke-v7.webp" alt="Salmon poke bowl broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Salmon poke bowl<small>640 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-pasta-v7.webp" alt="Pasta carbonara broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Carbonara<small>780 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-toast-v7.webp" alt="Avocado toast broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Avocado toast<small>420 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-sushi-v7.webp" alt="Sushi platter broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Sushi platter<small>560 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-burger-v11.webp" alt="Cheeseburger and fries broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Cheeseburger &amp; fries<small>1,107 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-poke-v11.webp" alt="Salmon poke bowl broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Salmon rice bowl<small>957 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-sushi-v11.webp" alt="Sushi platter broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Assorted sushi<small>640 cal</small></span></a>
   </div>
 </section>
 
@@ -224,7 +214,7 @@
         <p>Pancakes, syrup, blueberries — each with its own weight and calories. When one line looks off, fix that line instead of throwing out the whole estimate.</p>
         <ul><li>Retune portions in grams, ounces, cups or the food's own unit</li><li>Macros update with every edit</li><li>Corrections are remembered next time</li></ul>
       </div>
-      <div class="art"><img src="assets/hand-result-v10.webp" alt="A hand holding an iPhone showing a scanned plate of pancakes broken down into ingredients" loading="lazy" width="1100" height="1375"></div>
+      <div class="art"><img src="assets/hand-result-v11.webp" alt="A hand holding an iPhone showing a scanned plate of pancakes broken down into ingredients" loading="lazy" width="1100" height="1375"></div>
     </div>
 
     <div class="feat flip">
@@ -244,7 +234,7 @@
         <p>Scan a barcode or a nutrition label. Search brands, restaurant menu items and whole foods. Type or say "two eggs and toast" and get the same breakdown.</p>
         <ul><li>Apple Health sync that carries edits and deletes across</li><li>Re-log anything from your Frequent list in one tap</li><li>Your meals back up to your account</li></ul>
       </div>
-      <div class="art"><img src="assets/hand-search-v10.webp" alt="A hand holding an iPhone showing food search results for chicken breast" loading="lazy" width="1100" height="1375"></div>
+      <div class="art"><img src="assets/hand-search-v11.webp" alt="A hand holding an iPhone showing food search results for chicken breast" loading="lazy" width="1100" height="1375"></div>
     </div>
 
     <div class="midcta">
@@ -257,29 +247,27 @@
 
 <section class="why">
   <div class="wrap">
-    <div class="sec-h"><div class="kicker" style="color:rgba(255,255,255,.5)">Why people stick with it</div><h2>The reason people quit tracking is the logging. So we removed it.</h2></div>
+    <div class="sec-h"><div class="kicker" style="color:rgba(255,255,255,.5)">Why people stick with it</div><h2>Logging is why people quit. So we removed it.</h2></div>
     <div class="vs">
-      <div class="vcard old">
-        <div class="vh">Logging a meal in a typical tracker</div>
-        <ol>
-          <li><span>Search the database for the first ingredient</span><em>45s</em></li>
-          <li><span>Pick a serving size, guess the weight</span><em>30s</em></li>
-          <li><span>Repeat for the bun, the bacon, the cheese, the fries</span><em>2m</em></li>
-          <li><span>Give up on the sauce and the side</span><em>—</em></li>
-        </ol>
-        <div class="vt"><span>About</span><b>4 minutes</b><span>and it's still a guess</span></div>
-      </div>
-      <div class="vcard new">
-        <div class="vh"><img src="assets/mark-white.png" alt="" width="18" height="18">Logging a meal in Eat IQ</div>
-        <ol>
-          <li><span>Snap a photo</span><em>10s</em></li>
-        </ol>
+      <div class="vcard good">
+        <div class="vh"><img src="assets/mark-black.png" alt="" width="20" height="20">Eat IQ</div>
         <ul>
-          <li>Every ingredient on its own line, with a weight</li>
-          <li>Fix any single line if it looks off</li>
-          <li>Written to Apple Health automatically</li>
+          <li>Snap a photo</li>
+          <li>Every ingredient, listed</li>
+          <li>Fix any line</li>
+          <li>Synced to Apple Health</li>
         </ul>
-        <div class="vt"><span>About</span><b>10 seconds</b><span>and you can see the work</span></div>
+        <div class="vt">10 seconds</div>
+      </div>
+      <div class="vcard bad">
+        <div class="vh">Typical tracker</div>
+        <ul>
+          <li>Search a database</li>
+          <li>Guess the serving size</li>
+          <li>Repeat for every ingredient</li>
+          <li>Give up on the sauce</li>
+        </ul>
+        <div class="vt">4 minutes</div>
       </div>
     </div>
   </div>
@@ -305,7 +293,7 @@
     <p>Free to download. Three days of Pro on us. Cancel anytime.</p>
     <a class="badge xl" href="https://geteatiq.com/download" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
     <div class="fine">By subscribing you agree to our <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>. iPhone, iOS 18 or later.</div>
-    <img class="art" src="assets/hero-v7.webp" alt="" loading="lazy">
+    <img class="art" src="assets/hero-v11.webp" alt="" loading="lazy">
   </div></div>
 </section>
 
