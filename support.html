@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Eat IQ</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<style>
+  :root{
+    --bg:#ffffff; --bg2:#f6f7fa; --ink:#0e1118; --ink2:#4b5261; --ink3:#7a8190;
+    --line:#e6e8ee; --blue:#0a84ff; --pink:#e8336f; --green:#34c759; --teal:#30b0c7; --purple:#af52de;
+    --radius:22px; --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;letter-spacing:-.01em}
+  .brand img{width:34px;height:34px}
+  .navlinks{display:flex;align-items:center;gap:26px;font-size:15px;color:var(--ink2);font-weight:500}
+  .navlinks a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:#fff;border-radius:999px;padding:12px 22px;font-weight:600;font-size:16px;line-height:1;transition:transform .12s ease-out,opacity .12s ease-out}
+  .btn:hover{opacity:.88}
+  .btn:active{transform:scale(.98)}
+  .btn.small{padding:10px 18px;font-size:15px}
+  .btn.blue{background:var(--blue)}
+  @media (max-width:640px){.navlinks{display:none}}
+
+  /* App Store badge */
+  .badge{display:inline-flex;align-items:center;gap:9px;background:#000;color:#fff;border:1px solid #333;border-radius:11px;padding:8px 16px 8px 12px;line-height:1.05;transition:opacity .12s}
+  .badge:hover{opacity:.85}
+  .badge svg{width:24px;height:24px;flex:none}
+  .badge .t{display:flex;flex-direction:column;text-align:left}
+  .badge .t small{font-size:10.5px;font-weight:500;letter-spacing:.01em;opacity:.9}
+  .badge .t b{font-size:21px;font-weight:600;letter-spacing:-.01em}
+
+  /* hero */
+  .hero{padding:72px 0 40px}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600;color:var(--ink2)}
+  .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block}
+  h1{font-size:60px;line-height:1.04;letter-spacing:-.03em;margin:18px 0 18px;font-weight:800;text-wrap:balance}
+  .hero p.lede{font-size:20px;color:var(--ink2);max-width:34em;margin:0 0 28px;text-wrap:pretty}
+  .cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .cta-row .fine{font-size:13.5px;color:var(--ink3)}
+  .phone{width:min(100%,330px);margin:0 auto;filter:drop-shadow(0 30px 60px rgba(14,17,24,.18))}
+  @media (max-width:900px){
+    .hero{padding:44px 0 24px}
+    .hero .wrap{grid-template-columns:1fr;text-align:center}
+    .hero p.lede{margin-left:auto;margin-right:auto}
+    .cta-row{justify-content:center}
+    h1{font-size:42px}
+    .phone{width:min(78%,340px);margin-top:12px}
+  }
+
+  /* section headers */
+  section{padding:72px 0}
+  section.alt{background:var(--bg2)}
+  .sec-h{text-align:center;max-width:44em;margin:0 auto 44px}
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+  h2{font-size:40px;line-height:1.1;letter-spacing:-.025em;margin:10px 0 12px;font-weight:800;text-wrap:balance}
+  .sec-h p{color:var(--ink2);font-size:18px;margin:0}
+
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+  .step .n{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;margin-bottom:16px}
+  .step h3{margin:0 0 6px;font-size:20px;letter-spacing:-.01em}
+  .step p{margin:0;color:var(--ink2);font-size:16px}
+  @media (max-width:800px){.steps{grid-template-columns:1fr}}
+
+  /* features (alternating) */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:28px 0}
+  .feat:nth-child(even) .copy{order:2}
+  .feat .copy h3{font-size:32px;letter-spacing:-.02em;line-height:1.12;margin:0 0 12px;font-weight:800;text-wrap:balance}
+  .feat .copy p{color:var(--ink2);font-size:18px;margin:0 0 18px}
+  .feat ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .feat li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:16px}
+  .feat li::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--green);margin-top:2px;
+    -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='black'/><path d='M6 10.5l2.6 2.6L14 7.6' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='black'/><path d='M6 10.5l2.6 2.6L14 7.6' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
+  .feat .phone{width:min(100%,290px)}
+  @media (max-width:800px){
+    .feat{grid-template-columns:1fr;gap:26px;text-align:center;padding:28px 0}
+    .feat:nth-child(even) .copy{order:0}
+    .feat li{justify-content:center;text-align:left}
+    .feat .phone{width:min(70%,300px)}
+  }
+
+  /* macros strip */
+  .macros{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+  .macro{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+  .macro .k{font-size:13px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+  .macro .v{font-size:28px;font-weight:800;letter-spacing:-.02em;margin-top:2px}
+  .macro.cal .v{color:var(--pink)}.macro.p .v{color:var(--green)}.macro.c .v{color:var(--teal)}.macro.f .v{color:var(--purple)}
+  @media (max-width:640px){.macros{grid-template-columns:repeat(2,1fr)}}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto}
+  details{border-bottom:1px solid var(--line);padding:18px 0}
+  details:first-child{border-top:1px solid var(--line)}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:600;font-size:18px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:24px;font-weight:300;color:var(--ink3);flex:none;transition:transform .15s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p,details ol{color:var(--ink2);margin:12px 0 0;font-size:16px}
+  details ol{padding-left:20px}
+  details p b{color:var(--ink)}
+
+  /* final cta */
+  .final{background:var(--ink);color:#fff;text-align:center;padding:84px 0}
+  .final h2{color:#fff}
+  .final p{color:rgba(255,255,255,.7);font-size:18px;max-width:38em;margin:0 auto 26px}
+  .final .fine{font-size:13px;color:rgba(255,255,255,.5);margin-top:16px}
+  .final .fine a{text-decoration:underline}
+
+  footer{padding:36px 0;color:var(--ink3);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  footer .links{display:flex;gap:20px}
+  footer .links a:hover{color:var(--ink)}
+  .sr{position:absolute;left:-9999px}
+
+  .article{max-width:760px;margin:0 auto;padding:56px 24px 72px}
+  .article h1{font-size:44px;line-height:1.08;letter-spacing:-.025em;margin:0 0 6px;font-weight:800}
+  .article .updated{color:var(--ink3);font-size:15px;margin:0 0 28px}
+  .article h2{font-size:24px;letter-spacing:-.015em;margin:34px 0 10px;font-weight:700}
+  .article p,.article li{color:var(--ink2);font-size:17px;line-height:1.6}
+  .article ul,.article ol{padding-left:22px}
+  .article li{margin:6px 0}
+  .article a{color:var(--blue);text-decoration:underline}
+  .article table{border-collapse:collapse;width:100%;font-size:15.5px}
+  .article th,.article td{text-align:left;padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+  .article th{color:var(--ink3);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;border-top:0}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/mark-black.png" alt="" width="34" height="34">Eat IQ</a>
+    <div class="navlinks">
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="support.html" target="_blank" rel="noopener">Support</a>
+    </div>
+    <a class="btn small" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener">Download</a>
+  </div>
+</nav>
+<main class="article">
+<h1>Eat IQ</h1>
+<p class="updated">Calorie and macro tracking, by photo · Church Street Studios</p>
+
+<p>Point your camera at a meal and Eat IQ estimates its calories, protein, carbohydrates and fat — breaking a composed plate into its parts so you can correct any one of them. It also reads barcodes and nutrition labels, searches a food database, and syncs what you log to Apple Health.</p>
+
+<h2>Support</h2>
+<p>Questions, bug reports, feature requests, or account deletion: <a href="mailto:jackzeileai@gmail.com">jackzeileai@gmail.com</a>. We read everything and usually reply within a couple of days.</p>
+
+<h2>Legal</h2>
+<ul>
+  <li><a href="privacy.html">Privacy Policy</a></li>
+  <li><a href="terms.html">Terms of Use</a></li>
+</ul>
+</main>
+<footer>
+  <div class="wrap">
+    <div>© 2026 Church Street Studios · Eat IQ</div>
+    <div class="links">
+      <a href="mailto:jackzeileai@gmail.com">Support</a>
+      <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="terms.html" target="_blank" rel="noopener">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

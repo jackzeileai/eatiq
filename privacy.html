@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Eat IQ</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<style>
+  :root{
+    --bg:#ffffff; --bg2:#f6f7fa; --ink:#0e1118; --ink2:#4b5261; --ink3:#7a8190;
+    --line:#e6e8ee; --blue:#0a84ff; --pink:#e8336f; --green:#34c759; --teal:#30b0c7; --purple:#af52de;
+    --radius:22px; --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;letter-spacing:-.01em}
+  .brand img{width:34px;height:34px}
+  .navlinks{display:flex;align-items:center;gap:26px;font-size:15px;color:var(--ink2);font-weight:500}
+  .navlinks a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:#fff;border-radius:999px;padding:12px 22px;font-weight:600;font-size:16px;line-height:1;transition:transform .12s ease-out,opacity .12s ease-out}
+  .btn:hover{opacity:.88}
+  .btn:active{transform:scale(.98)}
+  .btn.small{padding:10px 18px;font-size:15px}
+  .btn.blue{background:var(--blue)}
+  @media (max-width:640px){.navlinks{display:none}}
+
+  /* App Store badge */
+  .badge{display:inline-flex;align-items:center;gap:9px;background:#000;color:#fff;border:1px solid #333;border-radius:11px;padding:8px 16px 8px 12px;line-height:1.05;transition:opacity .12s}
+  .badge:hover{opacity:.85}
+  .badge svg{width:24px;height:24px;flex:none}
+  .badge .t{display:flex;flex-direction:column;text-align:left}
+  .badge .t small{font-size:10.5px;font-weight:500;letter-spacing:.01em;opacity:.9}
+  .badge .t b{font-size:21px;font-weight:600;letter-spacing:-.01em}
+
+  /* hero */
+  .hero{padding:72px 0 40px}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600;color:var(--ink2)}
+  .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block}
+  h1{font-size:60px;line-height:1.04;letter-spacing:-.03em;margin:18px 0 18px;font-weight:800;text-wrap:balance}
+  .hero p.lede{font-size:20px;color:var(--ink2);max-width:34em;margin:0 0 28px;text-wrap:pretty}
+  .cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .cta-row .fine{font-size:13.5px;color:var(--ink3)}
+  .phone{width:min(100%,330px);margin:0 auto;filter:drop-shadow(0 30px 60px rgba(14,17,24,.18))}
+  @media (max-width:900px){
+    .hero{padding:44px 0 24px}
+    .hero .wrap{grid-template-columns:1fr;text-align:center}
+    .hero p.lede{margin-left:auto;margin-right:auto}
+    .cta-row{justify-content:center}
+    h1{font-size:42px}
+    .phone{width:min(78%,340px);margin-top:12px}
+  }
+
+  /* section headers */
+  section{padding:72px 0}
+  section.alt{background:var(--bg2)}
+  .sec-h{text-align:center;max-width:44em;margin:0 auto 44px}
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+  h2{font-size:40px;line-height:1.1;letter-spacing:-.025em;margin:10px 0 12px;font-weight:800;text-wrap:balance}
+  .sec-h p{color:var(--ink2);font-size:18px;margin:0}
+
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+  .step .n{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;margin-bottom:16px}
+  .step h3{margin:0 0 6px;font-size:20px;letter-spacing:-.01em}
+  .step p{margin:0;color:var(--ink2);font-size:16px}
+  @media (max-width:800px){.steps{grid-template-columns:1fr}}
+
+  /* features (alternating) */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:28px 0}
+  .feat:nth-child(even) .copy{order:2}
+  .feat .copy h3{font-size:32px;letter-spacing:-.02em;line-height:1.12;margin:0 0 12px;font-weight:800;text-wrap:balance}
+  .feat .copy p{color:var(--ink2);font-size:18px;margin:0 0 18px}
+  .feat ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .feat li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:16px}
+  .feat li::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--green);margin-top:2px;
+    -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='black'/><path d='M6 10.5l2.6 2.6L14 7.6' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='black'/><path d='M6 10.5l2.6 2.6L14 7.6' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
+  .feat .phone{width:min(100%,290px)}
+  @media (max-width:800px){
+    .feat{grid-template-columns:1fr;gap:26px;text-align:center;padding:28px 0}
+    .feat:nth-child(even) .copy{order:0}
+    .feat li{justify-content:center;text-align:left}
+    .feat .phone{width:min(70%,300px)}
+  }
+
+  /* macros strip */
+  .macros{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+  .macro{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+  .macro .k{font-size:13px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+  .macro .v{font-size:28px;font-weight:800;letter-spacing:-.02em;margin-top:2px}
+  .macro.cal .v{color:var(--pink)}.macro.p .v{color:var(--green)}.macro.c .v{color:var(--teal)}.macro.f .v{color:var(--purple)}
+  @media (max-width:640px){.macros{grid-template-columns:repeat(2,1fr)}}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto}
+  details{border-bottom:1px solid var(--line);padding:18px 0}
+  details:first-child{border-top:1px solid var(--line)}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:600;font-size:18px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:24px;font-weight:300;color:var(--ink3);flex:none;transition:transform .15s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p,details ol{color:var(--ink2);margin:12px 0 0;font-size:16px}
+  details ol{padding-left:20px}
+  details p b{color:var(--ink)}
+
+  /* final cta */
+  .final{background:var(--ink);color:#fff;text-align:center;padding:84px 0}
+  .final h2{color:#fff}
+  .final p{color:rgba(255,255,255,.7);font-size:18px;max-width:38em;margin:0 auto 26px}
+  .final .fine{font-size:13px;color:rgba(255,255,255,.5);margin-top:16px}
+  .final .fine a{text-decoration:underline}
+
+  footer{padding:36px 0;color:var(--ink3);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  footer .links{display:flex;gap:20px}
+  footer .links a:hover{color:var(--ink)}
+  .sr{position:absolute;left:-9999px}
+
+  .article{max-width:760px;margin:0 auto;padding:56px 24px 72px}
+  .article h1{font-size:44px;line-height:1.08;letter-spacing:-.025em;margin:0 0 6px;font-weight:800}
+  .article .updated{color:var(--ink3);font-size:15px;margin:0 0 28px}
+  .article h2{font-size:24px;letter-spacing:-.015em;margin:34px 0 10px;font-weight:700}
+  .article p,.article li{color:var(--ink2);font-size:17px;line-height:1.6}
+  .article ul,.article ol{padding-left:22px}
+  .article li{margin:6px 0}
+  .article a{color:var(--blue);text-decoration:underline}
+  .article table{border-collapse:collapse;width:100%;font-size:15.5px}
+  .article th,.article td{text-align:left;padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+  .article th{color:var(--ink3);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;border-top:0}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="assets/mark-black.png" alt="" width="34" height="34">Eat IQ</a>
+    <div class="navlinks">
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="support.html" target="_blank" rel="noopener">Support</a>
+    </div>
+    <a class="btn small" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener">Download</a>
+  </div>
+</nav>
+<main class="article">
+<h1>Eat IQ Privacy Policy</h1>
+<p class="updated">Last updated 28 August 2026 · Church Street Studios</p>
+
+<p>Eat IQ helps you track what you eat. This policy explains exactly what leaves your phone, who receives it, and how to get rid of it. It matches the privacy label on our App Store page — if the two ever disagree, tell us and we will fix it.</p>
+
+<h2>What we collect</h2>
+
+<div class="wrap">
+<table>
+<thead>
+<tr><th>Data</th><th>Why</th><th>Tied to your account?</th></tr>
+</thead>
+<tbody>
+<tr><td>Food logs — meals, portions, nutrition estimates</td><td>To show you your day and your history</td><td>Yes</td></tr>
+<tr><td>Photos of food you scan</td><td>To estimate the nutrition in the meal</td><td>Yes</td></tr>
+<tr><td>Profile and goals — height, weight, birthday, activity, targets</td><td>To calculate your calorie and macro targets</td><td>Yes</td></tr>
+<tr><td>Name and email address</td><td>Only if you sign in with Apple, to create your account</td><td>Yes</td></tr>
+<tr><td>Account ID</td><td>To key your data to you</td><td>Yes</td></tr>
+<tr><td>Anonymous usage events and a device ID</td><td>To see which features get used</td><td>No</td></tr>
+<tr><td>Approximate location — city, region, country</td><td>Derived from your IP by our analytics provider</td><td>No</td></tr>
+<tr><td>Subscription events</td><td>To unlock the app for subscribers and measure the paywall</td><td>No</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>We never ask for your precise location, and the app requests no location permission. We do not collect your contacts, your browsing history, or any advertising identifier.</p>
+
+<h2>Sign in with Apple</h2>
+<p>If you choose Sign in with Apple, Apple sends us your name and an email address. If you pick <strong>Hide My Email</strong>, the address we receive is Apple's private relay address, and we never see your real one. That is the only identity information we hold.</p>
+
+<h2>Apple Health</h2>
+<p>If you turn on Apple Health, Eat IQ writes the calories, protein, carbohydrates and fat from meals you log into Health, and reads back your dietary energy for the day. <strong>This stays between your device and Apple Health.</strong> We do not upload your Health records to our servers or send them to anyone. You can revoke access at any time in iOS Settings → Health → Data Access &amp; Devices → Eat IQ.</p>
+
+<h2>AI analysis of your food — what is sent, to whom, and your consent</h2>
+<p>Eat IQ estimates calories and macros with a third-party AI service. <strong>The app asks for your permission before the first request</strong>, on a screen that repeats everything in this section, and you can review or change that choice at any time under <strong>Profile → Privacy &amp; Sources → AI Data Sharing</strong>. If you choose "Not Now", nothing is sent, and the photo, voice and AI-search features stay off until you allow it; the Food Database search still works, because it does not use an AI service.</p>
+<p><strong>What is sent.</strong> Only the content you are asking the app to analyze: the photo or video frames of a meal you scan, photos of nutrition labels, and food descriptions you type or speak (spoken food logs are converted to text on your device first). Nothing else is attached — not your name, email address, weight, goals, birthday, Apple Health data, or account ID.</p>
+<p><strong>Who receives it.</strong> <strong>OpenAI</strong> (OpenAI, L.L.C., United States) — the AI provider that analyzes the image or text. The request is routed through Eat IQ's own server, which forwards it and does not keep a copy of your photo. Food names identified in a scan, and barcodes you scan, are also looked up in nutrition databases: <strong>USDA FoodData Central</strong>, <strong>Open Food Facts</strong>, and <strong>Nutritionix</strong>. These receive only the food name or barcode.</p>
+<p><strong>How it is used.</strong> Solely to estimate the nutrition in that meal. Your photos and descriptions are <strong>not used to train AI models</strong> — we use OpenAI's API, whose terms exclude API data from training — and they are never shared for advertising or sold. OpenAI may retain API inputs for up to 30 days for abuse monitoring, per its API data-usage policy. Photos you keep on a logged meal are stored on your device (and, if cloud sync is on, in your account).</p>
+<p><strong>Same protection.</strong> Every provider above is bound by its own privacy terms to use the data only to provide the service to us: <a href="https://openai.com/policies/api-data-usage-policies">OpenAI API data usage</a>, <a href="https://www.nutritionix.com/privacy">Nutritionix</a>, <a href="https://world.openfoodfacts.org/privacy">Open Food Facts</a>. USDA FoodData Central is a public U.S. government database.</p>
+
+<h2>Who else receives data</h2>
+<ul>
+  <li><strong>Supabase</strong> — hosts your account and, if enabled, your synced logs.</li>
+  <li><strong>OpenAI</strong> — analyzes scan photos, label photos and food descriptions, only after you allow it in the app (see above).</li>
+  <li><strong>USDA FoodData Central, Open Food Facts and Nutritionix</strong> — nutrition lookups by food name or barcode.</li>
+  <li><strong>Mixpanel</strong> — anonymous product analytics.</li>
+  <li><strong>Superwall</strong> — runs the subscription screen.</li>
+  <li><strong>Apple</strong> — handles all billing. We never see your payment details.</li>
+</ul>
+<p>We do not sell your personal data, and we do not share it with data brokers or advertisers. Nothing in Eat IQ tracks you across other companies' apps or websites.</p>
+
+<h2>Your choices</h2>
+<ul>
+  <li>Delete any logged meal in the app at any time.</li>
+  <li><strong>Profile → Delete Account</strong> permanently deletes your account and every row of your data from our servers. This cannot be undone.</li>
+  <li><strong>Profile → Reset All Data</strong> clears everything stored on the device.</li>
+  <li><strong>Profile → Privacy &amp; Sources → AI Data Sharing</strong> to review or withdraw your consent to AI analysis.</li>
+  <li>Turn off Apple Health access in iOS Settings.</li>
+  <li>Email us and we will delete your data on request.</li>
+</ul>
+
+<h2>Children</h2>
+<p>Eat IQ is not directed at children under 13, and we do not knowingly collect data from them. If you believe a child has created an account, email us and we will delete it.</p>
+
+<h2>Changes</h2>
+<p>If our data practices change, we will update this page and the App Store privacy label before the change ships.</p>
+
+<h2>Contact</h2>
+<p>Questions, deletion requests, or anything on this page that looks wrong: <a href="mailto:jackzeileai@gmail.com">jackzeileai@gmail.com</a>.</p>
+</main>
+<footer>
+  <div class="wrap">
+    <div>© 2026 Church Street Studios · Eat IQ</div>
+    <div class="links">
+      <a href="mailto:jackzeileai@gmail.com">Support</a>
+      <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="terms.html" target="_blank" rel="noopener">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
