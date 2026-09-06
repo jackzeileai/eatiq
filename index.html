@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eat IQ — Track your calories with just a picture</title>
+<meta name="description" content="Eat IQ is the AI calorie tracker for iPhone. Snap a photo, scan a barcode, or describe your meal and get calories, protein, carbs and fat — with the plate broken into ingredients you can edit.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:title" content="Eat IQ — Track your calories with just a picture">
+<meta property="og:description" content="Snap a photo, scan a barcode, or describe your meal. Eat IQ does the rest.">
+<meta property="og:image" content="assets/icon-512.png">
+<meta name="theme-color" content="#ffffff">
+<style>
+  :root{
+    --bg:#ffffff; --bg2:#f6f7fa; --ink:#0e1118; --ink2:#4b5261; --ink3:#7a8190;
+    --line:#e6e8ee; --blue:#0a84ff; --pink:#e8336f; --green:#34c759; --teal:#30b0c7; --purple:#af52de;
+    --radius:22px; --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;letter-spacing:-.01em}
+  .brand img{width:34px;height:34px}
+  .navlinks{display:flex;align-items:center;gap:26px;font-size:15px;color:var(--ink2);font-weight:500}
+  .navlinks a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:#fff;border-radius:999px;padding:12px 22px;font-weight:600;font-size:16px;line-height:1;transition:transform .12s ease-out,opacity .12s ease-out}
+  .btn:hover{opacity:.88}
+  .btn:active{transform:scale(.98)}
+  .btn.small{padding:10px 18px;font-size:15px}
+  .btn.blue{background:var(--blue)}
+  @media (max-width:640px){.navlinks{display:none}}
+
+  /* App Store badge */
+  .badge{display:inline-flex;align-items:center;gap:9px;background:#000;color:#fff;border:1px solid #333;border-radius:11px;padding:8px 16px 8px 12px;line-height:1.05;transition:opacity .12s}
+  .badge:hover{opacity:.85}
+  .badge svg{width:24px;height:24px;flex:none}
+  .badge .t{display:flex;flex-direction:column;text-align:left}
+  .badge .t small{font-size:10.5px;font-weight:500;letter-spacing:.01em;opacity:.9}
+  .badge .t b{font-size:21px;font-weight:600;letter-spacing:-.01em}
+
+  /* hero */
+  .hero{padding:72px 0 40px}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600;color:var(--ink2)}
+  .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block}
+  h1{font-size:60px;line-height:1.04;letter-spacing:-.03em;margin:18px 0 18px;font-weight:800;text-wrap:balance}
+  .hero p.lede{font-size:20px;color:var(--ink2);max-width:34em;margin:0 0 28px;text-wrap:pretty}
+  .cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .cta-row .fine{font-size:13.5px;color:var(--ink3)}
+  .phone{width:min(100%,330px);margin:0 auto;filter:drop-shadow(0 30px 60px rgba(14,17,24,.18))}
+  @media (max-width:900px){
+    .hero{padding:44px 0 24px}
+    .hero .wrap{grid-template-columns:1fr;text-align:center}
+    .hero p.lede{margin-left:auto;margin-right:auto}
+    .cta-row{justify-content:center}
+    h1{font-size:42px}
+    .phone{width:min(78%,340px);margin-top:12px}
+  }
+
+  /* section headers */
+  section{padding:72px 0}
+  section.alt{background:var(--bg2)}
+  .sec-h{text-align:center;max-width:44em;margin:0 auto 44px}
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+  h2{font-size:40px;line-height:1.1;letter-spacing:-.025em;margin:10px 0 12px;font-weight:800;text-wrap:balance}
+  .sec-h p{color:var(--ink2);font-size:18px;margin:0}
+
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+  .step .n{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;margin-bottom:16px}
+  .step h3{margin:0 0 6px;font-size:20px;letter-spacing:-.01em}
+  .step p{margin:0;color:var(--ink2);font-size:16px}
+  @media (max-width:800px){.steps{grid-template-columns:1fr}}
+
+  /* features (alternating) */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:28px 0}
+  .feat:nth-child(even) .copy{order:2}
+  .feat .copy h3{font-size:32px;letter-spacing:-.02em;line-height:1.12;margin:0 0 12px;font-weight:800;text-wrap:balance}
+  .feat .copy p{color:var(--ink2);font-size:18px;margin:0 0 18px}
+  .feat ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .feat li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:16px}
+  .feat li::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--green);margin-top:2px;
+    -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='black'/><path d='M6 10.5l2.6 2.6L14 7.6' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='black'/><path d='M6 10.5l2.6 2.6L14 7.6' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
+  .feat .phone{width:min(100%,290px)}
+  @media (max-width:800px){
+    .feat{grid-template-columns:1fr;gap:26px;text-align:center;padding:28px 0}
+    .feat:nth-child(even) .copy{order:0}
+    .feat li{justify-content:center;text-align:left}
+    .feat .phone{width:min(70%,300px)}
+  }
+
+  /* macros strip */
+  .macros{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+  .macro{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+  .macro .k{font-size:13px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+  .macro .v{font-size:28px;font-weight:800;letter-spacing:-.02em;margin-top:2px}
+  .macro.cal .v{color:var(--pink)}.macro.p .v{color:var(--green)}.macro.c .v{color:var(--teal)}.macro.f .v{color:var(--purple)}
+  @media (max-width:640px){.macros{grid-template-columns:repeat(2,1fr)}}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto}
+  details{border-bottom:1px solid var(--line);padding:18px 0}
+  details:first-child{border-top:1px solid var(--line)}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:600;font-size:18px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:24px;font-weight:300;color:var(--ink3);flex:none;transition:transform .15s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p,details ol{color:var(--ink2);margin:12px 0 0;font-size:16px}
+  details ol{padding-left:20px}
+  details p b{color:var(--ink)}
+
+  /* final cta */
+  .final{background:var(--ink);color:#fff;text-align:center;padding:84px 0}
+  .final h2{color:#fff}
+  .final p{color:rgba(255,255,255,.7);font-size:18px;max-width:38em;margin:0 auto 26px}
+  .final .fine{font-size:13px;color:rgba(255,255,255,.5);margin-top:16px}
+  .final .fine a{text-decoration:underline}
+
+  footer{padding:36px 0;color:var(--ink3);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  footer .links{display:flex;gap:20px}
+  footer .links a:hover{color:var(--ink)}
+  .sr{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/mark-black.png" alt="" width="34" height="34">Eat IQ</a>
+    <div class="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://jackzeileai.github.io/biteai-legal/" target="_blank" rel="noopener">Support</a>
+    </div>
+    <a class="btn small" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener">Download</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><i></i>Now on the App Store</span>
+      <h1>Track your calories with just a picture</h1>
+      <p class="lede">Eat IQ is the AI-powered calorie tracker for iPhone. Snap a photo, scan a barcode, or describe your meal and get instant calories, protein, carbs and fat — with the plate broken into ingredients you can edit.</p>
+      <div class="cta-row">
+        <a class="badge" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.74c-.02-2.36 1.93-3.5 2.02-3.56-1.1-1.61-2.81-1.83-3.42-1.85-1.45-.15-2.84.86-3.58.86-.74 0-1.88-.84-3.09-.82-1.59.02-3.06.93-3.88 2.35-1.66 2.88-.42 7.13 1.19 9.47.79 1.14 1.73 2.43 2.96 2.38 1.19-.05 1.64-.77 3.08-.77 1.44 0 1.84.77 3.1.75 1.28-.02 2.09-1.16 2.87-2.31.9-1.32 1.28-2.6 1.3-2.67-.03-.01-2.5-.96-2.55-3.83zM14.02 5.8c.65-.79 1.09-1.89.97-2.98-.94.04-2.08.63-2.75 1.42-.6.7-1.13 1.82-.99 2.89 1.05.08 2.12-.53 2.77-1.33z"/></svg>
+          <span class="t"><small>Download on the</small><b>App Store</b></span>
+        </a>
+        <span class="fine">Free to download · 3-day free trial of Pro</span>
+      </div>
+    </div>
+    <img class="phone" src="assets/phone-scan.png" alt="Eat IQ home screen after scanning a club sandwich: 874 calories, with protein, carbs and fat rings" width="675" height="1380" fetchpriority="high">
+  </div>
+</header>
+
+<section id="how" class="alt">
+  <div class="wrap">
+    <div class="sec-h">
+      <div class="kicker">How it works</div>
+      <h2>Three steps. About ten seconds.</h2>
+      <p>No searching, no weighing, no guessing at serving sizes.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Set your targets</h3><p>Answer a few questions and Eat IQ works out your daily calories and macros, with the formulas cited.</p></div>
+      <div class="step"><div class="n">2</div><h3>Snap your meal</h3><p>Point the camera at your plate. Or scan a barcode, read a nutrition label, type it, or just say it.</p></div>
+      <div class="step"><div class="n">3</div><h3>Get the breakdown</h3><p>Calories, protein, carbs and fat — with every ingredient on the plate as its own editable line.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-h">
+      <div class="kicker">What's inside</div>
+      <h2>Built to be right, and easy to fix when it isn't</h2>
+      <p>Most trackers hand you one number. Eat IQ shows its work.</p>
+    </div>
+
+    <div class="feat">
+      <div class="copy">
+        <h3>The whole plate, ingredient by ingredient</h3>
+        <p>A club sandwich comes back as bread, bacon, lettuce, tomato and chips — each with its own weight and calories. When something looks off, fix that one line instead of throwing out the estimate.</p>
+        <ul>
+          <li>Retune portions in grams, ounces, cups or the food's own unit</li>
+          <li>Macros follow every edit automatically</li>
+          <li>See the database row behind the numbers when there is one</li>
+        </ul>
+      </div>
+      <img class="phone" src="assets/phone-meal.png" alt="A scanned club sandwich broken into bread, bacon, lettuce, tomato and chips with calories per item" width="675" height="1380" loading="lazy">
+    </div>
+
+    <div class="feat">
+      <div class="copy">
+        <h3>More ways to log than a camera</h3>
+        <p>Scan a barcode or a nutrition label. Search packaged brands, restaurant menu items and whole foods. Type or say "two eggs and toast" and get the same breakdown.</p>
+        <ul>
+          <li>Barcode and label scanning built in</li>
+          <li>Search across brands, restaurants and USDA data</li>
+          <li>Re-log anything from your Frequent list in one tap</li>
+        </ul>
+      </div>
+      <img class="phone" src="assets/phone-search.png" alt="Food search results for chicken breast with calories and macros per serving" width="675" height="1380" loading="lazy">
+    </div>
+
+    <div class="feat">
+      <div class="copy">
+        <h3>See it add up</h3>
+        <p>Progress against your goal by week, month or year. Streaks and badges earned from what you actually logged, not from opening the app.</p>
+        <ul>
+          <li>Apple Health sync that carries your edits and deletes across</li>
+          <li>Rollover calories: up to 200 unused calories carry into tomorrow</li>
+          <li>Light and dark themes</li>
+        </ul>
+      </div>
+      <img class="phone" src="assets/phone-streaks.png" alt="Streaks screen with days logged, meals, scans and badges" width="675" height="1380" loading="lazy">
+    </div>
+
+    <div class="macros" aria-label="Example of a scanned meal">
+      <div class="macro cal"><div class="k">Calories</div><div class="v">874</div></div>
+      <div class="macro p"><div class="k">Protein</div><div class="v">24g</div></div>
+      <div class="macro c"><div class="k">Carbs</div><div class="v">107g</div></div>
+      <div class="macro f"><div class="k">Fat</div><div class="v">39g</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="sec-h">
+      <div class="kicker">FAQ</div>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>How accurate is it?</summary>
+        <p>Every number is an estimate. Eat IQ measures portions from the photo, prices each ingredient against nutrition data, and shows you the breakdown so you can correct any line. Good light and a photo that fills the frame help a lot. If a scan is way off, edit the item — your correction is remembered for next time.</p>
+      </details>
+      <details>
+        <summary>What does it cost?</summary>
+        <p>The app is free to download. <b>Eat IQ Pro</b> unlocks unlimited scanning: <b>$29.99 a year</b> (about $2.49 a month) or <b>$9.99 a month</b>, with a 3-day free trial. Prices in USD; Canada is priced in CAD.</p>
+      </details>
+      <details>
+        <summary>How do I cancel my subscription or free trial?</summary>
+        <p>Subscriptions go through Apple, so cancellation does too:</p>
+        <ol><li>Open <b>Settings</b> on your iPhone and tap your name.</li><li>Tap <b>Subscriptions</b>.</li><li>Tap <b>Eat IQ</b>, then <b>Cancel Subscription</b>.</li></ol>
+        <p>Deleting the app does not cancel a subscription. Cancel at least 24 hours before the trial or period ends to avoid being charged.</p>
+      </details>
+      <details>
+        <summary>I paid but the app still shows a paywall</summary>
+        <p>On the paywall screen tap <b>Restore Purchases</b>, and make sure you're signed in to the same Apple ID you bought with. Switched phones or Apple IDs? That's usually the cause.</p>
+      </details>
+      <details>
+        <summary>What happens to my photos and data?</summary>
+        <p>Before your first scan the app asks for consent to send your food photo (or voice description) to our AI provider for analysis. Tapping "Not Now" sends nothing. Your meals back up to your account so a new phone gets them back. You can delete your account and all its data from inside the app. Full details are in the <a href="https://jackzeileai.github.io/biteai-legal/privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">Privacy Policy</a>.</p>
+      </details>
+      <details>
+        <summary>Does it work with Apple Health?</summary>
+        <p>Yes. Meals you log are written to Health, and edits and deletes are carried across — not just new entries. Workouts and active energy from Health can count toward your daily goal.</p>
+      </details>
+      <details>
+        <summary>Is Eat IQ medical advice?</summary>
+        <p>No. Eat IQ is a general wellness tool, not a medical device, and nothing in it is medical, nutritional or dietary advice. Please consult a doctor or a registered dietitian before making significant changes to your diet.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Claim your 3-day free trial</h2>
+    <p>Download Eat IQ, scan your next meal, and see the whole plate broken down. No commitment. Cancel anytime.</p>
+    <a class="badge" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener" aria-label="Download on the App Store">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.74c-.02-2.36 1.93-3.5 2.02-3.56-1.1-1.61-2.81-1.83-3.42-1.85-1.45-.15-2.84.86-3.58.86-.74 0-1.88-.84-3.09-.82-1.59.02-3.06.93-3.88 2.35-1.66 2.88-.42 7.13 1.19 9.47.79 1.14 1.73 2.43 2.96 2.38 1.19-.05 1.64-.77 3.08-.77 1.44 0 1.84.77 3.1.75 1.28-.02 2.09-1.16 2.87-2.31.9-1.32 1.28-2.6 1.3-2.67-.03-.01-2.5-.96-2.55-3.83zM14.02 5.8c.65-.79 1.09-1.89.97-2.98-.94.04-2.08.63-2.75 1.42-.6.7-1.13 1.82-.99 2.89 1.05.08 2.12-.53 2.77-1.33z"/></svg>
+      <span class="t"><small>Download on the</small><b>App Store</b></span>
+    </a>
+    <div class="fine">By subscribing you agree to our <a href="https://jackzeileai.github.io/biteai-legal/terms.html" target="_blank" rel="noopener">Terms of Use</a> and <a href="https://jackzeileai.github.io/biteai-legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>. iPhone only, iOS 18 or later.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Church Street Studios · Eat IQ</div>
+    <div class="links">
+      <a href="mailto:jackzeileai@gmail.com">Support</a>
+      <a href="https://jackzeileai.github.io/biteai-legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="https://jackzeileai.github.io/biteai-legal/terms.html" target="_blank" rel="noopener">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
