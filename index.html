@@ -54,12 +54,16 @@
   .cta .fine{font-size:14px;color:var(--ink3);font-weight:500}
   .hero-img{width:100%;height:auto}
   @media (max-width:980px){
-    .hero{padding:24px 0 0}
-    .hero .wrap{grid-template-columns:1fr;gap:0}
-    h1{font-size:46px}
-    .lede{font-size:18px}
-    .hero-img{width:100%}
+    .hero{padding:20px 0 0}
+    .hero .wrap{grid-template-columns:1fr;gap:6px;text-align:center}
+    .kicker{margin-bottom:12px}
+    h1{font-size:44px;letter-spacing:-.04em}
+    .lede{font-size:17px;margin:0 auto 24px}
+    .cta{align-items:center}
+    .badge.xl img{height:72px}
+    .hero-img{width:min(100%,520px);margin:0 auto}
   }
+  @media (max-width:400px){h1{font-size:38px}}
 
   /* proof strip */
   .strip{padding:28px 0 0}
@@ -68,20 +72,22 @@
 
   /* sections */
   section{padding:120px 0}
+  @media (max-width:760px){section{padding:72px 0}.sec-h{margin-bottom:32px}h2{font-size:36px}.sec-h p{font-size:17px}.strip .wrap{gap:12px 20px;font-size:13px}nav .wrap{height:68px}.brand{font-size:21px}.badge.nav img{height:38px}}
   .sec-h{max-width:34em;margin:0 auto 56px;text-align:center}
   .sec-h .kicker{margin-bottom:14px}
   h2{font-size:52px;line-height:1.02;letter-spacing:-.04em;margin:0 0 14px;font-weight:900;text-wrap:balance}
   .sec-h p{color:var(--ink2);font-size:19px;margin:0}
 
-  /* plates gallery: 4 columns, the burger spans 2×2, no holes */
-  .plates{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:250px;gap:14px}
-  .plate{position:relative;border-radius:var(--r);overflow:hidden;background:#eee}
-  .plate img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-  .plate:hover img{transform:scale(1.04)}
-  .plate .tag{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:14px;padding:9px 13px;font-size:13px;font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-  .plate .tag small{display:block;font-size:11.5px;font-weight:600;color:var(--ink2);margin-top:1px}
-  .plate.a{grid-column:span 2;grid-row:span 2}
-  @media (max-width:760px){.plates{grid-template-columns:1fr 1fr;grid-auto-rows:190px}.plate.a{grid-column:span 2;grid-row:span 2}}
+  /* dishes: in-app result screens, one per plate. Snap-scrolls on phones, fits in a row on desktop */
+  .dishes{display:flex;gap:22px;padding:8px 28px 24px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1280px;margin:0 auto}
+  .dishes::-webkit-scrollbar{display:none}
+  .dish{flex:0 0 218px;scroll-snap-align:center;text-align:center}
+  .dish img{width:100%;height:auto;transition:transform .35s ease}
+  .dish:hover img{transform:translateY(-6px)}
+  .dish span{display:block;margin-top:10px;font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .dish span small{display:block;font-size:13px;font-weight:600;color:var(--ink3)}
+  @media (min-width:1240px){.dishes{justify-content:center;overflow:visible}}
+  @media (max-width:760px){.dishes{gap:14px;padding:4px 20px 16px}.dish{flex:0 0 66vw;max-width:260px}}
 
   /* feature rows */
   .feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:36px 0}
@@ -98,7 +104,7 @@
   .feat .art.pink{background:linear-gradient(160deg,#ffe9f0,#fff5f8)}
   .feat .art.mint{background:linear-gradient(160deg,#e6f8ec,#f3fbf6)}
   .feat .art.sky{background:linear-gradient(160deg,#e4f4f8,#f2fafc)}
-  @media (max-width:900px){.feat{grid-template-columns:1fr;gap:24px;padding:20px 0}.feat.flip .copy{order:0}.feat h3{font-size:32px}.feat .art{min-height:520px}.feat .art img{width:min(62%,260px)}}
+  @media (max-width:900px){.feat{grid-template-columns:1fr;gap:20px;padding:22px 0}.feat .copy,.feat.flip .copy{order:2}.feat h3{font-size:30px}.feat p{font-size:16.5px}.feat li{font-size:15px}.feat .art{min-height:0;padding:28px 0}.feat .art img{width:min(58%,240px)}}
 
   /* why */
   .why{background:var(--ink);color:#fff;border-radius:40px;margin:0 20px}
@@ -109,7 +115,7 @@
   .wcard .n{font-size:44px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:14px;background:linear-gradient(90deg,#fff,#9a9ba3);-webkit-background-clip:text;background-clip:text;color:transparent}
   .wcard h3{margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-.02em}
   .wcard p{margin:0;color:rgba(255,255,255,.65);font-size:16px}
-  @media (max-width:800px){.why3{grid-template-columns:1fr}.why{margin:0 12px;border-radius:28px}}
+  @media (max-width:800px){.why3{grid-template-columns:1fr;gap:12px}.why{margin:0 12px;border-radius:28px}.wcard{padding:24px 22px}.wcard .n{font-size:36px}}
 
   /* faq */
   .faq{max-width:760px;margin:0 auto}
@@ -132,10 +138,11 @@
   .final .fine{font-size:13px;color:var(--ink3);margin:14px 0 48px}
   .final .fine a{text-decoration:underline}
   .final .art{width:min(100%,640px);margin:0 auto -8%;height:auto}
-  @media (max-width:640px){.final .box{padding:56px 20px 0;border-radius:28px}.final h2{font-size:38px}}
+  @media (max-width:640px){.final{padding:24px 0 72px}.final .box{padding:52px 20px 0;border-radius:28px}.final h2{font-size:36px}.final p{font-size:17px}.badge.xl img{height:72px}.final .art{margin-bottom:-12%}}
 
   footer{padding:28px 0 44px;color:var(--ink3);font-size:14px;font-weight:500}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  @media (max-width:640px){footer .wrap{justify-content:center;text-align:center}}
   footer .links{display:flex;gap:22px;flex-wrap:wrap}
   footer .links a:hover{color:var(--ink)}
 </style>
@@ -171,14 +178,14 @@
 
 <section id="plates">
   <div class="wrap">
-    <div class="sec-h"><div class="kicker">Any plate</div><h2>Works on whatever you're actually eating.</h2><p>Home cooking, takeout, restaurants, a packaged snack. Point the camera and log it.</p></div>
-    <div class="plates">
-      <a class="plate a" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/food-burger.jpg" alt="Cheeseburger and fries" loading="lazy" style="object-position:center 72%"><span class="tag">Cheeseburger &amp; fries<small>1,140 cal · P 48g · C 92g · F 62g</small></span></a>
-      <a class="plate" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/food-poke.jpg" alt="Salmon poke bowl" loading="lazy"><span class="tag">Salmon poke bowl<small>640 cal · P 34g · C 68g · F 24g</small></span></a>
-      <a class="plate" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/food-pasta.jpg" alt="Pasta carbonara" loading="lazy"><span class="tag">Carbonara<small>780 cal</small></span></a>
-      <a class="plate" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/food-toast.jpg" alt="Avocado toast with egg" loading="lazy"><span class="tag">Avocado toast<small>420 cal</small></span></a>
-      <a class="plate" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/food-sushi.jpg" alt="Sushi platter" loading="lazy"><span class="tag">Sushi platter<small>560 cal</small></span></a>
-    </div>
+    <div class="sec-h"><div class="kicker">Any plate</div><h2>Whatever you're actually eating.</h2><p>Home cooking, takeout, a restaurant, a packaged snack. Point the camera and this is what comes back.</p></div>
+  </div>
+  <div class="dishes" role="list">
+    <a class="dish" role="listitem" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/dish-burger.webp" alt="Cheeseburger and fries broken down in Eat IQ" loading="lazy" width="1040" height="1847"><span>Cheeseburger &amp; fries<small>1,140 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/dish-poke.webp" alt="Salmon poke bowl broken down in Eat IQ" loading="lazy" width="1040" height="1847"><span>Salmon poke bowl<small>640 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/dish-pasta.webp" alt="Pasta carbonara broken down in Eat IQ" loading="lazy" width="1040" height="1847"><span>Carbonara<small>780 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/dish-toast.webp" alt="Avocado toast broken down in Eat IQ" loading="lazy" width="1040" height="1847"><span>Avocado toast<small>420 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener"><img src="assets/dish-sushi.webp" alt="Sushi platter broken down in Eat IQ" loading="lazy" width="1040" height="1847"><span>Sushi platter<small>560 cal</small></span></a>
   </div>
 </section>
 

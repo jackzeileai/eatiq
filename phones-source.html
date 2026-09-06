@@ -132,5 +132,24 @@ body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFon
   <div class="modes"><span class="on">Scan Food</span><span>Barcode</span><span>Food label</span></div>
   <div class="shutter"></div><div class="homebar"></div>
 </div></div></div>
-<script>document.getElementById(location.hash.slice(1)||'home').classList.add('show')</script>
+<script>
+const dishes={
+  pancakes:{img:'food.jpg',time:'9:41 AM · BREAKFAST',title:'Pancakes with blueberries & syrup',cal:615,p:11,c:93,f:21,items:[['Pancakes','3 · 240g',595],['Syrup','1 tbsp',12],['Blueberries','15g',8]]},
+  burger:{img:'dish-burger.jpg',time:'12:52 PM · LUNCH',title:'Cheeseburger & fries',cal:1140,p:48,c:92,f:62,items:[['Double cheeseburger','1 · 290g',760],['French fries','150g',380]]},
+  poke:{img:'dish-poke.jpg',time:'1:10 PM · LUNCH',title:'Salmon poke bowl',cal:640,p:34,c:68,f:24,items:[['Salmon','120g',250],['Sushi rice','180g',234],['Avocado','60g',96],['Edamame & veg','90g',60]]},
+  pasta:{img:'dish-pasta.jpg',time:'7:24 PM · DINNER',title:'Pasta carbonara',cal:780,p:31,c:84,f:34,items:[['Pasta','220g',330],['Pancetta','45g',210],['Egg & parmesan sauce','80g',240]]},
+  toast:{img:'dish-toast.jpg',time:'8:15 AM · BREAKFAST',title:'Avocado toast with egg',cal:420,p:16,c:34,f:25,items:[['Sourdough','1 slice · 60g',150],['Avocado','70g',112],['Poached egg','1',72],['Flat white','240ml',86]]},
+  sushi:{img:'dish-sushi.jpg',time:'6:40 PM · DINNER',title:'Sushi platter',cal:560,p:32,c:72,f:14,items:[['Salmon nigiri','4 pieces',240],['Tuna nigiri','2 pieces',110],['California roll','4 pieces',210]]},
+};
+const h=location.hash.slice(1)||'home'; const [which,dish]=h.split(':');
+document.getElementById(which).classList.add('show');
+if(which==='result'){
+  const d=dishes[dish||'pancakes']; const r=document.querySelector('#result');
+  r.querySelector('.ph img').src=d.img; r.querySelector('.time').textContent=d.time; r.querySelector('.ttl').textContent=d.title;
+  const rows=r.querySelectorAll('.rows')[0].querySelectorAll('.row b');
+  rows[0].innerHTML=d.cal+' <small>cal</small>'; rows[1].innerHTML=d.p+' <small>g</small>'; rows[2].innerHTML=d.c+' <small>g</small>'; rows[3].innerHTML=d.f+' <small>g</small>';
+  r.querySelector('.items-h span').textContent=d.items.length;
+  r.querySelector('.rows.items').innerHTML=d.items.map(i=>`<div class="row">${i[0]} <small>${i[1]}</small><b>${i[2]} <small>cal</small></b></div>`).join('');
+}
+</script>
 </body></html>
