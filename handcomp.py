@@ -45,14 +45,16 @@ for (x,y),(u,v) in zip(dst,src):
     M.append([x,y,1,0,0,0,-u*x,-u*y]); M.append([0,0,0,x,y,1,-v*x,-v*y])
 coef=np.linalg.solve(np.array(M,float),src.reshape(8))
 warped=screen.transform(photo.size,Image.PERSPECTIVE,coef.tolist(),Image.BICUBIC)
+# --- key: the green blob IS the screen shape (rounded corners and all). The only
+# fix-ups are holes the AI painted inside the green (a fake status bar, glare):
+# fill any hole that does not touch the blob's outer edge, except a large one
+# near the top centre — the phone's real Dynamic Island, which stays a hole.
 quad=Image.new('L',photo.size,0); ImageDraw.Draw(quad).polygon([tuple(p) for p in dst],fill=255)
 Q=np.asarray(quad)>0
-# holes = non-green inside the quad. Fill every hole EXCEPT a large one near the
-# top centre (the phone's real Dynamic Island) — the screenshot is rendered
-# without its own island so the photo's cutout shows through.
-holes=Q&~blob; hseen=np.zeros_like(holes,bool); keep=np.zeros_like(holes,bool)
+inner=np.asarray(quad.filter(ImageFilter.MinFilter(9)))>0     # quad eroded 4px: anything outside this touches the edge
+holes=Q&~blob; hseen=np.zeros_like(holes,bool); fill=np.zeros_like(holes,bool)
 hy,hx=np.where(holes); qh=dst[:,1].max()-dst[:,1].min(); qtop=dst[:,1].min(); qcx=dst[:,0].mean(); qw=dst[:,0].max()-dst[:,0].min()
-for y0,x0 in zip(hy[::200],hx[::200]):
+for y0,x0 in zip(hy[::150],hx[::150]):
     if hseen[y0,x0]: continue
     q=deque([(y0,x0)]); hseen[y0,x0]=True; pts=[]
     while q:
@@ -61,8 +63,12 @@ for y0,x0 in zip(hy[::200],hx[::200]):
             ny,nx=y+dy,x+dx
             if 0<=ny<Hh and 0<=nx<Ww and holes[ny,nx] and not hseen[ny,nx]: hseen[ny,nx]=True; q.append((ny,nx))
     P=np.array(pts); cy,cx=P[:,0].mean(),P[:,1].mean()
-    if len(pts)>1500 and cy<qtop+qh*0.09 and abs(cx-qcx)<qw*0.2:
-        keep[P[:,0],P[:,1]]=True; print('island hole kept',len(pts))
-final=Q&~keep
-m=Image.fromarray((final*255).astype('uint8')).filter(ImageFilter.GaussianBlur(0.7))
+    touches_edge=(~inner[P[:,0],P[:,1]]).any()
+    is_island=len(pts)>1500 and cy<qtop+qh*0.09 and abs(cx-qcx)<qw*0.2
+    if touches_edge or is_island:
+        if is_island: print('island hole kept',len(pts))
+        continue
+    fill[P[:,0],P[:,1]]=True
+final=blob|fill
+m=Image.fromarray((final*255).astype('uint8')).filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.GaussianBlur(0.8))
 out=Image.composite(warped,photo,m); out.save(sys.argv[3],quality=92); print('saved',sys.argv[3])
