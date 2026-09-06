@@ -105,6 +105,24 @@ body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFon
 .btns .fixb{background:#fff;border:1px solid #e6e7ec;color:var(--ink)}
 .btns .done{background:#0b0b0f;color:#fff}
 .home2{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:130px;height:5px;border-radius:3px;background:#0b0b0f;opacity:.8}
+
+.srch{padding:72px 18px 0}
+.nav2{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.nav2 .c{width:40px;height:40px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:17px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.bar{display:flex;align-items:center;gap:10px;background:#fff;border-radius:999px;padding:14px 16px;font-size:16px;font-weight:600;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.bar .mag{color:#8b8e95;font-size:20px}.bar .mic{margin-left:auto;font-size:15px;opacity:.7}
+.modes2{display:flex;gap:6px;margin:12px 0 14px}
+.modes2 span{flex:1;text-align:center;font-size:13px;font-weight:700;padding:9px 0;border-radius:999px;background:#e9eaee;color:#5c5f66}
+.modes2 span.on{background:#0b0b0f;color:#fff}
+.lbl{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8b8e95;margin:10px 0 6px}
+.rrow{display:flex;align-items:center;gap:10px;background:#fff;border-radius:16px;padding:12px 12px 12px 14px;margin-bottom:8px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.rrow>div{display:flex;flex-direction:column;gap:2px}
+.rrow>div:first-child{flex:1;min-width:0}
+.rrow b{font-size:14.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rrow small{font-size:11.5px;color:#8b8e95;font-weight:600}
+.rrow .r{text-align:right;flex:none}.rrow .r b{color:var(--pink)}
+.plus{flex:none;width:30px;height:30px;border-radius:50%;background:#0b0b0f;color:#fff;display:grid;place-items:center;font-size:18px;font-weight:700}
+.ai{margin-top:10px;background:#0b0b0f;color:#fff;border-radius:999px;text-align:center;padding:14px;font-size:15px;font-weight:700}
 </style></head><body>
 <div class="wrap" id="home"><div class="phone"><div class="screen">
   <div class="island"></div><div class="status"><span>9:41</span><span>●●● ⌂ ▮</span></div>
@@ -176,6 +194,25 @@ body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFon
   <div class="br"><i></i><i></i><i></i><i></i></div>
   <div class="modes"><span class="on">Scan Food</span><span>Barcode</span><span>Food label</span></div>
   <div class="shutter"></div><div class="homebar"></div>
+</div></div></div>
+
+<div class="wrap" id="search"><div class="phone"><div class="screen light">
+  <div class="island"></div><div class="status"><span>9:41</span><span>●●● ⌂ ▮</span></div>
+  <div class="srch">
+    <div class="nav2"><span class="c">←</span><b>Log food</b><span class="c">✎</span></div>
+    <div class="bar"><span class="mag">⌕</span>chicken breast<span class="mic">🎤</span></div>
+    <div class="modes2"><span class="on">All</span><span>Frequent</span><span>Saved</span><span>Barcode</span></div>
+    <div class="lbl">From your foods</div>
+    <div class="rrow"><div><b>Grilled chicken breast</b><small>Frequent · logged Tue</small></div><div class="r"><b>248 cal</b><small>150g · 46P 0C 5F</small></div><span class="plus">+</span></div>
+    <div class="lbl">Select from database</div>
+    <div class="rrow"><div><b>Chicken breast, grilled</b><small>USDA · 1 breast, 172g</small></div><div class="r"><b>284 cal</b><small>53P 0C 6F</small></div><span class="plus">+</span></div>
+    <div class="rrow"><div><b>Chicken breast, rotisserie</b><small>USDA · 3 oz</small></div><div class="r"><b>140 cal</b><small>26P 0C 4F</small></div><span class="plus">+</span></div>
+    <div class="rrow"><div><b>Chick-fil-A Grilled Nuggets</b><small>8 count</small></div><div class="r"><b>130 cal</b><small>25P 1C 3F</small></div><span class="plus">+</span></div>
+    <div class="rrow"><div><b>Chicken breast tenders, breaded</b><small>USDA · 100g</small></div><div class="r"><b>263 cal</b><small>18P 15C 15F</small></div><span class="plus">+</span></div>
+    <div class="rrow"><div><b>Kirkland Rotisserie Chicken</b><small>3 oz</small></div><div class="r"><b>140 cal</b><small>24P 0C 5F</small></div><span class="plus">+</span></div>
+    <div class="ai">✦ Generate results using AI</div>
+  </div>
+  <div class="home2"></div>
 </div></div></div>
 <script>
 const dishes={
