@@ -66,20 +66,20 @@
   @media (max-width:400px){h1{font-size:38px}}
 
   /* proof strip */
-  .strip{padding:28px 0 0}
+  .strip{padding:20px 0 0}
   .strip .wrap{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;color:var(--ink3);font-size:14px;font-weight:600}
   .strip span b{color:var(--ink);font-weight:800}
 
   /* sections */
-  section{padding:120px 0}
-  @media (max-width:760px){section{padding:72px 0}.sec-h{margin-bottom:32px}h2{font-size:36px}.sec-h p{font-size:17px}.strip .wrap{gap:12px 20px;font-size:13px}nav .wrap{height:68px}.brand{font-size:21px}.badge.nav img{height:38px}}
-  .sec-h{max-width:34em;margin:0 auto 56px;text-align:center}
+  section{padding:96px 0}
+  @media (max-width:760px){section{padding:56px 0}.sec-h{margin-bottom:32px}h2{font-size:36px}.sec-h p{font-size:17px}.strip .wrap{gap:12px 20px;font-size:13px}nav .wrap{height:68px}.brand{font-size:21px}.badge.nav img{height:38px}}
+  .sec-h{max-width:34em;margin:0 auto 40px;text-align:center}
   .sec-h .kicker{margin-bottom:14px}
   h2{font-size:52px;line-height:1.02;letter-spacing:-.04em;margin:0 0 14px;font-weight:900;text-wrap:balance}
   .sec-h p{color:var(--ink2);font-size:19px;margin:0}
 
   /* dishes: in-app result screens, one per plate. Snap-scrolls on phones, fits in a row on desktop */
-  .dishes{display:flex;gap:26px;padding:8px 28px 24px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1440px;margin:0 auto}
+  .dishes{display:flex;gap:26px;padding:4px 28px 0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1440px;margin:0 auto}
   .dishes::-webkit-scrollbar{display:none}
   .dish{flex:0 0 226px;scroll-snap-align:center;text-align:center}
   .dish img{width:100%;height:auto;transition:transform .35s ease}
@@ -90,7 +90,7 @@
   @media (max-width:760px){.dishes{gap:16px;padding:4px 20px 24px}.dish{flex:0 0 66vw;max-width:280px}}
 
   /* feature rows */
-  .feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:36px 0}
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:20px 0}
   .feat.flip .copy{order:2}
   .feat .copy .kicker{margin-bottom:12px}
   .feat h3{font-size:40px;line-height:1.05;letter-spacing:-.035em;margin:0 0 14px;font-weight:900;text-wrap:balance}
@@ -107,10 +107,10 @@
   @media (max-width:900px){.feat{grid-template-columns:1fr;gap:20px;padding:22px 0}.feat .copy,.feat.flip .copy{order:2}.feat h3{font-size:30px}.feat p{font-size:16.5px}.feat li{font-size:15px}.feat .art{min-height:0;padding:28px 0}.feat .art img{width:min(58%,240px)}}
 
   /* mid-page CTA */
-  .midcta{text-align:center;padding:72px 0 8px;display:flex;flex-direction:column;align-items:center;gap:16px}
+  .midcta{text-align:center;padding:56px 0 0;display:flex;flex-direction:column;align-items:center;gap:16px}
   .midcta h3{font-size:34px;font-weight:900;letter-spacing:-.035em;margin:0}
   .midcta .fine{font-size:14px;color:var(--ink3);font-weight:500}
-  @media (max-width:760px){.midcta{padding:40px 0 0}.midcta h3{font-size:28px}}
+  @media (max-width:760px){.midcta{padding:32px 0 0}.midcta h3{font-size:28px}}
 
   /* why */
   .why{background:var(--ink);color:#fff;border-radius:40px;margin:0 20px}
@@ -137,14 +137,14 @@
   details p a{text-decoration:underline}
 
   /* final */
-  .final{padding:60px 0 120px}
+  .final{padding:40px 0 96px}
   .final .box{background:var(--bg2);border-radius:40px;padding:80px 40px 0;text-align:center;overflow:hidden;position:relative}
   .final h2{font-size:56px}
   .final p{color:var(--ink2);font-size:19px;max-width:30em;margin:0 auto 30px}
   .final .fine{font-size:13px;color:var(--ink3);margin:14px 0 48px}
   .final .fine a{text-decoration:underline}
   .final .art{width:min(100%,640px);margin:0 auto -8%;height:auto}
-  @media (max-width:640px){.final{padding:24px 0 72px}.final .box{padding:52px 20px 0;border-radius:28px}.final h2{font-size:36px}.final p{font-size:17px}.badge.xl img{height:72px}.final .art{margin-bottom:-12%}}
+  @media (max-width:640px){.final{padding:16px 0 56px}.final .box{padding:52px 20px 0;border-radius:28px}.final h2{font-size:36px}.final p{font-size:17px}.badge.xl img{height:72px}.final .art{margin-bottom:-12%}}
 
   footer{padding:28px 0 44px;color:var(--ink3);font-size:14px;font-weight:500}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
@@ -195,7 +195,7 @@
   </div>
 </section>
 
-<section id="features" style="padding-top:0">
+<section id="features" style="padding-top:8px">
   <div class="wrap">
     <div class="sec-h"><div class="kicker">What's inside</div><h2>Built to be right. Easy to fix when it isn't.</h2></div>
 
