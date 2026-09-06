@@ -25,14 +25,14 @@
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
-  .badge{display:inline-block;height:44px;transition:transform .12s ease-out,opacity .12s}
-  .badge img{height:44px;width:auto}
+  .badge{display:inline-block;height:64px;transition:transform .12s ease-out,opacity .12s;filter:drop-shadow(0 8px 18px rgba(11,11,15,.18))}
+  .badge img{height:64px;width:auto}
   .badge:hover{opacity:.85}.badge:active{transform:scale(.98)}
-  .badge.sm{height:36px}.badge.sm img{height:36px}
+  .badge.sm{height:40px;filter:none}.badge.sm img{height:40px}
 
   /* nav */
   nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px)}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:84px}
   .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:24px;letter-spacing:-.02em}
   .brand img{width:32px;height:32px}
   .navlinks{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:500;color:var(--ink)}
@@ -45,83 +45,39 @@
   .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;font-size:13.5px;font-weight:600;color:var(--ink2);box-shadow:0 1px 2px rgba(0,0,0,.04)}
   .eyebrow .ic{width:22px;height:22px;border-radius:50%;background:var(--black);display:grid;place-items:center}
   .eyebrow .ic img{width:14px;height:14px}
-  .meet{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:18px 0 2px;line-height:1.1}
-  h1{font-size:46px;line-height:1.12;letter-spacing:-.022em;margin:0 0 16px;font-weight:600;text-wrap:balance}
-  .lede{font-size:17px;color:var(--ink2);max-width:32em;margin:0 0 22px}
+  .meet{font-size:38px;font-weight:800;letter-spacing:-.025em;margin:22px 0 4px;line-height:1.1}
+  h1{font-size:54px;line-height:1.08;letter-spacing:-.025em;margin:0 0 20px;font-weight:600;text-wrap:balance}
+  .lede{font-size:19px;line-height:1.55;color:var(--ink2);max-width:30em;margin:0 0 30px}
   .cta-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .cta-row .fine{font-size:13px;color:var(--ink3)}
+  .cta-row .fine{font-size:14px;color:var(--ink3)}
 
-  /* hero composition (designed, not screenshots) */
-  .stage{position:relative;height:600px}
-  .stage::before{content:"";position:absolute;inset:6% -6% 2% -6%;background:radial-gradient(60% 55% at 55% 50%,rgba(11,11,15,.07),rgba(11,11,15,0) 70%);border-radius:40px}
-  .phone{position:absolute;left:8%;top:22px;width:296px;height:604px;border-radius:52px;background:#0f1013;padding:11px;box-shadow:0 40px 70px rgba(11,11,15,.30),0 2px 0 rgba(255,255,255,.06) inset;transform:rotate(-6deg)}
-  .phone .screen{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:#000}
-  .phone .screen img{width:100%;height:100%;object-fit:cover}
-  .phone .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 62%,rgba(0,0,0,.6) 100%)}
-  .phone .island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:92px;height:28px;border-radius:16px;background:#000}
-  .phone .top{position:absolute;top:56px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#fff}
-  .phone .top .c{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);display:grid;place-items:center;font-size:15px}
-  .phone .top .t{display:flex;align-items:center;gap:6px;font-weight:700;font-size:16px;letter-spacing:-.01em;text-shadow:0 1px 6px rgba(0,0,0,.5)}
-  .phone .top .t img{width:18px;height:18px}
-  .phone .brackets{position:absolute;left:34px;right:34px;top:150px;height:280px}
-  .phone .brackets i{position:absolute;width:44px;height:44px;border:3px solid #fff;border-radius:10px}
-  .phone .brackets i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-radius:10px 0 0 0}
-  .phone .brackets i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-radius:0 10px 0 0}
-  .phone .brackets i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-radius:0 0 0 10px}
-  .phone .brackets i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 10px 0}
-  .phone .modes{position:absolute;left:14px;right:14px;bottom:96px;display:flex;gap:6px}
-  .phone .modes span{flex:1;text-align:center;font-size:11.5px;font-weight:600;color:#fff;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);border-radius:14px;padding:10px 0}
-  .phone .modes span.on{background:#fff;color:#0b0b0f}
-  .phone .shutter{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:62px;height:62px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.35)}
-  .phone .home{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:110px;height:4px;border-radius:2px;background:rgba(255,255,255,.7)}
-
-  .result{position:absolute;right:2%;top:70px;width:250px;background:#fff;border-radius:24px;padding:16px 16px 14px;box-shadow:0 30px 60px rgba(11,11,15,.18),0 0 0 1px rgba(11,11,15,.05);transform:rotate(4deg)}
-  .result .ph{height:118px;border-radius:16px;overflow:hidden;margin-bottom:12px}
-  .result .ph img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
-  .result h4{margin:0 0 2px;font-size:16px;font-weight:700;letter-spacing:-.01em}
-  .result .cal{display:flex;align-items:baseline;gap:6px;margin-bottom:10px}
-  .result .cal b{font-size:26px;font-weight:800;color:var(--pink);letter-spacing:-.02em}
-  .result .cal span{font-size:12px;color:var(--ink3);font-weight:600}
-  .result .m{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-  .result .m div{background:#f6f6f7;border-radius:12px;padding:8px 6px;text-align:center}
-  .result .m .k{font-size:10.5px;color:var(--ink3);font-weight:600}
-  .result .m .v{font-size:15px;font-weight:800;letter-spacing:-.01em}
-  .result .m .p .v{color:var(--green)}.result .m .c .v{color:var(--teal)}.result .m .f .v{color:var(--purple)}
-  .chip{position:absolute;background:#fff;border-radius:999px;padding:8px 12px;font-size:12.5px;font-weight:700;box-shadow:0 12px 28px rgba(11,11,15,.16),0 0 0 1px rgba(11,11,15,.05);display:flex;align-items:center;gap:8px;white-space:nowrap}
-  .chip small{font-weight:600;color:var(--ink3)}
-  .chip.c1{left:0;top:200px;transform:rotate(-6deg)}
-  .chip.c2{left:2%;top:430px;transform:rotate(-4deg)}
-  .chip.c3{right:0;top:390px;transform:rotate(5deg)}
+  /* hero */
+  .hero{padding:64px 0 32px;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;align-items:center}
+  .hero-img{width:100%;height:auto;display:block}
   @media (max-width:900px){
-    .hero{padding:36px 0 8px}
-    .hero .wrap{grid-template-columns:1fr}
-    .meet{font-size:28px}h1{font-size:36px}
-    .stage{height:560px;margin-top:10px}
-    .phone{left:4%;width:250px;height:512px;border-radius:46px}
-    .phone .brackets{top:120px;height:230px}
-    .result{right:0;top:40px;width:210px}
-    .chip.c1{top:150px}.chip.c2{top:300px}.chip.c3{top:350px}
-  }
-  @media (max-width:420px){
-    .stage{height:520px}
-    .phone{left:0;width:220px;height:452px}
-    .result{width:190px;top:30px}
-    .chip.c1{display:none}.chip.c2{top:270px}.chip.c3{top:320px}
+    .hero{padding:32px 0 8px}
+    .hero .wrap{grid-template-columns:1fr;gap:8px}
+    .meet{font-size:30px}h1{font-size:40px}
+    .hero-img{width:min(100%,560px);margin:0 auto}
   }
 
   /* sections */
-  section{padding:80px 0}
-  .sec-h{text-align:center;max-width:46em;margin:0 auto 40px}
-  h2{font-size:40px;line-height:1.1;letter-spacing:-.022em;margin:0 0 10px;font-weight:600;text-wrap:balance}
+  section{padding:104px 0}
+  .sec-h{text-align:center;max-width:46em;margin:0 auto 52px}
+  h2{font-size:44px;line-height:1.08;letter-spacing:-.025em;margin:0 0 12px;font-weight:700;text-wrap:balance}
   .sec-h p{color:var(--ink2);font-size:18px;margin:0}
 
   /* include */
+  /* CSS phone (features section) */
+  .phone{position:relative;width:296px;height:690px;border-radius:52px;background:#0f1013;padding:11px;box-shadow:0 30px 60px rgba(11,11,15,.18),0 2px 0 rgba(255,255,255,.06) inset;margin:0 auto}
+  .phone .screen{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:#000}
+  .phone .island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:92px;height:28px;border-radius:16px;background:#000}
   /* meal-breakdown phone (features section) */
-  .phone.still{position:relative;left:auto;top:auto;transform:none;margin:0 auto;height:640px;box-shadow:0 30px 60px rgba(11,11,15,.18)}
   .screen.light{background:#f5f6f8}
   .island.dark{background:#0f1013;z-index:2}
   .hero-ph{height:215px;overflow:hidden}
-  .hero-ph img{width:100%;height:100%;object-fit:cover}
+  .hero-ph img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
   .sheet{position:absolute;left:0;right:0;top:192px;bottom:0;background:#f5f6f8;border-radius:28px 28px 0 0;padding:16px 16px 0}
   .sheet .time{font-size:11px;color:var(--ink3);font-weight:600}
   .sheet .ttl{font-size:19px;font-weight:800;letter-spacing:-.02em;margin:2px 0 10px}
@@ -143,7 +99,7 @@
   .fcard.on{background:#f6f6f7;border-color:#d6d7dc;box-shadow:0 8px 24px rgba(11,11,15,.06)}
   .fcard h3{margin:0 0 6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
   .fcard p{margin:0;color:var(--ink2);font-size:15.5px}
-  @media (max-width:860px){.include{grid-template-columns:1fr;gap:28px}.phone.still{width:250px;height:560px;border-radius:46px}}
+  @media (max-width:860px){.include{grid-template-columns:1fr;gap:28px}.phone.still{width:250px;height:610px;border-radius:46px}}
 
   /* why */
   .why{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -176,9 +132,9 @@
   details p a{text-decoration:underline}
 
   /* final cta */
-  .final{background:var(--black);color:#fff;text-align:center;padding:84px 24px;border-radius:28px;margin:0 28px 28px}
+  .final{background:var(--black);color:#fff;text-align:center;padding:104px 24px;border-radius:32px;margin:0 28px 28px}
   .final h2{color:#fff;font-weight:700}
-  .final p{color:rgba(255,255,255,.7);font-size:17px;max-width:38em;margin:0 auto 24px}
+  .final p{color:rgba(255,255,255,.7);font-size:19px;max-width:36em;margin:0 auto 32px}
   .final .fine{font-size:12.5px;color:rgba(255,255,255,.5);margin-top:16px}
   .final .fine a{text-decoration:underline}
   @media (max-width:640px){.final{margin:0 12px 12px;padding:56px 20px;border-radius:20px}}
@@ -206,35 +162,16 @@
 <header class="hero" id="top">
   <div class="wrap">
     <div>
-      <span class="eyebrow"><span class="ic"><img src="assets/mark-white.png" alt=""></span>Now on the App Store · 3-day free trial</span>
+      <span class="eyebrow"><span class="ic"><img src="assets/mark-white.png" alt=""></span>Now on the App Store</span>
       <div class="meet">Meet Eat IQ</div>
       <h1>Track your calories with just a picture</h1>
       <p class="lede">Meet Eat IQ, the AI-powered app for easy calorie tracking. Snap a photo, scan a barcode, or describe your meal and get instant calorie and nutrient info.</p>
       <div class="cta-row">
         <a class="badge" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
-        <span class="fine">Free to download · iPhone</span>
+        <span class="fine">Free to download · 3-day free trial of Pro</span>
       </div>
     </div>
-    <div class="stage" aria-hidden="true">
-      <div class="phone"><div class="screen">
-        <img src="assets/food-hero.jpg" alt="">
-        <div class="shade"></div>
-        <div class="island"></div>
-        <div class="top"><span class="c">✕</span><span class="t"><img src="assets/mark-white.png" alt="">Eat IQ</span><span class="c">?</span></div>
-        <div class="brackets"><i></i><i></i><i></i><i></i></div>
-        <div class="modes"><span class="on">Scan Food</span><span>Barcode</span><span>Food label</span></div>
-        <div class="shutter"></div>
-        <div class="home"></div>
-      </div></div>
-      <div class="result">
-        <div class="ph"><img src="assets/food-hero.jpg" alt=""></div>
-        <h4>Club sandwich &amp; chips</h4>
-        <div class="cal"><b>874</b><span>CALORIES</span></div>
-        <div class="m"><div class="p"><div class="k">Protein</div><div class="v">24g</div></div><div class="c"><div class="k">Carbs</div><div class="v">107g</div></div><div class="f"><div class="k">Fat</div><div class="v">39g</div></div></div>
-      </div>
-      <div class="chip c1">Bread <small>348 cal</small></div>
-      <div class="chip c2">Bacon <small>117 cal</small></div>
-      <div class="chip c3">Chips <small>399 cal</small></div>
+    <img class="hero-img" src="assets/hero.jpg" alt="Eat IQ scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2120" height="1880" fetchpriority="high">
   </div>
 </header>
 
@@ -246,36 +183,35 @@
         <div class="island dark"></div>
         <div class="hero-ph"><img src="assets/food-hero.jpg" alt=""></div>
         <div class="sheet">
-          <div class="time">1:54 PM</div>
-          <div class="ttl">Club Sandwich &amp; Chips</div>
+          <div class="time">9:41 AM · Breakfast</div>
+          <div class="ttl">Pancakes with blueberries &amp; syrup</div>
           <div class="rows">
-            <div class="row"><span class="dot" style="background:var(--pink)"></span>Calories<b>874 <small>cal</small></b></div>
-            <div class="row"><span class="dot" style="background:var(--green)"></span>Protein<b>24 <small>g</small></b></div>
-            <div class="row"><span class="dot" style="background:var(--teal)"></span>Carbs<b>107 <small>g</small></b></div>
-            <div class="row"><span class="dot" style="background:var(--purple)"></span>Fat<b>39 <small>g</small></b></div>
+            <div class="row"><span class="dot" style="background:var(--pink)"></span>Calories<b>615 <small>cal</small></b></div>
+            <div class="row"><span class="dot" style="background:var(--green)"></span>Protein<b>11 <small>g</small></b></div>
+            <div class="row"><span class="dot" style="background:var(--teal)"></span>Carbs<b>93 <small>g</small></b></div>
+            <div class="row"><span class="dot" style="background:var(--purple)"></span>Fat<b>21 <small>g</small></b></div>
           </div>
-          <div class="items-h">Items <span>6</span></div>
+          <div class="items-h">Items <span>3</span></div>
           <div class="rows items">
-            <div class="row">Bread <small>120g</small><b>348 <small>cal</small></b></div>
-            <div class="row">Bacon <small>25g</small><b>117 <small>cal</small></b></div>
-            <div class="row">Potato chips <small>75g</small><b>399 <small>cal</small></b></div>
-            <div class="row">Tomato &amp; lettuce <small>60g</small><b>10 <small>cal</small></b></div>
+            <div class="row">Pancakes <small>3 · 240g</small><b>595 <small>cal</small></b></div>
+            <div class="row">Syrup <small>1 tbsp</small><b>12 <small>cal</small></b></div>
+            <div class="row">Blueberries <small>15g</small><b>8 <small>cal</small></b></div>
           </div>
           <div class="fix">✎ Fix results</div>
         </div>
       </div></div>
       <div class="cards">
-        <div class="fcard on"><h3>Track your food with just a picture</h3><p>Snap a photo and Eat IQ measures the portion, then breaks the plate into its parts — bread, bacon, lettuce, tomato, chips — with calories, protein, carbs and fat for each.</p></div>
+        <div class="fcard on"><h3>Track your food with just a picture</h3><p>Snap a photo and Eat IQ measures the portion, then breaks the plate into its parts — pancakes, syrup, blueberries — with calories, protein, carbs and fat for each.</p></div>
         <div class="fcard"><h3>Every ingredient is editable</h3><p>When something looks off, fix that one line instead of throwing out the estimate. Retune portions in grams, ounces, cups or the food's own unit and the macros follow.</p></div>
         <div class="fcard"><h3>Barcodes, labels, search, voice</h3><p>Scan a barcode or a nutrition label. Search packaged brands, restaurant menu items and whole foods. Type or say "two eggs and toast" and get the same breakdown.</p></div>
         <div class="fcard"><h3>Progress, streaks and Apple Health</h3><p>Charts against your goal by week, month or year. Streaks earned from what you actually logged. Health sync that carries your edits and deletes across.</p></div>
       </div>
     </div>
     <div class="macros" aria-label="Example of a scanned meal">
-      <div class="macro cal"><div class="k">Calories</div><div class="v">874</div></div>
-      <div class="macro p"><div class="k">Protein</div><div class="v">24g</div></div>
-      <div class="macro c"><div class="k">Carbs</div><div class="v">107g</div></div>
-      <div class="macro f"><div class="k">Fat</div><div class="v">39g</div></div>
+      <div class="macro cal"><div class="k">Calories</div><div class="v">615</div></div>
+      <div class="macro p"><div class="k">Protein</div><div class="v">11g</div></div>
+      <div class="macro c"><div class="k">Carbs</div><div class="v">93g</div></div>
+      <div class="macro f"><div class="k">Fat</div><div class="v">21g</div></div>
     </div>
   </div>
 </section>
