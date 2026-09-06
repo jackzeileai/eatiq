@@ -123,6 +123,7 @@ body{margin:0;background:transparent;font-family:-apple-system,BlinkMacSystemFon
 .rrow .r{text-align:right;flex:none}.rrow .r b{color:var(--pink)}
 .plus{flex:none;width:30px;height:30px;border-radius:50%;background:#0b0b0f;color:#fff;display:grid;place-items:center;font-size:18px;font-weight:700}
 .ai{margin-top:10px;background:#0b0b0f;color:#fff;border-radius:999px;text-align:center;padding:14px;font-size:15px;font-weight:700}
+body.noisland .island{display:none}
 </style></head><body>
 <div class="wrap" id="home"><div class="phone"><div class="screen">
   <div class="island"></div><div class="status"><span>9:41</span><span>●●● ⌂ ▮</span></div>
@@ -223,7 +224,7 @@ const dishes={
   toast:{img:'dish-toast.jpg',time:'8:15 AM · BREAKFAST',title:'Avocado toast with egg',cal:420,p:16,c:34,f:25,items:[['Sourdough','1 slice · 60g',150],['Avocado','70g',112],['Poached egg','1',72],['Flat white','240ml',86]]},
   sushi:{img:'dish-sushi.jpg',time:'6:40 PM · DINNER',title:'Sushi platter',cal:560,p:32,c:72,f:14,items:[['Salmon nigiri','4 pieces',240],['Tuna nigiri','2 pieces',110],['California roll','4 pieces',210]]},
 };
-const h=location.hash.slice(1)||'home'; const [which,dish]=h.split(':');
+const h=location.hash.slice(1)||'home'; const parts=h.split(':'); const which=parts[0], dish=parts[1]; if(parts.includes('noisland')) document.body.classList.add('noisland');
 document.getElementById(which).classList.add('show');
 if(which==='result'){
   const d=dishes[dish||'pancakes']; const r=document.querySelector('#result');
