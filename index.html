@@ -113,22 +113,25 @@
   .midcta .fine{font-size:14px;color:var(--ink3);font-weight:500}
   @media (max-width:760px){.midcta{padding:32px 0 0}.midcta h3{font-size:28px}}
 
-  /* why: Eat IQ vs a typical tracker */
-  .why{background:var(--ink);color:#fff;border-radius:40px;margin:0 20px}
-  .why h2{color:#fff;font-size:44px;max-width:16em;margin-left:auto;margin-right:auto}
-  .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:960px;margin:0 auto}
-  .vcard{border-radius:28px;padding:36px 36px 32px}
-  .vcard.good{background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(255,255,255,.4)}
-  .vcard.bad{background:#17171b;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
-  .vh{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:24px;color:var(--ink3)}
-  .vcard.bad .vh{color:rgba(255,255,255,.4)}
-  .vcard ul{list-style:none;margin:0;padding:0;display:grid;gap:18px}
-  .vcard li{display:flex;align-items:center;gap:14px;font-size:23px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
-  .vcard .ic{flex:none;width:28px;height:28px}
-  .vt{margin-top:30px;padding-top:24px;border-top:1px solid rgba(0,0,0,.08);font-size:44px;font-weight:900;letter-spacing:-.045em;line-height:1}
-  .vcard.good .vt{color:var(--green)}
-  .vcard.bad .vt{border-top-color:rgba(255,255,255,.08);color:rgba(255,255,255,.3)}
-  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:12px}.why{margin:0 12px;border-radius:28px}.why h2{font-size:30px}.vcard{padding:26px 24px 22px}.vcard li{font-size:19px}.vt{font-size:34px}}
+  /* why: Eat IQ vs other trackers */
+  .why{background:#0a0a0c;color:#fff;border-radius:40px;margin:0 20px;position:relative;overflow:hidden}
+  .why::before{content:"";position:absolute;left:8%;top:-20%;width:44%;height:80%;background:radial-gradient(closest-side,rgba(52,199,89,.22),rgba(52,199,89,0));pointer-events:none}
+  .why h2{color:#fff;font-size:56px}
+  .vs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:980px;margin:0 auto}
+  .vsbadge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:#fff;color:#0a0a0c;display:grid;place-items:center;font-size:14px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 0 8px #0a0a0c;z-index:2}
+  .vcard{border-radius:32px;padding:38px 36px 34px}
+  .vcard.good{background:#fff;color:var(--ink);box-shadow:0 30px 80px rgba(52,199,89,.18),0 0 0 1px rgba(255,255,255,.5)}
+  .vcard.bad{background:#141417;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
+  .vh{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:26px;color:var(--ink)}
+  .vcard.bad .vh{color:rgba(255,255,255,.45)}
+  .vcard ul{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+  .vcard li{display:flex;align-items:flex-start;gap:16px}
+  .vcard .ic{flex:none;width:32px;height:32px;margin-top:2px}
+  .vcard li span{display:flex;flex-direction:column;gap:3px;font-size:30px;font-weight:900;letter-spacing:-.035em;line-height:1}
+  .vcard li small{font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink2)}
+  .vcard.bad li span{color:rgba(255,255,255,.55);text-decoration:line-through;text-decoration-color:rgba(255,69,58,.7);text-decoration-thickness:3px}
+  .vcard.bad li small{color:rgba(255,255,255,.35);text-decoration:none}
+  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:14px}.vsbadge{display:none}.why{margin:0 12px;border-radius:28px}.why h2{font-size:38px}.vcard{padding:28px 24px 24px}.vcard li span{font-size:24px}}
 
   /* faq */
   .faq{max-width:760px;margin:0 auto}
@@ -211,7 +214,7 @@
         <p>Pancakes, syrup, blueberries — each with its own weight and calories. When one line looks off, fix that line instead of throwing out the whole estimate.</p>
         <ul><li>Retune portions in grams, ounces, cups or the food's own unit</li><li>Macros update with every edit</li><li>Corrections are remembered next time</li></ul>
       </div>
-      <div class="art"><img src="assets/hand-result-v13.webp" alt="A hand holding an iPhone showing a scanned plate of pancakes broken down into ingredients" loading="lazy" width="1100" height="1375"></div>
+      <div class="art"><img src="assets/hand-result-v14.webp" alt="A hand holding an iPhone showing a scanned plate of pancakes broken down into ingredients" loading="lazy" width="1100" height="1375"></div>
     </div>
 
     <div class="feat flip">
@@ -221,7 +224,7 @@
         <p>Calories and macros as rings that fill as you eat. Streaks earned from what you actually logged, not from opening the app.</p>
         <ul><li>Rollover: up to 200 unused calories carry into tomorrow</li><li>Progress by week, month or year</li><li>Light and dark themes</li></ul>
       </div>
-      <div class="art"><img src="assets/hand-home-v13.webp" alt="A hand holding an iPhone showing the Eat IQ home screen with calorie and macro rings" loading="lazy" width="1100" height="1375"></div>
+      <div class="art"><img src="assets/hand-home-v14.webp" alt="A hand holding an iPhone showing the Eat IQ home screen with calorie and macro rings" loading="lazy" width="1100" height="1375"></div>
     </div>
 
     <div class="feat">
@@ -231,7 +234,7 @@
         <p>Scan a barcode or a nutrition label. Search brands, restaurant menu items and whole foods. Type or say "two eggs and toast" and get the same breakdown.</p>
         <ul><li>Apple Health sync that carries edits and deletes across</li><li>Re-log anything from your Frequent list in one tap</li><li>Your meals back up to your account</li></ul>
       </div>
-      <div class="art"><img src="assets/hand-search-v13.webp" alt="A hand holding an iPhone showing food search results for chicken breast" loading="lazy" width="1100" height="1375"></div>
+      <div class="art"><img src="assets/hand-search-v14.webp" alt="A hand holding an iPhone showing food search results for chicken breast" loading="lazy" width="1100" height="1375"></div>
     </div>
 
     <div class="midcta">
@@ -244,27 +247,26 @@
 
 <section class="why">
   <div class="wrap">
-    <div class="sec-h"><div class="kicker" style="color:rgba(255,255,255,.5)">Why people stick with it</div><h2>Logging is why people quit. So we removed it.</h2></div>
+    <div class="sec-h"><div class="kicker" style="color:rgba(255,255,255,.5)">Why Eat IQ</div><h2>Built different.</h2></div>
     <div class="vs">
       <div class="vcard good">
-        <div class="vh"><img src="assets/mark-black.png" alt="" width="20" height="20">Eat IQ</div>
+        <div class="vh"><img src="assets/mark-black.png" alt="" width="22" height="22">Eat IQ</div>
         <ul>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Snap a photo</li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Every ingredient, listed</li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Fix any line</li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Synced to Apple Health</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Fast<small>Snap. Done in seconds.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Accurate<small>Every ingredient, weighed.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Edit macros<small>Fix any line. It remembers.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tailored to you<small>Your goals, your Apple Health.</small></span></li>
         </ul>
-        <div class="vt">10 seconds</div>
       </div>
+      <div class="vsbadge" aria-hidden="true">vs</div>
       <div class="vcard bad">
-        <div class="vh">Typical tracker</div>
+        <div class="vh">Other trackers</div>
         <ul>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>Search a database</li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>Guess the serving size</li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>Repeat for every ingredient</li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>Give up on the sauce</li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Slow<small>Search, scroll, guess, repeat.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Generic<small>One number, no breakdown.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Hard to use<small>Serving sizes you have to know.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Not about you<small>Same targets for everyone.</small></span></li>
         </ul>
-        <div class="vt">4 minutes</div>
       </div>
     </div>
   </div>
