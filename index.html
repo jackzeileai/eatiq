@@ -127,11 +127,12 @@
   .vcard ul{list-style:none;margin:0;padding:0;display:grid;gap:20px}
   .vcard li{display:flex;align-items:flex-start;gap:16px}
   .vcard .ic{flex:none;width:32px;height:32px;margin-top:2px}
-  .vcard li span{display:flex;flex-direction:column;gap:3px;font-size:30px;font-weight:900;letter-spacing:-.035em;line-height:1}
+  .vcard li span{display:flex;flex-direction:column;gap:3px;line-height:1}
+  .vcard li b{font-size:30px;font-weight:900;letter-spacing:-.035em}
   .vcard li small{font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink2)}
-  .vcard.bad li span{color:rgba(255,255,255,.55);text-decoration:line-through;text-decoration-color:rgba(255,69,58,.7);text-decoration-thickness:3px}
-  .vcard.bad li small{color:rgba(255,255,255,.35);text-decoration:none}
-  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:14px}.vsbadge{display:none}.why{margin:0 12px;border-radius:28px}.why h2{font-size:38px}.vcard{padding:28px 24px 24px}.vcard li span{font-size:24px}}
+  .vcard.bad li b{color:rgba(255,255,255,.55);text-decoration:line-through;text-decoration-color:rgba(255,69,58,.7);text-decoration-thickness:3px}
+  .vcard.bad li small{color:rgba(255,255,255,.35)}
+  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:14px}.vsbadge{display:none}.why{margin:0 12px;border-radius:28px}.why h2{font-size:38px}.vcard{padding:28px 24px 24px}.vcard li b{font-size:24px}}
 
   /* faq */
   .faq{max-width:760px;margin:0 auto}
@@ -198,8 +199,8 @@
   </div>
   <div class="dishes" role="list">
     <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-burger-v11.webp" alt="Cheeseburger and fries broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Cheeseburger &amp; fries<small>1,107 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-poke-v11.webp" alt="Salmon poke bowl broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Salmon rice bowl<small>957 cal</small></span></a>
-    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-sushi-v11.webp" alt="Sushi platter broken down in Eat IQ" loading="lazy" width="675" height="1380"><span>Assorted sushi<small>640 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-poke-v11.webp" alt="Salmon poke bowl broken down in Eat IQ" loading="lazy" width="675" height="1380"><span><b>Salmon rice bowl</b><small>957 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://geteatiq.com/download"><img src="assets/dish-sushi-v11.webp" alt="Sushi platter broken down in Eat IQ" loading="lazy" width="675" height="1380"><span><b>Assorted sushi</b><small>640 cal</small></span></a>
   </div>
 </section>
 
@@ -252,20 +253,20 @@
       <div class="vcard good">
         <div class="vh"><img src="assets/mark-black.png" alt="" width="22" height="22">Eat IQ</div>
         <ul>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Fast<small>Snap. Done in seconds.</small></span></li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Accurate<small>Every ingredient, weighed.</small></span></li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Edit macros<small>Fix any line. It remembers.</small></span></li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tailored to you<small>Your goals, your Apple Health.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Fast</b><small>Snap. Done in seconds.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Accurate</b><small>Every ingredient, weighed.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Edit macros</b><small>Fix any line. It remembers.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tailored to you</b><small>Your goals, your Apple Health.</small></span></li>
         </ul>
       </div>
       <div class="vsbadge" aria-hidden="true">vs</div>
       <div class="vcard bad">
         <div class="vh">Other trackers</div>
         <ul>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Slow<small>Search, scroll, guess, repeat.</small></span></li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Generic<small>One number, no breakdown.</small></span></li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Hard to use<small>Serving sizes you have to know.</small></span></li>
-          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>Not about you<small>Same targets for everyone.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span><b>Slow</b><small>Search, scroll, guess, repeat.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span><b>Generic</b><small>One number, no breakdown.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span><b>Hard to use</b><small>Serving sizes you have to know.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span><b>Not about you</b><small>Same targets for everyone.</small></span></li>
         </ul>
       </div>
     </div>
