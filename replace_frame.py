@@ -18,8 +18,8 @@ while q:
         if 0<=ny<hh and 0<=nx<ww and not seen[ny,nx] and hole[ny,nx]: seen[ny,nx]=True; q.append((ny,nx))
 screen=Image.fromarray((seen*255).astype('uint8'))
 base=gen.width/1536*0.5
-def rings(scale,rot):
-    s=screen.resize((int(fr.width*scale),int(fr.height*scale)),Image.BILINEAR).rotate(rot,expand=True,resample=Image.BILINEAR)
+def rings(scale,rot,sy=1.0):   # sy: extra vertical stretch — AI phones are rarely drawn at the exact real aspect
+    s=screen.resize((int(fr.width*scale),int(fr.height*scale*sy)),Image.BILINEAR).rotate(rot,expand=True,resample=Image.BILINEAR)
     a=np.asarray(s)>127
     e1=np.asarray(Image.fromarray((a*255).astype('uint8')).filter(ImageFilter.MinFilter(5)))>127
     e2=np.asarray(Image.fromarray((a*255).astype('uint8')).filter(ImageFilter.MinFilter(15)))>127
@@ -54,8 +54,18 @@ for sc in np.linspace(scale-0.04,scale+0.04,9):
             for xx in range(x-16,x+17,2):
                 s2=score(sz,rin,rout,xx,yy,2)
                 if s2>best[0]: best=(s2,xx,yy,sc,r)
-s,x,y,scale,rot=best; print('match score %.3f at x=%d y=%d scale=%.3f rot=%.1f'%best)
-t=fr.resize((int(fr.width*scale),int(fr.height*scale)),Image.LANCZOS).rotate(rot,expand=True,resample=Image.BICUBIC)
-sm=screen.filter(ImageFilter.MaxFilter(5)).resize((int(fr.width*scale),int(fr.height*scale)),Image.BILINEAR).rotate(rot,expand=True,resample=Image.BILINEAR)
+s,x,y,scale,rot=best
+# aspect pass: keep width, let height breathe ±8% so the paste stops at the drawn bezel top AND bottom
+best=(s,x,y,scale,rot,1.0)
+for sy in np.linspace(0.92,1.08,17):
+    sz,rin,rout=rings(scale,rot,sy)
+    for yy in range(y-24,y+25,2):
+        for xx in range(x-4,x+5,2):
+            s2=score(sz,rin,rout,xx,yy,2)
+            if s2>best[0]: best=(s2,xx,yy,scale,rot,sy)
+s,x,y,scale,rot,sy=best; print('match score %.3f at x=%d y=%d scale=%.3f rot=%.1f sy=%.3f'%best)
+sz=(int(fr.width*scale),int(fr.height*scale*sy))
+t=fr.resize(sz,Image.LANCZOS).rotate(rot,expand=True,resample=Image.BICUBIC)
+sm=screen.filter(ImageFilter.MaxFilter(5)).resize(sz,Image.BILINEAR).rotate(rot,expand=True,resample=Image.BILINEAR)
 out=gen.copy(); out.paste(t,(x,y),sm); out.save(sys.argv[3],quality=93); print('saved',sys.argv[3])
 json.dump({'x':x,'y':y,'w':t.width,'h':t.height,'W':out.width,'H':out.height},open(sys.argv[3]+'.json','w'))
