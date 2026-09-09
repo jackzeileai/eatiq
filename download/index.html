@@ -2,8 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>location.replace("https://apps.apple.com/app/id6802901402")</script>
-<meta http-equiv="refresh" content="0;url=https://apps.apple.com/app/id6802901402">
+<script>
+(function(){
+  var fixed='',pt='',base="https://apps.apple.com/app/apple-store/id6802901402";
+  var ref=document.referrer||"",q=new URLSearchParams(location.search).get("s")||"";
+  var src=fixed||(q&&/^[a-z0-9_-]{1,40}$/i.test(q)?q:"")||
+    (/instagram\.com/i.test(ref)?"ig_bio":/tiktok\.com/i.test(ref)?"tt_bio":
+     /youtube\.com|youtu\.be/i.test(ref)?"yt":/twitter\.com|x\.com|t\.co/i.test(ref)?"x":"direct");
+  var url=base+"?"+(pt?"pt="+pt+"&":"")+"ct="+src+"&mt=8";
+  try{
+    fetch('https://bvaumyrtcuehlipiaxlv.supabase.co'+"/rest/v1/link_clicks",{method:"POST",keepalive:true,
+      headers:{"apikey":'sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7',"Authorization":"Bearer "+'sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7',
+        "Content-Type":"application/json","Prefer":"return=minimal"},
+      body:JSON.stringify({source:src,path:location.pathname,referrer:ref.slice(0,500),
+        ua:navigator.userAgent.slice(0,500),lang:navigator.language})});
+  }catch(e){}
+  location.replace(url);
+})();
+</script>
+<meta http-equiv="refresh" content="0;url=https://apps.apple.com/app/apple-store/id6802901402?ct=direct&mt=8">
 <title>Meal Pic on the App Store</title>
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,6 +29,6 @@
 <style>body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}p{font-size:17px}a{color:#0a84ff}</style>
 </head>
 <body>
-<p><a href="https://apps.apple.com/app/id6802901402">Meal Pic on the App Store</a></p>
+<p><a href="https://apps.apple.com/app/apple-store/id6802901402?ct=direct&mt=8">Meal Pic on the App Store</a></p>
 </body>
 </html>
