@@ -10,7 +10,10 @@ proceeds per source. Click → install rate = installs(ct) / clicks(source).
 Source per page:
   /ig /tt /yt      fixed (ig_bio / tt_bio / yt)
   /  /download     ?s=<tag> if given, else by referrer (instagram → ig_bio,
-                   tiktok → tt_bio, youtube → yt, x/twitter → x), else direct.
+                   tiktok → tt_bio, youtube → yt, x/twitter → x, own site → site,
+                   other referrer → direct). NO referrer → ig_bio: the bio link is
+                   the bare domain (Jack, 2026-09-09) and IG's in-app browser
+                   can strip the referrer.
 
 PT = Apple provider token (App Store Connect → App Analytics → Sources →
 Campaigns → Generate Campaign Link shows it as pt=…). Empty = the ct tag
@@ -41,7 +44,8 @@ TEMPLATE = """<!DOCTYPE html>
   var ref=document.referrer||"",q=new URLSearchParams(location.search).get("s")||"";
   var src=fixed||(q&&/^[a-z0-9_-]{{1,40}}$/i.test(q)?q:"")||
     (/instagram\\.com/i.test(ref)?"ig_bio":/tiktok\\.com/i.test(ref)?"tt_bio":
-     /youtube\\.com|youtu\\.be/i.test(ref)?"yt":/twitter\\.com|x\\.com|t\\.co/i.test(ref)?"x":"direct");
+     /youtube\\.com|youtu\\.be/i.test(ref)?"yt":/twitter\\.com|x\\.com|t\\.co/i.test(ref)?"x":
+     /mealpic\\.app/i.test(ref)?"site":ref?"direct":"ig_bio");
   var url=base+"?"+(pt?"pt="+pt+"&":"")+"ct="+src+"&mt=8";
   try{{
     fetch({sb_url!r}+"/rest/v1/link_clicks",{{method:"POST",keepalive:true,
@@ -69,7 +73,7 @@ TEMPLATE = """<!DOCTYPE html>
 
 here = os.path.dirname(os.path.abspath(__file__))
 for path, fixed in PAGES.items():
-    ct = fixed or "direct"
+    ct = fixed or "ig_bio"
     plain = f"https://apps.apple.com/app/apple-store/id{APP_ID}?" + (f"pt={PT}&" if PT else "") + f"ct={ct}&mt=8"
     out = os.path.join(here, path)
     os.makedirs(os.path.dirname(out), exist_ok=True)
