@@ -19,7 +19,7 @@ still goes out but Apple will not attribute it. Run: python3 mk-redirects.py
 import os
 
 APP_ID = "6802901402"
-PT = ""  # ← Apple provider token, e.g. "119123456"
+PT = "128667679"  # Apple provider token (ASC olympus session providerId, 2026-09-09)
 SUPABASE_URL = "https://bvaumyrtcuehlipiaxlv.supabase.co"
 SUPABASE_KEY = "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7"  # publishable, insert-only via RLS
 
