@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MealPic | Track your calories with just a picture</title>
+<meta name="description" content="MealPic is the AI calorie tracker for iPhone. Snap a photo and get calories, protein, carbs and fat in seconds — with every ingredient on the plate broken out and editable.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://mealpic.app/">
+<meta property="og:title" content="MealPic | Track your calories with just a picture">
+<meta property="og:description" content="Snap a photo. Get calories, protein, carbs and fat in seconds.">
+<meta property="og:image" content="https://mealpic.app/assets/icon-512.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --bg2:#f5f5f7; --ink:#0a0a0c; --ink2:#55585f; --ink3:#8a8d94; --line:#e8e8ec;
+    --pink:#e8336f; --green:#34c759; --teal:#30b0c7; --purple:#af52de; --blue:#0a84ff;
+    --max:1160px; --r:28px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+
+  /* badge */
+  .badge{display:inline-block;transition:transform .15s ease-out,opacity .15s}
+  .badge img{height:60px;width:auto}
+  .badge:hover{transform:translateY(-1px)}.badge:active{transform:scale(.98)}
+  .badge.xl img{height:84px}
+  .badge.nav img{height:44px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:80px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:24px;letter-spacing:-.03em}
+  .brand img{width:30px;height:30px}
+  .navlinks{display:flex;gap:30px;font-size:15px;font-weight:600;color:var(--ink2)}
+  .navlinks a:hover{color:var(--ink)}
+  @media (max-width:760px){.navlinks{display:none}}
+
+  /* hero */
+  .hero{padding:48px 0 0;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:12px;align-items:center}
+  .kicker{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin:0 0 18px}
+  h1{font-size:66px;line-height:1.0;letter-spacing:-.045em;margin:0 0 22px;font-weight:900;text-wrap:balance}
+  h1 span{color:var(--ink3);font-weight:800}
+  .lede{font-size:20px;line-height:1.5;color:var(--ink2);max-width:24em;margin:0 0 34px;font-weight:400}
+  .cta{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+  .cta .fine{font-size:14px;color:var(--ink3);font-weight:500}
+  .hero-img{width:100%;height:auto}
+  @media (max-width:980px){
+    .hero{padding:20px 0 0}
+    .hero .wrap{grid-template-columns:1fr;gap:6px;text-align:center}
+    .kicker{margin-bottom:12px}
+    h1{font-size:44px;letter-spacing:-.04em}
+    .lede{font-size:17px;margin:0 auto 24px}
+    .cta{align-items:center}
+    .badge.xl img{height:72px}
+    .hero-img{width:min(100%,520px);margin:22px auto 0}
+  }
+  @media (max-width:760px){.strip{padding:34px 0 0}}
+  @media (max-width:400px){h1{font-size:38px}}
+
+  /* proof strip */
+  .strip{padding:20px 0 0}
+  .strip .wrap{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;color:var(--ink3);font-size:14px;font-weight:600}
+  .strip span b{color:var(--ink);font-weight:800}
+
+  /* sections */
+  section{padding:96px 0}
+  @media (max-width:760px){section{padding:56px 0}.sec-h{margin-bottom:32px}h2{font-size:36px}.sec-h p{font-size:17px}.strip .wrap{gap:12px 20px;font-size:13px}nav .wrap{height:68px}.brand{font-size:21px}.badge.nav img{height:38px}}
+  .sec-h{max-width:34em;margin:0 auto 40px;text-align:center}
+  .sec-h .kicker{margin-bottom:14px}
+  h2{font-size:52px;line-height:1.02;letter-spacing:-.04em;margin:0 0 14px;font-weight:900;text-wrap:balance}
+  .sec-h p{color:var(--ink2);font-size:19px;margin:0}
+
+  /* dishes: in-app result screens, one per plate. Snap-scrolls on phones, fits in a row on desktop */
+  .dishes{display:flex;gap:36px;padding:4px 28px 0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:1440px;margin:0 auto}
+  .dishes::-webkit-scrollbar{display:none}
+  .dish{flex:0 0 340px;scroll-snap-align:center;text-align:center}
+  .dish img{width:100%;height:auto;transition:transform .35s ease}
+  .dish:hover img{transform:translateY(-6px)}
+  .dish span{display:block;margin-top:18px;font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .dish span small{display:block;font-size:13px;font-weight:600;color:var(--ink3)}
+  @media (min-width:1180px){.dishes{justify-content:center;overflow:visible}}
+  @media (max-width:760px){.dishes{gap:18px;padding:4px 20px 24px}.dish{flex:0 0 76vw;max-width:320px}}
+
+  /* feature rows */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:28px 0}
+  .feat.flip .copy{order:2}
+  .feat .copy .kicker{margin-bottom:12px}
+  .feat h3{font-size:40px;line-height:1.05;letter-spacing:-.035em;margin:0 0 14px;font-weight:900;text-wrap:balance}
+  .feat p{color:var(--ink2);font-size:18px;margin:0 0 20px;max-width:28em}
+  .feat ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .feat li{display:flex;gap:10px;align-items:flex-start;font-size:16px;font-weight:600}
+  .feat li::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);margin-top:1px;
+    -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><circle cx='11' cy='11' r='11' fill='black'/><path d='M6.5 11.5l3 3L15.5 8.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'><circle cx='11' cy='11' r='11' fill='black'/><path d='M6.5 11.5l3 3L15.5 8.5' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/contain no-repeat}
+  .feat .art{position:relative}
+  .feat .art img{width:100%;height:auto;border-radius:var(--r)}
+  
+  
+  
+  @media (max-width:900px){.feat{grid-template-columns:1fr;gap:20px;padding:22px 0}.feat .copy,.feat.flip .copy{order:2}.feat h3{font-size:30px}.feat p{font-size:16.5px}.feat li{font-size:15px}.feat .art img{border-radius:22px}}
+
+  /* mid-page CTA */
+  .midcta{text-align:center;padding:56px 0 0;display:flex;flex-direction:column;align-items:center;gap:16px}
+  .midcta h3{font-size:34px;font-weight:900;letter-spacing:-.035em;margin:0}
+  .midcta .fine{font-size:14px;color:var(--ink3);font-weight:500}
+  @media (max-width:760px){.midcta{padding:32px 0 0}.midcta h3{font-size:28px}}
+
+  /* why: MealPic vs other trackers */
+  .why{background:#0a0a0c;color:#fff;border-radius:40px;margin:0 20px;position:relative;overflow:hidden}
+  .why::before{content:"";position:absolute;left:8%;top:-20%;width:44%;height:80%;background:radial-gradient(closest-side,rgba(52,199,89,.22),rgba(52,199,89,0));pointer-events:none}
+  .why h2{color:#fff;font-size:56px}
+  .vs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:980px;margin:0 auto}
+  .vsbadge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:#fff;color:#0a0a0c;display:grid;place-items:center;font-size:14px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 0 8px #0a0a0c;z-index:2}
+  .vcard{border-radius:32px;padding:38px 36px 34px}
+  .vcard.good{background:#fff;color:var(--ink);box-shadow:0 30px 80px rgba(52,199,89,.18),0 0 0 1px rgba(255,255,255,.5)}
+  .vcard.bad{background:#141417;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
+  .vh{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:26px;color:var(--ink)}
+  .vcard.bad .vh{color:rgba(255,255,255,.45)}
+  .vcard ul{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+  .vcard li{display:flex;align-items:flex-start;gap:16px}
+  .vcard .ic{flex:none;width:32px;height:32px;margin-top:2px}
+  .vcard li span{display:flex;flex-direction:column;gap:3px;line-height:1}
+  .vcard li b{font-size:30px;font-weight:900;letter-spacing:-.035em}
+  .vcard li small{font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink2)}
+  .vcard.bad li b{color:rgba(255,255,255,.55);text-decoration:line-through;text-decoration-color:rgba(255,69,58,.7);text-decoration-thickness:3px}
+  .vcard.bad li small{color:rgba(255,255,255,.35)}
+  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:14px}.vsbadge{display:none}.why{margin:0 12px;border-radius:28px}.why h2{font-size:38px}.vcard{padding:28px 24px 24px}.vcard li b{font-size:24px}}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto}
+  details{border-bottom:1px solid var(--line);padding:22px 0}
+  details:first-child{border-top:1px solid var(--line)}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:700;font-size:19px;letter-spacing:-.01em}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:26px;font-weight:300;color:var(--ink3);flex:none;transition:transform .15s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p,details ol{color:var(--ink2);margin:12px 0 0;font-size:16.5px}
+  details ol{padding-left:20px}
+  details p b{color:var(--ink)}
+  details p a{text-decoration:underline}
+
+  /* final */
+  .final{padding:40px 0 96px}
+  .final .box{background:var(--bg2);border-radius:40px;padding:80px 40px 0;text-align:center;overflow:hidden;position:relative}
+  .final h2{font-size:56px}
+  .final p{color:var(--ink2);font-size:19px;max-width:30em;margin:0 auto 30px}
+  .final .fine{font-size:13px;color:var(--ink3);margin:14px 0 48px}
+  .final .fine a{text-decoration:underline}
+  .final .art{width:min(100%,640px);margin:0 auto -8%;height:auto}
+  @media (max-width:640px){.final{padding:16px 0 56px}.final .box{padding:52px 20px 0;border-radius:28px}.final h2{font-size:36px}.final p{font-size:17px}.badge.xl img{height:72px}.final .art{margin-bottom:-12%}}
+
+  footer{padding:28px 0 44px;color:var(--ink3);font-size:14px;font-weight:500}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  @media (max-width:640px){footer .wrap{justify-content:center;text-align:center}}
+  footer .links{display:flex;gap:22px;flex-wrap:wrap}
+  footer .links a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/mark-black.png" alt="" width="30" height="30">MealPic</a>
+    <div class="navlinks"><a href="#features">Features</a><a href="#faq">FAQ</a><a href="support.html">Support</a></div>
+    <a class="badge nav" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="kicker">AI calorie tracker for iPhone</div>
+      <h1>Track your calories <span>with just a picture.</span></h1>
+      <p class="lede">Snap a photo. Get calories, protein, carbs and fat in seconds — with every ingredient on the plate broken out and editable.</p>
+      <div class="cta">
+        <a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
+        <span class="fine">Free to download · 3-day free trial of Pro</span>
+      </div>
+    </div>
+    <img class="hero-img" src="assets/hero-v14.webp" alt="MealPic scanning a plate of blueberry pancakes and returning calories, carbs, protein and fat" width="2426" height="1984" fetchpriority="high">
+  </div>
+</header>
+
+<div class="strip"><div class="wrap">
+  <span><b>~10 seconds</b> per meal</span><span><b>Every ingredient</b> on its own line</span><span><b>Barcodes &amp; labels</b> too</span><span><b>Apple Health</b> sync</span>
+</div></div>
+
+<section id="plates">
+  <div class="wrap">
+    <div class="sec-h"><div class="kicker">Any plate</div><h2>Whatever you're actually eating.</h2><p>Home cooking, takeout, a restaurant, a packaged snack. Point the camera. These are real scans, numbers untouched.</p></div>
+  </div>
+  <div class="dishes" role="list">
+    <a class="dish" role="listitem" href="https://mealpic.app/download"><img src="assets/dish-burger-v11.webp" alt="Cheeseburger and fries broken down in MealPic" loading="lazy" width="675" height="1380"><span>Cheeseburger &amp; fries<small>1,107 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://mealpic.app/download"><img src="assets/dish-poke-v11.webp" alt="Salmon poke bowl broken down in MealPic" loading="lazy" width="675" height="1380"><span><b>Salmon rice bowl</b><small>957 cal</small></span></a>
+    <a class="dish" role="listitem" href="https://mealpic.app/download"><img src="assets/dish-sushi-v11.webp" alt="Sushi platter broken down in MealPic" loading="lazy" width="675" height="1380"><span><b>Assorted sushi</b><small>640 cal</small></span></a>
+  </div>
+</section>
+
+<section id="features" style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-h"><div class="kicker">What's inside</div><h2>Built to be right. Easy to fix when it isn't.</h2></div>
+
+    <div class="feat">
+      <div class="copy">
+        <div class="kicker">Ingredient by ingredient</div>
+        <h3>The whole plate, broken down.</h3>
+        <p>Pancakes, syrup, blueberries — each with its own weight and calories. When one line looks off, fix that line instead of throwing out the whole estimate.</p>
+        <ul><li>Retune portions in grams, ounces, cups or the food's own unit</li><li>Macros update with every edit</li><li>Corrections are remembered next time</li></ul>
+      </div>
+      <div class="art"><img src="assets/hand-result-v16.webp" alt="A hand holding an iPhone showing a scanned plate of pancakes broken down into ingredients" loading="lazy" width="1100" height="1375"></div>
+    </div>
+
+    <div class="feat flip">
+      <div class="copy">
+        <div class="kicker">One home screen</div>
+        <h3>Your day at a glance.</h3>
+        <p>Calories and macros as rings that fill as you eat. Streaks earned from what you actually logged, not from opening the app.</p>
+        <ul><li>Rollover: up to 200 unused calories carry into tomorrow</li><li>Progress by week, month or year</li><li>Light and dark themes</li></ul>
+      </div>
+      <div class="art"><img src="assets/hand-home-v17.webp" alt="A hand holding an iPhone showing the MealPic home screen with calorie and macro rings" loading="lazy" width="1100" height="1375"></div>
+    </div>
+
+    <div class="feat">
+      <div class="copy">
+        <div class="kicker">More than a camera</div>
+        <h3>Barcodes, labels, search, voice.</h3>
+        <p>Scan a barcode or a nutrition label. Search brands, restaurant menu items and whole foods. Type or say "two eggs and toast" and get the same breakdown.</p>
+        <ul><li>Apple Health sync that carries edits and deletes across</li><li>Re-log anything from your Frequent list in one tap</li><li>Your meals back up to your account</li></ul>
+      </div>
+      <div class="art"><img src="assets/hand-search-v17.webp" alt="A hand holding an iPhone showing food search results for chicken breast" loading="lazy" width="1100" height="1375"></div>
+    </div>
+
+    <div class="midcta">
+      <h3>Ready when your next meal is.</h3>
+      <a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
+      <span class="fine">Free to download · 3-day free trial of Pro</span>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="sec-h"><div class="kicker" style="color:rgba(255,255,255,.5)">Why MealPic</div><h2>Built different.</h2></div>
+    <div class="vs">
+      <div class="vcard good">
+        <div class="vh"><img src="assets/mark-black.png" alt="" width="22" height="22">MealPic</div>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Fast</b><small>Snap. Done in seconds.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Accurate</b><small>Every ingredient, weighed.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Edit macros</b><small>Fix any line. It remembers.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#34c759"/><path d="M9 15.5l4 4 8-8.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tailored to you</b><small>Your goals, your Apple Health.</small></span></li>
+        </ul>
+      </div>
+      <div class="vsbadge" aria-hidden="true">vs</div>
+      <div class="vcard bad">
+        <div class="vh">Other trackers</div>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span><b>Slow</b><small>Search, scroll, guess, repeat.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span><b>Generic</b><small>One number, no breakdown.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span><b>Hard to use</b><small>Serving sizes you have to know.</small></span></li>
+          <li><svg class="ic" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#ff453a"/><path d="M10.5 10.5l9 9M19.5 10.5l-9 9" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span><b>Not about you</b><small>Same targets for everyone.</small></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-h"><div class="kicker">FAQ</div><h2>Questions, answered.</h2></div>
+    <div class="faq">
+      <details><summary>How accurate is it?</summary><p>Every number is an estimate. MealPic measures portions from the photo, prices each ingredient against nutrition data, and shows the breakdown so you can correct any line. Good light and a photo that fills the frame help a lot.</p></details>
+      <details><summary>What does it cost?</summary><p>Free to download. <b>MealPic Pro</b> unlocks unlimited scanning: <b>$29.99 a year</b> (about $2.49 a month) or <b>$9.99 a month</b>, with a 3-day free trial.</p></details>
+      <details><summary>How do I cancel?</summary><p>Subscriptions go through Apple: <b>Settings → your name → Subscriptions → MealPic → Cancel</b>. Deleting the app does not cancel. Cancel at least 24 hours before the trial ends to avoid a charge.</p></details>
+      <details><summary>I paid but still see a paywall</summary><p>Tap <b>Restore Purchases</b> on the paywall and make sure you're signed in with the Apple ID you bought with.</p></details>
+      <details><summary>What happens to my photos?</summary><p>Before your first scan the app asks for consent to send the photo to our AI provider for analysis. "Not Now" sends nothing. Meals back up to your account; you can delete the account and all its data in-app. Details in the <a href="privacy.html">Privacy Policy</a>.</p></details>
+      <details><summary>Is this medical advice?</summary><p>No. MealPic is a general wellness tool, not a medical device. Consult a doctor or registered dietitian before making significant changes to your diet.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap"><div class="box">
+    <h2>Scan your next meal.</h2>
+    <p>Free to download. Three days of Pro on us. Cancel anytime.</p>
+    <a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
+    <div class="fine">By subscribing you agree to our <a href="terms.html">Terms of Use</a> and <a href="privacy.html">Privacy Policy</a>. iPhone, iOS 18 or later.</div>
+    <img class="art" src="assets/hero-v14.webp" alt="" loading="lazy">
+  </div></div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Church Street Studios · MealPic</div>
+    <div class="links"><a href="support.html">Support</a><a href="mailto:help@mealpic.app">help@mealpic.app</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
