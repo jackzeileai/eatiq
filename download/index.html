@@ -12,11 +12,10 @@
      /mealpic\.app/i.test(ref)?"site":ref?"direct":"ig_bio");
   var url=base+"?"+(pt?"pt="+pt+"&":"")+"ct="+src+"&mt=8";
   try{
-    fetch('https://bvaumyrtcuehlipiaxlv.supabase.co'+"/rest/v1/link_clicks",{method:"POST",keepalive:true,
-      headers:{"apikey":'sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7',"Authorization":"Bearer "+'sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7',
-        "Content-Type":"application/json","Prefer":"return=minimal"},
-      body:JSON.stringify({source:src,path:location.pathname,referrer:ref.slice(0,500),
-        ua:navigator.userAgent.slice(0,500),lang:navigator.language})});
+    fetch("https://mealpic-clicks.jackzeile.workers.dev",{method:"POST",keepalive:true,
+      headers:{"Content-Type":"text/plain"},
+      body:JSON.stringify({source:src,path:location.pathname,
+        privacyOptOut:navigator.globalPrivacyControl===true||navigator.doNotTrack==="1"})});
   }catch(e){}
   location.replace(url);
 })();

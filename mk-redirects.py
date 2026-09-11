@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Writes the App Store redirect pages: /, /download, /ig, /tt, /yt.
 
-Each page (1) logs one click to Supabase `link_clicks` (anon insert-only,
+Each page (1) logs one click through the Cloudflare collector to Supabase `link_clicks` (anon insert-only,
 see supabase/migrations 'link_clicks'), then (2) sends the visitor to the
 App Store with an Apple campaign tag, ct=<source>. App Store Connect →
 App Analytics → Sources → Campaigns then reports page views / installs /
@@ -48,11 +48,10 @@ TEMPLATE = """<!DOCTYPE html>
      /mealpic\\.app/i.test(ref)?"site":ref?"direct":"ig_bio");
   var url=base+"?"+(pt?"pt="+pt+"&":"")+"ct="+src+"&mt=8";
   try{{
-    fetch({sb_url!r}+"/rest/v1/link_clicks",{{method:"POST",keepalive:true,
-      headers:{{"apikey":{sb_key!r},"Authorization":"Bearer "+{sb_key!r},
-        "Content-Type":"application/json","Prefer":"return=minimal"}},
-      body:JSON.stringify({{source:src,path:location.pathname,referrer:ref.slice(0,500),
-        ua:navigator.userAgent.slice(0,500),lang:navigator.language}})}});
+    fetch("https://mealpic-clicks.jackzeile.workers.dev",{{method:"POST",keepalive:true,
+      headers:{{"Content-Type":"text/plain"}},
+      body:JSON.stringify({{source:src,path:location.pathname,
+        privacyOptOut:navigator.globalPrivacyControl===true||navigator.doNotTrack==="1"}})}});
   }}catch(e){{}}
   location.replace(url);
 }})();
