@@ -51,6 +51,7 @@ TEMPLATE = """<!DOCTYPE html>
     fetch("https://mealpic-clicks.jackzeile.workers.dev",{{method:"POST",keepalive:true,
       headers:{{"Content-Type":"text/plain"}},
       body:JSON.stringify({{source:src,path:location.pathname,
+        ref:(ref.match(/^https?:\/\/([^\/:?#]+)/i)||[])[1]||"",wd:navigator.webdriver===true,
         privacyOptOut:navigator.globalPrivacyControl===true||navigator.doNotTrack==="1"}})}});
   }}catch(e){{}}
   location.replace(url);

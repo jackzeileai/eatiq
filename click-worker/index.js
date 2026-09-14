@@ -18,7 +18,11 @@ export default {
     const country = !optOut && /^[A-Z]{2}$/.test(cf.country || "") && !["XX", "T1"].includes(cf.country) ? cf.country : null;
     const region = country === "US" && /^[A-Z]{2}$/.test(cf.regionCode || "") ? cf.regionCode : null;
     // IP and full request headers are never forwarded, persisted, or logged.
-    const row = { source: body.source, path: body.path, ua: (request.headers.get("User-Agent") || "").slice(0,500), country, region };
+    // ref = referrer HOSTNAME only (page sends it; the worker's own Referer header is always mealpic.app).
+    // wd = navigator.webdriver, true in headless browsers = link scanners; link_clicks_real drops them.
+    const referrer = typeof body.ref === "string" && /^[a-z0-9.-]{1,120}$/i.test(body.ref) ? body.ref.toLowerCase() : null;
+    const row = { source: body.source, path: body.path, ua: (request.headers.get("User-Agent") || "").slice(0,500), country, region,
+                  referrer, webdriver: body.wd === true };
     try {
       const result = await fetch(API, { method: "POST", headers: { "apikey": KEY, "Authorization": "Bearer " + KEY, "Content-Type": "application/json", "Prefer": "return=minimal" }, body: JSON.stringify(row), signal: AbortSignal.timeout(5000) });
       return new Response(null, { status: result.ok ? 204 : 502, headers });
