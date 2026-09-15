@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Writes the App Store redirect pages: /, /download, /ig, /tt, /yt.
+"""Writes the App Store redirect pages: /, /download, /ig, /tt, /yt, /fb.
 
 Each page (1) logs one click through the Cloudflare collector to Supabase `link_clicks` (anon insert-only,
 see supabase/migrations 'link_clicks'), then (2) sends the visitor to the
@@ -32,6 +32,7 @@ PAGES = {  # path → fixed source ('' = detect)
     "ig/index.html": "ig_bio",
     "tt/index.html": "tt_bio",
     "yt/index.html": "yt",
+    "fb/index.html": "meta_ads",  # Meta (Facebook/Instagram) paid ads, 2026-09-15
 }
 
 TEMPLATE = """<!DOCTYPE html>
