@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Meal Pic</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<meta name="theme-color" content="#fffdf8">
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fffdf8;color:#111318;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;text-align:center}
+  main{padding:0 28px;max-width:420px}
+  .dot{width:72px;height:72px;border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;background:#34c759}
+  .dot.no{background:#8a90a0}
+  h1{font-size:30px;line-height:1.15;letter-spacing:-.6px;margin:0 0 10px}
+  p{font-size:17px;line-height:1.45;color:#5b6170;margin:0}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<!-- Where Stripe Checkout sends people back (stripe-checkout edge function, ?ok=1 paid / ?ok=0 backed out). -->
+<main id="yes" hidden>
+  <div class="dot"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+  <h1>You're in.</h1>
+  <p>Go back to the Meal Pic app. It unlocks on its own in a few seconds.</p>
+</main>
+<main id="no" hidden>
+  <div class="dot no"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+  <h1>Nothing was charged.</h1>
+  <p>Go back to the Meal Pic app whenever you're ready.</p>
+</main>
+<script>
+  var ok = new URLSearchParams(location.search).get("ok") === "1";
+  document.getElementById(ok ? "yes" : "no").hidden = false;
+</script>
+</body>
+</html>
