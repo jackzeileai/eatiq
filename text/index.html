@@ -55,8 +55,13 @@ fbq('init','1873631240283364');fbq('track','PageView');
   var go = document.getElementById("go"), fired = false;
   go.addEventListener("click", function () {
     if (!fired) { fired = true; try { fbq('track', 'Lead', {content_name: 'start_by_text'}); } catch (e) {} }
-    // If Messages didn't take over within a couple of seconds, show the manual way.
-    setTimeout(function () { if (!document.hidden) document.getElementById("fb").hidden = false; }, 2500);
+    // Did Messages actually take over? Tell Meta either way, so we can see it.
+    var left = false;
+    var onHide = function () { if (!left && document.hidden) { left = true; try { fbq('trackCustom', 'MessagesOpened'); } catch (e) {} } };
+    document.addEventListener("visibilitychange", onHide);
+    setTimeout(function () {
+      if (!document.hidden && !left) { document.getElementById("fb").hidden = false; try { fbq('trackCustom', 'MessagesBlocked', {ua: navigator.userAgent.slice(0, 120)}); } catch (e) {} }
+    }, 2500);
   });
   document.getElementById("copy").addEventListener("click", function () {
     var t = "Hey Meal Pic, I'm ready to get started";
