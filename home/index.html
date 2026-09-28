@@ -54,12 +54,17 @@
   .cta .fine{font-size:14px;color:var(--ink3);font-weight:500}
   .ctarow{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
   .final .ctarow,.midcta .ctarow{justify-content:center}
-  .textbtn{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:252px;gap:14px;height:84px;padding:0 16px;border-radius:14px;border:2px solid #a6a6a6;background:#000;color:#fff;font-size:26px;font-weight:600;letter-spacing:-.02em;transition:transform .15s ease-out}
+  /* Start by text = the App Store badge's white sibling: same box (2.99:1), same corner, same hairline */
+  .ctarow{--bh:68px}
+  .ctarow .badge.xl img{height:var(--bh)}
+  .ctarow .badge,.ctarow .textbtn{flex:none}
+  .textbtn{display:inline-flex;align-items:center;box-sizing:border-box;height:var(--bh);width:calc(var(--bh)*2.9916);gap:calc(var(--bh)*.16);padding:0 calc(var(--bh)*.19);border-radius:calc(var(--bh)*.14);border:1.5px solid #a6a6a6;background:#fff;color:#000;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,sans-serif;font-size:calc(var(--bh)*.3);font-weight:600;letter-spacing:-.015em;white-space:nowrap;transition:transform .15s ease-out}
   .textbtn:hover{transform:translateY(-1px)}.textbtn:active{transform:scale(.98)}
-  .textbtn img{width:50px;height:50px;flex:none}
-  @media (max-width:980px){.cta .ctarow{justify-content:center}}
+  .textbtn img{width:calc(var(--bh)*.52);height:calc(var(--bh)*.52);flex:none}
+  @media (max-width:980px){.ctarow{--bh:72px}}
+  @media (max-width:520px){.ctarow{--bh:56px;gap:10px;flex-wrap:nowrap}}
+  @media (max-width:380px){.ctarow{--bh:52px;gap:8px}}
   @media (max-width:760px){.ctarow .textbtn{order:-1}}
-  @media (max-width:640px){.textbtn{width:216px;height:72px;padding:0 12px;border-radius:12px;font-size:22px;gap:12px}.textbtn img{width:44px;height:44px}}
   .hero-img{width:100%;height:auto}
   @media (max-width:980px){
     .hero{padding:20px 0 0}
