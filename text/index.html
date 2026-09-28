@@ -18,89 +18,37 @@ fbq('init','1873631240283364');fbq('track','PageView');
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1873631240283364&ev=PageView&noscript=1"></noscript>
 <style>
   :root{--ink:#0a0a0c;--sub:#6b6e75;--muted:#8a8d94}
-  html,body{margin:0;background:#f7f7f8;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;overflow-x:hidden}
-  main{min-height:100dvh;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 16px calc(28px + env(safe-area-inset-bottom,0px))}
+  html,body{margin:0;background:#f7f7f8;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+  main{min-height:100dvh;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 16px 0}
   .brand{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:700;letter-spacing:-.02em}
   .brand img{width:30px;height:30px}
-  h1{margin:18px 0 0;font-size:clamp(34px,10vw,46px);line-height:1.06;font-weight:500;letter-spacing:-.035em}
-  h1 em{display:block;font-weight:700;font-style:italic;color:#9a9ca2}
+  h1{margin:18px 0 0;font-size:clamp(34px,10vw,46px);line-height:1.06;font-weight:700;letter-spacing:-.035em}
+  h1 em{font-style:normal;color:#1fc84a}
   .lede{margin:12px 0 0;color:var(--sub);font-size:17px;line-height:1.4;max-width:340px}
-
-  /* phone stage */
-  .stage{position:relative;width:100%;max-width:420px;margin-top:26px;padding-bottom:30px}
-  .glow{position:absolute;left:0;right:0;top:4%;bottom:-6%;z-index:0;pointer-events:none;filter:blur(30px);opacity:1;
-    background:radial-gradient(40% 35% at 25% 30%,#a9c6ea 0,transparent 70%),radial-gradient(40% 40% at 78% 45%,#c3b5ec 0,transparent 70%),radial-gradient(45% 35% at 50% 85%,#b6dcb8 0,transparent 70%)}
-  .phone{position:relative;z-index:1;margin:0 auto;width:min(76vw,320px);height:min(108vw,460px);box-sizing:border-box;border:11px solid #111;border-bottom:0;border-radius:52px 52px 0 0;background:#fff;overflow:hidden;
-    box-shadow:0 0 0 2px #c9cacd,0 30px 60px -20px rgba(20,20,40,.35)}
-  .island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:30%;height:26px;border-radius:20px;background:#000}
-  .status{display:flex;justify-content:space-between;align-items:center;padding:13px 18px 0 24px;font-size:14px;font-weight:600}
-  .status svg{display:block}
-  .hdr{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:14px}
-  .hdr .back{position:absolute;left:12px;top:8px;width:38px;height:38px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);display:grid;place-items:center}
-  .hdr .vid{position:absolute;right:12px;top:8px;width:38px;height:38px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);display:grid;place-items:center}
-  .avatar{width:54px;height:54px;border-radius:50%;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.12);display:grid;place-items:center}
-  .avatar img{width:30px;height:30px}
-  .name{margin-top:6px;padding:4px 12px;border-radius:14px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08);font-size:13px;font-weight:600}
-  .name i{font-style:normal;color:#b0b2b8;margin-left:3px}
-  .thread{position:absolute;left:0;right:0;bottom:118px;display:flex;flex-direction:column;gap:6px;padding:0 12px;text-align:left}
-  .msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:14px;line-height:1.3;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
-  .msg.on{opacity:1;transform:none}
-  .msg.me{align-self:flex-end;background:#1f8bff;color:#fff}
-  .msg.them{align-self:flex-start;background:#e9e9eb;color:var(--ink)}
-  .compose{position:absolute;left:10px;right:10px;bottom:66px;display:flex;align-items:center;gap:8px}
-  .plus{width:34px;height:34px;flex:none;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1);display:grid;place-items:center;color:#555}
-  .field{flex:1;min-width:0;display:flex;align-items:center;gap:6px;height:36px;padding:0 4px 0 12px;border-radius:18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1);font-size:14px;text-align:left}
-  .field span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:clip}
-  .field span:after{content:"";display:inline-block;width:2px;height:16px;margin-left:1px;vertical-align:-3px;background:#1f8bff;animation:blink 1s steps(1) infinite}
-  .send{width:28px;height:28px;flex:none;border-radius:50%;background:#1f8bff;display:grid;place-items:center;opacity:.35;transition:opacity .2s}
-  .send.on{opacity:1}
-  @keyframes blink{50%{opacity:0}}
-
-  a.go{position:absolute;z-index:2;left:50%;bottom:0;transform:translateX(-50%);box-sizing:border-box;width:min(92vw,380px);min-height:74px;display:flex;align-items:center;justify-content:center;gap:14px;padding:12px 20px;border-radius:26px;
-    background:linear-gradient(180deg,#2a2a2e,#0a0a0c);color:#fff;text-decoration:none;font-size:20px;font-weight:600;letter-spacing:-.01em;box-shadow:0 18px 40px -12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12);-webkit-tap-highlight-color:transparent;transition:transform .14s}
-  a.go:active{transform:translateX(-50%) scale(.98)}
+  a.go{box-sizing:border-box;width:100%;max-width:400px;margin-top:22px;min-height:72px;display:flex;align-items:center;justify-content:center;gap:14px;padding:12px 20px;border-radius:24px;
+    background:linear-gradient(180deg,#2a2a2e,#0a0a0c);color:#fff;text-decoration:none;font-size:20px;font-weight:600;letter-spacing:-.01em;box-shadow:0 14px 32px -12px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.12);-webkit-tap-highlight-color:transparent;transition:transform .14s}
+  a.go:active{transform:scale(.98)}
   a.go img{width:38px;height:38px;border-radius:9px}
-  .num{margin-top:14px;font-size:14px;color:var(--muted)}
+  .num{margin-top:12px;font-size:14px;color:var(--muted)}
   .fallback{margin-top:14px;font-size:14px;color:var(--muted);max-width:340px;line-height:1.5}
   .fallback b{color:var(--ink);font-weight:600}
   button.copy{margin-top:8px;font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:#ececef;border:0;border-radius:12px;padding:10px 16px}
-  a.back{margin-top:18px;color:var(--muted);font-size:14px;text-decoration:none}
-  @media (prefers-reduced-motion:reduce){.msg{transition:none}.field span:after{animation:none}}
+  .phone{display:block;width:min(80vw,340px);height:auto;margin-top:26px;filter:drop-shadow(0 24px 40px rgba(20,20,40,.18))}
+  a.back{margin:22px 0 calc(24px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:14px;text-decoration:none}
 </style>
 </head>
 <body>
 <main>
   <div class="brand"><img src="../assets/mark-black.png" alt="">Meal Pic</div>
-  <h1>Meet your new<em>calorie tracker</em></h1>
+  <h1>Track your calories<br>in <em>iMessage</em></h1>
   <p class="lede">Text what you eat. It does the counting.</p>
-
-  <div class="stage">
-    <div class="glow"></div>
-    <div class="phone" aria-hidden="true">
-      <div class="island"></div>
-      <div class="status"><span>9:41</span>
-        <svg width="56" height="11" viewBox="0 0 66 12" fill="#000"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><path d="M31 11.5l-2.2-2.3a3.2 3.2 0 014.4 0zM26.7 7a6.2 6.2 0 018.6 0l-1.4 1.4a4.2 4.2 0 00-5.8 0zM24.5 4.8a9.3 9.3 0 0113 0l-1.4 1.4a7.3 7.3 0 00-10.2 0z"/><rect x="42" y="1" width="21" height="10" rx="3" fill="none" stroke="#000" stroke-opacity=".4"/><rect x="44" y="3" width="17" height="6" rx="1.5"/><rect x="64" y="4" width="1.6" height="4" rx=".8" fill-opacity=".4"/></svg>
-      </div>
-      <div class="hdr">
-        <div class="back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div>
-        <div class="avatar"><img src="../assets/mark-black.png" alt=""></div>
-        <div class="name">Meal Pic<i>&rsaquo;</i></div>
-        <div class="vid"><svg width="20" height="16" viewBox="0 0 26 18" fill="none" stroke="#111" stroke-width="1.8" stroke-linejoin="round"><rect x="1" y="2" width="16" height="14" rx="3"/><path d="M17 7l7-4v12l-7-4z"/></svg></div>
-      </div>
-      <div class="thread" id="thread"></div>
-      <div class="compose">
-        <div class="plus"><svg width="16" height="16" viewBox="0 0 24 24" stroke="#555" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-        <div class="field"><span id="typed"></span><div class="send" id="send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></div></div>
-      </div>
-    </div>
-    <a class="go" id="go" href="sms:+16033691048&body=Hey%20Meal%20Pic%2C%20I%27m%20ready%20to%20get%20started">
-      <img src="../assets/imessage.png" alt="" width="38" height="38">
-      <span>Get started</span>
-    </a>
-  </div>
-
+  <a class="go" id="go" href="sms:+16033691048&body=Hey%20Meal%20Pic%2C%20I%27m%20ready%20to%20get%20started">
+    <img src="../assets/imessage.png" alt="" width="38" height="38">
+    <span>Get started</span>
+  </a>
   <div class="num" id="num">Opens Messages with your first text typed. Just hit send.</div>
   <div class="fallback" id="fb" hidden>Button not opening Messages? Text <b>+1 (603) 369-1048</b> with <b>"Hey Meal Pic, I'm ready to get started"</b>.<br><button class="copy" id="copy" type="button">Copy the text</button></div>
+  <img class="phone" src="../assets/text-phone.webp" alt="A Meal Pic text thread: a photo of a teriyaki bowl gets logged as 660 calories" width="1020" height="2082">
   <a class="back" href="/home/">Back to mealpic.app</a>
 </main>
 <script>
@@ -127,30 +75,6 @@ fbq('init','1873631240283364');fbq('track','PageView');
   if (!/iPhone|iPad|iPod/.test(navigator.userAgent)) {
     document.getElementById("num").textContent = "Works on iPhone. On other phones, text +1 (603) 369-1048";
   }
-  // The little phone plays the first chat on a loop: type the hello, send it, get a reply.
-  (function () {
-    var typed = document.getElementById("typed"), send = document.getElementById("send"), thread = document.getElementById("thread");
-    var hello = "Hey Meal Pic, I'm ready to get started";
-    var replies = ["hey! text me what you eat and i'll count it", "a pic or a voice memo works too"];
-    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    function bubble(t, who) { var d = document.createElement("div"); d.className = "msg " + who; d.textContent = t; thread.appendChild(d); requestAnimationFrame(function(){ requestAnimationFrame(function(){ d.classList.add("on"); }); }); }
-    if (still) { bubble(hello, "me"); bubble(replies[0], "them"); bubble(replies[1], "them"); return; }
-    function run() {
-      thread.innerHTML = ""; typed.textContent = ""; send.classList.remove("on");
-      var i = 0;
-      (function tick() {
-        typed.textContent = hello.slice(0, ++i); send.classList.add("on");
-        if (i < hello.length) return setTimeout(tick, 55 + Math.random() * 60);
-        setTimeout(function () {
-          typed.textContent = ""; send.classList.remove("on"); bubble(hello, "me");
-          setTimeout(function () { bubble(replies[0], "them"); }, 1100);
-          setTimeout(function () { bubble(replies[1], "them"); }, 2300);
-          setTimeout(run, 6500);
-        }, 600);
-      })();
-    }
-    setTimeout(run, 700);
-  })();
 </script>
 </body>
 </html>
