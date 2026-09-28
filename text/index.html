@@ -20,14 +20,17 @@ fbq('init','1873631240283364');fbq('track','PageView');
   html,body{margin:0;background:#fff;color:#0a0a0c;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
   main{min-height:100dvh;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:32px 20px calc(32px + env(safe-area-inset-bottom,0px))}
   .mark{width:64px;height:64px;margin-bottom:6px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.22))}
-  h1{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:0}
+  h1{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:0}
   p{margin:0;color:#55585f;font-size:16px;line-height:1.45;max-width:340px}
-  a.go{box-sizing:border-box;width:100%;max-width:400px;margin-top:12px;min-height:68px;display:flex;align-items:center;gap:12px;padding:12px 20px 12px 12px;border:1.5px solid #0a0a0c;border-radius:16px;text-decoration:none;color:inherit;text-align:left;-webkit-tap-highlight-color:transparent;transition:transform .14s}
-  a.go:active{transform:scale(.99)}
-  a.go .bubble{width:40px;height:40px;flex:none}
-  .t{flex:1;display:flex;flex-direction:column;gap:1px}
-  .t b{font-size:16px;font-weight:600}
-  .t small{font-size:13px;color:#8a8d94}
+  a.go{box-sizing:border-box;width:100%;max-width:400px;margin-top:14px;min-height:76px;display:flex;align-items:center;gap:14px;padding:12px 20px 12px 14px;border-radius:18px;background:#0a0a0c;color:#fff;text-decoration:none;text-align:left;-webkit-tap-highlight-color:transparent;transition:transform .14s}
+  a.go:active{transform:scale(.98)}
+  a.go .bubble{width:44px;height:44px;flex:none;border-radius:11px}
+  .t{flex:1;display:flex;flex-direction:column;gap:2px}
+  .t b{font-size:18px;font-weight:600}
+  .t small{font-size:13px;color:#b5b8c0}
+  .fallback{margin-top:18px;font-size:14px;color:#8a8d94;max-width:340px;line-height:1.5}
+  .fallback b{color:#0a0a0c;font-weight:600}
+  button.copy{margin-top:8px;font:inherit;font-size:15px;font-weight:600;color:#0a0a0c;background:#f2f2f4;border:0;border-radius:12px;padding:10px 16px}
   a.back{margin-top:22px;color:#8a8d94;font-size:14px;text-decoration:none}
 </style>
 </head>
@@ -35,21 +38,34 @@ fbq('init','1873631240283364');fbq('track','PageView');
 <main>
   <img class="mark" src="../assets/mark-black.png" alt="Meal Pic">
   <h1>Start by text</h1>
-  <p>Text, send a picture, or a voice memo of what you ate. Meal Pic logs it for you.</p>
+  <p>Tap the button. Messages opens with your first text already typed, then just hit send.</p>
   <a class="go" id="go" href="sms:+16033691048&body=Hey%20Meal%20Pic%2C%20I%27m%20ready%20to%20get%20started">
-    <img class="bubble" src="../assets/imessage.png" alt="" width="40" height="40">
-    <span class="t"><b>Continue with iMessage</b><small>Text +1 (603) 369-1048</small></span>
+    <img class="bubble" src="../assets/imessage.png" alt="" width="44" height="44">
+    <span class="t"><b>Open Messages</b><small>Text +1 (603) 369-1048</small></span>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
   </a>
+  <div class="fallback" id="fb" hidden>Button not opening Messages? Text <b>+1 (603) 369-1048</b> with <b>"Hey Meal Pic, I'm ready to get started"</b>.<br><button class="copy" id="copy" type="button">Copy the text</button></div>
   <a class="back" href="/home/">Back to mealpic.app</a>
 </main>
 <script>
-  // "Lead" = they went to Messages (tap, or the auto-open on iPhone). This is what the Meta text campaign optimizes for.
-  var go=document.getElementById("go"), fired=false;
-  function lead(){ if(fired) return; fired=true; try{ fbq('track','Lead',{content_name:'start_by_text'}); }catch(e){} }
-  go.addEventListener("click", lead);
-  // Straight into Messages on a phone; in-app browsers may ignore it, so the button stays.
-  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) { lead(); setTimeout(function(){ try { location.href = go.href; } catch (e) {} }, 250); }
+  // "Lead" to Meta = a real tap on the button (it used to fire on page load, which
+  // counted every iPhone visitor as a lead — 2026-09-28). No auto-open: Instagram's
+  // and Facebook's in-app browsers block a page from launching Messages by itself,
+  // so people were left staring at this page. The tap is the whole job now.
+  var go = document.getElementById("go"), fired = false;
+  go.addEventListener("click", function () {
+    if (!fired) { fired = true; try { fbq('track', 'Lead', {content_name: 'start_by_text'}); } catch (e) {} }
+    // If Messages didn't take over within a couple of seconds, show the manual way.
+    setTimeout(function () { if (!document.hidden) document.getElementById("fb").hidden = false; }, 2500);
+  });
+  document.getElementById("copy").addEventListener("click", function () {
+    var t = "Hey Meal Pic, I'm ready to get started";
+    try { navigator.clipboard.writeText(t).then(function(){ document.getElementById("copy").textContent = "Copied"; }); } catch (e) {}
+  });
+  // Not an iPhone (Android, desktop): say so instead of a dead button.
+  if (!/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    var s = go.querySelector("small"); if (s) s.textContent = "Works on iPhone. On other phones, text +1 (603) 369-1048";
+  }
 </script>
 </body>
 </html>
