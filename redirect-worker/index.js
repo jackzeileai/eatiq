@@ -55,6 +55,12 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     let path = url.pathname.replace(/\/index\.html$/, "").replace(/\/+$/, "") || "/";
+    // Pay by text (2026-09-28): mealpic.app/pay/<code> → that phone's own Stripe
+    // Checkout, looked up by the sendblue function (the table is service-role only).
+    const pay = url.pathname.match(/^\/pay\/([a-z0-9]{7})\/?$/);
+    if (pay) {
+      return Response.redirect(`https://bvaumyrtcuehlipiaxlv.supabase.co/functions/v1/sendblue/pay?c=${pay[1]}`, 302);
+    }
     // The bare domain is the website (Jack, 2026-09-27): serve /home/ under mealpic.app/.
     if (path === "/" && (request.method === "GET" || request.method === "HEAD")) {
       const home = new URL("/home/", url);

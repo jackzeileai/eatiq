@@ -31,7 +31,13 @@
   <p>Go back to the Meal Pic app whenever you're ready.</p>
 </main>
 <script>
-  var ok = new URLSearchParams(location.search).get("ok") === "1";
+  var q = new URLSearchParams(location.search), ok = q.get("ok") === "1";
+ // Pay by text (?t=1): they came from Messages, so send them back there, not to the app.
+ if (q.get("t") === "1") {
+   var y = document.querySelector("#yes p"), n = document.querySelector("#no p");
+   if (y) y.textContent = "Head back to Messages. Meal Pic takes it from here.";
+   if (n) n.textContent = "Head back to Messages whenever you're ready.";
+ }
   document.getElementById(ok ? "yes" : "no").hidden = false;
 </script>
 </body>
