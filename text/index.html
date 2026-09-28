@@ -11,6 +11,11 @@
 <meta property="og:description" content="Text, send a picture, or a voice memo of what you ate. Meal Pic logs it.">
 <meta property="og:image" content="https://mealpic.app/assets/icon-512.png">
 <meta name="theme-color" content="#ffffff">
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1873631240283364');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1873631240283364&ev=PageView&noscript=1"></noscript>
 <style>
   html,body{margin:0;background:#fff;color:#0a0a0c;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
   main{min-height:100dvh;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:32px 20px calc(32px + env(safe-area-inset-bottom,0px))}
@@ -39,8 +44,12 @@
   <a class="back" href="/home/">Back to mealpic.app</a>
 </main>
 <script>
+  // "Lead" = they went to Messages (tap, or the auto-open on iPhone). This is what the Meta text campaign optimizes for.
+  var go=document.getElementById("go"), fired=false;
+  function lead(){ if(fired) return; fired=true; try{ fbq('track','Lead',{content_name:'start_by_text'}); }catch(e){} }
+  go.addEventListener("click", lead);
   // Straight into Messages on a phone; in-app browsers may ignore it, so the button stays.
-  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) { try { location.href = document.getElementById("go").href; } catch (e) {} }
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) { lead(); setTimeout(function(){ try { location.href = go.href; } catch (e) {} }, 250); }
 </script>
 </body>
 </html>
