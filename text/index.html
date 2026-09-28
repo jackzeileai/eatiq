@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meal Pic | Start by text</title>
+<meta name="description" content="Text Meal Pic what you ate. It logs your calories, protein, carbs and fat right in iMessage.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:title" content="Text Meal Pic">
+<meta property="og:description" content="Text, send a picture, or a voice memo of what you ate. Meal Pic logs it.">
+<meta property="og:image" content="https://mealpic.app/assets/icon-512.png">
+<meta name="theme-color" content="#ffffff">
+<style>
+  html,body{margin:0;background:#fff;color:#0a0a0c;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+  main{min-height:100dvh;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:32px 20px calc(32px + env(safe-area-inset-bottom,0px))}
+  .mark{width:64px;height:64px;border-radius:15px;margin-bottom:6px}
+  h1{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:0}
+  p{margin:0;color:#55585f;font-size:16px;line-height:1.45;max-width:340px}
+  a.go{box-sizing:border-box;width:100%;max-width:400px;margin-top:12px;min-height:68px;display:flex;align-items:center;gap:12px;padding:12px 20px 12px 12px;border:1.5px solid #0a0a0c;border-radius:16px;text-decoration:none;color:inherit;text-align:left;-webkit-tap-highlight-color:transparent;transition:transform .14s}
+  a.go:active{transform:scale(.99)}
+  a.go svg.bubble{width:40px;height:40px;flex:none}
+  .t{flex:1;display:flex;flex-direction:column;gap:1px}
+  .t b{font-size:16px;font-weight:600}
+  .t small{font-size:13px;color:#8a8d94}
+  a.back{margin-top:22px;color:#8a8d94;font-size:14px;text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+  <img class="mark" src="../assets/apple-touch-icon.png" alt="Meal Pic">
+  <h1>Start by text</h1>
+  <p>Text, send a picture, or a voice memo of what you ate. Meal Pic logs it for you.</p>
+  <a class="go" id="go" href="sms:+16033691048&body=Hey%20Meal%20Pic!">
+    <svg class="bubble" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="10" fill="#34c759"/><path d="M18 8.5c-5.8 0-10.5 3.9-10.5 8.8 0 2.8 1.6 5.3 4 6.9-.2 1.5-1 2.9-2.1 3.9 2.2 0 4.2-.8 5.7-2.1 1 .2 1.9.3 2.9.3 5.8 0 10.5-3.9 10.5-8.9S23.8 8.5 18 8.5z" fill="#fff"/></svg>
+    <span class="t"><b>Continue with iMessage</b><small>Text +1 (603) 369-1048</small></span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+  <a class="back" href="/home/">Back to mealpic.app</a>
+</main>
+<script>
+  // Straight into Messages on a phone; in-app browsers may ignore it, so the button stays.
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) { try { location.href = document.getElementById("go").href; } catch (e) {} }
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Writes the App Store redirect pages: /, /download, /ig, /tt, /yt, /fb.
+"""Writes the App Store redirect pages: /download, /ig, /tt, /yt, /fb.
 
 Each page (1) logs one click through the Cloudflare collector to Supabase `link_clicks` (anon insert-only,
 see supabase/migrations 'link_clicks'), then (2) sends the visitor to the
@@ -9,11 +9,11 @@ proceeds per source. Click → install rate = installs(ct) / clicks(source).
 
 Source per page:
   /ig /tt /yt      fixed (ig_bio / tt_bio / yt)
-  /  /download     ?s=<tag> if given, else by referrer (instagram → ig_bio,
+  /download        ?s=<tag> if given, else by referrer (instagram → ig_bio,
                    tiktok → tt_bio, youtube → yt, x/twitter → x, own site → site,
-                   other referrer → direct). NO referrer → ig_bio: the bio link is
-                   the bare domain (Jack, 2026-09-09) and IG's in-app browser
-                   can strip the referrer.
+                   other referrer → direct). NO referrer → ig_bio.
+  /                NOT a redirect since 2026-09-27: the bare domain is the website
+                   (index.html → /home/; the edge worker serves /home/ at /).
 
 PT = Apple provider token (App Store Connect → App Analytics → Sources →
 Campaigns → Generate Campaign Link shows it as pt=…). Empty = the ct tag
@@ -27,7 +27,6 @@ SUPABASE_URL = "https://bvaumyrtcuehlipiaxlv.supabase.co"
 SUPABASE_KEY = "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7"  # publishable, insert-only via RLS
 
 PAGES = {  # path → fixed source ('' = detect)
-    "index.html": "",
     "download/index.html": "",
     "ig/index.html": "ig_bio",
     "tt/index.html": "tt_bio",

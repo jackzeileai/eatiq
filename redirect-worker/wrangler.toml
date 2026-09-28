@@ -3,7 +3,6 @@ main = "index.js"
 compatibility_date = "2026-09-11"
 account_id = "05f0e6a402a96b0ef2bf0514d1986a48"
 workers_dev = true
+routes = [{ pattern = "mealpic.app/*", zone_name = "mealpic.app" }, { pattern = "www.mealpic.app/*", zone_name = "mealpic.app" }]
 [observability]
 enabled = false
-# Zone routes are added once mealpic.app is on Cloudflare (see README):
-# routes = [{ pattern = "mealpic.app/*", zone_name = "mealpic.app" }, { pattern = "www.mealpic.app/*", zone_name = "mealpic.app" }]

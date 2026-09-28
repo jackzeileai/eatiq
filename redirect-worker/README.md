@@ -1,9 +1,9 @@
 # mealpic.app edge redirect
 
-Cloudflare Worker that answers `/`, `/ig`, `/tt`, `/yt`, `/download` with a 302
+Cloudflare Worker that answers `/ig`, `/tt`, `/yt`, `/fb`, `/download` with a 302
 straight to the App Store campaign link (pt + ct), logging the click to Supabase
 `link_clicks` first (with country, US region, referrer host, network owner).
-Every other path passes through to GitHub Pages. If the worker is down, the old
+`/` serves the website (/home/). Every other path passes through to GitHub Pages. If the worker is down, the old
 script-based redirect pages on GitHub Pages still work.
 
 Deploy: `wrangler deploy --config redirect-worker/wrangler.toml`.

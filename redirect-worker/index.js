@@ -7,7 +7,7 @@
 // origin and the old script-based redirect pages still work.
 //
 // Same rules as website/mk-redirects.py and click-worker/index.js:
-//   /ig /tt /yt /fb = fixed source (/fb = Meta/Facebook/Instagram paid ads); / and /download = ?s= tag, else referrer host
+//   /ig /tt /yt /fb = fixed source (/fb = Meta/Facebook/Instagram paid ads); /download = ?s= tag, else referrer host
 //   (instagram → ig_bio, tiktok → tt_bio, youtube → yt, x → x, mealpic → site,
 //   other → direct), NO referrer → ig_bio (the bio link is the bare domain).
 // Geography = Cloudflare's country + US region only; GPC/DNT suppresses it.
@@ -17,7 +17,7 @@
 const APP_ID = "6802901402", PT = "128667679";
 const API = "https://bvaumyrtcuehlipiaxlv.supabase.co/rest/v1/link_clicks";
 const KEY = "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7"; // public, insert-only under RLS
-const FIXED = { "/ig": "ig_bio", "/tt": "tt_bio", "/yt": "yt", "/fb": "meta_ads", "/": "", "/download": "" };
+const FIXED = { "/ig": "ig_bio", "/tt": "tt_bio", "/yt": "yt", "/fb": "meta_ads", "/download": "" };
 const STORE_PAGE = `https://apps.apple.com/us/app/id${APP_ID}`;
 
 function sourceFor(path, url, referrer) {
@@ -55,6 +55,11 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     let path = url.pathname.replace(/\/index\.html$/, "").replace(/\/+$/, "") || "/";
+    // The bare domain is the website (Jack, 2026-09-27): serve /home/ under mealpic.app/.
+    if (path === "/" && (request.method === "GET" || request.method === "HEAD")) {
+      const home = new URL("/home/", url);
+      return fetch(new Request(home, request));
+    }
     if (!(path in FIXED) || (request.method !== "GET" && request.method !== "HEAD")) return fetch(request);
     const ua = request.headers.get("User-Agent") || "";
     // Link previewers (iMessage, WhatsApp, Instagram DMs, Slack…) get the real

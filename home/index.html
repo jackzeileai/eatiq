@@ -52,6 +52,16 @@
   .lede{font-size:20px;line-height:1.5;color:var(--ink2);max-width:24em;margin:0 0 34px;font-weight:400}
   .cta{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
   .cta .fine{font-size:14px;color:var(--ink3);font-weight:500}
+  .ctarow{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .final .ctarow,.midcta .ctarow{justify-content:center}
+  .textbtn{display:inline-flex;align-items:center;gap:12px;height:84px;padding:0 26px 0 20px;border:1.5px solid var(--ink);border-radius:14px;background:#fff;color:var(--ink);transition:transform .15s ease-out}
+  .textbtn:hover{transform:translateY(-1px)}.textbtn:active{transform:scale(.98)}
+  .textbtn svg{width:36px;height:36px;flex:none}
+  .textbtn span{display:flex;flex-direction:column;line-height:1.1;text-align:left}
+  .textbtn small{font-size:14px;font-weight:500;color:var(--ink2)}
+  .textbtn b{font-size:24px;font-weight:700;letter-spacing:-.02em}
+  @media (max-width:980px){.cta .ctarow{justify-content:center}}
+  @media (max-width:640px){.textbtn{height:72px;padding:0 20px 0 16px;border-radius:12px}.textbtn svg{width:30px;height:30px}.textbtn b{font-size:20px}.textbtn small{font-size:12px}}
   .hero-img{width:100%;height:auto}
   @media (max-width:980px){
     .hero{padding:20px 0 0}
@@ -181,7 +191,8 @@
       <h1>Track your calories <span>with just a picture.</span></h1>
       <p class="lede">Snap a photo. Get calories, protein, carbs and fat in seconds — with every ingredient on the plate broken out and editable.</p>
       <div class="cta">
-        <a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="../assets/appstore-badge.svg" alt="Download on the App Store"></a>
+        <div class="ctarow"><a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="../assets/appstore-badge.svg" alt="Download on the App Store"></a>
+        <a class="textbtn" href="/text/" aria-label="Start by text in iMessage"><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="9" fill="#34c759"/><path d="M18 8.5c-5.8 0-10.5 3.9-10.5 8.8 0 2.8 1.6 5.3 4 6.9-.2 1.5-1 2.9-2.1 3.9 2.2 0 4.2-.8 5.7-2.1 1 .2 1.9.3 2.9.3 5.8 0 10.5-3.9 10.5-8.9S23.8 8.5 18 8.5z" fill="#fff"/></svg><span><small>Or start by text</small><b>Text Meal Pic</b></span></a></div>
         <span class="fine">Free to download · 3-day free trial of Pro</span>
       </div>
     </div>
@@ -240,7 +251,8 @@
 
     <div class="midcta">
       <h3>Ready when your next meal is.</h3>
-      <a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="../assets/appstore-badge.svg" alt="Download on the App Store"></a>
+      <div class="ctarow"><a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="../assets/appstore-badge.svg" alt="Download on the App Store"></a>
+        <a class="textbtn" href="/text/" aria-label="Start by text in iMessage"><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="9" fill="#34c759"/><path d="M18 8.5c-5.8 0-10.5 3.9-10.5 8.8 0 2.8 1.6 5.3 4 6.9-.2 1.5-1 2.9-2.1 3.9 2.2 0 4.2-.8 5.7-2.1 1 .2 1.9.3 2.9.3 5.8 0 10.5-3.9 10.5-8.9S23.8 8.5 18 8.5z" fill="#fff"/></svg><span><small>Or start by text</small><b>Text Meal Pic</b></span></a></div>
       <span class="fine">Free to download · 3-day free trial of Pro</span>
     </div>
   </div>
@@ -291,7 +303,8 @@
   <div class="wrap"><div class="box">
     <h2>Scan your next meal.</h2>
     <p>Free to download. Three days of Pro on us. Cancel anytime.</p>
-    <a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="../assets/appstore-badge.svg" alt="Download on the App Store"></a>
+    <div class="ctarow"><a class="badge xl" href="https://mealpic.app/download" aria-label="Download on the App Store"><img src="../assets/appstore-badge.svg" alt="Download on the App Store"></a>
+        <a class="textbtn" href="/text/" aria-label="Start by text in iMessage"><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="9" fill="#34c759"/><path d="M18 8.5c-5.8 0-10.5 3.9-10.5 8.8 0 2.8 1.6 5.3 4 6.9-.2 1.5-1 2.9-2.1 3.9 2.2 0 4.2-.8 5.7-2.1 1 .2 1.9.3 2.9.3 5.8 0 10.5-3.9 10.5-8.9S23.8 8.5 18 8.5z" fill="#fff"/></svg><span><small>Or start by text</small><b>Text Meal Pic</b></span></a></div>
     <div class="fine">By subscribing you agree to our <a href="../terms.html">Terms of Use</a> and <a href="../privacy.html">Privacy Policy</a>. iPhone, iOS 18 or later.</div>
     <img class="art" src="../assets/hero-v14.webp" alt="" loading="lazy">
   </div></div>
