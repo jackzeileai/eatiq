@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meal Pic | Start by text</title><!-- variant 5 Proof -->
+<meta name="description" content="Text Meal Pic what you ate. It logs your calories, protein, carbs and fat right in iMessage.">
+<link rel="icon" type="image/png" href="../../../assets/favicon.png">
+<link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+<meta property="og:title" content="Text Meal Pic">
+<meta property="og:description" content="Text, send a picture, or a voice memo of what you ate. Meal Pic logs it.">
+<meta property="og:image" content="https://mealpic.app/assets/icon-512.png">
+<meta name="theme-color" content="#f7f7f8">
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1873631240283364');fbq('track','PageView',{content_name:'text_v5'});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1873631240283364&ev=PageView&noscript=1"></noscript>
+<style>
+  :root{--ink:#0a0a0c;--sub:#6b6e75;--muted:#8a8d94}
+  html,body{margin:0;background:#f7f7f8;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+  main{height:100vh;height:100dvh;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(12px,3vh,28px) 16px 0}
+  main>*{flex:none}
+  .brand{display:flex;align-items:center;gap:8px;font-size:clamp(18px,2.6vh,22px);font-weight:700;letter-spacing:-.02em}
+  .brand img{width:1.35em;height:1.35em}
+  h1{margin:clamp(8px,2vh,18px) 0 0;font-size:min(10vw,5.2vh,46px);line-height:1.06;font-weight:700;letter-spacing:-.035em}
+  h1 em{font-style:normal;color:#1fc84a}
+  .lede{margin:clamp(6px,1.4vh,12px) 0 0;color:var(--sub);font-size:clamp(15px,2.1vh,17px);line-height:1.4;max-width:340px}
+  a.go{box-sizing:border-box;width:100%;max-width:400px;margin-top:clamp(10px,2.4vh,22px);min-height:clamp(56px,8.5vh,72px);display:flex;align-items:center;justify-content:center;gap:14px;padding:12px 20px;border-radius:24px;
+    background:linear-gradient(180deg,#2a2a2e,#0a0a0c);color:#fff;text-decoration:none;font-size:20px;font-weight:600;letter-spacing:-.01em;box-shadow:0 14px 32px -12px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.12);-webkit-tap-highlight-color:transparent;transition:transform .14s}
+  a.go:active{transform:scale(.98)}
+  a.go img{width:38px;height:38px;border-radius:9px}
+  .num{margin-top:clamp(6px,1.2vh,12px);font-size:13px;color:var(--muted)}
+  .fallback{margin-top:14px;font-size:14px;color:var(--muted);max-width:340px;line-height:1.5}
+  .fallback b{color:var(--ink);font-weight:600}
+  button.copy{margin-top:8px;font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:#ececef;border:0;border-radius:12px;padding:10px 16px}
+  /* Big phone like the inspo: pinned to the top of the space left, bottom runs off the screen and fades.
+     Width is capped by screen height so at least ~2/3 of the phone always shows. */
+  .shot{position:relative;flex:1 1 0;min-height:0;width:calc(100% + 32px);margin:clamp(12px,2.6vh,26px) -16px 0;overflow:hidden;display:flex;justify-content:center;align-items:flex-start;
+    -webkit-mask-image:linear-gradient(#000 calc(100% - 70px),transparent);mask-image:linear-gradient(#000 calc(100% - 70px),transparent)}
+  .shot:before{content:"";position:absolute;inset:6% 0 0;z-index:0;filter:blur(28px);
+    background:radial-gradient(38% 30% at 22% 30%,#b9cff0 0,transparent 70%),radial-gradient(38% 34% at 80% 45%,#cdbff0 0,transparent 70%),radial-gradient(45% 30% at 50% 80%,#bfe3c2 0,transparent 70%)}
+  .phone{position:relative;z-index:1;display:block;height:auto;width:min(82vw,360px,calc(75vh - 225px));width:min(82vw,360px,calc(75dvh - 225px));filter:drop-shadow(0 24px 40px rgba(20,20,40,.18))}
+  a.back{margin-top:8px;color:var(--muted);font-size:14px;text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+  <div class="brand"><img src="../../../assets/mark-black.png" alt="">Meal Pic</div>
+  <h1><em>3x more likely</em><br>to hit your goal</h1>
+  <p class="lede">People who log 6+ days a week are 3x more likely to hit their goal. The easiest way to log is a text.</p>
+  <a class="go" id="go" href="sms:+18186011988&body=Hey%20Meal%20Pic%2C%20I%27m%20ready%20to%20get%20started">
+    <img src="../../../assets/imessage.png" alt="" width="38" height="38">
+    <span>Get started</span>
+  </a>
+  <div class="num" id="num">Your first text is typed for you. Just hit send.</div>
+  <div class="fallback" id="fb" hidden>Button not opening Messages? Text <b>+1 (818) 601-1988</b> with <b>"Hey Meal Pic, I'm ready to get started"</b>.<br><button class="copy" id="copy" type="button">Copy the text</button></div>
+  <div class="shot"><img class="phone" src="../../../assets/text-phone.webp" alt="A Meal Pic text thread: a photo of a teriyaki bowl gets logged as 660 calories" width="1020" height="2082"></div>
+  </main>
+<script>
+  // "Lead" to Meta = a real tap on the button (it used to fire on page load, which
+  // counted every iPhone visitor as a lead — 2026-09-28). No auto-open: Instagram's
+  // and Facebook's in-app browsers block a page from launching Messages by itself,
+  // so people were left staring at this page. The tap is the whole job now.
+  var go = document.getElementById("go"), fired = false;
+  go.addEventListener("click", function () {
+    if (!fired) { fired = true; try { fbq('track', 'Lead', {content_name: 'start_by_text_v5'}); } catch (e) {} }
+    // Did Messages actually take over? Tell Meta either way, so we can see it.
+    var left = false;
+    var onHide = function () { if (!left && document.hidden) { left = true; try { fbq('trackCustom', 'MessagesOpened'); } catch (e) {} } };
+    document.addEventListener("visibilitychange", onHide);
+    setTimeout(function () {
+      if (!document.hidden && !left) { document.getElementById("fb").hidden = false; try { fbq('trackCustom', 'MessagesBlocked', {ua: navigator.userAgent.slice(0, 120)}); } catch (e) {} }
+    }, 2500);
+  });
+  document.getElementById("copy").addEventListener("click", function () {
+    var t = "Hey Meal Pic, I'm ready to get started";
+    try { navigator.clipboard.writeText(t).then(function(){ document.getElementById("copy").textContent = "Copied"; }); } catch (e) {}
+  });
+  // Not an iPhone (Android, desktop): say so instead of a dead button.
+  if (!/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    document.getElementById("num").textContent = "On other phones, text +1 (818) 601-1988";
+  }
+</script>
+</body>
+</html>
