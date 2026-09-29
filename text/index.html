@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Meal Pic | Start by text</title>
 <script>
-// Split test (2026-09-28): the ad points here; each visitor is sent to one of the pages
+// Split test (2026-09-28, cut to 2 pages 2026-09-29 — v1 + v13 had the texters): the ad points here; each visitor is sent to one of the pages
 // below and keeps it. ?v=N forces a page. Each page fires its own PageView/Lead tag.
-(function(){var A=[1,5,12,13],q=new URLSearchParams(location.search),v=q.get("v");
+(function(){var A=[1,13],q=new URLSearchParams(location.search),v=q.get("v");
 try{if(!v){v=localStorage.getItem("mp_text_v");}if(!v||A.indexOf(+v)<0){v=A[Math.floor(Math.random()*A.length)];}localStorage.setItem("mp_text_v",v);}catch(e){v=v||A[Math.floor(Math.random()*A.length)];}
 q.delete("v");var s=q.toString();location.replace("/text/v/"+v+"/"+(s?"?"+s:""));})();
 </script></head><body></body></html>
