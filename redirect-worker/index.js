@@ -67,7 +67,9 @@ export default {
     const card = url.pathname.match(/^\/today\/([a-z0-9]{10})(\.png)?\/?$/);
     if (card) {
       const r = await fetch(`https://bvaumyrtcuehlipiaxlv.supabase.co/functions/v1/today-card/${card[1]}${card[2] || ""}`, { method: request.method, cf: { cacheTtl: 31536000, cacheEverything: true } });
-      return new Response(r.body, { status: r.status, headers: { "content-type": r.headers.get("content-type") || "text/plain", "cache-control": r.headers.get("cache-control") || "no-store" } });
+      // The Supabase gateway rewrites HTML to text/plain (+ a sandbox CSP); the page's real type is set here.
+      const type = card[2] ? "image/png" : r.status === 200 ? "text/html; charset=utf-8" : "text/plain; charset=utf-8";
+      return new Response(r.body, { status: r.status, headers: { "content-type": type, "cache-control": r.headers.get("cache-control") || "no-store" } });
     }
     // The bare domain is the website (Jack, 2026-09-27): serve /home/ under mealpic.app/.
     if (path === "/" && (request.method === "GET" || request.method === "HEAD")) {
