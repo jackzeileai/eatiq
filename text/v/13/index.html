@@ -79,6 +79,21 @@ if(!/s=preview/.test(location.search)){fbq('init','1873631240283364');fbq('track
     var t = "Hey Meal Pic, I'm ready to get started #n3pd";
     try { navigator.clipboard.writeText(t).then(function(){ document.getElementById("copy").textContent = "Copied"; }); } catch (e) {}
   });
+  // Click id passthrough (2026-09-29): save Meta's click id (fbclid) + browser id (_fbp)
+  // under a short code and put that code at the end of the pre-typed text, so the bot can
+  // tie this phone back to this exact ad tap. Falls back to the page's own code (#n3pd).
+  (function () {
+    var q = new URLSearchParams(location.search);
+    if (/s=preview/.test(location.search)) return;
+    setTimeout(function () {
+      var fbp = (document.cookie.match(/(?:^|; )_fbp=([^;]+)/) || [])[1] || null;
+      var body = { landing: "v13", fbclid: q.get("fbclid"), fbp: fbp, src: q.get("s"), ua: navigator.userAgent.slice(0, 160) };
+      fetch("https://bvaumyrtcuehlipiaxlv.supabase.co/functions/v1/text-click", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { if (j && j.code) go.href = go.href.replace(/%23[a-z0-9]+$/i, "%23" + j.code); })
+        .catch(function () {});
+    }, 250);
+  })();
   // Android writes the pre-typed message as ?body= (and doesn't decode the iPhone &body= form —
   // one lead arrived as "Hey%20Meal%20Pic…", 2026-09-28).
   if (/Android/i.test(navigator.userAgent)) { go.href = go.href.replace("&body=", "?body="); }
