@@ -51,7 +51,7 @@ fbq('init','1873631240283364');fbq('track','PageView',{content_name:'text_v2'});
   <div class="brand"><img src="../../../assets/mark-black.png" alt="">Meal Pic</div>
   <h1>The laziest way to<br>count <em>calories</em></h1>
   <p class="lede">Text a pic of your food. That's it. Calories, protein, carbs, fat — back in seconds.</p>
-  <a class="go" id="go" href="sms:+18186011988&body=Hey%20Meal%20Pic%2C%20I%27m%20ready%20to%20get%20started">
+  <a class="go" id="go" href="sms:+18186011988&body=Hey%20Meal%20Pic%2C%20I%27m%20ready%20to%20get%20started%20(v2)">
     <img src="../../../assets/imessage.png" alt="" width="38" height="38">
     <span>Text my first meal</span>
   </a>
@@ -76,7 +76,7 @@ fbq('init','1873631240283364');fbq('track','PageView',{content_name:'text_v2'});
     }, 2500);
   });
   document.getElementById("copy").addEventListener("click", function () {
-    var t = "Hey Meal Pic, I'm ready to get started";
+    var t = "Hey Meal Pic, I'm ready to get started (v2)";
     try { navigator.clipboard.writeText(t).then(function(){ document.getElementById("copy").textContent = "Copied"; }); } catch (e) {}
   });
   // Not an iPhone (Android, desktop): say so instead of a dead button.
