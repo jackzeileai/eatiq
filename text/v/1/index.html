@@ -13,7 +13,7 @@
 <meta name="theme-color" content="#f7f7f8">
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','1873631240283364');fbq('track','PageView',{content_name:'text_v1'});
+if(!/s=preview/.test(location.search)){fbq('init','1873631240283364');fbq('track','PageView',{content_name:'text_v1'});}
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1873631240283364&ev=PageView&noscript=1"></noscript>
 <style>
@@ -31,7 +31,7 @@ fbq('init','1873631240283364');fbq('track','PageView',{content_name:'text_v1'});
   a.go:active{transform:scale(.98)}
   a.go img{width:38px;height:38px;border-radius:9px}
   .num{margin-top:clamp(6px,1.2vh,12px);font-size:13px;color:var(--muted)}
-  .fallback{margin-top:14px;font-size:14px;color:var(--muted);max-width:340px;line-height:1.5}
+  .fallback{margin-top:10px;font-size:12px;color:#b0b3ba;max-width:340px;line-height:1.5}
   .fallback b{color:var(--ink);font-weight:600}
   button.copy{margin-top:8px;font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:#ececef;border:0;border-radius:12px;padding:10px 16px}
   /* Big phone like the inspo: pinned to the top of the space left, bottom runs off the screen and fades.
@@ -56,7 +56,7 @@ fbq('init','1873631240283364');fbq('track','PageView',{content_name:'text_v1'});
     <span>Get started</span>
   </a>
   <div class="num" id="num">Your first text is typed for you. Just hit send.</div>
-  <div class="fallback" id="fb" hidden>Button not opening Messages? Text <b>+1 (818) 601-1988</b> with <b>"Hey Meal Pic, I'm ready to get started"</b>.<br><button class="copy" id="copy" type="button">Copy the text</button></div>
+  <div class="fallback" id="fb" hidden>didn't open? text +1 (818) 601-1988</div>
   <div class="shot"><img class="phone" src="../../../assets/text-phone.webp" alt="A Meal Pic text thread: a photo of a teriyaki bowl gets logged as 660 calories" width="1020" height="2082"></div>
   </main>
 <script>
@@ -73,9 +73,9 @@ fbq('init','1873631240283364');fbq('track','PageView',{content_name:'text_v1'});
     document.addEventListener("visibilitychange", onHide);
     setTimeout(function () {
       if (!document.hidden && !left) { document.getElementById("fb").hidden = false; try { fbq('trackCustom', 'MessagesBlocked', {ua: navigator.userAgent.slice(0, 120)}); } catch (e) {} }
-    }, 2500);
+    }, 6000);
   });
-  document.getElementById("copy").addEventListener("click", function () {
+  if (false) document.getElementById("copy").addEventListener("click", function () {
     var t = "Hey Meal Pic, I'm ready to get started (v1)";
     try { navigator.clipboard.writeText(t).then(function(){ document.getElementById("copy").textContent = "Copied"; }); } catch (e) {}
   });
