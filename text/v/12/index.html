@@ -79,6 +79,9 @@ if(!/s=preview/.test(location.search)){fbq('init','1873631240283364');fbq('track
     var t = "Hey Meal Pic, I'm ready to get started #v8sk";
     try { navigator.clipboard.writeText(t).then(function(){ document.getElementById("copy").textContent = "Copied"; }); } catch (e) {}
   });
+  // Android writes the pre-typed message as ?body= (and doesn't decode the iPhone &body= form —
+  // one lead arrived as "Hey%20Meal%20Pic…", 2026-09-28).
+  if (/Android/i.test(navigator.userAgent)) { go.href = go.href.replace("&body=", "?body="); }
   // Not an iPhone (Android, desktop): say so instead of a dead button.
   if (!/iPhone|iPad|iPod/.test(navigator.userAgent)) {
     document.getElementById("num").textContent = "On other phones, text +1 (818) 601-1988";
