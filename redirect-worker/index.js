@@ -61,6 +61,14 @@ export default {
     if (pay) {
       return Response.redirect(`https://bvaumyrtcuehlipiaxlv.supabase.co/functions/v1/sendblue/pay?c=${pay[1]}`, 302);
     }
+    // Today card by text (2026-09-29): mealpic.app/today/<10-char code>[.png] → the
+    // today-card function draws that send's page / picture. The short static mockup
+    // paths (/today/660/…) stay on GitHub Pages.
+    const card = url.pathname.match(/^\/today\/([a-z0-9]{10})(\.png)?\/?$/);
+    if (card) {
+      const r = await fetch(`https://bvaumyrtcuehlipiaxlv.supabase.co/functions/v1/today-card/${card[1]}${card[2] || ""}`, { method: request.method, cf: { cacheTtl: 31536000, cacheEverything: true } });
+      return new Response(r.body, { status: r.status, headers: { "content-type": r.headers.get("content-type") || "text/plain", "cache-control": r.headers.get("cache-control") || "no-store" } });
+    }
     // The bare domain is the website (Jack, 2026-09-27): serve /home/ under mealpic.app/.
     if (path === "/" && (request.method === "GET" || request.method === "HEAD")) {
       const home = new URL("/home/", url);
