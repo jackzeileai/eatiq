@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Creator Dashboard · Meal Pic</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#f4f4f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#050507" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,14 +14,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f4f4f7;--card:#ffffff;--card2:#fafafc;--ink:#0a0a0c;--sub:#6b6b74;--faint:#a3a3ad;--line:rgba(10,10,20,.07);
-  --blue:#0a84ff;--green:#30d158;--green-ink:#1f9e45;--pink:#ff375f;--purple:#bf5af2;--orange:#ff9f0a;
+  --bg:#F2F2F7;--card:#ffffff;--card2:#F4F4F7;--ink:#111113;--sub:#5d5d64;--faint:#8e8e94;--line:rgba(0,0,0,.07);
+  --green-ink:#1f9e45;--pink:#ff375f;
   --shadow:0 1px 2px rgba(10,10,20,.04),0 8px 24px rgba(10,10,20,.05);
   --r:24px;
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#050507;--card:#111114;--card2:#16161a;--ink:#f5f5f7;--sub:#9b9ba5;--faint:#5c5c66;--line:rgba(255,255,255,.07);
-  --green-ink:#30d158;--shadow:0 0 0 1px rgba(255,255,255,.04);
+  --bg:#161618;--card:#232326;--card2:#2C2C30;--ink:#f5f5f7;--sub:#A1A1A6;--faint:#6E6E73;--line:rgba(255,255,255,.08);
+  --green-ink:#34C759;--shadow:0 0 0 1px rgba(255,255,255,.04);
 }}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -32,7 +32,7 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .brand img{width:32px;height:32px;border-radius:9px}
 .brand span{color:var(--sub);font-weight:600}
 .ghost{background:var(--card);border:0;box-shadow:var(--shadow);color:var(--ink);font:600 14px Inter,sans-serif;cursor:pointer;padding:9px 16px;border-radius:999px}
-.link{background:none;border:0;color:var(--blue);font:600 15px Inter,sans-serif;cursor:pointer;padding:6px 0}
+.link{background:none;border:0;color:var(--sub);font:600 15px Inter,sans-serif;cursor:pointer;padding:6px 0}
 .hidden{display:none!important}
 
 /* sign-in */
@@ -42,29 +42,53 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .auth p{color:var(--sub);margin:0 0 24px;font-size:15px;line-height:1.5}
 label{display:block;font-weight:600;font-size:13px;color:var(--sub);margin-bottom:8px}
 input{width:100%;font:500 17px Inter,sans-serif;padding:15px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);outline:none;transition:border-color .15s}
-input:focus{border-color:var(--blue)}
+input:focus{border-color:var(--ink)}
 input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
 .btn{width:100%;margin-top:14px;padding:16px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:700 16px Inter,sans-serif;cursor:pointer;transition:opacity .15s}
 .btn:disabled{opacity:.45;cursor:default}
 .err{color:var(--pink);font-size:14px;margin-top:12px;min-height:18px}
 
 /* dashboard */
-.hello{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
-.hello h1{font-size:30px;letter-spacing:-.03em;margin:0;line-height:1.1}
-.hello .codechip{display:inline-flex;align-items:center;gap:8px;margin-top:8px;color:var(--sub);font-size:14px;font-weight:500}
-.hello .codechip b{color:var(--ink);background:var(--card);box-shadow:var(--shadow);padding:4px 10px;border-radius:8px;letter-spacing:.06em;font-size:13px}
+.money{display:grid;grid-template-columns:1.25fr 1fr;gap:12px}
+@media (max-width:760px){.money{grid-template-columns:1fr}}
+.recur{border-radius:28px;padding:28px 26px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column}
+.recur .k{font-size:14px;font-weight:600;color:var(--sub)}
+.recur .v{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-top:10px;color:var(--green-ink)}
+.recur .v small{font-size:20px;font-weight:700;letter-spacing:-.01em;color:var(--sub)}
+.recur .s{color:var(--sub);font-size:14px;line-height:1.5;margin-top:12px}
+.recur .meta{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
+.recur .meta div{font-size:13px;color:var(--sub);font-weight:500;padding-top:6px}
+.recur .meta b{display:block;font-size:18px;color:var(--ink);margin-top:3px;font-weight:800}
+.start{background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:22px 22px 8px;margin-top:12px}
+.start h3{margin:0 0 4px;font-size:17px}
+.start>p{margin:0 0 8px;color:var(--sub);font-size:14px}
+.start ol{list-style:none;margin:0;padding:0;counter-reset:s}
+.start li{counter-increment:s;display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.45}
+.start li:first-child{border-top:0}
+.start li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--card2);display:grid;place-items:center;font-weight:800;font-size:13px}
+.start li span{color:var(--sub)}
 
-.payout{position:relative;overflow:hidden;border-radius:28px;padding:28px 26px;color:#fff;
-  background:radial-gradient(120% 140% at 100% 0%,#3ad97a 0%,rgba(58,217,122,0) 55%),radial-gradient(90% 120% at 0% 100%,#0a84ff 0%,rgba(10,132,255,0) 60%),linear-gradient(135deg,#0f3d2a,#0b1f3a);
-  box-shadow:0 18px 40px -18px rgba(10,132,255,.45)}
+.hello{margin:6px 0 18px}
+.hello h1{font-size:32px;letter-spacing:-.03em;margin:0;line-height:1.1}
+.hello p{margin:6px 0 0;color:var(--sub);font-size:15px}
+.share{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin-bottom:12px}
+@media (max-width:640px){.share{grid-template-columns:1fr}}
+.share .sh{display:flex;align-items:center;gap:12px;background:var(--card);box-shadow:var(--shadow);border-radius:20px;padding:14px 14px 14px 18px;min-width:0}
+.share .sh div{min-width:0;flex:1}
+.share .k{display:block;color:var(--sub);font-size:12px;font-weight:600;margin-bottom:3px}
+.share b{display:block;font-size:17px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.share b.code{letter-spacing:.06em}
+.copy{flex:none;border:0;background:var(--card2);color:var(--ink);font:600 14px Inter,sans-serif;padding:9px 16px;border-radius:999px;cursor:pointer}
+
+.payout{border-radius:28px;padding:28px 26px;background:var(--card);box-shadow:var(--shadow)}
 .payout .row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.payout .k{font-size:14px;font-weight:600;opacity:.85}
+.payout .k{font-size:14px;font-weight:600;color:var(--sub)}
 .payout .v{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-top:10px}
-.payout .when{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:9px 14px;border-radius:999px;font-weight:700;font-size:14px;white-space:nowrap}
+.payout .when{display:inline-flex;align-items:center;gap:8px;background:var(--card2);padding:9px 14px;border-radius:999px;font-weight:700;font-size:14px;white-space:nowrap}
 .payout .when svg{width:16px;height:16px}
-.payout .meta{display:flex;gap:28px;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}
-.payout .meta div{font-size:13px;opacity:.8}
-.payout .meta b{display:block;font-size:18px;opacity:1;margin-top:3px;font-weight:800}
+.payout .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.payout .meta div{font-size:13px;color:var(--sub);font-weight:500}
+.payout .meta b{display:block;font-size:18px;color:var(--ink);margin-top:3px;font-weight:800}
 
 .bar{display:flex;align-items:center;justify-content:space-between;margin:30px 0 14px;gap:12px;flex-wrap:wrap}
 .bar h2{font-size:19px;letter-spacing:-.02em;margin:0}
@@ -75,7 +99,7 @@ input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media (min-width:760px){.grid.four{grid-template-columns:repeat(4,1fr)}}
 .tile{background:var(--card);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);min-width:0}
-.tile .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px}
+.tile .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px;background:var(--card2);color:var(--ink)}
 .tile .ic svg{width:18px;height:18px}
 .tile .k{color:var(--sub);font-size:13px;font-weight:600}
 .tile .v{font-size:30px;font-weight:800;margin-top:4px;letter-spacing:-.03em}
@@ -84,18 +108,14 @@ input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
 .earned .k{color:var(--sub);font-weight:600;font-size:14px}
 .earned .v{font-size:30px;font-weight:900;letter-spacing:-.03em;color:var(--green-ink);margin-left:auto}
 
-.rec{display:grid;grid-template-columns:1fr;gap:12px}
-@media (min-width:600px){.rec{grid-template-columns:1fr 1fr}}
-.rec .tile .v{font-size:34px}
-.rec .cut{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--green-ink);background:color-mix(in srgb,var(--green) 14%,transparent);padding:5px 10px;border-radius:999px}
 
 .chart{background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:20px}
 .chart .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
 .chart .top b{font-size:15px}
 .chart .top span{color:var(--sub);font-size:13px}
 .bars{display:flex;align-items:flex-end;gap:4px;height:140px}
-.bars div{flex:1;border-radius:5px 5px 2px 2px;min-height:3px;background:linear-gradient(180deg,var(--blue),color-mix(in srgb,var(--blue) 55%,var(--green)))}
-.bars div.zero{background:var(--line)}
+.bars div{flex:1;border-radius:5px 5px 2px 2px;min-height:3px;background:var(--ink)}
+.bars div.zero{background:var(--card2)}
 .axis{display:flex;justify-content:space-between;color:var(--faint);font-size:12px;margin-top:10px;font-weight:500}
 
 .hist{background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:6px 20px}
@@ -145,7 +165,7 @@ input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
   <section id="s-none" class="auth hidden">
     <img class="mark" src="../assets/apple-touch-icon.png" alt="">
     <h1>No creator code yet</h1>
-    <p><b id="noneemail"></b> isn't linked to a creator code. If you're working with Meal Pic, email <a href="mailto:help@mealpic.app" style="color:var(--blue)">help@mealpic.app</a> and we'll connect it.</p>
+    <p><b id="noneemail"></b> isn't linked to a creator code. If you're working with Meal Pic, email <a href="mailto:help@mealpic.app" style="color:var(--ink)">help@mealpic.app</a> and we'll connect it.</p>
   </section>
 
   <section id="s-stats" class="hidden"><div id="dash"></div></section>
@@ -170,7 +190,6 @@ const ICON = {
   star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
   cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>'
 };
-const tint = c => `background:color-mix(in srgb,${c} 15%,transparent);color:${c}`;
 
 $("f-email").onsubmit = async e => {
   e.preventDefault();
@@ -192,6 +211,8 @@ $("f-code").onsubmit = async e => {
 $("back").onclick = () => show("s-email");
 $("out").onclick = async () => { await sb.auth.signOut(); show("s-email"); };
 document.addEventListener("click", e => {
+  const c = e.target.closest("[data-copy]");
+  if (c) { navigator.clipboard.writeText(c.dataset.copy).then(() => { c.textContent = "Copied"; setTimeout(() => c.textContent = "Copy", 1500); }); return; }
   const p = e.target.closest("[data-p]")?.dataset.p; if (!p) return;
   period = p; render();
 });
@@ -216,22 +237,24 @@ function render(){
   const earnedAll = sum(all, "owed");
   const next = Math.max(0, earnedAll - paidOut);
   const lastPaid = (data.paid || []).map(p => p.last).sort().pop();
-  const mrr = sum(all, "mrr"), arr = sum(all, "arr");
   const cutM = all.reduce((a, c) => a + Number(c.mrr || 0) * c.pct / 100, 0);
-  const pct = all.length === 1 ? `${num(all[0].pct)}%` : "your";
   const first = all[0];
   const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
   const total30 = days.reduce((a, d) => a + d.uses, 0);
+  const dl = sum(cur, "entered"), tr = sum(cur, "trials");
+  const rate = (a, b) => Math.round(a / b * 100) + "%";
 
   $("dash").innerHTML = `
   <div class="hello">
-    <div>
-      <h1>Hey ${esc(first.name.split(" ")[0])}</h1>
-      <div class="codechip">Your code ${all.map(c => `<b>${esc(c.code.toUpperCase())}</b>`).join(" ")} · ${pct} of subscription revenue</div>
-      <div class="codechip">Your link <b>mealpic.app/c/${esc(first.code)}</b> <button class="ghost" style="padding:5px 12px;font-size:13px" onclick="navigator.clipboard.writeText('https://mealpic.app/c/${esc(first.code)}').then(()=>{this.textContent='Copied'})">Copy</button></div>
-    </div>
+    <h1>Hey ${esc(first.name.split(" ")[0])}</h1>
+    <p>Share your code or link. You earn on every payment from people who use it.</p>
+  </div>
+  <div class="share">
+    <div class="sh"><div><span class="k">Your code</span><b class="code">${all.map(c => esc(c.code.toUpperCase())).join(", ")}</b></div><button class="copy" data-copy="${esc(first.code.toUpperCase())}">Copy</button></div>
+    <div class="sh"><div><span class="k">Your link</span><b>mealpic.app/c/${esc(first.code)}</b></div><button class="copy" data-copy="https://mealpic.app/c/${esc(first.code)}">Copy</button></div>
   </div>
 
+  <div class="money">
   <div class="payout">
     <div class="row">
       <div>
@@ -246,6 +269,26 @@ function render(){
       <div>Last payout<b>${lastPaid ? fmtDate(lastPaid) : "None yet"}</b></div>
     </div>
   </div>
+  <div class="recur">
+    <div class="k">Coming in every month</div>
+    <div class="v">${money(cutM)}<small> / mo</small></div>
+    <div class="s">Your cut from people still subscribed through you. Yearly plans are spread across 12 months. It keeps paying as long as they stay, about ${money(cutM * 12)} a year.</div>
+    <div class="meta">
+      <div>Paying subscribers<b>${num(sum(all,"monthly_active") + sum(all,"yearly_paid"))}</b></div>
+      <div>Your cut<b>${all.length === 1 ? num(all[0].pct) + "%" : "Varies"}</b></div>
+    </div>
+  </div>
+  </div>
+${sum(all,"entered") ? "" : `
+  <div class="start">
+    <h3>Get your first subscriber</h3>
+    <p>Nobody has used your code yet. Here's what works best.</p>
+    <ol>
+      <li><div>Put your link in your bio <span>— mealpic.app/c/${esc(first.code)}. Anyone who downloads through it counts as yours.</span></div></li>
+      <li><div>Post a video of you using it <span>— snap a meal, show the calories pop up. Real use beats a review.</span></div></li>
+      <li><div>Say your code out loud <span>— "use code ${esc(first.code.toUpperCase())}". People type it in while setting up the app.</span></div></li>
+    </ol>
+  </div>`}
 
   <div class="bar">
     <h2>Your numbers</h2>
@@ -253,16 +296,10 @@ function render(){
   </div>
   <div class="earned"><span class="k">Earned ${label}</span><span class="v">${money(sum(cur,"owed"))}</span></div>
   <div class="grid four">
-    ${tile(ICON.down, "var(--blue)", "Downloads", num(sum(cur,"entered")), "used your code")}
-    ${tile(ICON.clock, "var(--orange)", "Free trials", num(sum(cur,"trials")), `${num(sum(cur,"in_trial"))} still in trial`)}
-    ${tile(ICON.repeat, "var(--purple)", "Monthly subscribers", num(sum(cur,"monthly_active")), "paying now")}
-    ${tile(ICON.star, "var(--green)", "Yearly purchases", num(sum(cur,"yearly_paid")), "bought a full year")}
-  </div>
-
-  <div class="bar"><h2>Recurring revenue</h2></div>
-  <div class="rec">
-    <div class="tile"><div class="k">Monthly recurring revenue</div><div class="v">${money(mrr)}</div><span class="cut">Your cut ${money(cutM)} / month</span></div>
-    <div class="tile"><div class="k">Yearly recurring revenue</div><div class="v">${money(arr)}</div><span class="cut">Your cut ${money(cutM * 12)} / year</span></div>
+    ${tile(ICON.down, "Downloads", num(dl), "used your code or link")}
+    ${tile(ICON.clock, "Free trials", num(tr), dl ? `${rate(tr, dl)} of downloads · ${num(sum(cur,"in_trial"))} still in trial` : `${num(sum(cur,"in_trial"))} still in trial`)}
+    ${tile(ICON.repeat, "Monthly subscribers", num(sum(cur,"monthly_active")), "paying now")}
+    ${tile(ICON.star, "Yearly purchases", num(sum(cur,"yearly_paid")), tr ? `${rate(sum(cur,"monthly_active") + sum(cur,"yearly_paid"), tr)} of trials paid` : "bought a full year")}
   </div>
 
   <div class="bar"><h2>Code uses</h2></div>
@@ -279,8 +316,8 @@ function render(){
 
   <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
 }
-function tile(icon, color, k, v, s){
-  return `<div class="tile"><div class="ic" style="${tint(color)}">${icon}</div><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
+function tile(icon, k, v, s){
+  return `<div class="tile"><div class="ic">${icon}</div><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
 }
 function fmtDate(iso){ const [y,m,d] = iso.split("-").map(Number); return new Date(y, m-1, d).toLocaleDateString("en-US",{month:"short",day:"numeric"}); }
 // Payouts go out weekly on Friday (Jack, 2026-10-07: "every week"), Pacific time.

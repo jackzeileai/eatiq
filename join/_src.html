@@ -85,6 +85,27 @@ p.section{font-size:18px;line-height:1.55;color:var(--sub);margin:0;max-width:56
 .hero .container{position:relative}
 [data-theme="party"] .hero h1 em{background:linear-gradient(110deg,#fff 0%,#ffb3f1 45%,#a6b8ff 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
 
+/* dashboard preview section */
+.see{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.see ul{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:14px}
+.see li{display:flex;gap:12px;font-size:16px;line-height:1.5;color:var(--sub)}
+.see li b{color:var(--ink)}
+.see li svg{flex:none;width:20px;height:20px;color:var(--money);margin-top:2px}
+.dash{background:var(--bg);border:1px solid var(--line-2);border-radius:28px;padding:16px;box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.3)}
+.dash .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dash .c{background:var(--surface);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.dash .k{font-size:12px;font-weight:600;color:var(--sub)}
+.dash .v{font-size:32px;font-weight:900;letter-spacing:-.03em;line-height:1;margin-top:8px}
+.dash .v.g{color:var(--money)}
+.dash .v small{font-size:14px;color:var(--sub);font-weight:700}
+.dash .pill{display:inline-block;margin-top:12px;background:var(--surface-2);padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.dash .four{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.dash .four .v{font-size:22px}
+.dash .chart{display:flex;align-items:flex-end;gap:4px;height:70px;margin-top:10px;background:var(--surface);border-radius:18px;padding:16px 16px 14px;box-shadow:var(--shadow)}
+.dash .chart i{flex:1;background:var(--ink);border-radius:3px 3px 1px 1px;opacity:.9}
+@media (max-width:980px){.see{grid-template-columns:1fr;gap:40px}}
+@media (max-width:560px){.dash .four{grid-template-columns:1fr 1fr}.dash .two{grid-template-columns:1fr}}
+
 /* ---------- sections ---------- */
 section.block{padding:104px 0}
 section.block.alt{background:var(--bg2)}
@@ -347,6 +368,33 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   </div>
 </section>
 
+<section class="block">
+  <div class="container see">
+    <div>
+      <h2 class="section">See every dollar, live</h2>
+      <p class="section">Your own dashboard shows exactly who came through you and what you're owed. Nothing hidden.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Next payout</b> and the Friday it lands.</div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Money coming in every month</b> from people still subscribed.</div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Downloads, trials and subscribers</b> from your code and link.</div></li>
+      </ul>
+    </div>
+    <div class="dash" aria-hidden="true">
+      <div class="two">
+        <div class="c"><div class="k">Next payout</div><div class="v">$412.50</div><span class="pill">Friday</span></div>
+        <div class="c"><div class="k">Coming in every month</div><div class="v g">$285<small> / mo</small></div><span class="pill">19 paying subscribers</span></div>
+      </div>
+      <div class="four">
+        <div class="c"><div class="k">Downloads</div><div class="v">318</div></div>
+        <div class="c"><div class="k">Free trials</div><div class="v">94</div></div>
+        <div class="c"><div class="k">Monthly</div><div class="v">12</div></div>
+        <div class="c"><div class="k">Yearly</div><div class="v">7</div></div>
+      </div>
+      <div class="chart"><i style="height:18%"></i><i style="height:24%"></i><i style="height:20%"></i><i style="height:34%"></i><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:54%"></i><i style="height:66%"></i><i style="height:62%"></i><i style="height:74%"></i><i style="height:70%"></i><i style="height:82%"></i><i style="height:78%"></i><i style="height:92%"></i></div>
+    </div>
+  </div>
+</section>
+
 <section class="block alt">
   <div class="container">
     <div class="head">
@@ -369,6 +417,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any real payment from someone who came through your link or used your code. Free trials count once they turn into a payment. Refunds don't pay out.</p></details>
       <details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No. Your code makes sure you get credit. Your followers pay the normal price.</p></details>
       <details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join. It's free and there's no contract.</p></details>
+      <details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>What works best is a video of you actually using it: snap your meal, show the calories pop up, then say your code. Put your link in your bio too. You don't need a script or a review.</p></details>
       <details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your creator dashboard shows downloads, trials, subscribers, recurring revenue, your next payout and past payouts, live.</p></details>
     </div>
     </div>
