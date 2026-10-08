@@ -71,6 +71,17 @@ export default {
       const type = card[2] ? "image/png" : r.status === 200 ? "text/html; charset=utf-8" : "text/plain; charset=utf-8";
       return new Response(r.body, { status: r.status, headers: { "content-type": type, "cache-control": r.headers.get("cache-control") || "no-store" } });
     }
+    // Creator links (2026-10-08): mealpic.app/c/<code> → the static /c/ page (it reads
+    // the code from the path, copies the link for the app to pick up, then goes to the
+    // App Store with ct=cr_<code>). The click is logged here as source cr_<code>.
+    const creator = url.pathname.match(/^\/c\/([A-Za-z0-9]{3,20})\/?$/);
+    if (creator && (request.method === "GET" || request.method === "HEAD")) {
+      const ua = request.headers.get("User-Agent") || "";
+      if (!/bot|crawl|spider|preview|facebookexternalhit|facebot|whatsapp|telegram|slack|discord|linkedin|pinterest|snapchat/i.test(ua)) {
+        ctx.waitUntil(logClick(request, "/c", "cr_" + creator[1].toLowerCase()));
+      }
+      return fetch(new Request(new URL("/c/", url), request));
+    }
     // The bare domain is the website (Jack, 2026-09-27): serve /home/ under mealpic.app/.
     if (path === "/" && (request.method === "GET" || request.method === "HEAD")) {
       const home = new URL("/home/", url);

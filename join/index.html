@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Become a Meal Pic Creator</title>
+<meta name="description" content="Earn 50% of every Meal Pic subscription you bring in. Paid every Friday.">
+<meta property="og:title" content="Get paid to share Meal Pic">
+<meta property="og:description" content="Earn 50% of every subscription you bring in. Paid every Friday.">
+<meta name="theme-color" content="#f4f4f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#050507" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f4f7;--card:#fff;--ink:#0a0a0c;--sub:#6b6b74;--faint:#a3a3ad;--line:rgba(10,10,20,.08);
+  --blue:#0a84ff;--green:#30d158;--green-ink:#1f9e45;--pink:#ff375f;
+  --shadow:0 1px 2px rgba(10,10,20,.04),0 8px 24px rgba(10,10,20,.05);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#050507;--card:#111114;--ink:#f5f5f7;--sub:#9b9ba5;--faint:#5c5c66;--line:rgba(255,255,255,.08);
+  --green-ink:#30d158;--shadow:0 0 0 1px rgba(255,255,255,.05);
+}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;padding:18px 16px 28px;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:12px;height:36px;margin-bottom:22px}
+.back{width:36px;height:36px;border-radius:50%;border:0;background:var(--card);box-shadow:var(--shadow);color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none}
+.back svg{width:18px;height:18px}
+.back.hide{visibility:hidden}
+.prog{flex:1;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--ink);border-radius:4px;transition:width .35s ease}
+.step{display:none;flex:1;flex-direction:column}
+.step.on{display:flex;animation:in .28s ease}
+@keyframes in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+h1{font-size:30px;line-height:1.12;letter-spacing:-.03em;margin:0 0 10px}
+.lead{color:var(--sub);font-size:16px;line-height:1.5;margin:0 0 22px}
+label{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0 8px}
+input{width:100%;font:500 17px Inter,sans-serif;padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);outline:none}
+input:focus{border-color:var(--blue)}
+input.code6{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
+.prefix{display:flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding-left:16px}
+.prefix span{color:var(--faint);font-weight:600;font-size:17px;white-space:nowrap}
+.prefix input{border:0;padding-left:2px;background:transparent}
+.prefix:focus-within{border-color:var(--blue)}
+.hint{font-size:14px;margin-top:10px;min-height:20px;color:var(--sub)}
+.hint.ok{color:var(--green-ink);font-weight:600}
+.hint.bad{color:var(--pink);font-weight:600}
+.foot{margin-top:auto;padding-top:20px}
+.btn{width:100%;padding:17px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:700 17px Inter,sans-serif;cursor:pointer;transition:opacity .15s}
+.btn:disabled{opacity:.35;cursor:default}
+.btn.blue{background:var(--blue);color:#fff}
+.link{background:none;border:0;color:var(--blue);font:600 15px Inter,sans-serif;cursor:pointer;padding:12px 0 0;width:100%}
+
+/* intro */
+.hero{border-radius:26px;padding:26px 22px;color:#fff;margin-bottom:14px;
+  background:radial-gradient(120% 140% at 100% 0%,#3ad97a 0%,rgba(58,217,122,0) 55%),radial-gradient(90% 120% at 0% 100%,#0a84ff 0%,rgba(10,132,255,0) 60%),linear-gradient(135deg,#0f3d2a,#0b1f3a)}
+.hero .mark{width:44px;height:44px;border-radius:12px;display:block;margin-bottom:18px}
+.hero h1{font-size:32px;color:#fff}
+.hero .big{font-size:64px;font-weight:900;letter-spacing:-.04em;line-height:1;margin:6px 0 6px}
+.hero p{margin:0;opacity:.85;font-size:16px;line-height:1.45}
+.card{background:var(--card);border-radius:22px;padding:18px 18px;box-shadow:var(--shadow);margin-bottom:12px}
+.card h3{margin:0 0 12px;font-size:16px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid var(--line);font-size:15px;gap:10px}
+.row:first-of-type{border-top:0;padding-top:2px}
+.row span{color:var(--sub)}
+.row b{font-weight:800;color:var(--green-ink);white-space:nowrap}
+.row small{display:block;color:var(--faint);font-size:12px;margin-top:2px}
+.how{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.how:first-of-type{border-top:0;padding-top:2px}
+.how .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue)}
+.how .ic svg{width:18px;height:18px}
+.how b{display:block;font-size:15px}
+.how span{color:var(--sub);font-size:14px;line-height:1.4}
+
+/* payout choice */
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.opt{background:var(--card);border:2px solid transparent;box-shadow:var(--shadow);border-radius:16px;padding:16px 12px;font:700 16px Inter,sans-serif;color:var(--ink);cursor:pointer}
+.opt.on{border-color:var(--blue)}
+.rules{list-style:none;padding:0;margin:0 0 16px}
+.rules li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.45}
+.rules li:first-child{border-top:0}
+.rules li svg{flex:none;width:18px;height:18px;color:var(--green);margin-top:2px}
+.check{display:flex;gap:12px;align-items:flex-start;background:var(--card);box-shadow:var(--shadow);border-radius:16px;padding:16px;cursor:pointer;font-size:15px;line-height:1.4}
+.check input{width:22px;height:22px;flex:none;margin:0;accent-color:var(--blue)}
+
+/* done */
+.done{text-align:center;padding-top:10px}
+.done .badge{width:72px;height:72px;border-radius:50%;background:var(--green);display:grid;place-items:center;margin:0 auto 18px;color:#fff}
+.done .badge svg{width:36px;height:36px}
+.share{background:var(--card);box-shadow:var(--shadow);border-radius:20px;padding:16px;margin-top:12px;text-align:left}
+.share .k{color:var(--sub);font-size:13px;font-weight:600}
+.share .v{font-size:22px;font-weight:800;margin:4px 0 12px;word-break:break-all}
+.copy{width:100%;padding:12px;border-radius:12px;border:0;background:color-mix(in srgb,var(--blue) 12%,transparent);color:var(--blue);font:700 15px Inter,sans-serif;cursor:pointer}
+.err{color:var(--pink);font-size:14px;font-weight:600;margin-top:10px;min-height:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <button class="back hide" id="back" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="prog"><i id="bar" style="width:8%"></i></div>
+  </div>
+
+  <!-- 0 intro -->
+  <section class="step on" data-s="intro">
+    <div class="hero">
+      <img class="mark" src="../assets/apple-touch-icon.png" alt="">
+      <h1>Get paid to share Meal Pic</h1>
+      <div class="big">50%</div>
+      <p>of every subscription you bring in. Every renewal too, for as long as they stay. Paid every Friday.</p>
+    </div>
+    <div class="card">
+      <h3>What you'd make</h3>
+      <div class="row"><span>Someone buys a year ($29.99)<small>And again every year they renew</small></span><b>$15.00</b></div>
+      <div class="row"><span>Someone pays monthly ($29.99)<small>Every month they stay</small></span><b>$15.00 / mo</b></div>
+      <div class="row"><span>10 people buy a year<small>In your first payout</small></span><b>$150</b></div>
+      <div class="row"><span>20 people stay monthly<small>Every month, on repeat</small></span><b>$300 / mo</b></div>
+    </div>
+    <div class="card">
+      <h3>How you get credit</h3>
+      <div class="how"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><div><b>They tap your link</b><span>You get your own link. Anyone who downloads through it is yours.</span></div></div>
+      <div class="how"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></div><div><b>Or they type your code</b><span>The app asks for a creator code during setup. Your code counts too.</span></div></div>
+      <div class="how"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></div><div><b>Paid every Friday</b><span>Once a subscriber's payment comes in, it goes out to you that Friday. Track it all on your dashboard.</span></div></div>
+    </div>
+    <div class="foot"><button class="btn" data-next>Become a creator</button></div>
+  </section>
+
+  <!-- 1 name -->
+  <section class="step" data-s="name">
+    <h1>What's your name?</h1>
+    <p class="lead">This is how we'll greet you on your dashboard.</p>
+    <label for="name">Full name</label>
+    <input id="name" autocomplete="name" placeholder="Sarah Jones">
+    <div class="foot"><button class="btn" data-next id="b-name" disabled>Continue</button></div>
+  </section>
+
+  <!-- 2 handle -->
+  <section class="step" data-s="handle">
+    <h1>Where do you post?</h1>
+    <p class="lead">Your Instagram or TikTok handle, so we know who you are.</p>
+    <label for="handle">Handle</label>
+    <div class="prefix"><span>@</span><input id="handle" autocapitalize="off" autocorrect="off" placeholder="sarahfit"></div>
+    <div class="foot"><button class="btn" data-next id="b-handle" disabled>Continue</button></div>
+  </section>
+
+  <!-- 3 email -->
+  <section class="step" data-s="email">
+    <h1>What's your email?</h1>
+    <p class="lead">You'll sign in to your dashboard with it. We'll send a 6-digit code to check it's you.</p>
+    <label for="email">Email</label>
+    <input id="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="you@example.com">
+    <div class="err" id="e-email"></div>
+    <div class="foot"><button class="btn" id="b-email" disabled>Send my code</button></div>
+  </section>
+
+  <!-- 4 verify -->
+  <section class="step" data-s="verify">
+    <h1>Check your email</h1>
+    <p class="lead">We sent a 6-digit code to <b id="sentto"></b>.</p>
+    <label for="otp">Code</label>
+    <input id="otp" class="code6" inputmode="numeric" autocomplete="one-time-code" maxlength="6">
+    <div class="err" id="e-otp"></div>
+    <div class="foot"><button class="btn" id="b-otp" disabled>Verify</button><button class="link" id="resend">Send a new code</button></div>
+  </section>
+
+  <!-- 5 code -->
+  <section class="step" data-s="code">
+    <h1>Pick your code</h1>
+    <p class="lead">Your followers type this in the app. Short and easy to say works best.</p>
+    <label for="code">Creator code</label>
+    <input id="code" autocapitalize="characters" autocorrect="off" maxlength="20" placeholder="SARAH">
+    <div class="hint" id="h-code">Letters and numbers, 3 to 20 characters.</div>
+    <div class="foot"><button class="btn" data-next id="b-code" disabled>Continue</button></div>
+  </section>
+
+  <!-- 6 payout -->
+  <section class="step" data-s="payout">
+    <h1>How should we pay you?</h1>
+    <p class="lead">Payouts go out every Friday.</p>
+    <div class="opts" id="opts">
+      <button class="opt" data-m="venmo">Venmo</button>
+      <button class="opt" data-m="paypal">PayPal</button>
+      <button class="opt" data-m="zelle">Zelle</button>
+      <button class="opt" data-m="cashapp">Cash App</button>
+    </div>
+    <label for="payhandle" id="l-pay">Your Venmo</label>
+    <input id="payhandle" autocapitalize="off" autocorrect="off" placeholder="@username">
+    <div class="foot"><button class="btn" data-next id="b-pay" disabled>Continue</button></div>
+  </section>
+
+  <!-- 7 terms -->
+  <section class="step" data-s="terms">
+    <h1>A few ground rules</h1>
+    <p class="lead">Keep it honest and we're good.</p>
+    <ul class="rules">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Say it's a partnership when you post (#ad or "paid partner").</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No made-up results or health promises.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No using your own code on your own purchases, and no paid search ads on the Meal Pic name.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Refunded purchases don't pay out, and we can turn a code off if these are broken.</li>
+    </ul>
+    <label class="check"><input type="checkbox" id="agree"> I agree to the creator rules and the <a href="/terms.html" target="_blank" style="color:var(--blue)">Terms</a>.</label>
+    <div class="err" id="e-sign"></div>
+    <div class="foot"><button class="btn blue" id="b-sign" disabled>Create my creator account</button></div>
+  </section>
+
+  <!-- 8 done -->
+  <section class="step" data-s="done">
+    <div class="done">
+      <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1>You're in!</h1>
+      <p class="lead" id="done-sub">Your code is live right now. Share either one below.</p>
+    </div>
+    <div class="share"><div class="k">Your link</div><div class="v" id="d-link"></div><button class="copy" data-copy="d-link">Copy link</button></div>
+    <div class="share"><div class="k">Your code</div><div class="v" id="d-code"></div><button class="copy" data-copy="d-code">Copy code</button></div>
+    <div class="foot"><a href="/dashboard/" class="btn" style="display:block;text-align:center;text-decoration:none">Open my dashboard</a></div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+// Shares the dashboard's sign-in, so finishing here leaves them signed in there.
+const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
+const $ = id => document.getElementById(id);
+const steps = [...document.querySelectorAll(".step")].map(s => s.dataset.s);
+let at = 0, method = "", codeOk = false, checkT = null;
+
+function go(name){
+  at = steps.indexOf(name);
+  document.querySelectorAll(".step").forEach(s => s.classList.toggle("on", s.dataset.s === name));
+  $("back").classList.toggle("hide", at === 0 || name === "done" || name === "verify");
+  // Front-loaded bar, like the app's onboarding.
+  const p = (at + 1) / steps.length;
+  $("bar").style.width = Math.round((1 - Math.pow(1 - p, 1.6)) * 100) + "%";
+  window.scrollTo(0, 0);
+  const f = document.querySelector(`.step[data-s="${name}"] input:not([type=checkbox])`);
+  if (f && matchMedia("(hover:hover)").matches) setTimeout(() => f.focus(), 250);
+}
+const next = () => go(steps[at + 1]);
+document.querySelectorAll("[data-next]").forEach(b => b.onclick = next);
+$("back").onclick = () => {
+  let prev = steps[at - 1];
+  if (prev === "verify") prev = "email";
+  go(prev);
+};
+
+// name / handle
+$("name").oninput = () => {
+  $("b-name").disabled = $("name").value.trim().length < 2;
+  if (!$("code").dataset.touched) suggestCode();
+};
+$("handle").oninput = () => {
+  $("handle").value = $("handle").value.replace(/^@+/, "").replace(/\s/g, "");
+  $("b-handle").disabled = $("handle").value.length < 2;
+  if (!$("code").dataset.touched) suggestCode();
+};
+function suggestCode(){
+  const base = ($("handle").value || $("name").value.split(" ")[0] || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20);
+  $("code").value = base.toUpperCase();
+}
+
+// email → code
+$("email").oninput = () => { $("b-email").disabled = !/^\S+@\S+\.\S+$/.test($("email").value.trim()); };
+async function sendCode(){
+  const email = $("email").value.trim().toLowerCase();
+  $("b-email").disabled = true; $("e-email").textContent = "";
+  const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:true } });
+  $("b-email").disabled = false;
+  if (error) { $("e-email").textContent = error.message; return false; }
+  $("sentto").textContent = email; return true;
+}
+$("b-email").onclick = async () => { if (await sendCode()) go("verify"); };
+$("resend").onclick = async () => { $("e-otp").textContent = (await sendCode()) ? "New code sent." : "Couldn't send. Try again."; };
+$("otp").oninput = () => {
+  $("otp").value = $("otp").value.replace(/\D/g, "");
+  $("b-otp").disabled = $("otp").value.length !== 6;
+  if ($("otp").value.length === 6) $("b-otp").click();
+};
+$("b-otp").onclick = async () => {
+  $("b-otp").disabled = true; $("e-otp").textContent = "";
+  const { error } = await sb.auth.verifyOtp({ email:$("sentto").textContent, token:$("otp").value, type:"email" });
+  if (error) { $("b-otp").disabled = false; $("e-otp").textContent = "That code didn't work. Check it or send a new one."; return; }
+  // Already a creator on this email? Skip straight to their code.
+  const { data } = await sb.rpc("creator_dashboard");
+  if (data?.codes?.length) return finish(data.codes[0].code, true);
+  go("code"); checkCode();
+};
+
+// code availability
+$("code").oninput = () => {
+  $("code").dataset.touched = "1";
+  $("code").value = $("code").value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  checkCode();
+};
+function checkCode(){
+  const c = $("code").value.toLowerCase();
+  codeOk = false; $("b-code").disabled = true;
+  const h = $("h-code");
+  if (c.length < 3) { h.className = "hint"; h.textContent = "Letters and numbers, 3 to 20 characters."; return; }
+  h.className = "hint"; h.textContent = "Checking…";
+  clearTimeout(checkT);
+  checkT = setTimeout(async () => {
+    const { data, error } = await sb.rpc("creator_code_available", { code: c });
+    if ($("code").value.toLowerCase() !== c) return;
+    if (error) { h.className = "hint bad"; h.textContent = "Couldn't check that. Try again."; return; }
+    codeOk = !!data;
+    h.className = "hint " + (codeOk ? "ok" : "bad");
+    h.textContent = codeOk ? `${c.toUpperCase()} is yours if you want it.` : `${c.toUpperCase()} is taken. Try another.`;
+    $("b-code").disabled = !codeOk;
+  }, 300);
+}
+
+// payout
+const PAY = { venmo:["Your Venmo","@username"], paypal:["Your PayPal email","you@example.com"], zelle:["Your Zelle phone or email","phone or email"], cashapp:["Your Cash App","$cashtag"] };
+document.querySelectorAll(".opt").forEach(o => o.onclick = () => {
+  method = o.dataset.m;
+  document.querySelectorAll(".opt").forEach(x => x.classList.toggle("on", x === o));
+  $("l-pay").textContent = PAY[method][0]; $("payhandle").placeholder = PAY[method][1];
+  $("payhandle").focus(); payReady();
+});
+const payReady = () => { $("b-pay").disabled = !method || $("payhandle").value.trim().length < 2; };
+$("payhandle").oninput = payReady;
+
+// sign up
+$("agree").onchange = () => { $("b-sign").disabled = !$("agree").checked; };
+$("b-sign").onclick = async () => {
+  $("b-sign").disabled = true; $("e-sign").textContent = "";
+  const { data, error } = await sb.rpc("creator_signup", {
+    code: $("code").value.toLowerCase(), name: $("name").value.trim(), handle: "@" + $("handle").value.trim(),
+    payout_method: method, payout_handle: $("payhandle").value.trim()
+  });
+  if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
+  if (data?.error === "taken") { go("code"); checkCode(); return; }
+  finish(data.code, data.existing);
+};
+function finish(code, existing){
+  $("d-code").textContent = code.toUpperCase();
+  $("d-link").textContent = `mealpic.app/c/${code}`;
+  if (existing) $("done-sub").textContent = "You're already set up. Here's your link and code.";
+  go("done");
+}
+document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
+  const t = $(b.dataset.copy).textContent, label = b.textContent;
+  try { await navigator.clipboard.writeText(b.dataset.copy === "d-link" ? "https://" + t : t); b.textContent = "Copied"; }
+  catch (e) { b.textContent = "Press and hold to copy"; }
+  setTimeout(() => b.textContent = label, 1600);
+});
+</script>
+</body>
+</html>

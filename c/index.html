@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meal Pic · Snap a photo, know the calories</title>
+<meta name="description" content="Snap a photo of your food and Meal Pic counts the calories and macros for you.">
+<meta property="og:title" content="Meal Pic">
+<meta property="og:description" content="Snap a photo of your food. Meal Pic counts the calories for you.">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4f7;--card:#fff;--ink:#0a0a0c;--sub:#6b6b74;--blue:#0a84ff;--green:#30d158}
+@media (prefers-color-scheme:dark){:root{--bg:#050507;--card:#111114;--ink:#f5f5f7;--sub:#9b9ba5}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:440px;margin:0 auto;min-height:100vh;padding:56px 20px 40px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.icon{width:96px;height:96px;border-radius:24px;box-shadow:0 12px 30px -10px rgba(0,0,0,.35)}
+.from{margin-top:26px;color:var(--sub);font-weight:600;font-size:15px}
+h1{font-size:34px;letter-spacing:-.03em;line-height:1.1;margin:10px 0 12px}
+p{color:var(--sub);font-size:16px;line-height:1.5;margin:0}
+.code{margin:28px 0 8px;background:var(--card);border-radius:20px;padding:18px 22px;width:100%}
+.code .k{color:var(--sub);font-size:13px;font-weight:600}
+.code .v{font-size:32px;font-weight:900;letter-spacing:.08em;margin-top:4px}
+.note{font-size:13px;color:var(--sub);margin-bottom:28px}
+.btn{width:100%;padding:17px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:700 17px Inter,sans-serif;cursor:pointer;margin-top:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="icon" src="/assets/apple-touch-icon.png" alt="Meal Pic">
+  <div class="from" id="from">You were invited to Meal Pic</div>
+  <h1>Snap a photo.<br>Know the calories.</h1>
+  <p>Take a picture of your food and Meal Pic counts the calories and macros for you.</p>
+  <div class="code"><div class="k">Your code</div><div class="v" id="code">—</div></div>
+  <div class="note">We'll fill it in for you in the app. If it asks, tap Allow Paste.</div>
+  <button class="btn" id="go">Get Meal Pic</button>
+</div>
+<script>
+const code = (location.pathname.match(/\/c\/([A-Za-z0-9]{3,20})/) || [])[1]?.toLowerCase() || "";
+document.getElementById("code").textContent = code ? code.toUpperCase() : "—";
+const store = `https://apps.apple.com/app/apple-store/id6802901402?pt=128667679&ct=${encodeURIComponent("cr_" + code)}&mt=8`;
+if (code) {
+  fetch("https://bvaumyrtcuehlipiaxlv.supabase.co/rest/v1/rpc/creator_code_lookup", {
+    method: "POST",
+    headers: { apikey: "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", "Content-Type": "application/json" },
+    body: JSON.stringify({ code })
+  }).then(r => r.json()).then(name => {
+    if (typeof name === "string" && name) document.getElementById("from").textContent = `${name.split(" ")[0]} invited you to Meal Pic`;
+  }).catch(() => {});
+}
+// The tap copies this link; the app's code screen reads it and fills the code in.
+document.getElementById("go").onclick = async () => {
+  try { if (code) await navigator.clipboard.writeText(`https://mealpic.app/c/${code}`); } catch (e) {}
+  location.href = store;
+};
+</script>
+</body>
+</html>
