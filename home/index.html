@@ -132,25 +132,24 @@ fbq('init','1873631240283364');fbq('track','PageView');
   @media (max-width:760px){.midcta{padding:32px 0 0}.midcta h3{font-size:28px}}
 
   /* why: Meal Pic vs other trackers */
-  .why{background:#0a0a0c;color:#fff;border-radius:40px;margin:0 20px;position:relative;overflow:hidden}
-  .why::before{content:"";position:absolute;left:8%;top:-20%;width:44%;height:80%;background:radial-gradient(closest-side,rgba(52,199,89,.22),rgba(52,199,89,0));pointer-events:none}
-  .why h2{color:#fff;font-size:56px}
+  .why{background:var(--bg2);position:relative}
+  .why h2{font-size:56px}
   .vs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:980px;margin:0 auto}
-  .vsbadge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:#fff;color:#0a0a0c;display:grid;place-items:center;font-size:14px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 0 8px #0a0a0c;z-index:2}
+  .vsbadge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 0 8px var(--bg2);z-index:2}
   .vcard{border-radius:32px;padding:38px 36px 34px}
-  .vcard.good{background:#fff;color:var(--ink);box-shadow:0 30px 80px rgba(52,199,89,.18),0 0 0 1px rgba(255,255,255,.5)}
-  .vcard.bad{background:#141417;border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
+  .vcard.good{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(10,10,20,.04),0 20px 50px -20px rgba(10,10,20,.18)}
+  .vcard.bad{background:transparent;border:1px solid var(--line);color:var(--ink3)}
   .vh{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:26px;color:var(--ink)}
-  .vcard.bad .vh{color:rgba(255,255,255,.45)}
+  .vcard.bad .vh{color:var(--ink3)}
   .vcard ul{list-style:none;margin:0;padding:0;display:grid;gap:20px}
   .vcard li{display:flex;align-items:flex-start;gap:16px}
   .vcard .ic{flex:none;width:32px;height:32px;margin-top:2px}
   .vcard li span{display:flex;flex-direction:column;gap:3px;line-height:1}
   .vcard li b{font-size:30px;font-weight:900;letter-spacing:-.035em}
   .vcard li small{font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink2)}
-  .vcard.bad li b{color:rgba(255,255,255,.55);text-decoration:line-through;text-decoration-color:rgba(255,69,58,.7);text-decoration-thickness:3px}
-  .vcard.bad li small{color:rgba(255,255,255,.35)}
-  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:14px}.vsbadge{display:none}.why{margin:0 12px;border-radius:28px}.why h2{font-size:38px}.vcard{padding:28px 24px 24px}.vcard li b{font-size:24px}}
+  .vcard.bad li b{color:var(--ink3);text-decoration:line-through;text-decoration-color:rgba(255,69,58,.6);text-decoration-thickness:3px}
+  .vcard.bad li small{color:var(--ink3)}
+  @media (max-width:800px){.vs{grid-template-columns:1fr;gap:14px}.vsbadge{display:none}.why h2{font-size:38px}.vcard{padding:28px 24px 24px}.vcard li b{font-size:24px}}
 
   /* faq */
   .faq{max-width:760px;margin:0 auto}
@@ -268,7 +267,7 @@ fbq('init','1873631240283364');fbq('track','PageView');
 
 <section class="why">
   <div class="wrap">
-    <div class="sec-h"><div class="kicker" style="color:rgba(255,255,255,.5)">Why Meal Pic</div><h2>Built different.</h2></div>
+    <div class="sec-h"><div class="kicker">Why Meal Pic</div><h2>Built different.</h2></div>
     <div class="vs">
       <div class="vcard good">
         <div class="vh"><img src="../assets/mark-black.png" alt="" width="22" height="22">Meal Pic</div>

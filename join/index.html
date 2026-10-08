@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Meal Pic Creators · Earn 50% of every subscription</title>
-<meta name="description" content="Share Meal Pic and earn 50% of every subscription you bring in, on every renewal. Paid every Friday.">
+<meta name="description" content="Earn 50% of every Meal Pic subscription you bring in, plus a library of proven reels and a step-by-step playbook for videos that sell. Paid every Friday.">
 <meta property="og:title" content="Get paid to share Meal Pic">
 <meta property="og:description" content="Earn 50% of every subscription you bring in, on every renewal. Paid every Friday.">
 <meta property="og:image" content="https://mealpic.app/assets/apple-touch-icon.png">
@@ -74,7 +74,7 @@ p.section{font-size:18px;line-height:1.55;color:var(--sub);margin:0;max-width:56
 .hero h1 em{font-style:normal;color:var(--money)}
 .hero .sub{font-size:20px;line-height:1.5;color:var(--sub);margin:0 0 32px;max-width:500px}
 .hero .ctas{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.hero .proof{display:grid;grid-template-columns:repeat(3,max-content);gap:36px;margin-top:40px}
+.hero .proof{display:grid;grid-template-columns:repeat(4,max-content);gap:32px;margin-top:40px}
 .hero .proof div{font-size:14px;color:var(--sub)}
 .hero .proof b{display:block;font-size:22px;color:var(--ink);font-weight:800;letter-spacing:-.02em;margin-bottom:2px}
 [data-theme="party"] .glow{position:absolute;inset:-120px -10% auto -10%;height:620px;pointer-events:none;
@@ -105,6 +105,18 @@ p.section{font-size:18px;line-height:1.55;color:var(--sub);margin:0;max-width:56
 .dash .chart i{flex:1;background:var(--ink);border-radius:3px 3px 1px 1px;opacity:.9}
 @media (max-width:980px){.see{grid-template-columns:1fr;gap:40px}}
 @media (max-width:560px){.dash .four{grid-template-columns:1fr 1fr}.dash .two{grid-template-columns:1fr}}
+
+/* what you get */
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.perk{background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow);border-radius:var(--card-r);padding:30px;display:flex;flex-direction:column}
+.perk .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);margin-bottom:22px}
+.perk .ic svg{width:24px;height:24px}
+.perk h3{font-size:21px;letter-spacing:-.015em;margin:0 0 8px}
+.perk p{margin:0;color:var(--sub);font-size:16px;line-height:1.55}
+.perk ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px;font-size:15px}
+.perk li{display:flex;gap:10px;line-height:1.45}
+.perk li svg{flex:none;width:18px;height:18px;color:var(--money);margin-top:2px}
+@media (max-width:980px){.perks{grid-template-columns:1fr}}
 
 /* ---------- sections ---------- */
 section.block{padding:104px 0}
@@ -262,7 +274,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .hero .sub{font-size:17px;margin-bottom:26px}
   .hero .ctas .btn{width:100%}
   .hero .ctas .btn.ghost{display:none}
-  .hero .proof{grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+  .hero .proof{grid-template-columns:repeat(2,1fr);gap:16px 12px;margin-top:30px}
   .hero .proof b{font-size:18px}
   .hero .proof div{font-size:13px}
   .float{right:-4px;top:-20px;padding:10px 14px}
@@ -303,6 +315,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="container">
     <a class="brand" href="/"><img src="../assets/apple-touch-icon.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
+      <a class="plain" href="#get">What you get</a>
       <a class="plain" href="#how">How it works</a>
       <a class="plain" href="#earn">Earnings</a>
       <a class="plain" href="#faq">FAQ</a>
@@ -318,7 +331,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
     <div>
       <span class="eyebrow"><i></i>Free to join · Paid every Friday</span>
       <h1>Earn <em>50%</em> of every subscription you bring in.</h1>
-      <p class="sub">Share Meal Pic with your audience. Every time someone subscribes through your link or code, you get half, on every renewal, for as long as they stay.</p>
+      <p class="sub">Every time someone subscribes through your link or code, you get half, on every renewal, for as long as they stay. And we show you exactly what to post: a library of proven reels and a playbook for videos that sell.</p>
       <div class="ctas">
         <button class="btn" data-open>Become a creator</button>
         <a class="btn ghost" href="#how">How it works</a>
@@ -327,6 +340,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
         <div><b>50%</b>of every payment</div>
         <div><b>Every Friday</b>payouts</div>
         <div><b>Forever</b>on renewals</div>
+        <div><b>Playbook</b>proven reels + how-to</div>
       </div>
     </div>
     <div class="calc hero-calc" id="earn">
@@ -351,6 +365,26 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
           </div>
           <div class="fine">Assumes everyone keeps their subscription for the year. Real numbers depend on how many stay, and refunds don't pay out.</div>
         </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="get">
+  <div class="container">
+    <div class="head">
+      <h2 class="section">What you get</h2>
+      <p class="section">Not just a link. Everything you need to make videos that actually sell, and get paid for every one that does.</p>
+    </div>
+    <div class="perks">
+      <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>50% of every payment</h3><p>Half of what every subscriber you bring in pays, on every renewal, for as long as they stay.</p>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Paid every Friday</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Monthly and yearly plans both count</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Live dashboard of every dollar</span></li></ul></div>
+      <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div>
+        <h3>Library of proven reels</h3><p>Real reels and videos that pulled big numbers, each broken down so you can see why it worked.</p>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>The hook in the first second</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>How the app shows up on screen</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>What made people tap the link</span></li></ul></div>
+      <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M19 19v2H6"/><path d="M9 8h6M9 12h4"/></svg></div>
+        <h3>Playbook for videos that sell</h3><p>Step-by-step instructions for making videos that go viral and turn viewers into subscribers.</p>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Hooks and formats that work</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>What to film and what to say</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>How to end on your code</span></li></ul></div>
     </div>
   </div>
 </section>
@@ -418,7 +452,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any real payment from someone who came through your link or used your code. Free trials count once they turn into a payment. Refunds don't pay out.</p></details>
       <details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No. Your code makes sure you get credit. Your followers pay the normal price.</p></details>
       <details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join. It's free and there's no contract.</p></details>
-      <details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>What works best is a video of you actually using it: snap your meal, show the calories pop up, then say your code. Put your link in your bio too. You don't need a script or a review.</p></details>
+      <details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>You don't have to guess. When you join you get our library of proven reels, with why each one worked, and a step-by-step playbook for making your own. The short version: film yourself actually using it, snap a meal, show the calories pop up, and end on your code.</p></details>
       <details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your creator dashboard shows downloads, trials, subscribers, recurring revenue, your next payout and past payouts, live.</p></details>
     </div>
     </div>
@@ -429,7 +463,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="container">
     <div class="box">
       <h2>Start earning this week.</h2>
-      <p>Sign up in about a minute and your code works right away.</p>
+      <p>Sign up in about a minute. Your code works right away, and the reels library and playbook unlock as soon as you're in.</p>
       <button class="btn" data-open>Become a creator</button>
     </div>
   </div>
