@@ -43,6 +43,8 @@ input.code{letter-spacing:8px;font-size:24px;font-weight:700;text-align:center}
 .tile{background:var(--card);border-radius:18px;padding:16px}
 .tile .k{color:var(--sub);font-size:13px;font-weight:600}
 .tile .v{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.02em}
+.tile .s{color:var(--sub);font-size:12px;margin-top:4px}
+@media (min-width:600px){.grid.two{grid-template-columns:repeat(2,1fr)}}
 .chart h3{font-size:15px;margin:0 0 14px}
 .bars{display:flex;align-items:flex-end;gap:3px;height:120px}
 .bars div{flex:1;background:var(--blue);border-radius:3px 3px 0 0;min-height:2px;opacity:.9}
@@ -97,7 +99,7 @@ input.code{letter-spacing:8px;font-size:24px;font-weight:700;text-align:center}
       <div class="bars" id="bars"></div>
       <div class="axis"><span id="ax0"></span><span>Today</span></div>
     </div>
-    <p class="foot">Earnings are your cut of what subscribers actually paid, after refunds. Free trials count once they turn into a payment. Numbers update live.</p>
+    <p class="foot">Earnings are your cut of what subscribers actually paid, after refunds. Downloads are people who entered your code in the app. Free trials count toward earnings once they turn into a payment. Numbers update live.</p>
   </section>
 
   <p id="loading" class="sub">Loading…</p>
@@ -160,10 +162,14 @@ function render(){
       <div class="note">${multi ? "" : `Code <b>${esc(c.code.toUpperCase())}</b> · `}${num(c.pct)}% of subscription revenue</div>
     </div>
     <div class="grid">
-      <div class="tile"><div class="k">Used your code</div><div class="v">${num(r.entered)}</div></div>
-      <div class="tile"><div class="k">Started a trial</div><div class="v">${num(r.trials)}</div></div>
-      <div class="tile"><div class="k">Paying</div><div class="v">${num(r.paying)}</div></div>
-      <div class="tile"><div class="k">Revenue</div><div class="v">${money((r.revenue||0)-(r.refunded||0))}</div></div>
+      <div class="tile"><div class="k">Downloads</div><div class="v">${num(r.entered)}</div><div class="s">used your code</div></div>
+      <div class="tile"><div class="k">Free trials</div><div class="v">${num(r.trials)}</div><div class="s">${num(r.in_trial)} still in trial</div></div>
+      <div class="tile"><div class="k">Monthly subscribers</div><div class="v">${num(r.monthly_active)}</div><div class="s">paying now</div></div>
+      <div class="tile"><div class="k">Yearly purchases</div><div class="v">${num(r.yearly_paid)}</div><div class="s">bought a year</div></div>
+    </div>
+    <div class="grid two">
+      <div class="tile"><div class="k">Paying customers</div><div class="v">${num(r.paying)}</div><div class="s">monthly + yearly, ever charged</div></div>
+      <div class="tile"><div class="k">Revenue</div><div class="v">${money((r.revenue||0)-(r.refunded||0))}</div><div class="s">after refunds</div></div>
     </div>`;
   }).join("");
   const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
