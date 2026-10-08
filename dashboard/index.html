@@ -38,6 +38,8 @@ input.code{letter-spacing:8px;font-size:24px;font-weight:700;text-align:center}
 .hero .k{color:var(--sub);font-size:14px;font-weight:600}
 .hero .v{font-size:48px;font-weight:800;letter-spacing:-.03em;margin-top:4px}
 .hero .note{color:var(--sub);font-size:13px;margin-top:6px}
+.hero .payout{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:15px}
+.hero .payout b{color:var(--green)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
 @media (min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}}
 .tile{background:var(--card);border-radius:18px;padding:16px}
@@ -92,7 +94,7 @@ input.code{letter-spacing:8px;font-size:24px;font-weight:700;text-align:center}
   </section>
 
   <section id="s-stats" class="hidden">
-    <div class="seg" id="seg"><button data-p="month" class="on">This month</button><button data-p="all">All time</button></div>
+    <div class="seg" id="seg"><button data-p="week" class="on">This week</button><button data-p="month">This month</button><button data-p="all">All time</button></div>
     <div id="codes"></div>
     <div class="card chart">
       <h3>People who used your code · last 30 days</h3>
@@ -113,7 +115,7 @@ const screens = ["s-email","s-code","s-none","s-stats","loading"];
 function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-none")); }
 const money = n => "$" + Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
 const num = n => Number(n||0).toLocaleString("en-US");
-let data = null, period = "month";
+let data = null, period = "week";
 
 $("f-email").onsubmit = async e => {
   e.preventDefault();
@@ -151,21 +153,26 @@ async function load(){
 }
 
 function render(){
-  const rows = period === "month" ? (data.month || []) : data.codes;
+  const rows = period === "week" ? (data.week || []) : period === "month" ? (data.month || []) : data.codes;
   $("codes").innerHTML = data.codes.map(c => {
     const r = rows.find(x => x.code === c.code) || {};
     const multi = data.codes.length > 1;
     return `${multi ? `<div class="codehead"><h2>${esc(c.name)}</h2><span class="pill">${esc(c.code.toUpperCase())}</span></div>` : ""}
     <div class="card hero">
-      <div class="k">${period === "month" ? "Earned this month" : "Earned all time"}</div>
+      <div class="k">${period === "week" ? "Earned this week" : period === "month" ? "Earned this month" : "Earned all time"}</div>
       <div class="v">${money(r.owed)}</div>
       <div class="note">${multi ? "" : `Code <b>${esc(c.code.toUpperCase())}</b> · `}${num(c.pct)}% of subscription revenue</div>
+      <div class="payout">Next payout <b>${nextPayout()}</b> · paid every Friday</div>
     </div>
     <div class="grid">
       <div class="tile"><div class="k">Downloads</div><div class="v">${num(r.entered)}</div><div class="s">used your code</div></div>
       <div class="tile"><div class="k">Free trials</div><div class="v">${num(r.trials)}</div><div class="s">${num(r.in_trial)} still in trial</div></div>
       <div class="tile"><div class="k">Monthly subscribers</div><div class="v">${num(r.monthly_active)}</div><div class="s">paying now</div></div>
       <div class="tile"><div class="k">Yearly purchases</div><div class="v">${num(r.yearly_paid)}</div><div class="s">bought a year</div></div>
+    </div>
+    <div class="grid two">
+      <div class="tile"><div class="k">Monthly recurring revenue</div><div class="v">${money(c.mrr)}</div><div class="s">your cut ${money(c.mrr * c.pct / 100)} / month</div></div>
+      <div class="tile"><div class="k">Yearly recurring revenue</div><div class="v">${money(c.arr)}</div><div class="s">your cut ${money(c.arr * c.pct / 100)} / year</div></div>
     </div>
     <div class="grid two">
       <div class="tile"><div class="k">Paying customers</div><div class="v">${num(r.paying)}</div><div class="s">monthly + yearly, ever charged</div></div>
@@ -175,6 +182,14 @@ function render(){
   const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
   $("bars").innerHTML = days.map(d => `<div class="${d.uses ? "" : "zero"}" style="height:${d.uses ? Math.max(4, d.uses / max * 100) : 2}%" title="${d.day.slice(0,10)}: ${d.uses}"></div>`).join("");
   if (days.length) $("ax0").textContent = new Date(days[0].day).toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"});
+}
+// Payouts go out weekly on Friday (Jack, 2026-10-07: "every week"), Pacific time.
+function nextPayout(){
+  const pt = new Date(new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"}));
+  const add = (5 - pt.getDay() + 7) % 7;
+  if (add === 0) return "Today";
+  pt.setDate(pt.getDate() + add);
+  return pt.toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"});
 }
 function esc(s){ return String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 load();
