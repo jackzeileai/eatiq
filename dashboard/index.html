@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Creator Dashboard · Meal Pic</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#0a0a0c;--sub:#6e6e76;--line:#e8e8ec;--blue:#0a84ff;--green:#34c759;--pink:#e8336f;--r:22px}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#141416;--ink:#f5f5f7;--sub:#9a9aa2;--line:#2a2a2e}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 64px}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none}
+.brand img{width:30px;height:30px;border-radius:8px}
+.link{background:none;border:0;color:var(--blue);font:600 15px Inter,sans-serif;cursor:pointer;padding:6px}
+.card{background:var(--card);border-radius:var(--r);padding:24px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin:0 0 8px}
+p.sub{color:var(--sub);margin:0 0 22px;font-size:15px;line-height:1.45}
+label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+input{width:100%;font:500 17px Inter,sans-serif;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);outline:none}
+input:focus{border-color:var(--blue)}
+input.code{letter-spacing:8px;font-size:24px;font-weight:700;text-align:center}
+.btn{width:100%;margin-top:14px;padding:15px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:700 16px Inter,sans-serif;cursor:pointer}
+.btn:disabled{opacity:.5;cursor:default}
+.err{color:var(--pink);font-size:14px;margin-top:12px;min-height:18px}
+.hidden{display:none!important}
+.seg{display:inline-flex;background:var(--card);border-radius:999px;padding:4px;margin-bottom:16px}
+.seg button{border:0;background:none;color:var(--sub);font:600 14px Inter,sans-serif;padding:8px 16px;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.hero{margin-bottom:14px}
+.hero .k{color:var(--sub);font-size:14px;font-weight:600}
+.hero .v{font-size:48px;font-weight:800;letter-spacing:-.03em;margin-top:4px}
+.hero .note{color:var(--sub);font-size:13px;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+@media (min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}}
+.tile{background:var(--card);border-radius:18px;padding:16px}
+.tile .k{color:var(--sub);font-size:13px;font-weight:600}
+.tile .v{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.02em}
+.chart h3{font-size:15px;margin:0 0 14px}
+.bars{display:flex;align-items:flex-end;gap:3px;height:120px}
+.bars div{flex:1;background:var(--blue);border-radius:3px 3px 0 0;min-height:2px;opacity:.9}
+.bars div.zero{background:var(--line)}
+.axis{display:flex;justify-content:space-between;color:var(--sub);font-size:12px;margin-top:8px}
+.codehead{display:flex;align-items:baseline;justify-content:space-between;margin:26px 0 12px}
+.codehead h2{font-size:22px;margin:0}
+.pill{background:var(--card);border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px;letter-spacing:.04em}
+.foot{color:var(--sub);font-size:13px;margin-top:22px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/"><img src="../assets/apple-touch-icon.png" alt="">Meal Pic</a>
+    <button id="out" class="link hidden">Sign out</button>
+  </header>
+
+  <section id="s-email" class="card hidden">
+    <h1>Creator dashboard</h1>
+    <p class="sub">Sign in with the email we have on file for your creator code. We'll email you a 6-digit code.</p>
+    <form id="f-email">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+      <button class="btn" type="submit">Email me a code</button>
+      <div class="err" id="e-email"></div>
+    </form>
+  </section>
+
+  <section id="s-code" class="card hidden">
+    <h1>Check your email</h1>
+    <p class="sub">We sent a 6-digit code to <b id="sentto"></b>.</p>
+    <form id="f-code">
+      <label for="code">Code</label>
+      <input id="code" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required>
+      <button class="btn" type="submit">Sign in</button>
+      <div class="err" id="e-code"></div>
+    </form>
+    <button class="link" id="back" style="margin-top:10px">Use a different email</button>
+  </section>
+
+  <section id="s-none" class="card hidden">
+    <h1>No creator code yet</h1>
+    <p class="sub"><b id="noneemail"></b> isn't linked to a creator code. If you're working with Meal Pic, email <a href="mailto:help@mealpic.app" style="color:var(--blue)">help@mealpic.app</a> and we'll connect it.</p>
+  </section>
+
+  <section id="s-stats" class="hidden">
+    <div class="seg" id="seg"><button data-p="month" class="on">This month</button><button data-p="all">All time</button></div>
+    <div id="codes"></div>
+    <div class="card chart">
+      <h3>People who used your code · last 30 days</h3>
+      <div class="bars" id="bars"></div>
+      <div class="axis"><span id="ax0"></span><span>Today</span></div>
+    </div>
+    <p class="foot">Earnings are your cut of what subscribers actually paid, after refunds. Free trials count once they turn into a payment. Numbers update live.</p>
+  </section>
+
+  <p id="loading" class="sub">Loading…</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
+const $ = id => document.getElementById(id);
+const screens = ["s-email","s-code","s-none","s-stats","loading"];
+function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-none")); }
+const money = n => "$" + Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const num = n => Number(n||0).toLocaleString("en-US");
+let data = null, period = "month";
+
+$("f-email").onsubmit = async e => {
+  e.preventDefault();
+  const email = $("email").value.trim().toLowerCase(), b = e.target.querySelector("button");
+  b.disabled = true; $("e-email").textContent = "";
+  const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:true } });
+  b.disabled = false;
+  if (error) { $("e-email").textContent = error.message; return; }
+  $("sentto").textContent = email; show("s-code"); $("code").focus();
+};
+$("f-code").onsubmit = async e => {
+  e.preventDefault();
+  const b = e.target.querySelector("button"); b.disabled = true; $("e-code").textContent = "";
+  const { error } = await sb.auth.verifyOtp({ email:$("sentto").textContent, token:$("code").value.trim(), type:"email" });
+  b.disabled = false;
+  if (error) { $("e-code").textContent = "That code didn't work. Check it, or go back and send a new one."; return; }
+  load();
+};
+$("back").onclick = () => show("s-email");
+$("out").onclick = async () => { await sb.auth.signOut(); show("s-email"); };
+$("seg").onclick = e => {
+  const p = e.target.dataset.p; if (!p) return;
+  period = p; [...$("seg").children].forEach(x => x.classList.toggle("on", x.dataset.p === p)); render();
+};
+
+async function load(){
+  show("loading");
+  const { data:{ session } } = await sb.auth.getSession();
+  if (!session) { show("s-email"); return; }
+  const { data:d, error } = await sb.rpc("creator_dashboard");
+  if (error) { show("s-email"); $("e-email").textContent = "Something went wrong. Try signing in again."; return; }
+  data = d;
+  if (!d.codes || !d.codes.length) { $("noneemail").textContent = session.user.email; show("s-none"); return; }
+  render(); show("s-stats");
+}
+
+function render(){
+  const rows = period === "month" ? (data.month || []) : data.codes;
+  $("codes").innerHTML = data.codes.map(c => {
+    const r = rows.find(x => x.code === c.code) || {};
+    const multi = data.codes.length > 1;
+    return `${multi ? `<div class="codehead"><h2>${esc(c.name)}</h2><span class="pill">${esc(c.code.toUpperCase())}</span></div>` : ""}
+    <div class="card hero">
+      <div class="k">${period === "month" ? "Earned this month" : "Earned all time"}</div>
+      <div class="v">${money(r.owed)}</div>
+      <div class="note">${multi ? "" : `Code <b>${esc(c.code.toUpperCase())}</b> · `}${num(c.pct)}% of subscription revenue</div>
+    </div>
+    <div class="grid">
+      <div class="tile"><div class="k">Used your code</div><div class="v">${num(r.entered)}</div></div>
+      <div class="tile"><div class="k">Started a trial</div><div class="v">${num(r.trials)}</div></div>
+      <div class="tile"><div class="k">Paying</div><div class="v">${num(r.paying)}</div></div>
+      <div class="tile"><div class="k">Revenue</div><div class="v">${money((r.revenue||0)-(r.refunded||0))}</div></div>
+    </div>`;
+  }).join("");
+  const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
+  $("bars").innerHTML = days.map(d => `<div class="${d.uses ? "" : "zero"}" style="height:${d.uses ? Math.max(4, d.uses / max * 100) : 2}%" title="${d.day.slice(0,10)}: ${d.uses}"></div>`).join("");
+  if (days.length) $("ax0").textContent = new Date(days[0].day).toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"});
+}
+function esc(s){ return String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+load();
+</script>
+</body>
+</html>
