@@ -134,6 +134,44 @@ a.tile.res:hover .chev{color:var(--ink)}
 .foot{color:var(--faint);font-size:12px;margin-top:26px;line-height:1.6;text-align:center}
 .foot a{color:var(--sub)}
 .loading{display:grid;place-items:center;height:50vh;color:var(--sub)}
+
+/* ---------- v3: same look as the join page (Dub-style hairlines, colour icons) ---------- */
+:root{--shadow:0 0 0 1px rgba(0,0,0,.08);--r:16px;--green:#34C759;--orange:#FF9500;--purple:#AF52DE;--pinkc:#FF2D55}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Helvetica,Arial,sans-serif}
+header{margin:-22px -16px 28px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.brand{font-weight:700}
+.ghost,.copy{background:var(--card);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);border-radius:10px;font-weight:600}
+.copy{padding:8px 14px;font-size:13px}
+.ghost:hover,.copy:hover{box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.btn{border-radius:12px;font-weight:600}
+.auth{border-radius:20px;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 48px -28px rgba(0,0,0,.25)}
+.auth h1,.hello h1{font-weight:600}
+.hello h1{font-size:34px}
+.share .sh{border-radius:14px}
+.share b{font-weight:700}
+.payout,.recur{position:relative;overflow:hidden;border-radius:20px}
+.payout>*,.recur>*{position:relative;z-index:1}
+.payout .v,.recur .v{font-weight:700;letter-spacing:-.035em}
+.payout .when{background:var(--card);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);font-weight:600}
+.payout .meta b,.recur .meta b{font-weight:700}
+.bar{margin:40px 0 14px}
+.bar h2{font-size:18px;font-weight:600;letter-spacing:-.015em}
+.seg{box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);border-radius:10px;padding:3px}
+.seg button{border-radius:8px}
+.tile{border-radius:16px}
+.tile .v{font-weight:700}
+.tile .ic{color:#fff}
+.grid.four .tile:nth-child(1) .ic{background:var(--green)}
+.grid.four .tile:nth-child(2) .ic{background:var(--orange)}
+.grid.four .tile:nth-child(3) .ic{background:var(--purple)}
+.grid.four .tile:nth-child(4) .ic{background:var(--pinkc)}
+.grid.two .tile.res:nth-child(1) .ic{background:var(--pinkc)}
+.grid.two .tile.res:nth-child(2) .ic{background:var(--orange)}
+.tile.res .soon{background:var(--card);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
+.earned .v{font-weight:700}
+.bars div{background:var(--green)}
+.start li::before{background:var(--ink);color:#fff}
+.start h3{font-weight:600}
 </style>
 </head>
 <body>
