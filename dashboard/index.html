@@ -5,69 +5,122 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Creator Dashboard · Meal Pic</title>
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#f4f4f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#050507" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f5f7;--card:#fff;--ink:#0a0a0c;--sub:#6e6e76;--line:#e8e8ec;--blue:#0a84ff;--green:#34c759;--pink:#e8336f;--r:22px}
-@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#141416;--ink:#f5f5f7;--sub:#9a9aa2;--line:#2a2a2e}}
+:root{
+  --bg:#f4f4f7;--card:#ffffff;--card2:#fafafc;--ink:#0a0a0c;--sub:#6b6b74;--faint:#a3a3ad;--line:rgba(10,10,20,.07);
+  --blue:#0a84ff;--green:#30d158;--green-ink:#1f9e45;--pink:#ff375f;--purple:#bf5af2;--orange:#ff9f0a;
+  --shadow:0 1px 2px rgba(10,10,20,.04),0 8px 24px rgba(10,10,20,.05);
+  --r:24px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#050507;--card:#111114;--card2:#16161a;--ink:#f5f5f7;--sub:#9b9ba5;--faint:#5c5c66;--line:rgba(255,255,255,.07);
+  --green-ink:#30d158;--shadow:0 0 0 1px rgba(255,255,255,.04);
+}}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:720px;margin:0 auto;padding:28px 16px 64px}
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none}
-.brand img{width:30px;height:30px;border-radius:8px}
-.link{background:none;border:0;color:var(--blue);font:600 15px Inter,sans-serif;cursor:pointer;padding:6px}
-.card{background:var(--card);border-radius:var(--r);padding:24px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
-h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin:0 0 8px}
-p.sub{color:var(--sub);margin:0 0 22px;font-size:15px;line-height:1.45}
-label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
-input{width:100%;font:500 17px Inter,sans-serif;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);outline:none}
-input:focus{border-color:var(--blue)}
-input.code{letter-spacing:8px;font-size:24px;font-weight:700;text-align:center}
-.btn{width:100%;margin-top:14px;padding:15px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:700 16px Inter,sans-serif;cursor:pointer}
-.btn:disabled{opacity:.5;cursor:default}
-.err{color:var(--pink);font-size:14px;margin-top:12px;min-height:18px}
+body{min-height:100vh}
+.wrap{max-width:980px;margin:0 auto;padding:22px 16px 72px}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.brand img{width:32px;height:32px;border-radius:9px}
+.brand span{color:var(--sub);font-weight:600}
+.ghost{background:var(--card);border:0;box-shadow:var(--shadow);color:var(--ink);font:600 14px Inter,sans-serif;cursor:pointer;padding:9px 16px;border-radius:999px}
+.link{background:none;border:0;color:var(--blue);font:600 15px Inter,sans-serif;cursor:pointer;padding:6px 0}
 .hidden{display:none!important}
-.seg{display:inline-flex;background:var(--card);border-radius:999px;padding:4px;margin-bottom:16px}
-.seg button{border:0;background:none;color:var(--sub);font:600 14px Inter,sans-serif;padding:8px 16px;border-radius:999px;cursor:pointer}
+
+/* sign-in */
+.auth{max-width:420px;margin:8vh auto 0;background:var(--card);border-radius:28px;padding:32px 26px;box-shadow:var(--shadow)}
+.auth .mark{width:56px;height:56px;border-radius:16px;display:block;margin-bottom:20px}
+.auth h1{font-size:28px;line-height:1.15;letter-spacing:-.025em;margin:0 0 8px}
+.auth p{color:var(--sub);margin:0 0 24px;font-size:15px;line-height:1.5}
+label{display:block;font-weight:600;font-size:13px;color:var(--sub);margin-bottom:8px}
+input{width:100%;font:500 17px Inter,sans-serif;padding:15px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);outline:none;transition:border-color .15s}
+input:focus{border-color:var(--blue)}
+input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
+.btn{width:100%;margin-top:14px;padding:16px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:700 16px Inter,sans-serif;cursor:pointer;transition:opacity .15s}
+.btn:disabled{opacity:.45;cursor:default}
+.err{color:var(--pink);font-size:14px;margin-top:12px;min-height:18px}
+
+/* dashboard */
+.hello{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.hello h1{font-size:30px;letter-spacing:-.03em;margin:0;line-height:1.1}
+.hello .codechip{display:inline-flex;align-items:center;gap:8px;margin-top:8px;color:var(--sub);font-size:14px;font-weight:500}
+.hello .codechip b{color:var(--ink);background:var(--card);box-shadow:var(--shadow);padding:4px 10px;border-radius:8px;letter-spacing:.06em;font-size:13px}
+
+.payout{position:relative;overflow:hidden;border-radius:28px;padding:28px 26px;color:#fff;
+  background:radial-gradient(120% 140% at 100% 0%,#3ad97a 0%,rgba(58,217,122,0) 55%),radial-gradient(90% 120% at 0% 100%,#0a84ff 0%,rgba(10,132,255,0) 60%),linear-gradient(135deg,#0f3d2a,#0b1f3a);
+  box-shadow:0 18px 40px -18px rgba(10,132,255,.45)}
+.payout .row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.payout .k{font-size:14px;font-weight:600;opacity:.85}
+.payout .v{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-top:10px}
+.payout .when{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:9px 14px;border-radius:999px;font-weight:700;font-size:14px;white-space:nowrap}
+.payout .when svg{width:16px;height:16px}
+.payout .meta{display:flex;gap:28px;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);flex-wrap:wrap}
+.payout .meta div{font-size:13px;opacity:.8}
+.payout .meta b{display:block;font-size:18px;opacity:1;margin-top:3px;font-weight:800}
+
+.bar{display:flex;align-items:center;justify-content:space-between;margin:30px 0 14px;gap:12px;flex-wrap:wrap}
+.bar h2{font-size:19px;letter-spacing:-.02em;margin:0}
+.seg{display:inline-flex;background:var(--card);box-shadow:var(--shadow);border-radius:999px;padding:4px}
+.seg button{border:0;background:none;color:var(--sub);font:600 13px Inter,sans-serif;padding:8px 14px;border-radius:999px;cursor:pointer;transition:all .15s}
 .seg button.on{background:var(--ink);color:var(--bg)}
-.hero{margin-bottom:14px}
-.hero .k{color:var(--sub);font-size:14px;font-weight:600}
-.hero .v{font-size:48px;font-weight:800;letter-spacing:-.03em;margin-top:4px}
-.hero .note{color:var(--sub);font-size:13px;margin-top:6px}
-.hero .payout{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:15px}
-.hero .payout b{color:var(--green)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
-@media (min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}}
-.tile{background:var(--card);border-radius:18px;padding:16px}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:760px){.grid.four{grid-template-columns:repeat(4,1fr)}}
+.tile{background:var(--card);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);min-width:0}
+.tile .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px}
+.tile .ic svg{width:18px;height:18px}
 .tile .k{color:var(--sub);font-size:13px;font-weight:600}
-.tile .v{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.02em}
-.tile .s{color:var(--sub);font-size:12px;margin-top:4px}
-@media (min-width:600px){.grid.two{grid-template-columns:repeat(2,1fr)}}
-.chart h3{font-size:15px;margin:0 0 14px}
-.bars{display:flex;align-items:flex-end;gap:3px;height:120px}
-.bars div{flex:1;background:var(--blue);border-radius:3px 3px 0 0;min-height:2px;opacity:.9}
+.tile .v{font-size:30px;font-weight:800;margin-top:4px;letter-spacing:-.03em}
+.tile .s{color:var(--faint);font-size:12px;margin-top:4px;font-weight:500}
+.earned{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:18px 20px;margin-bottom:12px}
+.earned .k{color:var(--sub);font-weight:600;font-size:14px}
+.earned .v{font-size:30px;font-weight:900;letter-spacing:-.03em;color:var(--green-ink);margin-left:auto}
+
+.rec{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:600px){.rec{grid-template-columns:1fr 1fr}}
+.rec .tile .v{font-size:34px}
+.rec .cut{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--green-ink);background:color-mix(in srgb,var(--green) 14%,transparent);padding:5px 10px;border-radius:999px}
+
+.chart{background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:20px}
+.chart .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+.chart .top b{font-size:15px}
+.chart .top span{color:var(--sub);font-size:13px}
+.bars{display:flex;align-items:flex-end;gap:4px;height:140px}
+.bars div{flex:1;border-radius:5px 5px 2px 2px;min-height:3px;background:linear-gradient(180deg,var(--blue),color-mix(in srgb,var(--blue) 55%,var(--green)))}
 .bars div.zero{background:var(--line)}
-.axis{display:flex;justify-content:space-between;color:var(--sub);font-size:12px;margin-top:8px}
-.codehead{display:flex;align-items:baseline;justify-content:space-between;margin:26px 0 12px}
-.codehead h2{font-size:22px;margin:0}
-.pill{background:var(--card);border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px;letter-spacing:.04em}
-.foot{color:var(--sub);font-size:13px;margin-top:22px;line-height:1.5}
+.axis{display:flex;justify-content:space-between;color:var(--faint);font-size:12px;margin-top:10px;font-weight:500}
+
+.hist{background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:6px 20px}
+.hist .r{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+.hist .r:last-child{border-bottom:0}
+.hist .r span{color:var(--sub)}
+.hist .r b{font-weight:700}
+.hist .empty{color:var(--sub);padding:18px 0;font-size:14px}
+
+.foot{color:var(--faint);font-size:12px;margin-top:26px;line-height:1.6;text-align:center}
+.foot a{color:var(--sub)}
+.loading{display:grid;place-items:center;height:50vh;color:var(--sub)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <a class="brand" href="/"><img src="../assets/apple-touch-icon.png" alt="">Meal Pic</a>
-    <button id="out" class="link hidden">Sign out</button>
+    <a class="brand" href="/"><img src="../assets/apple-touch-icon.png" alt="">Meal Pic <span>Creators</span></a>
+    <button id="out" class="ghost hidden">Sign out</button>
   </header>
 
-  <section id="s-email" class="card hidden">
+  <section id="s-email" class="auth hidden">
+    <img class="mark" src="../assets/apple-touch-icon.png" alt="">
     <h1>Creator dashboard</h1>
-    <p class="sub">Sign in with the email we have on file for your creator code. We'll email you a 6-digit code.</p>
+    <p>See your downloads, subscribers and payouts. Sign in with the email linked to your creator code.</p>
     <form id="f-email">
       <label for="email">Email</label>
       <input id="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
@@ -76,35 +129,28 @@ input.code{letter-spacing:8px;font-size:24px;font-weight:700;text-align:center}
     </form>
   </section>
 
-  <section id="s-code" class="card hidden">
+  <section id="s-code" class="auth hidden">
+    <img class="mark" src="../assets/apple-touch-icon.png" alt="">
     <h1>Check your email</h1>
-    <p class="sub">We sent a 6-digit code to <b id="sentto"></b>.</p>
+    <p>We sent a 6-digit code to <b id="sentto"></b>.</p>
     <form id="f-code">
       <label for="code">Code</label>
       <input id="code" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required>
       <button class="btn" type="submit">Sign in</button>
       <div class="err" id="e-code"></div>
     </form>
-    <button class="link" id="back" style="margin-top:10px">Use a different email</button>
+    <button class="link" id="back">Use a different email</button>
   </section>
 
-  <section id="s-none" class="card hidden">
+  <section id="s-none" class="auth hidden">
+    <img class="mark" src="../assets/apple-touch-icon.png" alt="">
     <h1>No creator code yet</h1>
-    <p class="sub"><b id="noneemail"></b> isn't linked to a creator code. If you're working with Meal Pic, email <a href="mailto:help@mealpic.app" style="color:var(--blue)">help@mealpic.app</a> and we'll connect it.</p>
+    <p><b id="noneemail"></b> isn't linked to a creator code. If you're working with Meal Pic, email <a href="mailto:help@mealpic.app" style="color:var(--blue)">help@mealpic.app</a> and we'll connect it.</p>
   </section>
 
-  <section id="s-stats" class="hidden">
-    <div class="seg" id="seg"><button data-p="week" class="on">This week</button><button data-p="month">This month</button><button data-p="all">All time</button></div>
-    <div id="codes"></div>
-    <div class="card chart">
-      <h3>People who used your code · last 30 days</h3>
-      <div class="bars" id="bars"></div>
-      <div class="axis"><span id="ax0"></span><span>Today</span></div>
-    </div>
-    <p class="foot">Earnings are your cut of what subscribers actually paid, after refunds. Downloads are people who entered your code in the app. Free trials count toward earnings once they turn into a payment. Numbers update live.</p>
-  </section>
+  <section id="s-stats" class="hidden"><div id="dash"></div></section>
 
-  <p id="loading" class="sub">Loading…</p>
+  <div id="loading" class="loading">Loading…</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -116,6 +162,15 @@ function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id
 const money = n => "$" + Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
 const num = n => Number(n||0).toLocaleString("en-US");
 let data = null, period = "week";
+
+const ICON = {
+  down:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+  repeat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg>',
+  star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+  cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>'
+};
+const tint = c => `background:color-mix(in srgb,${c} 15%,transparent);color:${c}`;
 
 $("f-email").onsubmit = async e => {
   e.preventDefault();
@@ -136,10 +191,10 @@ $("f-code").onsubmit = async e => {
 };
 $("back").onclick = () => show("s-email");
 $("out").onclick = async () => { await sb.auth.signOut(); show("s-email"); };
-$("seg").onclick = e => {
-  const p = e.target.dataset.p; if (!p) return;
-  period = p; [...$("seg").children].forEach(x => x.classList.toggle("on", x.dataset.p === p)); render();
-};
+document.addEventListener("click", e => {
+  const p = e.target.closest("[data-p]")?.dataset.p; if (!p) return;
+  period = p; render();
+});
 
 async function load(){
   show("loading");
@@ -154,35 +209,79 @@ async function load(){
 
 function render(){
   const rows = period === "week" ? (data.week || []) : period === "month" ? (data.month || []) : data.codes;
-  $("codes").innerHTML = data.codes.map(c => {
-    const r = rows.find(x => x.code === c.code) || {};
-    const multi = data.codes.length > 1;
-    return `${multi ? `<div class="codehead"><h2>${esc(c.name)}</h2><span class="pill">${esc(c.code.toUpperCase())}</span></div>` : ""}
-    <div class="card hero">
-      <div class="k">${period === "week" ? "Earned this week" : period === "month" ? "Earned this month" : "Earned all time"}</div>
-      <div class="v">${money(r.owed)}</div>
-      <div class="note">${multi ? "" : `Code <b>${esc(c.code.toUpperCase())}</b> · `}${num(c.pct)}% of subscription revenue</div>
-      <div class="payout">Next payout <b>${nextPayout()}</b> · paid every Friday</div>
-    </div>
-    <div class="grid">
-      <div class="tile"><div class="k">Downloads</div><div class="v">${num(r.entered)}</div><div class="s">used your code</div></div>
-      <div class="tile"><div class="k">Free trials</div><div class="v">${num(r.trials)}</div><div class="s">${num(r.in_trial)} still in trial</div></div>
-      <div class="tile"><div class="k">Monthly subscribers</div><div class="v">${num(r.monthly_active)}</div><div class="s">paying now</div></div>
-      <div class="tile"><div class="k">Yearly purchases</div><div class="v">${num(r.yearly_paid)}</div><div class="s">bought a year</div></div>
-    </div>
-    <div class="grid two">
-      <div class="tile"><div class="k">Monthly recurring revenue</div><div class="v">${money(c.mrr)}</div><div class="s">your cut ${money(c.mrr * c.pct / 100)} / month</div></div>
-      <div class="tile"><div class="k">Yearly recurring revenue</div><div class="v">${money(c.arr)}</div><div class="s">your cut ${money(c.arr * c.pct / 100)} / year</div></div>
-    </div>
-    <div class="grid two">
-      <div class="tile"><div class="k">Paying customers</div><div class="v">${num(r.paying)}</div><div class="s">monthly + yearly, ever charged</div></div>
-      <div class="tile"><div class="k">Revenue</div><div class="v">${money((r.revenue||0)-(r.refunded||0))}</div><div class="s">after refunds</div></div>
-    </div>`;
-  }).join("");
+  const label = period === "week" ? "this week" : period === "month" ? "this month" : "all time";
+  const sum = (list, k) => list.reduce((a, x) => a + Number(x[k] || 0), 0);
+  const all = data.codes, cur = rows;
+  const paidOut = sum(data.paid || [], "paid_out");
+  const earnedAll = sum(all, "owed");
+  const next = Math.max(0, earnedAll - paidOut);
+  const lastPaid = (data.paid || []).map(p => p.last).sort().pop();
+  const mrr = sum(all, "mrr"), arr = sum(all, "arr");
+  const cutM = all.reduce((a, c) => a + Number(c.mrr || 0) * c.pct / 100, 0);
+  const pct = all.length === 1 ? `${num(all[0].pct)}%` : "your";
+  const first = all[0];
   const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
-  $("bars").innerHTML = days.map(d => `<div class="${d.uses ? "" : "zero"}" style="height:${d.uses ? Math.max(4, d.uses / max * 100) : 2}%" title="${d.day.slice(0,10)}: ${d.uses}"></div>`).join("");
-  if (days.length) $("ax0").textContent = new Date(days[0].day).toLocaleDateString("en-US",{month:"short",day:"numeric",timeZone:"UTC"});
+  const total30 = days.reduce((a, d) => a + d.uses, 0);
+
+  $("dash").innerHTML = `
+  <div class="hello">
+    <div>
+      <h1>Hey ${esc(first.name.split(" ")[0])}</h1>
+      <div class="codechip">Your code ${all.map(c => `<b>${esc(c.code.toUpperCase())}</b>`).join(" ")} · ${pct} of subscription revenue</div>
+    </div>
+  </div>
+
+  <div class="payout">
+    <div class="row">
+      <div>
+        <div class="k">Next payout</div>
+        <div class="v">${money(next)}</div>
+      </div>
+      <div class="when">${ICON.cal}${nextPayout()}</div>
+    </div>
+    <div class="meta">
+      <div>Earned all time<b>${money(earnedAll)}</b></div>
+      <div>Paid out so far<b>${money(paidOut)}</b></div>
+      <div>Last payout<b>${lastPaid ? fmtDate(lastPaid) : "None yet"}</b></div>
+    </div>
+  </div>
+
+  <div class="bar">
+    <h2>Your numbers</h2>
+    <div class="seg">${[["week","This week"],["month","This month"],["all","All time"]].map(([p,t]) => `<button data-p="${p}" class="${p===period?"on":""}">${t}</button>`).join("")}</div>
+  </div>
+  <div class="earned"><span class="k">Earned ${label}</span><span class="v">${money(sum(cur,"owed"))}</span></div>
+  <div class="grid four">
+    ${tile(ICON.down, "var(--blue)", "Downloads", num(sum(cur,"entered")), "used your code")}
+    ${tile(ICON.clock, "var(--orange)", "Free trials", num(sum(cur,"trials")), `${num(sum(cur,"in_trial"))} still in trial`)}
+    ${tile(ICON.repeat, "var(--purple)", "Monthly subscribers", num(sum(cur,"monthly_active")), "paying now")}
+    ${tile(ICON.star, "var(--green)", "Yearly purchases", num(sum(cur,"yearly_paid")), "bought a full year")}
+  </div>
+
+  <div class="bar"><h2>Recurring revenue</h2></div>
+  <div class="rec">
+    <div class="tile"><div class="k">Monthly recurring revenue</div><div class="v">${money(mrr)}</div><span class="cut">Your cut ${money(cutM)} / month</span></div>
+    <div class="tile"><div class="k">Yearly recurring revenue</div><div class="v">${money(arr)}</div><span class="cut">Your cut ${money(cutM * 12)} / year</span></div>
+  </div>
+
+  <div class="bar"><h2>Code uses</h2></div>
+  <div class="chart">
+    <div class="top"><b>Last 30 days</b><span>${num(total30)} ${total30 === 1 ? "person" : "people"}</span></div>
+    <div class="bars">${days.map(d => `<div class="${d.uses ? "" : "zero"}" style="height:${d.uses ? Math.max(6, d.uses / max * 100) : 2}%" title="${fmtDate(d.day.slice(0,10))}: ${d.uses}"></div>`).join("")}</div>
+    <div class="axis"><span>${days.length ? fmtDate(days[0].day.slice(0,10)) : ""}</span><span>Today</span></div>
+  </div>
+
+  <div class="bar"><h2>Payout history</h2></div>
+  <div class="hist">${(data.history || []).length
+    ? data.history.map(h => `<div class="r"><span>${fmtDate(h.paid_on)}</span><b>${money(h.amount)}</b></div>`).join("")
+    : `<div class="empty">No payouts yet. Your first one goes out ${nextPayout()}.</div>`}</div>
+
+  <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
 }
+function tile(icon, color, k, v, s){
+  return `<div class="tile"><div class="ic" style="${tint(color)}">${icon}</div><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
+}
+function fmtDate(iso){ const [y,m,d] = iso.split("-").map(Number); return new Date(y, m-1, d).toLocaleDateString("en-US",{month:"short",day:"numeric"}); }
 // Payouts go out weekly on Friday (Jack, 2026-10-07: "every week"), Pacific time.
 function nextPayout(){
   const pt = new Date(new Date().toLocaleString("en-US",{timeZone:"America/Los_Angeles"}));
