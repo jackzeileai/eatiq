@@ -203,6 +203,8 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .opt.on .radio{background:var(--ink);border-color:var(--ink)}
 .opt.on .radio::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--bg)}
 .payfield{margin-top:20px;display:none}
+.opt.multi .radio{border-radius:7px}
+.opt.multi.on .radio::after{width:10px;height:6px;border-radius:0;background:none;border:solid var(--bg);border-width:0 0 2px 2px;transform:translateY(-1px) rotate(-45deg)}
 .rules{list-style:none;padding:4px 18px;margin:0 0 12px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--card-r)}
 .rules li{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line-2);font-size:15px;line-height:1.45}
 .rules li:first-child{border-top:0}
@@ -407,8 +409,13 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
         <div class="foot"><button class="btn" data-next id="b-name" disabled>Continue</button></div>
       </section>
       <section class="step" data-s="handle">
-        <div class="body"><h3>Where do you post?</h3><p class="lead">Your Instagram or TikTok handle, so we know who you are.</p>
-          <label class="f" for="handle">Handle</label><div class="prefix"><span>@</span><input class="field" id="handle" autocapitalize="off" autocorrect="off" placeholder="sarahfit"></div></div>
+        <div class="body"><h3>Where do you post?</h3><p class="lead">Pick one or both, then add your handle so we know who you are.</p>
+          <div class="rows">
+            <button class="opt multi" data-p="tiktok"><span class="tile" style="background:#111">T</span>TikTok<span class="radio"></span></button>
+            <button class="opt multi" data-p="instagram"><span class="tile" style="background:#E1306C">I</span>Instagram<span class="radio"></span></button>
+          </div>
+          <div class="payfield" id="box-tiktok"><label class="f" for="h-tiktok">TikTok handle</label><div class="prefix"><span>@</span><input class="field" id="h-tiktok" autocapitalize="off" autocorrect="off" placeholder="sarahfit"></div></div>
+          <div class="payfield" id="box-instagram"><label class="f" for="h-instagram">Instagram handle</label><div class="prefix"><span>@</span><input class="field" id="h-instagram" autocapitalize="off" autocorrect="off" placeholder="sarahfit"></div></div></div>
         <div class="foot"><button class="btn" data-next id="b-handle" disabled>Continue</button></div>
       </section>
       <section class="step" data-s="email">
@@ -525,12 +532,25 @@ document.querySelectorAll(".step input.field").forEach(i => i.addEventListener("
 }));
 
 $("name").oninput = () => { $("b-name").disabled = $("name").value.trim().length < 2; if (!$("code").dataset.touched) suggestCode(); };
-$("handle").oninput = () => {
-  $("handle").value = $("handle").value.replace(/^@+/, "").replace(/\s/g, "");
-  $("b-handle").disabled = $("handle").value.length < 2; if (!$("code").dataset.touched) suggestCode();
-};
+// ---- where they post: TikTok, Instagram, or both, one handle each ----
+const PLATS = { tiktok: "TikTok", instagram: "Instagram" }, picked = new Set();
+const handleOf = p => $("h-" + p).value.trim();
+const firstHandle = () => [...picked].map(handleOf).find(h => h) || "";
+const handleReady = () => { $("b-handle").disabled = !picked.size || [...picked].some(p => handleOf(p).length < 2); };
+const handleText = () => [...picked].map(p => `@${handleOf(p)} (${PLATS[p]})`).join(", ");
+document.querySelectorAll(".opt[data-p]").forEach(o => o.onclick = () => {
+  const p = o.dataset.p, on = !picked.has(p);
+  on ? picked.add(p) : picked.delete(p);
+  o.classList.toggle("on", on); $("box-" + p).style.display = on ? "block" : "none";
+  if (on) $("h-" + p).focus();
+  handleReady(); if (!$("code").dataset.touched) suggestCode();
+});
+Object.keys(PLATS).forEach(p => $("h-" + p).oninput = () => {
+  const el = $("h-" + p); el.value = el.value.replace(/^@+/, "").replace(/\s/g, "");
+  handleReady(); if (!$("code").dataset.touched) suggestCode();
+});
 function suggestCode(){
-  $("code").value = ($("handle").value || $("name").value.split(" ")[0] || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20).toUpperCase();
+  $("code").value = (firstHandle() || $("name").value.split(" ")[0] || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 20).toUpperCase();
 }
 
 $("email").oninput = () => { $("b-email").disabled = !/^\S+@\S+\.\S+$/.test($("email").value.trim()); };
@@ -593,7 +613,7 @@ $("agree").onchange = () => { $("b-sign").disabled = !$("agree").checked; $("agr
 $("b-sign").onclick = async () => {
   $("b-sign").disabled = true; $("e-sign").textContent = "";
   const { data, error } = await sb.rpc("creator_signup", {
-    code: $("code").value.toLowerCase(), name: $("name").value.trim(), handle: "@" + $("handle").value.trim(),
+    code: $("code").value.toLowerCase(), name: $("name").value.trim(), handle: handleText(),
     payout_method: method, payout_handle: $("payhandle").value.trim()
   });
   if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
