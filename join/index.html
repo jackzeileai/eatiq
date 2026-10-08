@@ -22,14 +22,14 @@
 /* App look: Meal Pic's own onboarding (grey page, white rows, blue pill). */
 [data-theme="app"]{
   --bg:#F2F2F7; --bg2:#FFFFFF; --surface:#FFFFFF; --surface-2:#F7F7FA; --line:rgba(0,0,0,.08); --line-2:rgba(0,0,0,.05);
-  --ink:#111113; --sub:#5d5d64; --faint:#8e8e94; --accent:#0A84FF; --accent-ink:#fff; --money:#1f9e45; --red:#FF3B30;
+  --ink:#111113; --sub:#5d5d64; --faint:#8e8e94; --accent:#111113; --accent-ink:#fff; --money:#1f9e45; --red:#FF3B30;
   --btn-r:999px; --field-r:16px; --card-r:24px; --shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px -12px rgba(0,0,0,.10);
-  --hero-bg:linear-gradient(180deg,#FFFFFF 0%,#F2F2F7 100%); --scrim:rgba(17,17,19,.42); --nav:rgba(242,242,247,.78);
+  --hero-bg:#F2F2F7; --scrim:rgba(17,17,19,.42); --nav:rgba(242,242,247,.82);
 }
 @media (prefers-color-scheme:dark){[data-theme="app"]{
-  --bg:#000; --bg2:#0B0B0D; --surface:#1C1C1E; --surface-2:#232326; --line:#38383A; --line-2:rgba(255,255,255,.06);
-  --ink:#F5F5F7; --sub:#A1A1A6; --faint:#6E6E73; --money:#34C759; --shadow:0 0 0 1px rgba(255,255,255,.04);
-  --hero-bg:linear-gradient(180deg,#0E0F17 0%,#000 100%); --scrim:rgba(0,0,0,.6); --nav:rgba(0,0,0,.72);
+  --bg:#161618; --bg2:#1B1B1E; --surface:#232326; --surface-2:#2C2C30; --line:#3A3A3E; --line-2:rgba(255,255,255,.06);
+  --ink:#F5F5F7; --sub:#A1A1A6; --faint:#6E6E73; --accent:#F5F5F7; --accent-ink:#000; --money:#34C759; --shadow:0 0 0 1px rgba(255,255,255,.04);
+  --hero-bg:#161618; --scrim:rgba(0,0,0,.55); --nav:rgba(22,22,24,.82);
 }}
 /* Party look: Partiful-style, always dark, colour glow, white buttons. */
 [data-theme="party"]{
@@ -58,7 +58,7 @@ h2.section{font-size:40px;line-height:1.08;letter-spacing:-.025em;font-weight:80
 p.section{font-size:18px;line-height:1.55;color:var(--sub);margin:0;max-width:560px}
 
 /* ---------- nav ---------- */
-.nav{position:sticky;top:0;z-index:20;background:var(--nav);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line-2)}
+.nav{position:sticky;top:0;z-index:20;background:var(--nav);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px)}
 .nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:17px;letter-spacing:-.01em}
 .brand img{width:30px;height:30px;border-radius:8px}
@@ -85,26 +85,6 @@ p.section{font-size:18px;line-height:1.55;color:var(--sub);margin:0;max-width:56
 .hero .container{position:relative}
 [data-theme="party"] .hero h1 em{background:linear-gradient(110deg,#fff 0%,#ffb3f1 45%,#a6b8ff 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* dashboard preview (hero visual) */
-.preview{position:relative;justify-self:end;width:100%;max-width:440px}
-.preview .panel{background:var(--surface);border-radius:28px;box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.35);padding:22px;border:1px solid var(--line-2)}
-.pay{border-radius:20px;padding:22px;color:#fff;background:radial-gradient(120% 140% at 100% 0%,#3ad97a,rgba(58,217,122,0) 55%),radial-gradient(90% 120% at 0% 100%,#0a84ff,rgba(10,132,255,0) 60%),linear-gradient(135deg,#0f3d2a,#0b1f3a)}
-[data-theme="party"] .pay{background:radial-gradient(120% 140% at 100% 0%,#ff4fd8,rgba(255,79,216,0) 55%),radial-gradient(90% 120% at 0% 100%,#4f7bff,rgba(79,123,255,0) 60%),linear-gradient(135deg,#2a0f3d,#0b1440)}
-.pay .k{font-size:13px;font-weight:600;opacity:.85}
-.pay .v{font-size:44px;font-weight:900;letter-spacing:-.03em;margin-top:6px;line-height:1}
-.pay .when{display:inline-block;margin-top:14px;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700}
-.mini{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.mini div{background:var(--surface-2);border-radius:14px;padding:14px}
-.mini span{display:block;font-size:12px;color:var(--sub);font-weight:600}
-.mini b{display:block;font-size:22px;font-weight:800;margin-top:4px;letter-spacing:-.02em}
-.bars{display:flex;align-items:flex-end;gap:5px;height:64px;margin-top:14px;padding:0 2px}
-.bars i{flex:1;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,var(--accent),color-mix(in srgb,var(--accent) 50%,var(--money)))}
-[data-theme="party"] .bars i{background:linear-gradient(180deg,#ff8ae6,#8a4dff)}
-.float{position:absolute;right:-28px;top:-22px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow),0 20px 40px -20px rgba(0,0,0,.35);border-radius:16px;padding:12px 16px;display:flex;gap:12px;align-items:center;font-size:14px}
-.float .dot{width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--money) 18%,transparent);color:var(--money);display:grid;place-items:center;font-weight:900}
-.float b{display:block;font-size:15px}
-.float span{color:var(--sub);font-size:13px}
-
 /* ---------- sections ---------- */
 section.block{padding:104px 0}
 section.block.alt{background:var(--bg2)}
@@ -116,7 +96,16 @@ section.block.alt{background:var(--bg2)}
 .stepcard h3{font-size:20px;margin:0 0 8px;letter-spacing:-.01em}
 .stepcard p{margin:0;color:var(--sub);font-size:16px;line-height:1.55}
 
-/* calculator */
+/* calculator (hero, one stacked card) */
+.hero-calc{display:block;justify-self:end;width:100%;max-width:460px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.35);border-radius:28px;padding:28px}
+.hero-calc .calc-title{font-size:15px;font-weight:700;color:var(--sub);margin-bottom:22px}
+.hero-calc .controls,.hero-calc .result{background:none;border:0;box-shadow:none;border-radius:0;padding:0}
+.hero-calc .slider{margin-bottom:24px}
+.hero-calc .slider output{font-size:24px}
+.hero-calc .result{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+.hero-calc .result .v{font-size:56px}
+.hero-calc .result .lines{padding-top:20px;margin-top:20px}
+
 .calc{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
 .calc .controls,.calc .result{background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow);border-radius:var(--card-r);padding:32px}
 .slider{margin-bottom:32px}
@@ -141,7 +130,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 /* credit + faq */
 .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .credit .stepcard{display:flex;gap:18px;align-items:flex-start}
-.credit .ic{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;color:#fff}
+.credit .ic{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink)}
 .credit .ic svg{width:24px;height:24px}
 .credit .linkdemo{display:inline-block;margin-top:12px;font-weight:700;font-size:15px;background:var(--surface-2);padding:8px 12px;border-radius:10px}
 .faqwrap{display:grid;grid-template-columns:1fr 1.7fr;gap:64px;align-items:start}
@@ -263,6 +252,9 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .stepcard{padding:22px}
   .stepcard .n{margin-bottom:16px}
   .calc .controls,.calc .result{padding:24px}
+  .hero-calc{padding:22px;max-width:none;justify-self:stretch}
+  .hero-calc .controls,.hero-calc .result{padding:0}
+  .hero-calc .result{padding-top:22px}
   .result .v{font-size:56px}
   .faq summary{font-size:17px;padding:20px 0}
   .final .box{padding:56px 22px;border-radius:26px}
@@ -305,7 +297,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <p class="sub">Share Meal Pic with your audience. Every time someone subscribes through your link or code, you get half, on every renewal, for as long as they stay.</p>
       <div class="ctas">
         <button class="btn" data-open>Become a creator</button>
-        <a class="btn ghost" href="#earn">See what you'd make</a>
+        <a class="btn ghost" href="#how">How it works</a>
       </div>
       <div class="proof">
         <div><b>50%</b>of every payment</div>
@@ -313,22 +305,28 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
         <div><b>Forever</b>on renewals</div>
       </div>
     </div>
-    <div class="preview" aria-hidden="true">
-      <div class="panel">
-        <div class="pay">
-          <div class="k">Next payout</div>
-          <div class="v">$412.50</div>
-          <span class="when">Friday</span>
+    <div class="calc hero-calc" id="earn">
+      <div class="k calc-title">What you could make</div>
+        <div class="controls">
+          <div class="slider">
+            <div class="top"><label for="sy">Yearly buyers per month<small>Pay $29.99 once a year</small></label><output id="oy">10</output></div>
+            <input type="range" id="sy" min="0" max="100" value="10">
+          </div>
+          <div class="slider">
+            <div class="top"><label for="sm">New monthly subscribers per month<small>Pay $29.99 every month</small></label><output id="om">20</output></div>
+            <input type="range" id="sm" min="0" max="200" value="20">
+          </div>
         </div>
-        <div class="mini">
-          <div><span>Downloads</span><b>318</b></div>
-          <div><span>Free trials</span><b>94</b></div>
-          <div><span>Monthly subscribers</span><b>21</b></div>
-          <div><span>Yearly purchases</span><b>7</b></div>
+        <div class="result">
+          <div class="k">In your first year</div>
+          <div class="v" id="ry">$0</div>
+          <div class="per" id="rp">about $0 a month on average</div>
+          <div class="lines">
+            <div><span>From yearly buyers</span><b id="ly">$0</b></div>
+            <div><span>From monthly subscribers</span><b id="lm">$0</b></div>
+          </div>
+          <div class="fine">Assumes everyone keeps their subscription for the year. Real numbers depend on how many stay, and refunds don't pay out.</div>
         </div>
-        <div class="bars"><i style="height:22%"></i><i style="height:30%"></i><i style="height:26%"></i><i style="height:44%"></i><i style="height:38%"></i><i style="height:52%"></i><i style="height:48%"></i><i style="height:64%"></i><i style="height:58%"></i><i style="height:76%"></i><i style="height:70%"></i><i style="height:92%"></i></div>
-      </div>
-      <div class="float"><div class="dot">$</div><div><b>+$15.00</b><span>Someone bought a year</span></div></div>
     </div>
   </div>
 </section>
@@ -347,37 +345,6 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   </div>
 </section>
 
-<section class="block" id="earn">
-  <div class="container">
-    <div class="head">
-      <h2 class="section">What you could make</h2>
-      <p class="section">Drag the sliders. Every paying subscriber earns you $15 a payment, monthly or yearly.</p>
-    </div>
-    <div class="calc">
-      <div class="controls">
-        <div class="slider">
-          <div class="top"><label for="sy">Yearly buyers per month<small>Pay $29.99 once a year</small></label><output id="oy">10</output></div>
-          <input type="range" id="sy" min="0" max="100" value="10">
-        </div>
-        <div class="slider">
-          <div class="top"><label for="sm">New monthly subscribers per month<small>Pay $29.99 every month</small></label><output id="om">20</output></div>
-          <input type="range" id="sm" min="0" max="200" value="20">
-        </div>
-      </div>
-      <div class="result">
-        <div class="k">In your first year</div>
-        <div class="v" id="ry">$0</div>
-        <div class="per" id="rp">about $0 a month on average</div>
-        <div class="lines">
-          <div><span>From yearly buyers</span><b id="ly">$0</b></div>
-          <div><span>From monthly subscribers</span><b id="lm">$0</b></div>
-        </div>
-        <div class="fine">Assumes everyone keeps their subscription for the year. Real numbers depend on how many stay, and refunds don't pay out.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="block alt">
   <div class="container">
     <div class="head">
@@ -385,8 +352,8 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <p class="section">Whichever your followers use, the subscription is yours.</p>
     </div>
     <div class="credit">
-      <div class="stepcard"><div class="ic" style="background:#0A84FF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><div><h3>They tap your link</h3><p>Anyone who downloads Meal Pic through your link is counted as yours.</p><span class="linkdemo">mealpic.app/c/yourcode</span></div></div>
-      <div class="stepcard"><div class="ic" style="background:#AF52DE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></div><div><h3>Or they type your code</h3><p>While setting up the app, people are asked for a creator code. Yours counts the same.</p><span class="linkdemo">YOURCODE</span></div></div>
+      <div class="stepcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><div><h3>They tap your link</h3><p>Anyone who downloads Meal Pic through your link is counted as yours.</p><span class="linkdemo">mealpic.app/c/yourcode</span></div></div>
+      <div class="stepcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></div><div><h3>Or they type your code</h3><p>While setting up the app, people are asked for a creator code. Yours counts the same.</p><span class="linkdemo">YOURCODE</span></div></div>
     </div>
   </div>
 </section>
