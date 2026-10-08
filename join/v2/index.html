@@ -117,15 +117,7 @@ section.block.alt{background:var(--bg2)}
 .stepcard h3{font-size:20px;margin:0 0 8px;letter-spacing:-.01em}
 .stepcard p{margin:0;color:var(--sub);font-size:16px;line-height:1.55}
 
-/* calculator (hero, one stacked card) */
-.hero-calc{display:block;justify-self:end;width:100%;max-width:460px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.35);border-radius:28px;padding:28px}
-.hero-calc .calc-title{font-size:15px;font-weight:700;color:var(--sub);margin-bottom:22px}
-.hero-calc .controls,.hero-calc .result{background:none;border:0;box-shadow:none;border-radius:0;padding:0}
-.hero-calc .slider{margin-bottom:24px}
-.hero-calc .slider output{font-size:24px}
-.hero-calc .result{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
-.hero-calc .result .v{font-size:56px}
-.hero-calc .result .lines{padding-top:20px;margin-top:20px}
+/* calculator */
 
 .calc{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
 .calc .controls,.calc .result{background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow);border-radius:var(--card-r);padding:32px}
@@ -147,6 +139,15 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .result .lines span{color:var(--sub)}
 .result .lines b{font-variant-numeric:tabular-nums}
 .fine{color:var(--faint);font-size:13px;margin-top:16px;line-height:1.5}
+/* calculator (hero, one stacked card) */
+.calc.hero-calc{display:block;justify-self:end;width:100%;max-width:460px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.35);border-radius:28px;padding:28px}
+.calc.hero-calc .calc-title{font-size:15px;font-weight:700;color:var(--sub);margin-bottom:22px}
+.calc.hero-calc .controls,.calc.hero-calc .result{background:none;border:0;box-shadow:none;border-radius:0;padding:0}
+.calc.hero-calc .slider{margin-bottom:24px}
+.calc.hero-calc .slider output{font-size:24px}
+.calc.hero-calc .result{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+.calc.hero-calc .result .v{font-size:56px}
+.calc.hero-calc .result .lines{padding-top:20px;margin-top:20px}
 
 /* credit + faq */
 .credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -275,9 +276,9 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .stepcard{padding:22px}
   .stepcard .n{margin-bottom:16px}
   .calc .controls,.calc .result{padding:24px}
-  .hero-calc{padding:22px;max-width:none;justify-self:stretch}
-  .hero-calc .controls,.hero-calc .result{padding:0}
-  .hero-calc .result{padding-top:22px}
+  .calc.hero-calc{padding:22px;max-width:none;justify-self:stretch}
+  .calc.hero-calc .controls,.calc.hero-calc .result{padding:0}
+  .calc.hero-calc .result{padding-top:22px}
   .result .v{font-size:56px}
   .faq summary{font-size:17px;padding:20px 0}
   .final .box{padding:56px 22px;border-radius:26px}
