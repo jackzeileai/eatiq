@@ -14,13 +14,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F2F2F7;--card:#ffffff;--card2:#F4F4F7;--ink:#111113;--sub:#5d5d64;--faint:#8e8e94;--line:rgba(0,0,0,.07);
+  --bg:#F2F2F7;--card:#ffffff;--card2:#F4F4F7;--ink:#111113;--sub:#5d5d64;--faint:#6e6e74;--line:rgba(0,0,0,.07);
   --green-ink:#1f9e45;--pink:#ff375f;
   --shadow:0 1px 2px rgba(10,10,20,.04),0 8px 24px rgba(10,10,20,.05);
   --r:24px;
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#161618;--card:#232326;--card2:#2C2C30;--ink:#f5f5f7;--sub:#A1A1A6;--faint:#6E6E73;--line:rgba(255,255,255,.08);
+  --bg:#161618;--card:#232326;--card2:#2C2C30;--ink:#f5f5f7;--sub:#A1A1A6;--faint:#8a8a90;--line:rgba(255,255,255,.08);
   --green-ink:#34C759;--shadow:0 0 0 1px rgba(255,255,255,.04);
 }}
 *{box-sizing:border-box}
@@ -46,6 +46,7 @@ input:focus{border-color:var(--ink)}
 input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
 .btn{width:100%;margin-top:14px;padding:16px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:700 16px Inter,sans-serif;cursor:pointer;transition:opacity .15s}
 .btn:disabled{opacity:.45;cursor:default}
+.auth p.fallback{margin:18px 0 0;font-size:14px;text-align:center}
 .err{color:var(--pink);font-size:14px;margin-top:12px;min-height:18px}
 
 /* dashboard */
@@ -55,7 +56,7 @@ input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
 .recur .k{font-size:14px;font-weight:600;color:var(--sub)}
 .recur .v{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-top:10px;color:var(--green-ink)}
 .recur .v small{font-size:20px;font-weight:700;letter-spacing:-.01em;color:var(--sub)}
-.recur .s{color:var(--sub);font-size:14px;line-height:1.5;margin-top:12px}
+.recur .s{color:var(--sub);font-size:14px;line-height:1.5;margin-top:12px;margin-bottom:24px}
 .recur .meta{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
 .recur .meta div{font-size:13px;color:var(--sub);font-weight:500;padding-top:6px}
 .recur .meta b{display:block;font-size:18px;color:var(--ink);margin-top:3px;font-weight:800}
@@ -98,12 +99,22 @@ input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
 
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media (min-width:760px){.grid.four{grid-template-columns:repeat(4,1fr)}}
+.grid.two{grid-template-columns:1fr 1fr}
+@media (max-width:600px){.grid.two{grid-template-columns:1fr}}
 .tile{background:var(--card);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);min-width:0}
 .tile .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px;background:var(--card2);color:var(--ink)}
 .tile .ic svg{width:18px;height:18px}
 .tile .k{color:var(--sub);font-size:13px;font-weight:600}
 .tile .v{font-size:30px;font-weight:800;margin-top:4px;letter-spacing:-.03em}
 .tile .s{color:var(--faint);font-size:12px;margin-top:4px;font-weight:500}
+.tile.res{display:flex;align-items:center;gap:14px;color:var(--ink);text-decoration:none}
+.tile.res .ic{margin-bottom:0;flex:none}
+.tile.res div{flex:1;min-width:0}
+.tile.res .k{color:var(--ink);font-size:15px;font-weight:700}
+.tile.res .s{color:var(--sub);font-size:13px;line-height:1.4}
+.tile.res .soon{flex:none;background:var(--card2);color:var(--sub);font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
+.tile.res .chev{flex:none;width:18px;height:18px;color:var(--faint)}
+a.tile.res:hover .chev{color:var(--ink)}
 .earned{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:18px 20px;margin-bottom:12px}
 .earned .k{color:var(--sub);font-weight:600;font-size:14px}
 .earned .v{font-size:30px;font-weight:900;letter-spacing:-.03em;color:var(--green-ink);margin-left:auto}
@@ -165,7 +176,9 @@ input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
   <section id="s-none" class="auth hidden">
     <img class="mark" src="../assets/apple-touch-icon.png" alt="">
     <h1>No creator code yet</h1>
-    <p><b id="noneemail"></b> isn't linked to a creator code. If you're working with Meal Pic, email <a href="mailto:help@mealpic.app" style="color:var(--ink)">help@mealpic.app</a> and we'll connect it.</p>
+    <p>This email, <b id="noneemail"></b>, isn't a creator yet. Sign up in about a minute and your code works right away.</p>
+    <a class="btn" href="/join/?start" style="display:block;text-align:center;text-decoration:none">Become a creator</a>
+    <p class="fallback">Already have a code? Email <a href="mailto:help@mealpic.app" style="color:var(--ink)">help@mealpic.app</a></p>
   </section>
 
   <section id="s-stats" class="hidden"><div id="dash"></div></section>
@@ -175,6 +188,8 @@ input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
+// "What to post" links. Empty = shows "Coming soon" with no link.
+const REELS_URL = ""; const PLAYBOOK_URL = "";
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
 const $ = id => document.getElementById(id);
 const screens = ["s-email","s-code","s-none","s-stats","loading"];
@@ -188,6 +203,9 @@ const ICON = {
   clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
   repeat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg>',
   star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+  reel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M19 19v2H6"/><path d="M9 8h6M9 12h4"/></svg>',
+  chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5l7.5 7.5L9 19.5"/></svg>',
   cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>'
 };
 
@@ -230,7 +248,7 @@ async function load(){
 
 function render(){
   const rows = period === "week" ? (data.week || []) : period === "month" ? (data.month || []) : data.codes;
-  const label = period === "week" ? "this week" : period === "month" ? "this month" : "all time";
+  const label = period === "week" ? "from people who joined this week" : period === "month" ? "from people who joined this month" : "all time";
   const sum = (list, k) => list.reduce((a, x) => a + Number(x[k] || 0), 0);
   const all = data.codes, cur = rows;
   const paidOut = sum(data.paid || [], "paid_out");
@@ -274,7 +292,7 @@ function render(){
     <div class="v">${money(cutM)}<small> / mo</small></div>
     <div class="s">Your cut from people still subscribed through you. Yearly plans are spread across 12 months. It keeps paying as long as they stay, about ${money(cutM * 12)} a year.</div>
     <div class="meta">
-      <div>Paying subscribers<b>${num(sum(all,"monthly_active") + sum(all,"yearly_paid"))}</b></div>
+      <div>Paid subscribers<b>${num(sum(all,"monthly_active") + sum(all,"yearly_paid"))}</b></div>
       <div>Your cut<b>${all.length === 1 ? num(all[0].pct) + "%" : "Varies"}</b></div>
     </div>
   </div>
@@ -284,11 +302,17 @@ ${sum(all,"entered") ? "" : `
     <h3>Get your first subscriber</h3>
     <p>Nobody has used your code yet. Here's what works best.</p>
     <ol>
-      <li><div>Put your link in your bio <span>— mealpic.app/c/${esc(first.code)}. Anyone who downloads through it counts as yours.</span></div></li>
+      <li><div>Put your link in your bio <span>— mealpic.app/c/${esc(first.code)}. It fills your code in for anyone who installs from it.</span></div></li>
       <li><div>Post a video of you using it <span>— snap a meal, show the calories pop up. Real use beats a review.</span></div></li>
       <li><div>Say your code out loud <span>— "use code ${esc(first.code.toUpperCase())}". People type it in while setting up the app.</span></div></li>
     </ol>
   </div>`}
+
+  <div class="bar"><h2>What to post</h2></div>
+  <div class="grid two">
+    ${resTile(ICON.reel, "Library of proven reels", "Real reels that pulled big numbers, with why each one worked.", REELS_URL)}
+    ${resTile(ICON.book, "Playbook for videos that sell", "Hooks, what to film, what to say, how to end on your code.", PLAYBOOK_URL)}
+  </div>
 
   <div class="bar">
     <h2>Your numbers</h2>
@@ -296,10 +320,10 @@ ${sum(all,"entered") ? "" : `
   </div>
   <div class="earned"><span class="k">Earned ${label}</span><span class="v">${money(sum(cur,"owed"))}</span></div>
   <div class="grid four">
-    ${tile(ICON.down, "Downloads", num(dl), "used your code or link")}
+    ${tile(ICON.down, "Downloads", num(dl), "used your code or link in the app")}
     ${tile(ICON.clock, "Free trials", num(tr), dl ? `${rate(tr, dl)} of downloads · ${num(sum(cur,"in_trial"))} still in trial` : `${num(sum(cur,"in_trial"))} still in trial`)}
     ${tile(ICON.repeat, "Monthly subscribers", num(sum(cur,"monthly_active")), "paying now")}
-    ${tile(ICON.star, "Yearly purchases", num(sum(cur,"yearly_paid")), tr ? `${rate(sum(cur,"monthly_active") + sum(cur,"yearly_paid"), tr)} of trials paid` : "bought a full year")}
+    ${tile(ICON.star, "Yearly purchases", num(sum(cur,"yearly_paid")), sum(cur,"subs") ? `${rate(sum(cur,"paying"), sum(cur,"subs"))} of sign-ups paid` : "bought a full year")}
   </div>
 
   <div class="bar"><h2>Code uses</h2></div>
@@ -314,7 +338,13 @@ ${sum(all,"entered") ? "" : `
     ? data.history.map(h => `<div class="r"><span>${fmtDate(h.paid_on)}</span><b>${money(h.amount)}</b></div>`).join("")
     : `<div class="empty">No payouts yet. Your first one goes out ${nextPayout()}.</div>`}</div>
 
-  <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
+  <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>Weekly and monthly views count people by the day they subscribed. Your payout counts every payment received.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
+}
+function resTile(icon, k, s, url){
+  const inner = `<div class="ic">${icon}</div><div><div class="k">${k}</div><div class="s">${s}</div></div>`;
+  return url
+    ? `<a class="tile res" href="${esc(url)}" target="_blank" rel="noopener">${inner}${ICON.chev}</a>`
+    : `<div class="tile res">${inner}<span class="soon">Coming soon</span></div>`;
 }
 function tile(icon, k, v, s){
   return `<div class="tile"><div class="ic">${icon}</div><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;

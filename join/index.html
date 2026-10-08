@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Meal Pic Creators · Earn 50% of every subscription</title>
 <meta name="description" content="Earn 50% of every Meal Pic subscription you bring in, plus a library of proven reels and a step-by-step playbook for videos that sell. Paid every Friday.">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Get paid to share Meal Pic">
 <meta property="og:description" content="Earn 50% of every subscription you bring in, on every renewal. Paid every Friday.">
 <meta property="og:image" content="https://mealpic.app/assets/apple-touch-icon.png">
@@ -19,16 +21,16 @@
   --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Helvetica,Arial,sans-serif;
   --max:1120px; --gutter:24px;
 }
-/* App look: Meal Pic's own onboarding (grey page, white rows, blue pill). */
+/* App look: Meal Pic's own onboarding (grey page, white rows, black pill). */
 [data-theme="app"]{
   --bg:#F2F2F7; --bg2:#FFFFFF; --surface:#FFFFFF; --surface-2:#F7F7FA; --line:rgba(0,0,0,.08); --line-2:rgba(0,0,0,.05);
-  --ink:#111113; --sub:#5d5d64; --faint:#8e8e94; --accent:#111113; --accent-ink:#fff; --money:#1f9e45; --red:#FF3B30;
+  --ink:#111113; --sub:#5d5d64; --faint:#6e6e74; --accent:#111113; --accent-ink:#fff; --money:#1f9e45; --red:#FF3B30;
   --btn-r:999px; --field-r:16px; --card-r:24px; --shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px -12px rgba(0,0,0,.10);
   --hero-bg:#F2F2F7; --scrim:rgba(17,17,19,.42); --nav:rgba(242,242,247,.82);
 }
 @media (prefers-color-scheme:dark){[data-theme="app"]{
   --bg:#161618; --bg2:#1B1B1E; --surface:#232326; --surface-2:#2C2C30; --line:#3A3A3E; --line-2:rgba(255,255,255,.06);
-  --ink:#F5F5F7; --sub:#A1A1A6; --faint:#6E6E73; --accent:#F5F5F7; --accent-ink:#000; --money:#34C759; --shadow:0 0 0 1px rgba(255,255,255,.04);
+  --ink:#F5F5F7; --sub:#A1A1A6; --faint:#8a8a90; --accent:#F5F5F7; --accent-ink:#000; --money:#34C759; --shadow:0 0 0 1px rgba(255,255,255,.04);
   --hero-bg:#161618; --scrim:rgba(0,0,0,.55); --nav:rgba(22,22,24,.82);
 }}
 /* Party look: Partiful-style, always dark, colour glow, white buttons. */
@@ -60,7 +62,7 @@ p.section{font-size:18px;line-height:1.55;color:var(--sub);margin:0;max-width:56
 /* ---------- nav ---------- */
 .nav{position:sticky;top:0;z-index:20;background:var(--nav);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px)}
 .nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:17px;letter-spacing:-.01em}
+.brand{display:flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;font-weight:800;font-size:17px;letter-spacing:-.01em}
 .brand img{width:30px;height:30px;border-radius:8px}
 .brand span{color:var(--faint);font-weight:600}
 .nav .links{display:flex;align-items:center;gap:8px}
@@ -130,9 +132,6 @@ section.block.alt{background:var(--bg2)}
 .stepcard p{margin:0;color:var(--sub);font-size:16px;line-height:1.55}
 
 /* calculator */
-
-.calc{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
-.calc .controls,.calc .result{background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow);border-radius:var(--card-r);padding:32px}
 .slider{margin-bottom:32px}
 .slider:last-child{margin-bottom:0}
 .slider .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:12px}
@@ -144,7 +143,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;heigh
 input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:0;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .result{display:flex;flex-direction:column}
 .result .k{font-size:15px;color:var(--sub);font-weight:600}
-.result .v{font-size:72px;font-weight:900;letter-spacing:-.04em;color:var(--money);line-height:1;margin:10px 0 6px;font-variant-numeric:tabular-nums}
+.result .v{font-weight:900;letter-spacing:-.04em;color:var(--money);line-height:1;margin:10px 0 6px;font-variant-numeric:tabular-nums}
 .result .per{color:var(--sub);font-size:16px}
 .result .lines{margin-top:auto;padding-top:28px;border-top:1px solid var(--line);display:grid;gap:12px}
 .result .lines div{display:flex;justify-content:space-between;font-size:16px}
@@ -152,9 +151,8 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .result .lines b{font-variant-numeric:tabular-nums}
 .fine{color:var(--faint);font-size:13px;margin-top:16px;line-height:1.5}
 /* calculator (hero, one stacked card) */
-.calc.hero-calc{display:block;justify-self:end;width:100%;max-width:460px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.35);border-radius:28px;padding:28px}
+.calc.hero-calc{justify-self:end;width:100%;max-width:460px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.35);border-radius:28px;padding:28px}
 .calc.hero-calc .calc-title{font-size:15px;font-weight:700;color:var(--sub);margin-bottom:22px}
-.calc.hero-calc .controls,.calc.hero-calc .result{background:none;border:0;box-shadow:none;border-radius:0;padding:0}
 .calc.hero-calc .slider{margin-bottom:24px}
 .calc.hero-calc .slider output{font-size:24px}
 .calc.hero-calc .result{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
@@ -243,8 +241,10 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .rules li{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line-2);font-size:15px;line-height:1.45}
 .rules li:first-child{border-top:0}
 .rules li svg{flex:none;width:18px;height:18px;color:var(--money);margin-top:2px}
-.opt.check{height:auto;min-height:60px;padding:14px 16px;font-weight:500;font-size:15px;line-height:1.4}
+.opt.check{position:relative;height:auto;min-height:60px;padding:14px 16px;font-weight:500;font-size:15px;line-height:1.4}
+.opt.check:focus-within{border-color:var(--ink)}
 .opt.check a{color:var(--accent)}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 [data-theme="party"] .opt.check a{color:#c9b6ff}
 .done{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center}
 .done .badge{width:76px;height:76px;border-radius:50%;background:var(--money);display:grid;place-items:center;margin:0 auto 22px;color:#fff}
@@ -260,15 +260,17 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 /* ---------- tablet / phone ---------- */
 @media (max-width:980px){
   .hero .container{grid-template-columns:1fr;gap:56px;padding-top:56px;padding-bottom:72px}
-  .preview{justify-self:center}
-  .calc,.credit,.faqwrap{grid-template-columns:1fr}
+  .calc.hero-calc{justify-self:stretch;max-width:none}
+  .credit,.faqwrap{grid-template-columns:1fr}
   .faqwrap{gap:0}
   .faqwrap .head{position:static}
+}
+@media (max-width:900px){
+  .nav .links a.plain{display:none}
 }
 @media (max-width:720px){
   :root{--gutter:20px}
   .nav .container{height:56px}
-  .nav .links a.plain{display:none}
   .hero .container{padding-top:36px;padding-bottom:56px;gap:44px}
   .hero h1{font-size:42px;margin:18px 0 16px}
   .hero .sub{font-size:17px;margin-bottom:26px}
@@ -277,9 +279,6 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .hero .proof{grid-template-columns:repeat(2,1fr);gap:16px 12px;margin-top:30px}
   .hero .proof b{font-size:18px}
   .hero .proof div{font-size:13px}
-  .float{right:-4px;top:-20px;padding:10px 14px}
-  .preview .panel{padding:16px;border-radius:24px}
-  .pay .v{font-size:38px}
   section.block{padding:72px 0}
   .head{margin-bottom:32px}
   h2.section{font-size:30px}
@@ -287,11 +286,8 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .steps3{grid-template-columns:1fr;gap:12px}
   .stepcard{padding:22px}
   .stepcard .n{margin-bottom:16px}
-  .calc .controls,.calc .result{padding:24px}
-  .calc.hero-calc{padding:22px;max-width:none;justify-self:stretch}
-  .calc.hero-calc .controls,.calc.hero-calc .result{padding:0}
+  .calc.hero-calc{padding:22px}
   .calc.hero-calc .result{padding-top:22px}
-  .result .v{font-size:56px}
   .faq summary{font-size:17px;padding:20px 0}
   .final .box{padding:56px 22px;border-radius:26px}
   .final h2{font-size:34px}
@@ -347,11 +343,11 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <div class="k calc-title">What you could make</div>
         <div class="controls">
           <div class="slider">
-            <div class="top"><label for="sy">Yearly buyers per month<small>Pay $29.99 once a year</small></label><output id="oy">10</output></div>
+            <div class="top"><label for="sy">Yearly buyers per month<small id="py">Pay $29.99 once a year</small></label><output id="oy">10</output></div>
             <input type="range" id="sy" min="0" max="100" value="10">
           </div>
           <div class="slider">
-            <div class="top"><label for="sm">New monthly subscribers per month<small>Pay $29.99 every month</small></label><output id="om">20</output></div>
+            <div class="top"><label for="sm">New monthly subscribers per month<small id="pm">Pay $29.99 every month</small></label><output id="om">20</output></div>
             <input type="range" id="sm" min="0" max="200" value="20">
           </div>
         </div>
@@ -363,7 +359,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
             <div><span>From yearly buyers</span><b id="ly">$0</b></div>
             <div><span>From monthly subscribers</span><b id="lm">$0</b></div>
           </div>
-          <div class="fine">Assumes everyone keeps their subscription for the year. Real numbers depend on how many stay, and refunds don't pay out.</div>
+          <div class="fine">Assumes everyone keeps paying all year. People who finish the 30-day challenge get their first month refunded, and refunds don't pay out.</div>
         </div>
     </div>
   </div>
@@ -437,7 +433,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <p class="section">Whichever your followers use, the subscription is yours.</p>
     </div>
     <div class="credit">
-      <div class="stepcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><div><h3>They tap your link</h3><p>Anyone who downloads Meal Pic through your link is counted as yours.</p><span class="linkdemo">mealpic.app/c/yourcode</span></div></div>
+      <div class="stepcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><div><h3>They tap your link</h3><p>When someone taps your link and installs, your code is filled in for them on the creator-code screen. They just tap Allow Paste.</p><span class="linkdemo">mealpic.app/c/yourcode</span></div></div>
       <div class="stepcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></div><div><h3>Or they type your code</h3><p>While setting up the app, people are asked for a creator code. Yours counts the same.</p><span class="linkdemo">YOURCODE</span></div></div>
     </div>
   </div>
@@ -463,7 +459,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="container">
     <div class="box">
       <h2>Start earning this week.</h2>
-      <p>Sign up in about a minute. Your code works right away, and the reels library and playbook unlock as soon as you're in.</p>
+      <p>Sign up in about a minute. Your code works right away. The reels library and playbook live in your dashboard.</p>
       <button class="btn" data-open>Become a creator</button>
     </div>
   </div>
@@ -495,8 +491,8 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <section class="step" data-s="handle">
         <div class="body"><h3>Where do you post?</h3><p class="lead">Pick one or both, then add your handle so we know who you are.</p>
           <div class="rows">
-            <button class="opt multi" data-p="tiktok"><span class="tile" style="background:#111">T</span>TikTok<span class="radio"></span></button>
-            <button class="opt multi" data-p="instagram"><span class="tile" style="background:#E1306C">I</span>Instagram<span class="radio"></span></button>
+            <button class="opt multi" aria-pressed="false" data-p="tiktok"><span class="tile" style="background:#111">T</span>TikTok<span class="radio"></span></button>
+            <button class="opt multi" aria-pressed="false" data-p="instagram"><span class="tile" style="background:#E1306C">I</span>Instagram<span class="radio"></span></button>
           </div>
           <div class="payfield" id="box-tiktok"><label class="f" for="h-tiktok">TikTok handle</label><div class="prefix"><span>@</span><input class="field" id="h-tiktok" autocapitalize="off" autocorrect="off" placeholder="sarahfit"></div></div>
           <div class="payfield" id="box-instagram"><label class="f" for="h-instagram">Instagram handle</label><div class="prefix"><span>@</span><input class="field" id="h-instagram" autocapitalize="off" autocorrect="off" placeholder="sarahfit"></div></div></div>
@@ -510,7 +506,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <section class="step" data-s="verify">
         <div class="body"><h3>Check your email</h3><p class="lead">We sent a 6-digit code to <b id="sentto"></b>.</p>
           <label class="f" for="otp">Code</label><input class="field code6" id="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="6"><div class="err" id="e-otp"></div></div>
-        <div class="foot"><button class="btn" id="b-otp" disabled>Verify</button><button class="link" id="resend">Send a new code</button></div>
+        <div class="foot"><button class="btn" id="b-otp" disabled>Verify</button><button class="link" id="resend">Send a new code</button><button class="link" id="diffemail">Use a different email</button></div>
       </section>
       <section class="step" data-s="code">
         <div class="body"><h3>Pick your code</h3><p class="lead">Your followers type this in the app. Short and easy to say works best.</p>
@@ -520,10 +516,10 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <section class="step" data-s="payout">
         <div class="body"><h3>How should we pay you?</h3><p class="lead">Payouts go out every Friday.</p>
           <div class="rows" id="opts">
-            <button class="opt" data-m="venmo"><span class="tile" style="background:#008CFF">V</span>Venmo<span class="radio"></span></button>
-            <button class="opt" data-m="paypal"><span class="tile" style="background:#003087">P</span>PayPal<span class="radio"></span></button>
-            <button class="opt" data-m="zelle"><span class="tile" style="background:#6D1ED4">Z</span>Zelle<span class="radio"></span></button>
-            <button class="opt" data-m="cashapp"><span class="tile" style="background:#00C244">$</span>Cash App<span class="radio"></span></button>
+            <button class="opt" aria-pressed="false" data-m="venmo"><span class="tile" style="background:#008CFF">V</span>Venmo<span class="radio"></span></button>
+            <button class="opt" aria-pressed="false" data-m="paypal"><span class="tile" style="background:#003087">P</span>PayPal<span class="radio"></span></button>
+            <button class="opt" aria-pressed="false" data-m="zelle"><span class="tile" style="background:#6D1ED4">Z</span>Zelle<span class="radio"></span></button>
+            <button class="opt" aria-pressed="false" data-m="cashapp"><span class="tile" style="background:#00C244">$</span>Cash App<span class="radio"></span></button>
           </div>
           <div class="payfield" id="paybox"><label class="f" for="payhandle" id="l-pay">Your Venmo</label><input class="field" id="payhandle" autocapitalize="off" autocorrect="off" placeholder="@username"></div></div>
         <div class="foot"><button class="btn" data-next id="b-pay" disabled>Continue</button></div>
@@ -536,7 +532,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Don't use your own code on your own purchases, and no paid search ads on the Meal Pic name.</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Refunded purchases don't pay out, and we can turn a code off if these are broken.</li>
           </ul>
-          <label class="opt check" id="agreebox"><input type="checkbox" id="agree" hidden><span>I agree to the creator rules and the <a href="/terms.html" target="_blank">Terms</a>.</span><span class="radio"></span></label>
+          <label class="opt check" id="agreebox"><input type="checkbox" id="agree" class="vh"><span>I agree to the creator rules and the <a href="/terms.html" target="_blank">Terms</a>.</span><span class="radio"></span></label>
           <div class="err" id="e-sign"></div></div>
         <div class="foot"><button class="btn" id="b-sign" disabled>Create my creator account</button></div>
       </section>
@@ -559,15 +555,17 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 const $ = id => document.getElementById(id);
 const money = n => "$" + Math.round(n).toLocaleString("en-US");
 
-// ---- calculator ($29.99 × 50% ≈ $15 a payment) ----
-const PER = 15;
+// ---- calculator (list prices × your cut) ----
+const YEARLY = 29.99, MONTHLY = 29.99, CUT = .5;
+$("py").textContent = `Pay $${YEARLY} once a year`;
+$("pm").textContent = `Pay $${MONTHLY} every month`;
 function calc(){
   const y = +$("sy").value, m = +$("sm").value;
   for (const [s, o] of [["sy","oy"],["sm","om"]]) { const el = $(s); el.style.setProperty("--p", (el.value / el.max * 100) + "%"); $(o).textContent = el.value; }
-  // Yearly: y new buyers each month, $15 each, once in the year.
-  const fromY = y * 12 * PER;
-  // Monthly: m new subscribers each month; a subscriber who joins in month k pays (13 - k) times in year one.
-  const fromM = m * PER * (12 * 13 / 2);
+  // Yearly: y new buyers each month, each pays once in the year.
+  const fromY = y * 12 * YEARLY * CUT;
+  // Monthly: m new subscribers each month; a subscriber who joins in month k pays (13 - k) times in year one (1 + ... + 12 = 78).
+  const fromM = m * MONTHLY * CUT * 78;
   $("ly").textContent = money(fromY); $("lm").textContent = money(fromM);
   $("ry").textContent = money(fromY + fromM);
   $("rp").textContent = `about ${money((fromY + fromM) / 12)} a month on average`;
@@ -587,6 +585,7 @@ function openFlow(){
   $("overlay").classList.add("open"); document.body.classList.add("locked");
   requestAnimationFrame(() => $("overlay").classList.add("show"));
   if (!document.querySelector(".step.on")) go("name");
+  else if (steps[at] === "verify") go("email");
 }
 function closeFlow(){
   $("overlay").classList.remove("show"); document.body.classList.remove("locked");
@@ -600,15 +599,17 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && $("overlay
 function go(name){
   at = steps.indexOf(name);
   document.querySelectorAll(".step").forEach(s => s.classList.toggle("on", s.dataset.s === name));
-  $("back").classList.toggle("hide", at === 0 || name === "done" || name === "verify");
+  $("back").classList.toggle("hide", at === 0 || name === "done");
   const p = (at + 1) / steps.length;
   $("bar").style.width = Math.round((1 - Math.pow(1 - p, 1.5)) * 100) + "%";
-  const f = document.querySelector(`.step[data-s="${name}"] input.field`);
+  const f = [...document.querySelectorAll(`.step[data-s="${name}"] input.field`)].find(i => i.offsetParent);
   if (f && matchMedia("(hover:hover)").matches) setTimeout(() => f.focus(), 120);
 }
 const next = () => go(steps[at + 1]);
 document.querySelectorAll("[data-next]").forEach(b => b.onclick = next);
-$("back").onclick = () => { let prev = steps[at - 1]; if (prev === "verify") prev = "email"; go(prev); };
+// Back skips verify: from verify go to email, from code (already signed in) go to handle.
+$("back").onclick = () => { let prev = steps[at - 1]; if (prev === "verify") prev = "handle"; go(prev); };
+$("diffemail").onclick = () => go("email");
 // Enter = Continue
 document.querySelectorAll(".step input.field").forEach(i => i.addEventListener("keydown", e => {
   if (e.key !== "Enter") return;
@@ -625,7 +626,7 @@ const handleText = () => [...picked].map(p => `@${handleOf(p)} (${PLATS[p]})`).j
 document.querySelectorAll(".opt[data-p]").forEach(o => o.onclick = () => {
   const p = o.dataset.p, on = !picked.has(p);
   on ? picked.add(p) : picked.delete(p);
-  o.classList.toggle("on", on); $("box-" + p).style.display = on ? "block" : "none";
+  o.classList.toggle("on", on); o.setAttribute("aria-pressed", on); $("box-" + p).style.display = on ? "block" : "none";
   if (on) $("h-" + p).focus();
   handleReady(); if (!$("code").dataset.touched) suggestCode();
 });
@@ -686,7 +687,7 @@ function checkCode(){
 const PAY = { venmo:["Your Venmo","@username"], paypal:["Your PayPal email","you@example.com"], zelle:["Your Zelle phone or email","Phone or email"], cashapp:["Your Cash App","$cashtag"] };
 document.querySelectorAll(".opt[data-m]").forEach(o => o.onclick = () => {
   method = o.dataset.m;
-  document.querySelectorAll(".opt[data-m]").forEach(x => x.classList.toggle("on", x === o));
+  document.querySelectorAll(".opt[data-m]").forEach(x => { x.classList.toggle("on", x === o); x.setAttribute("aria-pressed", x === o); });
   $("paybox").style.display = "block"; $("l-pay").textContent = PAY[method][0]; $("payhandle").placeholder = PAY[method][1];
   $("payhandle").focus(); payReady();
 });
@@ -716,7 +717,7 @@ document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
   catch (e) { b.textContent = "Hold to copy"; }
   setTimeout(() => b.textContent = label, 1600);
 });
-// ?join opens the signup straight away (for links that should skip the page).
+// ?start opens the signup straight away (for links that should skip the page).
 if (new URLSearchParams(location.search).has("start")) openFlow();
 </script>
 </body>
