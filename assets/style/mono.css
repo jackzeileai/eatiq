@@ -73,8 +73,9 @@ button{font-family:inherit}
 .ctas{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 
 /* ---------- surfaces ---------- */
-.stage{background:var(--stage);border-radius:var(--r-card);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.pic{border-radius:var(--r-card);overflow:hidden;background:var(--stage)}
+.stage{background:#fff;box-shadow:inset 0 0 0 1px var(--hair);border-radius:var(--r-card);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.stage.dark{background:#000;box-shadow:none}
+.pic{border-radius:var(--r-card);overflow:hidden;background:#fff}
 .pic img{width:100%;height:100%;object-fit:cover}
 .card{background:#fff;border-radius:var(--r-card);box-shadow:inset 0 0 0 1px var(--hair)}
 .ui{background:#fff;border-radius:18px;box-shadow:var(--shadow-ui)}   /* a UI mockup sitting on a stage */

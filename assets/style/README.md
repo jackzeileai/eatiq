@@ -18,7 +18,7 @@ References: shopify.design (giant black grotesk, white space, mono labels, image
 1. **Page is white or black. Type is the opposite.** Secondary text is one grey (`--sub`). No coloured headings, numbers, icons, badges, links or buttons. Dark is the same pack inverted: `data-theme="dark"` on `<html>` or `.dark` on a section.
 2. **Colour comes only from pictures**: food photos, app screenshots, UI mockups, 3D renders, memoji, big emoji, video. If something needs colour, make it a picture.
 3. **One picture does the talking.** The hero is words, two pills, then one big object (`.hero-apple`). Not a collage, not a wall.
-4. **One grey, one job.** `--stage` (#f2f2f2, or #161618 on dark) is a stage behind pictures and UI mockups. Never put a block of text on it.
+4. **No grey fills.** Tiles and stages are white with a hairline (or pure black on dark). Jack: "I hate the grey fill." Grey exists only as secondary text.
 5. **One button, Apple's.** 56px pill, 18px medium text, roomy padding. Black on white, white on black (`.btn`). Secondary is the same pill outlined 1.5px with no fill (`.btn.ghost`). Big page-wide CTA is `.btn.bar`.
 6. **One typeface, used big and heavy.** Inter. Headlines 800 and tight (-.04em to -.05em), bigger than feels safe. Body is 17px semibold (600). If it looks thin, it is thin: go up a weight.
 7. **Small bold labels for structure.** Tiny uppercase Inter labels (800, letter-spaced) with a hairline rule (`.rule` + `.label`) replace coloured eyebrows, pills and icons. Not monospace — Jack said it felt off-brand.
@@ -44,7 +44,7 @@ References: shopify.design (giant black grotesk, white space, mono labels, image
 | `.glass` (+`.card`), `.btn.glass`, `.nav.float` | liquid glass surfaces, floating glass nav pill |
 | `.label` (+`.dim`, `.dot`) and `.rule` | mono labels and the hairline rule line |
 | `.btn` `.btn.ghost` `.btn.small` `.btn.circle` `.btn.bar` | the button |
-| `.stage` | grey stage for a picture or mockup |
+| `.stage` (+`.dark`) | white hairline tile for a picture; `.dark` for a black one |
 | `.pic` | rounded image |
 | `.card` | hairline card (white) |
 | `.ui` | white UI mockup with soft shadow, for use on a stage |
@@ -77,6 +77,6 @@ Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`
 ## Moves worth stealing
 
 - A giant number or word as the graphic, with a few 3D objects / emoji floating around it (Shopify "26").
-- Three light tiles in a row, each holding one picture or mockup, bold caption and two short lines under each (UglyCash, our `.tile`).
+- Three white hairline tiles in a row, each holding one 3D object, bold caption and two short lines under each (UglyCash, our `.tile`).
 - Tiny bold labels hanging off huge type (Shopify "Toronto — ONTARIO, CANADA").
 - Words, two pills, one object (Apple).

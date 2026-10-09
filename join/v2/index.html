@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/style/mono.css?v=9933a94y">
+<link rel="stylesheet" href="../../assets/style/mono.css?v=34c421az">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -293,7 +293,6 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .giant .f2{right:0;top:-20px;transform:rotate(10deg)}
 .giant .f3{left:2%;bottom:-30px;transform:rotate(8deg)}
 .giant .f4{right:1%;bottom:-90px;transform:rotate(-6deg);width:clamp(120px,16vw,260px)}
-.stage.white{background:#fff;box-shadow:inset 0 0 0 1px var(--hair)}
 .tile .stage{aspect-ratio:1;height:auto;margin-bottom:22px;padding:28px}
 .tile .stage img{max-width:100%;max-height:100%;object-fit:contain}
 .tile .h3{font-size:28px}
@@ -339,9 +338,31 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 @media (max-width:900px){.split-hero .float{display:none}}
 @media (max-width:900px){.split-hero{text-align:center;padding:48px 0 56px}.hero-cols{grid-template-columns:1fr;gap:36px}.split-hero .lede{margin:24px auto 0}.split-hero .ctas{justify-content:center}.split-hero .quick{text-align:left;max-width:520px;margin:0 auto;width:100%}}
 @media (max-width:720px){.split-hero .quick{padding:22px 20px 18px;border-radius:24px}}
-.stage.dark{background:#000}
 .reelsgrid{padding:0}
 .reelsgrid img{width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.12)}
+
+/* ---------- rhythm pass: centred section heads, one column, even gaps ---------- */
+.sec{padding-top:128px}
+.sec .split{display:block;text-align:center;max-width:760px;margin:36px auto 56px}
+.sec .split .h2{margin:0 auto}
+.sec .split .lede{max-width:560px;margin:18px auto 0;justify-self:auto}
+.tile .stage{margin-bottom:24px}
+.tile .h3{margin-bottom:8px}
+.ctabar{margin-top:56px}
+.faqwrap{max-width:760px;margin:0 auto}
+.final{padding-top:128px}
+.final .lede{margin:16px auto 40px}
+@media (max-width:720px){.sec{padding-top:80px}.sec .split{margin:28px auto 36px}.ctabar{margin-top:36px}.final{padding-top:80px}}
+
+.q-big{font-size:clamp(64px,7vw,104px);letter-spacing:-.06em}
+.q-big.pop{animation:qpop .28s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes qpop{40%{transform:scale(1.045)}100%{transform:scale(1)}}
+.q-per b{color:var(--ink);font-weight:800}
+.split-hero .quick{padding:32px 32px 28px}
+.split-hero .quick input[type=range]{height:8px}
+.split-hero .quick input[type=range]::-webkit-slider-thumb{width:34px;height:34px;box-shadow:0 0 0 1.5px var(--ink),0 4px 10px rgba(0,0,0,.25)}
+.split-hero .quick input[type=range]::-moz-range-thumb{width:34px;height:34px}
+@media (max-width:720px){.q-big{font-size:56px}}
 </style>
 </head>
 <body>
@@ -375,7 +396,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <div class="quick card" id="earn">
         <span class="label dim">What you'd make</span>
         <b class="num q-big" id="rm">$0</b>
-        <span class="q-per">every month</span>
+        <span class="q-per">every month · <b id="ryr">$0</b> a year</span>
         <div class="q-top"><label for="sm"><output id="om">100</output> monthly subscribers</label></div>
         <input type="range" id="sm" min="0" max="500" value="100" step="10">
         <div class="q-foot"><span id="pm"></span><span>Drag it</span></div>
@@ -397,38 +418,19 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 
 <section class="sec" id="get">
   <div class="wrap">
-    <div class="rule start"><span class="label"><i class="dot"></i>02 — What you get</span><i></i><span class="label dim">Money, plus the tools to earn it</span></div>
-    <div class="split"><h2 class="h2">Not just a cut. A system.</h2><p class="lede">A library of reels that already worked, and a playbook for making your own.</p></div>
+    <div class="rule start"><span class="label"><i class="dot"></i>01 — What you get</span><i></i><span class="label dim">Money, plus the tools to earn it</span></div>
+    <div class="split"><h2 class="h2">Not just a cut. A system.</h2><p class="lede">A library of reels that already worked, a playbook for making your own, and a live dashboard of every dollar.</p></div>
     <div class="grid c2">
             <div class="tile"><div class="stage dark reelsgrid"><img src="../../assets/lab/reels_grid.jpg" alt=""></div><h3 class="h3">Proven reels.</h3><p class="lede sub">Videos that blew up, and why.</p></div>
-      <div class="tile"><div class="stage"><div class="ui v-book"><div class="v-bh"><span>Playbook</span><small>4 steps</small></div>
-          <ol><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Open with a hook</li><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Snap the meal</li><li class="now"><i>3</i>Show the numbers pop up</li><li><i>4</i>End on your code</li></ol></div></div><h3 class="h3">The playbook.</h3><p class="lede sub">Exactly how to make videos that sell.</p></div>
+      <div class="tile"><div class="stage"><img src="../../assets/lab/playbook_t.png" alt=""></div><h3 class="h3">The playbook.</h3><p class="lede sub">Exactly how to make videos that sell.</p></div>
     </div>
     <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
 </section>
 
-<section class="sec" id="dash">
-  <div class="wrap">
-    <div class="rule start"><span class="label"><i class="dot"></i>03 — Your dashboard</span><i></i><span class="label dim">Live</span></div>
-    <div class="split"><h2 class="h2">See every dollar.</h2><p class="lede">Who came through you and what you're owed, live.</p></div>
-    <div class="stage dashstage"><div class="dash" aria-hidden="true"><div class="two">
-        <div class="c"><span class="di g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><div class="k">Next payout</div><div class="v">$412.50</div><span class="pill pg">Friday</span></div>
-        <div class="c"><span class="di b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span><div class="k">Coming in every month</div><div class="v g">$189<small> / mo</small></div><span class="pill pb">19 paid subscribers</span></div>
-      </div>
-      <div class="four">
-        <div class="c"><span class="di b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></span><div class="k">Downloads</div><div class="v">318</div></div>
-        <div class="c"><span class="di o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="k">Free trials</div><div class="v">94</div></div>
-        <div class="c"><span class="di p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><div class="k">Monthly</div><div class="v">12</div></div>
-        <div class="c"><span class="di k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span><div class="k">Yearly</div><div class="v">7</div></div>
-      </div>
-      <div class="chart"><i style="height:18%"></i><i style="height:24%"></i><i style="height:20%"></i><i style="height:34%"></i><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:54%"></i><i style="height:66%"></i><i style="height:62%"></i><i style="height:74%"></i><i style="height:70%"></i><i style="height:82%"></i><i style="height:78%"></i><i style="height:92%"></i></div></div></div>
-  </div>
-</section>
-
 <section class="sec" id="credit">
   <div class="wrap">
-    <div class="rule start"><span class="label"><i class="dot"></i>04 — Credit</span><i></i><span class="label dim">Two ways</span></div>
+    <div class="rule start"><span class="label"><i class="dot"></i>02 — Credit</span><i></i><span class="label dim">Two ways</span></div>
     <div class="split"><h2 class="h2">Either way, the sale is yours.</h2><p class="lede">They tap your link or type your code. Both count.</p></div>
     <div class="grid c2">
       <div class="tile"><div class="stage white"><img src="../../assets/lab/phone_link_t.png" alt=""></div><h3 class="h3">They tap your link.</h3><p class="lede sub">Your code fills in for them.</p></div>
@@ -440,7 +442,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 
 <section class="sec" id="faq">
   <div class="wrap">
-    <div class="rule start"><span class="label"><i class="dot"></i>05 — Questions</span><i></i><span class="label dim">help@mealpic.app</span></div>
+    <div class="rule start"><span class="label"><i class="dot"></i>03 — Questions</span><i></i><span class="label dim">help@mealpic.app</span></div>
     <div class="split"><h2 class="h2">Questions.</h2><p class="lede">Email <a href="mailto:help@mealpic.app">help@mealpic.app</a> for anything else.</p></div>
     <div class="faq faqwrap"><details><summary>How and when do I get paid?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Every Friday, by Venmo, PayPal, Zelle or Cash App.</p></details><details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any payment from someone who used your link or code. Trials count once they pay.</p></details><details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No. They pay the normal price.</p></details><details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join.</p></details><details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Snap a meal, show the calories pop up, end on your code. The playbook covers the rest.</p></details><details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your dashboard, live.</p></details></div>
   </div>
@@ -550,11 +552,26 @@ const money = n => "$" + Math.round(n).toLocaleString("en-US");
 // ---- calculator (list price × your cut) ----
 const MONTHLY = 29.99, CUT = .5;
 $("pm").textContent = `They pay $${MONTHLY} a month`;
+let shown = 0, raf = 0;
+function tween(target){
+  const start = shown, t0 = performance.now(), dur = Math.abs(target - start) > 3000 ? 900 : 320;
+  cancelAnimationFrame(raf);
+  const step = now => {
+    const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+    shown = start + (target - start) * e;
+    $("rm").textContent = money(Math.round(shown));
+    if (k < 1) raf = requestAnimationFrame(step);
+  };
+  raf = requestAnimationFrame(step);
+}
 function calc(){
   const el = $("sm"), m = +el.value;
   el.style.setProperty("--p", (m / el.max * 100) + "%");
   $("om").textContent = m;
-  $("rm").textContent = money(m * MONTHLY * CUT);
+  const v = m * MONTHLY * CUT;
+  tween(v);
+  $("ryr").textContent = money(v * 12);
+  const n = $("rm"); n.classList.remove("pop"); void n.offsetWidth; n.classList.add("pop");
 }
 $("sm").addEventListener("input", calc); calc();
 
