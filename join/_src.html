@@ -321,7 +321,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 
 /* ---------- hero: copy left, calculator right ---------- */
 .split-hero{text-align:left;padding:64px 0 120px}
-.hero-cols{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(360px,.85fr);gap:56px;align-items:center}
+.hero-cols{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(360px,.85fr);gap:clamp(56px,8vw,120px);align-items:center}
 .split-hero .h-hero{font-size:clamp(52px,7.6vw,118px);line-height:.9;max-width:none}
 .split-hero .lede{margin:24px 0 0;max-width:500px;font-size:19px}
 .split-hero .ctas{justify-content:flex-start;margin-top:30px}
@@ -377,11 +377,9 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 @media (max-width:1100px){.split-hero .f1{right:-10px}.split-hero .f4{right:-6px}}
 /* four corners, mirrored: each object hangs off its corner by the same amount */
 .split-hero .quick .float{top:auto;right:auto;bottom:auto;left:auto;--ox:-72%;--oy:-72%}
-.split-hero .quick .f5{left:0;top:0;width:170px;transform:translate(var(--ox),var(--oy)) rotate(-8deg)}
-.split-hero .quick .f1{right:0;top:0;width:150px;transform:translate(calc(var(--ox)*-1),var(--oy)) rotate(8deg)}
-.split-hero .quick .f3{left:0;bottom:0;width:165px;transform:translate(var(--ox),calc(var(--oy)*-1)) rotate(-6deg)}
-.split-hero .quick .f6{right:0;bottom:0;width:100px;transform:translate(calc(var(--ox)*-1),calc(var(--oy)*-1)) rotate(12deg)}
-@media (max-width:1440px){.split-hero .quick .float{--ox:-40%;--oy:-82%}.split-hero .quick .f5{width:140px}.split-hero .quick .f1{width:124px}.split-hero .quick .f3{width:136px}.split-hero .quick .f6{width:82px}}
+.split-hero .quick .f5{left:0;bottom:0;width:180px;transform:translate(var(--ox),calc(var(--oy)*-1)) rotate(-8deg)}
+.split-hero .quick .f6{right:0;top:0;width:110px;transform:translate(calc(var(--ox)*-1),var(--oy)) rotate(12deg)}
+@media (max-width:1440px){.split-hero .quick .float{--ox:-40%;--oy:-72%}.split-hero .quick .f5{width:150px}.split-hero .quick .f6{width:92px}}
 #how .tile .stage{padding:0}
 #how .tile .lede{max-width:350px;margin:0 auto;text-wrap:balance}
 #how .tile .stage img{max-height:84%;max-width:84%}
@@ -432,13 +430,13 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .btn.bar.outline b{font-size:24px}
   .btn.bar.outline span{font-size:14px}
 }
-.split-hero .h-hero{font-size:clamp(44px,4.6vw,68px);line-height:1;letter-spacing:-.035em;white-space:normal}
-.split-hero .h-hero .one{display:block;font-size:.56em;letter-spacing:-.03em;margin-bottom:.14em}
+.split-hero .h-hero{font-size:clamp(48px,6.6vw,100px);line-height:.98;letter-spacing:-.035em;white-space:normal}
+.split-hero .h-hero .one{display:block;font-size:.42em;letter-spacing:-.03em;margin-bottom:.06em}
 .split-hero .h-hero .two{display:block}
-.fifty{background:linear-gradient(100deg,#ff2d87,#ff8a00 22%,#ffd23f 38%,#3ddc84 54%,#2f80ff 72%,#a64bff 88%,#ff2d87);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:fiftyflow 6s linear infinite;padding-right:.04em}
+.fifty{background:linear-gradient(100deg,#ff2d87,#ff8a00 22%,#ffd23f 38%,#3ddc84 54%,#2f80ff 72%,#a64bff 88%,#ff2d87);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:fiftyflow 6s linear infinite;padding-right:.02em;margin-right:-.04em}
 @keyframes fiftyflow{to{background-position:-220% 0}}
 @media (prefers-reduced-motion:reduce){.fifty{animation:none}}
-@media (max-width:720px){.split-hero .h-hero{font-size:44px}}
+@media (max-width:720px){.split-hero .h-hero{font-size:58px}}
 .brand img.mark{width:30px;height:30px;border-radius:0}
 </style>
 </head>
@@ -463,13 +461,11 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="wrap">
     <div class="hero-cols">
       <div class="hero-copy">
-        <h1 class="h-hero"><span class="one">Make videos.</span><span class="two">Get <span class="fifty">50%</span> of revenue.</span></h1>
+        <h1 class="h-hero"><span class="one">Make videos.</span><span class="two">Get <span class="fifty">50%</span> of<br>revenue.</span></h1>
         <p class="lede">Promote Meal Pic. Half of what every person you bring in pays is yours, for as long as they stay.</p>
         <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
       </div>
       <div class="quick card" id="earn">
-  <img class="float f1" src="__ROOT__assets/lab/burger_t.png?v=1791571789" alt="">
-  <img class="float f3" src="__ROOT__assets/lab/avocado_t.png?v=1791571789" alt="">
   <img class="float f5" src="__ROOT__assets/lab/cash100_t.png?v=1791582000" alt="">
   <img class="float f6" src="__ROOT__assets/lab/iphone_color_t.png?v=1791582000" alt="">
 
