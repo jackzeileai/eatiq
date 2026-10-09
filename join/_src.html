@@ -399,35 +399,49 @@ footer{border-top:1px solid var(--line-2)}
   .x-final h2{font-size:34px}
 }
 
-/* What you get illustrations */
-.x-ill{height:210px}
-.v-earn{width:250px;padding:14px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 14px 30px -16px rgba(0,0,0,.25);text-align:left}
-.v-top{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--sub)}
-.v-top b{font-size:18px;color:var(--money);font-weight:700;letter-spacing:-.01em}
-.v-bars{display:flex;align-items:flex-end;gap:6px;height:62px;margin:12px 0}
-.v-bars i{flex:1;border-radius:4px;background:rgba(52,199,89,.25)}
-.v-bars i:last-child{background:var(--green,#34C759)}
-.v-pay{display:flex;align-items:center;gap:10px;padding-top:10px;border-top:1px solid var(--line-2)}
-.v-pay .d{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;background:var(--green,#34C759)}
-.v-pay b{display:block;font-size:13px;font-weight:600}.v-pay small{display:block;font-size:11.5px;color:var(--sub)}
-.v-pay em{margin-left:auto;font-style:normal;font-weight:700;font-size:13.5px}
-.v-reels{position:relative;width:250px;height:205px}
-.v-reel{position:absolute;top:4px;width:84px;background:#ddd center/cover;aspect-ratio:9/16;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 12px 24px -12px rgba(0,0,0,.45)}
+/* ---------- Illustrations: shared card system ---------- */
+.x-ill{height:220px;margin-bottom:22px;gap:0}
+.x-ill.sm{height:168px;margin-bottom:20px}
+.ui{position:relative;width:260px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 1px 2px rgba(0,0,0,.04),0 16px 32px -16px rgba(0,0,0,.24);text-align:left;font-size:13px;line-height:1.3;font-variant-numeric:tabular-nums}
+.tick{width:18px;height:18px;border-radius:50%;background:var(--green,#34C759);color:#fff;display:grid;place-items:center;flex:none}
+.tick svg{width:10px;height:10px}
+.v-av{border-radius:50%;flex:none;background:url(__ROOT__assets/food-hero.jpg) center/cover}
+
+/* What you get: earnings */
+.v-earn{padding:14px 14px 12px}
+.v-top{display:flex;justify-content:space-between;align-items:baseline}
+.v-top span{font-size:12px;color:var(--sub);font-weight:500}
+.v-top b{font-size:20px;color:var(--money);font-weight:700;letter-spacing:-.02em}
+.v-bars{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;align-items:end;height:64px;margin:12px 0 12px}
+.v-bars i{border-radius:4px 4px 2px 2px;background:color-mix(in srgb,var(--money) 20%,transparent)}
+.v-bars i:last-child{background:var(--money)}
+.v-pay{display:flex;align-items:center;gap:10px;padding-top:11px;border-top:1px solid var(--line-2)}
+.v-pay img{width:30px;height:30px;border-radius:8px;flex:none}
+.v-pay div{flex:1;min-width:0}
+.v-pay b{display:block;font-size:13px;font-weight:600}.v-pay small{display:block;font-size:11.5px;color:var(--sub);margin-top:1px}
+.v-pay em{font-style:normal;font-weight:700;font-size:14px}
+
+/* What you get: reel library */
+.v-reels{position:relative;width:260px;height:220px}
+.v-reel{position:absolute;top:0;width:80px;height:142px;border-radius:12px;overflow:hidden;background:#e9e9ec center/cover no-repeat;box-shadow:0 0 0 1px rgba(0,0,0,.07),0 12px 24px -12px rgba(0,0,0,.4)}
 .v-reel img{width:100%;height:100%;object-fit:cover;display:block}
-.v-reel:nth-child(1){left:0;transform:rotate(-7deg) translateY(8px)}
-.v-reel:nth-child(2){left:83px;z-index:2}
-.v-crop{background-size:auto 360%;background-position:center 9%}
-.v-reel:nth-child(3){right:0;transform:rotate(7deg) translateY(8px)}
-.v-cap{position:absolute;left:6px;right:6px;top:22%;font-size:9.5px;font-weight:700;line-height:1.2;color:#fff;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.7)}
-.v-views{position:absolute;left:7px;bottom:7px;display:flex;align-items:center;gap:2px;font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
-.v-views svg{width:10px;height:10px;fill:#fff}
-.v-why{position:absolute;z-index:3;left:50%;bottom:0;transform:translateX(-50%);white-space:nowrap;font-size:11.5px;padding:7px 11px;border-radius:12px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 10px 22px -12px rgba(0,0,0,.35);text-align:left;color:var(--sub)}
-.v-why b{display:block;color:var(--pink,#FF2D55);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-.v-book{width:250px;padding:12px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 14px 30px -16px rgba(0,0,0,.25);text-align:left}
-.v-bh{display:flex;justify-content:space-between;align-items:baseline;padding:2px 6px 10px;border-bottom:1px solid var(--line-2);margin-bottom:6px;font-size:13px;font-weight:600}
+.v-reel:nth-child(1){left:6px;top:14px;transform:rotate(-8deg);z-index:1}
+.v-reel:nth-child(2){left:90px;top:0;z-index:2}
+.v-reel:nth-child(3){right:6px;top:14px;transform:rotate(8deg);z-index:1}
+.v-crop{background-size:auto 460%;background-position:center 9%}
+.v-views{position:absolute;left:6px;bottom:6px;display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:700;color:#111;background:rgba(255,255,255,.94);padding:3px 7px 3px 5px;border-radius:999px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.v-views svg{width:9px;height:9px;fill:#111}
+.v-why{position:absolute;z-index:3;left:50%;bottom:0;transform:translateX(-50%);display:flex;align-items:center;gap:9px;white-space:nowrap;font-size:12px;padding:8px 12px 8px 8px;border-radius:12px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 12px 24px -12px rgba(0,0,0,.35);color:var(--ink);font-weight:500}
+.v-why i{width:22px;height:22px;border-radius:6px;background:var(--pink,#FF2D55);color:#fff;display:grid;place-items:center;flex:none}
+.v-why i svg{width:12px;height:12px}
+.v-why small{display:block;color:var(--sub);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1px}
+
+/* What you get: playbook */
+.v-book{padding:10px}
+.v-bh{display:flex;justify-content:space-between;align-items:center;padding:4px 6px 10px;border-bottom:1px solid var(--line-2);margin-bottom:6px;font-size:13.5px;font-weight:600}
 .v-bh small{font-size:11.5px;color:var(--sub);font-weight:500}
 .v-book ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
-.v-book li{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;padding:6px;border-radius:8px;color:var(--sub)}
+.v-book li{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;padding:7px 6px;border-radius:9px;color:var(--sub)}
 .v-book li i{font-style:normal;flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10.5px;font-weight:700;color:var(--sub);box-shadow:inset 0 0 0 1.5px var(--line)}
 .v-book li i svg{width:11px;height:11px}
 .v-book li.ok{color:var(--ink)}.v-book li.ok i{background:var(--green,#34C759);color:#fff;box-shadow:none}
@@ -465,46 +479,62 @@ footer{border-top:1px solid var(--line-2)}
 .dash .pill.pg{background:rgba(52,199,89,.14);color:#1f8a3b}.dash .pill.pb{background:rgba(0,122,255,.12);color:#0062cc}
 .dash .chart i{background:var(--green,#34C759);opacity:1}
 
-/* Credit two ways illustrations */
-.v-bio{position:relative;width:270px;padding:16px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 14px 30px -16px rgba(0,0,0,.25);text-align:left}
+/* Credit two ways: bio link */
+.v-bio{padding:14px}
 .v-prof{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.v-prof .av{width:38px;height:38px;border-radius:50%;flex:none;background:url(__ROOT__assets/food-hero.jpg) center/cover;box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--pink,#FF2D55)}
-.v-prof b{display:block;font-size:13.5px;font-weight:600}.v-prof small{display:block;font-size:11.5px;color:var(--sub)}
-.v-link{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#0062cc;padding:8px 10px;border-radius:10px;background:rgba(0,122,255,.09)}
+.v-stats{display:flex;justify-content:space-between;padding:0 6px;margin-bottom:12px;font-size:11px;color:var(--sub)}
+.v-stats b{display:block;font-size:13.5px;color:var(--ink);font-weight:700}
+.v-prof .v-av{width:40px;height:40px;box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--pink,#FF2D55)}
+.v-prof b{display:block;font-size:13.5px;font-weight:600}.v-prof small{display:block;font-size:11.5px;color:var(--sub);margin-top:1px}
+.v-link{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#0062cc;padding:9px 11px;border-radius:10px;background:rgba(0,122,255,.08)}
 .v-link svg{width:14px;height:14px;flex:none}
-.v-tap{position:absolute;width:30px;height:30px;right:26px;bottom:6px}
-.v-toast{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);padding:8px 12px;border-radius:999px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 10px 22px -12px rgba(0,0,0,.35)}
-.v-toast b{color:var(--ink);font-weight:700}
-.v-toast i,.v-ok i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--green,#34C759);color:#fff}
-.v-toast i svg,.v-ok i svg{width:10px;height:10px}
-.v-app{width:250px;padding:16px;border-radius:20px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 14px 30px -16px rgba(0,0,0,.25);text-align:left;display:grid;gap:10px}
-.v-app>b{font-size:15px;font-weight:700;letter-spacing:-.01em}
-.v-field{display:flex;align-items:center;font-size:16px;font-weight:700;letter-spacing:.06em;padding:10px 12px;border-radius:12px;box-shadow:inset 0 0 0 2px var(--orange,#FF9500);background:rgba(255,149,0,.06)}
-.v-field .cur{width:2px;height:18px;margin-left:2px;background:var(--orange,#FF9500);animation:vblink 1s steps(1) infinite}
-@keyframes vblink{50%{opacity:0}}
-.v-ok{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#1f8a3b}
-.v-btn{display:block;text-align:center;font-size:13.5px;font-weight:600;color:#fff;background:var(--ink);padding:9px;border-radius:11px}
+.v-tap{position:absolute;width:34px;height:34px;right:24px;bottom:12px}
+.v-toast{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);padding:8px 13px 8px 8px;border-radius:999px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 12px 24px -12px rgba(0,0,0,.35);margin-top:-8px}
+.v-toast b{color:var(--ink);font-weight:700;letter-spacing:.02em}
 
-/* How it works illustrations */
-.x-ill.sm{height:150px;margin-bottom:20px}
-.v-code{width:240px;padding:14px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 14px 30px -16px rgba(0,0,0,.25);text-align:left}
+/* Credit two ways: in-app code field */
+.v-app{padding:16px;display:grid;gap:10px}
+.v-app>b{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.v-field{display:flex;align-items:center;font-size:17px;font-weight:700;letter-spacing:.08em;padding:11px 13px;border-radius:12px;box-shadow:0 0 0 1.5px var(--orange,#FF9500),0 0 0 4px rgba(255,149,0,.14);background:var(--surface)}
+.v-field .cur{width:2px;height:20px;margin-left:2px;background:var(--orange,#FF9500);animation:vblink 1s steps(1) infinite}
+@keyframes vblink{50%{opacity:0}}
+.v-ok{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#1f8a3b;padding:0 2px}
+.v-btn{display:block;text-align:center;font-size:13.5px;font-weight:600;color:#fff;background:var(--ink);padding:10px;border-radius:11px}
+
+
+/* How it works: code + link rows (mirrors the signup "done" screen) */
+.v-code .r{display:flex;align-items:center;gap:10px;padding:11px 14px}
+.v-code .r+.r{border-top:1px solid var(--line-2)}
+.v-code .r div{flex:1;min-width:0}
 .v-code small{display:block;font-size:11.5px;color:var(--sub);font-weight:500}
-.v-code .row{display:flex;align-items:center;justify-content:space-between;margin:6px 0 8px}
-.v-code .row b{font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--green-ink,#1f8a3b)}
-.v-code .cp{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:6px 9px;border-radius:9px;box-shadow:inset 0 0 0 1px var(--line)}
-.v-code .cp svg{width:12px;height:12px}
-.v-code .ln{color:#0062cc;font-weight:600}
-.v-post{display:flex;align-items:center;gap:12px;width:250px;padding:10px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 14px 30px -16px rgba(0,0,0,.25);text-align:left}
-.v-reel1{position:relative;flex:none;width:72px;aspect-ratio:9/16;border-radius:10px;background:center/cover}
-.v-sticker{position:absolute;left:50%;bottom:16px;transform:translateX(-50%) rotate(-4deg);white-space:nowrap;font-size:7px;font-weight:800;color:#111;background:#fff;padding:3px 4px;border-radius:5px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
-.v-meta b{display:block;font-size:13px;font-weight:600}.v-meta small{display:block;font-size:12px;color:var(--sub);margin:2px 0 8px}
-.v-chip{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
-.v-chip.g{background:rgba(255,45,85,.1);color:#d1193e}
-.v-notifs{position:relative;width:260px;height:100px}
-.v-note{position:absolute;left:0;right:0;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:12px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 14px 30px -16px rgba(0,0,0,.25);text-align:left}
-.v-note.back{z-index:1;top:14px;transform:scale(.92);transform-origin:bottom center;opacity:.7}.v-note.back>*{visibility:hidden}.v-notifs{height:76px}
-.v-note .d{width:30px;height:30px;flex:none;border-radius:8px;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--green,#34C759)}
-.v-note b{display:block;font-size:13px;font-weight:600}.v-note small{display:block;font-size:11.5px;color:var(--sub)}
+.v-code b{display:block;font-size:17px;font-weight:700;letter-spacing:.02em;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v-code .r+.r b{font-size:13.5px;letter-spacing:0;color:#0062cc}
+.v-code .cp{flex:none;font-size:12px;font-weight:600;padding:6px 11px;border-radius:999px;background:var(--surface-2)}
+
+/* How it works: the post */
+.v-post{display:flex;align-items:center;gap:12px;padding:10px}
+.v-reel1{position:relative;flex:none;width:74px;height:132px;border-radius:10px;overflow:hidden;background:#e9e9ec}
+.v-reel1 img{width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block}
+.v-sticker{position:absolute;left:50%;bottom:8px;transform:translateX(-50%) rotate(-4deg);white-space:nowrap;font-size:8px;font-weight:800;color:#111;background:#fff;padding:3px 5px;border-radius:5px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.v-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.v-meta .who{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600}
+.v-meta .v-av{width:22px;height:22px}
+.v-meta p{margin:0;font-size:12.5px;line-height:1.4;color:var(--sub)}
+.v-meta p b{color:var(--ink);font-weight:600}
+.v-meta .tags{display:flex;gap:6px;margin-top:2px}
+.v-chip{font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--surface-2);color:var(--sub)}
+
+/* How it works: payout notifications */
+.v-notifs{position:relative;width:260px;height:92px}
+.v-note{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;align-items:center;gap:11px;padding:11px 13px}
+.v-note img{width:36px;height:36px;border-radius:9px;flex:none}
+.v-note div{flex:1;min-width:0}
+.v-note b{display:block;font-size:13px;font-weight:600}.v-note small{display:block;font-size:12px;color:var(--sub);margin-top:1px}
+.v-note time{font-size:11px;color:var(--faint);align-self:flex-start;margin-top:1px}
+.v-note.b1{z-index:2;top:14px;transform:scale(.94);transform-origin:bottom center;opacity:.65}
+.v-note.b2{z-index:1;top:28px;transform:scale(.88);transform-origin:bottom center;opacity:.35}
+.v-note.b1>*,.v-note.b2>*{visibility:hidden}
+
 /* Hero headline + calmer calculator */
 .g50{color:var(--money)}
 .x-split h1{font-size:50px;text-wrap:balance}
@@ -646,9 +676,9 @@ h1,h2,h3,.x-total .v,.slider output,.x-lines b,.dash .v,.v-top b,.v-code .row b{
 <section class="x-sec" id="how">
   <div class="x-head"><h2>How it works</h2><p>Free. No minimum following.</p></div>
   <div class="x-cells three">
-    <div class="x-cell"><div class="x-ill sm"><div class="v-code"><small>Your code</small><div class="row"><b>YOURCODE</b><span class="cp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</span></div><small class="ln">mealpic.app/c/yourcode</small></div></div><span class="x-n">01</span><h3>Get your code</h3><p>Pick one. You get a link too.</p></div>
-    <div class="x-cell"><div class="x-ill sm"><div class="v-post"><div class="v-reel1" style="background-image:url(__ROOT__assets/food-hero.jpg)"><span class="v-sticker">use code YOURCODE</span></div><div class="v-meta"><b>@yourname</b><small>calories in 2 seconds?</small><span class="v-chip g">#ad</span></div></div></div><span class="x-n">02</span><h3>Post</h3><p>Say your code or put the link in your bio.</p></div>
-    <div class="x-cell"><div class="x-ill sm"><div class="v-notifs"><div class="v-note"><span class="d">$</span><div><b>Meal Pic paid you $412.50</b><small>Friday</small></div></div><div class="v-note back"><span class="d">$</span><div><b>Meal Pic paid you $388.00</b><small>Last Friday</small></div></div></div></div><span class="x-n">03</span><h3>Get paid</h3><p>50% of every payment, every Friday.</p></div>
+    <div class="x-cell"><div class="x-ill sm"><div class="ui v-code"><div class="r"><div><small>Your code</small><b>SARAH</b></div><span class="cp">Copy</span></div><div class="r"><div><small>Your link</small><b>mealpic.app/c/sarah</b></div><span class="cp">Copy</span></div></div></div><span class="x-n">01</span><h3>Get your code</h3><p>Pick one. You get a link too.</p></div>
+    <div class="x-cell"><div class="x-ill sm"><div class="ui v-post"><div class="v-reel1"><img src="__ROOT__assets/food-hero.jpg" alt=""><span class="v-sticker">code SARAH</span></div><div class="v-meta"><span class="who"><span class="v-av"></span>sarahfit</span><p>calories in 2 seconds? <b>code SARAH</b></p><span class="tags"><span class="v-chip">#ad</span><span class="v-chip">#mealpic</span></span></div></div></div><span class="x-n">02</span><h3>Post</h3><p>Say your code or put the link in your bio.</p></div>
+    <div class="x-cell"><div class="x-ill sm"><div class="v-notifs"><div class="ui v-note"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>You got paid $412.50</b><small>Sent to your Venmo</small></div><time>now</time></div><div class="ui v-note b1"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>.</b></div></div><div class="ui v-note b2"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>.</b></div></div></div></div><span class="x-n">03</span><h3>Get paid</h3><p>50% of every payment, every Friday.</p></div>
   </div>
 </section>
 
@@ -657,10 +687,10 @@ h1,h2,h3,.x-total .v,.slider output,.x-lines b,.dash .v,.v-top b,.v-code .row b{
   <div class="x-cells three">
     <div class="x-cell">
       <div class="x-ill">
-        <div class="v-earn">
+        <div class="ui v-earn">
           <div class="v-top"><span>This week</span><b>+$412.50</b></div>
           <div class="v-bars"><i style="height:34%"></i><i style="height:48%"></i><i style="height:40%"></i><i style="height:62%"></i><i style="height:55%"></i><i style="height:78%"></i><i style="height:100%"></i></div>
-          <div class="v-pay"><span class="d">$</span><div><b>Payout sent</b><small>Friday</small></div><em>$412.50</em></div>
+          <div class="v-pay"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>Payout sent</b><small>Friday · Venmo</small></div><em>$412.50</em></div>
         </div>
       </div>
       <h3>50% of every payment</h3><p>On every renewal, for as long as they stay. Paid Fridays.</p>
@@ -668,17 +698,17 @@ h1,h2,h3,.x-total .v,.slider output,.x-lines b,.dash .v,.v-top b,.v-code .row b{
     <div class="x-cell">
       <div class="x-ill">
         <div class="v-reels">
-          <div class="v-reel v-crop" style="background-image:url(__ROOT__assets/dish-burger-v11.webp)"><span class="v-cap">how many calories is this??</span><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>2.4M</span></div>
-          <div class="v-reel"><img src="__ROOT__assets/food-hero.jpg" alt=""><span class="v-cap">i stopped guessing</span><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>1.1M</span></div>
-          <div class="v-reel v-crop" style="background-image:url(__ROOT__assets/dish-poke-v11.webp)"><span class="v-cap">rating my lunch</span><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>860K</span></div>
-          <span class="v-why"><b>Why it worked</b>Question hook in the first second</span>
+          <div class="v-reel v-crop" style="background-image:url(__ROOT__assets/dish-burger-v11.webp);background-position:36% 9%"><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>2.4M</span></div>
+          <div class="v-reel"><img src="__ROOT__assets/food-hero.jpg" alt=""><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>1.1M</span></div>
+          <div class="v-reel v-crop" style="background-image:url(__ROOT__assets/dish-sushi-v11.webp)"><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>860K</span></div>
+          <span class="v-why"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></i><span><small>Why it worked</small>Question hook in the first second</span></span>
         </div>
       </div>
       <h3>Library of proven reels</h3><p>Videos that blew up, and why they worked.</p>
     </div>
     <div class="x-cell">
       <div class="x-ill">
-        <div class="v-book">
+        <div class="ui v-book">
           <div class="v-bh"><span>Playbook</span><small>4 steps</small></div>
           <ol><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Open with a hook</li><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Snap the meal</li><li class="now"><i>3</i>Show the numbers pop up</li><li><i>4</i>End on your code</li></ol>
         </div>
@@ -711,18 +741,19 @@ h1,h2,h3,.x-total .v,.slider output,.x-lines b,.dash .v,.v-top b,.v-code .row b{
   <div class="x-head"><h2>You get credit two ways</h2><p>Either way, the sale is yours.</p></div>
   <div class="x-cells two">
     <div class="x-cell"><div class="x-ill">
-      <div class="v-bio">
-        <div class="v-prof"><span class="av"></span><div><b>@yourname</b><small>food, gym, what i eat in a day</small></div></div>
-        <span class="v-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>mealpic.app/c/yourcode</span>
-        <svg class="v-tap" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="rgba(0,0,0,.18)"/><circle cx="12" cy="12" r="5" fill="#fff" stroke="rgba(0,0,0,.25)"/></svg>
+      <div class="ui v-bio">
+        <div class="v-prof"><span class="v-av"></span><div><b>sarahfit</b><small>food, gym, what i eat in a day</small></div></div>
+        <div class="v-stats"><span><b>128</b>posts</span><span><b>24.1K</b>followers</span><span><b>310</b>following</span></div>
+        <span class="v-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>mealpic.app/c/sarah</span>
+        <svg class="v-tap" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(0,0,0,.14)"/><circle cx="12" cy="12" r="5" fill="#fff" stroke="rgba(0,0,0,.3)"/></svg>
       </div>
-      <span class="v-toast"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Code filled in: <b>YOURCODE</b></span>
+      <span class="v-toast"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Code filled in: <b>SARAH</b></span>
     </div><h3>They tap your link</h3><p>Your code fills in for them.</p></div>
     <div class="x-cell"><div class="x-ill">
-      <div class="v-app">
+      <div class="ui v-app">
         <b>Got a creator code?</b>
-        <div class="v-field">YOURCODE<span class="cur"></span></div>
-        <span class="v-ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Code applied</span>
+        <div class="v-field">SARAH<span class="cur"></span></div>
+        <span class="v-ok"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Code applied</span>
         <span class="v-btn">Continue</span>
       </div>
     </div><h3>Or they type your code</h3><p>The app asks for it at signup.</p></div>
