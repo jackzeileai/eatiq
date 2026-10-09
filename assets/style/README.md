@@ -67,6 +67,7 @@ Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`
 3. Floating objects live in the margins, outside the text column, never over words or buttons.
 4. Keep the layout Jack approved (hero: words left, one-slider calculator right, three tiles under). Change the content, not the structure, unless he asks.
 5. Screenshot desktop and phone after every change and look at it before pushing.
+6. Open the signup popup too (Playwright: click Become a creator, screenshot). The popup uses `.step`, `.bar`, `.sheet`, `.opt`; never reuse those class names for page styling — a stray `.step` rule once broke the whole popup.
 
 ## The house moves (Jack-approved, 2026-10-09)
 
@@ -77,6 +78,10 @@ Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`
 
 - **Headline is all black.** Jack hated the grey second line ("I hate this gray"). Each sentence on its own line, sized so it fits; don't make it wall-sized. Grey never goes in headlines.
 - **Nav type:** wordmark 800 with "Creators" the same weight in grey; links 600 solid black (hover goes grey); Join 600.
+
+## Buttons
+
+Main CTA = `.btn.shine`: compact black pill with a sheen sweep and an arrow that nudges on hover, with a small grey note under it. Jack called the full-width bar "so big, with so much dead space and so unexciting" — don't use `.btn.bar` for CTAs.
 
 ## Render prompt (Jack's winner)
 

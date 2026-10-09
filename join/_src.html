@@ -14,7 +14,7 @@ __THEME_COLOR__
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="__ROOT__assets/style/mono.css?v=1791580000">
+<link rel="stylesheet" href="__ROOT__assets/style/mono.css?v=1791586000">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -296,7 +296,6 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .tile .stage{aspect-ratio:1;height:auto;margin-bottom:22px;padding:28px}
 .tile .stage img{max-width:100%;max-height:100%;object-fit:contain}
 .tile .h3{font-size:28px}
-.step{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;font-size:16px;font-weight:800;margin-bottom:12px}
 .tile .lede.sub{font-size:18px;color:var(--sub);margin:6px auto 0;max-width:320px}
 #how{padding-top:0}
 .calcpic{display:flex;align-items:center;justify-content:center;padding:40px}
@@ -349,7 +348,8 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .sec .split .lede{max-width:560px;margin:18px auto 0;justify-self:auto}
 .tile .stage{margin-bottom:24px}
 .tile .h3{margin-bottom:8px}
-.ctabar{margin-top:56px}
+.ctabar{margin-top:56px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cta-note{font-size:14px;font-weight:600;color:var(--sub)}
 .faqwrap{max-width:760px;margin:0 auto}
 .final{padding-top:128px}
 .final .lede{margin:16px auto 40px}
@@ -376,10 +376,12 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .split-hero .f6{right:-34px;bottom:-120px;width:92px;transform:rotate(12deg)}
 @media (max-width:1100px){.split-hero .f1{right:-10px}.split-hero .f4{right:-6px}}
 /* four corners, mirrored: each object hangs off its corner by the same amount */
-.split-hero .quick .float{top:auto;right:auto;bottom:auto;left:auto;--ox:-72%;--oy:-72%}
-.split-hero .quick .f5{left:0;bottom:0;width:180px;transform:translate(var(--ox),calc(var(--oy)*-1)) rotate(-8deg)}
-.split-hero .quick .f6{right:0;top:0;width:110px;transform:translate(calc(var(--ox)*-1),var(--oy)) rotate(12deg)}
-@media (max-width:1440px){.split-hero .quick .float{--ox:-40%;--oy:-72%}.split-hero .quick .f5{width:150px}.split-hero .quick .f6{width:92px}}
+.split-hero .quick .float{top:auto;right:auto;bottom:auto;left:auto;--ox:-42%;--oy:-42%;filter:drop-shadow(0 14px 18px rgba(0,0,0,.16));animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -8px}}
+@media (prefers-reduced-motion:reduce){.split-hero .quick .float{animation:none}}
+.split-hero .quick .f5{left:0;bottom:0;width:128px;transform:translate(-58%,64%) rotate(-10deg);animation-delay:-2.5s}
+.split-hero .quick .f6{right:0;top:0;width:66px;transform:translate(calc(var(--ox)*-1),var(--oy)) rotate(14deg)}
+@media (max-width:1440px){.split-hero .quick .f5{width:112px}.split-hero .quick .f6{width:58px}}
 #how .tile .stage{padding:0}
 #how .tile .lede{max-width:350px;margin:0 auto;text-wrap:balance}
 #how .tile .stage img{max-height:84%;max-width:84%}
@@ -463,7 +465,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <div class="hero-copy">
         <h1 class="h-hero"><span class="one">Make videos.</span><span class="two">Get <span class="fifty">50%</span> of<br>revenue.</span></h1>
         <p class="lede">Promote Meal Pic. Half of what every person you bring in pays is yours, for as long as they stay.</p>
-        <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
+        <div class="ctas"><button class="btn shine" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
       </div>
       <div class="quick card" id="earn">
   <img class="float f5" src="__ROOT__assets/lab/cash100_t.png?v=1791582000" alt="">
@@ -487,20 +489,20 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <div class="tile"><div class="stage white"><img class="md" src="__ROOT__assets/lab/fifty_balloon_t.png?v=1791585000" alt=""></div><h3 class="h3">2. Get 50%.</h3><p class="lede sub">Anyone who joins with your link or code pays you half, every single month.</p></div>
       <div class="tile"><div class="stage white"><img class="sm" src="__ROOT__assets/lab/venmo_t.png?v=1791583000" alt=""></div><h3 class="h3">3. Cash out.</h3><p class="lede sub">Paid every Friday, straight to your Venmo, Cash App, Zelle or bank account.</p></div>
     </div>
-    <div class="ctabar"><button class="btn bar outline" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+    <div class="ctabar"><button class="btn shine" data-open>Become a creator<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="cta-note">Free to join. Paid every Friday.</span></div>
   </div>
 </section>
 
 <section class="sec" id="get">
   <div class="wrap">
     <div class="rule start"><span class="label"><i class="dot"></i>01 — What you get</span><i></i><span class="label dim">Money, plus the tools to earn it</span></div>
-    <div class="split"><h2 class="h2">Not just a cut. A system.</h2><p class="lede">A library of reels that already worked, a playbook for making your own, and a live dashboard of every dollar.</p></div>
+    <div class="split"><h2 class="h2">We don't just pay you. We teach you to sell.</h2><p class="lede">Reels that already made sales, a playbook for making your own, and a live dashboard of every dollar you earn.</p></div>
     <div class="grid c3">
             <div class="tile"><div class="stage dark reelsgrid"><img src="__ROOT__assets/lab/reels_grid.jpg?v=1791571789" alt=""></div><h3 class="h3">Proven reels.</h3><p class="lede sub">Videos that blew up, and why.</p></div>
       <div class="tile"><div class="stage"><img src="__ROOT__assets/lab/playbook_t.png?v=1791571789" alt=""></div><h3 class="h3">The playbook.</h3><p class="lede sub">Exactly how to make videos that sell.</p></div>
       <div class="tile"><div class="stage"><img src="__ROOT__assets/hero-v14.webp?v=1791571789" alt=""></div><h3 class="h3">An app people keep.</h3><p class="lede sub">Snap a meal, see the calories. Easy to show on camera.</p></div>
     </div>
-    <div class="ctabar"><button class="btn bar outline" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+    <div class="ctabar"><button class="btn shine" data-open>Become a creator<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="cta-note">Free to join. Paid every Friday.</span></div>
   </div>
 </section>
 
@@ -513,7 +515,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <div class="tile"><div class="stage white"><img src="__ROOT__assets/lab/memoji_code_t.png?v=1791571789" alt=""></div><h3 class="h3">Or they type your code.</h3><p class="lede sub">The app asks for it at signup.</p></div>
       <div class="tile"><div class="stage"><img class="appicon" src="__ROOT__assets/icon-512.png" alt="Meal Pic"></div><h3 class="h3">It's tracked to you.</h3><p class="lede sub">Every payment shows on your dashboard.</p></div>
     </div>
-    <div class="ctabar"><button class="btn bar outline" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+    <div class="ctabar"><button class="btn shine" data-open>Become a creator<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="cta-note">Free to join. Paid every Friday.</span></div>
   </div>
 </section>
 
@@ -529,7 +531,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="wrap">
     <h2 class="h1">Start this week.</h2>
     <p class="lede">Takes a minute. Your code works right away.</p>
-    <div class="ctabar"><button class="btn bar outline" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+    <div class="ctabar"><button class="btn shine" data-open>Become a creator<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="cta-note">Free to join. Paid every Friday.</span></div>
   </div>
 </section>
 
