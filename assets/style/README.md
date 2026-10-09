@@ -78,6 +78,10 @@ Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`
 - **Two-tone headline** (Apple): first sentence black, second in the grey. Sized so each sentence sits on one line; don't make it wall-sized.
 - **Nav type:** wordmark 800 with "Creators" the same weight in grey; links 600 solid black (hover goes grey); Join 600.
 
+## Render prompt (Jack's winner)
+
+`Pure white background. 3D render in the style of Apple's mobile phone emoji: <THING>. Soft shadow below. No text.` — Higgsfield GPT Image 2.5, 1:1. Then Higgsfield remove_background for the cutout. Winners: `cash100_t.png`, `iphone_color_t.png`.
+
 ## Moves worth stealing
 
 - A giant number or word as the graphic, with a few 3D objects / emoji floating around it (Shopify "26").
