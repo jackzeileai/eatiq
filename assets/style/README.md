@@ -60,6 +60,12 @@ References: shopify.design (giant black grotesk, white space, mono labels, image
 
 Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`.
 
+## The house moves (Jack-approved, 2026-10-09)
+
+- **Giant headline with 3D objects floating around the edges** and a floating glass nav pill (lab C hero). Objects sit in the margins, never over the words.
+- **Three white tiles, one 3D object each**, bold caption, grey one-liner (lab B tiles).
+- **3D clay / memoji illustration style** for people and objects: soft matte, Apple-memoji faces, saturated props, white or black background, generated per section (never reuse one render twice on a page).
+
 ## Moves worth stealing
 
 - A giant number or word as the graphic, with a few 3D objects / emoji floating around it (Shopify "26").
