@@ -13,290 +13,105 @@ __THEME_COLOR__
 <link rel="apple-touch-icon" href="__ROOT__assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Geist:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="__ROOT__assets/style/mono.css">
 <style>
-/* ---------- tokens ---------- */
-:root{
-  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Helvetica,Arial,sans-serif;
-  --max:1120px; --gutter:24px;
-}
-/* App look: Meal Pic's own onboarding (grey page, white rows, black pill). */
-[data-theme="app"]{
-  --bg:#FFFFFF; --bg2:#FFFFFF; --surface:#FFFFFF; --surface-2:#F4F4F6; --line:rgba(0,0,0,.08); --line-2:rgba(0,0,0,.05);
-  --ink:#111113; --sub:#5d5d64; --faint:#6e6e74; --accent:#111113; --accent-ink:#fff; --money:#1fa64a; --green:#34C759; --pink:#FF2D55; --orange:#FF9500; --purple:#AF52DE; --red:#FF3B30;
-  --btn-r:999px; --field-r:16px; --card-r:24px; --shadow:0 0 0 1px rgba(0,0,0,.05),0 2px 4px rgba(0,0,0,.03),0 16px 40px -16px rgba(0,0,0,.12);
-  --hero-bg:#FFFFFF; --scrim:rgba(17,17,19,.42); --nav:rgba(255,255,255,.85);
-}
-/* Party look: Partiful-style, always dark, colour glow, white buttons. */
-[data-theme="party"]{
-  --bg:#0B0B0D; --bg2:#0B0B0D; --surface:#17171A; --surface-2:#202024; --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.06);
-  --ink:#FFFFFF; --sub:rgba(255,255,255,.64); --faint:rgba(255,255,255,.40); --accent:#FFFFFF; --accent-ink:#000; --money:#5CF28E; --red:#FF6B81;
-  --btn-r:10px; --field-r:8px; --card-r:18px; --shadow:0 0 0 1px rgba(255,255,255,.06);
-  --hero-bg:#0B0B0D; --scrim:rgba(0,0,0,.66); --nav:rgba(11,11,13,.7);
-}
-
-/* ---------- base ---------- */
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/* ---------- aliases so the UI mockups + signup panel keep working ---------- */
+:root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
+  --money:#1d9a4c;--green:#34C759;--pink:#FF2D55;--orange:#FF9500;--red:#FF3B30;--scrim:rgba(0,0,0,.45);
+  --btn-r:999px;--field-r:16px;--card-r:24px;--shadow:0 0 0 1px rgba(0,0,0,.06),0 2px 4px rgba(0,0,0,.03),0 16px 40px -16px rgba(0,0,0,.12);--display:var(--font)}
 body.locked{overflow:hidden}
-a{color:inherit}
-.container{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:56px;padding:0 28px;border:0;border-radius:var(--btn-r);background:var(--accent);color:var(--accent-ink);font:600 17px var(--font);cursor:pointer;text-decoration:none;transition:transform .12s,opacity .15s,box-shadow .2s;white-space:nowrap}
-.btn:hover{box-shadow:0 10px 28px -10px color-mix(in srgb,var(--accent) 70%,transparent)}
-.btn:active{transform:scale(.98)}
-.btn:disabled{opacity:.38;cursor:default;transform:none;box-shadow:none}
-.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
-.btn.small{height:40px;padding:0 18px;font-size:15px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--sub);background:var(--surface);box-shadow:var(--shadow);padding:7px 14px 7px 8px;border-radius:999px}
-.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--money);box-shadow:0 0 0 4px color-mix(in srgb,var(--money) 22%,transparent)}
-h2.section{font-size:40px;line-height:1.08;letter-spacing:-.025em;font-weight:800;margin:0 0 14px}
-p.section{font-size:18px;line-height:1.55;color:var(--sub);margin:0;max-width:560px}
-
-/* ---------- nav ---------- */
-.nav{position:sticky;top:0;z-index:20;background:var(--nav);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px)}
-.nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{display:flex;align-items:center;gap:10px;white-space:nowrap;text-decoration:none;font-weight:800;font-size:17px;letter-spacing:-.01em}
-.brand img{width:30px;height:30px;border-radius:8px}
-.brand span{color:var(--faint);font-weight:600}
-.nav .links{display:flex;align-items:center;gap:8px}
-.nav .links a.plain{font-size:15px;font-weight:600;color:var(--sub);text-decoration:none;padding:10px 12px}
-.nav .links a.plain:hover{color:var(--ink)}
 
 /* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;background:var(--hero-bg)}
-.hero .container{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;padding-top:80px;padding-bottom:88px}
-.hero h1{font-size:64px;line-height:1.02;letter-spacing:-.035em;font-weight:800;margin:22px 0 20px}
-.hero h1 em{font-style:normal;color:var(--money)}
-.hero .sub{font-size:20px;line-height:1.5;color:var(--sub);margin:0 0 32px;max-width:500px}
-.hero .ctas{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-[data-theme="party"] .glow{position:absolute;inset:-120px -10% auto -10%;height:620px;pointer-events:none;
-  background:radial-gradient(40% 60% at 18% 30%,rgba(255,79,216,.75),transparent 70%),radial-gradient(38% 60% at 82% 20%,rgba(79,123,255,.7),transparent 70%),radial-gradient(50% 55% at 50% 0%,rgba(138,77,255,.75),transparent 72%);
-  filter:blur(40px);opacity:.7;animation:drift 14s ease-in-out infinite alternate}
-@keyframes drift{from{transform:translateX(-3%) scale(1)}to{transform:translateX(3%) scale(1.08)}}
-[data-theme="app"] .glow{display:none}
-.hero .container{position:relative}
-[data-theme="party"] .hero h1 em{background:linear-gradient(110deg,#fff 0%,#ffb3f1 45%,#a6b8ff 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero{padding:64px 0 0;text-align:center}
+.hero .h-hero{max-width:1100px;margin:0 auto}
+.hero-lede{max-width:620px;margin:28px auto 32px}
+.hero .ctas{justify-content:center}
+.hero-rule{margin-top:88px}
+.hero-grid{display:grid;grid-template-columns:5fr 7fr;gap:16px;margin-top:20px;align-items:stretch;text-align:left}
+.pics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pics .pic{aspect-ratio:9/15;height:100%}
+.pics .pic:nth-child(2) img{object-position:center 40%}
 
-/* dashboard preview section */
-.see{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
-.see ul{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:14px}
-.see li{display:flex;gap:12px;font-size:16px;line-height:1.5;color:var(--sub)}
-.see li b{color:var(--ink)}
-.see li svg{flex:none;width:20px;height:20px;color:var(--money);margin-top:2px}
-.dash{background:var(--bg);border:1px solid var(--line-2);border-radius:28px;padding:16px;box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.3)}
+/* ---------- calculator (black and white) ---------- */
+.calc{padding:28px 28px 24px;display:flex;flex-direction:column}
+.calc .total{margin:16px 0 22px}
+.calc .total .k{font-size:14px;color:var(--sub);font-weight:600}
+.calc .total .v{font-size:clamp(48px,5vw,68px);line-height:1;margin:6px 0 6px;letter-spacing:-.05em}
+.calc .total .per{font-size:15px;color:var(--sub)}
+.slider{padding:18px 0;border-top:1px solid var(--hair)}
+.slider .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.slider label{font-size:15px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.slider label small{display:block;color:var(--sub);font-weight:500;font-size:13px;margin-top:3px}
+.slider output{font-size:24px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.2}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:linear-gradient(to right,var(--ink) var(--p,30%),var(--hair) var(--p,30%));outline:none;margin:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.2);cursor:grab}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 1px rgba(0,0,0,.12),0 2px 6px rgba(0,0,0,.2)}
+.calc .lines{display:grid;gap:8px;padding-top:18px;border-top:1px solid var(--hair);font-size:15px;margin-top:auto}
+.calc .lines div{display:flex;justify-content:space-between}
+.calc .lines span{color:var(--sub)}
+.calc .lines b{font-variant-numeric:tabular-nums}
+.calc .fine{margin:14px 0 0;color:var(--faint);font-size:12.5px;line-height:1.45}
+
+/* ---------- section bits ---------- */
+.sec .split{margin:28px 0 40px}
+.sec .split .lede{max-width:520px;justify-self:end}
+.tile{text-align:center}
+.tile .stage{height:300px;margin-bottom:20px}
+.tile .h3{margin-bottom:6px}
+.tile .p{max-width:320px;margin:0 auto}
+.ctabar{margin-top:48px}
+.dashstage{padding:32px}
+.final{text-align:center;padding-top:140px}
+.final .lede{margin:18px auto 36px}
+.final .ctabar{margin:0 auto;max-width:720px}
+.faqwrap{max-width:800px}
+
+/* ---------- dashboard mockup (a picture of the real thing) ---------- */
+.dash{width:100%;max-width:760px;margin:0 auto;background:#fff;border-radius:24px;padding:16px;box-shadow:var(--shadow-ui)}
 .dash .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.dash .c{background:var(--surface);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.dash .c{background:#fff;border-radius:18px;padding:18px;box-shadow:inset 0 0 0 1px var(--hair-2)}
 .dash .k{font-size:12px;font-weight:600;color:var(--sub)}
-.dash .v{font-size:32px;font-weight:900;letter-spacing:-.03em;line-height:1;margin-top:8px}
+.dash .v{font-size:32px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-top:8px}
 .dash .v.g{color:var(--money)}
 .dash .v small{font-size:14px;color:var(--sub);font-weight:700}
 .dash .pill{display:inline-block;margin-top:12px;background:var(--surface-2);padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700}
 .dash .four{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
 .dash .four .v{font-size:22px}
-.dash .chart{display:flex;align-items:flex-end;gap:4px;height:70px;margin-top:10px;background:var(--surface);border-radius:18px;padding:16px 16px 14px;box-shadow:var(--shadow)}
-.dash .chart i{flex:1;background:var(--ink);border-radius:3px 3px 1px 1px;opacity:.9}
-@media (max-width:980px){.see{grid-template-columns:1fr;gap:40px}}
-@media (max-width:560px){.dash .four{grid-template-columns:1fr 1fr}.dash .two{grid-template-columns:1fr}}
+.dash .chart{display:flex;align-items:flex-end;gap:4px;height:70px;margin-top:10px;background:#fff;border-radius:18px;padding:16px 16px 14px;box-shadow:inset 0 0 0 1px var(--hair-2)}
+.dash .di{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;margin-bottom:12px}
+.dash .four .di{width:28px;height:28px;border-radius:8px}
+.dash .di svg{width:16px;height:16px}
+.dash .di.g{background:var(--green)}.dash .di.b{background:#007AFF}.dash .di.o{background:var(--orange)}.dash .di.p{background:#AF52DE}.dash .di.k{background:var(--pink)}
+.dash .pill.pg{background:rgba(52,199,89,.14);color:#1f8a3b}.dash .pill.pb{background:rgba(0,122,255,.12);color:#0062cc}
+.dash .chart i{flex:1;background:var(--green);border-radius:3px 3px 1px 1px}
 
-/* what you get */
-.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.perk{background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow);border-radius:var(--card-r);padding:30px;display:flex;flex-direction:column}
-.perk .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);margin-bottom:22px}
-.perk .ic svg{width:24px;height:24px}
-.perk h3{font-size:21px;letter-spacing:-.015em;margin:0 0 8px}
-.perk p{margin:0;color:var(--sub);font-size:16px;line-height:1.55}
-.perk ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:10px;font-size:15px}
-.perk li{display:flex;gap:10px;line-height:1.45}
-.perk li svg{flex:none;width:18px;height:18px;color:var(--money);margin-top:2px}
-@media (max-width:980px){.perks{grid-template-columns:1fr}}
-
-/* colour */
-[data-theme="app"] input[type=range]{background:linear-gradient(to right,var(--green) var(--p,30%),var(--line) var(--p,30%))}
-[data-theme="app"] .perk:nth-child(1) .ic,[data-theme="app"] .stepcard:nth-child(1) .n{background:var(--green);color:#fff}
-[data-theme="app"] .perk:nth-child(2) .ic,[data-theme="app"] .stepcard:nth-child(2) .n{background:var(--pink);color:#fff}
-[data-theme="app"] .perk:nth-child(3) .ic,[data-theme="app"] .stepcard:nth-child(3) .n{background:var(--orange);color:#fff}
-[data-theme="app"] .credit .stepcard:nth-child(1) .ic{background:var(--purple)}
-[data-theme="app"] .credit .stepcard:nth-child(2) .ic{background:var(--orange)}
-[data-theme="app"] .final .box{background:color-mix(in srgb,var(--green) 10%,#fff);border:0;box-shadow:none}
-
-/* ---------- sections ---------- */
-section.block{padding:64px 0}
-section.block.alt{background:var(--bg2)}
-.head{margin:0 auto 48px;text-align:center}
-.head p.section{margin:0 auto;max-width:640px}
-#get{padding-top:120px}
-section.block.final{padding-top:32px}
-.see .head,.faqwrap .head{text-align:left;margin-left:0}
-.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.stepcard{background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow);border-radius:var(--card-r);padding:28px}
-.stepcard .n{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:17px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);margin-bottom:22px}
-[data-theme="party"] .stepcard .n{background:linear-gradient(135deg,#ff4fd8,#8a4dff);color:#fff}
-.stepcard h3{font-size:20px;margin:0 0 8px;letter-spacing:-.01em}
-.stepcard p{margin:0;color:var(--sub);font-size:16px;line-height:1.55}
-
-/* calculator */
-.slider{margin-bottom:32px}
-.slider:last-child{margin-bottom:0}
-.slider .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:12px}
-.slider label{font-size:16px;font-weight:600}
-.slider label small{display:block;color:var(--sub);font-weight:400;font-size:14px;margin-top:3px}
-.slider output{font-size:28px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:linear-gradient(to right,var(--accent) var(--p,30%),var(--line) var(--p,30%));outline:none;margin:0;padding:0;border:0}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.06);cursor:grab}
-input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:0;box-shadow:0 1px 4px rgba(0,0,0,.25)}
-.result{display:flex;flex-direction:column}
-.result .k{font-size:15px;color:var(--sub);font-weight:600}
-.result .v{font-weight:900;letter-spacing:-.04em;color:var(--money);line-height:1;margin:10px 0 6px;font-variant-numeric:tabular-nums}
-.result .per{color:var(--sub);font-size:16px}
-.result .lines{margin-top:auto;padding-top:28px;border-top:1px solid var(--line);display:grid;gap:12px}
-.result .lines div{display:flex;justify-content:space-between;font-size:16px}
-.result .lines span{color:var(--sub)}
-.result .lines b{font-variant-numeric:tabular-nums}
-.fine{color:var(--faint);font-size:13px;margin-top:16px;line-height:1.5}
-/* calculator (hero, one stacked card) */
-.calc.hero-calc{justify-self:end;width:100%;max-width:460px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow),0 40px 80px -40px rgba(0,0,0,.35);border-radius:28px;padding:28px}
-.calc.hero-calc .calc-title{font-size:15px;font-weight:700;color:var(--sub);margin-bottom:22px}
-.calc.hero-calc .slider{margin-bottom:24px}
-.calc.hero-calc .slider output{font-size:24px}
-.calc.hero-calc .result{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
-.calc.hero-calc .result .v{font-size:56px}
-.calc.hero-calc .result .lines{padding-top:20px;margin-top:20px}
-
-/* credit + faq */
-.credit{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.credit .stepcard{display:flex;gap:18px;align-items:flex-start}
-.credit .ic{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink)}
-.credit .ic svg{width:24px;height:24px}
-.credit .linkdemo{display:inline-block;margin-top:12px;font-weight:700;font-size:15px;background:var(--surface-2);padding:8px 12px;border-radius:10px}
-.faqwrap{display:grid;grid-template-columns:1fr 1.7fr;gap:64px;align-items:start}
-.faqwrap .head{position:sticky;top:96px}
-.faq{border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-size:18px;font-weight:600}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center;transition:transform .2s}
-.faq summary i svg{width:14px;height:14px}
-.faq details[open] summary i{transform:rotate(45deg)}
-.faq details p{margin:0 0 24px;color:var(--sub);font-size:16px;line-height:1.6;max-width:640px}
-
-.final{text-align:center}
-.final .box{border-radius:32px;padding:80px 32px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow);position:relative;overflow:hidden}
-[data-theme="party"] .final .box{background:radial-gradient(60% 90% at 20% 0%,rgba(255,79,216,.35),transparent 70%),radial-gradient(60% 90% at 80% 100%,rgba(79,123,255,.35),transparent 70%),#141417}
-.final h2{font-size:48px;letter-spacing:-.03em;line-height:1.05;margin:0 0 16px;font-weight:800}
-.final p{color:var(--sub);font-size:18px;margin:0 auto 32px;max-width:460px;line-height:1.5}
-footer{padding:40px 0 56px;color:var(--faint);font-size:14px}
-footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer a{color:var(--sub);text-decoration:none;margin-left:20px}
+/* ---------- mobile bar ---------- */
 .mobilebar{display:none}
 
-/* ---------- signup panel ---------- */
-.overlay{position:fixed;inset:0;z-index:50;background:var(--scrim);display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .2s}
-.overlay.open{display:flex}
-.overlay.show{opacity:1}
-.sheet{position:relative;width:100%;max-width:480px;min-height:min(540px,calc(100vh - 48px));max-height:calc(100vh - 48px);background:var(--bg);border-radius:28px;box-shadow:0 40px 100px -30px rgba(0,0,0,.5),0 0 0 1px var(--line-2);display:flex;flex-direction:column;overflow:hidden;transform:translateY(16px) scale(.98);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
-.overlay.show .sheet{transform:none}
-[data-theme="party"] .sheet::before{content:"";position:absolute;inset:-80px -20% auto;height:280px;background:radial-gradient(50% 70% at 20% 30%,rgba(255,79,216,.6),transparent 70%),radial-gradient(50% 70% at 80% 20%,rgba(79,123,255,.55),transparent 70%);filter:blur(30px);opacity:.7;pointer-events:none}
-.sheet .bar{position:relative;display:flex;align-items:center;gap:12px;height:64px;padding:0 14px;flex:none}
-.iconbtn{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none}
-.iconbtn:hover{background:var(--line-2)}
-.iconbtn svg{width:20px;height:20px}
-.iconbtn.hide{visibility:hidden}
-.prog{flex:1;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
-.prog i{display:block;height:100%;width:0;background:var(--ink);border-radius:4px;transition:width .35s ease}
-.steps{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
-.step{display:none;flex:1;flex-direction:column;min-height:0}
-.step.on{display:flex;animation:in .3s cubic-bezier(.2,.8,.2,1)}
-@keyframes in{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
-.step .body{flex:1;overflow-y:auto;padding:8px 32px 24px}
-.step .foot{flex:none;padding:16px 32px 28px}
-.step .foot .btn{width:100%}
-.step h3{font-size:30px;line-height:1.15;letter-spacing:-.02em;font-weight:800;margin:8px 0 8px}
-.step .lead{color:var(--sub);font-size:16px;line-height:1.5;margin:0 0 28px}
-[data-theme="party"] .step h3,[data-theme="party"] .step .lead{text-align:center}
-label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0 8px 2px}
-.field{width:100%;font:500 17px var(--font);height:56px;padding:0 18px;border-radius:var(--field-r);border:1px solid var(--line);background:var(--surface);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
-.field::placeholder{color:var(--faint)}
-.field:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent)}
-[data-theme="party"] .field:focus{border-color:rgba(255,255,255,.5);box-shadow:none}
-.field.code6{letter-spacing:12px;font-size:28px;font-weight:800;text-align:center}
-.prefix{display:flex;align-items:center;height:56px;border-radius:var(--field-r);border:1px solid var(--line);background:var(--surface);padding-left:18px;transition:border-color .15s,box-shadow .15s}
-.prefix span{color:var(--faint);font-size:17px;font-weight:600}
-.prefix .field{border:0;background:transparent;padding-left:2px;height:54px;box-shadow:none!important}
-.prefix:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent)}
-.hint{font-size:14px;margin:10px 2px 0;min-height:20px;color:var(--sub)}
-.hint.ok{color:var(--money);font-weight:600}
-.hint.bad,.err{color:var(--red);font-weight:600}
-.err{font-size:14px;margin:10px 2px 0;min-height:20px}
-.link{background:none;border:0;color:var(--sub);font:600 15px var(--font);cursor:pointer;height:44px;width:100%;margin-top:4px}
-.link:hover{color:var(--ink)}
-.rows{display:grid;gap:10px}
-.opt{display:flex;align-items:center;gap:14px;width:100%;height:60px;padding:0 16px;border-radius:var(--field-r);border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 17px var(--font);cursor:pointer;text-align:left;transition:border-color .15s,box-shadow .15s}
-.opt:hover{border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
-.opt .tile{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;flex:none}
-.opt .radio{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);flex:none;display:grid;place-items:center}
-.opt.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
-.opt.on .radio{background:var(--ink);border-color:var(--ink)}
-.opt.on .radio::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--bg)}
-.payfield{margin-top:20px;display:none}
-.opt.multi .radio{border-radius:7px}
-.opt.multi.on .radio::after{width:10px;height:6px;border-radius:0;background:none;border:solid var(--bg);border-width:0 0 2px 2px;transform:translateY(-1px) rotate(-45deg)}
-.rules{list-style:none;padding:4px 18px;margin:0 0 12px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--card-r)}
-.rules li{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line-2);font-size:15px;line-height:1.45}
-.rules li:first-child{border-top:0}
-.rules li svg{flex:none;width:18px;height:18px;color:var(--money);margin-top:2px}
-.opt.check{position:relative;height:auto;min-height:60px;padding:14px 16px;font-weight:500;font-size:15px;line-height:1.4}
-.opt.check:focus-within{border-color:var(--ink)}
-.opt.check a{color:var(--accent)}
-.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
-[data-theme="party"] .opt.check a{color:#c9b6ff}
-.done{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center}
-.done .badge{width:76px;height:76px;border-radius:50%;background:var(--money);display:grid;place-items:center;margin:0 auto 22px;color:#fff}
-[data-theme="party"] .done .badge{background:linear-gradient(135deg,#ff4fd8,#8a4dff 55%,#4f7bff)}
-.done .badge svg{width:36px;height:36px}
-.share{display:flex;align-items:center;gap:12px;text-align:left;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--field-r);padding:14px 16px;margin-top:10px}
-.share div{flex:1;min-width:0}
-.share .k{color:var(--sub);font-size:13px;font-weight:600}
-.share .v{font-size:19px;font-weight:800;margin-top:2px;word-break:break-all}
-.copy{flex:none;height:36px;padding:0 16px;border-radius:999px;border:0;background:var(--surface-2);color:var(--ink);font:600 14px var(--font);cursor:pointer}
-[data-theme="party"] .copy{background:#fff;color:#000;border-radius:8px}
-
-/* ---------- tablet / phone ---------- */
+/* ---------- responsive ---------- */
 @media (max-width:980px){
-  .hero .container{grid-template-columns:1fr;gap:56px;padding-top:56px;padding-bottom:72px}
-  .calc.hero-calc{justify-self:stretch;max-width:none}
-  .credit,.faqwrap{grid-template-columns:1fr}
-  .faqwrap{gap:0}
-  .faqwrap .head{position:static}
-}
-@media (max-width:900px){
-  .nav .links a.plain{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .pics .pic{aspect-ratio:9/13}
+  .tile .stage{height:280px}
+  .sec .split .lede{justify-self:start}
 }
 @media (max-width:720px){
-  :root{--gutter:20px}
-  .nav .container{height:56px}
-  .hero .container{padding-top:36px;padding-bottom:56px;gap:44px}
-  .hero h1{font-size:42px;margin:18px 0 16px}
-  .hero .sub{font-size:17px;margin-bottom:26px}
+  .hero{padding-top:40px}
+  .hero-lede{margin:20px auto 24px}
+  .hero .ctas{flex-direction:column}
   .hero .ctas .btn{width:100%}
-  .hero .ctas .btn.ghost{display:none}
-        section.block{padding:48px 0}
-  .head{margin-bottom:32px}
-  h2.section{font-size:30px}
-  p.section{font-size:17px}
-  .steps3{grid-template-columns:1fr;gap:12px}
-  .stepcard{padding:22px}
-  .stepcard .n{margin-bottom:16px}
-  .calc.hero-calc{padding:22px}
-  .calc.hero-calc .result{padding-top:22px}
-  .faq summary{font-size:17px;padding:20px 0}
-  .final .box{padding:56px 22px;border-radius:26px}
-  .final h2{font-size:34px}
-  footer{padding-bottom:110px}
-  footer a{margin:0 16px 0 0}
-  .mobilebar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 20px max(14px,env(safe-area-inset-bottom));background:linear-gradient(to bottom,transparent,var(--bg) 30%);transform:translateY(110%);transition:transform .25s}
+  .hero-rule{margin-top:56px}
+  .pics{gap:10px}
+  .calc{padding:22px 18px 18px}
+  .tile .stage{height:260px}
+  .dashstage{padding:14px}
+  .ctabar{margin-top:32px}
+  .final{padding-top:96px}
+  .mobilebar{display:block;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 16px max(14px,env(safe-area-inset-bottom));background:linear-gradient(to bottom,transparent,#fff 30%);transform:translateY(110%);transition:transform .25s}
   .mobilebar.show{transform:none}
   .mobilebar .btn{width:100%}
+  footer.site{padding-bottom:110px}
   .overlay{padding:0}
   .sheet{max-width:none;height:100%;height:100dvh;min-height:0;max-height:none;border-radius:0;transform:translateY(30px)}
   .sheet .bar{padding-top:env(safe-area-inset-top);height:calc(56px + env(safe-area-inset-top))}
@@ -304,104 +119,10 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .step .foot{padding:12px 20px max(16px,env(safe-area-inset-bottom))}
   .step h3{font-size:28px}
 }
+@media (max-width:420px){.h-hero{font-size:46px}}
 
-/* ---------- v3 landing (modelled on Dub's partner page) ---------- */
-.btn.line{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
-.btn.line:hover{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 30%,transparent)}
-.nav .links .btn.small{height:36px;padding:0 16px;font-size:14px;border-radius:10px}
-.nav .links .btn.line{margin-left:6px}
-.x-frame{max-width:1120px;margin:0 auto;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
-.x-in{position:relative;z-index:2}
-.x-grid{position:absolute;inset:0;background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(70% 60% at 50% 30%,#000 30%,transparent 80%);mask-image:radial-gradient(70% 60% at 50% 30%,#000 30%,transparent 80%);pointer-events:none}
-.x-wash{position:absolute;inset:auto 0 0 0;height:70%;background:radial-gradient(45% 70% at 22% 100%,rgba(52,199,89,.20),transparent 70%),radial-gradient(40% 70% at 55% 100%,rgba(255,149,0,.14),transparent 70%),radial-gradient(45% 70% at 85% 100%,rgba(255,45,85,.16),transparent 70%);pointer-events:none}
-.x-wash.low{height:80%}
-.x-hero{text-align:center;padding:88px 0 88px;background:var(--bg)}
-.x-pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);padding:5px 12px 5px 6px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);background:var(--surface)}
-.x-pill img{width:20px;height:20px;border-radius:6px}
-.x-hero h1{font-size:64px;line-height:1.04;letter-spacing:-.035em;font-weight:600;margin:24px auto 20px;max-width:900px}
-.x-hero .sub{font-size:19px;line-height:1.55;color:var(--sub);margin:0 auto 32px;max-width:600px}
-.x-hero .ctas{justify-content:center}
-.x-hero .ctas .btn{height:48px;padding:0 22px;font-size:16px;border-radius:12px}
-.x-wall{position:relative;display:flex;justify-content:center;gap:16px;margin-top:64px;padding:6px 0 56px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
-.x-reel{position:relative;z-index:1;flex:none;width:168px;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--surface-2);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 20px 40px -20px rgba(0,0,0,.35)}
-.x-reel:nth-child(odd){transform:translateY(28px)}
-.x-reel img{width:100%;height:100%;object-fit:cover;display:block}
-.x-earn{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(255,255,255,.94);border-radius:12px;padding:8px 10px;text-align:left;font-size:11px;color:var(--sub);font-weight:500;line-height:1.25;box-shadow:0 4px 14px rgba(0,0,0,.12)}
-.x-earn b{display:block;font-size:15px;color:var(--money);font-weight:700}
-.x-sec{position:relative;border-top:1px solid var(--line-2);padding:72px 0 0}
-.x-head{text-align:center;padding:0 24px;margin-bottom:40px}
-.x-head h2{font-size:40px;line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:0 0 12px}
-.x-head p{font-size:18px;line-height:1.55;color:var(--sub);margin:0 auto;max-width:600px}
-.x-head a{color:var(--ink)}
-.x-cells{display:grid;border-top:1px solid var(--line-2)}
-.x-cells.three{grid-template-columns:repeat(3,1fr)}
-.x-cells.two{grid-template-columns:repeat(2,1fr)}
-.x-cell{padding:32px;border-right:1px solid var(--line-2)}
-.x-cell:last-child{border-right:0}
-.x-cell h3{font-size:18px;font-weight:600;letter-spacing:-.01em;margin:0 0 8px}
-.x-cell p{margin:0;color:var(--sub);font-size:15.5px;line-height:1.55}
-.x-cell .linkdemo{display:inline-block;margin-top:16px;font-weight:600;font-size:14px;padding:7px 11px;border-radius:9px;box-shadow:inset 0 0 0 1px var(--line);background:var(--surface)}
-.x-n{display:block;font-size:13px;font-weight:600;color:var(--faint);font-variant-numeric:tabular-nums;margin-bottom:14px;letter-spacing:.04em}
-.x-ill{position:relative;height:190px;margin-bottom:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-.x-chip{display:flex;align-items:center;gap:10px;width:220px;padding:10px 12px;border-radius:14px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 8px 20px -10px rgba(0,0,0,.2);text-align:left}
-.x-chip.off{width:200px;opacity:.65}.x-chip.off2{width:180px;opacity:.35}
-.x-chip .d{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:14px;color:#fff;background:var(--green,#34C759)}
-.x-chip b{display:block;font-size:14px;color:var(--money)}
-.x-chip small{display:block;font-size:12px;color:var(--sub)}
-.x-minis{display:flex;gap:10px}
-.x-minis img{width:72px;aspect-ratio:9/16;object-fit:cover;border-radius:10px;box-shadow:0 0 0 1px var(--line-2),0 10px 20px -12px rgba(0,0,0,.35)}
-.x-minis img:nth-child(2){transform:translateY(-10px)}
-.x-tag{font-size:12px;color:var(--sub);padding:6px 10px;border-radius:999px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 6px 16px -10px rgba(0,0,0,.25)}
-.x-tag b{color:var(--ink);font-weight:600}
-.x-steps{list-style:none;margin:0;padding:12px;width:260px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 10px 24px -14px rgba(0,0,0,.25);display:grid;gap:4px;text-align:left}
-.x-steps li{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;padding:6px}
-.x-steps i{font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;background:var(--orange,#FF9500)}
-.x-steps li:nth-child(1) i{background:var(--pink,#FF2D55)}.x-steps li:nth-child(4) i{background:var(--green,#34C759)}
-.x-calc{max-width:640px;margin:0 auto 72px;padding:28px;border-radius:20px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 24px 48px -28px rgba(0,0,0,.25)}
-.x-total .k{font-size:14px;font-weight:600;color:var(--sub)}
-.x-total .v{font-size:56px;font-weight:700;letter-spacing:-.035em;line-height:1;margin:8px 0 6px;color:var(--money);font-variant-numeric:tabular-nums}
-.x-total .per{color:var(--sub);font-size:15px}
-.x-sliders{margin-top:24px;padding:22px;border-radius:14px;background:var(--surface-2)}
-.x-sliders .slider{margin-bottom:22px}.x-sliders .slider:last-child{margin-bottom:0}
-.x-sliders .slider output{font-size:22px}
-.x-lines{display:grid;gap:10px;margin-top:20px;font-size:15px}
-.x-lines div{display:flex;justify-content:space-between}
-.x-lines span{color:var(--sub)}
-.x-calc .fine{margin-top:16px}
-.x-sec#get .x-cells,.x-sec#how .x-cells,.x-sec .x-cells.two{margin-bottom:0}
-.x-dashwrap{position:relative;padding:0 64px 72px}
-.x-dashwrap .dash{position:relative;z-index:1;max-width:760px;margin:0 auto;background:var(--surface)}
-.x-faq{max-width:720px;margin:0 auto;padding:0 24px 88px}
-.x-final{text-align:center;padding:112px 24px 120px;overflow:hidden}
-.x-final h2{font-size:48px;letter-spacing:-.035em;font-weight:600;line-height:1.05;margin:0 0 14px}
-.x-final p{color:var(--sub);font-size:18px;margin:0 auto 28px;max-width:480px;line-height:1.5}
-.x-final .btn{height:48px;border-radius:12px;padding:0 24px;font-size:16px}
-footer{border-top:1px solid var(--line-2)}
-@media (max-width:900px){.x-cells.three,.x-cells.two{grid-template-columns:1fr}.x-cell{border-right:0;border-bottom:1px solid var(--line-2)}.x-cell:last-child{border-bottom:0}.x-dashwrap{padding:0 20px 56px}}
-@media (max-width:720px){
-  .x-frame{border:0}
-  .x-hero{padding:44px 0 56px}
-  .x-hero h1{font-size:40px;margin:18px auto 14px;padding:0 8px}
-  .x-hero h1 br{display:none}
-  .x-hero .sub{font-size:17px;padding:0 20px}
-  .x-hero .ctas{padding:0 20px}
-  .x-wall{margin-top:44px;gap:10px;justify-content:flex-start;padding-bottom:40px}
-  .x-reel{width:128px;border-radius:14px}
-  .x-sec{padding-top:56px}
-  .x-head{margin-bottom:32px}
-  .x-head h2{font-size:32px}
-  .x-head p{font-size:16.5px}
-  .x-cell{padding:28px 20px}
-  .x-calc{margin:0 16px 56px;padding:22px}
-  .x-total .v{font-size:44px}
-  .x-faq{padding-bottom:56px}
-  .x-final{padding:72px 20px 88px}
-  .x-final h2{font-size:34px}
-}
-
+/* ---------- UI mockups (these are the pictures, so they keep their colour) ---------- */
 /* ---------- Illustrations: shared card system ---------- */
-.x-ill{height:244px;margin-bottom:24px;gap:0}
-.x-ill.sm{height:188px;margin-bottom:22px}
 .ui{position:relative;width:280px;border-radius:18px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 1px 2px rgba(0,0,0,.04),0 16px 32px -16px rgba(0,0,0,.24);text-align:left;font-size:14px;line-height:1.3;font-variant-numeric:tabular-nums}
 .tick{width:20px;height:20px;border-radius:50%;background:var(--money);color:#fff;display:grid;place-items:center;flex:none}
 .tick svg{width:11px;height:11px}
@@ -446,38 +167,6 @@ footer{border-top:1px solid var(--line-2)}
 .v-book li i svg{width:12px;height:12px}
 .v-book li.ok{color:var(--ink)}.v-book li.ok i{background:var(--money);color:#fff;box-shadow:none}
 .v-book li.now{color:var(--ink);background:rgba(255,149,0,.10)}.v-book li.now i{background:var(--orange,#FF9500);color:#fff;box-shadow:none}
-
-/* Hero with calculator top right */
-.x-split{text-align:left;padding:72px 0}
-.x-split .x-in{display:grid;grid-template-columns:1fr 440px;gap:48px;align-items:center;padding:0 56px}
-.x-split h1{font-size:54px;margin:20px 0 16px;max-width:none}
-.x-split .sub{margin:0 0 28px;max-width:none}
-.x-split .ctas{justify-content:flex-start}
-.x-split .x-calc{margin:0;max-width:none;padding:24px}
-.x-split .x-total .v{font-size:48px}
-@media (max-width:980px){
-  .x-split{text-align:center}
-  .x-split .x-in{grid-template-columns:1fr;gap:40px;padding:0 24px}
-  .x-split .x-copy{max-width:640px;margin:0 auto}
-  .x-split .ctas{justify-content:center}
-  .x-split .x-calc{width:100%;max-width:520px;margin:0 auto;text-align:left}
-}
-@media (max-width:720px){
-  .x-split{padding:40px 0 48px}
-  .x-split .x-in{padding:0 16px}
-  .x-split h1{font-size:40px;padding:0}
-  .x-split .sub,.x-split .ctas{padding:0}
-  .x-split .x-calc{padding:20px}
-  .x-split .x-total .v{font-size:42px}
-}
-
-/* Dashboard preview colour */
-.dash .di{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;margin-bottom:12px}
-.dash .four .di{width:28px;height:28px;border-radius:8px}
-.dash .di svg{width:16px;height:16px}
-.dash .di.g{background:var(--green,#34C759)}.dash .di.b{background:#007AFF}.dash .di.o{background:var(--orange,#FF9500)}.dash .di.p{background:#AF52DE}.dash .di.k{background:var(--pink,#FF2D55)}
-.dash .pill.pg{background:rgba(52,199,89,.14);color:#1f8a3b}.dash .pill.pb{background:rgba(0,122,255,.12);color:#0062cc}
-.dash .chart i{background:var(--green,#34C759);opacity:1}
 
 /* Credit two ways: bio link */
 .v-bio{padding:16px}
@@ -535,364 +224,105 @@ footer{border-top:1px solid var(--line-2)}
 .v-note.b2{z-index:1;top:30px;transform:scale(.88);transform-origin:bottom center;opacity:.35}
 .v-note.b1>*,.v-note.b2>*{visibility:hidden}
 
-/* Hero headline + calmer calculator */
-.g50{color:var(--money)}
-.x-split h1{font-size:50px;text-wrap:balance}
-.x-split .x-calc{position:relative;z-index:3;padding:22px;border-radius:22px;box-shadow:0 0 0 1px rgba(0,0,0,.09),0 2px 4px rgba(0,0,0,.04),0 12px 24px -8px rgba(0,0,0,.10),0 40px 80px -20px rgba(0,0,0,.22)}
-.x-split .x-total .v{font-size:42px}
-.x-split .x-sliders{margin-top:18px;padding:18px}
-.x-split .x-sliders .slider{margin-bottom:16px}.x-split .x-sliders .slider:last-child{margin-bottom:0}
-.x-split .slider label{font-size:14.5px}.x-split .slider label small{font-size:13px}
-.x-split .x-sliders .slider output{font-size:20px}
-.x-split .x-lines{margin-top:14px;font-size:14px;gap:6px}
-.x-split .x-calc .fine{margin-top:12px}
 
-/* Hero: final spacing pass */
-.x-split{padding:96px 0}
-.x-split .x-in{grid-template-columns:minmax(0,1fr) 420px;gap:72px;padding:0 64px}
-.x-split h1{font-size:52px;line-height:1.06;letter-spacing:-.035em;margin:20px 0 18px}
-.x-split .sub{font-size:18px;margin:0 0 32px}
-.x-split .ctas{gap:12px}
-.x-split .x-calc{padding:24px}
-.x-split .x-total .k{font-size:13px}
-.x-split .x-total .v{font-size:44px;margin:10px 0 6px}
-.x-split .x-total .per{font-size:14px}
-.x-split .x-sliders{margin-top:20px;padding:20px}
-.x-split .x-sliders .slider{margin-bottom:22px}
-.x-split .slider .top{align-items:flex-start;margin-bottom:12px}
-.x-split .slider label{font-size:14px;line-height:1.3}
-.x-split .slider label small{font-size:12.5px;margin-top:2px}
-.x-split .x-sliders .slider output{font-size:20px;line-height:1.2}
-.x-split input[type=range]{height:5px}
-.x-split input[type=range]::-webkit-slider-thumb{width:22px;height:22px}
-.x-split .x-lines{margin-top:18px;font-size:14px;gap:8px}
-.x-split .x-calc .fine{margin-top:14px;font-size:12px}
-@media (max-width:1100px){.x-split .x-in{grid-template-columns:minmax(0,1fr) 380px;gap:48px;padding:0 40px}.x-split h1{font-size:46px}}
-@media (max-width:980px){.x-split{padding:64px 0}.x-split .x-in{grid-template-columns:1fr;gap:40px;padding:0 24px}.x-split .x-calc{max-width:460px}}
-@media (max-width:720px){.x-split{padding:40px 0 48px}.x-split .x-in{padding:0 16px}.x-split h1{font-size:38px}.x-split .sub{font-size:16.5px;margin-bottom:24px}.x-split .x-calc{padding:20px}.x-split .x-total .v{font-size:40px}}
+/* ---------- signup panel ---------- */
+.overlay{position:fixed;inset:0;z-index:50;background:var(--scrim);display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .2s}
+.overlay.open{display:flex}
+.overlay.show{opacity:1}
+.sheet{position:relative;width:100%;max-width:480px;min-height:min(540px,calc(100vh - 48px));max-height:calc(100vh - 48px);background:var(--bg);border-radius:28px;box-shadow:0 40px 100px -30px rgba(0,0,0,.5),0 0 0 1px var(--line-2);display:flex;flex-direction:column;overflow:hidden;transform:translateY(16px) scale(.98);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.overlay.show .sheet{transform:none}
+.sheet .bar{position:relative;display:flex;align-items:center;gap:12px;height:64px;padding:0 14px;flex:none}
+.iconbtn{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none}
+.iconbtn:hover{background:var(--line-2)}
+.iconbtn svg{width:20px;height:20px}
+.iconbtn.hide{visibility:hidden}
+.prog{flex:1;height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--ink);border-radius:4px;transition:width .35s ease}
+.steps{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
+.step{display:none;flex:1;flex-direction:column;min-height:0}
+.step.on{display:flex;animation:in .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.step .body{flex:1;overflow-y:auto;padding:8px 32px 24px}
+.step .foot{flex:none;padding:16px 32px 28px}
+.step .foot .btn{width:100%}
+.step h3{font-size:30px;line-height:1.15;letter-spacing:-.02em;font-weight:800;margin:8px 0 8px}
+.step .lead{color:var(--sub);font-size:16px;line-height:1.5;margin:0 0 28px}
+label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0 8px 2px}
+.field{width:100%;font:500 17px var(--font);height:56px;padding:0 18px;border-radius:var(--field-r);border:1px solid var(--line);background:var(--surface);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+.field::placeholder{color:var(--faint)}
+.field:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent)}
+.field.code6{letter-spacing:12px;font-size:28px;font-weight:800;text-align:center}
+.prefix{display:flex;align-items:center;height:56px;border-radius:var(--field-r);border:1px solid var(--line);background:var(--surface);padding-left:18px;transition:border-color .15s,box-shadow .15s}
+.prefix span{color:var(--faint);font-size:17px;font-weight:600}
+.prefix .field{border:0;background:transparent;padding-left:2px;height:54px;box-shadow:none!important}
+.prefix:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent)}
+.hint{font-size:14px;margin:10px 2px 0;min-height:20px;color:var(--sub)}
+.hint.ok{color:var(--money);font-weight:600}
+.hint.bad,.err{color:var(--red);font-weight:600}
+.err{font-size:14px;margin:10px 2px 0;min-height:20px}
+.link{background:none;border:0;color:var(--sub);font:600 15px var(--font);cursor:pointer;height:44px;width:100%;margin-top:4px}
+.link:hover{color:var(--ink)}
+.rows{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;height:60px;padding:0 16px;border-radius:var(--field-r);border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 17px var(--font);cursor:pointer;text-align:left;transition:border-color .15s,box-shadow .15s}
+.opt:hover{border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.opt .tile{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;flex:none}
+.opt .radio{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);flex:none;display:grid;place-items:center}
+.opt.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.opt.on .radio{background:var(--ink);border-color:var(--ink)}
+.opt.on .radio::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--bg)}
+.payfield{margin-top:20px;display:none}
+.opt.multi .radio{border-radius:7px}
+.opt.multi.on .radio::after{width:10px;height:6px;border-radius:0;background:none;border:solid var(--bg);border-width:0 0 2px 2px;transform:translateY(-1px) rotate(-45deg)}
+.rules{list-style:none;padding:4px 18px;margin:0 0 12px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--card-r)}
+.rules li{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line-2);font-size:15px;line-height:1.45}
+.rules li:first-child{border-top:0}
+.rules li svg{flex:none;width:18px;height:18px;color:var(--money);margin-top:2px}
+.opt.check{position:relative;height:auto;min-height:60px;padding:14px 16px;font-weight:500;font-size:15px;line-height:1.4}
+.opt.check:focus-within{border-color:var(--ink)}
+.opt.check a{color:var(--accent)}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.done{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.done .badge{width:76px;height:76px;border-radius:50%;background:var(--money);display:grid;place-items:center;margin:0 auto 22px;color:#fff}
+.done .badge svg{width:36px;height:36px}
+.share{display:flex;align-items:center;gap:12px;text-align:left;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--field-r);padding:14px 16px;margin-top:10px}
+.share div{flex:1;min-width:0}
+.share .k{color:var(--sub);font-size:13px;font-weight:600}
+.share .v{font-size:19px;font-weight:800;margin-top:2px;word-break:break-all}
+.copy{flex:none;height:36px;padding:0 16px;border-radius:999px;border:0;background:var(--surface-2);color:var(--ink);font:600 14px var(--font);cursor:pointer}
 
-/* Center text under centered illustrations; hero headline fit */
-.x-cell:has(.x-ill){text-align:center}
-.x-cell:has(.x-ill) .x-n{margin-bottom:8px}
-.x-split .x-in{grid-template-columns:minmax(0,1fr) 400px;gap:56px}
-.x-split h1{font-size:48px;text-wrap:wrap}
 
-/* Hero calculator: bigger, bolder */
-.x-split .x-in{grid-template-columns:minmax(0,1fr) 440px}
-.x-split .x-calc{padding:0;overflow:hidden;border-radius:24px}
-.x-split .x-total{background:#34C759;color:#fff;padding:24px 26px 22px}
-.x-split .x-total .k{color:rgba(255,255,255,.85);font-size:15px;font-weight:600}
-.x-split .x-total .v{color:#fff;font-size:60px;font-weight:800;letter-spacing:-.04em;margin:6px 0 4px}
-.x-split .x-total .per{color:rgba(255,255,255,.9);font-size:16px;font-weight:500}
-.x-split .x-sliders{margin:0;padding:24px 26px 4px;background:none;border-radius:0}
-.x-split .x-sliders .slider{margin-bottom:26px}
-.x-split .slider label{font-size:16px;font-weight:600}
-.x-split .slider label small{font-size:14px}
-.x-split .x-sliders .slider output{font-size:26px;font-weight:800;color:var(--ink)}
-.x-split input[type=range]{height:8px}
-.x-split input[type=range]::-webkit-slider-thumb{width:28px;height:28px}
-.x-split .x-lines{margin:4px 26px 0;padding-top:16px;border-top:1px solid var(--line-2);font-size:15.5px;gap:10px}
-.x-split .x-lines b{font-size:16px}
-.x-split .x-calc .fine{margin:12px 26px 22px;font-size:13px}
-@media (max-width:1100px){.x-split .x-in{grid-template-columns:minmax(0,1fr) 400px}.x-split .x-total .v{font-size:52px}}
-@media (max-width:720px){.x-split .x-total{padding:20px}.x-split .x-total .v{font-size:46px}.x-split .x-sliders{padding:20px 20px 4px}.x-split .x-lines{margin:4px 20px 0}.x-split .x-calc .fine{margin:12px 20px 18px}}
-
-/* Type + colour system pass */
-:root{--money:#16a34a;--display:"Geist",-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,sans-serif}
-body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
-h1,h2,h3,.x-total .v,.slider output,.x-lines b,.dash .v,.v-top b,.v-pay em,.v-note b{font-family:var(--display)}
-.x-split h1{font-size:60px;line-height:1.02;letter-spacing:-.045em;font-weight:700;margin:22px 0 20px}
-.x-split .sub{font-size:20px;line-height:1.5;color:#52525b;margin-bottom:34px}
-.x-split .ctas .btn{height:52px;padding:0 26px;font-size:16px;font-weight:600;border-radius:14px}
-.x-head h2{font-size:46px;letter-spacing:-.04em;font-weight:700}
-.x-head p{font-size:19px;color:#52525b}
-.x-cell h3{font-size:19px;font-weight:600;letter-spacing:-.02em}
-.x-cell p{font-size:16px;color:#52525b}
-.x-final h2{font-weight:700;letter-spacing:-.045em}
-.x-split .x-total{background:var(--money)}
-.x-split .x-total .v{font-weight:700;letter-spacing:-.045em}
-.x-split input[type=range]{background:linear-gradient(to right,var(--money) var(--p,30%),#e5e7eb var(--p,30%))}
-.x-split input[type=range]::-webkit-slider-thumb{box-shadow:0 0 0 1px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.2)}
-.g50{color:var(--money)}
-@media (max-width:1100px){.x-split h1{font-size:52px}}
-@media (max-width:720px){.x-split h1{font-size:40px}.x-split .sub{font-size:17px}.x-head h2{font-size:34px}.x-head p{font-size:17px}}
-
-.x-split h1,.x-split .sub{text-wrap:balance}
-@media (max-width:980px){.x-split .x-in{grid-template-columns:1fr;gap:40px;padding:0 24px}.x-split .x-calc{width:100%;max-width:460px;margin:0 auto}}
-@media (max-width:720px){.x-split .x-in{padding:0 16px}}
-
-/* No grid lines: plain white sections, spaced columns */
-.x-frame{border-left:0;border-right:0}
-.x-grid{display:none}
-.x-sec{border-top:0;padding-top:96px}
-.x-cells{border-top:0;gap:24px;padding:0 48px}
-.x-cell,.x-cell:last-child{border:0!important;padding:8px 8px 0}
-.x-sec .x-cells{padding-bottom:24px}
-.x-faq{padding-top:0}
-footer{border-top:1px solid var(--line-2)}
-@media (max-width:900px){.x-cells{gap:48px;padding:0 20px}}
-@media (max-width:720px){.x-sec{padding-top:72px}}
-
-/* Mobile pass */
-.x-split{position:relative;z-index:2;overflow:visible}
-@media (max-width:900px){
-  .x-cells{gap:56px}
-  .x-ill,.x-ill.sm{height:auto;margin-bottom:18px}
-  .x-cell:has(.x-ill) .x-n{margin-bottom:6px}
-  .x-cell h3{margin-bottom:6px}
-}
-@media (max-width:720px){
-  .x-sec{padding-top:80px}
-  .x-head{margin-bottom:36px}
-  .x-head p{max-width:320px}
-  .x-split .ctas{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .x-split .ctas .btn{width:100%;padding:0 12px}
-  .x-split .x-calc{box-shadow:0 0 0 1px rgba(0,0,0,.08),0 18px 40px -18px rgba(0,0,0,.25)}
-  .x-dashwrap{padding:0 16px 24px}
-  .x-final{padding:96px 20px 96px}
-}
-
-/* ===================== Apple pass ===================== */
-:root{--money:#1d9a4c;--blue:#0071e3;--blue-h:#0077ed;--ink:#1d1d1f;--sub:#6e6e73;--faint:#86868b;--tile:#f5f5f7;--hair:#d2d2d7;
-  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Inter,Helvetica,Arial,sans-serif}
-html,body,body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Inter,Helvetica,Arial,sans-serif;color:#1d1d1f}
-h1,h2,h3,.x-total .v,.slider output,.x-lines b,.dash .v{font-family:var(--display);color:#1d1d1f}
-
-/* Buttons: Apple blue pills, text links with chevron */
-.btn,.mobilebar .btn{height:44px;padding:0 22px;border-radius:980px;background:var(--blue);color:#fff;font-weight:400;font-size:17px;letter-spacing:-.01em;box-shadow:none}
-.btn:hover{background:var(--blue-h);box-shadow:none}
-.sheet .btn{background:#1d1d1f;color:#fff;font-weight:600;height:52px}
-.sheet .btn:hover{background:#000}
-.tlink{display:inline-flex;align-items:center;gap:4px;color:var(--blue);font-size:17px;text-decoration:none;letter-spacing:-.01em}
-.tlink:hover{text-decoration:underline}
-.tlink span{font-size:20px;line-height:1;margin-top:-1px}
-
-/* Nav: Apple local nav */
-.nav{background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
-.nav .container{height:52px;max-width:1024px}
-.brand{font-size:21px;font-weight:600;letter-spacing:-.01em;gap:9px}
-.brand img{width:24px;height:24px;border-radius:6px}
-.brand span{font-weight:400;color:#1d1d1f;opacity:.5}
-.nav .links{gap:4px}
-.nav .links a.plain{font-size:12px;font-weight:400;color:#1d1d1f;opacity:.88;padding:8px 12px;letter-spacing:-.01em}
-.nav .links a.plain:hover{opacity:1;color:var(--blue)}
-.nav .links a.login{display:inline-block}
-.nav .links .btn.small{height:24px;padding:0 11px;font-size:12px;border-radius:980px;margin-left:10px;background:var(--blue);color:#fff;font-weight:400}
-
-/* Hero */
-.x-split{padding:104px 0 112px}
-.x-split .x-in{max-width:1024px;margin:0 auto;padding:0 24px;grid-template-columns:minmax(0,1fr) 420px;gap:64px}
-.x-pill{box-shadow:none;background:none;padding:0;font-size:17px;font-weight:600;color:var(--sub);letter-spacing:-.01em}
-.x-split h1{font-size:64px;line-height:1.05;letter-spacing:-.02em;font-weight:600;margin:14px 0 18px;color:#1d1d1f}
-.x-split .sub{font-size:21px;line-height:1.38;letter-spacing:.011em;color:#1d1d1f;font-weight:400;margin-bottom:32px}
-.x-split .ctas{display:flex;align-items:center;gap:22px}
-.x-split .ctas .btn{height:48px;padding:0 24px;font-size:17px;border-radius:980px}
-.g50{color:var(--money)}
-
-/* Calculator: a tile */
-.x-split .x-calc{background:var(--tile);border-radius:28px;box-shadow:none;padding:30px 30px 26px;overflow:visible}
-.x-split .x-total{background:none;color:#1d1d1f;padding:0 0 22px}
-.x-split .x-total .k{color:var(--sub);font-size:14px;font-weight:600;letter-spacing:-.01em}
-.x-split .x-total .v{color:var(--money);font-size:60px;font-weight:600;letter-spacing:-.03em;margin:6px 0 4px}
-.x-split .x-total .per{color:var(--sub);font-size:15px;font-weight:400}
-.x-split .x-sliders{background:#fff;border-radius:18px;padding:22px 22px 6px;margin:0}
-.x-split .x-sliders .slider{margin-bottom:22px}
-.x-split .slider label{font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em}
-.x-split .slider label small{font-size:13px;color:var(--sub);font-weight:400}
-.x-split .x-sliders .slider output{font-size:24px;font-weight:600;letter-spacing:-.02em}
-.x-split input[type=range]{height:4px;background:linear-gradient(to right,var(--money) var(--p,30%),#e8e8ed var(--p,30%))}
-.x-split input[type=range]::-webkit-slider-thumb{width:26px;height:26px;background:#fff;box-shadow:0 0 0 .5px rgba(0,0,0,.06),0 3px 8px rgba(0,0,0,.18),0 1px 1px rgba(0,0,0,.1)}
-.x-split .x-lines{margin:20px 0 0;padding:0;border:0;font-size:15px;gap:8px}
-.x-split .x-lines span{color:var(--sub)}
-.x-split .x-lines b{font-weight:600;font-size:15px}
-.x-split .x-calc .fine{margin:14px 0 0;color:var(--faint);font-size:12px;line-height:1.45}
-
-/* Sections */
-.x-sec{padding-top:120px}
-.x-head{margin-bottom:44px}
-.x-head h2{font-size:56px;line-height:1.07;letter-spacing:-.02em;font-weight:600;color:#1d1d1f;margin-bottom:12px}
-.x-head p{font-size:21px;line-height:1.38;letter-spacing:.011em;color:#1d1d1f;font-weight:400;max-width:620px}
-.x-head a{color:var(--blue);text-decoration:none}.x-head a:hover{text-decoration:underline}
-
-/* Tiles */
-.x-cells{max-width:1024px;margin:0 auto;padding:0 24px;gap:16px}
-.x-cell,.x-cell:last-child{background:var(--tile);border-radius:28px;padding:36px 28px 40px!important;text-align:center}
-.x-ill,.x-ill.sm{margin-bottom:28px}
-.x-cell .x-n{display:none}
-.x-cell h3{font-size:24px;line-height:1.17;letter-spacing:-.01em;font-weight:600;color:#1d1d1f;margin:0 0 8px}
-.x-cell p{font-size:17px;line-height:1.47;letter-spacing:-.02em;color:#1d1d1f;opacity:.72;max-width:300px;margin:0 auto}
-.ui,.v-earn,.v-book,.v-bio,.v-app,.v-code,.v-post,.v-note,.v-toast,.v-why{box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 10px 30px -12px rgba(0,0,0,.18)}
-
-/* Dashboard preview tile */
-.x-dashwrap{max-width:1024px;margin:0 auto;padding:0 24px 0}
-.x-dashwrap .dash{max-width:none;background:var(--tile);border:0;border-radius:28px;box-shadow:none;padding:32px}
-.dash .c,.dash .chart{box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 6px 18px -8px rgba(0,0,0,.12);border-radius:18px}
-.dash .k{color:var(--sub);font-weight:500}
-.dash .v{font-weight:600;letter-spacing:-.02em}
-.dash .pill{font-weight:500}
-
-/* FAQ */
-.x-faq{max-width:760px;padding:0 24px 0}
-.faq{border-top:1px solid var(--hair)}
-.faq details{border-bottom:1px solid var(--hair)}
-.faq summary{font-size:19px;font-weight:600;letter-spacing:-.01em;color:#1d1d1f;padding:24px 0}
-.faq summary i{width:24px;height:24px;background:none;box-shadow:none;color:var(--blue)}
-.faq summary i svg{width:16px;height:16px}
-.faq details p{font-size:17px;line-height:1.47;color:var(--sub);letter-spacing:-.01em}
-
-/* Final CTA + footer */
-.x-final{padding:140px 24px 140px}
-.x-final h2{font-size:56px;letter-spacing:-.02em;font-weight:600;color:#1d1d1f}
-.x-final p{font-size:21px;line-height:1.38;color:#1d1d1f;letter-spacing:.011em;margin-bottom:30px}
-.x-final .btn{height:48px;padding:0 26px;font-size:17px;border-radius:980px}
-footer{background:var(--tile);border-top:0;padding:28px 0 36px;color:var(--faint);font-size:12px}
-footer .container{max-width:1024px}
-footer a{color:#424245;font-size:12px}footer a:hover{text-decoration:underline}
-
-/* Mobile */
-@media (max-width:1100px){.x-split .x-in{grid-template-columns:minmax(0,1fr) 380px;gap:40px}.x-split h1{font-size:54px}}
-@media (max-width:980px){
-  .x-split{padding:72px 0 80px}
-  .x-split .x-in{grid-template-columns:1fr;gap:44px;text-align:center}
-  .x-split .ctas{justify-content:center}
-  .x-split .x-calc{max-width:480px;margin:0 auto;text-align:left}
-  .x-cells{gap:16px}
-}
-@media (max-width:720px){
-  .nav .container{height:48px}
-  .brand{font-size:19px}
-  .x-split{padding:48px 0 64px}
-  .x-split h1{font-size:40px;letter-spacing:-.02em;margin:10px 0 14px}
-  .x-split .sub{font-size:19px;margin-bottom:24px}
-  .x-split .ctas{display:flex;flex-direction:column;gap:14px}
-  .x-split .ctas .btn{width:auto;min-width:220px}
-  .x-split .x-calc{padding:24px 20px 20px;border-radius:24px}
-  .x-split .x-total .v{font-size:48px}
-  .x-split .x-sliders{padding:18px 16px 4px}
-  .x-sec{padding-top:88px}
-  .x-head{margin-bottom:32px}
-  .x-head h2{font-size:40px}
-  .x-head p{font-size:19px;max-width:340px}
-  .x-cells{padding:0 16px}
-  .x-cell,.x-cell:last-child{padding:32px 20px 36px!important;border-radius:24px}
-  .x-cell h3{font-size:22px}
-  .x-dashwrap{padding:0 16px}
-  .x-dashwrap .dash{padding:16px;border-radius:24px}
-  .x-final{padding:96px 24px 110px}
-  .x-final h2{font-size:40px}
-  .x-final p{font-size:19px}
-  .mobilebar .btn{width:100%;height:50px}
-}
-
-.x-split h1{font-size:58px;text-wrap:normal;max-width:560px}
-.x-split{padding-bottom:88px}
-@media (max-width:1100px){.x-split h1{font-size:50px}}
-@media (max-width:980px){.x-split h1{max-width:640px;margin-left:auto;margin-right:auto;text-wrap:balance}}
-@media (max-width:720px){.x-split h1{font-size:40px}}
-
-/* Apple pass, round 2: keep grey tiles, undo the things that got worse */
-.btn,.mobilebar .btn{background:#1d1d1f;color:#fff;font-weight:600;height:50px;padding:0 26px;font-size:17px}
-.btn:hover{background:#000}
-.x-split .ctas .btn,.x-final .btn{height:52px;padding:0 28px}
-.tlink{color:#1d1d1f;font-weight:600}
-.tlink span{color:var(--faint)}
-.nav .container{height:60px;max-width:1120px}
-.brand{font-size:19px;font-weight:700}
-.brand img{width:28px;height:28px;border-radius:8px}
-.nav .links{gap:6px}
-.nav .links a.plain{font-size:15px;font-weight:500;opacity:.78;padding:10px 12px}
-.nav .links .btn.small{height:36px;padding:0 16px;font-size:14px;margin-left:8px;background:#1d1d1f;font-weight:600}
-.x-split h1{font-weight:700;letter-spacing:-.03em;font-size:60px;font-family:var(--display)}
-.x-split .sub{color:var(--sub);font-size:20px}
-.x-head h2{font-weight:700;letter-spacing:-.03em}
-.x-head p{color:var(--sub);font-size:20px}
-.x-final h2{font-weight:700;letter-spacing:-.03em}
-.x-final p{color:var(--sub);font-size:20px}
-.x-cell h3{font-weight:700;letter-spacing:-.02em}
-.x-cell p{opacity:1;color:var(--sub)}
-.x-split .x-calc{padding:0;overflow:hidden}
-.x-split .x-total{background:var(--money);color:#fff;padding:24px 28px 22px}
-.x-split .x-total .k{color:rgba(255,255,255,.85)}
-.x-split .x-total .v{color:#fff;font-weight:700;font-size:56px}
-.x-split .x-total .per{color:rgba(255,255,255,.9)}
-.x-split .x-sliders{margin:20px 20px 0;padding:20px 20px 6px}
-.x-split .x-sliders .slider output{font-weight:700}
-.x-split .x-lines{margin:18px 24px 0}
-.x-split .x-calc .fine{margin:12px 24px 22px}
-.faq summary i{color:#1d1d1f}
-@media (max-width:1100px){.x-split h1{font-size:52px}}
-@media (max-width:720px){.x-split h1{font-size:40px}.x-split .x-calc{padding:0}.x-split .x-total{padding:20px}.x-split .x-sliders{margin:16px 14px 0;padding:16px 14px 4px}.x-split .x-lines{margin:16px 18px 0}.x-split .x-calc .fine{margin:12px 18px 18px}.nav .container{height:56px}}
-
-/* Heavier type throughout */
-html,body{font-weight:500}
-.x-split h1,.x-head h2,.x-final h2{font-weight:800;letter-spacing:-.035em}
-.x-cell h3{font-weight:800}
-.x-split .sub,.x-head p,.x-final p,.x-cell p{font-weight:500}
-.x-pill{font-weight:700}
-.x-split .x-total .k,.x-split .x-total .per{font-weight:600}
-.x-split .x-total .v{font-weight:800}
-.x-split .slider label{font-weight:700}
-.x-split .slider label small{font-weight:500}
-.x-split .x-sliders .slider output{font-weight:800}
-.x-split .x-lines span{font-weight:500}.x-split .x-lines b{font-weight:700}
-.x-split .x-calc .fine{font-weight:500}
-.nav .links a.plain{font-weight:600;opacity:.85}
-.brand{font-weight:800}.brand span{font-weight:600}
-.btn,.mobilebar .btn,.nav .links .btn.small{font-weight:700}
-.tlink{font-weight:700}
-.faq summary{font-weight:700}
-.faq details p{font-weight:500}
-.dash .k{font-weight:600}.dash .v{font-weight:800}.dash .pill{font-weight:700}
-.ui,.v-earn,.v-book,.v-bio,.v-app,.v-code,.v-post,.v-note,.v-toast,.v-why{font-weight:500}
-.ui b,.v-earn b,.v-book b,.v-bio b,.v-app b,.v-code b,.v-post b,.v-note b,.v-toast b{font-weight:700}
-footer,footer a{font-weight:500}
-
-/* Big repeated CTA bar */
-.x-cta{max-width:1024px;margin:40px auto 0;padding:0 24px}
-.x-ctabtn{display:block;width:100%;border:0;cursor:pointer;border-radius:22px;padding:30px 24px 28px;background:var(--money);color:#fff;text-align:center;font-family:inherit;transition:transform .15s,background .15s,box-shadow .15s;box-shadow:0 18px 40px -18px rgba(29,154,76,.6)}
-.x-ctabtn:hover{background:#178a43;transform:translateY(-1px);box-shadow:0 22px 44px -18px rgba(29,154,76,.7)}
-.x-ctabtn:active{transform:scale(.995)}
-.x-ctabtn b{display:block;font-family:var(--display);font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.x-ctabtn span{display:block;margin-top:8px;font-size:17px;font-weight:600;color:rgba(255,255,255,.88)}
-.x-final .x-cta{margin-top:0;max-width:760px}
-.x-final p{margin-bottom:28px}
-@media (max-width:720px){.x-cta{padding:0 16px;margin-top:28px}.x-ctabtn{padding:24px 18px 22px;border-radius:20px}.x-ctabtn b{font-size:26px}.x-ctabtn span{font-size:15px}}
-@media (max-width:720px){#get{padding-top:88px}}
 </style>
 </head>
 <body>
 
 <header class="nav">
-  <div class="container">
+  <div class="wrap">
     <a class="brand" href="/"><img src="__ROOT__assets/apple-touch-icon.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
       <a class="plain" href="#earn">Earnings</a>
       <a class="plain" href="#how">How it works</a>
       <a class="plain" href="#get">What you get</a>
       <a class="plain" href="#faq">FAQ</a>
-      <a class="plain login" href="/dashboard/">Log in</a>
+      <a class="btn small ghost" href="/dashboard/">Log in</a>
       <button class="btn small" data-open>Join</button>
     </nav>
   </div>
 </header>
 
-<main class="x-frame">
+<main>
 
-<section class="hero x-hero x-split">
-  <div class="x-grid" aria-hidden="true"></div>
-  <div class="x-in">
-    <div class="x-copy">
-      <span class="x-pill">Meal Pic Creators</span>
-      <h1>Earn <span class="g50">50%</span> of every subscription you bring in</h1>
-      <p class="sub">Plus proven reels and a playbook for videos that sell.</p>
-      <div class="ctas">
-        <button class="btn" data-open>Become a creator</button>
-        <a class="tlink" href="#how">How it works <span aria-hidden="true">›</span></a>
-      </div>
-    </div>
-    <div class="x-calc" id="earn">
-      <div class="x-total"><div class="k">In your first year</div><div class="v" id="ry">$0</div><div class="per" id="rp">about $0 a month on average</div></div>
-      <div class="x-sliders">
+<section class="hero">
+  <div class="wrap">
+    <h1 class="h-hero">Earn 50% of every subscription you bring in.</h1>
+    <p class="lede hero-lede">Share Meal Pic. Keep half of every payment, every Friday. Plus proven reels and a playbook for videos that sell.</p>
+    <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
+  </div>
+  <div class="wrap">
+    <div class="rule start hero-rule"><span class="label"><i class="dot"></i>Free to join</span><i></i><span class="label dim">Paid every Friday</span></div>
+    <div class="hero-grid">
+      <div class="card calc" id="earn">
+        <span class="label dim">What you could make</span>
+        <div class="total"><div class="k">In your first year</div><div class="v num" id="ry">$0</div><div class="per" id="rp">about $0 a month on average</div></div>
         <div class="slider">
           <div class="top"><label for="sy">Yearly buyers per month<small id="py">Pay $29.99 once a year</small></label><output id="oy">30</output></div>
           <input type="range" id="sy" min="0" max="100" value="30">
@@ -901,68 +331,82 @@ footer,footer a{font-weight:500}
           <div class="top"><label for="sm">New monthly subscribers per month<small id="pm">Pay $29.99 every month</small></label><output id="om">100</output></div>
           <input type="range" id="sm" min="0" max="200" value="100">
         </div>
+        <div class="lines">
+          <div><span>From yearly buyers</span><b id="ly">$0</b></div>
+          <div><span>From monthly subscribers</span><b id="lm">$0</b></div>
+        </div>
+        <p class="fine small">Assumes everyone stays all year. Refunds don't pay out.</p>
       </div>
-      <div class="x-lines">
-        <div><span>From yearly buyers</span><b id="ly">$0</b></div>
-        <div><span>From monthly subscribers</span><b id="lm">$0</b></div>
+      <div class="pics">
+        <div class="pic"><img src="__ROOT__assets/hand-home-v18.webp" alt=""></div>
+        <div class="pic"><img src="__ROOT__assets/food-hero.jpg" alt=""></div>
+        <div class="pic"><img src="__ROOT__assets/hand-result-v16.webp" alt=""></div>
       </div>
-      <p class="fine">Assumes everyone stays all year. Refunds don't pay out.</p>
     </div>
   </div>
 </section>
 
-<section class="x-sec" id="how">
-  <div class="x-head"><h2>How it works</h2><p>Free. No minimum following.</p></div>
-  <div class="x-cells three">
-    <div class="x-cell"><div class="x-ill sm"><div class="ui v-code"><div class="r"><div><small>Your code</small><b>SARAH</b></div><span class="cp">Copy</span></div><div class="r"><div><small>Your link</small><b>mealpic.app/c/sarah</b></div><span class="cp">Copy</span></div></div></div><span class="x-n">01</span><h3>Get your code</h3><p>Pick one. You get a link too.</p></div>
-    <div class="x-cell"><div class="x-ill sm"><div class="ui v-post"><div class="v-reel1"><img src="__ROOT__assets/food-hero.jpg" alt=""><span class="v-sticker">code SARAH</span></div><div class="v-meta"><span class="who"><span class="v-av"></span>sarahfit</span><p>calories in 2 seconds? <b>code SARAH</b></p><span class="tags"><span class="v-chip">#ad</span><span class="v-chip">#mealpic</span></span></div></div></div><span class="x-n">02</span><h3>Post</h3><p>Say your code or put the link in your bio.</p></div>
-    <div class="x-cell"><div class="x-ill sm"><div class="v-notifs"><div class="ui v-note"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>You got paid $412.50</b><small>Sent to your Venmo</small></div><time>now</time></div><div class="ui v-note b1"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>.</b></div></div><div class="ui v-note b2"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>.</b></div></div></div></div><span class="x-n">03</span><h3>Get paid</h3><p>50% of every payment, every Friday.</p></div>
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="rule start"><span class="label"><i class="dot"></i>01 — How it works</span><i></i><span class="label dim">Free · No minimum following</span></div>
+    <div class="split"><h2 class="h2">Post. Get paid.</h2><p class="lede">Share your code or link. Half of every payment comes to you, every Friday.</p></div>
+    <div class="grid c3">
+      <div class="tile">
+        <div class="stage"><div class="ui v-code"><div class="r"><div><small>Your code</small><b>SARAH</b></div><span class="cp">Copy</span></div><div class="r"><div><small>Your link</small><b>mealpic.app/c/sarah</b></div><span class="cp">Copy</span></div></div></div>
+        <h3 class="h3">Get your code</h3><p class="p">Pick one. You get a link too.</p>
+      </div>
+      <div class="tile">
+        <div class="stage"><div class="ui v-post"><div class="v-reel1"><img src="__ROOT__assets/food-hero.jpg" alt=""><span class="v-sticker">code SARAH</span></div><div class="v-meta"><span class="who"><span class="v-av"></span>sarahfit</span><p>calories in 2 seconds? <b>code SARAH</b></p><span class="tags"><span class="v-chip">#ad</span><span class="v-chip">#mealpic</span></span></div></div></div>
+        <h3 class="h3">Post</h3><p class="p">Say your code or put the link in your bio.</p>
+      </div>
+      <div class="tile">
+        <div class="stage"><div class="v-notifs"><div class="ui v-note"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>You got paid $412.50</b><small>Sent to your Venmo</small></div><time>now</time></div><div class="ui v-note b1"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>.</b></div></div><div class="ui v-note b2"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>.</b></div></div></div></div>
+        <h3 class="h3">Get paid</h3><p class="p">50% of every payment, every Friday.</p>
+      </div>
+    </div>
+    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
-  <div class="x-cta"><button class="x-ctabtn" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
 </section>
 
-<section class="x-sec" id="get">
-  <div class="x-head"><h2>What you get</h2><p>Money, plus the tools to earn it.</p></div>
-  <div class="x-cells three">
-    <div class="x-cell">
-      <div class="x-ill">
-        <div class="ui v-earn">
+<section class="sec" id="get">
+  <div class="wrap">
+    <div class="rule start"><span class="label"><i class="dot"></i>02 — What you get</span><i></i><span class="label dim">Money, plus the tools to earn it</span></div>
+    <div class="split"><h2 class="h2">Not just a cut. A system.</h2><p class="lede">Half of every payment, a library of reels that already worked, and a playbook for making your own.</p></div>
+    <div class="grid c3">
+      <div class="tile">
+        <div class="stage"><div class="ui v-earn">
           <div class="v-top"><span>This week</span><b>+$412.50</b></div>
           <div class="v-bars"><i style="height:34%"></i><i style="height:48%"></i><i style="height:40%"></i><i style="height:62%"></i><i style="height:55%"></i><i style="height:78%"></i><i style="height:100%"></i></div>
           <div class="v-pay"><img src="__ROOT__assets/apple-touch-icon.png" alt=""><div><b>Payout sent</b><small>Friday · Venmo</small></div><em>$412.50</em></div>
-        </div>
+        </div></div>
+        <h3 class="h3">50% of every payment</h3><p class="p">On every renewal, for as long as they stay.</p>
       </div>
-      <h3>50% of every payment</h3><p>On every renewal, for as long as they stay. Paid Fridays.</p>
-    </div>
-    <div class="x-cell">
-      <div class="x-ill">
-        <div class="v-reels">
+      <div class="tile">
+        <div class="stage"><div class="v-reels">
           <div class="v-reel v-crop" style="background-image:url(__ROOT__assets/dish-burger-v11.webp);background-position:36% 9%"><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>2.4M</span></div>
           <div class="v-reel"><img src="__ROOT__assets/food-hero.jpg" alt=""><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>1.1M</span></div>
           <div class="v-reel v-crop" style="background-image:url(__ROOT__assets/dish-sushi-v11.webp)"><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>860K</span></div>
           <span class="v-why"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></i><span><small>Why it worked</small>Question hook in the first second</span></span>
-        </div>
+        </div></div>
+        <h3 class="h3">Library of proven reels</h3><p class="p">Videos that blew up, and why they worked.</p>
       </div>
-      <h3>Library of proven reels</h3><p>Videos that blew up, and why they worked.</p>
-    </div>
-    <div class="x-cell">
-      <div class="x-ill">
-        <div class="ui v-book">
+      <div class="tile">
+        <div class="stage"><div class="ui v-book">
           <div class="v-bh"><span>Playbook</span><small>4 steps</small></div>
           <ol><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Open with a hook</li><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Snap the meal</li><li class="now"><i>3</i>Show the numbers pop up</li><li><i>4</i>End on your code</li></ol>
-        </div>
+        </div></div>
+        <h3 class="h3">Playbook for videos that sell</h3><p class="p">Exactly how to make videos that sell.</p>
       </div>
-      <h3>Playbook for videos that sell</h3><p>Exactly how to make videos that sell.</p>
     </div>
+    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
-  <div class="x-cta"><button class="x-ctabtn" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
 </section>
 
-<section class="x-sec">
-  <div class="x-head"><h2>See every dollar, live</h2><p>Who came through you and what you're owed.</p></div>
-  <div class="x-dashwrap">
-    <div class="dash" aria-hidden="true">
-      <div class="two">
+<section class="sec" id="dash">
+  <div class="wrap">
+    <div class="rule start"><span class="label"><i class="dot"></i>03 — Your dashboard</span><i></i><span class="label dim">Live</span></div>
+    <div class="split"><h2 class="h2">See every dollar.</h2><p class="lede">Who came through you and what you're owed, live.</p></div>
+    <div class="stage dashstage"><div class="dash" aria-hidden="true"><div class="two">
         <div class="c"><span class="di g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><div class="k">Next payout</div><div class="v">$412.50</div><span class="pill pg">Friday</span></div>
         <div class="c"><span class="di b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span><div class="k">Coming in every month</div><div class="v g">$189<small> / mo</small></div><span class="pill pb">19 paid subscribers</span></div>
       </div>
@@ -972,56 +416,62 @@ footer,footer a{font-weight:500}
         <div class="c"><span class="di p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><div class="k">Monthly</div><div class="v">12</div></div>
         <div class="c"><span class="di k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span><div class="k">Yearly</div><div class="v">7</div></div>
       </div>
-      <div class="chart"><i style="height:18%"></i><i style="height:24%"></i><i style="height:20%"></i><i style="height:34%"></i><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:54%"></i><i style="height:66%"></i><i style="height:62%"></i><i style="height:74%"></i><i style="height:70%"></i><i style="height:82%"></i><i style="height:78%"></i><i style="height:92%"></i></div>
-    </div>
+      <div class="chart"><i style="height:18%"></i><i style="height:24%"></i><i style="height:20%"></i><i style="height:34%"></i><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:54%"></i><i style="height:66%"></i><i style="height:62%"></i><i style="height:74%"></i><i style="height:70%"></i><i style="height:82%"></i><i style="height:78%"></i><i style="height:92%"></i></div></div></div>
+    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
-  <div class="x-cta"><button class="x-ctabtn" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
 </section>
 
-<section class="x-sec">
-  <div class="x-head"><h2>You get credit two ways</h2><p>Either way, the sale is yours.</p></div>
-  <div class="x-cells two">
-    <div class="x-cell"><div class="x-ill">
-      <div class="ui v-bio">
+<section class="sec" id="credit">
+  <div class="wrap">
+    <div class="rule start"><span class="label"><i class="dot"></i>04 — Credit</span><i></i><span class="label dim">Two ways</span></div>
+    <div class="split"><h2 class="h2">Either way, the sale is yours.</h2><p class="lede">They tap your link or type your code. Both count.</p></div>
+    <div class="grid c2">
+      <div class="tile">
+        <div class="stage"><div class="ui v-bio">
         <div class="v-prof"><span class="v-av"></span><div><b>sarahfit</b><small>food, gym, what i eat in a day</small></div></div>
         <div class="v-stats"><span><b>128</b>posts</span><span><b>24.1K</b>followers</span><span><b>310</b>following</span></div>
         <span class="v-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>mealpic.app/c/sarah</span>
         <svg class="v-tap" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(0,0,0,.14)"/><circle cx="12" cy="12" r="5" fill="#fff" stroke="rgba(0,0,0,.3)"/></svg>
       </div>
-      <span class="v-toast"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Code filled in: <b>SARAH</b></span>
-    </div><h3>They tap your link</h3><p>Your code fills in for them.</p></div>
-    <div class="x-cell"><div class="x-ill">
-      <div class="ui v-app">
+      <span class="v-toast"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Code filled in: <b>SARAH</b></span></div>
+        <h3 class="h3">They tap your link</h3><p class="p">Your code fills in for them.</p>
+      </div>
+      <div class="tile">
+        <div class="stage"><div class="ui v-app">
         <b>Got a creator code?</b>
         <div class="v-field">SARAH<span class="cur"></span></div>
         <span class="v-ok"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Code applied</span>
         <span class="v-btn">Continue</span>
+      </div></div>
+        <h3 class="h3">Or they type your code</h3><p class="p">The app asks for it at signup.</p>
       </div>
-    </div><h3>Or they type your code</h3><p>The app asks for it at signup.</p></div>
+    </div>
+    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
-  <div class="x-cta"><button class="x-ctabtn" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
 </section>
 
-<section class="x-sec" id="faq">
-  <div class="x-head"><h2>Questions</h2><p>Email <a href="mailto:help@mealpic.app">help@mealpic.app</a>.</p></div>
-  <div class="faq x-faq"><details><summary>How and when do I get paid?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Every Friday, by Venmo, PayPal, Zelle or Cash App.</p></details><details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any payment from someone who used your link or code. Trials count once they pay.</p></details><details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No. They pay the normal price.</p></details><details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join.</p></details><details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Snap a meal, show the calories pop up, end on your code. The playbook covers the rest.</p></details><details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your dashboard, live.</p></details></div>
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="rule start"><span class="label"><i class="dot"></i>05 — Questions</span><i></i><span class="label dim">help@mealpic.app</span></div>
+    <div class="split"><h2 class="h2">Questions.</h2><p class="lede">Email <a href="mailto:help@mealpic.app">help@mealpic.app</a> for anything else.</p></div>
+    <div class="faq faqwrap"><details><summary>How and when do I get paid?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Every Friday, by Venmo, PayPal, Zelle or Cash App.</p></details><details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any payment from someone who used your link or code. Trials count once they pay.</p></details><details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No. They pay the normal price.</p></details><details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join.</p></details><details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Snap a meal, show the calories pop up, end on your code. The playbook covers the rest.</p></details><details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your dashboard, live.</p></details></div>
+  </div>
 </section>
 
-<section class="x-sec x-final">
-  <div class="x-grid" aria-hidden="true"></div>
-  <div class="x-in">
-    <h2>Start earning this week</h2>
-    <p>Takes a minute. Your code works right away.</p>
-    <div class="x-cta"><button class="x-ctabtn" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+<section class="sec final">
+  <div class="wrap">
+    <h2 class="h1">Start earning this week.</h2>
+    <p class="lede">Takes a minute. Your code works right away.</p>
+    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
 </section>
 
 </main>
 
-<footer>
-  <div class="container">
-    <span>© 2026 Meal Pic</span>
-    <span><a href="/dashboard/">Creator login</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="mailto:help@mealpic.app">Contact</a></span>
+<footer class="site">
+  <div class="wrap">
+    <span class="label dim">© 2026 Meal Pic</span>
+    <span class="label dim"><a href="/dashboard/">Creator login</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a><a href="mailto:help@mealpic.app">Contact</a></span>
   </div>
 </footer>
 
@@ -1273,5 +723,6 @@ document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
 // ?start opens the signup straight away (for links that should skip the page).
 if (new URLSearchParams(location.search).has("start")) openFlow();
 </script>
+
 </body>
 </html>

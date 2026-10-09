@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Meal Pic style pack — "Mono"
+   Black type, white page. Colour comes only from pictures.
+   Rules: assets/style/README.md
+   ========================================================================== */
+
+:root{
+  --paper:#fff;
+  --ink:#000;
+  --ink-2:#111;
+  --sub:#6b6b6b;
+  --faint:#9a9a9a;
+  --hair:rgba(0,0,0,.12);
+  --hair-2:rgba(0,0,0,.07);
+  --stage:#f2f2f2;              /* the ONE grey: a stage behind pictures/UI mockups, never behind text */
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --wrap:1200px; --gutter:24px;
+  --r-card:24px; --r-pill:999px;
+  --shadow-ui:0 0 0 1px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04),0 18px 36px -18px rgba(0,0,0,.25);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-weight:500;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+button{font-family:inherit}
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.sec{padding:112px 0 0}
+.sec.tight{padding-top:72px}
+.grid{display:grid;gap:16px}
+.grid.c2{grid-template-columns:repeat(2,1fr)}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
+
+/* ---------- type ---------- */
+.h-hero,.h1,.h2,.h3{font-weight:800;color:var(--ink);margin:0;text-wrap:balance}
+.h-hero{font-size:clamp(56px,9vw,124px);line-height:.94;letter-spacing:-.05em}
+.h1{font-size:clamp(44px,6vw,80px);line-height:.98;letter-spacing:-.045em}
+.h2{font-size:clamp(36px,4.6vw,60px);line-height:1;letter-spacing:-.04em}
+.h3{font-size:24px;line-height:1.15;letter-spacing:-.025em;font-weight:700}
+.lede{font-size:21px;line-height:1.4;letter-spacing:-.015em;color:var(--ink);margin:0;font-weight:500}
+.p{font-size:17px;line-height:1.5;color:var(--sub);margin:0;font-weight:500}
+.small{font-size:14px;color:var(--sub)}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.04em;font-weight:800}
+
+/* mono labels + the hairline rule line: "● LIVE ———— FROM ARTIFACT" */
+.label{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.label.dim{color:var(--sub)}
+.label .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ink);margin-right:8px;vertical-align:1px}
+.rule{display:flex;align-items:center;gap:16px}
+.rule::before,.rule>i{content:"";flex:1;height:1px;background:var(--hair)}
+.rule.start::before{display:none}
+.rule>i{display:block}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 24px;border:0;border-radius:var(--r-pill);background:var(--ink);color:#fff;font:600 17px/1 var(--font);letter-spacing:-.01em;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .15s,background .15s,box-shadow .15s}
+.btn:hover{background:#222}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.35;cursor:default;transform:none}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--hair)}
+.btn.ghost:hover{background:#fff;box-shadow:inset 0 0 0 1px var(--ink)}
+.btn.small{height:40px;padding:0 16px;font-size:15px}
+.btn.circle{width:52px;padding:0}
+.btn.circle svg{width:20px;height:20px}
+/* big full-width bar CTA: <button class="btn bar"><b>Title</b><span>sub</span></button> */
+.btn.bar{display:block;width:100%;height:auto;padding:30px 24px 28px;border-radius:var(--r-card);text-align:center}
+.btn.bar b{display:block;font-size:clamp(26px,3.2vw,36px);font-weight:800;letter-spacing:-.035em;line-height:1.05}
+.btn.bar span{display:block;margin-top:8px;font-size:16px;font-weight:500;color:rgba(255,255,255,.72)}
+.ctas{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* ---------- surfaces ---------- */
+.stage{background:var(--stage);border-radius:var(--r-card);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pic{border-radius:var(--r-card);overflow:hidden;background:var(--stage)}
+.pic img{width:100%;height:100%;object-fit:cover}
+.card{background:#fff;border-radius:var(--r-card);box-shadow:inset 0 0 0 1px var(--hair)}
+.ui{background:#fff;border-radius:18px;box-shadow:var(--shadow-ui)}   /* a UI mockup sitting on a stage */
+.hairline{border-top:1px solid var(--hair)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:-.02em;white-space:nowrap}
+.brand img{width:30px;height:30px;border-radius:8px}
+.brand span{color:var(--sub);font-weight:600}
+.nav .links{display:flex;align-items:center;gap:4px}
+.nav .links a.plain{font-size:15px;font-weight:600;color:var(--ink);opacity:.8;text-decoration:none;padding:10px 12px}
+.nav .links a.plain:hover{opacity:1}
+.nav .links .btn{margin-left:8px}
+
+/* ---------- faq ---------- */
+.faq{border-top:1px solid var(--hair)}
+.faq details{border-bottom:1px solid var(--hair)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-size:20px;font-weight:700;letter-spacing:-.02em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--hair);display:grid;place-items:center;transition:transform .2s}
+.faq summary i svg{width:14px;height:14px}
+.faq details[open] summary i{transform:rotate(45deg)}
+.faq details p{margin:0 0 24px;color:var(--sub);font-size:17px;line-height:1.5;max-width:640px}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--hair);margin-top:120px;padding:28px 0 40px}
+footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer.site a{text-decoration:none;margin-left:20px}
+footer.site a:hover{text-decoration:underline}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .grid.c3,.grid.c2{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr;gap:20px}
+  .nav .links a.plain{display:none}
+}
+@media (max-width:720px){
+  :root{--gutter:16px}
+  .sec{padding-top:72px}
+  .sec.tight{padding-top:48px}
+  .nav .wrap{height:60px}
+  .h3{font-size:22px}
+  .lede{font-size:19px}
+  .btn.bar{padding:24px 18px 22px;border-radius:20px}
+  .faq summary{font-size:18px;padding:20px 0}
+  footer.site{margin-top:80px}
+  footer.site a{margin:0 16px 0 0}
+}
