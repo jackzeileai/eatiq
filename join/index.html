@@ -516,6 +516,36 @@ footer{border-top:1px solid var(--line-2)}
 .x-split .x-sliders .slider output{font-size:20px}
 .x-split .x-lines{margin-top:14px;font-size:14px;gap:6px}
 .x-split .x-calc .fine{margin-top:12px}
+
+/* Hero: final spacing pass */
+.x-split{padding:96px 0}
+.x-split .x-in{grid-template-columns:minmax(0,1fr) 420px;gap:72px;padding:0 64px}
+.x-split h1{font-size:52px;line-height:1.06;letter-spacing:-.035em;margin:20px 0 18px}
+.x-split .sub{font-size:18px;margin:0 0 32px}
+.x-split .ctas{gap:12px}
+.x-split .x-calc{padding:24px}
+.x-split .x-total .k{font-size:13px}
+.x-split .x-total .v{font-size:44px;margin:10px 0 6px}
+.x-split .x-total .per{font-size:14px}
+.x-split .x-sliders{margin-top:20px;padding:20px}
+.x-split .x-sliders .slider{margin-bottom:22px}
+.x-split .slider .top{align-items:flex-start;margin-bottom:12px}
+.x-split .slider label{font-size:14px;line-height:1.3}
+.x-split .slider label small{font-size:12.5px;margin-top:2px}
+.x-split .x-sliders .slider output{font-size:20px;line-height:1.2}
+.x-split input[type=range]{height:5px}
+.x-split input[type=range]::-webkit-slider-thumb{width:22px;height:22px}
+.x-split .x-lines{margin-top:18px;font-size:14px;gap:8px}
+.x-split .x-calc .fine{margin-top:14px;font-size:12px}
+@media (max-width:1100px){.x-split .x-in{grid-template-columns:minmax(0,1fr) 380px;gap:48px;padding:0 40px}.x-split h1{font-size:46px}}
+@media (max-width:980px){.x-split{padding:64px 0}.x-split .x-in{grid-template-columns:1fr;gap:40px;padding:0 24px}.x-split .x-calc{max-width:460px}}
+@media (max-width:720px){.x-split{padding:40px 0 48px}.x-split .x-in{padding:0 16px}.x-split h1{font-size:38px}.x-split .sub{font-size:16.5px;margin-bottom:24px}.x-split .x-calc{padding:20px}.x-split .x-total .v{font-size:40px}}
+
+/* Center text under centered illustrations; hero headline fit */
+.x-cell:has(.x-ill){text-align:center}
+.x-cell:has(.x-ill) .x-n{margin-bottom:8px}
+.x-split .x-in{grid-template-columns:minmax(0,1fr) 400px;gap:56px}
+.x-split h1{font-size:48px;text-wrap:wrap}
 </style>
 </head>
 <body>
@@ -524,9 +554,9 @@ footer{border-top:1px solid var(--line-2)}
   <div class="container">
     <a class="brand" href="/"><img src="../assets/apple-touch-icon.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
-      <a class="plain" href="#get">What you get</a>
       <a class="plain" href="#earn">Earnings</a>
       <a class="plain" href="#how">How it works</a>
+      <a class="plain" href="#get">What you get</a>
       <a class="plain" href="#faq">FAQ</a>
       <a class="btn small line" href="/dashboard/">Log in</a>
       <button class="btn small" data-open>Join</button>
@@ -569,6 +599,15 @@ footer{border-top:1px solid var(--line-2)}
   </div>
 </section>
 
+<section class="x-sec" id="how">
+  <div class="x-head"><h2>How it works</h2><p>Free. No minimum following.</p></div>
+  <div class="x-cells three">
+    <div class="x-cell"><div class="x-ill sm"><div class="v-code"><small>Your code</small><div class="row"><b>YOURCODE</b><span class="cp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</span></div><small class="ln">mealpic.app/c/yourcode</small></div></div><span class="x-n">01</span><h3>Get your code</h3><p>Pick one. You get a link too.</p></div>
+    <div class="x-cell"><div class="x-ill sm"><div class="v-post"><div class="v-reel1" style="background-image:url(../assets/food-hero.jpg)"><span class="v-sticker">use code YOURCODE</span></div><div class="v-meta"><b>@yourname</b><small>calories in 2 seconds?</small><span class="v-chip g">#ad</span></div></div></div><span class="x-n">02</span><h3>Post</h3><p>Say your code or put the link in your bio.</p></div>
+    <div class="x-cell"><div class="x-ill sm"><div class="v-notifs"><div class="v-note"><span class="d">$</span><div><b>Meal Pic paid you $412.50</b><small>Friday</small></div></div><div class="v-note back"><span class="d">$</span><div><b>Meal Pic paid you $388.00</b><small>Last Friday</small></div></div></div></div><span class="x-n">03</span><h3>Get paid</h3><p>50% of every payment, every Friday.</p></div>
+  </div>
+</section>
+
 <section class="x-sec" id="get">
   <div class="x-head"><h2>What you get</h2><p>Money, plus the tools to earn it.</p></div>
   <div class="x-cells three">
@@ -602,15 +641,6 @@ footer{border-top:1px solid var(--line-2)}
       </div>
       <h3>Playbook for videos that sell</h3><p>Exactly how to make videos that sell.</p>
     </div>
-  </div>
-</section>
-
-<section class="x-sec" id="how">
-  <div class="x-head"><h2>How it works</h2><p>Free. No minimum following.</p></div>
-  <div class="x-cells three">
-    <div class="x-cell"><div class="x-ill sm"><div class="v-code"><small>Your code</small><div class="row"><b>YOURCODE</b><span class="cp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</span></div><small class="ln">mealpic.app/c/yourcode</small></div></div><span class="x-n">01</span><h3>Get your code</h3><p>Pick one. You get a link too.</p></div>
-    <div class="x-cell"><div class="x-ill sm"><div class="v-post"><div class="v-reel1" style="background-image:url(../assets/food-hero.jpg)"><span class="v-sticker">use code YOURCODE</span></div><div class="v-meta"><b>@yourname</b><small>calories in 2 seconds?</small><span class="v-chip g">#ad</span></div></div></div><span class="x-n">02</span><h3>Post</h3><p>Say your code or put the link in your bio.</p></div>
-    <div class="x-cell"><div class="x-ill sm"><div class="v-notifs"><div class="v-note"><span class="d">$</span><div><b>Meal Pic paid you $412.50</b><small>Friday</small></div></div><div class="v-note back"><span class="d">$</span><div><b>Meal Pic paid you $388.00</b><small>Last Friday</small></div></div></div></div><span class="x-n">03</span><h3>Get paid</h3><p>50% of every payment, every Friday.</p></div>
   </div>
 </section>
 
