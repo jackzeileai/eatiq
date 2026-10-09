@@ -60,6 +60,14 @@ References: shopify.design (giant black grotesk, white space, mono labels, image
 
 Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`.
 
+## Before every edit (read this, then edit)
+
+1. Re-read the rules above. An edit never lowers a weight, adds a colour, or adds a second grey.
+2. Pictures: one render per spot, never the same render twice on one screen.
+3. Floating objects live in the margins, outside the text column, never over words or buttons.
+4. Keep the layout Jack approved (hero: words left, one-slider calculator right, three tiles under). Change the content, not the structure, unless he asks.
+5. Screenshot desktop and phone after every change and look at it before pushing.
+
 ## The house moves (Jack-approved, 2026-10-09)
 
 - **Giant headline with 3D objects floating around the edges** and a floating glass nav pill (lab C hero). Objects sit in the margins, never over the words.

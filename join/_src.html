@@ -14,7 +14,7 @@ __THEME_COLOR__
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="__ROOT__assets/style/mono.css?v=62a9ca6x">
+<link rel="stylesheet" href="__ROOT__assets/style/mono.css?v=9933a94y">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -318,6 +318,26 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .q-foot{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:13px;font-weight:600;color:var(--sub)}
 .giant{padding-bottom:140px}
 @media (max-width:720px){.quick{margin-top:24px;padding:18px 18px 14px}.q-top b{font-size:32px}.q-foot span:first-child{display:none}.giant{padding-bottom:56px}}
+
+/* ---------- hero: copy left, calculator right ---------- */
+.split-hero{text-align:left;padding:64px 0 120px}
+.hero-cols{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(360px,.85fr);gap:56px;align-items:center}
+.split-hero .h-hero{font-size:clamp(52px,7.6vw,118px);line-height:.9;max-width:none}
+.split-hero .lede{margin:28px 0 0;max-width:520px}
+.split-hero .ctas{justify-content:flex-start;margin-top:30px}
+.split-hero .quick{margin:0;max-width:none;padding:30px 30px 26px;border-radius:28px;background:#fff}
+.split-hero .quick .label{display:block;margin-bottom:14px}
+.q-big{display:block;font-size:clamp(56px,6vw,88px);line-height:1;letter-spacing:-.055em}
+.q-per{display:block;font-size:17px;font-weight:600;color:var(--sub);margin:8px 0 26px}
+.split-hero .q-top{margin-bottom:14px;padding-top:22px;border-top:1px solid var(--hair)}
+.split-hero .giant-f2{display:none}
+.split-hero .float{width:clamp(90px,11vw,170px)}
+.split-hero .f1{left:-11%;top:-30px}
+.split-hero .f3{left:-11%;bottom:-20px}
+.split-hero .f4{right:-11%;bottom:-70px;width:clamp(110px,12vw,190px)}
+@media (max-width:1320px){.split-hero .float{display:none}}
+@media (max-width:900px){.split-hero{text-align:center;padding:48px 0 56px}.hero-cols{grid-template-columns:1fr;gap:36px}.split-hero .lede{margin:24px auto 0}.split-hero .ctas{justify-content:center}.split-hero .quick{text-align:left;max-width:520px;margin:0 auto;width:100%}}
+@media (max-width:720px){.split-hero .quick{padding:22px 20px 18px;border-radius:24px}}
 </style>
 </head>
 <body>
@@ -337,19 +357,25 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 
 <main>
 
-<section class="hero giant">
+<section class="hero giant split-hero">
   <div class="wrap">
     <img class="float f1" src="__ROOT__assets/lab/burger_t.png" alt="">
-    <img class="float f2" src="__ROOT__assets/lab/avocado_t.png" alt="">
-    <img class="float f3" src="__ROOT__assets/lab/money_t.png" alt="">
+    <img class="float f3" src="__ROOT__assets/lab/avocado_t.png" alt="">
     <img class="float f4" src="__ROOT__assets/lab/memoji_ramen_t.png" alt="">
-    <h1 class="h-hero">Make videos.<br>Get 50% of revenue.</h1>
-    <p class="lede">Promote Meal Pic. Half of what every person you bring in pays is yours, for as long as they stay.</p>
-    <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
-    <div class="quick glass card" id="earn">
-      <div class="q-top"><label for="sm"><output id="om">100</output> monthly subscribers</label><b class="num" id="rm">$0</b></div>
-      <input type="range" id="sm" min="0" max="500" value="100" step="10">
-      <div class="q-foot"><span>Drag it</span><span id="pm"></span><span>You make this every month</span></div>
+    <div class="hero-cols">
+      <div class="hero-copy">
+        <h1 class="h-hero">Make videos.<br>Get 50% of revenue.</h1>
+        <p class="lede">Promote Meal Pic. Half of what every person you bring in pays is yours, for as long as they stay.</p>
+        <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
+      </div>
+      <div class="quick card" id="earn">
+        <span class="label dim">What you'd make</span>
+        <b class="num q-big" id="rm">$0</b>
+        <span class="q-per">every month</span>
+        <div class="q-top"><label for="sm"><output id="om">100</output> monthly subscribers</label></div>
+        <input type="range" id="sm" min="0" max="500" value="100" step="10">
+        <div class="q-foot"><span id="pm"></span><span>Drag it</span></div>
+      </div>
     </div>
   </div>
 </section>
