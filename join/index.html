@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Geist:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ---------- tokens ---------- */
 :root{
@@ -546,6 +546,50 @@ footer{border-top:1px solid var(--line-2)}
 .x-cell:has(.x-ill) .x-n{margin-bottom:8px}
 .x-split .x-in{grid-template-columns:minmax(0,1fr) 400px;gap:56px}
 .x-split h1{font-size:48px;text-wrap:wrap}
+
+/* Hero calculator: bigger, bolder */
+.x-split .x-in{grid-template-columns:minmax(0,1fr) 440px}
+.x-split .x-calc{padding:0;overflow:hidden;border-radius:24px}
+.x-split .x-total{background:#34C759;color:#fff;padding:24px 26px 22px}
+.x-split .x-total .k{color:rgba(255,255,255,.85);font-size:15px;font-weight:600}
+.x-split .x-total .v{color:#fff;font-size:60px;font-weight:800;letter-spacing:-.04em;margin:6px 0 4px}
+.x-split .x-total .per{color:rgba(255,255,255,.9);font-size:16px;font-weight:500}
+.x-split .x-sliders{margin:0;padding:24px 26px 4px;background:none;border-radius:0}
+.x-split .x-sliders .slider{margin-bottom:26px}
+.x-split .slider label{font-size:16px;font-weight:600}
+.x-split .slider label small{font-size:14px}
+.x-split .x-sliders .slider output{font-size:26px;font-weight:800;color:var(--ink)}
+.x-split input[type=range]{height:8px}
+.x-split input[type=range]::-webkit-slider-thumb{width:28px;height:28px}
+.x-split .x-lines{margin:4px 26px 0;padding-top:16px;border-top:1px solid var(--line-2);font-size:15.5px;gap:10px}
+.x-split .x-lines b{font-size:16px}
+.x-split .x-calc .fine{margin:12px 26px 22px;font-size:13px}
+@media (max-width:1100px){.x-split .x-in{grid-template-columns:minmax(0,1fr) 400px}.x-split .x-total .v{font-size:52px}}
+@media (max-width:720px){.x-split .x-total{padding:20px}.x-split .x-total .v{font-size:46px}.x-split .x-sliders{padding:20px 20px 4px}.x-split .x-lines{margin:4px 20px 0}.x-split .x-calc .fine{margin:12px 20px 18px}}
+
+/* Type + colour system pass */
+:root{--money:#16a34a;--display:"Geist",-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,sans-serif}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+h1,h2,h3,.x-total .v,.slider output,.x-lines b,.dash .v,.v-top b,.v-code .row b{font-family:var(--display)}
+.x-split h1{font-size:60px;line-height:1.02;letter-spacing:-.045em;font-weight:700;margin:22px 0 20px}
+.x-split .sub{font-size:20px;line-height:1.5;color:#52525b;margin-bottom:34px}
+.x-split .ctas .btn{height:52px;padding:0 26px;font-size:16px;font-weight:600;border-radius:14px}
+.x-head h2{font-size:46px;letter-spacing:-.04em;font-weight:700}
+.x-head p{font-size:19px;color:#52525b}
+.x-cell h3{font-size:19px;font-weight:600;letter-spacing:-.02em}
+.x-cell p{font-size:16px;color:#52525b}
+.x-final h2{font-weight:700;letter-spacing:-.045em}
+.x-split .x-total{background:var(--money)}
+.x-split .x-total .v{font-weight:700;letter-spacing:-.045em}
+.x-split input[type=range]{background:linear-gradient(to right,var(--money) var(--p,30%),#e5e7eb var(--p,30%))}
+.x-split input[type=range]::-webkit-slider-thumb{box-shadow:0 0 0 1px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.2)}
+.g50{color:var(--money)}
+@media (max-width:1100px){.x-split h1{font-size:52px}}
+@media (max-width:720px){.x-split h1{font-size:40px}.x-split .sub{font-size:17px}.x-head h2{font-size:34px}.x-head p{font-size:17px}}
+
+.x-split h1,.x-split .sub{text-wrap:balance}
+@media (max-width:980px){.x-split .x-in{grid-template-columns:1fr;gap:40px;padding:0 24px}.x-split .x-calc{width:100%;max-width:460px;margin:0 auto}}
+@media (max-width:720px){.x-split .x-in{padding:0 16px}}
 </style>
 </head>
 <body>
