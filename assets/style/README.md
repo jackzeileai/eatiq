@@ -80,3 +80,7 @@ Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`
 - Three white hairline tiles in a row, each holding one 3D object, bold caption and two short lines under each (UglyCash, our `.tile`).
 - Tiny bold labels hanging off huge type (Shopify "Toronto — ONTARIO, CANADA").
 - Words, two pills, one object (Apple).
+
+## Logo
+
+Use the line mark (`assets/mark-black.png`, `mark-white.png` on dark) next to the wordmark in navs. Not the rounded app-icon square. Jack: "I like this logo way more."
