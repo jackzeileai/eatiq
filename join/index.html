@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style/mono.css?v=34c421az">
+<link rel="stylesheet" href="../assets/style/mono.css?v=1791571669">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -363,6 +363,32 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .split-hero .quick input[type=range]::-webkit-slider-thumb{width:34px;height:34px;box-shadow:0 0 0 1.5px var(--ink),0 4px 10px rgba(0,0,0,.25)}
 .split-hero .quick input[type=range]::-moz-range-thumb{width:34px;height:34px}
 @media (max-width:720px){.q-big{font-size:56px}}
+
+/* ---------- hero floats v2: anchored to the calculator, always fully on screen ---------- */
+.split-hero .float{display:block;filter:none}
+.split-hero .quick-wrap{position:relative}
+.split-hero .hero-cols>.quick{position:relative}
+.split-hero .f1{left:auto;right:-36px;top:-92px;bottom:auto;width:150px;transform:rotate(10deg)}
+.split-hero .f3{left:auto;right:auto;top:auto;bottom:-110px;left:-40px;width:130px;transform:rotate(-8deg)}
+.split-hero .f4{left:auto;right:-30px;top:auto;bottom:-150px;width:150px;transform:rotate(-4deg)}
+@media (max-width:1100px){.split-hero .f1{right:-10px}.split-hero .f4{right:-6px}}
+@media (max-width:900px){.split-hero .float{display:none}}
+
+/* ---------- light CTA row instead of the black slab ---------- */
+.cta-row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 24px 22px 32px;border-radius:var(--r-card);box-shadow:inset 0 0 0 1px var(--hair);background:#fff}
+.cta-row b{display:block;font-size:24px;font-weight:800;letter-spacing:-.03em}
+.cta-row span{display:block;margin-top:4px;font-size:15px;font-weight:600;color:var(--sub)}
+.final .cta-row{max-width:720px;margin:0 auto;text-align:left}
+@media (max-width:720px){.cta-row{flex-direction:column;align-items:stretch;text-align:center;padding:22px 18px}.cta-row .btn{width:100%}}
+
+/* ---------- tile sizes: smaller, picture fills the frame ---------- */
+.tile .stage{aspect-ratio:auto;height:280px;padding:24px}
+.grid.c2 .tile .stage{height:340px}
+.reelsgrid{padding:0!important}
+.reelsgrid img{width:100%;height:100%;object-fit:cover;object-position:center;transform:none}
+@media (max-width:720px){.tile .stage,.grid.c2 .tile .stage{height:240px}}
+.tile .stage.dark{padding:0}
+.tile .stage.dark img{width:100%;height:100%;object-fit:cover}
 </style>
 </head>
 <body>
@@ -384,9 +410,6 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 
 <section class="hero giant split-hero">
   <div class="wrap">
-    <img class="float f1" src="../assets/lab/burger_t.png" alt="">
-    <img class="float f3" src="../assets/lab/avocado_t.png" alt="">
-    <img class="float f4" src="../assets/lab/memoji_ramen_t.png" alt="">
     <div class="hero-cols">
       <div class="hero-copy">
         <h1 class="h-hero">Make videos.<br>Get 50% of revenue.</h1>
@@ -394,6 +417,10 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
         <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
       </div>
       <div class="quick card" id="earn">
+  <img class="float f1" src="../assets/lab/burger_t.png" alt="">
+  <img class="float f3" src="../assets/lab/avocado_t.png" alt="">
+  <img class="float f4" src="../assets/lab/memoji_ramen_t.png" alt="">
+
         <span class="label dim">What you'd make</span>
         <b class="num q-big" id="rm">$0</b>
         <span class="q-per">every month · <b id="ryr">$0</b> a year</span>
@@ -412,7 +439,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
       <div class="tile"><div class="stage white"><img src="../assets/lab/fifty_t.png" alt=""></div><h3 class="h3">50% is yours.</h3><p class="lede sub">Of all revenue from everyone who signs up with your link or code.</p></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/money_t.png" alt=""></div><h3 class="h3">Get paid.</h3><p class="lede sub">Every Friday. Venmo, PayPal, Zelle or Cash App.</p></div>
     </div>
-    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+    <div class="ctabar"><div class="cta-row"><div><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></div><button class="btn" data-open>Join now</button></div></div>
   </div>
 </section>
 
@@ -420,11 +447,12 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="wrap">
     <div class="rule start"><span class="label"><i class="dot"></i>01 — What you get</span><i></i><span class="label dim">Money, plus the tools to earn it</span></div>
     <div class="split"><h2 class="h2">Not just a cut. A system.</h2><p class="lede">A library of reels that already worked, a playbook for making your own, and a live dashboard of every dollar.</p></div>
-    <div class="grid c2">
+    <div class="grid c3">
             <div class="tile"><div class="stage dark reelsgrid"><img src="../assets/lab/reels_grid.jpg" alt=""></div><h3 class="h3">Proven reels.</h3><p class="lede sub">Videos that blew up, and why.</p></div>
       <div class="tile"><div class="stage"><img src="../assets/lab/playbook_t.png" alt=""></div><h3 class="h3">The playbook.</h3><p class="lede sub">Exactly how to make videos that sell.</p></div>
+      <div class="tile"><div class="stage"><img src="../assets/hero-v14.webp" alt=""></div><h3 class="h3">An app people keep.</h3><p class="lede sub">Snap a meal, see the calories. Easy to show on camera.</p></div>
     </div>
-    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+    <div class="ctabar"><div class="cta-row"><div><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></div><button class="btn" data-open>Join now</button></div></div>
   </div>
 </section>
 
@@ -432,11 +460,12 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="wrap">
     <div class="rule start"><span class="label"><i class="dot"></i>02 — Credit</span><i></i><span class="label dim">Two ways</span></div>
     <div class="split"><h2 class="h2">Either way, the sale is yours.</h2><p class="lede">They tap your link or type your code. Both count.</p></div>
-    <div class="grid c2">
+    <div class="grid c3">
       <div class="tile"><div class="stage white"><img src="../assets/lab/phone_link_t.png" alt=""></div><h3 class="h3">They tap your link.</h3><p class="lede sub">Your code fills in for them.</p></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">Or they type your code.</h3><p class="lede sub">The app asks for it at signup.</p></div>
+      <div class="tile"><div class="stage dark"><img src="../assets/lab/memoji_filming.jpg" alt=""></div><h3 class="h3">It's tracked to you.</h3><p class="lede sub">Every payment shows on your dashboard.</p></div>
     </div>
-    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+    <div class="ctabar"><div class="cta-row"><div><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></div><button class="btn" data-open>Join now</button></div></div>
   </div>
 </section>
 
@@ -453,7 +482,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
     <div class="object3d"><img class="crew" src="../assets/lab/creators_t.png" alt=""></div>
     <h2 class="h1">Start this week.</h2>
     <p class="lede">Takes a minute. Your code works right away.</p>
-    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+    <div class="ctabar"><div class="cta-row"><div><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></div><button class="btn" data-open>Join now</button></div></div>
   </div>
 </section>
 
