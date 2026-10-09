@@ -19,9 +19,9 @@ References: shopify.design (giant black grotesk, white space, mono labels, image
 2. **Colour comes only from pictures**: food photos, app screenshots, UI mockups, 3D renders, memoji, big emoji, video. If something needs colour, make it a picture.
 3. **One picture does the talking.** The hero is words, two pills, then one big object (`.hero-apple`). Not a collage, not a wall.
 4. **One grey, one job.** `--stage` (#f2f2f2, or #161618 on dark) is a stage behind pictures and UI mockups. Never put a block of text on it.
-5. **One button.** Black pill, white text (`.btn`); on dark it flips to white. Secondary is the outlined pill (`.btn.ghost`). Big page-wide CTA is `.btn.bar`.
+5. **One button, Apple's.** 56px pill, 18px medium text, roomy padding. Black on white, white on black (`.btn`). Secondary is the same pill outlined 1.5px with no fill (`.btn.ghost`). Big page-wide CTA is `.btn.bar`.
 6. **One typeface, used big and heavy.** Inter. Headlines 800 and tight (-.04em to -.05em), bigger than feels safe. Body is 17px semibold (600). If it looks thin, it is thin: go up a weight.
-7. **Mono labels for structure.** Tiny uppercase monospace labels with a hairline rule (`.rule` + `.label`) replace coloured eyebrows, pills and icons.
+7. **Small bold labels for structure.** Tiny uppercase Inter labels (800, letter-spaced) with a hairline rule (`.rule` + `.label`) replace coloured eyebrows, pills and icons. Not monospace — Jack said it felt off-brand.
 8. **Hairlines, not shadows.** Cards get a 1px hairline (`.card`). Only UI mockups and 3D objects get a soft shadow (`.ui`, `.object3d`).
 8b. **Liquid glass for anything that floats**: the nav, sticky bars, chips sitting on pictures, sheets (`.glass`). Translucent, blurred, bright inner edge.
 9. **No gradients, no washes, no glows.** Emoji and memoji are welcome, but only big, as the picture (`.emoji`), never as bullet decoration next to text.
@@ -70,5 +70,5 @@ Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`
 
 - A giant number or word as the graphic, with a few 3D objects / emoji floating around it (Shopify "26").
 - Three light tiles in a row, each holding one picture or mockup, bold caption and two short lines under each (UglyCash, our `.tile`).
-- Tiny mono labels hanging off huge type (Shopify "Toronto — ONTARIO, CANADA").
+- Tiny bold labels hanging off huge type (Shopify "Toronto — ONTARIO, CANADA").
 - Words, two pills, one object (Apple).
