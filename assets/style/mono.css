@@ -84,12 +84,13 @@ button{font-family:inherit}
 /* ---------- nav ---------- */
 .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:-.02em;white-space:nowrap}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:800;font-size:20px;letter-spacing:-.03em;white-space:nowrap}
 .brand img{width:30px;height:30px;border-radius:8px}
-.brand span{color:var(--sub);font-weight:600}
+.brand span{color:var(--sub);font-weight:800;margin-left:-3px}
 .nav .links{display:flex;align-items:center;gap:4px}
-.nav .links a.plain{font-size:15px;font-weight:700;color:var(--ink);opacity:.8;text-decoration:none;padding:10px 12px}
-.nav .links a.plain:hover{opacity:1}
+.nav .links a.plain{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink);text-decoration:none;padding:10px 14px;transition:color .15s}
+.nav .links a.plain:hover{color:var(--sub)}
+.nav .links .btn.small{font-weight:600;letter-spacing:-.01em}
 .nav .links .btn{margin-left:8px}
 
 

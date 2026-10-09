@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/style/mono.css?v=1791571669">
+<link rel="stylesheet" href="../../assets/style/mono.css?v=1791580000">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -354,7 +354,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .final .lede{margin:16px auto 40px}
 @media (max-width:720px){.sec{padding-top:80px}.sec .split{margin:28px auto 36px}.ctabar{margin-top:36px}.final{padding-top:80px}}
 
-.q-big{font-size:clamp(64px,7vw,104px);letter-spacing:-.06em}
+.q-big{font-size:clamp(56px,5.4vw,84px);letter-spacing:-.05em}
 .q-big.pop{animation:qpop .28s cubic-bezier(.2,.9,.3,1.4)}
 @keyframes qpop{40%{transform:scale(1.045)}100%{transform:scale(1)}}
 .q-per b{color:var(--ink);font-weight:800}
@@ -417,7 +417,8 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .btn.bar.outline b{font-size:24px}
   .btn.bar.outline span{font-size:14px}
 }
-.split-hero .h-hero{font-size:clamp(46px,5.6vw,92px);white-space:normal}
+.split-hero .h-hero{font-size:clamp(44px,4.6vw,68px);line-height:1;letter-spacing:-.035em;white-space:normal}
+.split-hero .h-hero .two{display:block;color:var(--sub)}
 @media (max-width:720px){.split-hero .h-hero{font-size:44px}}
 .brand img.mark{width:30px;height:30px;border-radius:0}
 </style>
@@ -443,7 +444,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="wrap">
     <div class="hero-cols">
       <div class="hero-copy">
-        <h1 class="h-hero">Make videos.<br>Get 50% of revenue.</h1>
+        <h1 class="h-hero">Make videos.<span class="two">Get 50% of revenue.</span></h1>
         <p class="lede">Promote Meal Pic. Half of what every person you bring in pays is yours, for as long as they stay.</p>
         <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
       </div>

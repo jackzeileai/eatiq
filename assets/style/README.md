@@ -75,6 +75,9 @@ Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`
 - **3D clay illustration style** for objects: soft matte, saturated props, white or black background, generated per section (never reuse one render twice on a page).
 - **People are Apple Memoji, not Bitmoji.** Jack: "I like memojis, not bitmojis." Memoji = Apple's Animoji look: oversized head, smooth glossy skin, simple dot-like features, little or no body. Not the Pixar / Snapchat Bitmoji cartoon kid with a full body and detailed clothes. The current ring-light guy and code girl lean Bitmoji; replace them when credits allow.
 
+- **Two-tone headline** (Apple): first sentence black, second in the grey. Sized so each sentence sits on one line; don't make it wall-sized.
+- **Nav type:** wordmark 800 with "Creators" the same weight in grey; links 600 solid black (hover goes grey); Join 600.
+
 ## Moves worth stealing
 
 - A giant number or word as the graphic, with a few 3D objects / emoji floating around it (Shopify "26").
