@@ -304,100 +304,6 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   .step .foot{padding:12px 20px max(16px,env(safe-area-inset-bottom))}
   .step h3{font-size:28px}
 }
-
-/* ---------- v3 landing (modelled on Dub's partner page) ---------- */
-.btn.line{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
-.btn.line:hover{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 30%,transparent)}
-.nav .links .btn.small{height:36px;padding:0 16px;font-size:14px;border-radius:10px}
-.nav .links .btn.line{margin-left:6px}
-.x-frame{max-width:1120px;margin:0 auto;border-left:1px solid var(--line-2);border-right:1px solid var(--line-2)}
-.x-in{position:relative;z-index:2}
-.x-grid{position:absolute;inset:0;background-image:linear-gradient(var(--line-2) 1px,transparent 1px),linear-gradient(90deg,var(--line-2) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(70% 60% at 50% 30%,#000 30%,transparent 80%);mask-image:radial-gradient(70% 60% at 50% 30%,#000 30%,transparent 80%);pointer-events:none}
-.x-wash{position:absolute;inset:auto 0 0 0;height:70%;background:radial-gradient(45% 70% at 22% 100%,rgba(52,199,89,.20),transparent 70%),radial-gradient(40% 70% at 55% 100%,rgba(255,149,0,.14),transparent 70%),radial-gradient(45% 70% at 85% 100%,rgba(255,45,85,.16),transparent 70%);pointer-events:none}
-.x-wash.low{height:80%}
-.x-hero{text-align:center;padding:88px 0 0;background:var(--bg)}
-.x-pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);padding:5px 12px 5px 6px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);background:var(--surface)}
-.x-pill img{width:20px;height:20px;border-radius:6px}
-.x-hero h1{font-size:64px;line-height:1.04;letter-spacing:-.035em;font-weight:600;margin:24px auto 20px;max-width:900px}
-.x-hero .sub{font-size:19px;line-height:1.55;color:var(--sub);margin:0 auto 32px;max-width:600px}
-.x-hero .ctas{justify-content:center}
-.x-hero .ctas .btn{height:48px;padding:0 22px;font-size:16px;border-radius:12px}
-.x-wall{position:relative;display:flex;justify-content:center;gap:16px;margin-top:64px;padding:6px 0 56px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
-.x-reel{position:relative;z-index:1;flex:none;width:168px;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--surface-2);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 20px 40px -20px rgba(0,0,0,.35)}
-.x-reel:nth-child(odd){transform:translateY(28px)}
-.x-reel img{width:100%;height:100%;object-fit:cover;display:block}
-.x-earn{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(255,255,255,.94);border-radius:12px;padding:8px 10px;text-align:left;font-size:11px;color:var(--sub);font-weight:500;line-height:1.25;box-shadow:0 4px 14px rgba(0,0,0,.12)}
-.x-earn b{display:block;font-size:15px;color:var(--money);font-weight:700}
-.x-sec{position:relative;border-top:1px solid var(--line-2);padding:88px 0 0}
-.x-head{text-align:center;padding:0 24px;margin-bottom:48px}
-.x-head h2{font-size:44px;line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:0 0 12px}
-.x-head p{font-size:18px;line-height:1.55;color:var(--sub);margin:0 auto;max-width:600px}
-.x-head a{color:var(--ink)}
-.x-cells{display:grid;border-top:1px solid var(--line-2)}
-.x-cells.three{grid-template-columns:repeat(3,1fr)}
-.x-cells.two{grid-template-columns:repeat(2,1fr)}
-.x-cell{padding:32px;border-right:1px solid var(--line-2)}
-.x-cell:last-child{border-right:0}
-.x-cell h3{font-size:18px;font-weight:600;letter-spacing:-.01em;margin:0 0 8px}
-.x-cell p{margin:0;color:var(--sub);font-size:15.5px;line-height:1.55}
-.x-cell .linkdemo{display:inline-block;margin-top:16px;font-weight:600;font-size:14px;padding:7px 11px;border-radius:9px;box-shadow:inset 0 0 0 1px var(--line);background:var(--surface)}
-.x-n{display:block;font-size:13px;font-weight:600;color:var(--faint);font-variant-numeric:tabular-nums;margin-bottom:28px;letter-spacing:.04em}
-.x-ill{position:relative;height:190px;margin-bottom:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-.x-chip{display:flex;align-items:center;gap:10px;width:220px;padding:10px 12px;border-radius:14px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 8px 20px -10px rgba(0,0,0,.2);text-align:left}
-.x-chip.off{width:200px;opacity:.65}.x-chip.off2{width:180px;opacity:.35}
-.x-chip .d{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:14px;color:#fff;background:var(--green,#34C759)}
-.x-chip b{display:block;font-size:14px;color:var(--money)}
-.x-chip small{display:block;font-size:12px;color:var(--sub)}
-.x-minis{display:flex;gap:10px}
-.x-minis img{width:72px;aspect-ratio:9/16;object-fit:cover;border-radius:10px;box-shadow:0 0 0 1px var(--line-2),0 10px 20px -12px rgba(0,0,0,.35)}
-.x-minis img:nth-child(2){transform:translateY(-10px)}
-.x-tag{font-size:12px;color:var(--sub);padding:6px 10px;border-radius:999px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 6px 16px -10px rgba(0,0,0,.25)}
-.x-tag b{color:var(--ink);font-weight:600}
-.x-steps{list-style:none;margin:0;padding:12px;width:260px;border-radius:16px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 10px 24px -14px rgba(0,0,0,.25);display:grid;gap:4px;text-align:left}
-.x-steps li{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;padding:6px}
-.x-steps i{font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;background:var(--orange,#FF9500)}
-.x-steps li:nth-child(1) i{background:var(--pink,#FF2D55)}.x-steps li:nth-child(4) i{background:var(--green,#34C759)}
-.x-calc{max-width:640px;margin:0 auto 88px;padding:28px;border-radius:20px;background:var(--surface);box-shadow:0 0 0 1px var(--line-2),0 24px 48px -28px rgba(0,0,0,.25)}
-.x-total .k{font-size:14px;font-weight:600;color:var(--sub)}
-.x-total .v{font-size:56px;font-weight:700;letter-spacing:-.035em;line-height:1;margin:8px 0 6px;color:var(--money);font-variant-numeric:tabular-nums}
-.x-total .per{color:var(--sub);font-size:15px}
-.x-sliders{margin-top:24px;padding:22px;border-radius:14px;background:var(--surface-2)}
-.x-sliders .slider{margin-bottom:22px}.x-sliders .slider:last-child{margin-bottom:0}
-.x-sliders .slider output{font-size:22px}
-.x-lines{display:grid;gap:10px;margin-top:20px;font-size:15px}
-.x-lines div{display:flex;justify-content:space-between}
-.x-lines span{color:var(--sub)}
-.x-calc .fine{margin-top:16px}
-.x-sec#get .x-cells,.x-sec#how .x-cells,.x-sec .x-cells.two{margin-bottom:0}
-.x-dashwrap{position:relative;padding:0 64px 72px}
-.x-dashwrap .dash{position:relative;z-index:1;max-width:760px;margin:0 auto;background:var(--surface)}
-.x-faq{max-width:720px;margin:0 auto;padding:0 24px 88px}
-.x-final{text-align:center;padding:112px 24px 120px;overflow:hidden}
-.x-final h2{font-size:48px;letter-spacing:-.035em;font-weight:600;line-height:1.05;margin:0 0 14px}
-.x-final p{color:var(--sub);font-size:18px;margin:0 auto 28px;max-width:480px;line-height:1.5}
-.x-final .btn{height:48px;border-radius:12px;padding:0 24px;font-size:16px}
-footer{border-top:1px solid var(--line-2)}
-@media (max-width:900px){.x-cells.three,.x-cells.two{grid-template-columns:1fr}.x-cell{border-right:0;border-bottom:1px solid var(--line-2)}.x-cell:last-child{border-bottom:0}.x-dashwrap{padding:0 20px 56px}}
-@media (max-width:720px){
-  .x-frame{border:0}
-  .x-hero{padding-top:44px}
-  .x-hero h1{font-size:40px;margin:18px auto 14px;padding:0 8px}
-  .x-hero h1 br{display:none}
-  .x-hero .sub{font-size:17px;padding:0 20px}
-  .x-hero .ctas{padding:0 20px}
-  .x-wall{margin-top:44px;gap:10px;justify-content:flex-start;padding-bottom:40px}
-  .x-reel{width:128px;border-radius:14px}
-  .x-sec{padding-top:56px}
-  .x-head{margin-bottom:32px}
-  .x-head h2{font-size:32px}
-  .x-head p{font-size:16.5px}
-  .x-cell{padding:28px 20px}
-  .x-calc{margin:0 16px 56px;padding:22px}
-  .x-total .v{font-size:44px}
-  .x-faq{padding-bottom:56px}
-  .x-final{padding:72px 20px 88px}
-  .x-final h2{font-size:34px}
-}
 </style>
 </head>
 <body>
@@ -407,92 +313,98 @@ footer{border-top:1px solid var(--line-2)}
     <a class="brand" href="/"><img src="../assets/apple-touch-icon.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
       <a class="plain" href="#get">What you get</a>
-      <a class="plain" href="#earn">Earnings</a>
       <a class="plain" href="#how">How it works</a>
+      <a class="plain" href="#earn">Earnings</a>
       <a class="plain" href="#faq">FAQ</a>
-      <a class="btn small line" href="/dashboard/">Log in</a>
+      <a class="plain" href="/dashboard/">Log in</a>
       <button class="btn small" data-open>Join</button>
     </nav>
   </div>
 </header>
 
-<main class="x-frame">
-
-<section class="hero x-hero">
-  <div class="x-grid" aria-hidden="true"></div>
-  <div class="x-in">
-    <span class="x-pill"><img src="../assets/apple-touch-icon.png" alt="">Meal Pic Creators</span>
-    <h1>Get paid to share <br>the app you actually use</h1>
-    <p class="sub">Earn 50% of every subscription you bring in, on every renewal. Plus a library of proven reels and a playbook for videos that sell.</p>
-    <div class="ctas">
-      <button class="btn" data-open>Become a creator</button>
-      <a class="btn line" href="#earn">See what you'd make</a>
-    </div>
-  </div>
-  <div class="x-wall" aria-hidden="true"><div class="x-wash"></div><div class="x-reel"><img src="../assets/food-hero.jpg" alt="" loading="lazy"><span class="x-earn"><b>+$15.00</b>Yearly plan</span></div><div class="x-reel"><img src="../assets/hand-result-v16.webp" alt="" loading="lazy"><span class="x-earn"><b>+$15.00</b>Monthly renewal</span></div><div class="x-reel"><img src="../assets/dish-poke-v11.webp" alt="" loading="lazy"><span class="x-earn"><b>+$15.00</b>New subscriber</span></div><div class="x-reel"><img src="../assets/hand-home-v18.webp" alt="" loading="lazy"><span class="x-earn"><b>+$15.00</b>Yearly plan</span></div><div class="x-reel"><img src="../assets/dish-burger-v11.webp" alt="" loading="lazy"><span class="x-earn"><b>+$15.00</b>Monthly renewal</span></div><div class="x-reel"><img src="../assets/hand-search-v17.webp" alt="" loading="lazy"><span class="x-earn"><b>+$15.00</b>New subscriber</span></div><div class="x-reel"><img src="../assets/dish-sushi-v11.webp" alt="" loading="lazy"><span class="x-earn"><b>+$15.00</b>Yearly plan</span></div></div>
-</section>
-
-<section class="x-sec" id="get">
-  <div class="x-head"><h2>What you get</h2><p>Not just a link. Everything you need to make videos that sell, and half of every payment when they do.</p></div>
-  <div class="x-cells three">
-    <div class="x-cell">
-      <div class="x-ill">
-        <div class="x-chip"><span class="d g">$</span><div><b>+$15.00</b><small>Yearly plan</small></div></div>
-        <div class="x-chip off"><span class="d g">$</span><div><b>+$15.00</b><small>Monthly renewal</small></div></div>
-        <div class="x-chip off2"><span class="d g">$</span><div><b>+$15.00</b><small>New subscriber</small></div></div>
+<section class="hero">
+  <div class="glow"></div>
+  <div class="container">
+    <div>
+      <span class="eyebrow"><i></i>Free to join · Paid every Friday</span>
+      <h1>Earn <em>50%</em> of every subscription you bring in.</h1>
+      <p class="sub">Every time someone subscribes through your link or code, you get half, on every renewal, for as long as they stay. And we show you exactly what to post: a library of proven reels and a playbook for videos that sell.</p>
+      <div class="ctas">
+        <button class="btn" data-open>Become a creator</button>
+        <a class="btn ghost" href="#how">How it works</a>
       </div>
-      <h3>50% of every payment</h3><p>Half of what every subscriber you bring in pays, on every renewal, for as long as they stay. Paid every Friday.</p>
     </div>
-    <div class="x-cell">
-      <div class="x-ill">
-        <div class="x-minis"><img src="../assets/hand-result-v16.webp" alt=""><img src="../assets/food-hero.jpg" alt=""><img src="../assets/dish-poke-v11.webp" alt=""></div>
-        <span class="x-tag">Why it worked: <b>hook in the first second</b></span>
-      </div>
-      <h3>Library of proven reels</h3><p>Real reels and videos that pulled big numbers, each broken down so you can see exactly why it worked.</p>
-    </div>
-    <div class="x-cell">
-      <div class="x-ill">
-        <ol class="x-steps"><li><i>1</i>Open with a hook</li><li><i>2</i>Snap the meal</li><li><i>3</i>Show the numbers pop up</li><li><i>4</i>End on your code</li></ol>
-      </div>
-      <h3>Playbook for videos that sell</h3><p>Step-by-step instructions for making videos that go viral and turn viewers into subscribers.</p>
+    <div class="calc hero-calc" id="earn">
+      <div class="k calc-title">What you could make</div>
+        <div class="controls">
+          <div class="slider">
+            <div class="top"><label for="sy">Yearly buyers per month<small id="py">Pay $29.99 once a year</small></label><output id="oy">10</output></div>
+            <input type="range" id="sy" min="0" max="100" value="10">
+          </div>
+          <div class="slider">
+            <div class="top"><label for="sm">New monthly subscribers per month<small id="pm">Pay $29.99 every month</small></label><output id="om">20</output></div>
+            <input type="range" id="sm" min="0" max="200" value="20">
+          </div>
+        </div>
+        <div class="result">
+          <div class="k">In your first year</div>
+          <div class="v" id="ry">$0</div>
+          <div class="per" id="rp">about $0 a month on average</div>
+          <div class="lines">
+            <div><span>From yearly buyers</span><b id="ly">$0</b></div>
+            <div><span>From monthly subscribers</span><b id="lm">$0</b></div>
+          </div>
+          <div class="fine">Assumes everyone keeps paying all year. People who finish the 30-day challenge get their first month refunded, and refunds don't pay out.</div>
+        </div>
     </div>
   </div>
 </section>
 
-<section class="x-sec" id="earn">
-  <div class="x-head"><h2>What you could make</h2><p>Drag the sliders. You earn half of every payment, monthly or yearly.</p></div>
-  <div class="x-calc">
-    <div class="x-total"><div class="k">In your first year</div><div class="v" id="ry">$0</div><div class="per" id="rp">about $0 a month on average</div></div>
-    <div class="x-sliders">
-      <div class="slider">
-        <div class="top"><label for="sy">Yearly buyers per month<small id="py">Pay $29.99 once a year</small></label><output id="oy">10</output></div>
-        <input type="range" id="sy" min="0" max="100" value="10">
-      </div>
-      <div class="slider">
-        <div class="top"><label for="sm">New monthly subscribers per month<small id="pm">Pay $29.99 every month</small></label><output id="om">20</output></div>
-        <input type="range" id="sm" min="0" max="200" value="20">
-      </div>
+<section class="block" id="get">
+  <div class="container">
+    <div class="head">
+      <h2 class="section">What you get</h2>
+      <p class="section">Not just a link. Everything you need to make videos that actually sell, and get paid for every one that does.</p>
     </div>
-    <div class="x-lines">
-      <div><span>From yearly buyers</span><b id="ly">$0</b></div>
-      <div><span>From monthly subscribers</span><b id="lm">$0</b></div>
+    <div class="perks">
+      <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>50% of every payment</h3><p>Half of what every subscriber you bring in pays, on every renewal, for as long as they stay.</p>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Paid every Friday</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Monthly and yearly plans both count</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Live dashboard of every dollar</span></li></ul></div>
+      <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div>
+        <h3>Library of proven reels</h3><p>Real reels and videos that pulled big numbers, each broken down so you can see why it worked.</p>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>The hook in the first second</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>How the app shows up on screen</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>What made people tap the link</span></li></ul></div>
+      <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M19 19v2H6"/><path d="M9 8h6M9 12h4"/></svg></div>
+        <h3>Playbook for videos that sell</h3><p>Step-by-step instructions for making videos that go viral and turn viewers into subscribers.</p>
+        <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Hooks and formats that work</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>What to film and what to say</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>How to end on your code</span></li></ul></div>
     </div>
-    <p class="fine">Assumes everyone keeps paying all year. People who finish the 30-day challenge get their first month refunded, and refunds don't pay out.</p>
   </div>
 </section>
 
-<section class="x-sec" id="how">
-  <div class="x-head"><h2>How it works</h2><p>Sign up in about a minute. No minimum following, no cost, no contract.</p></div>
-  <div class="x-cells three">
-    <div class="x-cell"><span class="x-n">01</span><h3>Get your link and code</h3><p>Pick a code your followers will remember. You get a link to go with it.</p></div>
-    <div class="x-cell"><span class="x-n">02</span><h3>Post about Meal Pic</h3><p>Use the playbook, put the link in your bio, say your code in a video.</p></div>
-    <div class="x-cell"><span class="x-n">03</span><h3>Get paid every Friday</h3><p>Half of every payment from people you bring in, every time they renew.</p></div>
+<section class="block alt" id="how">
+  <div class="container">
+    <div class="head">
+      <h2 class="section">How it works</h2>
+      <p class="section">Sign up in about a minute. No minimum following, no cost, no contract.</p>
+    </div>
+    <div class="steps3">
+      <div class="stepcard"><div class="n">1</div><h3>Get your link and code</h3><p>Pick a code your followers will remember. You get a link to go with it.</p></div>
+      <div class="stepcard"><div class="n">2</div><h3>Share Meal Pic</h3><p>Post about it, put the link in your bio, or say your code in a video.</p></div>
+      <div class="stepcard"><div class="n">3</div><h3>Get paid every Friday</h3><p>You earn 50% of every payment from people you bring in, every time they renew.</p></div>
+    </div>
   </div>
 </section>
 
-<section class="x-sec">
-  <div class="x-head"><h2>See every dollar, live</h2><p>Your own dashboard shows exactly who came through you and what you're owed. Nothing hidden.</p></div>
-  <div class="x-dashwrap"><div class="x-wash low"></div>
+<section class="block">
+  <div class="container see">
+    <div>
+      <h2 class="section">See every dollar, live</h2>
+      <p class="section">Your own dashboard shows exactly who came through you and what you're owed. Nothing hidden.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Next payout</b> and the Friday it lands.</div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Money coming in every month</b> from people still subscribed.</div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Downloads, trials and subscribers</b> from your code and link.</div></li>
+      </ul>
+    </div>
     <div class="dash" aria-hidden="true">
       <div class="two">
         <div class="c"><div class="k">Next payout</div><div class="v">$412.50</div><span class="pill">Friday</span></div>
@@ -509,29 +421,44 @@ footer{border-top:1px solid var(--line-2)}
   </div>
 </section>
 
-<section class="x-sec">
-  <div class="x-head"><h2>You get credit two ways</h2><p>Whichever your followers use, the subscription is yours.</p></div>
-  <div class="x-cells two">
-    <div class="x-cell"><h3>They tap your link</h3><p>When someone taps your link and installs, your code is filled in for them on the creator-code screen. They just tap Allow Paste.</p><span class="linkdemo">mealpic.app/c/yourcode</span></div>
-    <div class="x-cell"><h3>Or they type your code</h3><p>While setting up the app, people are asked for a creator code. Yours counts the same.</p><span class="linkdemo">YOURCODE</span></div>
+<section class="block alt">
+  <div class="container">
+    <div class="head">
+      <h2 class="section">You get credit two ways</h2>
+      <p class="section">Whichever your followers use, the subscription is yours.</p>
+    </div>
+    <div class="credit">
+      <div class="stepcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div><div><h3>They tap your link</h3><p>When someone taps your link and installs, your code is filled in for them on the creator-code screen. They just tap Allow Paste.</p><span class="linkdemo">mealpic.app/c/yourcode</span></div></div>
+      <div class="stepcard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></div><div><h3>Or they type your code</h3><p>While setting up the app, people are asked for a creator code. Yours counts the same.</p><span class="linkdemo">YOURCODE</span></div></div>
+    </div>
   </div>
 </section>
 
-<section class="x-sec" id="faq">
-  <div class="x-head"><h2>Questions</h2><p>Anything else? Email <a href="mailto:help@mealpic.app">help@mealpic.app</a>.</p></div>
-  <div class="faq x-faq"><details><summary>How and when do I get paid?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Every Friday, by Venmo, PayPal, Zelle or Cash App, whichever you pick when you sign up. Once a subscriber's payment comes in, your half goes out that Friday.</p></details><details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any real payment from someone who came through your link or used your code. Free trials count once they turn into a payment. Refunds don't pay out.</p></details><details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No. Your code makes sure you get credit. Your followers pay the normal price.</p></details><details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join. It's free and there's no contract.</p></details><details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>You don't have to guess. When you join you get our library of proven reels, with why each one worked, and a step-by-step playbook for making your own. The short version: film yourself actually using it, snap a meal, show the calories pop up, and end on your code.</p></details><details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your creator dashboard shows downloads, trials, subscribers, recurring revenue, your next payout and past payouts, live.</p></details></div>
-</section>
-
-<section class="x-sec x-final">
-  <div class="x-grid" aria-hidden="true"></div><div class="x-wash"></div>
-  <div class="x-in">
-    <h2>Start earning this week</h2>
-    <p>Sign up in about a minute. Your code works right away, and the reels library and playbook live in your dashboard.</p>
-    <button class="btn" data-open>Become a creator</button>
+<section class="block" id="faq">
+  <div class="container">
+    <div class="faqwrap">
+    <div class="head"><h2 class="section">Questions</h2><p class="section">Anything else? Email <a href="mailto:help@mealpic.app">help@mealpic.app</a>.</p></div>
+    <div class="faq">
+      <details><summary>How and when do I get paid?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Every Friday, by Venmo, PayPal, Zelle or Cash App, whichever you pick when you sign up. Once a subscriber's payment comes in, your half goes out that Friday.</p></details>
+      <details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any real payment from someone who came through your link or used your code. Free trials count once they turn into a payment. Refunds don't pay out.</p></details>
+      <details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No. Your code makes sure you get credit. Your followers pay the normal price.</p></details>
+      <details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join. It's free and there's no contract.</p></details>
+      <details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>You don't have to guess. When you join you get our library of proven reels, with why each one worked, and a step-by-step playbook for making your own. The short version: film yourself actually using it, snap a meal, show the calories pop up, and end on your code.</p></details>
+      <details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your creator dashboard shows downloads, trials, subscribers, recurring revenue, your next payout and past payouts, live.</p></details>
+    </div>
+    </div>
   </div>
 </section>
 
-</main>
+<section class="block final">
+  <div class="container">
+    <div class="box">
+      <h2>Start earning this week.</h2>
+      <p>Sign up in about a minute. Your code works right away. The reels library and playbook live in your dashboard.</p>
+      <button class="btn" data-open>Become a creator</button>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="container">
