@@ -72,7 +72,8 @@ Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`
 
 - **Giant headline with 3D objects floating around the edges** and a floating glass nav pill (lab C hero). Objects sit in the margins, never over the words.
 - **Three white tiles, one 3D object each**, bold caption, grey one-liner (lab B tiles).
-- **3D clay / memoji illustration style** for people and objects: soft matte, Apple-memoji faces, saturated props, white or black background, generated per section (never reuse one render twice on a page).
+- **3D clay illustration style** for objects: soft matte, saturated props, white or black background, generated per section (never reuse one render twice on a page).
+- **People are Apple Memoji, not Bitmoji.** Jack: "I like memojis, not bitmojis." Memoji = Apple's Animoji look: oversized head, smooth glossy skin, simple dot-like features, little or no body. Not the Pixar / Snapchat Bitmoji cartoon kid with a full body and detailed clothes. The current ring-light guy and code girl lean Bitmoji; replace them when credits allow.
 
 ## Moves worth stealing
 
