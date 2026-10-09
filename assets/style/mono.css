@@ -22,7 +22,7 @@
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-weight:500;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-weight:600;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:inherit}
 img,video{display:block;max-width:100%}
 button{font-family:inherit}
@@ -41,14 +41,14 @@ button{font-family:inherit}
 .h-hero{font-size:clamp(56px,9vw,124px);line-height:.94;letter-spacing:-.05em}
 .h1{font-size:clamp(44px,6vw,80px);line-height:.98;letter-spacing:-.045em}
 .h2{font-size:clamp(36px,4.6vw,60px);line-height:1;letter-spacing:-.04em}
-.h3{font-size:24px;line-height:1.15;letter-spacing:-.025em;font-weight:700}
-.lede{font-size:21px;line-height:1.4;letter-spacing:-.015em;color:var(--ink);margin:0;font-weight:500}
-.p{font-size:17px;line-height:1.5;color:var(--sub);margin:0;font-weight:500}
-.small{font-size:14px;color:var(--sub)}
+.h3{font-size:24px;line-height:1.15;letter-spacing:-.025em;font-weight:800}
+.lede{font-size:21px;line-height:1.4;letter-spacing:-.015em;color:var(--ink);margin:0;font-weight:600}
+.p{font-size:17px;line-height:1.5;color:var(--sub);margin:0;font-weight:600}
+.small{font-size:14px;color:var(--sub);font-weight:600}
 .num{font-variant-numeric:tabular-nums;letter-spacing:-.04em;font-weight:800}
 
 /* mono labels + the hairline rule line: "● LIVE ———— FROM ARTIFACT" */
-.label{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.label{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
 .label.dim{color:var(--sub)}
 .label .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ink);margin-right:8px;vertical-align:1px}
 .rule{display:flex;align-items:center;gap:16px}
@@ -57,7 +57,7 @@ button{font-family:inherit}
 .rule>i{display:block}
 
 /* ---------- buttons ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 24px;border:0;border-radius:var(--r-pill);background:var(--ink);color:#fff;font:600 17px/1 var(--font);letter-spacing:-.01em;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .15s,background .15s,box-shadow .15s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 24px;border:0;border-radius:var(--r-pill);background:var(--ink);color:#fff;font:700 17px/1 var(--font);letter-spacing:-.01em;cursor:pointer;text-decoration:none;white-space:nowrap;transition:transform .15s,background .15s,box-shadow .15s}
 .btn:hover{background:#222}
 .btn:active{transform:scale(.98)}
 .btn:disabled{opacity:.35;cursor:default;transform:none}
@@ -69,7 +69,7 @@ button{font-family:inherit}
 /* big full-width bar CTA: <button class="btn bar"><b>Title</b><span>sub</span></button> */
 .btn.bar{display:block;width:100%;height:auto;padding:30px 24px 28px;border-radius:var(--r-card);text-align:center}
 .btn.bar b{display:block;font-size:clamp(26px,3.2vw,36px);font-weight:800;letter-spacing:-.035em;line-height:1.05}
-.btn.bar span{display:block;margin-top:8px;font-size:16px;font-weight:500;color:rgba(255,255,255,.72)}
+.btn.bar span{display:block;margin-top:8px;font-size:16px;font-weight:600;color:rgba(255,255,255,.72)}
 .ctas{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 
 /* ---------- surfaces ---------- */
@@ -87,19 +87,35 @@ button{font-family:inherit}
 .brand img{width:30px;height:30px;border-radius:8px}
 .brand span{color:var(--sub);font-weight:600}
 .nav .links{display:flex;align-items:center;gap:4px}
-.nav .links a.plain{font-size:15px;font-weight:600;color:var(--ink);opacity:.8;text-decoration:none;padding:10px 12px}
+.nav .links a.plain{font-size:15px;font-weight:700;color:var(--ink);opacity:.8;text-decoration:none;padding:10px 12px}
 .nav .links a.plain:hover{opacity:1}
 .nav .links .btn{margin-left:8px}
+
+
+/* ---------- liquid glass: translucent, blurred, a bright inner edge. Use on nav, floating bars, chips, overlays on pictures ---------- */
+.glass{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(28px) saturate(180%);backdrop-filter:blur(28px) saturate(180%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(255,255,255,.45),0 0 0 1px rgba(0,0,0,.06),0 12px 32px -14px rgba(0,0,0,.28);border-radius:var(--r-pill)}
+.glass.card{border-radius:var(--r-card)}
+[data-theme="dark"] .glass,.dark .glass{background:rgba(28,28,30,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.08),0 12px 32px -14px rgba(0,0,0,.7)}
+.btn.glass{color:var(--ink);background:rgba(255,255,255,.55)}
+.btn.glass:hover{background:rgba(255,255,255,.75)}
+[data-theme="dark"] .btn.glass,.dark .btn.glass{color:#fff;background:rgba(40,40,44,.6)}
+/* floating glass nav pill: <header class="nav float"><div class="wrap glass">…</div></header> */
+.nav.float{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:12px var(--gutter) 0}
+.nav.float .wrap{height:60px;max-width:1040px;padding:0 10px 0 18px}
+.nav.float .brand img{width:28px;height:28px}
+.nav.float .links .btn.small{height:40px}
+@media (max-width:720px){.nav.float{padding-top:8px}.nav.float .wrap{height:54px;padding:0 8px 0 14px}.nav.float .links .btn.small{height:38px}}
 
 /* ---------- faq ---------- */
 .faq{border-top:1px solid var(--hair)}
 .faq details{border-bottom:1px solid var(--hair)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-size:20px;font-weight:700;letter-spacing:-.02em}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-size:20px;font-weight:800;letter-spacing:-.02em}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary i{flex:none;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--hair);display:grid;place-items:center;transition:transform .2s}
 .faq summary i svg{width:14px;height:14px}
 .faq details[open] summary i{transform:rotate(45deg)}
-.faq details p{margin:0 0 24px;color:var(--sub);font-size:17px;line-height:1.5;max-width:640px}
+.faq details p{margin:0 0 24px;color:var(--sub);font-size:17px;line-height:1.5;max-width:640px;font-weight:600}
 
 /* ---------- footer ---------- */
 footer.site{border-top:1px solid var(--hair);margin-top:120px;padding:28px 0 40px}
@@ -119,8 +135,8 @@ footer.site a:hover{text-decoration:underline}
 .hero-apple .ctas{justify-content:center;margin-top:28px}
 .hero-apple .object{max-width:1100px;margin:48px auto 0;padding:0 var(--gutter)}
 .hero-apple .object img{width:100%;height:auto;margin:0 auto}
-.meta{font-size:15px;color:var(--sub);margin:0;font-weight:500}
-.meta b{color:var(--ink);font-weight:600}
+.meta{font-size:15px;color:var(--sub);margin:0;font-weight:600}
+.meta b{color:var(--ink);font-weight:700}
 
 /* ---------- dark: same pack, inverted. Put data-theme="dark" on <html> or .dark on a section ---------- */
 [data-theme="dark"],.dark{--paper:#000;--ink:#fff;--ink-2:#f2f2f2;--sub:#a1a1a6;--faint:#6e6e73;--hair:rgba(255,255,255,.16);--hair-2:rgba(255,255,255,.09);--stage:#161618;
