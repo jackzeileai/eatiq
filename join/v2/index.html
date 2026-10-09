@@ -282,6 +282,29 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .copy{flex:none;height:36px;padding:0 16px;border-radius:999px;border:0;background:var(--surface-2);color:var(--ink);font:600 14px var(--font);cursor:pointer}
 
 
+
+/* ---------- v3: giant hero + clay tiles ---------- */
+.giant{position:relative;text-align:center;padding:72px 0 120px}
+.giant .h-hero{font-size:clamp(64px,11vw,170px);line-height:.88;letter-spacing:-.06em;position:relative;z-index:2}
+.giant .lede{max-width:480px;margin:36px auto 0;position:relative;z-index:2}
+.giant .ctas{justify-content:center;margin-top:28px;position:relative;z-index:2}
+.giant .float{position:absolute;z-index:1;width:clamp(90px,14vw,220px);filter:drop-shadow(0 24px 30px rgba(0,0,0,.22))}
+.giant .f1{left:0;top:-10px;transform:rotate(-12deg)}
+.giant .f2{right:0;top:-20px;transform:rotate(10deg)}
+.giant .f3{left:2%;bottom:-30px;transform:rotate(8deg)}
+.giant .f4{right:1%;bottom:-90px;transform:rotate(-6deg);width:clamp(120px,16vw,260px)}
+.stage.white{background:#fff;box-shadow:inset 0 0 0 1px var(--hair)}
+.tile .stage{aspect-ratio:1;height:auto;margin-bottom:22px;padding:28px}
+.tile .stage img{max-width:100%;max-height:100%;object-fit:contain}
+.tile .h3{font-size:28px}
+.tile .lede.sub{font-size:18px;color:var(--sub);margin:6px auto 0;max-width:320px}
+#how{padding-top:0}
+.calcpic{display:flex;align-items:center;justify-content:center;padding:40px}
+.calcpic img{max-width:80%;max-height:80%;object-fit:contain}
+.final .crew{max-width:520px;width:100%;margin:0 auto 24px}
+@media (max-width:1000px){.nav .links a.plain{display:none}}
+@media (max-width:900px){.giant .float{display:none}.giant{padding:48px 0 48px}}
+@media (max-width:720px){.nav .links a.plain{display:none}.tile .stage{padding:20px}.tile .stage img{max-height:260px}.tile .h3{font-size:24px}.calcpic{display:none}}
 </style>
 </head>
 <body>
@@ -290,11 +313,10 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
   <div class="wrap glass">
     <a class="brand" href="/"><img src="../../assets/apple-touch-icon.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
-      <a class="plain" href="#earn">Earnings</a>
       <a class="plain" href="#how">How it works</a>
-      <a class="plain" href="#get">What you get</a>
+      <a class="plain" href="#earn">Earnings</a>
       <a class="plain" href="#faq">FAQ</a>
-      <a class="btn small ghost" href="/dashboard/">Log in</a>
+      <a class="plain" href="/dashboard/">Log in</a>
       <button class="btn small" data-open>Join</button>
     </nav>
   </div>
@@ -302,19 +324,35 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 
 <main>
 
-<section class="hero hero-apple">
+<section class="hero giant">
   <div class="wrap">
-    <h1 class="h1">Earn 50% of every subscription you bring in.</h1>
-    <p class="lede">Share Meal Pic. Keep half of every payment, for as long as they stay.</p>
-    <p class="meta"><b>Free to join</b> · Paid every Friday · No minimum following</p>
-    <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#earn">What you could make</a></div>
+    <img class="float f1" src="../../assets/lab/burger_t.png" alt="">
+    <img class="float f2" src="../../assets/lab/avocado_t.png" alt="">
+    <img class="float f3" src="../../assets/lab/money_t.png" alt="">
+    <img class="float f4" src="../../assets/lab/memoji_ramen_t.png" alt="">
+    <h1 class="h-hero">Post food.<br>Get paid.</h1>
+    <p class="lede">Half of every Meal Pic subscription you bring in. Every renewal, every Friday.</p>
+    <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
   </div>
-  <div class="object object3d"><img src="../../assets/hero-v14.webp" alt="Meal Pic scanning a plate of pancakes and showing the calories" width="2426" height="1984"></div>
+</section>
+
+<section class="sec" id="how">
   <div class="wrap">
-    <div class="rule start hero-rule"><span class="label"><i class="dot"></i>What you could make</span><i></i><span class="label dim">Half of every payment</span></div>
+    <div class="grid c3">
+      <div class="tile"><div class="stage white"><img src="../../assets/lab/memoji_ringlight_white_t.png" alt=""></div><h3 class="h3">Post.</h3><p class="lede sub">Snap a meal. Say your code.</p></div>
+      <div class="tile"><div class="stage white"><img src="../../assets/lab/fifty_t.png" alt=""></div><h3 class="h3">Half is yours.</h3><p class="lede sub">Of every payment, every renewal.</p></div>
+      <div class="tile"><div class="stage white"><img src="../../assets/lab/calendar_friday_t.png" alt=""></div><h3 class="h3">Paid Fridays.</h3><p class="lede sub">Venmo, PayPal, Zelle or Cash App.</p></div>
+    </div>
+    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
+  </div>
+</section>
+
+<section class="sec" id="earn">
+  <div class="wrap">
+    <div class="rule start"><span class="label"><i class="dot"></i>01 — What you could make</span><i></i><span class="label dim">Half of every payment</span></div>
+    <div class="split"><h2 class="h2">See the money.</h2><p class="lede">Drag the sliders. Yearly and monthly both count.</p></div>
     <div class="hero-grid">
-      <div class="card calc" id="earn">
-        <span class="label dim">Drag the sliders</span>
+      <div class="card calc"><span class="label dim">Drag the sliders</span>
         <div class="total"><div class="k">In your first year</div><div class="v num" id="ry">$0</div><div class="per" id="rp">about $0 a month on average</div></div>
         <div class="slider">
           <div class="top"><label for="sy">Yearly buyers per month<small id="py">Pay $29.99 once a year</small></label><output id="oy">30</output></div>
@@ -328,32 +366,9 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
           <div><span>From yearly buyers</span><b id="ly">$0</b></div>
           <div><span>From monthly subscribers</span><b id="lm">$0</b></div>
         </div>
-        <p class="fine small">Assumes everyone stays all year. Refunds don't pay out.</p>
-      </div>
-      <div class="pic calcpic"><img src="../../assets/hand-result-v16.webp" alt=""></div>
+        <p class="fine small">Assumes everyone stays all year. Refunds don't pay out.</p></div>
+      <div class="stage white calcpic"><img src="../../assets/lab/sushi_t.png" alt=""></div>
     </div>
-  </div>
-</section>
-
-<section class="sec" id="how">
-  <div class="wrap">
-    <div class="rule start"><span class="label"><i class="dot"></i>01 — How it works</span><i></i><span class="label dim">Free · No minimum following</span></div>
-    <div class="split"><h2 class="h2">Post. Get paid.</h2><p class="lede">Share your code or link. Half of every payment comes to you, every Friday.</p></div>
-    <div class="grid c3">
-      <div class="tile">
-        <div class="stage"><div class="ui v-code"><div class="r"><div><small>Your code</small><b>SARAH</b></div><span class="cp">Copy</span></div><div class="r"><div><small>Your link</small><b>mealpic.app/c/sarah</b></div><span class="cp">Copy</span></div></div></div>
-        <h3 class="h3">Get your code</h3><p class="p">Pick one. You get a link too.</p>
-      </div>
-      <div class="tile">
-        <div class="stage"><div class="ui v-post"><div class="v-reel1"><img src="../../assets/food-hero.jpg" alt=""><span class="v-sticker">code SARAH</span></div><div class="v-meta"><span class="who"><span class="v-av"></span>sarahfit</span><p>calories in 2 seconds? <b>code SARAH</b></p><span class="tags"><span class="v-chip">#ad</span><span class="v-chip">#mealpic</span></span></div></div></div>
-        <h3 class="h3">Post</h3><p class="p">Say your code or put the link in your bio.</p>
-      </div>
-      <div class="tile">
-        <div class="stage"><div class="v-notifs"><div class="ui v-note"><img src="../../assets/apple-touch-icon.png" alt=""><div><b>You got paid $412.50</b><small>Sent to your Venmo</small></div><time>now</time></div><div class="ui v-note b1"><img src="../../assets/apple-touch-icon.png" alt=""><div><b>.</b></div></div><div class="ui v-note b2"><img src="../../assets/apple-touch-icon.png" alt=""><div><b>.</b></div></div></div></div>
-        <h3 class="h3">Get paid</h3><p class="p">50% of every payment, every Friday.</p>
-      </div>
-    </div>
-    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
 </section>
 
@@ -362,30 +377,13 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
     <div class="rule start"><span class="label"><i class="dot"></i>02 — What you get</span><i></i><span class="label dim">Money, plus the tools to earn it</span></div>
     <div class="split"><h2 class="h2">Not just a cut. A system.</h2><p class="lede">Half of every payment, a library of reels that already worked, and a playbook for making your own.</p></div>
     <div class="grid c3">
-      <div class="tile">
-        <div class="stage"><div class="ui v-earn">
-          <div class="v-top"><span>This week</span><b>+$412.50</b></div>
-          <div class="v-bars"><i style="height:34%"></i><i style="height:48%"></i><i style="height:40%"></i><i style="height:62%"></i><i style="height:55%"></i><i style="height:78%"></i><i style="height:100%"></i></div>
-          <div class="v-pay"><img src="../../assets/apple-touch-icon.png" alt=""><div><b>Payout sent</b><small>Friday · Venmo</small></div><em>$412.50</em></div>
-        </div></div>
-        <h3 class="h3">50% of every payment</h3><p class="p">On every renewal, for as long as they stay.</p>
-      </div>
-      <div class="tile">
-        <div class="stage"><div class="v-reels">
-          <div class="v-reel v-crop" style="background-image:url(../../assets/dish-burger-v11.webp);background-position:36% 9%"><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>2.4M</span></div>
+      <div class="tile"><div class="stage white"><img src="../../assets/lab/money_t.png" alt=""></div><h3 class="h3">50% of every payment.</h3><p class="lede sub">For as long as they stay.</p></div>
+      <div class="tile"><div class="stage"><div class="v-reels"><div class="v-reel v-crop" style="background-image:url(../../assets/dish-burger-v11.webp);background-position:36% 9%"><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>2.4M</span></div>
           <div class="v-reel"><img src="../../assets/food-hero.jpg" alt=""><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>1.1M</span></div>
           <div class="v-reel v-crop" style="background-image:url(../../assets/dish-sushi-v11.webp)"><span class="v-views"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>860K</span></div>
-          <span class="v-why"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></i><span><small>Why it worked</small>Question hook in the first second</span></span>
-        </div></div>
-        <h3 class="h3">Library of proven reels</h3><p class="p">Videos that blew up, and why they worked.</p>
-      </div>
-      <div class="tile">
-        <div class="stage"><div class="ui v-book">
-          <div class="v-bh"><span>Playbook</span><small>4 steps</small></div>
-          <ol><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Open with a hook</li><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Snap the meal</li><li class="now"><i>3</i>Show the numbers pop up</li><li><i>4</i>End on your code</li></ol>
-        </div></div>
-        <h3 class="h3">Playbook for videos that sell</h3><p class="p">Exactly how to make videos that sell.</p>
-      </div>
+          <span class="v-why"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></i><span><small>Why it worked</small>Question hook in the first second</span></span></div></div><h3 class="h3">Proven reels.</h3><p class="lede sub">Videos that blew up, and why.</p></div>
+      <div class="tile"><div class="stage"><div class="ui v-book"><div class="v-bh"><span>Playbook</span><small>4 steps</small></div>
+          <ol><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Open with a hook</li><li class="ok"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>Snap the meal</li><li class="now"><i>3</i>Show the numbers pop up</li><li><i>4</i>End on your code</li></ol></div></div><h3 class="h3">The playbook.</h3><p class="lede sub">Exactly how to make videos that sell.</p></div>
     </div>
     <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
@@ -406,7 +404,6 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
         <div class="c"><span class="di k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></span><div class="k">Yearly</div><div class="v">7</div></div>
       </div>
       <div class="chart"><i style="height:18%"></i><i style="height:24%"></i><i style="height:20%"></i><i style="height:34%"></i><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:54%"></i><i style="height:66%"></i><i style="height:62%"></i><i style="height:74%"></i><i style="height:70%"></i><i style="height:82%"></i><i style="height:78%"></i><i style="height:92%"></i></div></div></div>
-    <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
 </section>
 
@@ -415,25 +412,8 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
     <div class="rule start"><span class="label"><i class="dot"></i>04 — Credit</span><i></i><span class="label dim">Two ways</span></div>
     <div class="split"><h2 class="h2">Either way, the sale is yours.</h2><p class="lede">They tap your link or type your code. Both count.</p></div>
     <div class="grid c2">
-      <div class="tile">
-        <div class="stage"><div class="ui v-bio">
-        <div class="v-prof"><span class="v-av"></span><div><b>sarahfit</b><small>food, gym, what i eat in a day</small></div></div>
-        <div class="v-stats"><span><b>128</b>posts</span><span><b>24.1K</b>followers</span><span><b>310</b>following</span></div>
-        <span class="v-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>mealpic.app/c/sarah</span>
-        <svg class="v-tap" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(0,0,0,.14)"/><circle cx="12" cy="12" r="5" fill="#fff" stroke="rgba(0,0,0,.3)"/></svg>
-      </div>
-      <span class="v-toast"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Code filled in: <b>SARAH</b></span></div>
-        <h3 class="h3">They tap your link</h3><p class="p">Your code fills in for them.</p>
-      </div>
-      <div class="tile">
-        <div class="stage"><div class="ui v-app">
-        <b>Got a creator code?</b>
-        <div class="v-field">SARAH<span class="cur"></span></div>
-        <span class="v-ok"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Code applied</span>
-        <span class="v-btn">Continue</span>
-      </div></div>
-        <h3 class="h3">Or they type your code</h3><p class="p">The app asks for it at signup.</p>
-      </div>
+      <div class="tile"><div class="stage white"><img src="../../assets/lab/phone_link_t.png" alt=""></div><h3 class="h3">They tap your link.</h3><p class="lede sub">Your code fills in for them.</p></div>
+      <div class="tile"><div class="stage white"><img src="../../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">Or they type your code.</h3><p class="lede sub">The app asks for it at signup.</p></div>
     </div>
     <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
@@ -449,7 +429,8 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 
 <section class="sec final">
   <div class="wrap">
-    <h2 class="h1">Start earning this week.</h2>
+    <div class="object3d"><img class="crew" src="../../assets/lab/creators_t.png" alt=""></div>
+    <h2 class="h1">Start this week.</h2>
     <p class="lede">Takes a minute. Your code works right away.</p>
     <div class="ctabar"><button class="btn bar" data-open><b>Become a creator</b><span>Free to join. Takes a minute. Paid every Friday.</span></button></div>
   </div>
