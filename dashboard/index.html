@@ -184,7 +184,7 @@ header{margin:-22px -16px 28px;padding:14px 16px;border-bottom:1px solid var(--l
   <section id="s-email" class="auth hidden">
     <img class="mark" src="../assets/apple-touch-icon.png" alt="">
     <h1>Creator dashboard</h1>
-    <p>See your downloads, subscribers and payouts. Sign in with the email linked to your creator code.</p>
+    <p>Sign in with your creator email.</p>
     <form id="f-email">
       <label for="email">Email</label>
       <input id="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
@@ -298,7 +298,7 @@ function render(){
   $("dash").innerHTML = `
   <div class="hello">
     <h1>Hey ${esc(first.name.split(" ")[0])}</h1>
-    <p>Share your code or link. You earn on every payment from people who use it.</p>
+    <p>You earn on every payment from people who use these.</p>
   </div>
   <div class="share">
     <div class="sh"><div><span class="k">Your code</span><b class="code">${all.map(c => esc(c.code.toUpperCase())).join(", ")}</b></div><button class="copy" data-copy="${esc(first.code.toUpperCase())}">Copy</button></div>
@@ -333,7 +333,7 @@ function render(){
 ${sum(all,"entered") ? "" : `
   <div class="start">
     <h3>Get your first subscriber</h3>
-    <p>Nobody has used your code yet. Here's what works best.</p>
+    <p>No one's used your code yet. Start here.</p>
     <ol>
       <li><div>Put your link in your bio <span>— mealpic.app/c/${esc(first.code)}. It fills your code in for anyone who installs from it.</span></div></li>
       <li><div>Post a video of you using it <span>— snap a meal, show the calories pop up. Real use beats a review.</span></div></li>
