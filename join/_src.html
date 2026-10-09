@@ -651,6 +651,144 @@ footer{border-top:1px solid var(--line-2)}
   .x-dashwrap{padding:0 16px 24px}
   .x-final{padding:96px 20px 96px}
 }
+
+/* ===================== Apple pass ===================== */
+:root{--money:#1d9a4c;--blue:#0071e3;--blue-h:#0077ed;--ink:#1d1d1f;--sub:#6e6e73;--faint:#86868b;--tile:#f5f5f7;--hair:#d2d2d7;
+  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Inter,Helvetica,Arial,sans-serif}
+html,body,body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Inter,Helvetica,Arial,sans-serif;color:#1d1d1f}
+h1,h2,h3,.x-total .v,.slider output,.x-lines b,.dash .v{font-family:var(--display);color:#1d1d1f}
+
+/* Buttons: Apple blue pills, text links with chevron */
+.btn,.mobilebar .btn{height:44px;padding:0 22px;border-radius:980px;background:var(--blue);color:#fff;font-weight:400;font-size:17px;letter-spacing:-.01em;box-shadow:none}
+.btn:hover{background:var(--blue-h);box-shadow:none}
+.sheet .btn{background:#1d1d1f;color:#fff;font-weight:600;height:52px}
+.sheet .btn:hover{background:#000}
+.tlink{display:inline-flex;align-items:center;gap:4px;color:var(--blue);font-size:17px;text-decoration:none;letter-spacing:-.01em}
+.tlink:hover{text-decoration:underline}
+.tlink span{font-size:20px;line-height:1;margin-top:-1px}
+
+/* Nav: Apple local nav */
+.nav{background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+.nav .container{height:52px;max-width:1024px}
+.brand{font-size:21px;font-weight:600;letter-spacing:-.01em;gap:9px}
+.brand img{width:24px;height:24px;border-radius:6px}
+.brand span{font-weight:400;color:#1d1d1f;opacity:.5}
+.nav .links{gap:4px}
+.nav .links a.plain{font-size:12px;font-weight:400;color:#1d1d1f;opacity:.88;padding:8px 12px;letter-spacing:-.01em}
+.nav .links a.plain:hover{opacity:1;color:var(--blue)}
+.nav .links a.login{display:inline-block}
+.nav .links .btn.small{height:24px;padding:0 11px;font-size:12px;border-radius:980px;margin-left:10px;background:var(--blue);color:#fff;font-weight:400}
+
+/* Hero */
+.x-split{padding:104px 0 112px}
+.x-split .x-in{max-width:1024px;margin:0 auto;padding:0 24px;grid-template-columns:minmax(0,1fr) 420px;gap:64px}
+.x-pill{box-shadow:none;background:none;padding:0;font-size:17px;font-weight:600;color:var(--sub);letter-spacing:-.01em}
+.x-split h1{font-size:64px;line-height:1.05;letter-spacing:-.02em;font-weight:600;margin:14px 0 18px;color:#1d1d1f}
+.x-split .sub{font-size:21px;line-height:1.38;letter-spacing:.011em;color:#1d1d1f;font-weight:400;margin-bottom:32px}
+.x-split .ctas{display:flex;align-items:center;gap:22px}
+.x-split .ctas .btn{height:48px;padding:0 24px;font-size:17px;border-radius:980px}
+.g50{color:var(--money)}
+
+/* Calculator: a tile */
+.x-split .x-calc{background:var(--tile);border-radius:28px;box-shadow:none;padding:30px 30px 26px;overflow:visible}
+.x-split .x-total{background:none;color:#1d1d1f;padding:0 0 22px}
+.x-split .x-total .k{color:var(--sub);font-size:14px;font-weight:600;letter-spacing:-.01em}
+.x-split .x-total .v{color:var(--money);font-size:60px;font-weight:600;letter-spacing:-.03em;margin:6px 0 4px}
+.x-split .x-total .per{color:var(--sub);font-size:15px;font-weight:400}
+.x-split .x-sliders{background:#fff;border-radius:18px;padding:22px 22px 6px;margin:0}
+.x-split .x-sliders .slider{margin-bottom:22px}
+.x-split .slider label{font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em}
+.x-split .slider label small{font-size:13px;color:var(--sub);font-weight:400}
+.x-split .x-sliders .slider output{font-size:24px;font-weight:600;letter-spacing:-.02em}
+.x-split input[type=range]{height:4px;background:linear-gradient(to right,var(--money) var(--p,30%),#e8e8ed var(--p,30%))}
+.x-split input[type=range]::-webkit-slider-thumb{width:26px;height:26px;background:#fff;box-shadow:0 0 0 .5px rgba(0,0,0,.06),0 3px 8px rgba(0,0,0,.18),0 1px 1px rgba(0,0,0,.1)}
+.x-split .x-lines{margin:20px 0 0;padding:0;border:0;font-size:15px;gap:8px}
+.x-split .x-lines span{color:var(--sub)}
+.x-split .x-lines b{font-weight:600;font-size:15px}
+.x-split .x-calc .fine{margin:14px 0 0;color:var(--faint);font-size:12px;line-height:1.45}
+
+/* Sections */
+.x-sec{padding-top:120px}
+.x-head{margin-bottom:44px}
+.x-head h2{font-size:56px;line-height:1.07;letter-spacing:-.02em;font-weight:600;color:#1d1d1f;margin-bottom:12px}
+.x-head p{font-size:21px;line-height:1.38;letter-spacing:.011em;color:#1d1d1f;font-weight:400;max-width:620px}
+.x-head a{color:var(--blue);text-decoration:none}.x-head a:hover{text-decoration:underline}
+
+/* Tiles */
+.x-cells{max-width:1024px;margin:0 auto;padding:0 24px;gap:16px}
+.x-cell,.x-cell:last-child{background:var(--tile);border-radius:28px;padding:36px 28px 40px!important;text-align:center}
+.x-ill,.x-ill.sm{margin-bottom:28px}
+.x-cell .x-n{display:none}
+.x-cell h3{font-size:24px;line-height:1.17;letter-spacing:-.01em;font-weight:600;color:#1d1d1f;margin:0 0 8px}
+.x-cell p{font-size:17px;line-height:1.47;letter-spacing:-.02em;color:#1d1d1f;opacity:.72;max-width:300px;margin:0 auto}
+.ui,.v-earn,.v-book,.v-bio,.v-app,.v-code,.v-post,.v-note,.v-toast,.v-why{box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 10px 30px -12px rgba(0,0,0,.18)}
+
+/* Dashboard preview tile */
+.x-dashwrap{max-width:1024px;margin:0 auto;padding:0 24px 0}
+.x-dashwrap .dash{max-width:none;background:var(--tile);border:0;border-radius:28px;box-shadow:none;padding:32px}
+.dash .c,.dash .chart{box-shadow:0 0 0 .5px rgba(0,0,0,.04),0 6px 18px -8px rgba(0,0,0,.12);border-radius:18px}
+.dash .k{color:var(--sub);font-weight:500}
+.dash .v{font-weight:600;letter-spacing:-.02em}
+.dash .pill{font-weight:500}
+
+/* FAQ */
+.x-faq{max-width:760px;padding:0 24px 0}
+.faq{border-top:1px solid var(--hair)}
+.faq details{border-bottom:1px solid var(--hair)}
+.faq summary{font-size:19px;font-weight:600;letter-spacing:-.01em;color:#1d1d1f;padding:24px 0}
+.faq summary i{width:24px;height:24px;background:none;box-shadow:none;color:var(--blue)}
+.faq summary i svg{width:16px;height:16px}
+.faq details p{font-size:17px;line-height:1.47;color:var(--sub);letter-spacing:-.01em}
+
+/* Final CTA + footer */
+.x-final{padding:140px 24px 140px}
+.x-final h2{font-size:56px;letter-spacing:-.02em;font-weight:600;color:#1d1d1f}
+.x-final p{font-size:21px;line-height:1.38;color:#1d1d1f;letter-spacing:.011em;margin-bottom:30px}
+.x-final .btn{height:48px;padding:0 26px;font-size:17px;border-radius:980px}
+footer{background:var(--tile);border-top:0;padding:28px 0 36px;color:var(--faint);font-size:12px}
+footer .container{max-width:1024px}
+footer a{color:#424245;font-size:12px}footer a:hover{text-decoration:underline}
+
+/* Mobile */
+@media (max-width:1100px){.x-split .x-in{grid-template-columns:minmax(0,1fr) 380px;gap:40px}.x-split h1{font-size:54px}}
+@media (max-width:980px){
+  .x-split{padding:72px 0 80px}
+  .x-split .x-in{grid-template-columns:1fr;gap:44px;text-align:center}
+  .x-split .ctas{justify-content:center}
+  .x-split .x-calc{max-width:480px;margin:0 auto;text-align:left}
+  .x-cells{gap:16px}
+}
+@media (max-width:720px){
+  .nav .container{height:48px}
+  .brand{font-size:19px}
+  .x-split{padding:48px 0 64px}
+  .x-split h1{font-size:40px;letter-spacing:-.02em;margin:10px 0 14px}
+  .x-split .sub{font-size:19px;margin-bottom:24px}
+  .x-split .ctas{display:flex;flex-direction:column;gap:14px}
+  .x-split .ctas .btn{width:auto;min-width:220px}
+  .x-split .x-calc{padding:24px 20px 20px;border-radius:24px}
+  .x-split .x-total .v{font-size:48px}
+  .x-split .x-sliders{padding:18px 16px 4px}
+  .x-sec{padding-top:88px}
+  .x-head{margin-bottom:32px}
+  .x-head h2{font-size:40px}
+  .x-head p{font-size:19px;max-width:340px}
+  .x-cells{padding:0 16px}
+  .x-cell,.x-cell:last-child{padding:32px 20px 36px!important;border-radius:24px}
+  .x-cell h3{font-size:22px}
+  .x-dashwrap{padding:0 16px}
+  .x-dashwrap .dash{padding:16px;border-radius:24px}
+  .x-final{padding:96px 24px 110px}
+  .x-final h2{font-size:40px}
+  .x-final p{font-size:19px}
+  .mobilebar .btn{width:100%;height:50px}
+}
+
+.x-split h1{font-size:58px;text-wrap:normal;max-width:560px}
+.x-split{padding-bottom:88px}
+@media (max-width:1100px){.x-split h1{font-size:50px}}
+@media (max-width:980px){.x-split h1{max-width:640px;margin-left:auto;margin-right:auto;text-wrap:balance}}
+@media (max-width:720px){.x-split h1{font-size:40px}}
 </style>
 </head>
 <body>
@@ -663,7 +801,7 @@ footer{border-top:1px solid var(--line-2)}
       <a class="plain" href="#how">How it works</a>
       <a class="plain" href="#get">What you get</a>
       <a class="plain" href="#faq">FAQ</a>
-      <a class="btn small line" href="/dashboard/">Log in</a>
+      <a class="plain login" href="/dashboard/">Log in</a>
       <button class="btn small" data-open>Join</button>
     </nav>
   </div>
@@ -675,12 +813,12 @@ footer{border-top:1px solid var(--line-2)}
   <div class="x-grid" aria-hidden="true"></div>
   <div class="x-in">
     <div class="x-copy">
-      <span class="x-pill"><img src="__ROOT__assets/apple-touch-icon.png" alt="">Meal Pic Creators</span>
+      <span class="x-pill">Meal Pic Creators</span>
       <h1>Earn <span class="g50">50%</span> of every subscription you bring in</h1>
       <p class="sub">Plus proven reels and a playbook for videos that sell.</p>
       <div class="ctas">
         <button class="btn" data-open>Become a creator</button>
-        <a class="btn line" href="#how">How it works</a>
+        <a class="tlink" href="#how">How it works <span aria-hidden="true">›</span></a>
       </div>
     </div>
     <div class="x-calc" id="earn">
