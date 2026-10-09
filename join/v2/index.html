@@ -23,15 +23,10 @@
 body.locked{overflow:hidden}
 
 /* ---------- hero ---------- */
-.hero{padding:64px 0 0;text-align:center}
-.hero .h-hero{max-width:1100px;margin:0 auto}
-.hero-lede{max-width:620px;margin:28px auto 32px}
-.hero .ctas{justify-content:center}
-.hero-rule{margin-top:88px}
+.hero-rule{margin-top:96px}
 .hero-grid{display:grid;grid-template-columns:5fr 7fr;gap:16px;margin-top:20px;align-items:stretch;text-align:left}
-.pics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.pics .pic{aspect-ratio:9/15;height:100%}
-.pics .pic:nth-child(2) img{object-position:center 40%}
+.calcpic{min-height:100%}
+.calcpic img{height:100%;object-position:center 30%}
 
 /* ---------- calculator (black and white) ---------- */
 .calc{padding:28px 28px 24px;display:flex;flex-direction:column}
@@ -92,17 +87,12 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 /* ---------- responsive ---------- */
 @media (max-width:980px){
   .hero-grid{grid-template-columns:1fr}
-  .pics .pic{aspect-ratio:9/13}
+  .calcpic{aspect-ratio:4/3}
   .tile .stage{height:280px}
   .sec .split .lede{justify-self:start}
 }
 @media (max-width:720px){
-  .hero{padding-top:40px}
-  .hero-lede{margin:20px auto 24px}
-  .hero .ctas{flex-direction:column}
-  .hero .ctas .btn{width:100%}
   .hero-rule{margin-top:56px}
-  .pics{gap:10px}
   .calc{padding:22px 18px 18px}
   .tile .stage{height:260px}
   .dashstage{padding:14px}
@@ -311,17 +301,19 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 
 <main>
 
-<section class="hero">
+<section class="hero hero-apple">
   <div class="wrap">
-    <h1 class="h-hero">Earn 50% of every subscription you bring in.</h1>
-    <p class="lede hero-lede">Share Meal Pic. Keep half of every payment, every Friday. Plus proven reels and a playbook for videos that sell.</p>
-    <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#how">How it works</a></div>
+    <h1 class="h1">Earn 50% of every subscription you bring in.</h1>
+    <p class="lede">Share Meal Pic. Keep half of every payment, for as long as they stay.</p>
+    <p class="meta"><b>Free to join</b> · Paid every Friday · No minimum following</p>
+    <div class="ctas"><button class="btn" data-open>Become a creator</button><a class="btn ghost" href="#earn">What you could make</a></div>
   </div>
+  <div class="object object3d"><img src="../../assets/hero-v14.webp" alt="Meal Pic scanning a plate of pancakes and showing the calories" width="2426" height="1984"></div>
   <div class="wrap">
-    <div class="rule start hero-rule"><span class="label"><i class="dot"></i>Free to join</span><i></i><span class="label dim">Paid every Friday</span></div>
+    <div class="rule start hero-rule"><span class="label"><i class="dot"></i>What you could make</span><i></i><span class="label dim">Half of every payment</span></div>
     <div class="hero-grid">
       <div class="card calc" id="earn">
-        <span class="label dim">What you could make</span>
+        <span class="label dim">Drag the sliders</span>
         <div class="total"><div class="k">In your first year</div><div class="v num" id="ry">$0</div><div class="per" id="rp">about $0 a month on average</div></div>
         <div class="slider">
           <div class="top"><label for="sy">Yearly buyers per month<small id="py">Pay $29.99 once a year</small></label><output id="oy">30</output></div>
@@ -337,11 +329,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
         </div>
         <p class="fine small">Assumes everyone stays all year. Refunds don't pay out.</p>
       </div>
-      <div class="pics">
-        <div class="pic"><img src="../../assets/hand-home-v18.webp" alt=""></div>
-        <div class="pic"><img src="../../assets/food-hero.jpg" alt=""></div>
-        <div class="pic"><img src="../../assets/hand-result-v16.webp" alt=""></div>
-      </div>
+      <div class="pic calcpic"><img src="../../assets/hand-result-v16.webp" alt=""></div>
     </div>
   </div>
 </section>
