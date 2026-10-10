@@ -94,6 +94,14 @@ Main CTA = `.btn.shine`: compact black pill with a sheen sweep and an arrow that
 - Tiny bold labels hanging off huge type (Shopify "Toronto — ONTARIO, CANADA").
 - Words, two pills, one object (Apple).
 
+## Rhythm and restraint (audit, 2026-10-10)
+
+- Every section is a centred heading plus one grey line. No numbered rules, no right-side labels.
+- Section gap is 120px desktop / 72px phone, every time. The hero ends with the scroll cue; nothing else.
+- One accent per surface. The gradient goes on one number or one word, never two things in the same card.
+- No helper text that explains the obvious ("Drag it").
+- Dark mode = Apple's: pure black page, cards on #161617 / #1d1d1f with a faint light edge, brighter gradient stops, deeper shadows.
+
 ## Logo
 
 Use the line mark (`assets/mark-black.png`, `mark-white.png` on dark) next to the wordmark in navs. Not the rounded app-icon square. Jack: "I like this logo way more."
