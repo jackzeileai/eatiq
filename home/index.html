@@ -660,6 +660,20 @@ html[data-mode="dark"] .phone-vid{box-shadow:0 0 0 11px #2a2a2c,0 0 0 12px rgba(
 .split-hero .h-hero .two{white-space:nowrap}
 @media (max-width:900px){.split-hero .h-hero{font-size:clamp(40px,10.4vw,56px)}}
 :focus:not(:focus-visible){outline:none}
+
+/* real iPhone 17 Pro, tilted in 3D, screen content under Apple's frame */
+.iph{position:relative;width:min(340px,76vw);aspect-ratio:1350/2760;margin:0 auto;transform-style:preserve-3d;animation:iphfloat 7s ease-in-out infinite}
+.iph-frame{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.iph-screen{position:absolute;left:5.4%;right:5.4%;top:2.6%;bottom:2.6%;border-radius:12.5%/6%;overflow:hidden;background:#000;z-index:1}
+.iph-screen video,.iph-screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.iph::after{content:"";position:absolute;left:8%;right:8%;bottom:-7%;height:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.28),transparent);filter:blur(6px);z-index:0;transform:translateZ(-1px)}
+html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(255,255,255,.08),transparent)}
+.tilt-l{--ry:-16deg}.tilt-r{--ry:16deg}
+@keyframes iphfloat{0%,100%{transform:perspective(1800px) rotateY(var(--ry)) rotateX(5deg) translateY(0)}50%{transform:perspective(1800px) rotateY(calc(var(--ry) * .6)) rotateX(3deg) translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.iph{animation:none;transform:perspective(1800px) rotateY(var(--ry)) rotateX(5deg)}}
+@media (min-width:901px){.hero-art .iph{width:auto;height:clamp(480px,70vh,660px)}}
+.text-sec .phone{max-width:none;background:none;box-shadow:none}
+.text-sec .phone{padding:20px 0 48px}.text-sec .phone .iph{width:min(320px,74vw)}
 </style>
 <body>
 
@@ -687,7 +701,7 @@ html[data-mode="dark"] .phone-vid{box-shadow:0 0 0 11px #2a2a2c,0 0 0 12px rgba(
         <div class="ctas"><a class="btn shine" href="https://mealpic.app/download">Download free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost im" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img src="../assets/imessage.png" alt="">Start by text</a></div>
         <span class="fine">Free to download. 3-day free trial of Pro.</span>
       </div>
-      <div class="hero-art"><div class="phone-vid"><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div></div>
+      <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
     </div>
   </div>
 </section>
@@ -715,7 +729,7 @@ html[data-mode="dark"] .phone-vid{box-shadow:0 0 0 11px #2a2a2c,0 0 0 12px rgba(
         <div class="ctas"><a class="btn shine" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img class="im" src="../assets/imessage.png" alt="">Start by text</a></div>
         <span class="cta-note">(628) 298-8842. Free.</span>
       </div>
-      <div class="phone"><img src="../assets/text-phone.webp" alt="An iMessage thread with Meal Pic logging a meal from a photo" loading="lazy"></div>
+      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><img src="../assets/text-thread.webp" alt="An iMessage thread with Meal Pic logging a meal from a photo" loading="lazy"></div><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
     </div>
   </div>
 </section>
