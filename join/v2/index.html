@@ -507,9 +507,8 @@ footer.site{margin-top:72px}
 .pb-doc .pb-list em{font-style:normal;font-weight:500;font-size:.88em;color:var(--sub)}
 .pb-doc .pb-list b{width:26px;height:26px;font-size:12px}
 .stage.pb .pb-chip{bottom:9%}
-.scroll-cue{display:block;width:22px;height:34px;margin:28px auto 0;border-radius:12px;box-shadow:inset 0 0 0 2px #c7c7cc}
-.scroll-cue span{display:block;width:4px;height:7px;margin:7px auto 0;border-radius:2px;background:var(--sub);animation:cue 1.8s ease-in-out infinite}
-@keyframes cue{0%{transform:translateY(0);opacity:0}30%{opacity:1}80%{transform:translateY(10px);opacity:0}100%{opacity:0}}
+.scroll-cue{display:grid;place-items:center;width:44px;height:44px;margin:36px auto 0;border-radius:50%;color:var(--ink);background:rgba(255,255,255,.7);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 8px 20px -10px rgba(0,0,0,.25);animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 @media (max-width:900px){.scroll-cue{display:none}}
 #how{padding-top:56px}
 /* dashboard polish */
@@ -540,6 +539,10 @@ footer.site{margin-top:72px}
 .d-bars{height:76px;gap:4px;margin-top:14px}
 .d-stats{gap:10px}
 .d-stats b{font-size:clamp(22px,2vw,26px);margin-top:4px}
+.d-top{align-items:center}
+.d-title{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.scroll-cue:hover{background:#fff}
+@media (prefers-reduced-motion:reduce){.scroll-cue{animation:none}}
 </style>
 </head>
 <body>
@@ -582,7 +585,7 @@ footer.site{margin-top:72px}
   </div>
 </section>
 
-<a class="scroll-cue" href="#how" aria-label="Scroll down"><span></span></a>
+<a class="scroll-cue" href="#how" aria-label="Scroll down"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 <section class="sec" id="how">
   <div class="wrap">
     <div class="split"><h2 class="h2">How it works</h2><p class="lede">Three steps to your first payout.</p></div>
@@ -625,8 +628,8 @@ footer.site{margin-top:72px}
     <div class="split"><h2 class="h2">Watch every dollar come in</h2><p class="lede">Every download, trial and payout, live on your own dashboard.</p></div>
     <div class="dash" aria-label="Example creator dashboard">
       <div class="d-top">
-        <div><span class="d-k">Creator dashboard</span><b class="d-hi">Hey Sarah</b></div>
-        <div class="d-chips"><span class="d-chip"><em>Code</em>SARAH</span><span class="d-chip"><em>Link</em>mealpic.app/c/sarah</span></div>
+        <span class="d-k d-title">Your dashboard</span>
+        <div class="d-chips"><span class="d-chip"><em>Code</em>SARAH</span><span class="d-chip"><em>Link</em>mealpic.app/sarah</span></div>
       </div>
       <div class="d-money">
         <div class="d-card d-pay">
