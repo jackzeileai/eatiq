@@ -647,6 +647,18 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
 #how{padding-top:88px}
 @media (max-width:900px){#how{padding-top:56px}}
 :focus:not(:focus-visible){outline:none}
+
+/* ===== shared hero (home + creators): identical type, position, art box ===== */
+@media (min-width:901px){
+  .split-hero{padding-top:96px !important;padding-bottom:72px !important}
+  .split-hero .hero-cols{max-width:1160px !important;margin:0 auto !important;grid-template-columns:minmax(0,1fr) 440px !important;justify-content:normal !important;gap:64px !important;align-items:center !important;min-height:620px}
+  .split-hero .h-hero{font-size:clamp(56px,6.2vw,100px) !important;line-height:.96 !important;letter-spacing:-.045em !important;margin:0}
+  .split-hero .lede{font-size:21px !important;line-height:1.45 !important;max-width:30ch !important;margin:24px 0 0 !important}
+  .split-hero .ctas{margin-top:32px !important}
+  .split-hero .hero-art,.split-hero .hero-cols>.quick{justify-self:center;width:440px;max-width:100%}
+  .split-hero .hero-art .iph{height:600px !important;width:auto !important}
+}
+@media (min-width:901px){.split-hero .hero-cols{align-items:start !important}.split-hero .hero-cols>:first-child{padding-top:118px;align-self:start}.split-hero .hero-art,.split-hero .hero-cols>.quick{align-self:center}}
 </style>
 </head>
 <body>

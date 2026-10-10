@@ -717,6 +717,29 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
 .split-hero .btn.ghost.im img{width:20px;height:20px;border-radius:5px}
 html[data-mode="dark"] .split-hero .btn.ghost.im{box-shadow:inset 0 0 0 1px rgba(255,255,255,.24);color:var(--ink)}
 html[data-mode="dark"] .split-hero .btn.ghost.im:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+
+/* ===== shared hero (home + creators): identical type, position, art box ===== */
+@media (min-width:901px){
+  .split-hero{padding-top:96px !important;padding-bottom:72px !important}
+  .split-hero .hero-cols{max-width:1160px !important;margin:0 auto !important;grid-template-columns:minmax(0,1fr) 440px !important;justify-content:normal !important;gap:64px !important;align-items:center !important;min-height:620px}
+  .split-hero .h-hero{font-size:clamp(56px,6.2vw,100px) !important;line-height:.96 !important;letter-spacing:-.045em !important;margin:0}
+  .split-hero .lede{font-size:21px !important;line-height:1.45 !important;max-width:30ch !important;margin:24px 0 0 !important}
+  .split-hero .ctas{margin-top:32px !important}
+  .split-hero .hero-art,.split-hero .hero-cols>.quick{justify-self:center;width:440px;max-width:100%}
+  .split-hero .hero-art .iph{height:600px !important;width:auto !important}
+}
+
+.iph-island{position:absolute;left:33.2%;right:33.2%;top:1.05%;height:4.9%;border-radius:999px;background:#000;z-index:3}
+.iph-screen{z-index:3}
+.iph-frame{z-index:4}
+.iph-side{position:absolute;inset:0;background:url(../assets/iphone17pro-silver.webp) center/100% 100% no-repeat;filter:brightness(.62) contrast(1.1);transform:translateZ(var(--z));z-index:0;pointer-events:none}
+html[data-mode="dark"] .iph-side{filter:brightness(.45)}
+/* Apple's secondary: same pill, ink outline, no icon */
+.split-hero .btn.ghost.im{box-shadow:inset 0 0 0 1.5px var(--ink) !important;padding:0 26px !important;font-weight:500}
+.split-hero .btn.ghost.im:hover{background:var(--ink) !important;color:var(--paper,#fff) !important}
+html[data-mode="dark"] .split-hero .btn.ghost.im{box-shadow:inset 0 0 0 1.5px var(--ink) !important}
+html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
+@media (min-width:901px){.split-hero .hero-cols{align-items:start !important}.split-hero .hero-cols>:first-child{padding-top:118px;align-self:start}.split-hero .hero-art,.split-hero .hero-cols>.quick{align-self:center}}
 </style>
 <body>
 
@@ -741,10 +764,10 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{box-shadow:inset 0 0 0 1p
       <div class="hero-copy">
         <h1 class="h-hero"><span class="two">Calories from<br>a <span class="fifty">picture</span></span></h1>
         <p class="lede">Snap a photo. Get the calories and macros in seconds.</p>
-        <div class="ctas"><a class="btn shine" href="https://mealpic.app/download">Download free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost im" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img src="../assets/imessage.png" alt="">Start by text</a></div>
+        <div class="ctas"><a class="btn shine" href="https://mealpic.app/download">Download free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost im" href="sms:+16282988842&body=Hey%20Meal%20Pic!">Start by text</a></div>
         
       </div>
-      <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
+      <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><i class="iph-island"></i><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
     </div>
   </div>
 </section>
@@ -772,7 +795,7 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{box-shadow:inset 0 0 0 1p
         <div class="ctas"><a class="btn shine" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img class="im" src="../assets/imessage.png" alt="">Start by text</a></div>
         <span class="cta-note">(628) 298-8842. Free.</span>
       </div>
-      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><video muted playsinline loop preload="none" poster="../assets/video/text_demo.jpg" data-src="../assets/video/text_demo.mp4" aria-label="Texting a meal photo to Meal Pic and getting the calories back"></video></div><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
+      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><i class="iph-island"></i><video muted playsinline loop preload="none" poster="../assets/video/text_demo.jpg" data-src="../assets/video/text_demo.mp4" aria-label="Texting a meal photo to Meal Pic and getting the calories back"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
     </div>
   </div>
 </section>
