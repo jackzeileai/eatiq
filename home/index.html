@@ -631,6 +631,11 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
 .text-sec .hero-copy .lede{color:var(--sub);font-weight:500;margin:16px 0 0;max-width:460px}
 .text-sec .hero-copy .ctas{margin-top:26px}
 .text-sec .btn .im{width:22px;height:22px;border-radius:6px;margin-right:2px}
+/* outlined, not black (Jack 2026-10-10: "no black here") */
+.text-sec .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink);gap:10px}
+.text-sec .btn.ghost:hover{background:rgba(0,0,0,.04);color:var(--ink)}
+html[data-mode="dark"] .text-sec .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+html[data-mode="dark"] .text-sec .btn.ghost:hover{background:rgba(255,255,255,.08)}
 .text-sec .cta-note{display:block;margin-top:14px;font-size:14px;font-weight:600;color:var(--sub)}
 .text-sec .hero-copy .h2{font-size:clamp(40px,4.6vw,64px)}
 @media (max-width:900px){.hero-cols{grid-template-columns:1fr !important;gap:32px}.hero-art{max-width:560px;margin:0 auto}.split-hero .h-hero{font-size:clamp(40px,11vw,56px)}.split-hero .lede{text-align:center}.fine{text-align:center}.text-sec{text-align:center}.text-sec .hero-copy .lede{margin:16px auto 0}.text-sec .hero-copy .ctas{justify-content:center}.text-sec .phone{max-width:300px}}
@@ -773,7 +778,7 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
         <div class="ctas"><a class="btn shine" href="https://mealpic.app/download">Download free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost im" href="sms:+16282988842&body=Hey%20Meal%20Pic!">Start by text</a></div>
         
       </div>
-      <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><i class="iph-island"></i><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
+      <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
     </div>
   </div>
 </section>
@@ -798,10 +803,10 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
       <div class="hero-copy">
         <h2 class="h2">Or just text it</h2>
         <p class="lede">No app open. Text a photo of your meal to Meal Pic and it logs it, calories and all.</p>
-        <div class="ctas"><a class="btn shine" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img class="im" src="../assets/imessage.png" alt="">Start by text</a></div>
+        <div class="ctas"><a class="btn ghost" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img class="im" src="../assets/imessage.png" alt="">Start by text</a></div>
         <span class="cta-note">(628) 298-8842. Free.</span>
       </div>
-      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><i class="iph-island"></i><video muted playsinline loop preload="none" poster="../assets/video/text_demo.jpg" data-src="../assets/video/text_demo.mp4" aria-label="Texting a meal photo to Meal Pic and getting the calories back"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
+      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><video muted playsinline loop preload="none" poster="../assets/video/text_demo.jpg" data-src="../assets/video/text_demo.mp4" aria-label="Texting a meal photo to Meal Pic and getting the calories back"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
     </div>
   </div>
 </section>
