@@ -105,3 +105,10 @@ Main CTA = `.btn.shine`: compact black pill with a sheen sweep and an arrow that
 ## Logo
 
 Use the line mark (`assets/mark-black.png`, `mark-white.png` on dark) next to the wordmark in navs. Not the rounded app-icon square. Jack: "I like this logo way more."
+
+## Video (2026-10-10)
+
+- **Real video beats a render when the thing is the app.** Home hero = the app running in a CSS phone (`.phone-vid`, 11px #1d1d1f bezel, 54px radius, muted autoplay loop, `assets/video/app_scan.mp4`, 0.6 MB).
+- **Proof = a carousel of real viral reels** (`.reels` marquee on /join): 7 s muted 360x640 loops cut from the corpus, glass "63.4M views" chip bottom-left, play only when on screen. Never a 3D stand-in for "proven videos".
+- "It's free" lives inside the CTA pill (`.btn.shine .free`), not as a note under it.
+- Headline stays two lines; size it so the first line never wraps.
