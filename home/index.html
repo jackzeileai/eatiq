@@ -674,6 +674,17 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
 @media (min-width:901px){.hero-art .iph{width:auto;height:clamp(480px,70vh,660px)}}
 .text-sec .phone{max-width:none;background:none;box-shadow:none}
 .text-sec .phone{padding:20px 0 48px}.text-sec .phone .iph{width:min(320px,74vw)}
+
+/* hero v3: one composed block, words and phone close together */
+@media (min-width:901px){
+  .split-hero .hero-cols{max-width:1120px;margin:0 auto;grid-template-columns:minmax(0,1fr) auto !important;gap:clamp(48px,6vw,96px);align-items:center}
+  .split-hero .hero-art .iph{height:clamp(500px,72vh,640px)}
+  .split-hero .h-hero{font-size:clamp(56px,6.4vw,104px);line-height:.95;letter-spacing:-.045em}
+}
+.split-hero .lede{max-width:30ch;margin-top:24px}
+.split-hero .ctas{gap:12px;margin-top:32px}
+.split-hero .ctas .btn{height:56px;box-sizing:border-box}
+.split-hero .fine{margin-top:16px}
 </style>
 <body>
 
