@@ -58,7 +58,7 @@ References: shopify.design (giant black grotesk, white space, mono labels, image
 <link rel="stylesheet" href="/assets/style/mono.css">
 ```
 
-Pages that use it: `/join` (creator landing). Next: `/dashboard`, `/home`, `/c/`.
+Pages that use it: `/join` (creator landing), `/home` (the site home). Next: `/dashboard`, `/c/`.
 
 ## Before every edit (read this, then edit)
 
