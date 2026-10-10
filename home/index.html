@@ -705,6 +705,18 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
   .text-sec .phone .iph{width:min(240px,60vw)}
   .text-sec .phone{padding:8px 0 24px}
 }
+
+/* hero + text section: columns hug their content, the pair sits centred */
+@media (min-width:901px){
+  .split-hero .hero-cols,.text-sec .hero-cols{max-width:none;grid-template-columns:auto auto !important;justify-content:center;gap:clamp(56px,6vw,96px)}
+}
+
+/* secondary pill: hairline, not a heavy outline */
+.split-hero .btn.ghost.im{box-shadow:inset 0 0 0 1px rgba(0,0,0,.16);background:transparent;color:var(--ink);gap:10px;padding:0 24px 0 20px;transition:box-shadow .2s,background .2s}
+.split-hero .btn.ghost.im:hover{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.split-hero .btn.ghost.im img{width:20px;height:20px;border-radius:5px}
+html[data-mode="dark"] .split-hero .btn.ghost.im{box-shadow:inset 0 0 0 1px rgba(255,255,255,.24);color:var(--ink)}
+html[data-mode="dark"] .split-hero .btn.ghost.im:hover{box-shadow:inset 0 0 0 1px var(--ink)}
 </style>
 <body>
 
@@ -730,7 +742,7 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
         <h1 class="h-hero"><span class="two">Calories from<br>a <span class="fifty">picture</span></span></h1>
         <p class="lede">Snap a photo. Get the calories and macros in seconds.</p>
         <div class="ctas"><a class="btn shine" href="https://mealpic.app/download">Download free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost im" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img src="../assets/imessage.png" alt="">Start by text</a></div>
-        <span class="fine">Free to download. 3-day free trial of Pro.</span>
+        
       </div>
       <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
     </div>
@@ -739,7 +751,7 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
 
 <section class="sec" id="how">
   <div class="wrap">
-    <div class="split"><h2 class="h2">How it works</h2><p class="lede">Ten seconds a meal.</p></div>
+    <div class="split"><h2 class="h2">How it works</h2><p class="lede">Snap. Load. Edit.</p></div>
     <div class="grid c3">
       <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_snap_t.png?v=1" alt=""></div><h3 class="h3">1. Snap a Photo</h3><p class="lede sub">Point the camera at your plate. Home cooking, takeout, anything.</p></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_result_t.png?v=2" alt=""></div><h3 class="h3">2. Get the Breakdown</h3><p class="lede sub">Calories, protein, carbs and fat. Every ingredient on its own line.</p></div>

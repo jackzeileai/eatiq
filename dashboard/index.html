@@ -34,6 +34,9 @@ html[data-mode="dark"] .mode-btn .i-moon{display:none}
 .nav .links a.soon:hover{color:var(--ink)}
 .nav .links a.soon small{margin-left:6px;font-size:11px;font-weight:700;color:var(--sub);padding:2px 7px;border-radius:999px;box-shadow:var(--edge)}
 
+@media (max-width:980px){.nav .links a.navx{display:block}.nav .links a.navx.hidden{display:none}}
+@media (max-width:720px){.nav .links a.navx{font-size:14px;padding:8px 6px}}
+
 /* cards */
 .auth,.hist{background:var(--card-bg);box-shadow:var(--edge);border-radius:var(--r)}
 
@@ -77,12 +80,13 @@ input.code{letter-spacing:10px;font-size:28px;font-weight:800;text-align:center}
 .d-when{display:inline-flex;font-size:15px;font-weight:700;padding:7px 14px;border-radius:999px;background:#f2f2f7;color:var(--ink)}
 .d-s{display:block;font-size:16px;font-weight:600;color:var(--sub)}
 .d-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.d-row b{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.d-row b{white-space:nowrap;font-size:19px;font-weight:800;letter-spacing:-.02em}
 .d-bars{display:flex;align-items:flex-end;gap:6px;height:140px;margin-top:20px}
 .d-bars i{flex:1;border-radius:6px 6px 3px 3px;background:#e5e5ea;min-height:4px}
 .d-bars i.wk{background:#1d1d1f}
 .d-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.d-stats b{display:block;font-size:clamp(28px,3vw,40px);font-weight:800;letter-spacing:-.045em;margin-top:8px;font-variant-numeric:tabular-nums}
+@media (max-width:900px){.d-stats{grid-template-columns:1fr 1fr}}
+.d-stats b{display:block;font-size:clamp(26px,3vw,40px);white-space:nowrap;font-weight:800;letter-spacing:-.045em;margin-top:8px;font-variant-numeric:tabular-nums}
 .d-foot{font-size:14px;color:var(--sub);text-align:center;padding:6px 0 2px}
 @media (max-width:720px){.dash{border-radius:26px;gap:10px;margin-top:4px}.d-money{grid-template-columns:1fr;gap:10px}.d-stats{grid-template-columns:1fr 1fr;gap:10px}.d-card{padding:18px;border-radius:18px}.d-bars{height:100px;gap:3px}.d-chip{font-size:14px;padding:8px 12px}}
 html[data-mode="dark"] .dash{box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 60px -30px rgba(0,0,0,.9)}
@@ -110,8 +114,6 @@ html[data-mode="dark"] .d-pay .d-big{background:linear-gradient(95deg,#a28bff 0%
   .bar{margin-top:56px}
   .auth{padding:30px 22px}
   .nav .links .plain{display:none}
-  .nav .links a.navx{display:block;font-size:14px;padding:8px 6px}
-  .nav .links a.navx.hidden{display:none}
   .nav .links a.soon small{display:none}
   .nav.float .brand{font-size:0;gap:0}
   .nav.float .brand img.mark{width:24px;height:24px}
@@ -196,10 +198,10 @@ const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb
 const $ = id => document.getElementById(id);
 const screens = ["s-email","s-code","s-none","s-stats","loading"];
 function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-none")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
-const money = n => "$" + Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
 const num = n => Number(n||0).toLocaleString("en-US");
 // Whole dollars like the /join example ($346); cents only when there are some.
-const cash = n => { n = Number(n||0); return "$" + n.toLocaleString("en-US",{minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits:2}); };
+// whole=true drops cents from $1,000 up so big totals fit their tile.
+const cash = (n, whole) => { n = Math.round(Number(n||0) * 100) / 100; const c = n % 1 && !(whole && n >= 1000) ? 2 : 0; return "$" + n.toLocaleString("en-US",{minimumFractionDigits:c, maximumFractionDigits:c}); };
 let data = null;
 
 const ICON = {
@@ -258,7 +260,8 @@ function render(){
   const first = all[0];
   const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
   const total30 = days.reduce((a, d) => a + d.uses, 0);
-  const subs = sum(all,"monthly_active") + sum(all,"yearly_paid");
+  // Live paying subscribers right now (monthly + yearly that haven't lapsed).
+  const subs = sum(all,"monthly_active") + sum(all,"yearly_active");
 
   $("dash").innerHTML = `
   <div class="dash">
@@ -288,14 +291,14 @@ function render(){
     <div class="d-stats">
       <div class="d-card"><span class="d-k">Downloads</span><b>${num(sum(all,"entered"))}</b></div>
       <div class="d-card"><span class="d-k">Free trials</span><b>${num(sum(all,"trials"))}</b></div>
-      <div class="d-card"><span class="d-k">Monthly subs</span><b>${num(subs)}</b></div>
-      <div class="d-card"><span class="d-k">Paid out</span><b>${cash(paidOut)}</b></div>
+      <div class="d-card"><span class="d-k">Subscribers</span><b>${num(subs)}</b></div>
+      <div class="d-card"><span class="d-k">Paid out</span><b>${cash(paidOut, true)}</b></div>
     </div>
     <div class="d-foot">Tap your code or link to copy it.</div>
   </div>
   <div class="bar"><h2>Payout history</h2></div>
   <div class="hist">${(data.history || []).length
-    ? data.history.map(h => `<div class="r"><span>${fmtDate(h.paid_on)}</span><b>${money(h.amount)}</b></div>`).join("")
+    ? data.history.map(h => `<div class="r"><span>${fmtDate(h.paid_on)}</span><b>${cash(h.amount)}</b></div>`).join("")
     : `<div class="empty">No payouts yet. Your first one goes out ${nextPayout()}.</div>`}</div>
 
   <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
