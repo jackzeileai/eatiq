@@ -683,8 +683,28 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
 }
 .split-hero .lede{max-width:30ch;margin-top:24px}
 .split-hero .ctas{gap:12px;margin-top:32px}
-.split-hero .ctas .btn{height:56px;box-sizing:border-box}
+.split-hero .ctas .btn{height:50px;padding:0 26px;font-size:17px;box-sizing:border-box}
 .split-hero .fine{margin-top:16px}
+
+/* spacing + type audit (2026-10-10): one scale for every section */
+.split-hero{padding-bottom:72px}
+.text-sec .h2{font-size:60px}
+@media (min-width:901px){
+  .text-sec .hero-cols{max-width:1120px;margin:0 auto;grid-template-columns:minmax(0,1fr) auto !important;gap:clamp(48px,6vw,96px)}
+  .text-sec .phone .iph{width:auto;height:clamp(460px,64vh,560px)}
+  .text-sec .phone{padding:0 0 32px}
+  .text-sec .hero-copy{margin-left:0;max-width:520px}
+  .text-sec .hero-copy .h2{font-size:60px}
+}
+@media (max-width:900px){
+  .split-hero{padding-bottom:40px}
+  .split-hero .lede{font-size:18px;line-height:1.45}
+  .split-hero .hero-art .iph{width:min(260px,64vw)}
+  .text-sec .h2,.text-sec .hero-copy .h2{font-size:38px}
+  .text-sec .lede{font-size:17px}
+  .text-sec .phone .iph{width:min(240px,60vw)}
+  .text-sec .phone{padding:8px 0 24px}
+}
 </style>
 <body>
 
@@ -773,7 +793,7 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
 
 <script>
 document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
-new IntersectionObserver(([e]) => document.getElementById("mobilebar").classList.toggle("show", !e.isIntersecting)).observe(document.querySelector(".hero-art"));
+new IntersectionObserver(([e]) => document.getElementById("mobilebar").classList.toggle("show", !e.isIntersecting)).observe(document.querySelector(".split-hero .ctas"));
 </script>
 <script>(function(){var v=document.querySelector('.text-sec video');if(!v)return;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!v.src){v.src=v.dataset.src;}v.currentTime=0;v.play().catch(function(){});}else v.pause();});},{threshold:.35}).observe(v);})();</script>
 </body>

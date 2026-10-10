@@ -289,7 +289,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--ink);margin:0 0
 .copy{flex:none;height:36px;padding:0 16px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink);font:600 14px var(--font);cursor:pointer}
 .copy:hover,.copy.solid{background:var(--ink);color:var(--bg)}
 /* less grey: labels, links and bold bits are black; Continue stays black until it works */
-.step .lead b{color:var(--ink)}
+.step .lead b{color:var(--ink);font-weight:700}
 .step .foot .btn:disabled{opacity:1;background:var(--ink);color:var(--bg)}
 
 
@@ -838,19 +838,19 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No using your own code. No search ads on our name.</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Break these and we turn your code off.</li>
           </ul>
-          <label class="opt check" id="agreebox"><input type="checkbox" id="agree" class="vh"><span>I agree to the creator rules and the <a href="/terms.html" target="_blank">Terms</a>.</span><span class="radio"></span></label>
+          <label class="opt check" id="agreebox"><input type="checkbox" id="agree" class="vh"><span style="font-weight:600">I agree to the creator rules and the <a href="/terms.html" target="_blank">Terms</a>.</span><span class="radio"></span></label>
           <div class="err" id="e-sign"></div></div>
         <div class="foot"><button class="btn" id="b-sign" disabled>Create my creator account</button></div>
       </section>
       <section class="step" data-s="done">
         <div class="body done">
-          <img class="pic3d" src="__ROOT__assets/lab/money_t.png?v=1791603000" alt="">
+          <img class="pic3d" src="__ROOT__assets/lab/cash100_t.png?v=1791582000" alt="">
           <h3 style="text-align:center">You're in!</h3>
           <p class="lead" id="done-sub" style="text-align:center">Your code works right now. Share either one.</p>
           <div class="shares">
-            <div class="share"><div><div class="k">Your link</div><div class="v" id="d-link"></div></div><button class="copy" data-copy="d-link">Copy</button></div>
             <div class="share" id="coderow"><div><div class="k">Your code</div><div class="v" id="d-code"></div></div><button class="copy" id="chg">Change</button><button class="copy" data-copy="d-code">Copy</button></div>
             <div class="share edit" id="editrow" hidden><input class="field" id="newcode" autocapitalize="characters" autocorrect="off" maxlength="20" aria-label="New code"><button class="copy solid" id="savecode">Save</button></div>
+            <div class="share"><div><div class="k">Your link</div><div class="v" id="d-link"></div></div><button class="copy" data-copy="d-link">Copy</button></div>
           </div>
           <div class="err" id="e-change"></div>
         </div>
