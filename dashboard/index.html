@@ -127,6 +127,24 @@ a.lcard:hover .go{transform:translateX(3px)}
 @media (max-width:720px){.learn{grid-template-columns:1fr}.lcard b{font-size:18px}}
 html[data-mode="dark"] .lcard .go{background:#f5f5f7;color:#000}
 
+/* setup video: shown until the code's first use */
+.setup{display:flex;align-items:center;gap:var(--app-pad);padding:var(--app-pad);margin:16px 0 var(--app-gap);border-radius:var(--app-r);background:var(--card-bg);box-shadow:var(--edge)}
+.setup .thumb{flex:none;position:relative;width:96px;aspect-ratio:9/16;border-radius:14px;background:#1d1d1f;display:grid;place-items:center;border:0;padding:0;cursor:pointer;overflow:hidden}
+.setup .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.setup .thumb i{position:relative;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center}
+.setup .thumb i svg{width:16px;height:16px;margin-left:2px}
+.setup .txt{flex:1;min-width:0}
+.setup .d-k{margin-bottom:4px}
+.setup b{display:block;font-size:20px;font-weight:800;letter-spacing:-.025em}
+.setup ol{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.setup li{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px;box-shadow:var(--edge)}
+.setup .soon{display:block;margin-top:10px;font-size:var(--app-body);color:var(--sub)}
+.vid-over{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.85);display:grid;place-items:center;padding:24px}
+.vid-over video{max-height:90vh;max-width:100%;aspect-ratio:9/16;border-radius:20px;background:#000}
+.vid-over button{position:absolute;top:16px;right:16px}
+@media (max-width:720px){.setup{align-items:flex-start}.setup .thumb{width:76px}.setup b{font-size:18px}.setup ol{gap:0}.setup li{box-shadow:none;padding:0;font-size:14px;font-weight:600;color:var(--sub)}.setup li:not(:last-child)::after{content:"·";margin:0 6px}}
+html[data-mode="dark"] .setup .thumb{background:#2c2c2e}
+
 /* history */
 .hist{padding:0 var(--app-pad);border-radius:var(--app-r)}
 .hist .r{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--hair);font-size:var(--app-body)}
@@ -274,6 +292,7 @@ document.addEventListener("click", e => {
     });
     return;
   }
+  if (e.target.closest("[data-play]")) { playSetup(); return; }
   const id = e.target.closest("button")?.id;
   if (id === "chg") { editing = true; render(); const i = $("newcode"); i.focus(); i.select(); }
   else if (id === "cancelcode") { editing = false; render(); }
@@ -343,6 +362,7 @@ function render(){
   const subs = sum(all,"monthly_active") + sum(all,"yearly_active");
 
   $("dash").innerHTML = `
+  ${sum(all,"entered") ? "" : setupCard()}
   <div class="dash">
     <div class="d-top">
       <span class="d-title">Hey ${esc(first.name.split(" ")[0])}</span>
@@ -390,6 +410,26 @@ function render(){
     : `<div class="empty">No payouts yet. Your first one goes out ${nextPayout()}.</div>`}</div>
 
   <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
+}
+// "Watch this first" setup video (1 min: link in bio, film a real scan, say your code).
+// Empty = card still shows, with "Video coming soon". Same constant lives in join/_src.html.
+const SETUP_VIDEO_URL = "", SETUP_POSTER = "";
+function setupCard(){
+  return `<div class="setup">
+    <button class="thumb" ${SETUP_VIDEO_URL ? 'data-play' : 'disabled'} aria-label="Play setup video">${SETUP_POSTER ? `<img src="${esc(SETUP_POSTER)}" alt="">` : ""}<i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="#000"/></svg></i></button>
+    <div class="txt">
+      <span class="d-k">Watch this first · 1 min</span>
+      <b>How to get your first sale</b>
+      <ol><li>Link in your bio</li><li>Film a real scan</li><li>Say your code</li></ol>
+      ${SETUP_VIDEO_URL ? "" : `<span class="soon">Video coming soon.</span>`}
+    </div>
+  </div>`;
+}
+function playSetup(){
+  const o = document.createElement("div"); o.className = "vid-over";
+  o.innerHTML = `<video src="${esc(SETUP_VIDEO_URL)}" controls autoplay playsinline></video><button class="btn small glass">Close</button>`;
+  o.onclick = e => { if (e.target === o || e.target.tagName === "BUTTON") o.remove(); };
+  document.body.appendChild(o);
 }
 function learnCard(url, k, s){
   const inner = `<div><b>${k}</b><span>${s}</span></div>`;
