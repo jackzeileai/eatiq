@@ -658,7 +658,13 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
   .split-hero .hero-art,.split-hero .hero-cols>.quick{justify-self:center;width:440px;max-width:100%}
   .split-hero .hero-art .iph{height:600px !important;width:auto !important}
 }
-@media (min-width:901px){.split-hero .hero-cols{align-items:start !important;min-height:0 !important}.split-hero .hero-cols>:first-child{padding-top:24px;align-self:start}.split-hero .hero-art,.split-hero .hero-cols>.quick{align-self:start}}
+@media (min-width:901px){
+  .split-hero .hero-cols{align-items:center !important;min-height:500px !important}
+  .split-hero .hero-cols>:first-child{padding-top:0;align-self:center}
+  .split-hero .hero-art,.split-hero .hero-cols>.quick{align-self:center}
+  .split-hero .hero-art .iph{height:500px !important}
+  .split-hero .lede{max-width:500px !important;text-wrap:balance}
+}
 </style>
 </head>
 <body>

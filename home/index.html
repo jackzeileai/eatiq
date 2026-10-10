@@ -739,7 +739,13 @@ html[data-mode="dark"] .iph-side{filter:brightness(.45)}
 .split-hero .btn.ghost.im:hover{background:var(--ink) !important;color:var(--paper,#fff) !important}
 html[data-mode="dark"] .split-hero .btn.ghost.im{box-shadow:inset 0 0 0 1.5px var(--ink) !important}
 html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
-@media (min-width:901px){.split-hero .hero-cols{align-items:start !important}.split-hero .hero-cols>:first-child{padding-top:118px;align-self:start}.split-hero .hero-art,.split-hero .hero-cols>.quick{align-self:center}}
+@media (min-width:901px){
+  .split-hero .hero-cols{align-items:center !important;min-height:500px !important}
+  .split-hero .hero-cols>:first-child{padding-top:0;align-self:center}
+  .split-hero .hero-art,.split-hero .hero-cols>.quick{align-self:center}
+  .split-hero .hero-art .iph{height:500px !important}
+  .split-hero .lede{max-width:500px !important;text-wrap:balance}
+}
 </style>
 <body>
 
