@@ -1,188 +1,194 @@
 <!doctype html>
 <html lang="en">
+<script>try{var m=localStorage.getItem("mp-mode");document.documentElement.dataset.mode=m||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.mode="light"}</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Creator Dashboard · Meal Pic</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="icon" type="image/png" href="../assets/favicon.png">
-<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-dark.png?v=2" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style/mono.css?v=1791591000">
 <style>
-:root{
-  --bg:#FFFFFF;--card:#ffffff;--card2:#F4F4F6;--ink:#111113;--sub:#5d5d64;--faint:#6e6e74;--line:rgba(0,0,0,.07);
-  --green-ink:#1f9e45;--pink:#ff375f;
-  --shadow:0 0 0 1px rgba(0,0,0,.06),0 2px 4px rgba(0,0,0,.03),0 12px 32px -14px rgba(0,0,0,.12);
-  --r:24px;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
-.wrap{max-width:980px;margin:0 auto;padding:22px 16px 72px}
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
-.brand img{width:32px;height:32px;border-radius:9px}
-.brand span{color:var(--sub);font-weight:600}
-.ghost{background:var(--card);border:0;box-shadow:var(--shadow);color:var(--ink);font:600 14px Inter,sans-serif;cursor:pointer;padding:9px 16px;border-radius:999px}
-.link{background:none;border:0;color:var(--sub);font:600 15px Inter,sans-serif;cursor:pointer;padding:6px 0}
+/* Layout only. The look comes from the style pack (mono.css), same as /join. */
+:root{--card-bg:#fff;--edge:inset 0 0 0 1px var(--hair);--r:24px;--well:rgba(0,0,0,.06)}
 .hidden{display:none!important}
+.page{max-width:1040px;margin:0 auto;padding:40px var(--gutter) 72px}
+
+/* nav: floating glass pill, same as /join */
+.brand img.mark{width:28px;height:28px;border-radius:0}
+.mode-btn{display:grid;place-items:center;width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
+.mode-btn:hover{background:var(--well)}
+.mode-btn .i-sun{display:none}
+html[data-mode="dark"] .mode-btn .i-sun{display:block}
+html[data-mode="dark"] .mode-btn .i-moon{display:none}
+.nav .links{gap:6px}
+
+/* cards */
+.auth,.sh,.payout,.recur,.start,.tile,.earned,.chart,.hist{background:var(--card-bg);box-shadow:var(--edge);border-radius:var(--r)}
 
 /* sign-in */
-.auth{max-width:420px;margin:8vh auto 0;background:var(--card);border-radius:28px;padding:32px 26px;box-shadow:var(--shadow)}
-.auth .mark{width:56px;height:56px;border-radius:16px;display:block;margin-bottom:20px}
-.auth h1{font-size:28px;line-height:1.15;letter-spacing:-.025em;margin:0 0 8px}
-.auth p{color:var(--sub);margin:0 0 24px;font-size:15px;line-height:1.5}
-label{display:block;font-weight:600;font-size:13px;color:var(--sub);margin-bottom:8px}
-input{width:100%;font:500 17px Inter,sans-serif;padding:15px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);outline:none;transition:border-color .15s}
-input:focus{border-color:var(--ink)}
-input.code{letter-spacing:10px;font-size:26px;font-weight:800;text-align:center}
-.btn{width:100%;margin-top:14px;padding:16px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:700 16px Inter,sans-serif;cursor:pointer;transition:opacity .15s}
-.btn:disabled{opacity:.45;cursor:default}
-.auth p.fallback{margin:18px 0 0;font-size:14px;text-align:center}
-.err{color:var(--pink);font-size:14px;margin-top:12px;min-height:18px}
+.auth{max-width:440px;margin:8vh auto 0;padding:36px 30px}
+.auth .mark{width:44px;height:44px;display:block;margin-bottom:22px}
+.auth h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;font-weight:800;margin:0 0 10px}
+.auth p{color:var(--sub);margin:0 0 28px;font-size:16px;line-height:1.5;font-weight:600}
+.auth p b{color:var(--ink)}
+label{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0 8px 2px}
+input{width:100%;font:500 17px var(--font);height:56px;padding:0 18px;border-radius:16px;border:0;box-shadow:var(--edge);background:transparent;color:var(--ink);outline:none;transition:box-shadow .15s}
+input:focus{box-shadow:inset 0 0 0 1.5px var(--ink)}
+input.code{letter-spacing:10px;font-size:28px;font-weight:800;text-align:center}
+.auth .btn{width:100%;margin-top:16px}
+.auth p.fallback{margin:18px 0 0;font-size:15px;text-align:center}
+.link{display:block;margin:18px auto 0;background:none;border:0;color:var(--sub);font:600 15px var(--font);cursor:pointer;padding:6px 0}
+.link:hover{color:var(--ink)}
+.err{color:#ff3b30;font-size:15px;margin-top:12px;min-height:20px}
 
-/* dashboard */
-.money{display:grid;grid-template-columns:1.25fr 1fr;gap:12px}
-@media (max-width:760px){.money{grid-template-columns:1fr}}
-.recur{border-radius:28px;padding:28px 26px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column}
-.recur .k{font-size:14px;font-weight:600;color:var(--sub)}
-.recur .v{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-top:10px;color:var(--green-ink)}
-.recur .v small{font-size:20px;font-weight:700;letter-spacing:-.01em;color:var(--sub)}
-.recur .s{color:var(--sub);font-size:14px;line-height:1.5;margin-top:12px;margin-bottom:24px}
-.recur .meta{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
-.recur .meta div{font-size:13px;color:var(--sub);font-weight:500;padding-top:6px}
-.recur .meta b{display:block;font-size:18px;color:var(--ink);margin-top:3px;font-weight:800}
-.start{background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:22px 22px 8px;margin-top:12px}
-.start h3{margin:0 0 4px;font-size:17px}
-.start>p{margin:0 0 8px;color:var(--sub);font-size:14px}
-.start ol{list-style:none;margin:0;padding:0;counter-reset:s}
-.start li{counter-increment:s;display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.45}
-.start li:first-child{border-top:0}
-.start li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--card2);display:grid;place-items:center;font-weight:800;font-size:13px}
-.start li span{color:var(--sub)}
+/* greeting */
+.hello{margin:24px 0 28px}
+.hello h1{font-size:clamp(44px,6vw,72px);line-height:.98;letter-spacing:-.045em;font-weight:800;margin:0}
+.hello p{margin:12px 0 0;color:var(--sub);font-size:19px}
 
-.hello{margin:6px 0 18px}
-.hello h1{font-size:32px;letter-spacing:-.03em;margin:0;line-height:1.1}
-.hello p{margin:6px 0 0;color:var(--sub);font-size:15px}
-.share{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;margin-bottom:12px}
-@media (max-width:640px){.share{grid-template-columns:1fr}}
-.share .sh{display:flex;align-items:center;gap:12px;background:var(--card);box-shadow:var(--shadow);border-radius:20px;padding:14px 14px 14px 18px;min-width:0}
-.share .sh div{min-width:0;flex:1}
-.share .k{display:block;color:var(--sub);font-size:12px;font-weight:600;margin-bottom:3px}
-.share b{display:block;font-size:17px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.share b.code{letter-spacing:.06em}
-.copy{flex:none;border:0;background:var(--card2);color:var(--ink);font:600 14px Inter,sans-serif;padding:9px 16px;border-radius:999px;cursor:pointer}
+/* code + link */
+.share{display:grid;grid-template-columns:1fr 1.4fr;gap:16px;margin-bottom:16px}
+.sh{display:flex;align-items:center;gap:12px;padding:18px 18px 18px 24px;min-width:0}
+.sh div{min-width:0;flex:1}
+.sh .k{display:block;margin-bottom:4px}
+.sh b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sh b.code{letter-spacing:.04em}
+.k{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
 
-.payout{border-radius:28px;padding:28px 26px;background:var(--card);box-shadow:var(--shadow)}
+/* money */
+.money{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+.payout,.recur{padding:32px 30px;display:flex;flex-direction:column}
 .payout .row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.payout .k{font-size:14px;font-weight:600;color:var(--sub)}
-.payout .v{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-top:10px}
-.payout .when{display:inline-flex;align-items:center;gap:8px;background:var(--card2);padding:9px 14px;border-radius:999px;font-weight:700;font-size:14px;white-space:nowrap}
-.payout .when svg{width:16px;height:16px}
-.payout .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
-.payout .meta div{font-size:13px;color:var(--sub);font-weight:500}
-.payout .meta b{display:block;font-size:18px;color:var(--ink);margin-top:3px;font-weight:800}
+.payout .v,.recur .v{font-size:clamp(56px,7vw,84px);font-weight:800;letter-spacing:-.05em;line-height:1;margin-top:14px;font-variant-numeric:tabular-nums}
+.recur .v small{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--sub);margin-left:4px}
+.when{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;box-shadow:var(--edge);font-weight:700;font-size:15px;white-space:nowrap}
+.when svg{width:16px;height:16px}
+.recur .s{color:var(--sub);font-size:16px;line-height:1.5;margin:16px 0 24px}
+.payout .meta,.recur .meta{display:grid;gap:18px;margin-top:auto;padding-top:22px;border-top:1px solid var(--hair);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
+.payout .meta{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-top:32px}
+.recur .meta{grid-template-columns:1fr 1fr}
+.payout .meta b,.recur .meta b{display:block;font-size:22px;letter-spacing:-.02em;text-transform:none;color:var(--ink);margin-top:6px;font-weight:800}
+/* one accent on the page: the money that keeps coming in */
+.grad{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-right:.04em}
+html[data-mode="dark"] .grad{background:linear-gradient(95deg,#a28bff 0%,#d77bff 30%,#ff6fae 58%,#ffa04d 85%,#ffc65a 100%);-webkit-background-clip:text;background-clip:text}
 
-.bar{display:flex;align-items:center;justify-content:space-between;margin:30px 0 14px;gap:12px;flex-wrap:wrap}
-.bar h2{font-size:19px;letter-spacing:-.02em;margin:0}
-.seg{display:inline-flex;background:var(--card);box-shadow:var(--shadow);border-radius:999px;padding:4px}
-.seg button{border:0;background:none;color:var(--sub);font:600 13px Inter,sans-serif;padding:8px 14px;border-radius:999px;cursor:pointer;transition:all .15s}
-.seg button.on{background:var(--ink);color:var(--bg)}
+/* picture tiles, same as /join How it works: white hairline stage, one 3D object, bold caption, grey line */
+.pics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ptile{text-align:center;min-width:0;color:var(--ink);text-decoration:none}
+.ptile .stage{height:240px;padding:22px;margin-bottom:20px}
+.ptile .stage img{width:100%;height:100%;object-fit:contain;display:block}
+.ptile .h3{margin-bottom:6px}
+.ptile .s{color:var(--sub);font-size:17px;font-weight:600;line-height:1.4;max-width:320px;margin:0 auto;text-wrap:balance}
+.ptile .s b{color:var(--ink)}
+.ptile .soon{display:inline-block;margin-top:12px;box-shadow:var(--edge);color:var(--sub);font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
+a.ptile:hover .stage{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.bar.c{flex-direction:column;align-items:center;text-align:center;gap:10px}
+.bar.c p{margin:0;color:var(--sub);font-size:19px;font-weight:600}
 
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+/* section heads */
+.bar{display:flex;align-items:center;justify-content:space-between;margin:72px 0 18px;gap:12px;flex-wrap:wrap}
+.bar h2{font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1;margin:0}
+.seg{display:inline-flex;box-shadow:var(--edge);border-radius:999px;padding:4px}
+.seg button{border:0;background:none;color:var(--sub);font:600 15px var(--font);padding:9px 16px;border-radius:999px;cursor:pointer;transition:all .15s}
+.seg button:hover{color:var(--ink)}
+.seg button.on{background:var(--ink);color:var(--paper)}
+
+/* tiles */
+.grid{grid-template-columns:repeat(2,1fr)}
 @media (min-width:760px){.grid.four{grid-template-columns:repeat(4,1fr)}}
-.grid.two{grid-template-columns:1fr 1fr}
-@media (max-width:600px){.grid.two{grid-template-columns:1fr}}
-.tile{background:var(--card);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);min-width:0}
-.tile .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;margin-bottom:14px;background:var(--card2);color:var(--ink)}
+.tile{padding:22px;min-width:0}
+.tile .ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;margin-bottom:18px;box-shadow:var(--edge);color:var(--ink)}
 .tile .ic svg{width:18px;height:18px}
-.tile .k{color:var(--sub);font-size:13px;font-weight:600}
-.tile .v{font-size:30px;font-weight:800;margin-top:4px;letter-spacing:-.03em}
-.tile .s{color:var(--faint);font-size:12px;margin-top:4px;font-weight:500}
-.tile.res{display:flex;align-items:center;gap:14px;color:var(--ink);text-decoration:none}
-.tile.res .ic{margin-bottom:0;flex:none}
-.tile.res div{flex:1;min-width:0}
-.tile.res .k{color:var(--ink);font-size:15px;font-weight:700}
-.tile.res .s{color:var(--sub);font-size:13px;line-height:1.4}
-.tile.res .soon{flex:none;background:var(--card2);color:var(--sub);font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;white-space:nowrap}
-.tile.res .chev{flex:none;width:18px;height:18px;color:var(--faint)}
-a.tile.res:hover .chev{color:var(--ink)}
-.earned{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:18px 20px;margin-bottom:12px}
-.earned .k{color:var(--sub);font-weight:600;font-size:14px}
-.earned .v{font-size:30px;font-weight:900;letter-spacing:-.03em;color:var(--green-ink);margin-left:auto}
+.tile .v{font-size:40px;font-weight:800;margin-top:6px;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.tile .s{color:var(--sub);font-size:14px;margin-top:8px;line-height:1.4}
+.earned{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:22px 26px;margin-bottom:16px}
+.earned .v{font-size:40px;font-weight:800;letter-spacing:-.045em;margin-left:auto;line-height:1}
 
-
-.chart{background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:20px}
-.chart .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
-.chart .top b{font-size:15px}
-.chart .top span{color:var(--sub);font-size:13px}
-.bars{display:flex;align-items:flex-end;gap:4px;height:140px}
+/* chart */
+.chart{padding:26px}
+.chart .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}
+.chart .top b{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.chart .top span{color:var(--sub);font-size:15px}
+.bars{display:flex;align-items:flex-end;gap:4px;height:160px}
 .bars div{flex:1;border-radius:5px 5px 2px 2px;min-height:3px;background:var(--ink)}
-.bars div.zero{background:var(--card2)}
-.axis{display:flex;justify-content:space-between;color:var(--faint);font-size:12px;margin-top:10px;font-weight:500}
+.bars div.zero{background:var(--hair)}
+.axis{display:flex;justify-content:space-between;color:var(--sub);font-size:13px;margin-top:12px}
 
-.hist{background:var(--card);box-shadow:var(--shadow);border-radius:var(--r);padding:6px 20px}
-.hist .r{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+/* history */
+.hist{padding:6px 26px}
+.hist .r{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--hair);font-size:17px}
 .hist .r:last-child{border-bottom:0}
 .hist .r span{color:var(--sub)}
-.hist .r b{font-weight:700}
-.hist .empty{color:var(--sub);padding:18px 0;font-size:14px}
+.hist .r b{font-weight:800}
+.hist .empty{color:var(--sub);padding:22px 0}
 
-.foot{color:var(--faint);font-size:12px;margin-top:26px;line-height:1.6;text-align:center}
-.foot a{color:var(--sub)}
+.foot{color:var(--sub);font-size:13px;margin-top:48px;line-height:1.7;text-align:center}
+.foot a{color:var(--ink)}
 .loading{display:grid;place-items:center;height:50vh;color:var(--sub)}
 
-/* ---------- v3: same look as the join page (Dub-style hairlines, colour icons) ---------- */
-:root{--shadow:0 0 0 1px rgba(0,0,0,.08);--r:16px;--green:#34C759;--orange:#FF9500;--purple:#AF52DE;--pinkc:#FF2D55}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Helvetica,Arial,sans-serif}
-header{margin:-22px -16px 28px;padding:14px 16px;border-bottom:1px solid var(--line)}
-.brand{font-weight:700}
-.ghost,.copy{background:var(--card);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);border-radius:10px;font-weight:600}
-.copy{padding:8px 14px;font-size:13px}
-.ghost:hover,.copy:hover{box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
-.btn{border-radius:12px;font-weight:600}
-.auth{border-radius:20px;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 48px -28px rgba(0,0,0,.25)}
-.auth h1,.hello h1{font-weight:600}
-.hello h1{font-size:34px}
-.share .sh{border-radius:14px}
-.share b{font-weight:700}
-.payout,.recur{position:relative;overflow:hidden;border-radius:20px}
-.payout>*,.recur>*{position:relative;z-index:1}
-.payout .v,.recur .v{font-weight:700;letter-spacing:-.035em}
-.payout .when{background:var(--card);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);font-weight:600}
-.payout .meta b,.recur .meta b{font-weight:700}
-.bar{margin:40px 0 14px}
-.bar h2{font-size:18px;font-weight:600;letter-spacing:-.015em}
-.seg{box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);border-radius:10px;padding:3px}
-.seg button{border-radius:8px}
-.tile{border-radius:16px}
-.tile .v{font-weight:700}
-.tile .ic{color:#fff}
-.grid.four .tile:nth-child(1) .ic{background:var(--green)}
-.grid.four .tile:nth-child(2) .ic{background:var(--orange)}
-.grid.four .tile:nth-child(3) .ic{background:var(--purple)}
-.grid.four .tile:nth-child(4) .ic{background:var(--pinkc)}
-.grid.two .tile.res:nth-child(1) .ic{background:var(--pinkc)}
-.grid.two .tile.res:nth-child(2) .ic{background:var(--orange)}
-.tile.res .soon{background:var(--card);box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
-.earned .v{font-weight:700}
-.bars div{background:var(--green)}
-.start li::before{background:var(--ink);color:#fff}
-.start h3{font-weight:600}
+@media (max-width:760px){.money{grid-template-columns:1fr}}
+@media (max-width:640px){.share{grid-template-columns:1fr}}
+@media (max-width:720px){
+  .pics{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * var(--gutter));padding:0 var(--gutter) 8px;scrollbar-width:none}
+  .pics::-webkit-scrollbar{display:none}
+  .ptile{flex:0 0 78%;scroll-snap-align:center}
+  .ptile .stage{height:220px;padding:18px}
+  .ptile .s{font-size:16px}
+}
+@media (max-width:720px){
+  .page{padding-top:24px}
+  .payout,.recur{padding:26px 22px}
+  .sh{padding:16px 14px 16px 18px}
+  .sh b{font-size:19px}
+  .bar{margin-top:56px}
+  .tile{padding:18px}
+  .tile .v{font-size:32px}
+  .auth{padding:30px 22px}
+  .nav .links .plain{display:none}
+  .nav.float .brand{font-size:17px;gap:7px}
+  .nav.float .brand img.mark{width:24px;height:24px}
+  .mode-btn{width:36px;height:36px}
+  .tile.res .ic{display:none}
+  .tile.res{padding:20px}
+}
+
+/* dark: Apple's, same as /join — pure black page, #161617 cards with a faint light edge */
+html[data-mode="dark"]{--paper:#000;--ink:#f5f5f7;--sub:#a1a1a6;--faint:#6e6e73;--hair:rgba(255,255,255,.14);--hair-2:rgba(255,255,255,.08);
+  --card-bg:#161617;--edge:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.06);--well:rgba(255,255,255,.1);color-scheme:dark}
+html[data-mode="dark"],html[data-mode="dark"] body{background:#000;color:var(--ink)}
+html[data-mode="dark"] .glass{background:rgba(28,28,30,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.08),0 12px 32px -14px rgba(0,0,0,.8)}
+html[data-mode="dark"] .btn{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .btn:hover{background:#fff}
+html[data-mode="dark"] .btn.ghost{background:transparent;color:#f5f5f7;box-shadow:inset 0 0 0 1.5px #f5f5f7}
+html[data-mode="dark"] .btn.ghost:hover{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter:invert(1)}
+html[data-mode="dark"] .ptile .stage{background:var(--card-bg);box-shadow:var(--edge)}
+html[data-mode="dark"] .seg button.on{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .bars div{background:#f5f5f7}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <a class="brand" href="/"><img src="../assets/apple-touch-icon.png" alt="">Meal Pic <span>Creators</span></a>
-    <button id="out" class="ghost hidden">Sign out</button>
-  </header>
+<header class="nav float">
+  <div class="wrap glass">
+    <a class="brand" href="/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
+    <nav class="links">
+      <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
+      <button id="out" class="btn small ghost hidden">Sign out</button>
+    </nav>
+  </div>
+</header>
+<div class="page">
 
   <section id="s-email" class="auth hidden">
-    <img class="mark" src="../assets/apple-touch-icon.png" alt="">
+    <img class="mark" src="../assets/mark-black.png" alt="">
     <h1>Creator dashboard</h1>
     <p>Sign in with your creator email.</p>
     <form id="f-email">
@@ -194,7 +200,7 @@ header{margin:-22px -16px 28px;padding:14px 16px;border-bottom:1px solid var(--l
   </section>
 
   <section id="s-code" class="auth hidden">
-    <img class="mark" src="../assets/apple-touch-icon.png" alt="">
+    <img class="mark" src="../assets/mark-black.png" alt="">
     <h1>Check your email</h1>
     <p>We sent a 6-digit code to <b id="sentto"></b>.</p>
     <form id="f-code">
@@ -207,10 +213,10 @@ header{margin:-22px -16px 28px;padding:14px 16px;border-bottom:1px solid var(--l
   </section>
 
   <section id="s-none" class="auth hidden">
-    <img class="mark" src="../assets/apple-touch-icon.png" alt="">
+    <img class="mark" src="../assets/mark-black.png" alt="">
     <h1>No creator code yet</h1>
     <p>This email, <b id="noneemail"></b>, isn't a creator yet. Sign up in about a minute and your code works right away.</p>
-    <a class="btn" href="/join/?start" style="display:block;text-align:center;text-decoration:none">Become a creator</a>
+    <a class="btn" href="/join/?start">Become a creator</a>
     <p class="fallback">Already have a code? Email <a href="mailto:help@mealpic.app" style="color:var(--ink)">help@mealpic.app</a></p>
   </section>
 
@@ -222,7 +228,7 @@ header{margin:-22px -16px 28px;padding:14px 16px;border-bottom:1px solid var(--l
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 // "What to post" links. Empty = shows "Coming soon" with no link.
-const REELS_URL = ""; const PLAYBOOK_URL = "";
+const REELS_URL = ""; const PLAYBOOK_URL = ""; const COURSE_URL = "";
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
 const $ = id => document.getElementById(id);
 const screens = ["s-email","s-code","s-none","s-stats","loading"];
@@ -301,8 +307,8 @@ function render(){
     <p>You earn on every payment from people who use these.</p>
   </div>
   <div class="share">
-    <div class="sh"><div><span class="k">Your code</span><b class="code">${all.map(c => esc(c.code.toUpperCase())).join(", ")}</b></div><button class="copy" data-copy="${esc(first.code.toUpperCase())}">Copy</button></div>
-    <div class="sh"><div><span class="k">Your link</span><b>mealpic.app/c/${esc(first.code)}</b></div><button class="copy" data-copy="https://mealpic.app/c/${esc(first.code)}">Copy</button></div>
+    <div class="sh"><div><span class="k">Your code</span><b class="code">${all.map(c => esc(c.code.toUpperCase())).join(", ")}</b></div><button class="btn small ghost" data-copy="${esc(first.code.toUpperCase())}">Copy</button></div>
+    <div class="sh"><div><span class="k">Your link</span><b>mealpic.app/c/${esc(first.code)}</b></div><button class="btn small ghost" data-copy="https://mealpic.app/c/${esc(first.code)}">Copy</button></div>
   </div>
 
   <div class="money">
@@ -322,7 +328,7 @@ function render(){
   </div>
   <div class="recur">
     <div class="k">Coming in every month</div>
-    <div class="v">${money(cutM)}<small> / mo</small></div>
+    <div class="v"><span class="grad">${money(cutM)}</span><small>/ mo</small></div>
     <div class="s">Your cut from people still subscribed through you. Yearly plans are spread across 12 months. It keeps paying as long as they stay, about ${money(cutM * 12)} a year.</div>
     <div class="meta">
       <div>Paid subscribers<b>${num(sum(all,"monthly_active") + sum(all,"yearly_paid"))}</b></div>
@@ -331,20 +337,18 @@ function render(){
   </div>
   </div>
 ${sum(all,"entered") ? "" : `
-  <div class="start">
-    <h3>Get your first subscriber</h3>
-    <p>No one's used your code yet. Start here.</p>
-    <ol>
-      <li><div>Put your link in your bio <span>— mealpic.app/c/${esc(first.code)}. It fills your code in for anyone who installs from it.</span></div></li>
-      <li><div>Post a video of you using it <span>— snap a meal, show the calories pop up. Real use beats a review.</span></div></li>
-      <li><div>Say your code out loud <span>— "use code ${esc(first.code.toUpperCase())}". People type it in while setting up the app.</span></div></li>
-    </ol>
+  <div class="bar c"><h2>Get your first subscriber</h2><p>No one's used your code yet. Start here.</p></div>
+  <div class="pics">
+    ${picTile("profile_link_t.png?v=1791588000", "1. Link in your bio", `<b>mealpic.app/c/${esc(first.code)}</b> fills your code in for anyone who installs.`)}
+    ${picTile("memoji_ringlight_white_t.png?v=1791571789", "2. Post a video", "Snap a meal, show the calories pop up. Real use beats a review.")}
+    ${picTile("memoji_code_t.png", "3. Say your code", `"Use code ${esc(first.code.toUpperCase())}." People type it in while setting up the app.`)}
   </div>`}
 
-  <div class="bar"><h2>What to post</h2></div>
-  <div class="grid two">
-    ${resTile(ICON.reel, "Library of proven reels", "Real reels that pulled big numbers, with why each one worked.", REELS_URL)}
-    ${resTile(ICON.book, "Playbook for videos that sell", "Hooks, what to film, what to say, how to end on your code.", PLAYBOOK_URL)}
+  <div class="bar c"><h2>What to post</h2><p>See what works, then make your own.</p></div>
+  <div class="pics">
+    ${picTile("videos_fan_t.png?v=1791603000", "Proven Videos", "Videos that already went viral, and why each one worked.", REELS_URL)}
+    ${picTile("playbook_book_t.png?v=1791603000", "The Winning Playbook", "Hooks, what to film, how to end on your code.", PLAYBOOK_URL)}
+    ${picTile("course_laptop_t.png?v=1791603000", "The Secret Course", "From a creator with over 1 billion views.", COURSE_URL)}
   </div>
 
   <div class="bar">
@@ -373,11 +377,12 @@ ${sum(all,"entered") ? "" : `
 
   <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>Weekly and monthly views count people by the day they subscribed. Your payout counts every payment received.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
 }
-function resTile(icon, k, s, url){
-  const inner = `<div class="ic">${icon}</div><div><div class="k">${k}</div><div class="s">${s}</div></div>`;
+function picTile(img, k, s, url){
+  const inner = `<div class="stage"><img src="../assets/lab/${img}" alt=""></div><h3 class="h3">${k}</h3><p class="s">${s}</p>`;
+  if (url === undefined) return `<div class="ptile">${inner}</div>`;
   return url
-    ? `<a class="tile res" href="${esc(url)}" target="_blank" rel="noopener">${inner}${ICON.chev}</a>`
-    : `<div class="tile res">${inner}<span class="soon">Coming soon</span></div>`;
+    ? `<a class="ptile" href="${esc(url)}" target="_blank" rel="noopener">${inner}</a>`
+    : `<div class="ptile">${inner}<span class="soon">Coming soon</span></div>`;
 }
 function tile(icon, k, v, s){
   return `<div class="tile"><div class="ic">${icon}</div><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
@@ -392,6 +397,7 @@ function nextPayout(){
   return pt.toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"});
 }
 function esc(s){ return String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
 load();
 </script>
 </body>
