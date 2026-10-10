@@ -102,6 +102,10 @@ Main CTA = `.btn.shine`: compact black pill with a sheen sweep and an arrow that
 - No helper text that explains the obvious ("Drag it").
 - Dark mode = Apple's: pure black page, cards on #161617 / #1d1d1f with a faint light edge, brighter gradient stops, deeper shadows.
 
+## Ambient background (2026-10-10)
+
+Three huge blurred colour blobs (purple, orange, violet) drift slowly behind the page in a fixed layer (`.ambient`). Opacity ~.22 light / .3 dark, 40-60s ease loops, off under reduced-motion. The calculator, dashboard and tile stages are translucent glass (`backdrop-filter` blur + saturate) so they pick the colour up. Keep it faint: the page must still read as white/black with pictures as the colour.
+
 ## Logo
 
 Use the line mark (`assets/mark-black.png`, `mark-white.png` on dark) next to the wordmark in navs. Not the rounded app-icon square. Jack: "I like this logo way more."

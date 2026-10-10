@@ -498,7 +498,7 @@ footer.site{margin-top:72px}
 .final .lede{color:var(--sub);font-weight:500}
 /* playbook as a manual page */
 .stage.pb{align-items:center !important;padding:0 !important;background:#fff}
-.pb-doc{position:relative;width:76%;height:84%;padding:16px 20px 0;border-radius:6px 14px 14px 6px;background:#fff;box-shadow:inset 6px 0 0 #1d1d1f,0 0 0 1px var(--hair),0 22px 40px -18px rgba(0,0,0,.35);transform:rotate(-2.5deg);overflow:hidden;text-align:left}
+.pb-doc{position:relative;width:76%;height:84%;padding:16px 20px 0;border-radius:6px 14px 14px 6px;background:#fff;box-shadow:inset 6px 0 0 #1d1d1f,0 0 0 1px var(--hair),0 22px 40px -18px rgba(0,0,0,.35);overflow:hidden;text-align:left}
 .pb-head{display:flex;justify-content:space-between;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);padding:0 0 10px 6px;border-bottom:1px solid var(--hair)}
 .pb-title{display:block;font-size:clamp(18px,1.5vw,22px);font-weight:800;letter-spacing:-.035em;margin:12px 0 12px 6px}
 .pb-doc .pb-list{gap:12px;padding-left:6px}
@@ -553,7 +553,7 @@ html[data-mode="dark"] .mode-btn .i-sun{display:block}
 html[data-mode="dark"] .mode-btn .i-moon{display:none}
 html[data-mode="dark"]{--paper:#000;--ink:#f5f5f7;--sub:#a1a1a6;--faint:#6e6e73;--hair:rgba(255,255,255,.14);--hair-2:rgba(255,255,255,.08);
   --bg:#1c1c1e;--surface:#2c2c2e;--surface-2:#2c2c2e;--line:rgba(255,255,255,.14);--line-2:rgba(255,255,255,.08);--accent:#fff;--accent-ink:#000;color-scheme:dark}
-html[data-mode="dark"],html[data-mode="dark"] body{background:#000;color:var(--ink)}
+html[data-mode="dark"]{background:#000;color:var(--ink)}
 html[data-mode="dark"] .mode-btn:hover{background:rgba(255,255,255,.1)}
 html[data-mode="dark"] .glass{background:rgba(28,28,30,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.08),0 12px 32px -14px rgba(0,0,0,.8)}
 html[data-mode="dark"] .btn{background:#f5f5f7;color:#000}
@@ -596,9 +596,27 @@ html[data-mode="dark"] .quick input[type=range]{background:linear-gradient(to ri
 html[data-mode="dark"] .d-when{background:rgba(255,255,255,.1);color:#fff}
 .tile .stage img[src*="course_memoji_t"],.tile .stage img[src*="reels_ugc_t"]{filter:drop-shadow(0 18px 24px rgba(0,0,0,.22))}
 html[data-mode="dark"] .tile .stage img[src*="course_memoji_t"],html[data-mode="dark"] .tile .stage img[src*="reels_ugc_t"]{filter:drop-shadow(0 18px 24px rgba(0,0,0,.7))}
+/* ambient: three slow colour blobs behind everything; the glass surfaces pick them up */
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.ambient i{position:absolute;width:62vmax;height:62vmax;border-radius:50%;filter:blur(80px);opacity:.22;will-change:transform;transform:translateZ(0)}
+.ambient i:nth-child(1){left:-18vmax;top:-22vmax;background:radial-gradient(circle at 45% 45%,#c64bff 0%,rgba(198,75,255,0) 62%);animation:amb1 42s ease-in-out infinite alternate}
+.ambient i:nth-child(2){right:-22vmax;top:-12vmax;background:radial-gradient(circle at 50% 50%,#ff8a2b 0%,rgba(255,138,43,0) 62%);animation:amb2 50s ease-in-out infinite alternate}
+.ambient i:nth-child(3){left:28vw;bottom:-34vmax;background:radial-gradient(circle at 50% 50%,#7b5cff 0%,rgba(123,92,255,0) 62%);animation:amb3 58s ease-in-out infinite alternate}
+@keyframes amb1{to{transform:translate(22vw,14vh) rotate(45deg) scale(1.12)}}
+@keyframes amb2{to{transform:translate(-18vw,26vh) rotate(-60deg) scale(1.08)}}
+@keyframes amb3{to{transform:translate(-20vw,-16vh) rotate(30deg) scale(1.15)}}
+@media (prefers-reduced-motion:reduce){.ambient i{animation:none}}
+@media (max-width:720px){.ambient i{filter:blur(56px);opacity:.2}}
+html[data-mode="dark"] .ambient i{opacity:.3}
+.split-hero .quick,.dash{background:rgba(255,255,255,.66);backdrop-filter:blur(30px) saturate(170%);-webkit-backdrop-filter:blur(30px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(0,0,0,.08),0 24px 60px -30px rgba(0,0,0,.25)}
+.tile .stage{background:rgba(255,255,255,.55);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(0,0,0,.08)}
+html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data-mode="dark"] .tile .stage{background:rgba(22,22,23,.62);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 0 0 1px rgba(255,255,255,.08),0 24px 60px -30px rgba(0,0,0,.8)}
+html{background:var(--paper)}
+body{background:transparent}
 </style>
 </head>
 <body>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
 
 <header class="nav float">
   <div class="wrap glass">
@@ -669,7 +687,7 @@ html[data-mode="dark"] .tile .stage img[src*="course_memoji_t"],html[data-mode="
           </ol>
         </div>
       </div><h3 class="h3">The playbook</h3><p class="lede sub">Hooks, value, CTAs. The manual for videos that sell.</p></div>
-      <div class="tile"><div class="stage"><img class="lg" src="__ROOT__assets/lab/course_memoji_t.png?v=1791595000" alt=""></div><h3 class="h3">A free creator course</h3><p class="lede sub">From a top creator in the space. Worth thousands. Free when you join.</p></div>
+      <div class="tile"><div class="stage"><img class="lg" src="__ROOT__assets/lab/course_memoji_t.png?v=1791596000" alt=""></div><h3 class="h3">A free creator course</h3><p class="lede sub">From a top creator in the space. Worth thousands. Free when you join.</p></div>
     </div>
   </div>
 </section>
