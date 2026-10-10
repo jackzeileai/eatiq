@@ -436,7 +436,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .split-hero .h-hero{font-size:clamp(48px,6.6vw,100px);line-height:.98;letter-spacing:-.035em;white-space:normal}
 .split-hero .h-hero .one{display:block;font-size:.42em;letter-spacing:-.03em;margin-bottom:.06em}
 .split-hero .h-hero .two{display:block}
-.fifty{background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.95) 50%,transparent 62%) -150% 0/250% 100% no-repeat,linear-gradient(180deg,#f9e27d 0%,#e9b949 38%,#b9821f 62%,#e5b24a 82%,#8a5f12 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:fiftyflow 3.6s ease-in-out infinite;padding-right:.02em;margin-right:-.04em}
+.fifty{background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.85) 50%,transparent 62%) -150% 0/250% 100% no-repeat,linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:fiftyflow 3.6s ease-in-out infinite;padding-right:.02em;margin-right:-.04em}
 @keyframes fiftyflow{0%,45%{background-position:-150% 0,0 0}100%{background-position:250% 0,0 0}}
 @media (prefers-reduced-motion:reduce){.fifty{animation:none}}
 @media (max-width:720px){.split-hero .h-hero{font-size:58px}}
@@ -495,6 +495,37 @@ footer.site{margin-top:72px}
 @media (max-width:900px){#how{padding-top:40px}}
 .split-hero .lede,.final .lede{text-wrap:balance}
 .final .lede{color:var(--sub);font-weight:500}
+/* playbook as a manual page */
+.stage.pb{align-items:center !important;padding:0 !important;background:#fff}
+.pb-doc{position:relative;width:76%;height:84%;padding:16px 20px 0;border-radius:6px 14px 14px 6px;background:#fff;box-shadow:inset 6px 0 0 #1d1d1f,0 0 0 1px var(--hair),0 22px 40px -18px rgba(0,0,0,.35);transform:rotate(-2.5deg);overflow:hidden;text-align:left}
+.pb-head{display:flex;justify-content:space-between;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);padding:0 0 10px 6px;border-bottom:1px solid var(--hair)}
+.pb-title{display:block;font-size:clamp(18px,1.5vw,22px);font-weight:800;letter-spacing:-.035em;margin:12px 0 12px 6px}
+.pb-doc .pb-list{gap:12px;padding-left:6px}
+.pb-doc .pb-list li{align-items:flex-start;white-space:normal;font-size:clamp(13px,1.05vw,15px)}
+.pb-doc .pb-list li span{display:flex;flex-direction:column;gap:1px}
+.pb-doc .pb-list strong{font-weight:800;letter-spacing:-.02em}
+.pb-doc .pb-list em{font-style:normal;font-weight:500;font-size:.88em;color:var(--sub)}
+.pb-doc .pb-list b{width:26px;height:26px;font-size:12px}
+.stage.pb .pb-chip{bottom:9%}
+.scroll-cue{display:block;width:22px;height:34px;margin:28px auto 0;border-radius:12px;box-shadow:inset 0 0 0 2px #c7c7cc}
+.scroll-cue span{display:block;width:4px;height:7px;margin:7px auto 0;border-radius:2px;background:var(--sub);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:translateY(0);opacity:0}30%{opacity:1}80%{transform:translateY(10px);opacity:0}100%{opacity:0}}
+@media (max-width:900px){.scroll-cue{display:none}}
+#how{padding-top:56px}
+/* dashboard polish */
+.dash{gap:12px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 30px 60px -30px rgba(0,0,0,.22)}
+.d-card{box-shadow:inset 0 0 0 1px rgba(0,0,0,.07)}
+.d-big{font-size:clamp(40px,4vw,56px)}
+.d-pay .d-big{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text}
+.d-when{background:#fff1e6;color:#b4480f}
+.d-bars{height:110px;gap:6px}
+.d-bars i{background:#e5e5ea;opacity:1;border-radius:6px 6px 3px 3px}
+.d-bars i:nth-last-child(-n+8){background:#1d1d1f}
+.d-bars i.today{background:linear-gradient(180deg,#ff8a2b,#c64bff)}
+.d-chip{box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.d-stats b{font-size:clamp(26px,2.4vw,32px)}
+.tile .stage img.sm2{max-width:66%;max-height:72%}
+.stage.pb .pb-chip{bottom:7%}
 </style>
 </head>
 <body>
@@ -537,13 +568,14 @@ footer.site{margin-top:72px}
   </div>
 </section>
 
+<a class="scroll-cue" href="#how" aria-label="Scroll down"><span></span></a>
 <section class="sec" id="how">
   <div class="wrap">
     <div class="split"><h2 class="h2">How it works</h2><p class="lede">Three steps to your first payout.</p></div>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/profile_link_t.png?v=1791588000" alt=""></div><h3 class="h3">1. Get your link</h3><p class="lede sub">Sign up free for your own link and code. Put the link in your bio.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/profile_link_t.png?v=1791588000" alt=""></div><h3 class="h3">1. Get your link</h3><p class="lede sub">Sign up for free to get your affiliate link and code.</p></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_ringlight_white_t.png?v=1791571789" alt=""></div><h3 class="h3">2. Start making videos</h3><p class="lede sub">Film UGC showing off Meal Pic. Post it to your Instagram and TikTok.</p></div>
-      <div class="tile"><div class="stage white"><img class="sm" src="../assets/lab/venmo_t.png?v=1791583000" alt=""></div><h3 class="h3">3. Get paid</h3><p class="lede sub">Your 50%, every Friday. Venmo, Cash App, Zelle or bank.</p></div>
+      <div class="tile"><div class="stage white"><img class="sm" src="../assets/lab/venmo_t.png?v=1791583000" alt=""></div><h3 class="h3">3. Get paid</h3><p class="lede sub">Keep 50% of everything your viewers pay, sent every Friday.</p></div>
     </div>
     <div class="ctabar"><button class="btn shine" data-open>Become a creator<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="cta-note">Free to join. Paid every Friday.</span></div>
   </div>
@@ -554,18 +586,21 @@ footer.site{margin-top:72px}
     <div class="rule start"><span class="label"><i class="dot"></i>01 — What you get</span><i></i><span class="label dim">Money, plus the tools to earn it</span></div>
     <div class="split"><h2 class="h2">We teach you to make winning videos</h2><p class="lede">Reels that already sold, a playbook to copy, and a free video course.</p></div>
     <div class="grid c3">
-            <div class="tile"><div class="stage"><img class="lg" src="../assets/lab/reels_fan_t.png?v=1791587000" alt=""></div><h3 class="h3">Proven reels</h3><p class="lede sub">Videos that blew up, and why.</p></div>
+            <div class="tile"><div class="stage"><img class="lg" src="../assets/lab/reels_fan_t.png?v=1791587000" alt=""></div><h3 class="h3">Proven reels</h3><p class="lede sub">A library of reels that already went viral. Exact inspo for what works.</p></div>
       <div class="tile"><div class="stage pb">
-        <ol class="pb-list">
-          <li><b>1</b><span>Show the food first.</span></li>
-          <li><b>2</b><span>Scan it on camera.</span></li>
-          <li class="lock"><b>3</b><span>Say your code like a friend.</span></li>
-          <li class="lock"><b>4</b><span>Repost what already won.</span></li>
-          <li class="lock"><b>5</b><span>End on the result.</span></li>
-        </ol>
+        <div class="pb-doc">
+          <div class="pb-head"><span>The Meal Pic Playbook</span><span>Ch. 1</span></div>
+          <b class="pb-title">Videos that sell</b>
+          <ol class="pb-list">
+            <li><b>1</b><span><strong>Hook in one second</strong><em>Open on the food, not your face.</em></span></li>
+            <li><b>2</b><span><strong>Let the number land</strong><em>Scan it. Pause on the calories.</em></span></li>
+            <li class="lock"><b>3</b><span><strong>Say your code like a friend</strong><em>Never read it like an ad.</em></span></li>
+            <li class="lock"><b>4</b><span><strong>Copy what already won</strong><em>Same format, your food.</em></span></li>
+          </ol>
+        </div>
         <span class="pb-chip"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2M3.5 7h9v6.5h-9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Unlocks when you join</span>
-      </div><h3 class="h3">The playbook</h3><p class="lede sub">Exactly how to make videos that sell.</p></div>
-      <div class="tile"><div class="stage course"><img src="../assets/lab/memoji_filming.jpg?v=1791590000" alt=""><span class="c-free">Free course</span><span class="c-n">12 lessons</span><div class="c-bar"><div class="c-meta"><span class="c-play"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span><b>Lesson 3 · Hook them in one second</b><span>2:14</span></div><i><u></u></i></div></div><h3 class="h3">A free creator course</h3><p class="lede sub">Short video lessons on filming, posting and selling.</p></div>
+      </div><h3 class="h3">The playbook</h3><p class="lede sub">The step-by-step manual: hooks, what to film and what to say.</p></div>
+      <div class="tile"><div class="stage"><img class="sm2" src="../assets/lab/course_t.png?v=1791592000" alt=""></div><h3 class="h3">A free creator course</h3><p class="lede sub">Short video lessons on filming, posting and selling. Free.</p></div>
     </div>
   </div>
 </section>
