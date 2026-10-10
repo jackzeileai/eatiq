@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" data-theme="app">
+<script>try{var m=localStorage.getItem("mp-mode");document.documentElement.dataset.mode=m||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.mode="light"}</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -543,6 +544,38 @@ footer.site{margin-top:72px}
 .d-title{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
 .scroll-cue:hover{background:#fff}
 @media (prefers-reduced-motion:reduce){.scroll-cue{animation:none}}
+
+/* ================= dark mode ================= */
+.mode-btn{display:grid;place-items:center;width:40px;height:40px;margin-left:4px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
+.mode-btn:hover{background:rgba(0,0,0,.06)}
+.mode-btn .i-sun{display:none}
+html[data-mode="dark"] .mode-btn .i-sun{display:block}
+html[data-mode="dark"] .mode-btn .i-moon{display:none}
+html[data-mode="dark"]{--paper:#000;--ink:#f5f5f7;--sub:#a1a1a6;--faint:#6e6e73;--hair:rgba(255,255,255,.14);--hair-2:rgba(255,255,255,.08);
+  --bg:#1c1c1e;--surface:#2c2c2e;--surface-2:#2c2c2e;--line:rgba(255,255,255,.14);--line-2:rgba(255,255,255,.08);--accent:#fff;--accent-ink:#000;color-scheme:dark}
+html[data-mode="dark"],html[data-mode="dark"] body{background:#000;color:var(--ink)}
+html[data-mode="dark"] .mode-btn:hover{background:rgba(255,255,255,.1)}
+html[data-mode="dark"] .glass{background:rgba(28,28,30,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.08),0 12px 32px -14px rgba(0,0,0,.8)}
+html[data-mode="dark"] .btn{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .btn:hover{background:#fff}
+html[data-mode="dark"] .btn.shine::after{background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%)}
+html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .card{background:#0d0d0f;box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .quick input[type=range]::-webkit-slider-thumb{background:#fff}
+html[data-mode="dark"] .stage,html[data-mode="dark"] .stage.white,html[data-mode="dark"] .stage.pb{background:#0d0d0f;box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .pb-doc{background:#1c1c1e;box-shadow:inset 6px 0 0 #f5f5f7,0 0 0 1px var(--hair),0 22px 40px -18px rgba(0,0,0,.8)}
+html[data-mode="dark"] .pb-list b{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .pb-chip{background:rgba(44,44,46,.75);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 8px 24px -10px rgba(0,0,0,.8)}
+html[data-mode="dark"] .dash{background:#0d0d0f;box-shadow:0 0 0 1px var(--hair),0 30px 60px -30px rgba(0,0,0,.9)}
+html[data-mode="dark"] .d-card,html[data-mode="dark"] .d-chip{box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .d-bars i{background:#2c2c2e}
+html[data-mode="dark"] .d-bars i:nth-last-child(-n+8){background:#f5f5f7}
+html[data-mode="dark"] .d-bars i.today{background:linear-gradient(180deg,#ff8a2b,#c64bff)}
+html[data-mode="dark"] .d-when{background:rgba(255,138,43,.16);color:#ffb070}
+html[data-mode="dark"] .scroll-cue{background:rgba(28,28,30,.7);box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+html[data-mode="dark"] .scroll-cue:hover{background:#2c2c2e}
+html[data-mode="dark"] .float,html[data-mode="dark"] .tile .stage img{filter:none}
+html[data-mode="dark"] footer.site{border-top-color:var(--hair)}
+html[data-mode="dark"] .brand img.mark{filter:invert(1)}
 </style>
 </head>
 <body>
@@ -555,6 +588,7 @@ footer.site{margin-top:72px}
       <a class="plain" href="#get">What you get</a>
       <a class="plain" href="#faq">FAQ</a>
       <a class="plain" href="/dashboard/">Log in</a>
+      <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
       <button class="btn small shine" data-open>Join</button>
     </nav>
   </div>
@@ -567,7 +601,7 @@ footer.site{margin-top:72px}
     <div class="hero-cols">
       <div class="hero-copy">
         <h1 class="h-hero"><span class="two">Get <span class="fifty">50%</span> of<br>revenue</span></h1>
-        <p class="lede">Make videos about Meal Pic. Keep half of every dollar your viewers spend, for as long as they stay subscribed.</p>
+        <p class="lede">Make videos for Meal Pic. Keep 50% of all subscription revenue you generate, for life.</p>
         <div class="ctas"><button class="btn shine" data-open>Become a creator<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
       </div>
       <div class="quick card" id="earn">
@@ -592,7 +626,7 @@ footer.site{margin-top:72px}
     <div class="grid c3">
       <div class="tile"><div class="stage white"><img src="../assets/lab/profile_link_t.png?v=1791588000" alt=""></div><h3 class="h3">1. Get your link</h3><p class="lede sub">Sign up for free to get your affiliate link and code.</p></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_ringlight_white_t.png?v=1791571789" alt=""></div><h3 class="h3">2. Start making videos</h3><p class="lede sub">Film UGC showing off Meal Pic. Post it to your Instagram and TikTok.</p></div>
-      <div class="tile"><div class="stage white"><img class="sm" src="../assets/lab/venmo_t.png?v=1791583000" alt=""></div><h3 class="h3">3. Get paid</h3><p class="lede sub">Keep 50% of everything your viewers pay, sent every Friday.</p></div>
+      <div class="tile"><div class="stage white"><img class="sm" src="../assets/lab/venmo_t.png?v=1791583000" alt=""></div><h3 class="h3">3. Get paid</h3><p class="lede sub">Get 50% of all revenue you generate, for life. Paid every Friday.</p></div>
     </div>
     <div class="ctabar"><button class="btn shine" data-open>Become a creator<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="cta-note">Free to join. Paid every Friday.</span></div>
   </div>
@@ -940,5 +974,8 @@ document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
 if (new URLSearchParams(location.search).has("start")) openFlow();
 </script>
 
+<script>
+document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
+</script>
 </body>
 </html>
