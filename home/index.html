@@ -751,6 +751,35 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
   .split-hero .hero-art .iph{height:500px !important}
   .split-hero .lede{max-width:500px !important;text-wrap:balance}
 }
+
+/* ===== pro audit (2026-10-10): one grid, one rhythm ===== */
+/* nav pill spans the same 1160 content width, so the logo lines up with the headline */
+@media (min-width:901px){.nav.float .wrap{max-width:1188px}}
+/* the text section sits on the hero's grid: copy on the same left edge, phone in the same spot */
+@media (min-width:901px){
+  .text-sec .hero-cols{max-width:1160px !important;margin:0 auto !important;grid-template-columns:minmax(0,1fr) 440px !important;justify-content:normal !important;gap:64px !important;align-items:center}
+  .text-sec .phone{padding:0 !important;justify-self:center}
+  .text-sec .phone .iph{height:500px !important;width:auto !important}
+  .text-sec .hero-copy{max-width:520px;margin:0}
+}
+/* every section heading is the same size at every width */
+.text-sec .h2,.text-sec .hero-copy .h2{font-size:clamp(36px,4.6vw,60px)}
+@media (max-width:720px){.text-sec .h2,.text-sec .hero-copy .h2{font-size:38px}}
+/* every pill on the page is the same height */
+.text-sec .ctas .btn{height:50px;padding:0 26px;font-size:17px}
+/* even gaps: heading to content 56, content to button 56, section to section ~100 */
+@media (min-width:901px){
+  .sec .split{margin-bottom:56px}
+  #how .tile .stage{height:260px}
+  .ctabar{margin-top:56px}
+  .split-hero{padding-bottom:24px !important}
+}
+/* phone: the hero headline outranks section headings; buttons never wrap unevenly */
+@media (max-width:900px){.split-hero .h-hero{font-size:clamp(44px,12.8vw,56px)}}
+@media (max-width:440px){
+  .split-hero .ctas{flex-direction:column;align-items:stretch;max-width:320px;margin-left:auto;margin-right:auto}
+  .split-hero .ctas .btn{width:100%}
+}
 </style>
 <body>
 
