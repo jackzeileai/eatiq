@@ -51,6 +51,24 @@ function logClick(request, path, source) {
   }).catch(() => {});
 }
 
+async function isCreator(code, ctx) {
+  const key = new Request("https://cache.mealpic.app/creator-v2/" + code);
+  const hit = await caches.default.match(key);
+  if (hit) return (await hit.text()) === "1";
+  let yes = false;
+  try {
+    const r = await fetch("https://bvaumyrtcuehlipiaxlv.supabase.co/rest/v1/rpc/creator_code_lookup", {
+      method: "POST", signal: AbortSignal.timeout(3000),
+      headers: { apikey: KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ code }),
+    });
+    const name = r.ok ? await r.json() : null;
+    yes = typeof name === "string" && name.length > 0;
+  } catch (e) { return false; }
+  ctx.waitUntil(caches.default.put(key, new Response(yes ? "1" : "0", { headers: { "Cache-Control": "max-age=300" } })));
+  return yes;
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -79,6 +97,17 @@ export default {
       const ua = request.headers.get("User-Agent") || "";
       if (!/bot|crawl|spider|preview|facebookexternalhit|facebot|whatsapp|telegram|slack|discord|linkedin|pinterest|snapchat/i.test(ua)) {
         ctx.waitUntil(logClick(request, "/c", "cr_" + creator[1].toLowerCase()));
+      }
+      return fetch(new Request(new URL("/c/", url), request));
+    }
+    // Short creator links (2026-10-10): mealpic.app/<code> works like /c/<code>. Only when
+    // <code> is a real creator code (looked up, cached 5 min), so typos and site paths
+    // still fall through to GitHub Pages. Site paths are also reserved in creator_code_available().
+    const short = url.pathname.match(/^\/([A-Za-z0-9]{3,20})\/?$/);
+    if (short && (request.method === "GET" || request.method === "HEAD") && await isCreator(short[1].toLowerCase(), ctx)) {
+      const ua = request.headers.get("User-Agent") || "";
+      if (!/bot|crawl|spider|preview|facebookexternalhit|facebot|whatsapp|telegram|slack|discord|linkedin|pinterest|snapchat/i.test(ua)) {
+        ctx.waitUntil(logClick(request, "/c", "cr_" + short[1].toLowerCase()));
       }
       return fetch(new Request(new URL("/c/", url), request));
     }

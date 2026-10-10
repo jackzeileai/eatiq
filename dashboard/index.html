@@ -14,12 +14,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style/mono.css?v=1791591000">
+<link rel="stylesheet" href="../assets/style/mono.css?v=1791700000">
 <style>
 /* Layout only. The look comes from the style pack (mono.css), same as /join. */
 :root{--card-bg:#fff;--edge:inset 0 0 0 1px var(--hair);--r:24px;--well:rgba(0,0,0,.06)}
 .hidden{display:none!important}
-.page{max-width:1040px;margin:0 auto;padding:40px var(--gutter) 72px}
+.page{max-width:calc(var(--app-width) + 2 * var(--gutter));margin:0 auto;padding:32px var(--gutter) 72px}
 
 /* nav: floating glass pill, same as /join */
 .brand img.mark{width:28px;height:28px;border-radius:0}
@@ -29,6 +29,7 @@
 html[data-mode="dark"] .mode-btn .i-sun{display:block}
 html[data-mode="dark"] .mode-btn .i-moon{display:none}
 .nav .links{gap:6px}
+.nav.float .wrap{max-width:var(--app-width)}
 
 .nav .links a.soon{cursor:default}
 .nav .links a.soon:hover{color:var(--ink)}
@@ -60,14 +61,14 @@ input.code{letter-spacing:10px;font-size:28px;font-weight:800;text-align:center}
 /* picture tiles, same as /join How it works: white hairline stage, one 3D object, bold caption, grey line */
 
 /* section heads */
-.bar{display:flex;align-items:center;justify-content:space-between;margin:72px 0 18px;gap:12px;flex-wrap:wrap}
-.bar h2{font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1;margin:0}
+.bar{display:flex;align-items:center;justify-content:space-between;margin:56px 0 16px;gap:12px;flex-wrap:wrap}
+.bar h2{font-size:var(--app-h2);font-weight:800;letter-spacing:-.04em;line-height:1;margin:0}
 
 /* the dashboard card: same as the example on /join (.dash / .d-*) */
-.dash{margin:16px 0 0;padding:clamp(18px,2.6vw,32px);border-radius:32px;background:var(--card-bg);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 30px 60px -30px rgba(0,0,0,.22);display:grid;gap:12px;text-align:left}
-.d-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:4px 4px 8px}
-.d-title{font-size:clamp(22px,2.4vw,28px);font-weight:800;letter-spacing:-.03em;color:var(--ink)}
-.d-k{display:block;font-size:15px;font-weight:700;color:var(--sub);letter-spacing:-.005em}
+.dash{margin:16px 0 0;padding:var(--app-pad);border-radius:28px;background:var(--card-bg);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 30px 60px -30px rgba(0,0,0,.22);display:grid;gap:var(--app-gap);text-align:left}
+.d-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:0 0 4px}
+.d-title{font-size:var(--app-title);line-height:1.05;font-weight:800;letter-spacing:-.04em;color:var(--ink)}
+.d-k{display:block;font-size:var(--app-label);font-weight:600;color:var(--sub);letter-spacing:-.005em}
 .d-chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center;align-content:flex-start;justify-content:flex-end}
 @media (max-width:720px){.d-chips{justify-content:flex-start}}
 .d-chip{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:0;border-radius:999px;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);font:700 15px var(--font);color:var(--ink);white-space:nowrap;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis}
@@ -86,23 +87,23 @@ input.code{letter-spacing:10px;font-size:28px;font-weight:800;text-align:center}
 .d-hint{flex-basis:100%;text-align:right;font-size:14px;font-weight:600;color:var(--sub);min-height:20px;margin-top:-2px}
 .d-hint.bad{color:#ff3b30}
 @media (max-width:720px){.d-hint{text-align:left}}
-.d-card{border-radius:22px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);padding:22px 24px;min-width:0}
-.d-money{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.d-big{display:block;font-size:clamp(44px,5vw,64px);font-weight:800;letter-spacing:-.05em;line-height:1;margin:12px 0;font-variant-numeric:tabular-nums}
+.d-card{border-radius:var(--app-r);box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);padding:var(--app-pad);min-width:0}
+.d-money{display:grid;grid-template-columns:1fr 1fr;gap:var(--app-gap)}
+.d-big{display:block;font-size:var(--app-big);font-weight:800;letter-spacing:-.05em;line-height:1;margin:8px 0 12px;font-variant-numeric:tabular-nums}
 .d-big small{font-size:.5em;letter-spacing:-.03em}
 .d-pay .d-big{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-right:.05em;justify-self:start;width:max-content}
-.d-when{display:inline-flex;font-size:15px;font-weight:700;padding:7px 14px;border-radius:999px;background:#f2f2f7;color:var(--ink)}
-.d-s{display:block;font-size:16px;font-weight:600;color:var(--sub)}
+.d-when{display:inline-flex;font-size:var(--app-body);font-weight:700;padding:6px 12px;border-radius:999px;background:#f2f2f7;color:var(--ink)}
+.d-s{display:block;font-size:var(--app-body);font-weight:600;color:var(--sub)}
 .d-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.d-row b{white-space:nowrap;font-size:19px;font-weight:800;letter-spacing:-.02em}
-.d-bars{display:flex;align-items:flex-end;gap:6px;height:140px;margin-top:20px}
+.d-row b{white-space:nowrap;font-size:var(--app-label);font-weight:800;letter-spacing:-.02em}
+.d-bars{display:flex;align-items:flex-end;gap:6px;height:var(--app-chart);margin-top:16px}
 .d-bars i{flex:1;border-radius:6px 6px 3px 3px;background:#e5e5ea;min-height:4px}
 .d-bars i.wk{background:#1d1d1f}
-.d-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.d-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--app-gap)}
 @media (max-width:900px){.d-stats{grid-template-columns:1fr 1fr}}
-.d-stats b{display:block;font-size:clamp(26px,3vw,40px);white-space:nowrap;font-weight:800;letter-spacing:-.045em;margin-top:8px;font-variant-numeric:tabular-nums}
+.d-stats b{display:block;font-size:var(--app-num);white-space:nowrap;font-weight:800;letter-spacing:-.045em;margin-top:8px;line-height:1;font-variant-numeric:tabular-nums}
 .d-foot{font-size:14px;color:var(--sub);text-align:center;padding:6px 0 2px}
-@media (max-width:720px){.dash{border-radius:26px;gap:10px;margin-top:4px}.d-money{grid-template-columns:1fr;gap:10px}.d-stats{grid-template-columns:1fr 1fr;gap:10px}.d-card{padding:18px;border-radius:18px}.d-bars{height:100px;gap:3px}.d-chip{font-size:14px;padding:8px 12px}}
+@media (max-width:720px){.dash{border-radius:24px;margin-top:4px}.d-money{grid-template-columns:1fr}.d-stats{grid-template-columns:1fr 1fr}.d-bars{gap:3px}.d-chip{font-size:14px;padding:8px 12px}}
 html[data-mode="dark"] .dash{box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 60px -30px rgba(0,0,0,.9)}
 html[data-mode="dark"] .d-card{background:#1d1d1f;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
 html[data-mode="dark"] .d-chip{box-shadow:inset 0 0 0 1px var(--hair)}
@@ -114,25 +115,25 @@ html[data-mode="dark"] .d-bars i.wk{background:#f5f5f7}
 html[data-mode="dark"] .d-pay .d-big{background:linear-gradient(95deg,#a28bff 0%,#d77bff 30%,#ff6fae 58%,#ffa04d 85%,#ffc65a 100%);-webkit-background-clip:text;background-clip:text}
 
 /* course + library links */
-.learn{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-.lcard{display:flex;align-items:center;gap:16px;padding:24px 26px;border-radius:var(--r);background:var(--card-bg);box-shadow:var(--edge);color:var(--ink);text-decoration:none;min-width:0}
+.learn{display:grid;grid-template-columns:1fr 1fr;gap:var(--app-gap);margin-top:var(--app-gap)}
+.lcard{display:flex;align-items:center;gap:16px;padding:var(--app-pad);border-radius:var(--app-r);background:var(--card-bg);box-shadow:var(--edge);color:var(--ink);text-decoration:none;min-width:0}
 .lcard div{flex:1;min-width:0}
-.lcard b{display:block;font-size:22px;font-weight:800;letter-spacing:-.025em}
-.lcard span{display:block;margin-top:4px;color:var(--sub);font-size:16px;line-height:1.4}
+.lcard b{display:block;font-size:20px;font-weight:800;letter-spacing:-.025em}
+.lcard span{display:block;margin-top:4px;color:var(--sub);font-size:var(--app-body);line-height:1.4}
 .lcard .go{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--paper);transition:transform .2s}
 a.lcard:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
 a.lcard:hover .go{transform:translateX(3px)}
-.lcard .soon{flex:none;font-style:normal;font-size:13px;font-weight:700;color:var(--sub);padding:6px 12px;border-radius:999px;box-shadow:var(--edge)}
-@media (max-width:720px){.learn{grid-template-columns:1fr;gap:10px}.lcard{padding:20px}.lcard b{font-size:20px}}
+.lcard .soon{flex:none;font-style:normal;font-size:14px;font-weight:700;color:var(--sub);padding:6px 12px;border-radius:999px;box-shadow:var(--edge)}
+@media (max-width:720px){.learn{grid-template-columns:1fr}.lcard b{font-size:18px}}
 html[data-mode="dark"] .lcard .go{background:#f5f5f7;color:#000}
 
 /* history */
-.hist{padding:6px 26px}
-.hist .r{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--hair);font-size:17px}
+.hist{padding:0 var(--app-pad);border-radius:var(--app-r)}
+.hist .r{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--hair);font-size:var(--app-body)}
 .hist .r:last-child{border-bottom:0}
 .hist .r span{color:var(--sub)}
 .hist .r b{font-weight:800}
-.hist .empty{color:var(--sub);padding:22px 0}
+.hist .empty{color:var(--sub);padding:var(--app-pad) 0;font-size:var(--app-body)}
 
 .foot{color:var(--sub);font-size:13px;margin-top:48px;line-height:1.7;text-align:center}
 .foot a{color:var(--ink)}
@@ -351,7 +352,7 @@ function render(){
         <button class="d-chip plain" id="cancelcode">Cancel</button>
         <div class="d-hint" id="h-code">Letters and numbers, 3 to 20 characters.</div>` : `
         <button class="d-chip" data-copy="${esc(first.code.toUpperCase())}" title="Copy code"><em>Code</em>${all.map(c => esc(c.code.toUpperCase())).join(", ")}</button>
-        <button class="d-chip" data-copy="https://mealpic.app/c/${esc(first.code)}" title="Copy link"><em>Link</em>mealpic.app/c/${esc(first.code)}</button>
+        <button class="d-chip" data-copy="https://mealpic.app/${esc(first.code)}" title="Copy link"><em>Link</em>mealpic.app/${esc(first.code)}</button>
         ${canChange ? `<button class="d-chip plain" id="chg">Change</button>` : ""}`}
       </div>
     </div>

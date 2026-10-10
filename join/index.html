@@ -658,7 +658,7 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
   .split-hero .hero-art,.split-hero .hero-cols>.quick{justify-self:center;width:440px;max-width:100%}
   .split-hero .hero-art .iph{height:600px !important;width:auto !important}
 }
-@media (min-width:901px){.split-hero .hero-cols{align-items:start !important}.split-hero .hero-cols>:first-child{padding-top:118px;align-self:start}.split-hero .hero-art,.split-hero .hero-cols>.quick{align-self:center}}
+@media (min-width:901px){.split-hero .hero-cols{align-items:start !important;min-height:0 !important}.split-hero .hero-cols>:first-child{padding-top:24px;align-self:start}.split-hero .hero-art,.split-hero .hero-cols>.quick{align-self:start}}
 </style>
 </head>
 <body>
@@ -1051,12 +1051,12 @@ $("savecode").onclick = async () => {
       : "Couldn't change it. Try again.";
     return;
   }
-  $("d-code").textContent = data.code.toUpperCase(); $("d-link").textContent = `mealpic.app/c/${data.code}`;
+  $("d-code").textContent = data.code.toUpperCase(); $("d-link").textContent = `mealpic.app/${data.code}`;
   $("editrow").hidden = true; $("coderow").hidden = false; $("e-change").textContent = "";
 };
 function finish(code, existing){
   $("d-code").textContent = code.toUpperCase();
-  $("d-link").textContent = `mealpic.app/c/${code}`;
+  $("d-link").textContent = `mealpic.app/${code}`;
   if (existing) $("done-sub").textContent = "You're already set up. Here's your link and code.";
   go("done");
 }

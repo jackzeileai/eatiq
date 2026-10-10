@@ -112,3 +112,29 @@ Use the line mark (`assets/mark-black.png`, `mark-white.png` on dark) next to th
 - **Proof = a carousel of real viral reels** (`.reels` marquee on /join): 7 s muted 360x640 loops cut from the corpus, glass "63.4M views" chip bottom-left, play only when on screen. Never a 3D stand-in for "proven videos".
 - "It's free" lives inside the CTA pill (`.btn.shine .free`), not as a note under it.
 - Headline stays two lines; size it so the first line never wraps.
+
+## App screens (dashboards, account pages) — sizes are fixed, don't eyeball them
+
+Jack: "shouldn't there be a guide book on how to do this instead of just guess by vibe?" Yes. App screens use the `--app-*` tokens in `mono.css` and nothing else. Change a token here, never a one-off size on a page.
+
+| Thing | Desktop | Phone | Weight |
+|---|---|---|---|
+| Content width | 960px | full, 16px gutters | |
+| Greeting / page title ("Hey Sarah") | 44px | 34px | 800, -.04em |
+| Money number (one per card) | 48px | 40px | 800, -.05em |
+| Stat tile number | 30px | 26px | 800, -.04em |
+| Section heading below the panel | 28px | 24px | 800 |
+| Card label ("Next payout") | 15px | 15px | 600 grey |
+| One sentence in a card | 15px | 15px | 600 grey |
+| Chips / pills | 15px | 14px | 700 |
+| Card padding | 24px | 18px | |
+| Gap between cards | 12px | 10px | |
+| Card radius / outer panel radius | 20px / 28px | 18px / 24px | |
+| Bar chart height | 120px | 96px | |
+
+Rules:
+- The greeting is the biggest text on the screen. The money number is next. Nothing else competes.
+- One money number per card. Labels sit above numbers, never beside.
+- Everything is on the 8pt grid (8, 12, 16, 24, 32). No 13px, 22px or 26px paddings.
+- Same order and pieces as the example dashboard on /join; the real dashboard and that example must look like the same thing.
+

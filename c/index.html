@@ -38,7 +38,8 @@ p{color:var(--sub);font-size:16px;line-height:1.5;margin:0}
   <button class="btn" id="go">Get Meal Pic</button>
 </div>
 <script>
-const code = (location.pathname.match(/\/c\/([A-Za-z0-9]{3,20})/) || [])[1]?.toLowerCase() || "";
+// Works for mealpic.app/<code> and the older mealpic.app/c/<code>.
+const code = (location.pathname.match(/^\/(?:c\/)?([A-Za-z0-9]{3,20})\/?$/) || [])[1]?.toLowerCase() || "";
 document.getElementById("code").textContent = code ? code.toUpperCase() : "—";
 const store = `https://apps.apple.com/app/apple-store/id6802901402?pt=128667679&ct=${encodeURIComponent("cr_" + code)}&mt=8`;
 if (code) {
@@ -51,6 +52,7 @@ if (code) {
   }).catch(() => {});
 }
 // The tap copies this link; the app's code screen reads it and fills the code in.
+// Keep the /c/ form here: the shipped app only recognises mealpic.app/c/<code>.
 document.getElementById("go").onclick = async () => {
   try { if (code) await navigator.clipboard.writeText(`https://mealpic.app/c/${code}`); } catch (e) {}
   location.href = store;

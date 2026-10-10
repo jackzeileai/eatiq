@@ -187,3 +187,21 @@ footer.site a:hover{text-decoration:underline}
   footer.site{margin-top:80px}
   footer.site a{margin:0 16px 0 0}
 }
+
+/* ---------- app screens (dashboards, account pages): ONE size scale, 8pt grid. See README "App screens".
+   Landing pages use .h-hero/.h1/.h2; app screens use these and nothing else. ---------- */
+:root{
+  --app-width:960px;
+  --app-title:44px;      /* page greeting, "Hey Sarah" — the biggest thing on the screen */
+  --app-big:48px;        /* the one money number per card */
+  --app-num:30px;        /* stat tile numbers */
+  --app-h2:28px;         /* section heading under the main panel */
+  --app-label:15px;      /* card labels, grey 600 */
+  --app-body:15px;       /* one grey sentence in a card */
+  --app-pad:24px;        /* card padding */
+  --app-gap:12px;        /* gap between cards */
+  --app-r:20px;          /* card radius (outer panel = 28px) */
+  --app-chart:120px;     /* bar chart height */
+}
+@media (max-width:720px){:root{--app-title:34px;--app-big:40px;--app-num:26px;--app-h2:24px;--app-pad:18px;--app-gap:10px;--app-r:18px;--app-chart:96px}}
+
