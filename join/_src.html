@@ -596,27 +596,12 @@ html[data-mode="dark"] .quick input[type=range]{background:linear-gradient(to ri
 html[data-mode="dark"] .d-when{background:rgba(255,255,255,.1);color:#fff}
 .tile .stage img[src*="course_memoji_t"],.tile .stage img[src*="reels_ugc_t"]{filter:drop-shadow(0 18px 24px rgba(0,0,0,.22))}
 html[data-mode="dark"] .tile .stage img[src*="course_memoji_t"],html[data-mode="dark"] .tile .stage img[src*="reels_ugc_t"]{filter:drop-shadow(0 18px 24px rgba(0,0,0,.7))}
-/* ambient: three slow colour blobs behind everything; the glass surfaces pick them up */
-.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.ambient i{position:absolute;width:62vmax;height:62vmax;border-radius:50%;filter:blur(80px);opacity:.22;will-change:transform;transform:translateZ(0)}
-.ambient i:nth-child(1){left:-18vmax;top:-22vmax;background:radial-gradient(circle at 45% 45%,#c64bff 0%,rgba(198,75,255,0) 62%);animation:amb1 42s ease-in-out infinite alternate}
-.ambient i:nth-child(2){right:-22vmax;top:-12vmax;background:radial-gradient(circle at 50% 50%,#ff8a2b 0%,rgba(255,138,43,0) 62%);animation:amb2 50s ease-in-out infinite alternate}
-.ambient i:nth-child(3){left:28vw;bottom:-34vmax;background:radial-gradient(circle at 50% 50%,#7b5cff 0%,rgba(123,92,255,0) 62%);animation:amb3 58s ease-in-out infinite alternate}
-@keyframes amb1{to{transform:translate(22vw,14vh) rotate(45deg) scale(1.12)}}
-@keyframes amb2{to{transform:translate(-18vw,26vh) rotate(-60deg) scale(1.08)}}
-@keyframes amb3{to{transform:translate(-20vw,-16vh) rotate(30deg) scale(1.15)}}
-@media (prefers-reduced-motion:reduce){.ambient i{animation:none}}
-@media (max-width:720px){.ambient i{filter:blur(56px);opacity:.2}}
-html[data-mode="dark"] .ambient i{opacity:.3}
 .split-hero .quick,.dash{background:rgba(255,255,255,.66);backdrop-filter:blur(30px) saturate(170%);-webkit-backdrop-filter:blur(30px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(0,0,0,.08),0 24px 60px -30px rgba(0,0,0,.25)}
 .tile .stage{background:rgba(255,255,255,.55);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(0,0,0,.08)}
 html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data-mode="dark"] .tile .stage{background:rgba(22,22,23,.62);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 0 0 1px rgba(255,255,255,.08),0 24px 60px -30px rgba(0,0,0,.8)}
-html{background:var(--paper)}
-body{background:transparent}
 </style>
 </head>
 <body>
-<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
 
 <header class="nav float">
   <div class="wrap glass">
