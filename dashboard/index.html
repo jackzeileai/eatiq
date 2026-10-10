@@ -30,8 +30,12 @@ html[data-mode="dark"] .mode-btn .i-sun{display:block}
 html[data-mode="dark"] .mode-btn .i-moon{display:none}
 .nav .links{gap:6px}
 
+.nav .links a.soon{cursor:default}
+.nav .links a.soon:hover{color:var(--ink)}
+.nav .links a.soon small{margin-left:6px;font-size:11px;font-weight:700;color:var(--sub);padding:2px 7px;border-radius:999px;box-shadow:var(--edge)}
+
 /* cards */
-.auth,.sh,.payout,.recur,.start,.tile,.earned,.chart,.hist{background:var(--card-bg);box-shadow:var(--edge);border-radius:var(--r)}
+.auth,.hist{background:var(--card-bg);box-shadow:var(--edge);border-radius:var(--r)}
 
 /* sign-in */
 .auth{max-width:440px;margin:8vh auto 0;padding:36px 30px}
@@ -49,78 +53,45 @@ input.code{letter-spacing:10px;font-size:28px;font-weight:800;text-align:center}
 .link:hover{color:var(--ink)}
 .err{color:#ff3b30;font-size:15px;margin-top:12px;min-height:20px}
 
-/* greeting */
-.hello{margin:24px 0 28px}
-.hello h1{font-size:clamp(44px,6vw,72px);line-height:.98;letter-spacing:-.045em;font-weight:800;margin:0}
-.hello p{margin:12px 0 0;color:var(--sub);font-size:19px}
-
-/* code + link */
-.share{display:grid;grid-template-columns:1fr 1.4fr;gap:16px;margin-bottom:16px}
-.sh{display:flex;align-items:center;gap:12px;padding:18px 18px 18px 24px;min-width:0}
-.sh div{min-width:0;flex:1}
-.sh .k{display:block;margin-bottom:4px}
-.sh b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sh b.code{letter-spacing:.04em}
-.k{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
-
-/* money */
-.money{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
-.payout,.recur{padding:32px 30px;display:flex;flex-direction:column}
-.payout .row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.payout .v,.recur .v{font-size:clamp(56px,7vw,84px);font-weight:800;letter-spacing:-.05em;line-height:1;margin-top:14px;font-variant-numeric:tabular-nums}
-.recur .v small{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--sub);margin-left:4px}
-.when{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;box-shadow:var(--edge);font-weight:700;font-size:15px;white-space:nowrap}
-.when svg{width:16px;height:16px}
-.recur .s{color:var(--sub);font-size:16px;line-height:1.5;margin:16px 0 24px}
-.payout .meta,.recur .meta{display:grid;gap:18px;margin-top:auto;padding-top:22px;border-top:1px solid var(--hair);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
-.payout .meta{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-top:32px}
-.recur .meta{grid-template-columns:1fr 1fr}
-.payout .meta b,.recur .meta b{display:block;font-size:22px;letter-spacing:-.02em;text-transform:none;color:var(--ink);margin-top:6px;font-weight:800}
-/* one accent on the page: the money that keeps coming in */
-.grad{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-right:.04em}
-html[data-mode="dark"] .grad{background:linear-gradient(95deg,#a28bff 0%,#d77bff 30%,#ff6fae 58%,#ffa04d 85%,#ffc65a 100%);-webkit-background-clip:text;background-clip:text}
 
 /* picture tiles, same as /join How it works: white hairline stage, one 3D object, bold caption, grey line */
-.pics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.ptile{text-align:center;min-width:0;color:var(--ink);text-decoration:none}
-.ptile .stage{height:240px;padding:22px;margin-bottom:20px}
-.ptile .stage img{width:100%;height:100%;object-fit:contain;display:block}
-.ptile .h3{margin-bottom:6px}
-.ptile .s{color:var(--sub);font-size:17px;font-weight:600;line-height:1.4;max-width:320px;margin:0 auto;text-wrap:balance}
-.ptile .s b{color:var(--ink)}
-.ptile .soon{display:inline-block;margin-top:12px;box-shadow:var(--edge);color:var(--sub);font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
-a.ptile:hover .stage{box-shadow:inset 0 0 0 1.5px var(--ink)}
-.bar.c{flex-direction:column;align-items:center;text-align:center;gap:10px}
-.bar.c p{margin:0;color:var(--sub);font-size:19px;font-weight:600}
 
 /* section heads */
 .bar{display:flex;align-items:center;justify-content:space-between;margin:72px 0 18px;gap:12px;flex-wrap:wrap}
 .bar h2{font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1;margin:0}
-.seg{display:inline-flex;box-shadow:var(--edge);border-radius:999px;padding:4px}
-.seg button{border:0;background:none;color:var(--sub);font:600 15px var(--font);padding:9px 16px;border-radius:999px;cursor:pointer;transition:all .15s}
-.seg button:hover{color:var(--ink)}
-.seg button.on{background:var(--ink);color:var(--paper)}
 
-/* tiles */
-.grid{grid-template-columns:repeat(2,1fr)}
-@media (min-width:760px){.grid.four{grid-template-columns:repeat(4,1fr)}}
-.tile{padding:22px;min-width:0}
-.tile .ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;margin-bottom:18px;box-shadow:var(--edge);color:var(--ink)}
-.tile .ic svg{width:18px;height:18px}
-.tile .v{font-size:40px;font-weight:800;margin-top:6px;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
-.tile .s{color:var(--sub);font-size:14px;margin-top:8px;line-height:1.4}
-.earned{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:22px 26px;margin-bottom:16px}
-.earned .v{font-size:40px;font-weight:800;letter-spacing:-.045em;margin-left:auto;line-height:1}
-
-/* chart */
-.chart{padding:26px}
-.chart .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}
-.chart .top b{font-size:19px;font-weight:800;letter-spacing:-.02em}
-.chart .top span{color:var(--sub);font-size:15px}
-.bars{display:flex;align-items:flex-end;gap:4px;height:160px}
-.bars div{flex:1;border-radius:5px 5px 2px 2px;min-height:3px;background:var(--ink)}
-.bars div.zero{background:var(--hair)}
-.axis{display:flex;justify-content:space-between;color:var(--sub);font-size:13px;margin-top:12px}
+/* the dashboard card: same as the example on /join (.dash / .d-*) */
+.dash{margin:16px 0 0;padding:clamp(18px,2.6vw,32px);border-radius:32px;background:var(--card-bg);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 30px 60px -30px rgba(0,0,0,.22);display:grid;gap:12px;text-align:left}
+.d-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:4px 4px 8px}
+.d-title{font-size:clamp(22px,2.4vw,28px);font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.d-k{display:block;font-size:15px;font-weight:700;color:var(--sub);letter-spacing:-.005em}
+.d-chips{display:flex;gap:8px;flex-wrap:wrap}
+.d-chip{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:0;border-radius:999px;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);font:700 15px var(--font);color:var(--ink);white-space:nowrap;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.d-chip:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.d-chip em{font-style:normal;color:var(--sub);font-weight:600}
+.d-card{border-radius:22px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);padding:22px 24px;min-width:0}
+.d-money{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.d-big{display:block;font-size:clamp(44px,5vw,64px);font-weight:800;letter-spacing:-.05em;line-height:1;margin:12px 0;font-variant-numeric:tabular-nums}
+.d-big small{font-size:.5em;letter-spacing:-.03em}
+.d-pay .d-big{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-right:.05em;justify-self:start;width:max-content}
+.d-when{display:inline-flex;font-size:15px;font-weight:700;padding:7px 14px;border-radius:999px;background:#f2f2f7;color:var(--ink)}
+.d-s{display:block;font-size:16px;font-weight:600;color:var(--sub)}
+.d-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.d-row b{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.d-bars{display:flex;align-items:flex-end;gap:6px;height:140px;margin-top:20px}
+.d-bars i{flex:1;border-radius:6px 6px 3px 3px;background:#e5e5ea;min-height:4px}
+.d-bars i.wk{background:#1d1d1f}
+.d-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.d-stats b{display:block;font-size:clamp(28px,3vw,40px);font-weight:800;letter-spacing:-.045em;margin-top:8px;font-variant-numeric:tabular-nums}
+.d-foot{font-size:14px;color:var(--sub);text-align:center;padding:6px 0 2px}
+@media (max-width:720px){.dash{border-radius:26px;gap:10px;margin-top:4px}.d-money{grid-template-columns:1fr;gap:10px}.d-stats{grid-template-columns:1fr 1fr;gap:10px}.d-card{padding:18px;border-radius:18px}.d-bars{height:100px;gap:3px}.d-chip{font-size:14px;padding:8px 12px}}
+html[data-mode="dark"] .dash{box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 60px -30px rgba(0,0,0,.9)}
+html[data-mode="dark"] .d-card{background:#1d1d1f;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+html[data-mode="dark"] .d-chip{box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .d-when{background:#2c2c2e}
+html[data-mode="dark"] .d-bars i{background:#2c2c2e}
+html[data-mode="dark"] .d-bars i.wk{background:#f5f5f7}
+html[data-mode="dark"] .d-pay .d-big{background:linear-gradient(95deg,#a28bff 0%,#d77bff 30%,#ff6fae 58%,#ffa04d 85%,#ffc65a 100%);-webkit-background-clip:text;background-clip:text}
 
 /* history */
 .hist{padding:6px 26px}
@@ -134,30 +105,17 @@ a.ptile:hover .stage{box-shadow:inset 0 0 0 1.5px var(--ink)}
 .foot a{color:var(--ink)}
 .loading{display:grid;place-items:center;height:50vh;color:var(--sub)}
 
-@media (max-width:760px){.money{grid-template-columns:1fr}}
-@media (max-width:640px){.share{grid-template-columns:1fr}}
-@media (max-width:720px){
-  .pics{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * var(--gutter));padding:0 var(--gutter) 8px;scrollbar-width:none}
-  .pics::-webkit-scrollbar{display:none}
-  .ptile{flex:0 0 78%;scroll-snap-align:center}
-  .ptile .stage{height:220px;padding:18px}
-  .ptile .s{font-size:16px}
-}
 @media (max-width:720px){
   .page{padding-top:24px}
-  .payout,.recur{padding:26px 22px}
-  .sh{padding:16px 14px 16px 18px}
-  .sh b{font-size:19px}
   .bar{margin-top:56px}
-  .tile{padding:18px}
-  .tile .v{font-size:32px}
   .auth{padding:30px 22px}
   .nav .links .plain{display:none}
-  .nav.float .brand{font-size:17px;gap:7px}
+  .nav .links a.navx{display:block;font-size:14px;padding:8px 6px}
+  .nav .links a.navx.hidden{display:none}
+  .nav .links a.soon small{display:none}
+  .nav.float .brand{font-size:0;gap:0}
   .nav.float .brand img.mark{width:24px;height:24px}
   .mode-btn{width:36px;height:36px}
-  .tile.res .ic{display:none}
-  .tile.res{padding:20px}
 }
 
 /* dark: Apple's, same as /join — pure black page, #161617 cards with a faint light edge */
@@ -170,9 +128,6 @@ html[data-mode="dark"] .btn:hover{background:#fff}
 html[data-mode="dark"] .btn.ghost{background:transparent;color:#f5f5f7;box-shadow:inset 0 0 0 1.5px #f5f5f7}
 html[data-mode="dark"] .btn.ghost:hover{background:#f5f5f7;color:#000}
 html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter:invert(1)}
-html[data-mode="dark"] .ptile .stage{background:var(--card-bg);box-shadow:var(--edge)}
-html[data-mode="dark"] .seg button.on{background:#f5f5f7;color:#000}
-html[data-mode="dark"] .bars div{background:#f5f5f7}
 </style>
 </head>
 <body>
@@ -180,6 +135,8 @@ html[data-mode="dark"] .bars div{background:#f5f5f7}
   <div class="wrap glass">
     <a class="brand" href="/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
+      <a class="plain navx hidden" id="navCourse">Course</a>
+      <a class="plain navx hidden" id="navLib">Library</a>
       <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
       <button id="out" class="btn small ghost hidden">Sign out</button>
     </nav>
@@ -228,14 +185,22 @@ html[data-mode="dark"] .bars div{background:#f5f5f7}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 // "What to post" links. Empty = shows "Coming soon" with no link.
-const REELS_URL = ""; const PLAYBOOK_URL = ""; const COURSE_URL = "";
+// Top-bar links. Empty = shows "Soon" and doesn't click through.
+const LIBRARY_URL = ""; const COURSE_URL = "";
+[["navLib", LIBRARY_URL], ["navCourse", COURSE_URL]].forEach(([id, url]) => {
+  const a = document.getElementById(id);
+  if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener"; }
+  else { a.classList.add("soon"); a.insertAdjacentHTML("beforeend", "<small>Soon</small>"); }
+});
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
 const $ = id => document.getElementById(id);
 const screens = ["s-email","s-code","s-none","s-stats","loading"];
-function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-none")); }
+function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-none")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
 const money = n => "$" + Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
 const num = n => Number(n||0).toLocaleString("en-US");
-let data = null, period = "week";
+// Whole dollars like the /join example ($346); cents only when there are some.
+const cash = n => { n = Number(n||0); return "$" + n.toLocaleString("en-US",{minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits:2}); };
+let data = null;
 
 const ICON = {
   down:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>',
@@ -269,9 +234,7 @@ $("back").onclick = () => show("s-email");
 $("out").onclick = async () => { await sb.auth.signOut(); show("s-email"); };
 document.addEventListener("click", e => {
   const c = e.target.closest("[data-copy]");
-  if (c) { navigator.clipboard.writeText(c.dataset.copy).then(() => { c.textContent = "Copied"; setTimeout(() => c.textContent = "Copy", 1500); }); return; }
-  const p = e.target.closest("[data-p]")?.dataset.p; if (!p) return;
-  period = p; render();
+  if (c) { const was = c.innerHTML; navigator.clipboard.writeText(c.dataset.copy).then(() => { c.innerHTML = "<em>Copied</em>" + esc(c.dataset.copy.replace(/^https:\/\//, "")); setTimeout(() => c.innerHTML = was, 1400); }); return; }
 });
 
 async function load(){
@@ -286,106 +249,56 @@ async function load(){
 }
 
 function render(){
-  const rows = period === "week" ? (data.week || []) : period === "month" ? (data.month || []) : data.codes;
-  const label = period === "week" ? "from people who joined this week" : period === "month" ? "from people who joined this month" : "all time";
   const sum = (list, k) => list.reduce((a, x) => a + Number(x[k] || 0), 0);
-  const all = data.codes, cur = rows;
+  const all = data.codes;
   const paidOut = sum(data.paid || [], "paid_out");
   const earnedAll = sum(all, "owed");
   const next = Math.max(0, earnedAll - paidOut);
-  const lastPaid = (data.paid || []).map(p => p.last).sort().pop();
   const cutM = all.reduce((a, c) => a + Number(c.mrr || 0) * c.pct / 100, 0);
   const first = all[0];
   const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
   const total30 = days.reduce((a, d) => a + d.uses, 0);
-  const dl = sum(cur, "entered"), tr = sum(cur, "trials");
-  const rate = (a, b) => Math.round(a / b * 100) + "%";
+  const subs = sum(all,"monthly_active") + sum(all,"yearly_paid");
 
   $("dash").innerHTML = `
-  <div class="hello">
-    <h1>Hey ${esc(first.name.split(" ")[0])}</h1>
-    <p>You earn on every payment from people who use these.</p>
-  </div>
-  <div class="share">
-    <div class="sh"><div><span class="k">Your code</span><b class="code">${all.map(c => esc(c.code.toUpperCase())).join(", ")}</b></div><button class="btn small ghost" data-copy="${esc(first.code.toUpperCase())}">Copy</button></div>
-    <div class="sh"><div><span class="k">Your link</span><b>mealpic.app/c/${esc(first.code)}</b></div><button class="btn small ghost" data-copy="https://mealpic.app/c/${esc(first.code)}">Copy</button></div>
-  </div>
-
-  <div class="money">
-  <div class="payout">
-    <div class="row">
-      <div>
-        <div class="k">Next payout</div>
-        <div class="v">${money(next)}</div>
+  <div class="dash">
+    <div class="d-top">
+      <span class="d-title">Hey ${esc(first.name.split(" ")[0])}</span>
+      <div class="d-chips">
+        <button class="d-chip" data-copy="${esc(first.code.toUpperCase())}" title="Copy code"><em>Code</em>${all.map(c => esc(c.code.toUpperCase())).join(", ")}</button>
+        <button class="d-chip" data-copy="https://mealpic.app/c/${esc(first.code)}" title="Copy link"><em>Link</em>mealpic.app/c/${esc(first.code)}</button>
       </div>
-      <div class="when">${ICON.cal}${nextPayout()}</div>
     </div>
-    <div class="meta">
-      <div>Earned all time<b>${money(earnedAll)}</b></div>
-      <div>Paid out so far<b>${money(paidOut)}</b></div>
-      <div>Last payout<b>${lastPaid ? fmtDate(lastPaid) : "None yet"}</b></div>
+    <div class="d-money">
+      <div class="d-card d-pay">
+        <span class="d-k">Next payout</span>
+        <b class="d-big">${cash(next)}</b>
+        <span class="d-when">${nextPayout()}</span>
+      </div>
+      <div class="d-card">
+        <span class="d-k">Coming in every month</span>
+        <b class="d-big">${cash(cutM)}<small>/mo</small></b>
+        <span class="d-s">From ${num(subs)} ${subs === 1 ? "person" : "people"} still subscribed through you.</span>
+      </div>
     </div>
-  </div>
-  <div class="recur">
-    <div class="k">Coming in every month</div>
-    <div class="v"><span class="grad">${money(cutM)}</span><small>/ mo</small></div>
-    <div class="s">Your cut from people still subscribed through you. Yearly plans are spread across 12 months. It keeps paying as long as they stay, about ${money(cutM * 12)} a year.</div>
-    <div class="meta">
-      <div>Paid subscribers<b>${num(sum(all,"monthly_active") + sum(all,"yearly_paid"))}</b></div>
-      <div>Your cut<b>${all.length === 1 ? num(all[0].pct) + "%" : "Varies"}</b></div>
+    <div class="d-card">
+      <div class="d-row"><span class="d-k">Code uses · last 30 days</span><b>${num(total30)} ${total30 === 1 ? "person" : "people"}</b></div>
+      <div class="d-bars">${days.map((d, i) => `<i class="${i >= days.length - 7 ? "wk" : ""}" style="height:${d.uses ? Math.max(4, d.uses / max * 100) : 3}%" title="${fmtDate(d.day.slice(0,10))}: ${d.uses}"></i>`).join("")}</div>
     </div>
+    <div class="d-stats">
+      <div class="d-card"><span class="d-k">Downloads</span><b>${num(sum(all,"entered"))}</b></div>
+      <div class="d-card"><span class="d-k">Free trials</span><b>${num(sum(all,"trials"))}</b></div>
+      <div class="d-card"><span class="d-k">Monthly subs</span><b>${num(subs)}</b></div>
+      <div class="d-card"><span class="d-k">Paid out</span><b>${cash(paidOut)}</b></div>
+    </div>
+    <div class="d-foot">Tap your code or link to copy it.</div>
   </div>
-  </div>
-${sum(all,"entered") ? "" : `
-  <div class="bar c"><h2>Get your first subscriber</h2><p>No one's used your code yet. Start here.</p></div>
-  <div class="pics">
-    ${picTile("profile_link_t.png?v=1791588000", "1. Link in your bio", `<b>mealpic.app/c/${esc(first.code)}</b> fills your code in for anyone who installs.`)}
-    ${picTile("memoji_ringlight_white_t.png?v=1791571789", "2. Post a video", "Snap a meal, show the calories pop up. Real use beats a review.")}
-    ${picTile("memoji_code_t.png", "3. Say your code", `"Use code ${esc(first.code.toUpperCase())}." People type it in while setting up the app.`)}
-  </div>`}
-
-  <div class="bar c"><h2>What to post</h2><p>See what works, then make your own.</p></div>
-  <div class="pics">
-    ${picTile("videos_fan_t.png?v=1791603000", "Proven Videos", "Videos that already went viral, and why each one worked.", REELS_URL)}
-    ${picTile("playbook_book_t.png?v=1791603000", "The Winning Playbook", "Hooks, what to film, how to end on your code.", PLAYBOOK_URL)}
-    ${picTile("course_laptop_t.png?v=1791603000", "The Secret Course", "From a creator with over 1 billion views.", COURSE_URL)}
-  </div>
-
-  <div class="bar">
-    <h2>Your numbers</h2>
-    <div class="seg">${[["week","This week"],["month","This month"],["all","All time"]].map(([p,t]) => `<button data-p="${p}" class="${p===period?"on":""}">${t}</button>`).join("")}</div>
-  </div>
-  <div class="earned"><span class="k">Earned ${label}</span><span class="v">${money(sum(cur,"owed"))}</span></div>
-  <div class="grid four">
-    ${tile(ICON.down, "Downloads", num(dl), "used your code or link in the app")}
-    ${tile(ICON.clock, "Free trials", num(tr), dl ? `${rate(tr, dl)} of downloads · ${num(sum(cur,"in_trial"))} still in trial` : `${num(sum(cur,"in_trial"))} still in trial`)}
-    ${tile(ICON.repeat, "Monthly subscribers", num(sum(cur,"monthly_active")), "paying now")}
-    ${tile(ICON.star, "Yearly purchases", num(sum(cur,"yearly_paid")), sum(cur,"subs") ? `${rate(sum(cur,"paying"), sum(cur,"subs"))} of sign-ups paid` : "bought a full year")}
-  </div>
-
-  <div class="bar"><h2>Code uses</h2></div>
-  <div class="chart">
-    <div class="top"><b>Last 30 days</b><span>${num(total30)} ${total30 === 1 ? "person" : "people"}</span></div>
-    <div class="bars">${days.map(d => `<div class="${d.uses ? "" : "zero"}" style="height:${d.uses ? Math.max(6, d.uses / max * 100) : 2}%" title="${fmtDate(d.day.slice(0,10))}: ${d.uses}"></div>`).join("")}</div>
-    <div class="axis"><span>${days.length ? fmtDate(days[0].day.slice(0,10)) : ""}</span><span>Today</span></div>
-  </div>
-
   <div class="bar"><h2>Payout history</h2></div>
   <div class="hist">${(data.history || []).length
     ? data.history.map(h => `<div class="r"><span>${fmtDate(h.paid_on)}</span><b>${money(h.amount)}</b></div>`).join("")
     : `<div class="empty">No payouts yet. Your first one goes out ${nextPayout()}.</div>`}</div>
 
-  <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>Weekly and monthly views count people by the day they subscribed. Your payout counts every payment received.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
-}
-function picTile(img, k, s, url){
-  const inner = `<div class="stage"><img src="../assets/lab/${img}" alt=""></div><h3 class="h3">${k}</h3><p class="s">${s}</p>`;
-  if (url === undefined) return `<div class="ptile">${inner}</div>`;
-  return url
-    ? `<a class="ptile" href="${esc(url)}" target="_blank" rel="noopener">${inner}</a>`
-    : `<div class="ptile">${inner}<span class="soon">Coming soon</span></div>`;
-}
-function tile(icon, k, v, s){
-  return `<div class="tile"><div class="ic">${icon}</div><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
+  <p class="foot">Payouts go out every Friday. Earnings are your cut of what subscribers actually paid, after refunds.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
 }
 function fmtDate(iso){ const [y,m,d] = iso.split("-").map(Number); return new Date(y, m-1, d).toLocaleDateString("en-US",{month:"short",day:"numeric"}); }
 // Payouts go out weekly on Friday (Jack, 2026-10-07: "every week"), Pacific time.
