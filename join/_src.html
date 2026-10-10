@@ -241,7 +241,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bac
 .step .foot .btn{width:100%}
 .step h3{font-size:30px;line-height:1.15;letter-spacing:-.02em;font-weight:800;margin:8px 0 8px}
 .step .lead{color:var(--sub);font-size:16px;line-height:1.5;margin:0 0 28px}
-label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0 8px 2px}
+label.f{display:block;font-weight:600;font-size:13px;color:var(--ink);margin:0 0 8px 2px}
 .field{width:100%;font:500 17px var(--font);height:56px;padding:0 18px;border-radius:var(--field-r);border:1px solid var(--line);background:var(--surface);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
 .field::placeholder{color:var(--faint)}
 .field:focus{border-color:var(--ink);box-shadow:inset 0 0 0 .5px var(--ink)}
@@ -254,11 +254,12 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .hint.ok{color:var(--money);font-weight:600}
 .hint.bad,.err{color:var(--red);font-weight:600}
 .err{font-size:14px;margin:10px 2px 0;min-height:20px}
-.link{background:none;border:0;color:var(--sub);font:600 15px var(--font);cursor:pointer;height:44px;width:100%;margin-top:4px}
-.link:hover{color:var(--ink)}
+.link{background:none;border:0;color:var(--ink);font:600 15px var(--font);cursor:pointer;height:44px;width:100%;margin-top:4px}
+.link:hover{text-decoration:underline}
 .rows{display:grid;gap:10px}
 .opt{display:flex;align-items:center;gap:14px;width:100%;height:60px;padding:0 16px;border-radius:var(--field-r);border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 17px var(--font);cursor:pointer;text-align:left;transition:border-color .15s,box-shadow .15s}
 .opt:hover{border-color:color-mix(in srgb,var(--ink) 30%,transparent)}
+.opt .tile.logo{overflow:hidden}.opt .tile.logo svg{width:100%;height:100%;display:block}
 .opt .tile{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800;flex:none}
 .opt .radio{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);flex:none;display:grid;place-items:center}
 .opt.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
@@ -276,13 +277,20 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .opt.check a{color:var(--accent)}
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .done{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center}
-.done .badge{width:76px;height:76px;border-radius:50%;background:var(--money);display:grid;place-items:center;margin:0 auto 22px;color:#fff}
-.done .badge svg{width:36px;height:36px}
-.share{display:flex;align-items:center;gap:12px;text-align:left;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--field-r);padding:14px 16px;margin-top:10px}
+.done .pic3d{display:block;width:150px;height:auto;margin:0 auto 10px}
+.shares{margin-top:4px;border:1px solid var(--line);border-radius:var(--field-r);overflow:hidden}
+.share{display:flex;align-items:center;gap:8px;text-align:left;padding:14px 14px 14px 18px}
+.share+.share{border-top:1px solid var(--line)}
+.share[hidden]{display:none}
+.share.edit .field{height:44px;font-weight:800;letter-spacing:.04em}
 .share div{flex:1;min-width:0}
-.share .k{color:var(--sub);font-size:13px;font-weight:600}
+.share .k{color:var(--ink);font-size:13px;font-weight:600}
 .share .v{font-size:19px;font-weight:800;margin-top:2px;word-break:break-all}
-.copy{flex:none;height:36px;padding:0 16px;border-radius:999px;border:0;background:var(--surface-2);color:var(--ink);font:600 14px var(--font);cursor:pointer}
+.copy{flex:none;height:36px;padding:0 16px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink);font:600 14px var(--font);cursor:pointer}
+.copy:hover,.copy.solid{background:var(--ink);color:var(--bg)}
+/* less grey: labels, links and bold bits are black; Continue stays black until it works */
+.step .lead b{color:var(--ink)}
+.step .foot .btn:disabled{opacity:1;background:var(--ink);color:var(--bg)}
 
 
 
@@ -789,8 +797,8 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
       <section class="step" data-s="handle">
         <div class="body"><h3>Where do you post?</h3><p class="lead">Pick one or both.</p>
           <div class="rows">
-            <button class="opt multi" aria-pressed="false" data-p="tiktok"><span class="tile" style="background:#111">T</span>TikTok<span class="radio"></span></button>
-            <button class="opt multi" aria-pressed="false" data-p="instagram"><span class="tile" style="background:#E1306C">I</span>Instagram<span class="radio"></span></button>
+            <button class="opt multi" aria-pressed="false" data-p="tiktok"><span class="tile logo" style="background:#000"><svg viewBox="-4 -4 32 32"><path fill="#25F4EE" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" transform="translate(-.7 -.7)"/><path fill="#FE2C55" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" transform="translate(.7 .7)"/><path fill="#fff" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>TikTok<span class="radio"></span></button>
+            <button class="opt multi" aria-pressed="false" data-p="instagram"><span class="tile logo" style="background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)"><svg viewBox="-4 -4 32 32"><path fill="#fff" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span>Instagram<span class="radio"></span></button>
           </div>
           <div class="payfield" id="box-tiktok"><label class="f" for="h-tiktok">TikTok handle</label><div class="prefix"><span>@</span><input class="field" id="h-tiktok" autocapitalize="off" autocorrect="off" placeholder="sarahfit"></div></div>
           <div class="payfield" id="box-instagram"><label class="f" for="h-instagram">Instagram handle</label><div class="prefix"><span>@</span><input class="field" id="h-instagram" autocapitalize="off" autocorrect="off" placeholder="sarahfit"></div></div></div>
@@ -814,10 +822,10 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
       <section class="step" data-s="payout">
         <div class="body"><h3>How should we pay you?</h3><p class="lead">Payouts go out every Friday.</p>
           <div class="rows" id="opts">
-            <button class="opt" aria-pressed="false" data-m="venmo"><span class="tile" style="background:#008CFF">V</span>Venmo<span class="radio"></span></button>
-            <button class="opt" aria-pressed="false" data-m="paypal"><span class="tile" style="background:#003087">P</span>PayPal<span class="radio"></span></button>
-            <button class="opt" aria-pressed="false" data-m="zelle"><span class="tile" style="background:#6D1ED4">Z</span>Zelle<span class="radio"></span></button>
-            <button class="opt" aria-pressed="false" data-m="cashapp"><span class="tile" style="background:#00C244">$</span>Cash App<span class="radio"></span></button>
+            <button class="opt" aria-pressed="false" data-m="venmo"><span class="tile logo" style="background:#008CFF"><svg viewBox="0 0 24 24"><path fill="#fff" d="M5.6 5.2h4.3l1.7 9.6c1.6-2.6 3.1-5.7 3.1-7.9 0-.7-.1-1.2-.4-1.6l3.9-.8c.4.7.6 1.6.6 2.7 0 3.5-3 8.1-5.4 11.6H8.2z"/></svg></span>Venmo<span class="radio"></span></button>
+            <button class="opt" aria-pressed="false" data-m="paypal"><span class="tile logo" style="background:#003087"><svg viewBox="-5 -5 34 34"><path fill="#fff" d="M7.016 19.198h-4.2a.562.562 0 0 1-.555-.65L5.093.584A.692.692 0 0 1 5.776 0h7.222c3.417 0 5.904 2.488 5.846 5.5-.006.25-.027.5-.066.747A6.794 6.794 0 0 1 12.071 12H8.743a.69.69 0 0 0-.682.583l-.325 2.056-.013.083-.692 4.39-.015.087zM19.79 6.142c-.01.087-.01.175-.023.261a7.76 7.76 0 0 1-7.695 6.598H9.007l-.283 1.795-.013.083-.692 4.39-.134.843-.014.088H6.86l-.497 3.15a.562.562 0 0 0 .555.65h3.612c.34 0 .63-.249.683-.585l.952-6.031a.692.692 0 0 1 .683-.584h2.126a6.793 6.793 0 0 0 6.707-5.752c.306-1.95-.466-3.744-1.89-4.906z"/></svg></span>PayPal<span class="radio"></span></button>
+            <button class="opt" aria-pressed="false" data-m="zelle"><span class="tile logo" style="background:#6D1ED4"><svg viewBox="-5 -5 34 34"><path fill="#fff" d="M13.559 24h-2.841a.483.483 0 0 1-.483-.483v-2.765H5.638a.667.667 0 0 1-.666-.666v-2.234a.67.67 0 0 1 .142-.412l8.139-10.382h-7.25a.667.667 0 0 1-.667-.667V3.914c0-.367.299-.666.666-.666h4.23V.483c0-.266.217-.483.483-.483h2.841c.266 0 .483.217.483.483v2.765h4.323c.367 0 .666.299.666.666v2.137a.67.67 0 0 1-.141.41l-8.19 10.481h7.665c.367 0 .666.299.666.666v2.477a.667.667 0 0 1-.666.667h-4.32v2.765a.483.483 0 0 1-.483.483Z"/></svg></span>Zelle<span class="radio"></span></button>
+            <button class="opt" aria-pressed="false" data-m="cashapp"><span class="tile logo" style="background:transparent"><svg viewBox="0 0 24 24"><path fill="#00D64F" d="M23.59 3.475a5.1 5.1 0 00-3.05-3.05c-1.31-.42-2.5-.42-4.92-.42H8.36c-2.4 0-3.61 0-4.9.4a5.1 5.1 0 00-3.05 3.06C0 4.765 0 5.965 0 8.365v7.27c0 2.41 0 3.6.4 4.9a5.1 5.1 0 003.05 3.05c1.3.41 2.5.41 4.9.41h7.28c2.41 0 3.61 0 4.9-.4a5.1 5.1 0 003.06-3.06c.41-1.3.41-2.5.41-4.9v-7.25c0-2.41 0-3.61-.41-4.91zm-6.17 4.63l-.93.93a.5.5 0 01-.67.01 5 5 0 00-3.22-1.18c-.97 0-1.94.32-1.94 1.21 0 .9 1.04 1.2 2.24 1.65 2.1.7 3.84 1.58 3.84 3.64 0 2.24-1.74 3.78-4.58 3.95l-.26 1.2a.49.49 0 01-.48.39H9.63l-.09-.01a.5.5 0 01-.38-.59l.28-1.27a6.54 6.54 0 01-2.88-1.57v-.01a.48.48 0 010-.68l1-.97a.49.49 0 01.67 0c.91.86 2.13 1.34 3.39 1.32 1.3 0 2.17-.55 2.17-1.42 0-.87-.88-1.1-2.54-1.72-1.76-.63-3.43-1.52-3.43-3.6 0-2.42 2.01-3.6 4.39-3.71l.25-1.23a.48.48 0 01.48-.38h1.78l.1.01c.26.06.43.31.37.57l-.27 1.37c.9.3 1.75.77 2.48 1.39l.02.02c.19.2.19.5 0 .68z"/></svg></span>Cash App<span class="radio"></span></button>
           </div>
           <div class="payfield" id="paybox"><label class="f" for="payhandle" id="l-pay">Your Venmo</label><input class="field" id="payhandle" autocapitalize="off" autocorrect="off" placeholder="@username"></div></div>
         <div class="foot"><button class="btn" data-next id="b-pay" disabled>Continue</button></div>
@@ -836,11 +844,15 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
       </section>
       <section class="step" data-s="done">
         <div class="body done">
-          <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <img class="pic3d" src="__ROOT__assets/lab/money_t.png?v=1791603000" alt="">
           <h3 style="text-align:center">You're in!</h3>
           <p class="lead" id="done-sub" style="text-align:center">Your code works right now. Share either one.</p>
-          <div class="share"><div><div class="k">Your link</div><div class="v" id="d-link"></div></div><button class="copy" data-copy="d-link">Copy</button></div>
-          <div class="share"><div><div class="k">Your code</div><div class="v" id="d-code"></div></div><button class="copy" data-copy="d-code">Copy</button></div>
+          <div class="shares">
+            <div class="share"><div><div class="k">Your link</div><div class="v" id="d-link"></div></div><button class="copy" data-copy="d-link">Copy</button></div>
+            <div class="share" id="coderow"><div><div class="k">Your code</div><div class="v" id="d-code"></div></div><button class="copy" id="chg">Change</button><button class="copy" data-copy="d-code">Copy</button></div>
+            <div class="share edit" id="editrow" hidden><input class="field" id="newcode" autocapitalize="characters" autocorrect="off" maxlength="20" aria-label="New code"><button class="copy solid" id="savecode">Save</button></div>
+          </div>
+          <div class="err" id="e-change"></div>
         </div>
         <div class="foot"><a class="btn" href="/dashboard/">Open my dashboard</a></div>
       </section>
@@ -1011,6 +1023,24 @@ $("b-sign").onclick = async () => {
   if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
   if (data?.error === "taken") { go("code"); checkCode(); return; }
   finish(data.code, data.existing);
+};
+$("chg").onclick = () => { $("newcode").value = $("d-code").textContent; $("coderow").hidden = true; $("editrow").hidden = false; $("e-change").textContent = ""; $("newcode").focus(); };
+$("newcode").oninput = () => { $("newcode").value = $("newcode").value.toUpperCase().replace(/[^A-Z0-9]/g, ""); };
+$("newcode").onkeydown = e => { if (e.key === "Enter") $("savecode").click(); };
+$("savecode").onclick = async () => {
+  const c = $("newcode").value.toLowerCase();
+  if (!/^[a-z0-9]{3,20}$/.test(c)) { $("e-change").textContent = "Letters and numbers, 3 to 20 characters."; return; }
+  $("savecode").disabled = true;
+  const { data, error } = await sb.rpc("creator_change_code", { new_code: c });
+  $("savecode").disabled = false;
+  if (error || data?.error) {
+    $("e-change").textContent = data?.error === "taken" ? "That code's taken. Try another."
+      : data?.error === "used" ? "People already used this code, so it can't change now."
+      : "Couldn't change it. Try again.";
+    return;
+  }
+  $("d-code").textContent = data.code.toUpperCase(); $("d-link").textContent = `mealpic.app/c/${data.code}`;
+  $("editrow").hidden = true; $("coderow").hidden = false; $("e-change").textContent = "";
 };
 function finish(code, existing){
   $("d-code").textContent = code.toUpperCase();
