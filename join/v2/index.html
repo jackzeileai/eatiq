@@ -454,6 +454,21 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--sub);margin:0 0
 .pb-list b{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font-size:15px;font-weight:800}
 .pb-list li.lock{filter:blur(5px);opacity:.55;user-select:none}
 .pb-chip{position:absolute;left:50%;bottom:22%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 8px 24px -10px rgba(0,0,0,.3);font-size:13px;font-weight:700;white-space:nowrap}
+/* proven videos tile: three real reels fanned out, glass chip + pill */
+.tile .stage.fan{position:relative;overflow:hidden;padding:0!important;--fx:84px}
+.stage.fan img.fc{position:absolute;left:50%;top:50%;width:auto;max-width:none;max-height:none;height:70%;aspect-ratio:9/16;object-fit:cover;border-radius:14px;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 18px 40px -18px rgba(0,0,0,.4);z-index:1}
+.stage.fan img.fc.l{transform:translate(calc(-50% - var(--fx)),-50%) rotate(-7deg);opacity:.72}
+.stage.fan img.fc.r{transform:translate(calc(-50% + var(--fx)),-50%) rotate(7deg);opacity:.72}
+.stage.fan img.fc.c{height:84%;z-index:2;transform:translate(-50%,-50%)}
+.fan-chip,.fan-pill{position:absolute;left:50%;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:7px;border-radius:999px;background:rgba(255,255,255,.78);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 0 0 1px rgba(0,0,0,.08),0 10px 28px -12px rgba(0,0,0,.35);color:var(--ink);white-space:nowrap;font-weight:700;letter-spacing:-.01em}
+.fan-chip{top:14px;padding:7px 12px 7px 10px;font-size:13px;color:var(--sub)}
+.fan-chip b{font-weight:800;color:var(--ink);font-size:14px;letter-spacing:-.02em}
+.fan-pill{bottom:14px;padding:9px 16px;font-size:14px}
+.fan-pill i{width:1px;height:16px;background:rgba(0,0,0,.14);margin:0 4px}
+html[data-mode="dark"] .fan-chip,html[data-mode="dark"] .fan-pill{background:rgba(29,29,31,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 10px 28px -12px rgba(0,0,0,.8)}
+html[data-mode="dark"] .fan-pill i{background:rgba(255,255,255,.18)}
+html[data-mode="dark"] .stage.fan img.fc{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 18px 40px -18px rgba(0,0,0,.9)}
+@media (max-width:720px){.tile .stage.fan{--fx:60px}.fan-chip{top:10px}.fan-pill{bottom:10px;font-size:13px;padding:8px 14px}}
 /* course tile: a lesson video, free */
 .tile .stage.course{position:relative;overflow:hidden;background:#000;padding:0 !important}
 .tile .stage.course>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:50% 40%}
@@ -668,7 +683,13 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
   <div class="wrap">
     <div class="split"><h2 class="h2">We make winning videos easy</h2><p class="lede">We teach you how to make profitable videos. The videos, the playbook, the course.</p></div>
     <div class="grid c3">
-            <div class="tile"><div class="stage"><img src="../../assets/lab/videos_fan_t.png?v=1791603000" alt=""></div><h3 class="h3">1. Proven Videos</h3><p class="lede sub">A library of videos that already went viral. See exactly what works.</p></div>
+            <div class="tile"><div class="stage fan" aria-label="Three viral videos">
+        <img class="fc l" src="../../assets/lab/reel_a.jpg?v=1791610000" alt="">
+        <img class="fc r" src="../../assets/lab/reel_c.jpg?v=1791610000" alt="">
+        <img class="fc c" src="../../assets/lab/reel_b.jpg?v=1791610000" alt="">
+        <span class="fan-chip"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 11.5 6.5 7l3 3L14 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 5h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><b>42.6M</b> views</span>
+        <span class="fan-pill"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.4" cy="6.6" r="1.4" fill="currentColor"/></svg>Instagram<i></i><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M12.53.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>TikTok</span>
+      </div><h3 class="h3">1. Proven Videos</h3><p class="lede sub">A library of videos that already went viral. See exactly what works.</p></div>
       <div class="tile"><div class="stage"><img src="../../assets/lab/playbook_book_t.png?v=1791603000" alt=""></div><h3 class="h3">2. The Winning Playbook</h3><p class="lede sub">Hooks, value, CTAs. The manual for videos that sell.</p></div>
       <div class="tile"><div class="stage"><img src="../../assets/lab/course_laptop_t.png?v=1791603000" alt=""></div><h3 class="h3">3. The Secret Course</h3><p class="lede sub">From a creator with over 1 billion views. Worth thousands. Free when you join.</p></div>
     </div>
