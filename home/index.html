@@ -740,7 +740,7 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
         <div class="ctas"><a class="btn shine" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img class="im" src="../assets/imessage.png" alt="">Start by text</a></div>
         <span class="cta-note">(628) 298-8842. Free.</span>
       </div>
-      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><img src="../assets/text-thread.webp" alt="An iMessage thread with Meal Pic logging a meal from a photo" loading="lazy"></div><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
+      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><video muted playsinline loop preload="none" poster="../assets/video/text_demo.jpg" data-src="../assets/video/text_demo.mp4" aria-label="Texting a meal photo to Meal Pic and getting the calories back"></video></div><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
     </div>
   </div>
 </section>
@@ -775,5 +775,6 @@ html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(
 document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
 new IntersectionObserver(([e]) => document.getElementById("mobilebar").classList.toggle("show", !e.isIntersecting)).observe(document.querySelector(".hero-art"));
 </script>
+<script>(function(){var v=document.querySelector('.text-sec video');if(!v)return;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!v.src){v.src=v.dataset.src;}v.currentTime=0;v.play().catch(function(){});}else v.pause();});},{threshold:.35}).observe(v);})();</script>
 </body>
 </html>
