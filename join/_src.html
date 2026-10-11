@@ -759,8 +759,30 @@ html[data-mode="dark"] .split-hero .hero-cols>.quick.vb{background:#1c1c1e;box-s
 .split-hero .quick.vc input[type=range]{background:linear-gradient(to right,#1d1d1f var(--p,20%),rgba(0,0,0,.12) var(--p,20%)) !important;box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
 .quick-blobs i{opacity:.85}
 html[data-mode="dark"] .split-hero .hero-cols>.quick.vc{background:rgba(30,30,32,.35)}
-/* headline starts at the same height as on the home page, so switching pages doesn't jump */
-@media (min-width:901px){.split-hero{padding-top:170px !important}}
+/* cash + phone emoji sit in the empty margins beside the example dashboard, never over its content */
+.dash{position:relative;overflow:visible}
+.dfloat{position:absolute;z-index:0;pointer-events:none;filter:drop-shadow(0 18px 22px rgba(0,0,0,.16));animation:bob 5s ease-in-out infinite}
+.df-phone{left:100%;top:14%;width:96px;margin-left:56px;transform:rotate(12deg)}
+.df-cash{right:100%;bottom:16%;width:170px;margin-right:40px;transform:rotate(-10deg);animation-delay:-2.5s}
+@media (max-width:1240px){.dfloat{display:none}}
+@media (prefers-reduced-motion:reduce){.dfloat{animation:none}}
+/* dashboard colour: the recent bars, the 214 and each stat take a stop from the 50% gradient */
+.d-bars i{background:#ece8f8}
+html[data-mode] .d-bars i:nth-last-child(8){background:#7b5cff}html[data-mode] .d-bars i:nth-last-child(7){background:#9a55ff}html[data-mode] .d-bars i:nth-last-child(6){background:#b64dfb}
+html[data-mode] .d-bars i:nth-last-child(5){background:#d24ae0}html[data-mode] .d-bars i:nth-last-child(4){background:#ec4cb0}html[data-mode] .d-bars i:nth-last-child(3){background:#ff4f9a}
+html[data-mode] .d-bars i:nth-last-child(2){background:#ff6d5c}html[data-mode] .d-bars i:nth-last-child(1){background:#ff8a2b}
+html[data-mode] .d-bars i.today{background:#ff8a2b}
+.d-chart .d-row b{background:linear-gradient(95deg,#7b5cff,#c64bff 35%,#ff4f9a 70%,#ff8a2b);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.d-stats .d-card:nth-child(1) b{color:#6a4cf0}.d-stats .d-card:nth-child(2) b{color:#a93ee0}
+.d-stats .d-card:nth-child(3) b{color:#e33d86}.d-stats .d-card:nth-child(4) b{color:#ec6a14}
+html[data-mode="dark"] .d-bars i{background:#2a2633}
+html[data-mode="dark"] .d-stats .d-card:nth-child(1) b{color:#a28bff}html[data-mode="dark"] .d-stats .d-card:nth-child(2) b{color:#d77bff}
+html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-mode="dark"] .d-stats .d-card:nth-child(4) b{color:#ffa04d}
+/* thinking memoji either side of Questions, same as home */
+.sec .split .qhead{display:flex !important;align-items:center;justify-content:center;gap:clamp(8px,1.4vw,20px)}
+.sec .split .qhead .h2{width:auto !important;margin:0 !important}
+.qhead .ask{display:block;width:auto;height:clamp(84px,9vw,132px);margin:0}
+@media (max-width:720px){.qhead .ask{height:76px}}
 </style>
 </head>
 <body>
@@ -839,6 +861,8 @@ html[data-mode="dark"] .split-hero .hero-cols>.quick.vc{background:rgba(30,30,32
   <div class="wrap">
     <div class="split"><h2 class="h2">One dashboard to track it all</h2><p class="lede">Every download, trial and payout, as it happens.</p></div>
     <div class="dash" aria-label="Example creator dashboard">
+      <img class="dfloat df-phone" src="__ROOT__assets/lab/iphone_color_t.png?v=1791582000" alt="">
+      <img class="dfloat df-cash" src="__ROOT__assets/lab/cash100_t.png?v=1791582000" alt="">
       <div class="d-top">
         <span class="d-k d-title">Your dashboard</span>
         <div class="d-chips"><span class="d-chip"><em>Code</em>SARAH</span><span class="d-chip"><em>Link</em>mealpic.app/sarah</span></div>
@@ -871,7 +895,7 @@ html[data-mode="dark"] .split-hero .hero-cols>.quick.vc{background:rgba(30,30,32
 
 <section class="sec" id="faq">
   <div class="wrap">
-    <div class="split"><h2 class="h2">Questions</h2><p class="lede">Email <a href="mailto:help@mealpic.app">help@mealpic.app</a> for anything else.</p></div>
+    <div class="split"><div class="qhead"><img class="ask" src="__ROOT__assets/lab/memoji_think_t.png?v=1" alt=""><h2 class="h2">Questions</h2><img class="ask" src="__ROOT__assets/lab/memoji_think2_t.png?v=1" alt=""></div><p class="lede">Email <a href="mailto:help@mealpic.app">help@mealpic.app</a> for anything else.</p></div>
     <div class="faq faqwrap"><details><summary>How and when do I get paid?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Every Friday, by Venmo, PayPal, Zelle or Cash App.</p></details><details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any payment from someone who used your link or code. Trials count once they pay.</p></details><details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No, but they do get an extended free trial.</p></details><details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join.</p></details><details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>We teach you in our creator course and give you a library of past winning videos.</p></details><details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your dashboard, live.</p></details></div>
   </div>
 </section>
