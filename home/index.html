@@ -829,6 +829,21 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
   .faq details p{font-size:17px}
   .ask{width:130px}
 }
+
+/* ===== CTA pass (2026-10-11): hero type down a notch; CTAs bigger, app icon inside the pill ===== */
+@media (min-width:901px){.split-hero .h-hero{font-size:clamp(56px,6vw,92px) !important}}
+.split-hero .ctas .btn,.text-sec .ctas .btn,.ctabar .btn.shine{height:64px !important;font-size:19px !important;font-weight:600 !important;letter-spacing:-.015em}
+.btn.shine:not(.small){padding:0 30px 0 26px !important;gap:14px;box-shadow:0 14px 30px -14px rgba(0,0,0,.55)}
+.btn.shine .apl{width:22px;height:26px;margin-top:-3px}
+.two-l{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05;text-align:left}
+.two-l b{font-weight:700;font-size:19px;letter-spacing:-.02em}
+.two-l small{font-size:13px;font-weight:500;opacity:.7;margin-top:3px;letter-spacing:0}
+.btn.shine .arr{width:18px;height:18px;margin-left:2px}
+.btn.shine:not(.small):hover{transform:translateY(-1px);box-shadow:0 18px 34px -14px rgba(0,0,0,.6)}
+.split-hero .btn.ghost.im,.text-sec .ctas .btn.ghost{padding:0 30px 0 22px !important;font-weight:600 !important}
+.split-hero .btn.ghost.im img,.text-sec .btn .im{width:28px !important;height:28px !important;border-radius:7px}
+html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(255,255,255,.25)}
+@media (max-width:900px){.split-hero .ctas .btn,.text-sec .ctas .btn,.ctabar .btn.shine{height:60px !important;font-size:18px !important}.two-l b{font-size:18px}}
 </style>
 <body>
 
@@ -853,7 +868,7 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
       <div class="hero-copy">
         <h1 class="h-hero"><span class="two">Calories from<br>a <span class="fifty">picture</span></span></h1>
         <p class="lede">Snap a photo. Get the calories and macros in seconds.</p>
-        <div class="ctas"><a class="btn shine" href="https://mealpic.app/download">Download free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost im" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img src="../assets/imessage.png" alt="">Start by text</a></div>
+        <div class="ctas"><a class="btn shine" href="https://mealpic.app/download"><svg class="apl" viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span class="two-l"><b>Download free</b><small>on the App Store</small></span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost im" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img src="../assets/imessage.png" alt="">Start by text</a></div>
       </div>
       <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
     </div>
@@ -868,7 +883,7 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
       <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_tags_t.png?v=1" alt="Pancakes with a calorie tag on each item"></div><h3 class="h3">2. Get the breakdown</h3><p class="lede sub">Calories, protein, carbs and fat. Every ingredient on its own line.</p></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_fix_t.png?v=1" alt="A finger tapping plus on the syrup line"></div><h3 class="h3">3. Fix any line</h3><p class="lede sub">One thing looks off? Change that line. It remembers next time.</p></div>
     </div>
-    <div class="ctabar"><a class="btn shine" href="https://mealpic.app/download">Download free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="ctabar"><a class="btn shine" href="https://mealpic.app/download"><svg class="apl" viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span class="two-l"><b>Download free</b><small>on the App Store</small></span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
   </div>
 </section>
 
@@ -899,7 +914,7 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
       <details><summary>What happens to my photos?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Before your first scan the app asks for consent to send the photo to our AI provider for analysis. "Not Now" sends nothing. Meals back up to your account; you can delete the account and all its data in-app. Details in the <a href="../privacy.html">Privacy Policy</a>.</p></details>
       <details><summary>Is this medical advice?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No. Meal Pic is a general wellness tool, not a medical device. Consult a doctor or registered dietitian before making significant changes to your diet.</p></details>
     </div>
-    <div class="ctabar"><a class="btn shine" href="https://mealpic.app/download">Download free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    <div class="ctabar"><a class="btn shine" href="https://mealpic.app/download"><svg class="apl" viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span class="two-l"><b>Download free</b><small>on the App Store</small></span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
   </div>
 </section>
 
