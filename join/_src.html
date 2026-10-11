@@ -17,7 +17,7 @@ __THEME_COLOR__
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="__ROOT__assets/style/mono.css?v=1791800000">
+<link rel="stylesheet" href="__ROOT__assets/style/mono.css?v=1791810000">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -783,6 +783,9 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
 .sec .split .qhead .h2{width:auto !important;margin:0 !important}
 .qhead .ask{display:block;width:auto;height:clamp(84px,9vw,132px);margin:0}
 @media (max-width:720px){.qhead .ask{height:76px}}
+/* the cash stack fills the empty right side of the Next payout card */
+.d-pay{position:relative}
+.d-cash{position:absolute;right:6%;top:50%;width:min(40%,170px);transform:translateY(-50%) rotate(-8deg);filter:drop-shadow(0 14px 16px rgba(0,0,0,.16));pointer-events:none}
 </style>
 </head>
 <body>
@@ -861,8 +864,6 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
   <div class="wrap">
     <div class="split"><h2 class="h2">One dashboard to track it all</h2><p class="lede">Every download, trial and payout, as it happens.</p></div>
     <div class="dash" aria-label="Example creator dashboard">
-      <img class="dfloat df-phone" src="__ROOT__assets/lab/iphone_color_t.png?v=1791582000" alt="">
-      <img class="dfloat df-cash" src="__ROOT__assets/lab/cash100_t.png?v=1791582000" alt="">
       <div class="d-top">
         <span class="d-k d-title">Your dashboard</span>
         <div class="d-chips"><span class="d-chip"><em>Code</em>SARAH</span><span class="d-chip"><em>Link</em>mealpic.app/sarah</span></div>
@@ -872,6 +873,7 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
           <span class="d-k">Next payout</span>
           <b class="d-big">$346</b>
           <span class="d-when">Friday, Oct 17</span>
+          <img class="d-cash" src="__ROOT__assets/lab/cash100_t.png?v=1791582000" alt="">
         </div>
         <div class="d-card">
           <span class="d-k">Coming in every month</span>
