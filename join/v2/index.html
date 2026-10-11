@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/style/mono.css?v=1791810000">
+<link rel="stylesheet" href="../../assets/style/mono.css?v=1791820000">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -728,37 +728,6 @@ html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(
 html[data-mode="dark"] .split-hero .hero-cols>.quick{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);box-shadow:inset 0 22px 34px -14px rgba(255,255,255,.55),inset 14px 0 30px -16px rgba(255,255,255,.3),inset 0 -26px 40px -14px rgba(70,0,90,.38),inset -14px 0 30px -16px rgba(90,0,50,.25),0 34px 60px -28px rgba(110,30,140,.5),0 10px 20px -10px rgba(110,30,140,.25)}
 html[data-mode="dark"] .split-hero .hero-cols>.quick::after{opacity:.4}
 
-/* ===== calculator options for Jack to pick (?calc=b / ?calc=c); default is A, the puffy gradient ===== */
-/* B: puffy white clay card, only the money is in the 50% gradient */
-.split-hero .hero-cols>.quick.vb{background:#fff;color:var(--ink);
-  box-shadow:inset 0 22px 34px -14px #fff,inset 0 -26px 40px -14px rgba(60,40,90,.12),inset -14px 0 30px -16px rgba(60,40,90,.08),0 0 0 1px rgba(0,0,0,.05),0 34px 60px -28px rgba(60,40,90,.35),0 10px 20px -10px rgba(60,40,90,.15)}
-.quick.vb .q-glare{display:none}
-.split-hero .quick.vb .label{color:var(--sub) !important}
-.split-hero .quick.vb .q-per,.split-hero .quick.vb .q-foot,.split-hero .quick.vb label{color:var(--sub)}
-.split-hero .quick.vb .q-per b,.split-hero .quick.vb label output{color:var(--ink)}
-.split-hero .quick.vb .q-top{border-top-color:var(--hair)}
-.split-hero .quick.vb .q-amt{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;width:max-content;filter:drop-shadow(0 6px 10px rgba(198,75,255,.25))}
-.split-hero .quick.vb .q-big,.split-hero .quick.vb .q-mo{color:transparent;-webkit-text-fill-color:transparent;text-shadow:none}
-.split-hero .quick.vb input[type=range]{background:linear-gradient(to right,#c64bff 0,#ff4f9a calc(var(--p,20%)*.7),#ff8a2b var(--p,20%),rgba(60,40,90,.1) var(--p,20%)) !important;box-shadow:inset 0 2px 3px rgba(60,40,90,.15)}
-html[data-mode="dark"] .split-hero .hero-cols>.quick.vb{background:#1c1c1e;box-shadow:inset 0 22px 34px -14px rgba(255,255,255,.08),inset 0 -26px 40px -14px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08),0 34px 60px -28px rgba(0,0,0,.9)}
-/* C: glass card floating over glowing colour blobs */
-.split-hero .hero-cols>.quick.vc{transform-style:flat;background:rgba(255,255,255,.28);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);color:#fff;
-  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(255,255,255,.5),inset 0 -20px 40px -20px rgba(255,255,255,.4),0 30px 60px -30px rgba(110,30,140,.45)}
-.quick-blobs{position:absolute;right:0;top:0;bottom:0;width:440px;z-index:1;pointer-events:none}
-@media (max-width:900px){.quick-blobs{left:0;right:0;width:auto;top:auto;height:380px}}
-.quick-blobs i{position:absolute;border-radius:50%;filter:blur(8px)}
-.quick-blobs i:nth-child(1){width:220px;height:220px;left:-10px;top:10px;background:radial-gradient(circle at 35% 30%,#b9a4ff,#7b5cff 60%,#5a3fd0)}
-.quick-blobs i:nth-child(2){width:180px;height:180px;right:0;top:-20px;background:radial-gradient(circle at 35% 30%,#ffb3d4,#ff4f9a 60%,#d0306f)}
-.quick-blobs i:nth-child(3){width:200px;height:200px;right:40px;bottom:-20px;background:radial-gradient(circle at 35% 30%,#ffd59a,#ff8a2b 60%,#e06a10)}
-.split-hero .hero-cols>.quick.vc>*:not(.q-glare){transform:none}
-.split-hero .hero-cols>.quick.vc{background:rgba(255,255,255,.42);color:var(--ink)}
-.quick.vc .q-glare{display:none}
-.split-hero .quick.vc .label,.split-hero .quick.vc .q-per,.split-hero .quick.vc .q-foot,.split-hero .quick.vc label{color:rgba(0,0,0,.6) !important}
-.split-hero .quick.vc .q-per b,.split-hero .quick.vc label output,.split-hero .quick.vc .q-big,.split-hero .quick.vc .q-mo{color:var(--ink);text-shadow:none}
-.split-hero .quick.vc .q-top{border-top-color:rgba(0,0,0,.1)}
-.split-hero .quick.vc input[type=range]{background:linear-gradient(to right,#1d1d1f var(--p,20%),rgba(0,0,0,.12) var(--p,20%)) !important;box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
-.quick-blobs i{opacity:.85}
-html[data-mode="dark"] .split-hero .hero-cols>.quick.vc{background:rgba(30,30,32,.35)}
 /* cash + phone emoji sit in the empty margins beside the example dashboard, never over its content */
 .dash{position:relative;overflow:visible}
 .dfloat{position:absolute;z-index:0;pointer-events:none;filter:drop-shadow(0 18px 22px rgba(0,0,0,.16));animation:bob 5s ease-in-out infinite}
@@ -786,6 +755,13 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
 /* the cash stack fills the empty right side of the Next payout card */
 .d-pay{position:relative}
 .d-cash{position:absolute;right:6%;top:50%;width:min(40%,170px);transform:translateY(-50%) rotate(-8deg);filter:drop-shadow(0 14px 16px rgba(0,0,0,.16));pointer-events:none}
+/* ===== grid + rhythm pass (2026-10-11): every section's content sits the same distance below the previous one (96 desktop, 88 phone), same as /home ===== */
+@media (min-width:901px){#how,#videos{padding-top:74px !important}#get{padding-top:35px !important}#credit{padding-top:96px !important}#faq{padding-top:58px !important}.sec.final{padding-top:98px !important}}
+@media (max-width:900px){#how{padding-top:46px !important}#videos{padding-top:51px !important}#get{padding-top:32px !important}#credit{padding-top:64px !important}#faq{padding-top:34px !important}.sec.final{padding-top:92px !important}}
+/* smallest phones (320-360): nothing runs off the side */
+@media (max-width:900px){.split-hero .hero-cols{grid-template-columns:minmax(0,1fr) !important}.split-hero .hero-cols>.quick{min-width:0 !important;width:100% !important;max-width:520px !important;box-sizing:border-box}}
+@media (max-width:360px){.btn.shine{max-width:100%;box-sizing:border-box}.nav .brand{font-size:18px}.nav .mode-btn{display:none}.split-hero .h-hero{font-size:12.5vw !important}}
+@media (max-width:360px){.qhead .ask{height:56px}}
 </style>
 </head>
 <body>
@@ -833,9 +809,9 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
   <div class="wrap">
     <div class="split"><h2 class="h2">How it works</h2><p class="lede">Three steps to your first payout.</p></div>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../../assets/lab/profile_link_t.png?v=1791588000" alt=""></div><h3 class="h3">1. Get Your Link</h3><p class="lede sub">Sign up for free to get your affiliate link and code.</p></div>
-      <div class="tile"><div class="stage white"><img src="../../assets/lab/memoji_ringlight_white_t.png?v=1791571789" alt=""></div><h3 class="h3">2. Start Making Videos</h3><p class="lede sub">Film yourself using Meal Pic. Post it to Instagram and TikTok.</p></div>
-      <div class="tile"><div class="stage white"><img class="sm" src="../../assets/lab/venmo_t.png?v=1791583000" alt=""></div><h3 class="h3">3. Get Paid</h3><p class="lede sub">Get 50% of all revenue you generate, for life. Paid every Friday.</p></div>
+      <div class="tile"><div class="stage white"><img src="../../assets/lab/profile_link_t.png?v=7" alt=""></div><h3 class="h3">1. Get Your Link</h3><p class="lede sub">Sign up for free to get your affiliate link and code.</p></div>
+      <div class="tile"><div class="stage white"><img src="../../assets/lab/memoji_ringlight_white_t.png?v=7" alt=""></div><h3 class="h3">2. Start Making Videos</h3><p class="lede sub">Film yourself using Meal Pic. Post it to Instagram and TikTok.</p></div>
+      <div class="tile"><div class="stage white"><img class="sm" src="../../assets/lab/venmo_t.png?v=7" alt=""></div><h3 class="h3">3. Get Paid</h3><p class="lede sub">Get 50% of all revenue you generate, for life. Paid every Friday.</p></div>
     </div>
     <div class="ctabar"><button class="btn shine" data-open>Become a creator<span class="free">(it's free)</span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
   </div>
@@ -853,9 +829,9 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
   <div class="wrap">
     <div class="split"><h2 class="h2">We make winning videos easy</h2><p class="lede">We teach you how to make profitable videos. The videos, the playbook, the course.</p></div>
     <div class="grid c3">
-            <div class="tile"><div class="stage"><img src="../../assets/lab/videos_fan_t.png?v=1791603000" alt=""></div><h3 class="h3">1. Proven Videos</h3><p class="lede sub">A library of videos that already went viral. See exactly what works.</p></div>
-      <div class="tile"><div class="stage"><img src="../../assets/lab/playbook_book_t.png?v=1791603000" alt=""></div><h3 class="h3">2. The Winning Playbook</h3><p class="lede sub">Hooks, value, CTAs. The manual for videos that sell.</p></div>
-      <div class="tile"><div class="stage"><img src="../../assets/lab/course_laptop_t.png?v=1791603000" alt=""></div><h3 class="h3">3. The Secret Course</h3><p class="lede sub">From a creator with over 1 billion views. Worth thousands. Free when you join.</p></div>
+            <div class="tile"><div class="stage"><img src="../../assets/lab/videos_fan_t.png?v=7" alt=""></div><h3 class="h3">1. Proven Videos</h3><p class="lede sub">A library of videos that already went viral. See exactly what works.</p></div>
+      <div class="tile"><div class="stage"><img src="../../assets/lab/playbook_book_t.png?v=7" alt=""></div><h3 class="h3">2. The Winning Playbook</h3><p class="lede sub">Hooks, value, CTAs. The manual for videos that sell.</p></div>
+      <div class="tile"><div class="stage"><img src="../../assets/lab/course_laptop_t.png?v=7" alt=""></div><h3 class="h3">3. The Secret Course</h3><p class="lede sub">From a creator with over 1 billion views. Worth thousands. Free when you join.</p></div>
     </div>
   </div>
 </section>
@@ -873,7 +849,7 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
           <span class="d-k">Next payout</span>
           <b class="d-big">$346</b>
           <span class="d-when">Friday, Oct 17</span>
-          <img class="d-cash" src="../../assets/lab/cash100_t.png?v=1791582000" alt="">
+          <img class="d-cash" src="../../assets/lab/cash100_t.png?v=7" alt="">
         </div>
         <div class="d-card">
           <span class="d-k">Coming in every month</span>
@@ -897,7 +873,7 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
 
 <section class="sec" id="faq">
   <div class="wrap">
-    <div class="split"><div class="qhead"><img class="ask" src="../../assets/lab/memoji_think_t.png?v=1" alt=""><h2 class="h2">Questions</h2><img class="ask" src="../../assets/lab/memoji_think2_t.png?v=1" alt=""></div><p class="lede">Email <a href="mailto:help@mealpic.app">help@mealpic.app</a> for anything else.</p></div>
+    <div class="split"><div class="qhead"><img class="ask" src="../../assets/lab/memoji_think_t.png?v=7" alt=""><h2 class="h2">Questions</h2><img class="ask" src="../../assets/lab/memoji_think2_t.png?v=7" alt=""></div><p class="lede">Email <a href="mailto:help@mealpic.app">help@mealpic.app</a> for anything else.</p></div>
     <div class="faq faqwrap"><details><summary>How and when do I get paid?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Every Friday, by Venmo, PayPal, Zelle or Cash App.</p></details><details><summary>What counts as a sale?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Any payment from someone who used your link or code. Trials count once they pay.</p></details><details><summary>Do my followers get a discount?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>No, but they do get an extended free trial.</p></details><details><summary>How many followers do I need?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>None. Anyone can join.</p></details><details><summary>What should I post?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>We teach you in our creator course and give you a library of past winning videos.</p></details><details><summary>Where can I see my numbers?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Your dashboard, live.</p></details></div>
   </div>
 </section>
@@ -992,7 +968,7 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
       </section>
       <section class="step" data-s="done">
         <div class="body done">
-          <img class="pic3d" src="../../assets/lab/cash100_t.png?v=1791582000" alt="">
+          <img class="pic3d" src="../../assets/lab/cash100_t.png?v=7" alt="">
           <h3 style="text-align:center">You're in!</h3>
           <p class="lead" id="done-sub" style="text-align:center">Your code works right now. Share either one.</p>
           <div class="shares">
@@ -1040,15 +1016,6 @@ function calc(){
 $("sm").addEventListener("input", calc); calc();
 
 
-// ---- preview calculator options: ?calc=b or ?calc=c ----
-(() => {
-  const v = new URLSearchParams(location.search).get("calc"), card = $("earn");
-  if (v === "b") card.classList.add("vb");
-  if (v === "c") {
-    card.classList.add("vc");
-    card.insertAdjacentHTML("beforebegin", '<div class="quick-blobs" aria-hidden="true"><i></i><i></i><i></i></div>');
-  }
-})();
 // ---- 3D tilt: the calculator leans toward the cursor anywhere in the hero ----
 (() => {
   const card = $("earn"), hero = document.querySelector(".split-hero");

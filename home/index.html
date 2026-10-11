@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Meal Pic | Track your calories with just a picture</title>
 <meta name="description" content="Snap a photo. Get calories, protein, carbs and fat in seconds, with every ingredient broken out and editable. Free on iPhone.">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Meal Pic | Track your calories with just a picture">
 <meta property="og:description" content="Snap a photo. Get calories, protein, carbs and fat in seconds.">
 <meta property="og:image" content="https://mealpic.app/assets/apple-touch-icon.png">
@@ -22,7 +23,7 @@ fbq('init','1873631240283364');fbq('track','PageView');
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style/mono.css?v=1791591000">
+<link rel="stylesheet" href="../assets/style/mono.css?v=1791820000">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -611,6 +612,7 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
 .pb-doc{box-shadow:inset 6px 0 0 #1d1d1f,0 0 0 1px var(--hair)}
 #how{padding-top:88px}
 @media (max-width:900px){#how{padding-top:56px}}
+
 </style>
 <style>
 /* ===== home page ===== */
@@ -674,7 +676,7 @@ html[data-mode="dark"] .phone-vid{box-shadow:0 0 0 11px #2a2a2c,0 0 0 12px rgba(
 .iph::after{content:"";position:absolute;left:8%;right:8%;bottom:-7%;height:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.28),transparent);filter:blur(6px);z-index:0;transform:translateZ(-1px)}
 html[data-mode="dark"] .iph::after{background:radial-gradient(closest-side,rgba(255,255,255,.08),transparent)}
 .tilt-l{--ry:-16deg}.tilt-r{--ry:16deg}
-@keyframes iphfloat{0%,100%{transform:perspective(1800px) rotateY(var(--ry)) rotateX(5deg) translateY(0)}50%{transform:perspective(1800px) rotateY(calc(var(--ry) * .6)) rotateX(3deg) translateY(-10px)}}
+@keyframes iphfloat{0%,100%{transform:perspective(1800px) rotateY(var(--ry)) rotateX(5deg) translateY(5px)}50%{transform:perspective(1800px) rotateY(calc(var(--ry) * .6)) rotateX(3deg) translateY(-5px)}}
 @media (prefers-reduced-motion:reduce){.iph{animation:none;transform:perspective(1800px) rotateY(var(--ry)) rotateX(5deg)}}
 @media (min-width:901px){.hero-art .iph{width:auto;height:clamp(480px,70vh,660px)}}
 .text-sec .phone{max-width:none;background:none;box-shadow:none}
@@ -754,7 +756,7 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
 
 /* ===== pro audit (2026-10-10): one grid, one rhythm ===== */
 /* nav pill spans the same 1160 content width, so the logo lines up with the headline */
-@media (min-width:901px){.nav.float .wrap{max-width:1188px}}
+/* nav width now lives in mono.css (1188, same on every page) */
 /* the text section sits on the hero's grid: copy on the same left edge, phone in the same spot */
 @media (min-width:901px){
   .text-sec .hero-cols{max-width:1160px !important;margin:0 auto !important;grid-template-columns:auto 440px !important;justify-content:center !important;gap:64px !important;align-items:center}
@@ -844,6 +846,65 @@ html[data-mode="dark"] .split-hero .btn.ghost.im:hover{color:#000 !important}
 .split-hero .btn.ghost.im img,.text-sec .btn .im{width:28px !important;height:28px !important;border-radius:7px}
 html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(255,255,255,.25)}
 @media (max-width:900px){.split-hero .ctas .btn,.text-sec .ctas .btn,.ctabar .btn.shine{height:60px !important;font-size:18px !important}.two-l b{font-size:18px}}
+/* ===== hero + "Or just text it" use the /join hero's exact numbers (Jack approved that one 2026-10-11):
+   104 top, 1160 grid = text | 440 column, 64 gap, 92px max headline, 24px lede, buttons 36 below ===== */
+@media (min-width:901px){
+  .split-hero{padding-top:104px !important;padding-bottom:0 !important}
+  .split-hero .hero-cols,.text-sec .hero-cols{max-width:1160px !important;margin:0 auto !important;grid-template-columns:minmax(0,1fr) 440px !important;justify-content:normal !important;gap:64px !important;align-items:center !important;min-height:0 !important}
+  .split-hero .hero-cols>*,.text-sec .hero-cols>*{align-self:center !important}
+  .split-hero .hero-cols>:first-child{padding-top:0}
+  .text-sec .hero-copy{margin:0 !important;max-width:none !important;text-align:left}
+  .split-hero .h-hero,.text-sec .hero-copy .h2{font-size:clamp(56px,6vw,92px) !important;line-height:.96 !important;letter-spacing:-.045em !important;margin:0}
+  .split-hero .lede,.text-sec .hero-copy .lede{font-size:24px !important;line-height:1.4 !important;max-width:500px !important;margin:24px 0 0 !important;text-wrap:balance}
+  .split-hero .ctas,.text-sec .hero-copy .ctas{margin-top:36px !important;justify-content:flex-start}
+  .split-hero .ctas .btn,.text-sec .ctas .btn{height:56px !important;font-size:18px !important}
+  .split-hero .hero-art,.text-sec .phone{justify-self:center !important;width:440px !important;max-width:100% !important;padding:0 !important;margin:0 !important;display:flex;justify-content:center}
+  /* phone: centred in the open space right of the text (equal room both sides), as tall as the screen allows */
+  .split-hero .hero-cols,.text-sec .hero-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;gap:0 !important}
+  .split-hero .hero-art,.text-sec .phone{width:auto !important;justify-self:stretch !important;display:flex !important;justify-content:center !important;margin:-64px 0 !important;padding:0 !important}
+  .split-hero .hero-art .iph,.text-sec .phone .iph{height:clamp(500px,calc(100vh - 290px),620px) !important;width:auto !important;margin:0 !important}
+}
+/* questions: memoji sits beside the heading, not on its own line */
+.sec .split .qhead{display:flex !important;align-items:center;justify-content:center;gap:clamp(8px,1.4vw,20px)}
+.sec .split .qhead .h2{width:auto !important;margin:0 !important}
+.qhead .ask{width:auto;height:clamp(84px,9vw,132px);margin:0}
+.qhead .ask.r{transform:scaleX(1)}
+@media (max-width:720px){.qhead .ask{height:76px}}
+/* one section rhythm: ~112px between one section's content and the next (88 on phones) */
+@media (min-width:901px){#how,#faq{padding-top:150px !important}#text{padding-top:136px !important}}
+@media (max-width:900px){.split-hero{padding-bottom:0 !important}#how{padding-top:62px !important}#text{padding-top:76px !important}#faq{padding-top:38px !important}}
+/* section heads match /join exactly: 60px max heading, 21px subhead (38/17 on phones) */
+.sec .split .h2{font-size:clamp(38px,4.6vw,60px) !important;letter-spacing:-.04em !important;line-height:1 !important}
+.sec .split .lede{font-size:21px !important;line-height:1.4 !important}
+@media (max-width:720px){.sec .split .h2{font-size:38px !important}.sec .split .lede{font-size:17px !important}}
+/* "Or just text it": a section, not a second hero — section-size head, tight stack, one primary button with the number inside */
+@media (min-width:901px){
+  .text-sec .hero-copy .h2{font-size:clamp(44px,4.6vw,64px) !important;letter-spacing:-.04em !important;line-height:1 !important}
+  .text-sec .hero-copy .lede{margin-top:20px !important}
+  .text-sec .hero-copy .ctas{margin-top:32px !important}
+}
+.text-sec .btn.txt{gap:14px;padding:0 26px 0 20px !important}
+.text-sec .btn.txt .im{width:30px !important;height:30px !important;border-radius:8px}
+.text-sec .btn.txt .two-l small{font-variant-numeric:tabular-nums}
+@media (max-width:900px){.text-sec .hero-copy .ctas{justify-content:center}}
+/* "Or just text it" = the hero mirrored (zig-zag): phone centred in the left half, copy starts on the page's centre line */
+@media (min-width:901px){
+  .text-sec .hero-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;justify-content:normal !important;gap:0 !important}
+  .text-sec .phone{order:-1;justify-self:stretch !important}
+  .text-sec .hero-copy{padding-left:0}
+}
+/* section subheads: one weight up (pack rule: grey body text is 600, thin reads weak) */
+.sec .split .lede{font-weight:600 !important}
+@media (max-width:360px){.qhead .ask{height:56px}}
+/* phones/tablets: "Or just text it" reads heading > line > phone > button (the button closes the section, like an ending CTA) */
+@media (max-width:900px){
+  .text-sec .hero-cols{display:flex !important;flex-direction:column;align-items:center;gap:0 !important}
+  .text-sec .hero-copy{display:contents}
+  .text-sec .hero-copy .h2{order:1}
+  .text-sec .hero-copy .lede{order:2}
+  .text-sec .phone{order:3;margin-top:32px !important}
+  .text-sec .hero-copy .ctas{order:4;margin-top:8px !important;justify-content:center}
+}
 </style>
 <body>
 
@@ -870,7 +931,7 @@ html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(
         <p class="lede">Snap a photo. Get the calories and macros in seconds.</p>
         <div class="ctas"><a class="btn shine" href="https://mealpic.app/download"><svg class="apl" viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span class="two-l"><b>Download free</b><small>on the App Store</small></span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost im" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img src="../assets/imessage.png" alt="">Start by text</a></div>
       </div>
-      <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><video autoplay muted playsinline loop poster="../assets/video/app_scan.jpg" src="../assets/video/app_scan.mp4" aria-label="Meal Pic scanning a plate of chicken, rice and broccoli"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
+      <div class="hero-art"><div class="iph tilt-l"><div class="iph-screen"><video id="scanVid" autoplay muted playsinline loop poster="../assets/video/app_scan_light.jpg" src="../assets/video/app_scan_light.mp4" aria-label="Meal Pic scanning a salmon poke bowl"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt=""></div></div>
     </div>
   </div>
 </section>
@@ -879,9 +940,9 @@ html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(
   <div class="wrap">
     <div class="split"><h2 class="h2">How it works</h2><p class="lede">Snap. Check. Fix.</p></div>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_snap_t.png?v=1" alt=""></div><h3 class="h3">1. Snap a photo</h3><p class="lede sub">Point the camera at your plate. Home cooking, takeout, anything.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_tags_t.png?v=1" alt="Pancakes with a calorie tag on each item"></div><h3 class="h3">2. Get the breakdown</h3><p class="lede sub">Calories, protein, carbs and fat. Every ingredient on its own line.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_fix_t.png?v=1" alt="A finger tapping plus on the syrup line"></div><h3 class="h3">3. Fix any line</h3><p class="lede sub">One thing looks off? Change that line. It remembers next time.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_snap_t.png?v=7" alt=""></div><h3 class="h3">1. Snap a photo</h3><p class="lede sub">Point the camera at your plate. Home cooking, takeout, anything.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_tags_t.png?v=7" alt="Pancakes with a calorie tag on each item"></div><h3 class="h3">2. Get the breakdown</h3><p class="lede sub">Calories, protein, carbs and fat. Every ingredient on its own line.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_fix_t.png?v=7" alt="A finger tapping plus on the syrup line"></div><h3 class="h3">3. Fix any line</h3><p class="lede sub">One thing looks off? Change that line. It remembers next time.</p></div>
     </div>
     <div class="ctabar"><a class="btn shine" href="https://mealpic.app/download"><svg class="apl" viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span class="two-l"><b>Download free</b><small>on the App Store</small></span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
   </div>
@@ -894,18 +955,17 @@ html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(
     <div class="hero-cols">
       <div class="hero-copy">
         <h2 class="h2">Or just text it</h2>
-        <p class="lede">Text a photo of your meal. We log the calories.</p>
-        <div class="ctas"><a class="btn ghost" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img class="im" src="../assets/imessage.png" alt="">Start by text</a></div>
-        <span class="cta-note">(628) 298-8842</span>
+        <p class="lede">Text a photo of your meal.<br>We log the calories.</p>
+        <div class="ctas"><a class="btn shine txt" href="sms:+16282988842&body=Hey%20Meal%20Pic!"><img class="im" src="../assets/imessage.png" alt=""><span class="two-l"><b>Start by text</b><small>(628) 298-8842</small></span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
       </div>
-      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><video muted playsinline loop preload="none" poster="../assets/video/text_demo.jpg" data-src="../assets/video/text_demo.mp4" aria-label="Texting a meal photo to Meal Pic and getting the calories back"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
+      <div class="phone"><div class="iph tilt-r"><div class="iph-screen"><video muted playsinline loop preload="none" poster="../assets/video/text_demo_poke.jpg" data-src="../assets/video/text_demo_poke.mp4" aria-label="Texting a meal photo to Meal Pic and getting the calories back"></video></div><span class="iph-side" style="--z:-3px"></span><span class="iph-side" style="--z:-6px"></span><span class="iph-side" style="--z:-9px"></span><span class="iph-side" style="--z:-12px"></span><span class="iph-side" style="--z:-15px"></span><span class="iph-side" style="--z:-18px"></span><span class="iph-side" style="--z:-21px"></span><span class="iph-side" style="--z:-24px"></span><span class="iph-side" style="--z:-27px"></span><span class="iph-side" style="--z:-30px"></span><span class="iph-side" style="--z:-33px"></span><span class="iph-side" style="--z:-36px"></span><img class="iph-frame" src="../assets/iphone17pro-silver.webp" alt="" loading="lazy"></div></div>
     </div>
   </div>
 </section>
 
 <section class="sec" id="faq">
   <div class="wrap">
-    <div class="split"><img class="ask" src="../assets/lab/memoji_think_t.png?v=1" alt=""><h2 class="h2">Questions</h2><p class="lede">Email <a href="mailto:help@mealpic.app">help@mealpic.app</a> for anything else.</p></div>
+    <div class="split"><div class="qhead"><img class="ask" src="../assets/lab/memoji_think_t.png?v=7" alt=""><h2 class="h2">Questions</h2><img class="ask" src="../assets/lab/memoji_think2_t.png?v=7" alt=""></div><p class="lede">Email <a href="mailto:help@mealpic.app">help@mealpic.app</a> for anything else.</p></div>
     <div class="faq faqwrap">
       <details><summary>How accurate is it?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Every number is an estimate. Meal Pic measures portions from the photo, prices each ingredient against nutrition data, and shows the breakdown so you can correct any line. Good light and a photo that fills the frame help a lot.</p></details>
       <details><summary>What does it cost?<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></summary><p>Free to download. Meal Pic Pro unlocks unlimited scanning: $29.99 a year (about $2.49 a month) or $9.99 a month, with a 3-day free trial.</p></details>
@@ -934,5 +994,6 @@ document.getElementById("modeBtn").addEventListener("click",function(){var r=doc
 new IntersectionObserver(([e]) => document.getElementById("mobilebar").classList.toggle("show", !e.isIntersecting)).observe(document.querySelector(".split-hero .ctas"));
 </script>
 <script>(function(){var v=document.querySelector('.text-sec video');if(!v)return;new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!v.src){v.src=v.dataset.src;}v.currentTime=0;v.play().catch(function(){});}else v.pause();});},{threshold:.35}).observe(v);})();</script>
+<script>(function(){var v=document.getElementById("scanVid");if(!v)return;function set(){var m=document.documentElement.dataset.mode==="dark"?"dark":"light",src="../assets/video/app_scan_"+m+".mp4";if(v.getAttribute("src")!==src){v.poster="../assets/video/app_scan_"+m+".jpg";v.src=src;v.play().catch(function(){});}}set();new MutationObserver(set).observe(document.documentElement,{attributes:true,attributeFilter:["data-mode"]});})();</script>
 </body>
 </html>

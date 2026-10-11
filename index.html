@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<!-- The bare domain is the website. The edge worker serves /home/ here directly; this is only the fallback. -->
+<!-- The bare domain is the website. The edge worker serves /home/ here directly; this is only the fallback.
+     It redirects instantly and paints nothing (matching light/dark), so clicking the logo never flashes. -->
+<script>location.replace("/home/" + location.search + location.hash)</script>
 <meta http-equiv="refresh" content="0;url=/home/">
 <link rel="canonical" href="https://mealpic.app/home/">
 <title>Meal Pic</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<style>html,body{margin:0;background:#fff}@media (prefers-color-scheme:dark){html,body{background:#000}}</style>
 </head>
-<body><p><a href="/home/">Meal Pic</a></p></body>
+<body><noscript><a href="/home/">Meal Pic</a></noscript></body>
 </html>

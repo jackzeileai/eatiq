@@ -112,9 +112,12 @@ button{font-family:inherit}
 [data-theme="dark"] .btn.glass,.dark .btn.glass{color:#fff;background:rgba(40,40,44,.6)}
 /* floating glass nav pill: <header class="nav float"><div class="wrap glass">…</div></header> */
 .nav.float{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:12px var(--gutter) 0}
-.nav.float .wrap{height:60px;max-width:1040px;padding:0 10px 0 18px}
+.nav.float .wrap{height:60px;max-width:1188px;padding:0 10px 0 18px}
 .nav.float .brand img{width:28px;height:28px}
 .nav.float .links .btn.small{height:40px}
+/* the logo sits on the content edge at every width: nav pill = content width + its own 18px inner padding */
+@media (max-width:720px){.nav.float{padding-left:calc(var(--gutter) - 14px);padding-right:calc(var(--gutter) - 14px)}}
+@media (min-width:721px){.nav.float{padding-left:calc(var(--gutter) - 18px);padding-right:calc(var(--gutter) - 18px)}.nav.float .wrap{max-width:calc(1152px + 36px)}}
 @media (max-width:720px){.nav.float{padding-top:8px}.nav.float .wrap{height:54px;padding:0 8px 0 14px}.nav.float .links .btn.small{height:38px}}
 
 /* ---------- faq ---------- */
@@ -205,3 +208,6 @@ footer.site a:hover{text-decoration:underline}
 }
 @media (max-width:720px){:root{--app-title:34px;--app-big:40px;--app-num:26px;--app-h2:24px;--app-pad:18px;--app-gap:10px;--app-r:18px;--app-chart:96px}}
 
+
+/* native bits (scrollbars, form controls, autofill) follow the page mode */
+html{color-scheme:light}html[data-mode="dark"]{color-scheme:dark}
