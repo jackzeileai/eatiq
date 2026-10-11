@@ -17,7 +17,7 @@ __THEME_COLOR__
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="__ROOT__assets/style/mono.css?v=1791591000">
+<link rel="stylesheet" href="__ROOT__assets/style/mono.css?v=1791800000">
 <style>
 /* ---------- aliases so the UI mockups + signup panel keep working ---------- */
 :root{--bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--line:rgba(0,0,0,.12);--line-2:rgba(0,0,0,.07);--accent:#000;--accent-ink:#fff;
@@ -678,6 +678,15 @@ html[data-mode="dark"] .split-hero .quick,html[data-mode="dark"] .dash,html[data
 .wv-soon i svg{width:20px;height:20px;margin-left:3px}
 .wv-note{min-height:20px;margin:10px 0 0;font-size:14px;font-weight:600;color:var(--sub);text-align:center}
 html[data-mode="dark"] .wv{background:#2c2c2e}
+
+/* ===== match the home page (2026-10-11): same headline size, lede and CTA, so moving between the two pages doesn't jump ===== */
+@media (min-width:901px){.split-hero .h-hero{font-size:clamp(56px,6vw,92px) !important}.split-hero .lede{font-size:24px !important}.split-hero .ctas{margin-top:36px !important}}
+.split-hero .ctas .btn,.ctabar .btn.shine{height:64px !important;font-size:19px !important;font-weight:600 !important;letter-spacing:-.015em}
+.btn.shine:not(.small){padding:0 30px !important;gap:12px;box-shadow:0 14px 30px -14px rgba(0,0,0,.55)}
+.btn.shine:not(.small):hover{transform:translateY(-1px);box-shadow:0 18px 34px -14px rgba(0,0,0,.6)}
+.btn.shine .arr{width:18px;height:18px}
+html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(255,255,255,.25)}
+@media (max-width:900px){.split-hero .h-hero{font-size:clamp(48px,14vw,64px) !important}.split-hero .lede{font-size:20px !important}.split-hero .ctas .btn,.ctabar .btn.shine{height:60px !important;font-size:18px !important}}
 </style>
 </head>
 <body>
