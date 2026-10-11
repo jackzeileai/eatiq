@@ -762,8 +762,8 @@ html[data-mode="dark"] .split-hero .hero-cols>.quick.vc{background:rgba(30,30,32
 /* cash + phone emoji sit in the empty margins beside the example dashboard, never over its content */
 .dash{position:relative;overflow:visible}
 .dfloat{position:absolute;z-index:0;pointer-events:none;filter:drop-shadow(0 18px 22px rgba(0,0,0,.16));animation:bob 5s ease-in-out infinite}
-.df-phone{left:100%;top:14%;width:96px;margin-left:56px;transform:rotate(12deg)}
-.df-cash{right:100%;bottom:16%;width:170px;margin-right:40px;transform:rotate(-10deg);animation-delay:-2.5s}
+.df-phone{left:calc(100% + 28px);bottom:calc(100% - 70px);width:88px;transform:rotate(12deg)}
+.df-cash{right:calc(100% + 24px);top:calc(100% - 80px);width:160px;transform:rotate(-10deg);animation-delay:-2.5s}
 @media (max-width:1240px){.dfloat{display:none}}
 @media (prefers-reduced-motion:reduce){.dfloat{animation:none}}
 /* dashboard colour: the recent bars, the 214 and each stat take a stop from the 50% gradient */
