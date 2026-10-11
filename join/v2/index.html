@@ -687,6 +687,42 @@ html[data-mode="dark"] .wv{background:#2c2c2e}
 .btn.shine .arr{width:18px;height:18px}
 html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(255,255,255,.25)}
 @media (max-width:900px){.split-hero .h-hero{font-size:clamp(48px,14vw,64px) !important}.split-hero .lede{font-size:20px !important}.split-hero .ctas .btn,.ctabar .btn.shine{height:60px !important;font-size:18px !important}}
+
+/* ===== 3D calculator (2026-10-11): stacked slab that tilts toward the cursor, numbers float above it ===== */
+.split-hero .hero-cols>.quick{--rx:0;--ry:0;--mx:50%;--my:30%;
+  transform:perspective(1100px) rotateX(calc(var(--rx)*1deg)) rotateY(calc(var(--ry)*1deg));transform-style:preserve-3d;
+  background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:30px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.07),inset 0 1px 0 #fff,
+    calc(var(--ry)*-2.4px) calc(28px + var(--rx)*2.4px) 60px -24px rgba(0,0,0,.28),
+    calc(var(--ry)*-1px) calc(6px + var(--rx)*1px) 14px -6px rgba(0,0,0,.08)}
+.split-hero .hero-cols>.quick::before,.split-hero .hero-cols>.quick::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.split-hero .hero-cols>.quick::before{transform:translate3d(0,24px,-20px) scale(.94);background:#f2f2f4;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.split-hero .hero-cols>.quick::after{transform:translate3d(0,46px,-40px) scale(.88);background:#e6e6e9;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+.q-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;transform:translateZ(1px);
+  background:radial-gradient(520px circle at var(--mx) var(--my),rgba(255,255,255,0) 0,rgba(0,0,0,.018) 75%)}
+.split-hero .hero-cols>.quick>*:not(.q-glare){position:relative;transform:translateZ(24px)}
+.split-hero .hero-cols>.quick>.q-amt{transform:translateZ(70px)}
+.split-hero .hero-cols>.quick>.q-per{transform:translateZ(46px)}
+.split-hero .hero-cols>.quick>input[type=range]{transform:translateZ(38px)}
+/* big number: extruded, the extrusion leans away from the light */
+.split-hero .quick .q-big,.split-hero .quick .q-mo{--ex:calc(var(--ry)*-.12 + .9);--ey:calc(var(--rx)*.12 + 1.1);
+  text-shadow:calc(var(--ex)*1px) calc(var(--ey)*1px) 0 #c9c9ce,calc(var(--ex)*2px) calc(var(--ey)*2px) 0 #cfcfd4,calc(var(--ex)*3px) calc(var(--ey)*3px) 0 #d5d5da,calc(var(--ex)*4px) calc(var(--ey)*4px) 0 #dcdce0,calc(var(--ex)*5px) calc(var(--ey)*5px) 0 #e3e3e7,calc(var(--ex)*6px) calc(var(--ey)*6px) 0 #eaeaed,calc(var(--ex)*8px) calc(var(--ey)*12px) 14px rgba(0,0,0,.08)}
+/* slider: a chunky glossy knob on a recessed track */
+.split-hero .quick input[type=range]{height:12px;box-shadow:inset 0 2px 3px rgba(0,0,0,.18),0 1px 0 #fff}
+.split-hero .quick input[type=range]::-webkit-slider-thumb{width:38px;height:38px;background:radial-gradient(circle at 35% 28%,#fff 0,#f2f2f4 45%,#d9d9de 100%);box-shadow:0 0 0 1.5px var(--ink),0 8px 14px -4px rgba(0,0,0,.4),inset 0 -3px 4px rgba(0,0,0,.08)}
+.split-hero .quick input[type=range]::-moz-range-thumb{width:38px;height:38px;background:radial-gradient(circle at 35% 28%,#fff 0,#f2f2f4 45%,#d9d9de 100%);box-shadow:0 0 0 1.5px var(--ink),0 8px 14px -4px rgba(0,0,0,.4)}
+.split-hero .hero-cols>.quick{margin-bottom:48px}
+.split-hero .quick .q-foot{margin-top:18px}
+/* phones: no cursor, so it sways gently on its own */
+@media (hover:none){.split-hero .hero-cols>.quick{animation:qsway 9s ease-in-out infinite}}
+@keyframes qsway{0%,100%{transform:perspective(1100px) rotateX(5deg) rotateY(-6deg)}50%{transform:perspective(1100px) rotateX(3deg) rotateY(6deg)}}
+@media (prefers-reduced-motion:reduce){.split-hero .hero-cols>.quick{animation:none}}
+html[data-mode="dark"] .split-hero .hero-cols>.quick{background:#161617;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.08),calc(var(--ry)*-2.4px) calc(28px + var(--rx)*2.4px) 60px -24px rgba(0,0,0,.9)}
+html[data-mode="dark"] .split-hero .hero-cols>.quick::before{background:#111113;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+html[data-mode="dark"] .split-hero .hero-cols>.quick::after{background:#0a0a0b;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
+html[data-mode="dark"] .q-glare{background:radial-gradient(520px circle at var(--mx) var(--my),rgba(255,255,255,.07) 0,rgba(255,255,255,0) 60%)}
+html[data-mode="dark"] .split-hero .quick .q-big,html[data-mode="dark"] .split-hero .quick .q-mo{text-shadow:calc(var(--ex)*1px) calc(var(--ey)*1px) 0 #6e6e73,calc(var(--ex)*2px) calc(var(--ey)*2px) 0 #58585c,calc(var(--ex)*3px) calc(var(--ey)*3px) 0 #3c3c40,calc(var(--ex)*4px) calc(var(--ey)*4px) 0 #303033,calc(var(--ex)*5px) calc(var(--ey)*5px) 0 #252528,calc(var(--ex)*6px) calc(var(--ey)*6px) 0 #1c1c1e}
+html[data-mode="dark"] .split-hero .quick input[type=range]{box-shadow:inset 0 2px 3px rgba(0,0,0,.6)}
 </style>
 </head>
 <body>
@@ -717,8 +753,7 @@ html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(
         
       </div>
       <div class="quick card" id="earn">
-  <img class="float f5" src="../../assets/lab/cash100_t.png?v=1791582000" alt="">
-  <img class="float f6" src="../../assets/lab/iphone_color_t.png?v=1791582000" alt="">
+        <i class="q-glare" aria-hidden="true"></i>
 
         <span class="label dim">What you'd make</span>
         <div class="q-amt"><b class="num q-big" id="rm">$0</b><span class="q-mo">/mo</span></div>
@@ -939,6 +974,27 @@ function calc(){
   const n = $("rm"); n.classList.remove("pop"); void n.offsetWidth; n.classList.add("pop");
 }
 $("sm").addEventListener("input", calc); calc();
+
+// ---- 3D tilt: the calculator leans toward the cursor anywhere in the hero ----
+(() => {
+  const card = $("earn"), hero = document.querySelector(".split-hero");
+  if (!matchMedia("(hover:hover) and (prefers-reduced-motion:no-preference)").matches) return;
+  let tx = 0, ty = 0, x = 0, y = 0, mx = 50, my = 30, gx = 50, gy = 30, r = 0;
+  const tick = () => {
+    x += (tx - x) * .1; y += (ty - y) * .1; mx += (gx - mx) * .12; my += (gy - my) * .12;
+    card.style.setProperty("--rx", y.toFixed(2)); card.style.setProperty("--ry", x.toFixed(2));
+    card.style.setProperty("--mx", mx.toFixed(1) + "%"); card.style.setProperty("--my", my.toFixed(1) + "%");
+    r = (Math.abs(tx - x) + Math.abs(ty - y) > .01) ? requestAnimationFrame(tick) : 0;
+  };
+  const go = () => { if (!r) r = requestAnimationFrame(tick); };
+  hero.addEventListener("pointermove", e => {
+    const b = card.getBoundingClientRect();
+    const dx = (e.clientX - (b.left + b.width / 2)) / (innerWidth / 2), dy = (e.clientY - (b.top + b.height / 2)) / (innerHeight / 2);
+    tx = Math.max(-1, Math.min(1, dx)) * 14; ty = Math.max(-1, Math.min(1, dy)) * -10;
+    gx = (e.clientX - b.left) / b.width * 100; gy = (e.clientY - b.top) / b.height * 100; go();
+  });
+  hero.addEventListener("pointerleave", () => { tx = 0; ty = 0; gx = 50; gy = 30; go(); });
+})();
 
 // ---- mobile sticky CTA after the hero ----
 const heroCta = document.querySelector(".hero .ctas");
