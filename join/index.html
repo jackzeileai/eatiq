@@ -688,41 +688,44 @@ html[data-mode="dark"] .wv{background:#2c2c2e}
 html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(255,255,255,.25)}
 @media (max-width:900px){.split-hero .h-hero{font-size:clamp(48px,14vw,64px) !important}.split-hero .lede{font-size:20px !important}.split-hero .ctas .btn,.ctabar .btn.shine{height:60px !important;font-size:18px !important}}
 
-/* ===== 3D calculator (2026-10-11): stacked slab that tilts toward the cursor, numbers float above it ===== */
-.split-hero .hero-cols>.quick{--rx:0;--ry:0;--mx:50%;--my:30%;
+/* ===== 3D calculator, emoji style (2026-10-11): a chunky glossy candy slab in the 50% gradient, tilts toward the cursor ===== */
+.split-hero .hero-cols>.quick{--rx:0;--ry:0;--mx:30%;--my:15%;
   transform:perspective(1100px) rotateX(calc(var(--rx)*1deg)) rotateY(calc(var(--ry)*1deg));transform-style:preserve-3d;
-  background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:30px;
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.07),inset 0 1px 0 #fff,
-    calc(var(--ry)*-2.4px) calc(28px + var(--rx)*2.4px) 60px -24px rgba(0,0,0,.28),
-    calc(var(--ry)*-1px) calc(6px + var(--rx)*1px) 14px -6px rgba(0,0,0,.08)}
+  background:linear-gradient(140deg,#9d7bff 0%,#d36bff 32%,#ff5fa2 62%,#ff9a3c 88%,#ffc04d 100%);
+  backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:38px;margin-bottom:56px;color:#fff;
+  box-shadow:inset 0 3px 2px rgba(255,255,255,.55),inset 0 14px 28px rgba(255,255,255,.28),inset 0 -12px 24px rgba(120,20,90,.28),inset 0 0 0 1px rgba(255,255,255,.18)}
 .split-hero .hero-cols>.quick::before,.split-hero .hero-cols>.quick::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none}
-.split-hero .hero-cols>.quick::before{transform:translate3d(0,24px,-20px) scale(.94);background:#f2f2f4;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
-.split-hero .hero-cols>.quick::after{transform:translate3d(0,46px,-40px) scale(.88);background:#e6e6e9;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
-.q-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;transform:translateZ(1px);
-  background:radial-gradient(520px circle at var(--mx) var(--my),rgba(255,255,255,0) 0,rgba(0,0,0,.018) 75%)}
+/* the slab's thick side */
+.split-hero .hero-cols>.quick::before{transform:translate3d(0,16px,-16px);background:linear-gradient(140deg,#6a45d6 0%,#9a35c8 32%,#c92a72 62%,#cc6418 88%,#cf8a1c 100%);box-shadow:inset 0 -4px 8px rgba(0,0,0,.2)}
+/* coloured glow on the floor */
+.split-hero .hero-cols>.quick::after{transform:translate3d(calc(var(--ry)*-2px),calc(44px + var(--rx)*2px),-60px) scale(.9);background:linear-gradient(90deg,#9d7bff,#ff5fa2,#ffa04d);filter:blur(34px);opacity:.55}
+/* glossy shine that follows the cursor + a fixed top highlight */
+.q-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;transform:translateZ(2px);overflow:hidden;
+  background:radial-gradient(360px circle at var(--mx) var(--my),rgba(255,255,255,.42) 0,rgba(255,255,255,0) 60%),linear-gradient(180deg,rgba(255,255,255,.22) 0,rgba(255,255,255,0) 38%)}
+.q-glare::before{content:"";position:absolute;left:7%;right:30%;top:10px;height:22px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));filter:blur(1px)}
 .split-hero .hero-cols>.quick>*:not(.q-glare){position:relative;transform:translateZ(24px)}
 .split-hero .hero-cols>.quick>.q-amt{transform:translateZ(70px)}
 .split-hero .hero-cols>.quick>.q-per{transform:translateZ(46px)}
 .split-hero .hero-cols>.quick>input[type=range]{transform:translateZ(38px)}
-/* big number: extruded, the extrusion leans away from the light */
-.split-hero .quick .q-big,.split-hero .quick .q-mo{--ex:calc(var(--ry)*-.12 + .9);--ey:calc(var(--rx)*.12 + 1.1);
-  text-shadow:calc(var(--ex)*1px) calc(var(--ey)*1px) 0 #c9c9ce,calc(var(--ex)*2px) calc(var(--ey)*2px) 0 #cfcfd4,calc(var(--ex)*3px) calc(var(--ey)*3px) 0 #d5d5da,calc(var(--ex)*4px) calc(var(--ey)*4px) 0 #dcdce0,calc(var(--ex)*5px) calc(var(--ey)*5px) 0 #e3e3e7,calc(var(--ex)*6px) calc(var(--ey)*6px) 0 #eaeaed,calc(var(--ex)*8px) calc(var(--ey)*12px) 14px rgba(0,0,0,.08)}
-/* slider: a chunky glossy knob on a recessed track */
-.split-hero .quick input[type=range]{height:12px;box-shadow:inset 0 2px 3px rgba(0,0,0,.18),0 1px 0 #fff}
-.split-hero .quick input[type=range]::-webkit-slider-thumb{width:38px;height:38px;background:radial-gradient(circle at 35% 28%,#fff 0,#f2f2f4 45%,#d9d9de 100%);box-shadow:0 0 0 1.5px var(--ink),0 8px 14px -4px rgba(0,0,0,.4),inset 0 -3px 4px rgba(0,0,0,.08)}
-.split-hero .quick input[type=range]::-moz-range-thumb{width:38px;height:38px;background:radial-gradient(circle at 35% 28%,#fff 0,#f2f2f4 45%,#d9d9de 100%);box-shadow:0 0 0 1.5px var(--ink),0 8px 14px -4px rgba(0,0,0,.4)}
-.split-hero .hero-cols>.quick{margin-bottom:48px}
+.split-hero .quick .label{color:rgba(255,255,255,.85) !important}
+.split-hero .quick .q-per,.split-hero .quick .q-foot,.split-hero .quick label{color:rgba(255,255,255,.88)}
+.split-hero .quick .q-per b,.split-hero .quick label output{color:#fff}
+.split-hero .quick .q-top{border-top-color:rgba(255,255,255,.3)}
+/* puffy white number with a deep magenta extrusion */
+.split-hero .quick .q-big,.split-hero .quick .q-mo{color:#fff;--ex:calc(var(--ry)*-.12 + .6);--ey:calc(var(--rx)*.12 + 1.2);
+  text-shadow:calc(var(--ex)*1px) calc(var(--ey)*1px) 0 #f3c6ff,calc(var(--ex)*2px) calc(var(--ey)*2px) 0 #c94fc9,calc(var(--ex)*3px) calc(var(--ey)*3px) 0 #b23fb5,calc(var(--ex)*4px) calc(var(--ey)*4px) 0 #9c32a2,calc(var(--ex)*5px) calc(var(--ey)*5px) 0 #872790,calc(var(--ex)*6px) calc(var(--ey)*6px) 0 #721e7d,calc(var(--ex)*9px) calc(var(--ey)*12px) 16px rgba(90,10,80,.35)}
+/* slider: recessed groove, glossy white fill, candy ball knob */
+.split-hero .quick input[type=range]{height:14px;background:linear-gradient(to right,#fff var(--p,20%),rgba(80,10,70,.22) var(--p,20%)) !important;box-shadow:inset 0 2px 4px rgba(80,0,60,.35),0 1px 0 rgba(255,255,255,.35)}
+.split-hero .quick input[type=range]::-webkit-slider-thumb{width:40px;height:40px;background:radial-gradient(circle at 34% 28%,#fff 0,#fff 18%,#ffe1f0 52%,#ff8fc0 100%);box-shadow:0 8px 14px -4px rgba(90,0,70,.55),inset 0 -4px 6px rgba(200,40,120,.35),0 0 0 2px #fff}
+.split-hero .quick input[type=range]::-moz-range-thumb{width:40px;height:40px;background:radial-gradient(circle at 34% 28%,#fff 0,#fff 18%,#ffe1f0 52%,#ff8fc0 100%);box-shadow:0 8px 14px -4px rgba(90,0,70,.55),0 0 0 2px #fff}
 .split-hero .quick .q-foot{margin-top:18px}
 /* phones: no cursor, so it sways gently on its own */
 @media (hover:none){.split-hero .hero-cols>.quick{animation:qsway 9s ease-in-out infinite}}
 @keyframes qsway{0%,100%{transform:perspective(1100px) rotateX(5deg) rotateY(-6deg)}50%{transform:perspective(1100px) rotateX(3deg) rotateY(6deg)}}
 @media (prefers-reduced-motion:reduce){.split-hero .hero-cols>.quick{animation:none}}
-html[data-mode="dark"] .split-hero .hero-cols>.quick{background:#161617;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.08),calc(var(--ry)*-2.4px) calc(28px + var(--rx)*2.4px) 60px -24px rgba(0,0,0,.9)}
-html[data-mode="dark"] .split-hero .hero-cols>.quick::before{background:#111113;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
-html[data-mode="dark"] .split-hero .hero-cols>.quick::after{background:#0a0a0b;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
-html[data-mode="dark"] .q-glare{background:radial-gradient(520px circle at var(--mx) var(--my),rgba(255,255,255,.07) 0,rgba(255,255,255,0) 60%)}
-html[data-mode="dark"] .split-hero .quick .q-big,html[data-mode="dark"] .split-hero .quick .q-mo{text-shadow:calc(var(--ex)*1px) calc(var(--ey)*1px) 0 #6e6e73,calc(var(--ex)*2px) calc(var(--ey)*2px) 0 #58585c,calc(var(--ex)*3px) calc(var(--ey)*3px) 0 #3c3c40,calc(var(--ex)*4px) calc(var(--ey)*4px) 0 #303033,calc(var(--ex)*5px) calc(var(--ey)*5px) 0 #252528,calc(var(--ex)*6px) calc(var(--ey)*6px) 0 #1c1c1e}
-html[data-mode="dark"] .split-hero .quick input[type=range]{box-shadow:inset 0 2px 3px rgba(0,0,0,.6)}
+/* same object in dark mode (it's a picture, not UI) */
+html[data-mode="dark"] .split-hero .hero-cols>.quick{background:linear-gradient(140deg,#9d7bff 0%,#d36bff 32%,#ff5fa2 62%,#ff9a3c 88%,#ffc04d 100%);box-shadow:inset 0 3px 2px rgba(255,255,255,.55),inset 0 14px 28px rgba(255,255,255,.28),inset 0 -12px 24px rgba(120,20,90,.28),inset 0 0 0 1px rgba(255,255,255,.18)}
+html[data-mode="dark"] .split-hero .hero-cols>.quick::after{opacity:.4}
 </style>
 </head>
 <body>
