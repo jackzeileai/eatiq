@@ -693,15 +693,15 @@ html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(
   transform:perspective(1100px) rotateX(calc(var(--rx)*1deg)) rotateY(calc(var(--ry)*1deg));transform-style:preserve-3d;
   background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);
   backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:38px;margin-bottom:0;color:#fff;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.15)}
-.split-hero .hero-cols>.quick::before,.split-hero .hero-cols>.quick::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+  box-shadow:inset 0 22px 34px -14px rgba(255,255,255,.55),inset 14px 0 30px -16px rgba(255,255,255,.3),inset 0 -26px 40px -14px rgba(70,0,90,.38),inset -14px 0 30px -16px rgba(90,0,50,.25),0 34px 60px -28px rgba(110,30,140,.5),0 10px 20px -10px rgba(110,30,140,.25)}
+.split-hero .hero-cols>.quick::before,.split-hero .hero-cols>.quick::after{display:none;content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none}
 /* the slab's thick side */
 .split-hero .hero-cols>.quick::before{transform:translate3d(0,10px,-10px);background:linear-gradient(95deg,#5a3fd0 0%,#9330c4 30%,#c9306f 58%,#c9631a 85%,#c9861c 100%);box-shadow:inset 0 -4px 8px rgba(0,0,0,.2)}
 /* coloured glow on the floor */
 .split-hero .hero-cols>.quick::after{transform:translate3d(calc(var(--ry)*-2px),calc(44px + var(--rx)*2px),-60px) scale(.9);background:linear-gradient(90deg,#9d7bff,#ff5fa2,#ffa04d);filter:blur(34px);opacity:0}
 /* glossy shine that follows the cursor + a fixed top highlight */
 .q-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;transform:translateZ(2px);overflow:hidden;
-  background:linear-gradient(180deg,rgba(255,255,255,.14) 0,rgba(255,255,255,0) 40%)}
+  background:radial-gradient(60% 40% at 24% 8%,rgba(255,255,255,.38) 0,rgba(255,255,255,0) 100%)}
 .q-glare::before{display:none;content:"";position:absolute;left:7%;right:30%;top:10px;height:22px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));filter:blur(1px)}
 .split-hero .hero-cols>.quick>*:not(.q-glare){position:relative;transform:translateZ(24px)}
 .split-hero .hero-cols>.quick>.q-amt{transform:translateZ(36px)}
@@ -713,11 +713,11 @@ html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(
 .split-hero .quick .q-top{border-top-color:rgba(255,255,255,.3)}
 /* puffy white number with a deep magenta extrusion */
 .split-hero .quick .q-big,.split-hero .quick .q-mo{color:#fff;--ex:calc(var(--ry)*-.12 + .6);--ey:calc(var(--rx)*.12 + 1.2);
-  text-shadow:0 4px 14px rgba(90,10,80,.25)}
+  text-shadow:0 2px 0 rgba(90,0,90,.18),0 8px 18px rgba(90,0,90,.25)}
 /* slider: recessed groove, glossy white fill, candy ball knob */
-.split-hero .quick input[type=range]{height:10px;background:linear-gradient(to right,#fff var(--p,20%),rgba(255,255,255,.3) var(--p,20%)) !important;box-shadow:none}
-.split-hero .quick input[type=range]::-webkit-slider-thumb{width:40px;height:40px;background:#fff;box-shadow:0 4px 10px rgba(90,0,70,.3)}
-.split-hero .quick input[type=range]::-moz-range-thumb{width:40px;height:40px;background:#fff;box-shadow:0 4px 10px rgba(90,0,70,.3)}
+.split-hero .quick input[type=range]{height:10px;background:linear-gradient(to right,#fff var(--p,20%),rgba(255,255,255,.3) var(--p,20%)) !important;box-shadow:inset 0 2px 3px rgba(70,0,80,.25)}
+.split-hero .quick input[type=range]::-webkit-slider-thumb{width:40px;height:40px;background:radial-gradient(circle at 35% 28%,#fff 0,#fff 30%,#efe6f5 70%,#d9c8e6 100%);box-shadow:0 6px 12px -2px rgba(90,0,70,.4)}
+.split-hero .quick input[type=range]::-moz-range-thumb{width:40px;height:40px;background:radial-gradient(circle at 35% 28%,#fff 0,#fff 30%,#efe6f5 70%,#d9c8e6 100%);box-shadow:0 6px 12px -2px rgba(90,0,70,.4)}
 .split-hero .quick .q-foot{margin-top:18px}
 @media (min-width:901px){.split-hero .hero-cols>.quick{align-self:stretch !important;display:flex;flex-direction:column}.split-hero .quick .q-top{margin-top:auto}}
 /* phones: no cursor, so it sways gently on its own */
@@ -725,8 +725,42 @@ html[data-mode="dark"] .btn.shine:not(.small){box-shadow:0 14px 30px -14px rgba(
 @keyframes qsway{0%,100%{transform:perspective(1100px) rotateX(2deg) rotateY(-3deg)}50%{transform:perspective(1100px) rotateX(1deg) rotateY(3deg)}}
 @media (prefers-reduced-motion:reduce){.split-hero .hero-cols>.quick{animation:none}}
 /* same object in dark mode (it's a picture, not UI) */
-html[data-mode="dark"] .split-hero .hero-cols>.quick{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.15)}
+html[data-mode="dark"] .split-hero .hero-cols>.quick{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);box-shadow:inset 0 22px 34px -14px rgba(255,255,255,.55),inset 14px 0 30px -16px rgba(255,255,255,.3),inset 0 -26px 40px -14px rgba(70,0,90,.38),inset -14px 0 30px -16px rgba(90,0,50,.25),0 34px 60px -28px rgba(110,30,140,.5),0 10px 20px -10px rgba(110,30,140,.25)}
 html[data-mode="dark"] .split-hero .hero-cols>.quick::after{opacity:.4}
+
+/* ===== calculator options for Jack to pick (?calc=b / ?calc=c); default is A, the puffy gradient ===== */
+/* B: puffy white clay card, only the money is in the 50% gradient */
+.split-hero .hero-cols>.quick.vb{background:#fff;color:var(--ink);
+  box-shadow:inset 0 22px 34px -14px #fff,inset 0 -26px 40px -14px rgba(60,40,90,.12),inset -14px 0 30px -16px rgba(60,40,90,.08),0 0 0 1px rgba(0,0,0,.05),0 34px 60px -28px rgba(60,40,90,.35),0 10px 20px -10px rgba(60,40,90,.15)}
+.quick.vb .q-glare{display:none}
+.split-hero .quick.vb .label{color:var(--sub) !important}
+.split-hero .quick.vb .q-per,.split-hero .quick.vb .q-foot,.split-hero .quick.vb label{color:var(--sub)}
+.split-hero .quick.vb .q-per b,.split-hero .quick.vb label output{color:var(--ink)}
+.split-hero .quick.vb .q-top{border-top-color:var(--hair)}
+.split-hero .quick.vb .q-amt{background:linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;width:max-content;filter:drop-shadow(0 6px 10px rgba(198,75,255,.25))}
+.split-hero .quick.vb .q-big,.split-hero .quick.vb .q-mo{color:transparent;-webkit-text-fill-color:transparent;text-shadow:none}
+.split-hero .quick.vb input[type=range]{background:linear-gradient(to right,#c64bff 0,#ff4f9a calc(var(--p,20%)*.7),#ff8a2b var(--p,20%),rgba(60,40,90,.1) var(--p,20%)) !important;box-shadow:inset 0 2px 3px rgba(60,40,90,.15)}
+html[data-mode="dark"] .split-hero .hero-cols>.quick.vb{background:#1c1c1e;box-shadow:inset 0 22px 34px -14px rgba(255,255,255,.08),inset 0 -26px 40px -14px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08),0 34px 60px -28px rgba(0,0,0,.9)}
+/* C: glass card floating over glowing colour blobs */
+.split-hero .hero-cols>.quick.vc{transform-style:flat;background:rgba(255,255,255,.28);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);color:#fff;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(255,255,255,.5),inset 0 -20px 40px -20px rgba(255,255,255,.4),0 30px 60px -30px rgba(110,30,140,.45)}
+.quick-blobs{position:absolute;right:0;top:0;bottom:0;width:440px;z-index:1;pointer-events:none}
+@media (max-width:900px){.quick-blobs{left:0;right:0;width:auto;top:auto;height:380px}}
+.quick-blobs i{position:absolute;border-radius:50%;filter:blur(8px)}
+.quick-blobs i:nth-child(1){width:220px;height:220px;left:-10px;top:10px;background:radial-gradient(circle at 35% 30%,#b9a4ff,#7b5cff 60%,#5a3fd0)}
+.quick-blobs i:nth-child(2){width:180px;height:180px;right:0;top:-20px;background:radial-gradient(circle at 35% 30%,#ffb3d4,#ff4f9a 60%,#d0306f)}
+.quick-blobs i:nth-child(3){width:200px;height:200px;right:40px;bottom:-20px;background:radial-gradient(circle at 35% 30%,#ffd59a,#ff8a2b 60%,#e06a10)}
+.split-hero .hero-cols>.quick.vc>*:not(.q-glare){transform:none}
+.split-hero .hero-cols>.quick.vc{background:rgba(255,255,255,.42);color:var(--ink)}
+.quick.vc .q-glare{display:none}
+.split-hero .quick.vc .label,.split-hero .quick.vc .q-per,.split-hero .quick.vc .q-foot,.split-hero .quick.vc label{color:rgba(0,0,0,.6) !important}
+.split-hero .quick.vc .q-per b,.split-hero .quick.vc label output,.split-hero .quick.vc .q-big,.split-hero .quick.vc .q-mo{color:var(--ink);text-shadow:none}
+.split-hero .quick.vc .q-top{border-top-color:rgba(0,0,0,.1)}
+.split-hero .quick.vc input[type=range]{background:linear-gradient(to right,#1d1d1f var(--p,20%),rgba(0,0,0,.12) var(--p,20%)) !important;box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
+.quick-blobs i{opacity:.85}
+html[data-mode="dark"] .split-hero .hero-cols>.quick.vc{background:rgba(30,30,32,.35)}
+/* headline starts at the same height as on the home page, so switching pages doesn't jump */
+@media (min-width:901px){.split-hero{padding-top:170px !important}}
 </style>
 </head>
 <body>
@@ -979,6 +1013,16 @@ function calc(){
 }
 $("sm").addEventListener("input", calc); calc();
 
+
+// ---- preview calculator options: ?calc=b or ?calc=c ----
+(() => {
+  const v = new URLSearchParams(location.search).get("calc"), card = $("earn");
+  if (v === "b") card.classList.add("vb");
+  if (v === "c") {
+    card.classList.add("vc");
+    card.insertAdjacentHTML("beforebegin", '<div class="quick-blobs" aria-hidden="true"><i></i><i></i><i></i></div>');
+  }
+})();
 // ---- 3D tilt: the calculator leans toward the cursor anywhere in the hero ----
 (() => {
   const card = $("earn"), hero = document.querySelector(".split-hero");
