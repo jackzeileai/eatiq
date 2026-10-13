@@ -1246,6 +1246,9 @@ document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
 });
 // ?start opens the signup straight away (for links that should skip the page).
 if (new URLSearchParams(location.search).has("start")) openFlow();
+// ?step=terms (or any step name) jumps straight to that screen, for checking copy.
+const jump = new URLSearchParams(location.search).get("step");
+if (jump && steps.includes(jump)) { openFlow(); go(jump); }
 </script>
 
 <script>
