@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creator Agreement | Meal Pic</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://mealpic.app/creator-terms.html">
+<meta name="theme-color" content="#fffdf8">
+<style>
+  :root{
+    --bg:#fffdf8; --bg2:#fdf8ee; --card:#ffffff; --ink:#111318; --ink2:#5b6170; --ink3:#8a90a0;
+    --line:#ebe7dd; --line2:#e2ddd0; --black:#0d0f14; --blue:#0a84ff;
+    --pink:#e8336f; --green:#34c759; --teal:#30b0c7; --purple:#af52de;
+    --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  .badge{display:inline-block;height:44px;transition:transform .12s ease-out,opacity .12s}
+  .badge img{height:44px;width:auto}
+  .badge:hover{opacity:.85}.badge:active{transform:scale(.98)}
+  .badge.sm{height:36px}.badge.sm img{height:36px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,253,248,.85);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:24px;letter-spacing:-.02em}
+  .brand img{width:32px;height:32px}
+  .navlinks{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:500;color:var(--ink)}
+  .navlinks a{opacity:.8}.navlinks a:hover{opacity:1}
+  @media (max-width:760px){.navlinks{display:none}}
+
+  /* hero */
+  .hero{padding:56px 0 24px;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;font-size:13.5px;font-weight:600;color:var(--ink2);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .eyebrow .ic{width:22px;height:22px;border-radius:50%;background:var(--black);display:grid;place-items:center}
+  .eyebrow .ic img{width:14px;height:14px}
+  .meet{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:18px 0 2px;line-height:1.1}
+  h1{font-size:46px;line-height:1.12;letter-spacing:-.022em;margin:0 0 16px;font-weight:600;text-wrap:balance}
+  .lede{font-size:17px;color:var(--ink2);max-width:32em;margin:0 0 22px}
+  .cta-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .cta-row .fine{font-size:13px;color:var(--ink3)}
+
+  .phones{position:relative;height:560px}
+  .phones img{position:absolute;width:270px;height:auto;filter:drop-shadow(0 24px 40px rgba(17,19,24,.22))}
+  .phones .p1{left:8%;top:40px;transform:rotate(-5deg)}
+  .phones .p2{right:4%;top:0;transform:rotate(4deg)}
+  .phones .arrow{position:absolute;left:44%;top:230px;width:64px;height:auto;filter:none;transform:rotate(12deg)}
+  @media (max-width:900px){
+    .hero{padding:36px 0 8px}
+    .hero .wrap{grid-template-columns:1fr}
+    .meet{font-size:28px}h1{font-size:36px}
+    .phones{height:520px;margin-top:8px}
+    .phones img{width:230px}
+    .phones .p1{left:2%;top:30px}.phones .p2{right:2%}
+    .phones .arrow{left:42%;top:220px;width:52px}
+  }
+  @media (max-width:420px){.phones{height:440px}.phones img{width:190px}.phones .arrow{top:190px;width:44px}}
+
+  /* sections */
+  section{padding:80px 0}
+  .sec-h{text-align:center;max-width:46em;margin:0 auto 40px}
+  h2{font-size:40px;line-height:1.1;letter-spacing:-.022em;margin:0 0 10px;font-weight:600;text-wrap:balance}
+  .sec-h p{color:var(--ink2);font-size:18px;margin:0}
+
+  /* include */
+  .include{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+  .include .shot{width:min(100%,320px);margin:0 auto;filter:drop-shadow(0 24px 40px rgba(17,19,24,.18))}
+  .cards{display:grid;gap:12px}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .fcard.on{background:#f4f6fb;border-color:#c9d3e6;box-shadow:0 0 0 3px rgba(10,132,255,.08)}
+  .fcard h3{margin:0 0 6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
+  .fcard p{margin:0;color:var(--ink2);font-size:15.5px}
+  @media (max-width:860px){.include{grid-template-columns:1fr;gap:28px}.include .shot{width:min(72%,280px)}}
+
+  /* why */
+  .why{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .why3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .wcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .wcard .ic{width:44px;height:44px;border-radius:12px;background:#f1f3f8;display:grid;place-items:center;margin-bottom:16px}
+  .wcard .ic svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .wcard h3{margin:0 0 6px;font-size:18px;font-weight:700;letter-spacing:-.01em}
+  .wcard p{margin:0;color:var(--ink2);font-size:15.5px}
+  @media (max-width:800px){.why3{grid-template-columns:1fr}}
+
+  /* macro strip */
+  .macros{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:820px;margin:40px auto 0}
+  .macro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;text-align:center}
+  .macro .k{font-size:12px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+  .macro .v{font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .macro.cal .v{color:var(--pink)}.macro.p .v{color:var(--green)}.macro.c .v{color:var(--teal)}.macro.f .v{color:var(--purple)}
+  @media (max-width:640px){.macros{grid-template-columns:repeat(2,1fr)}}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto}
+  details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:600;font-size:17px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:22px;font-weight:300;color:var(--ink3);flex:none;transition:transform .15s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p,details ol{color:var(--ink2);margin:10px 0 0;font-size:15.5px}
+  details ol{padding-left:20px}
+  details p b{color:var(--ink)}
+  details p a{text-decoration:underline}
+
+  /* final cta */
+  .final{background:var(--black);color:#fff;text-align:center;padding:84px 24px;border-radius:28px;margin:0 28px 28px}
+  .final h2{color:#fff;font-weight:700}
+  .final p{color:rgba(255,255,255,.7);font-size:17px;max-width:38em;margin:0 auto 24px}
+  .final .fine{font-size:12.5px;color:rgba(255,255,255,.5);margin-top:16px}
+  .final .fine a{text-decoration:underline}
+  @media (max-width:640px){.final{margin:0 12px 12px;padding:56px 20px;border-radius:20px}}
+
+  footer{padding:24px 0 40px;color:var(--ink3);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  footer .links{display:flex;gap:22px;flex-wrap:wrap}
+  footer .links a:hover{color:var(--ink)}
+
+  .article{max-width:760px;margin:0 auto;padding:56px 28px 72px}
+  .article h1{font-size:42px;line-height:1.08;letter-spacing:-.022em;margin:0 0 6px;font-weight:700}
+  .article .updated{color:var(--ink3);font-size:15px;margin:0 0 28px}
+  .article h2{font-size:24px;letter-spacing:-.015em;margin:34px 0 10px;font-weight:700;text-align:left}
+  .article p,.article li{color:var(--ink2);font-size:17px;line-height:1.6}
+  .article ul,.article ol{padding-left:22px}
+  .article li{margin:6px 0}
+  .article a{color:var(--blue);text-decoration:underline}
+  .article table{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .article th,.article td{text-align:left;padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+  .article th{color:var(--ink3);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;border-top:0;background:var(--bg2)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="home/"><img src="assets/mark-black.png" alt="" width="32" height="32">Meal Pic</a>
+    <div class="navlinks">
+      <a href="index.html#include">Features</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="support.html">Support</a>
+    </div>
+    <a class="badge sm" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
+  </div>
+</nav>
+<main class="article">
+<h1>Meal Pic Creator Agreement</h1>
+<p class="updated">Version 2026-10-13 · Last updated 13 October 2026 · Church Street Studios</p>
+
+<p>This Creator Agreement (the "Agreement") is a binding contract between you and Church Street Studios, the maker of Meal Pic ("Meal Pic", "we", "us"). It covers your participation in the Meal Pic creator program, including your creator code and link, your commissions, and the videos you make about Meal Pic.</p>
+<p><strong>By checking the box and creating your creator account, you agree to this Agreement and to the Meal Pic <a href="terms.html">Terms of Use</a>. Your click is your electronic signature and has the same effect as signing on paper.</strong> We keep a record of the email address you signed up with and the date and time you accepted. If you do not agree, do not create a creator account.</p>
+
+<h2>1. Who can join</h2>
+<p>You must be at least 18 years old and able to enter into a binding contract. You must give us accurate information, including your name, social handles, and payout details, and keep it up to date.</p>
+
+<h2>2. Your content</h2>
+<p>"Your Content" means every video, photo, image, clip, livestream, story, audio recording, caption, and other material that you create, post, or send to us, at any time, that features, mentions, shows, or promotes Meal Pic, or that includes your Meal Pic creator code or link. It includes the raw footage, edits, and versions of that material.</p>
+
+<h2>3. The rights you give Meal Pic &mdash; forever</h2>
+<p><strong>By posting Your Content or sending it to us, you grant Meal Pic a perpetual, irrevocable, worldwide, royalty-free, fully paid-up, non-exclusive, transferable, and sublicensable license to use Your Content as marketing and advertising material, in perpetuity.</strong> This means we, and anyone we authorize (such as our ad agencies and the ad platforms we use), may, without asking you again and without paying you anything extra:</p>
+<ul>
+  <li>copy, download, store, host, and save Your Content;</li>
+  <li>edit, cut, crop, resize, re-caption, add music, text, voiceover, or graphics to, translate, combine with other material, and otherwise modify Your Content or make new works from it;</li>
+  <li>publish, post, repost, share, display, broadcast, stream, and distribute Your Content, in any form;</li>
+  <li>run Your Content as paid advertising, including on TikTok, Instagram, Facebook, YouTube, Snapchat, X, Apple, Google, and any other platform, and including ads run from your own account (such as Spark Ads, partnership ads, or "whitelisted" ads) when you give us access;</li>
+  <li>use Your Content on the Meal Pic app, App Store pages, website, emails, text messages, pitch decks, and any other marketing;</li>
+</ul>
+<p>in any media and any format, whether it exists now or is invented later, anywhere in the world. <strong>This license never expires and you cannot take it back</strong>, including after you stop posting, delete a post, close your creator account, or leave the program, and including after this Agreement ends.</p>
+
+<h2>4. Your name, face, and voice</h2>
+<p>You also grant Meal Pic the same perpetual, irrevocable, worldwide, royalty-free right to use your name, social handles, likeness, image, face, voice, and the biographical details you give us, as they appear in or alongside Your Content, to advertise and promote Meal Pic. You release Meal Pic and anyone we authorize from any claim that this use violates your right of publicity, right of privacy, or any similar right. We will not use your likeness to say that you endorse a product other than Meal Pic.</p>
+
+<h2>5. You keep ownership</h2>
+<p>You still own the copyright in Your Content. This Agreement gives Meal Pic a license, not ownership. You are free to keep using Your Content however you like, as long as you follow this Agreement.</p>
+
+<h2>6. No extra payment</h2>
+<p>You agree that your commissions under the creator program are the full and only payment for everything in this Agreement, including the rights in sections 3 and 4. You will not be owed any fee, royalty, residual, or other payment for any use of Your Content or your likeness, no matter how often, how long, or where it is used, or how many people see it.</p>
+
+<h2>7. No approval rights</h2>
+<p>Meal Pic is not required to use Your Content, and does not need your approval before using or editing it. To the fullest extent the law allows, you waive any "moral rights" or similar rights (such as the right to be credited or to object to edits) in Your Content as used by Meal Pic.</p>
+
+<h2>8. Promises you make</h2>
+<p>You promise that:</p>
+<ul>
+  <li>Your Content is original to you, and you have every right needed to grant the rights in this Agreement;</li>
+  <li>everyone who appears or can be heard in Your Content is 18 or older and has agreed that Meal Pic may use their appearance on the same terms as this Agreement;</li>
+  <li>Your Content does not use music, footage, images, logos, or other material that belongs to someone else unless you have the right to let Meal Pic use it as described here;</li>
+  <li>Your Content does not make false claims about Meal Pic, invent results, or make health, medical, or weight-loss claims;</li>
+  <li>you clearly disclose your relationship with Meal Pic in every post (for example with #ad or the platform's paid-partnership label), as required by the U.S. Federal Trade Commission's Endorsement Guides and similar laws.</li>
+</ul>
+
+<h2>9. Creator rules</h2>
+<ul>
+  <li>Tag every post about Meal Pic #ad, or use the platform's paid-partnership label.</li>
+  <li>No fake results, misleading claims, or health claims.</li>
+  <li>Do not use your own code or link to buy for yourself, and do not run search ads on the Meal Pic name.</li>
+  <li>No spam, bots, fake accounts, bought views, or any other way of faking sales.</li>
+</ul>
+<p>If you break these rules or this Agreement, we may turn off your code, close your creator account, and withhold commissions earned through rule-breaking.</p>
+
+<h2>10. Commissions and payouts</h2>
+<p>You earn commissions at the rate and on the terms shown on the creator page and your creator dashboard at the time a sale is made. Payouts are sent to the payout account you give us on the schedule shown there. You are an independent contractor, not an employee, partner, or agent of Meal Pic. You are responsible for your own taxes, and you agree to give us any tax forms we reasonably request (such as a Form W-9) before we pay you.</p>
+
+<h2>11. Your responsibility</h2>
+<p>You agree to defend and indemnify Meal Pic against any claim, loss, or cost (including reasonable legal fees) that arises because Your Content breaks a promise in section 8, or because you broke this Agreement or the law.</p>
+
+<h2>12. Ending the partnership</h2>
+<p>You or Meal Pic may end your participation in the creator program at any time, for any reason, by emailing the other or closing the account. Sections 2 through 8, 11, and 13 survive the end of this Agreement, which means <strong>Meal Pic may keep using all of Your Content created before the end, forever</strong>.</p>
+
+<h2>13. General terms</h2>
+<p>To the fullest extent permitted by law, Meal Pic is not liable to you for any indirect, incidental, or consequential damages, and our total liability to you under this Agreement will not exceed the commissions we paid you in the twelve months before the claim. This Agreement, together with the Terms of Use, is the entire agreement between you and Meal Pic about the creator program. If any part of it is found unenforceable, that part will be enforced as far as possible and the rest stays in effect. Our not enforcing a part of this Agreement is not a waiver of it. You may not transfer this Agreement; Meal Pic may transfer it, including the rights in Your Content, to any successor or buyer of Meal Pic. We may update this Agreement by posting a new version on this page with a new version date; changes apply to content posted after the update, and staying in the program after an update means you accept it.</p>
+
+<h2>Contact</h2>
+<p>Questions about this Agreement: <a href="mailto:help@mealpic.app">help@mealpic.app</a>.</p>
+</main>
+<footer>
+  <div class="wrap">
+    <div>© 2026 Church Street Studios · Meal Pic</div>
+    <div class="links">
+      <a href="support.html">Support</a>
+      <a href="mailto:help@mealpic.app">help@mealpic.app</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="creator-terms.html">Creator Agreement</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
