@@ -353,7 +353,7 @@ function render(){
   const paidOut = sum(data.paid || [], "paid_out");
   const earnedAll = sum(all, "owed");
   const next = Math.max(0, earnedAll - paidOut);
-  const cutM = all.reduce((a, c) => a + Number(c.mrr || 0) * (100 - Number(c.apple_fee_pct ?? 30)) / 100 * c.pct / 100, 0);
+  const cutM = all.reduce((a, c) => a + Number(c.mrr || 0) * (100 - Number(c.apple_fee_pct ?? 15)) / 100 * c.pct / 100, 0);
   const first = all[0];
   const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
   const total30 = days.reduce((a, d) => a + d.uses, 0);

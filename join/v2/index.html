@@ -990,7 +990,7 @@ const $ = id => document.getElementById(id);
 const money = n => "$" + Math.round(n).toLocaleString("en-US");
 
 // ---- calculator (list price × what Apple leaves us × your cut) ----
-const MONTHLY = 29.99, APPLE_FEE = .30, CUT = .5;
+const MONTHLY = 29.99, APPLE_FEE = .15, CUT = .5;
 $("pm").textContent = `They pay $${MONTHLY} a month`;
 let shown = 0, raf = 0;
 function tween(target){
