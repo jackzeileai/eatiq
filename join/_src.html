@@ -909,6 +909,11 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
           <label class="f" for="name">Full name</label><input class="field" id="name" autocomplete="name" placeholder="Sarah Jones"></div>
         <div class="foot"><button class="btn" data-next id="b-name" disabled>Continue</button></div>
       </section>
+      <section class="step" data-s="phone">
+        <div class="body"><h3>What's your phone number?</h3><p class="lead">So we can reach you about your payouts.</p>
+          <label class="f" for="phone">Phone number</label><input class="field" id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567"><div class="hint" id="h-phone"></div></div>
+        <div class="foot"><button class="btn" data-next id="b-phone" disabled>Continue</button></div>
+      </section>
       <section class="step" data-s="handle">
         <div class="body"><h3>Where do you post?</h3><p class="lead">Pick one or both.</p>
           <div class="rows">
@@ -1082,6 +1087,17 @@ document.querySelectorAll(".step input.field").forEach(i => i.addEventListener("
   const b = i.closest(".step").querySelector(".foot .btn"); if (b && !b.disabled) b.click();
 }));
 
+// Phone: US numbers get (555) 123-4567 formatting; anything starting with + is left as typed.
+const phoneDigits = () => $("phone").value.replace(/\D/g, "");
+const phoneValue = () => { const d = phoneDigits(), plus = $("phone").value.trim().startsWith("+");
+  return plus ? "+" + d : d.length === 11 && d[0] === "1" ? "+" + d : "+1" + d; };
+$("phone").oninput = () => {
+  const plus = $("phone").value.trim().startsWith("+"), d = phoneDigits();
+  if (!plus && d.length <= 10) {
+    $("phone").value = d.length > 6 ? `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}` : d.length > 3 ? `(${d.slice(0,3)}) ${d.slice(3)}` : d;
+  }
+  $("b-phone").disabled = plus ? d.length < 8 || d.length > 15 : !(d.length === 10 || (d.length === 11 && d[0] === "1"));
+};
 $("name").oninput = () => { $("b-name").disabled = $("name").value.trim().length < 2; if (!$("code").dataset.touched) suggestCode(); };
 // ---- where they post: TikTok, Instagram, or both, one handle each ----
 const PLATS = { tiktok: "TikTok", instagram: "Instagram" }, picked = new Set();
@@ -1175,7 +1191,7 @@ $("b-sign").onclick = async () => {
   }
   const { data, error } = await sb.rpc("creator_signup", {
     code: $("code").value.toLowerCase(), name: $("name").value.trim(), handle: handleText(),
-    payout_method: method, payout_handle: $("payhandle").value.trim()
+    payout_method: method, payout_handle: $("payhandle").value.trim(), phone: phoneValue()
   });
   if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
   if (data?.error === "taken") { go("code"); checkCode(); return; }
