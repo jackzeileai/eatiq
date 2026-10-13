@@ -57,6 +57,8 @@ input.code{letter-spacing:10px;font-size:28px;font-weight:800;text-align:center}
 .link{display:block;margin:18px auto 0;background:none;border:0;color:var(--sub);font:600 15px var(--font);cursor:pointer;padding:6px 0}
 .link:hover{color:var(--ink)}
 .err{color:#ff3b30;font-size:15px;margin-top:12px;min-height:20px}
+.agree{display:flex;gap:12px;align-items:flex-start;text-align:left;font-size:15px;line-height:1.45;font-weight:600;margin:4px 0 20px;cursor:pointer}
+.agree input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--ink)}
 
 
 /* picture tiles, same as /join How it works: white hairline stage, one 3D object, bold caption, grey line */
@@ -228,6 +230,15 @@ html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter
     <p class="fallback">Already have a code? Email <a href="mailto:help@mealpic.app" style="color:var(--ink)">help@mealpic.app</a></p>
   </section>
 
+  <section id="s-agree" class="auth hidden">
+    <img class="mark" src="../assets/mark-black.png" alt="">
+    <h1>One quick thing</h1>
+    <p>Before you see your link and code, please read and accept the <a href="/creator-terms.html" target="_blank" style="color:var(--ink);text-decoration:underline">Creator Agreement</a>.</p>
+    <label class="agree"><input type="checkbox" id="agree"><span>I agree to the Creator Agreement and Terms, including that by posting videos about Meal Pic, I give Meal Pic the right, in perpetuity, to use them as marketing and advertising.</span></label>
+    <button class="btn" id="b-agree" disabled>Continue to my dashboard</button>
+    <div class="err" id="e-agree"></div>
+  </section>
+
   <section id="s-stats" class="hidden"><div id="dash"></div></section>
 
   <div id="loading" class="loading">Loading…</div>
@@ -245,8 +256,8 @@ const LIBRARY_URL = ""; const COURSE_URL = "";
 });
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
 const $ = id => document.getElementById(id);
-const screens = ["s-email","s-code","s-none","s-stats","loading"];
-function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-none")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
+const screens = ["s-email","s-code","s-none","s-agree","s-stats","loading"];
+function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-none"||id==="s-agree")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
 const num = n => Number(n||0).toLocaleString("en-US");
 // Whole dollars like the /join example ($346); cents only when there are some.
 // whole=true drops cents from $1,000 up so big totals fit their tile.
@@ -344,8 +355,18 @@ async function load(){
   if (error) { show("s-email"); $("e-email").textContent = "Something went wrong. Try signing in again."; return; }
   data = d;
   if (!d.codes || !d.codes.length) { $("noneemail").textContent = session.user.email; show("s-none"); return; }
+  // Creator Agreement gate: no link or code until the current version is accepted.
+  const { data:needs } = await sb.rpc("creator_needs_agreement");
+  if (needs) { show("s-agree"); return; }
   render(); show("s-stats");
 }
+$("agree").onchange = () => { $("b-agree").disabled = !$("agree").checked; };
+$("b-agree").onclick = async () => {
+  $("b-agree").disabled = true; $("e-agree").textContent = "";
+  const { error } = await sb.rpc("creator_accept_agreement");
+  if (error) { $("b-agree").disabled = false; $("e-agree").textContent = "Something went wrong. Try again."; return; }
+  render(); show("s-stats");
+};
 
 function render(){
   const sum = (list, k) => list.reduce((a, x) => a + Number(x[k] || 0), 0);

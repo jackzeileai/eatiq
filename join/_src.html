@@ -1045,7 +1045,7 @@ new IntersectionObserver(([e]) => $("mobilebar").classList.toggle("show", !e.isI
 // ---- signup (shares the dashboard's sign-in) ----
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
 const steps = [...document.querySelectorAll(".step")].map(s => s.dataset.s);
-let at = 0, method = "", checkT = null;
+let at = 0, method = "", checkT = null, oldCode = "";
 
 function openFlow(){
   $("overlay").classList.add("open"); document.body.classList.add("locked");
@@ -1125,7 +1125,12 @@ $("b-otp").onclick = async () => {
   const { error } = await sb.auth.verifyOtp({ email:$("sentto").textContent, token:$("otp").value, type:"email" });
   if (error) { $("b-otp").disabled = false; $("e-otp").textContent = "That code didn't work. Check it or send a new one."; return; }
   const { data } = await sb.rpc("creator_dashboard");
-  if (data?.codes?.length) return finish(data.codes[0].code, true);
+  if (data?.codes?.length) {
+    // Signed up before the Creator Agreement: accept it before seeing the link and code.
+    const { data:needs } = await sb.rpc("creator_needs_agreement");
+    if (needs) { oldCode = data.codes[0].code; go("terms"); $("back").classList.add("hide"); return; }
+    return finish(data.codes[0].code, true);
+  }
   go("code"); checkCode();
 };
 
@@ -1163,12 +1168,18 @@ $("payhandle").oninput = payReady;
 $("agree").onchange = () => { $("b-sign").disabled = !$("agree").checked; $("agreebox").classList.toggle("on", $("agree").checked); };
 $("b-sign").onclick = async () => {
   $("b-sign").disabled = true; $("e-sign").textContent = "";
+  if (oldCode) {
+    const { error } = await sb.rpc("creator_accept_agreement");
+    if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
+    return finish(oldCode, true);
+  }
   const { data, error } = await sb.rpc("creator_signup", {
     code: $("code").value.toLowerCase(), name: $("name").value.trim(), handle: handleText(),
     payout_method: method, payout_handle: $("payhandle").value.trim()
   });
   if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
   if (data?.error === "taken") { go("code"); checkCode(); return; }
+  if (data.existing) await sb.rpc("creator_accept_agreement");
   finish(data.code, data.existing);
 };
 $("chg").onclick = () => { $("newcode").value = $("d-code").textContent; $("coderow").hidden = true; $("editrow").hidden = false; $("e-change").textContent = ""; $("newcode").focus(); };
