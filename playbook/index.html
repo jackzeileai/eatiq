@@ -19,20 +19,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style/mono.css?v=1791820000">
 <style>
-/* ---------- layout only; the look is mono.css + the /join tiles ---------- */
-.hero-apple{padding-top:64px}
-.hero-apple .lede{color:var(--sub)}
-.tiles{margin-top:56px}
-.tile{text-align:center;text-decoration:none;color:inherit;display:block}
-.tile .stage{aspect-ratio:1;height:auto;margin-bottom:22px;padding:28px;background:transparent;box-shadow:none}
-.tile .stage img{max-width:100%;max-height:100%;object-fit:contain}
-.tile .h3{font-size:28px;margin-bottom:8px}
-.tile .lede.sub{font-size:18px;color:var(--sub);margin:6px auto 0;max-width:320px}
-
+/* ---------- layout only; the look is mono.css + the /join 'How it works' section ---------- */
 .sec{padding-top:88px}
-.sec .split{margin:0 0 32px}
-.sec .split .lede{max-width:520px;justify-self:end;color:var(--sub)}
-.copy{max-width:760px}
+.sec.first{padding-top:72px}
+.sec .split{display:block;text-align:center;max-width:760px;margin:0 auto 36px}
+.sec .split .h2{margin:0 auto}
+.sec .split .lede{max-width:560px;margin:18px auto 0;color:var(--sub);font-weight:500;text-wrap:balance}
+.tile{text-align:center;text-decoration:none;color:inherit;display:block}
+.tile .stage{height:280px;padding:24px;margin-bottom:24px;background:transparent;box-shadow:none}
+.tile .stage img{width:100%;height:100%;object-fit:contain}
+.tile .h3{font-size:28px;margin-bottom:8px}
+.tile .lede.sub{font-size:18px;color:var(--sub);margin:6px auto 0;max-width:360px;text-wrap:balance}
+
+.copy{max-width:760px;margin:0 auto}
 .copy .h3{margin:36px 0 10px}
 .copy .h3:first-child{margin-top:0}
 .copy .p{color:var(--ink);margin:0 0 12px}
@@ -66,10 +65,13 @@ html[data-mode="dark"] .btn.shine::after{background:linear-gradient(105deg,trans
 html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 @media (max-width:900px){
-  .hero-apple{padding-top:32px}
-  .tiles{margin-top:32px}
-  .sec{padding-top:56px}
-  .sec .split{margin-bottom:20px}
+  .sec,.sec.first{padding-top:56px}
+  .sec .split{margin:0 auto 28px}
+  .sec .split .h2{font-size:38px}
+  .sec .split .lede{font-size:17px}
+  .tile .stage{height:220px;padding:18px}
+  .tile .h3{font-size:22px}
+  .tile .lede.sub{font-size:16px}
   .nav .links a.plain{display:none}
   .shots{grid-template-columns:1fr}
 }
@@ -95,14 +97,13 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 <main>
 
 <!-- ---------- hero + three-stepper ---------- -->
-<section class="hero-apple">
+<section class="sec first">
   <div class="wrap">
-    <h1 class="h1">A successful video<br>has three parts.</h1>
-    <p class="lede">Nail all three and the video gets views and sales.</p>
-    <div class="grid c3 tiles">
-      <a class="tile" href="#hook"><div class="stage"><img src="../assets/lab/memoji_ringlight_white_t.png?v=7" alt=""></div><h3 class="h3">1. The Hook</h3><p class="lede sub">The first 3 seconds. Get the right people's interest.</p></a>
-      <a class="tile" href="#meat"><div class="stage"><img src="../assets/lab/hiw_snap_t.png?v=7" alt=""></div><h3 class="h3">2. The Meat</h3><p class="lede sub">Show the app and why it's valuable.</p></a>
-      <a class="tile" href="#cta"><div class="stage"><img src="../assets/lab/phone_link_t.png?v=7" alt=""></div><h3 class="h3">3. The CTA</h3><p class="lede sub">Tell the viewer what to do. Give them a why.</p></a>
+    <div class="split"><h1 class="h2">A successful video has three parts.</h1><p class="lede">Nail all three and the video gets views and sales.</p></div>
+    <div class="grid c3">
+      <a class="tile" href="#hook"><div class="stage"><img src="../assets/lab/pb_hook_t.png?v=1" alt=""></div><h3 class="h3">1. The Hook</h3><p class="lede sub">The first 3 seconds. Get the right people's interest.</p></a>
+      <a class="tile" href="#meat"><div class="stage"><img src="../assets/lab/pb_meat_t.png?v=1" alt=""></div><h3 class="h3">2. The Meat</h3><p class="lede sub">Show the app and why it's valuable.</p></a>
+      <a class="tile" href="#cta"><div class="stage"><img src="../assets/lab/pb_cta_t.png?v=1" alt=""></div><h3 class="h3">3. The CTA</h3><p class="lede sub">Tell the viewer what to do. Give them a why.</p></a>
     </div>
   </div>
 </section>

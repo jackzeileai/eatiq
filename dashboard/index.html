@@ -384,7 +384,6 @@ function render(){
   const subs = sum(all,"monthly_active") + sum(all,"yearly_active");
 
   $("dash").innerHTML = `
-  ${sum(all,"entered") ? "" : setupCard()}
   <div class="dash">
     <div class="d-top">
       <span class="d-title">Hey ${esc(first.name.split(" ")[0])}</span>
@@ -433,8 +432,7 @@ function render(){
 
   <p class="foot">Payouts go out every Friday. Earnings are your 50% of the revenue: what Apple pays us after its commission, minus refunds.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:help@mealpic.app">help@mealpic.app</a></p>`;
 }
-// "Watch this first" setup video (1 min: link in bio, film a real scan, say your code).
-// Empty = card still shows, with "Video coming soon". Same constant lives in join/_src.html.
+// "Watch this first" setup card — REMOVED from the dashboard 2026-10-14 (Jack). Functions kept for when the video exists.
 const SETUP_VIDEO_URL = "", SETUP_POSTER = "";
 function setupCard(){
   return `<div class="setup">

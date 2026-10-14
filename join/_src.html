@@ -958,15 +958,6 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
           <div class="err" id="e-sign"></div></div>
         <div class="foot"><button class="btn" id="b-sign" disabled>Create my creator account</button></div>
       </section>
-      <section class="step" data-s="watch">
-        <div class="body watch">
-          <h3 style="text-align:center">Watch this first</h3>
-          <p class="lead" style="text-align:center">One minute on how to get your first sale. Your link and code come right after.</p>
-          <div class="wv" id="wv"><div class="wv-soon"><i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="#000"/></svg></i><span>Video coming soon</span></div></div>
-          <p class="wv-note" id="wvNote"></p>
-        </div>
-        <div class="foot"><button class="btn" id="b-watch">Continue</button></div>
-      </section>
       <section class="step" data-s="done">
         <div class="body done">
           <img class="pic3d" src="__ROOT__assets/lab/cash100_t.png?v=7" alt="">
@@ -1211,28 +1202,12 @@ $("savecode").onclick = async () => {
   $("d-code").textContent = data.code.toUpperCase(); $("d-link").textContent = `mealpic.app/${data.code}`;
   $("editrow").hidden = true; $("coderow").hidden = false; $("e-change").textContent = "";
 };
-// "Watch this first" (2026-10-10): new creators must watch the setup video to the end
-// before they see their link and code. No skipping ahead. Already-set-up creators skip it.
-// Empty URL = placeholder + Continue, so signups aren't blocked. Same URL lives in dashboard/index.html.
-const SETUP_VIDEO_URL = "", SETUP_POSTER = "";
-if (SETUP_VIDEO_URL) {
-  $("wv").innerHTML = `<video id="wvid" src="${SETUP_VIDEO_URL}" ${SETUP_POSTER ? `poster="${SETUP_POSTER}"` : ""} playsinline controls controlslist="nofullscreen noplaybackrate nodownload" disablepictureinpicture preload="metadata"></video>`;
-  const v = $("wvid"), b = $("b-watch"); let maxT = 0;
-  b.disabled = true; b.textContent = "Watch to the end to continue";
-  v.addEventListener("timeupdate", () => {
-    if (v.currentTime > maxT + 1.5) v.currentTime = maxT; else maxT = Math.max(maxT, v.currentTime);
-    if (v.duration) $("wvNote").textContent = `${Math.max(0, Math.ceil(v.duration - maxT))}s left`;
-  });
-  v.addEventListener("seeking", () => { if (v.currentTime > maxT + 1.5) v.currentTime = maxT; });
-  v.addEventListener("ratechange", () => { if (v.playbackRate > 1) v.playbackRate = 1; });
-  v.addEventListener("ended", () => { b.disabled = false; b.textContent = "Get my link and code"; $("wvNote").textContent = ""; });
-}
-$("b-watch").onclick = () => go("done");
+// "Watch this first" step REMOVED 2026-10-14 (Jack): signup goes straight to the link and code.
 function finish(code, existing){
   $("d-code").textContent = code.toUpperCase();
   $("d-link").textContent = `mealpic.app/${code}`;
-  if (existing) { $("done-sub").textContent = "You're already set up. Here's your link and code."; go("done"); return; }
-  go("watch");
+  if (existing) $("done-sub").textContent = "You're already set up. Here's your link and code.";
+  go("done");
 }
 document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
   const t = $(b.dataset.copy).textContent, label = b.textContent;
