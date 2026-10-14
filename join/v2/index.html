@@ -1165,6 +1165,8 @@ $("b-sign").onclick = async () => {
   });
   if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
   if (data?.error === "taken") { go("code"); checkCode(); return; }
+  // Which outreach email brought them (?ref=<handle>): the affiliate brain stops emailing once this lands.
+  try { var _ref = new URLSearchParams(location.search).get("ref"); if (_ref) sb.rpc("creator_set_ref", { ref: _ref }); } catch (e) {}
   if (data.existing) await sb.rpc("creator_accept_agreement");
   finish(data.code, data.existing);
 };
