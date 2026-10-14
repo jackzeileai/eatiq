@@ -1022,6 +1022,11 @@ new IntersectionObserver(([e]) => $("mobilebar").classList.toggle("show", !e.isI
 
 // ---- signup (shares the dashboard's sign-in) ----
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
+// Outreach click tracking (2026-10-14): emails link to /join?ref=<handle>; log one row so we can see
+// who clicked (link_clicks, source join_email, referrer = handle). The affiliate brain reads these.
+(function(){try{var ref=new URLSearchParams(location.search).get("ref");if(!ref||!/^[a-z0-9._-]{1,40}$/i.test(ref))return;
+fetch("https://bvaumyrtcuehlipiaxlv.supabase.co/rest/v1/link_clicks",{method:"POST",headers:{apikey:"sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7",Authorization:"Bearer sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7","Content-Type":"application/json",Prefer:"return=minimal"},
+body:JSON.stringify({source:"join_email",path:"/join",referrer:ref.toLowerCase(),ua:navigator.userAgent.slice(0,500)})}).catch(function(){});}catch(e){}})();
 const steps = [...document.querySelectorAll(".step")].map(s => s.dataset.s);
 let at = 0, checkT = null, oldCode = "";
 
