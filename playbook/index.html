@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en" data-theme="app">
+<script>try{var m=localStorage.getItem("mp-mode");document.documentElement.dataset.mode=m||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.mode="light"}</script>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meal Pic Creator Playbook · Hook, Meat, CTA</title>
+<meta name="description" content="The three parts of a Meal Pic video that gets views and downloads: the hook, the meat, the CTA.">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Meal Pic Creator Playbook">
+<meta property="og:description" content="Hook. Meat. CTA. The three parts of a video that sells.">
+<meta property="og:image" content="https://mealpic.app/assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-dark.png?v=2" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style/mono.css?v=1791820000">
+<style>
+/* ---------- layout only; the look comes from mono.css ---------- */
+:root{--surface-2:#f2f2f2}
+.sec{padding-top:88px}
+.sec .split{margin:0 0 36px}
+.sec .split .lede{max-width:520px;justify-self:end;color:var(--sub)}
+.intro{text-align:center;max-width:720px;margin:0 auto}
+.intro .lede{color:var(--sub);margin-top:16px}
+
+/* hero */
+.hero-apple{padding-top:56px}
+.hero-apple .lede{color:var(--sub)}
+.hero-apple .object{max-width:520px;margin-top:36px}
+.hero-apple .object img{max-height:300px;width:auto}
+
+/* the three parts (map) */
+.parts{margin-top:48px}
+.part{position:relative;text-align:center;text-decoration:none;color:inherit;display:block}
+.part .stage{height:280px;margin-bottom:18px}
+.part .stage img{max-height:220px;width:auto}
+.part .num{position:absolute;top:16px;left:16px;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px;letter-spacing:-.02em}
+html[data-mode="dark"] .part .num{background:#f5f5f7;color:#000}
+.part .h3{margin-bottom:6px}
+.part .p{max-width:300px;margin:0 auto}
+
+/* two-up cards */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cardx{padding:28px}
+.cardx .h3{margin-bottom:10px}
+.cardx .p{max-width:none}
+.cardx .label{display:block;margin-bottom:14px}
+
+/* check / cross lists */
+.ck{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ck li{display:flex;align-items:flex-start;gap:12px;font-size:17px;font-weight:600;line-height:1.4;color:var(--ink)}
+.ck li svg{flex:none;width:22px;height:22px;margin-top:1px}
+html[data-mode="dark"] .ck .tick{stroke:#000}
+.ck.no li{color:var(--sub)}
+
+/* chips: formats that work */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--ink);font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--ink)}
+.chip.off{box-shadow:inset 0 0 0 1px var(--hair);color:var(--sub);text-decoration:line-through;text-decoration-thickness:1.5px}
+
+/* example lines */
+.lines{display:grid;gap:0;border-top:1px solid var(--hair)}
+.lines .l{display:grid;grid-template-columns:140px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+.lines .l .label{padding-top:4px}
+.lines .l q{font-size:20px;font-weight:700;letter-spacing:-.02em;line-height:1.3;quotes:"“" "”"}
+
+/* magic moment */
+.steps .part .stage{height:300px}
+.demo{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+.demo .stage.dark{min-height:520px;padding:40px 24px}
+.demo .phone-vid{width:min(250px,60vw);height:auto;aspect-ratio:1320/2868}
+.demo .side{padding:32px;display:flex;flex-direction:column;justify-content:center}
+.demo .side .h3{margin-bottom:10px}
+.demo .side .ck{margin-top:20px}
+
+/* script card */
+.script{padding:32px}
+.script .label{display:block;margin-bottom:16px}
+.script p{margin:0;font-size:clamp(20px,2.2vw,26px);font-weight:700;letter-spacing:-.025em;line-height:1.3;color:var(--ink)}
+.script p+p{margin-top:10px}
+.script p.dim{color:var(--sub)}
+
+/* CTA formula */
+.formula{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin:8px 0 36px}
+.formula .glass.card{padding:18px 26px;font-weight:800;font-size:clamp(18px,2.2vw,24px);letter-spacing:-.03em;line-height:1.1}
+.formula .glass.card small{display:block;margin-top:4px;font-size:13px;font-weight:700;color:var(--sub);letter-spacing:0}
+.formula .plus{font-size:28px;font-weight:800;color:var(--sub)}
+
+/* hormozi rules */
+.rules .part .stage{height:0;margin:0;box-shadow:none}
+.rule3{padding:28px;text-align:left}
+.rule3 .big{font-size:clamp(40px,5vw,64px);font-weight:800;letter-spacing:-.05em;line-height:1;margin:0 0 10px}
+.rule3 .h3{margin-bottom:6px}
+
+/* checklist */
+.check{max-width:720px;margin:0 auto}
+.check .ck li{font-size:19px;padding:14px 0;border-bottom:1px solid var(--hair)}
+.check .ck li:last-child{border-bottom:0}
+.check .ck li svg{width:26px;height:26px;margin-top:3px}
+
+/* reels marquee (same component as /join) */
+.reels{overflow:hidden;max-width:1320px;margin:0 auto;padding:8px 0 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.reels-track{display:flex;gap:16px;width:max-content;animation:reels 70s linear infinite}
+.reels:hover .reels-track{animation-play-state:paused}
+@keyframes reels{to{transform:translateX(calc(-50% - 8px))}}
+.reel{position:relative;flex:none;margin:0;width:228px;aspect-ratio:9/16;border-radius:22px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 48px -28px rgba(0,0,0,.4)}
+.reel video{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;display:block}
+.reel figcaption{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:12.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%)}
+html[data-mode="dark"] .reel{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+
+/* final */
+.final{text-align:center;padding-top:120px}
+.final .lede{margin:16px auto 28px;color:var(--sub)}
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* nav + dark (same as /join) */
+.nav .brand span{color:var(--sub);font-weight:800}
+.mode-btn{display:grid;place-items:center;width:40px;height:40px;margin-left:4px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
+.mode-btn:hover{background:rgba(0,0,0,.06)}
+.mode-btn .i-sun{display:none}
+html[data-mode="dark"] .mode-btn .i-sun{display:block}
+html[data-mode="dark"] .mode-btn .i-moon{display:none}
+html[data-mode="dark"]{--paper:#000;--ink:#f5f5f7;--sub:#a1a1a6;--faint:#6e6e73;--hair:rgba(255,255,255,.14);--hair-2:rgba(255,255,255,.08);--surface-2:#2c2c2e;color-scheme:dark}
+html[data-mode="dark"]{background:#000;color:var(--ink)}
+html[data-mode="dark"] body{background:#000}
+html[data-mode="dark"] .mode-btn:hover{background:rgba(255,255,255,.1)}
+html[data-mode="dark"] .glass{background:rgba(28,28,30,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.08),0 12px 32px -14px rgba(0,0,0,.8)}
+html[data-mode="dark"] .btn{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .btn:hover{background:#fff}
+html[data-mode="dark"] .btn.ghost{background:transparent;color:#f5f5f7;box-shadow:inset 0 0 0 1.5px #f5f5f7}
+html[data-mode="dark"] .btn.ghost:hover{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .btn.shine::after{background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%)}
+html[data-mode="dark"] .card,html[data-mode="dark"] .stage{background:#0d0d0f;box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .stage.dark{background:#000}
+html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
+html[data-mode="dark"] .chip{box-shadow:inset 0 0 0 1.5px #f5f5f7;color:#f5f5f7}
+html[data-mode="dark"] .chip.off{box-shadow:inset 0 0 0 1px var(--hair);color:var(--sub)}
+html[data-mode="dark"] .part .stage img.inv{filter:none}
+
+@media (max-width:980px){
+  .two,.demo{grid-template-columns:1fr}
+  .lines .l{grid-template-columns:1fr;gap:6px}
+  .part .stage{height:240px}
+  .steps .part .stage{height:260px}
+  .demo .stage.dark{min-height:0;padding:32px 16px}
+}
+@media (max-width:900px){
+  .sec{padding-top:56px}
+  .final{padding-top:80px}
+  .nav .links a.plain{display:none}
+  .hero-apple{padding-top:32px}
+  .hero-apple .object{margin-top:24px}
+  .hero-apple .object img{max-height:200px}
+}
+@media (max-width:360px){.nav .brand{font-size:18px}.nav .mode-btn{display:none}}
+</style>
+</head>
+<body>
+
+<header class="nav float">
+  <div class="wrap glass">
+    <a class="brand" href="/join/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Playbook</span></a>
+    <nav class="links">
+      <a class="plain" href="#hook">Hook</a>
+      <a class="plain" href="#meat">Meat</a>
+      <a class="plain" href="#cta">CTA</a>
+      <a class="plain" href="/dashboard/">Log in</a>
+      <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
+      <a class="btn small shine" href="/join/">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ---------- hero ---------- -->
+<section class="hero-apple">
+  <div class="wrap">
+    <span class="label dim">Creator playbook</span>
+    <h1 class="h1" style="margin-top:14px">Three parts.<br>One video that sells.</h1>
+    <p class="lede">Every Meal Pic video that gets views <b>and</b> downloads does the same three things.</p>
+    <div class="object"><img src="../assets/lab/playbook_book_t.png?v=1" alt=""></div>
+  </div>
+</section>
+
+<!-- ---------- the map ---------- -->
+<section class="sec" style="padding-top:64px">
+  <div class="wrap">
+    <div class="grid c3 parts">
+      <a class="part" href="#hook"><span class="num">1</span><div class="stage"><img src="../assets/lab/memoji_ringlight_white_t.png?v=1" alt=""></div><h3 class="h3">The hook</h3><p class="p">Stop the scroll. Stop the right person.</p></a>
+      <a class="part" href="#meat"><span class="num">2</span><div class="stage"><img src="../assets/lab/hiw_result_t.png?v=1" alt=""></div><h3 class="h3">The meat</h3><p class="p">Show the app doing the thing.</p></a>
+      <a class="part" href="#cta"><span class="num">3</span><div class="stage"><img src="../assets/lab/phone_link_t.png?v=1" alt=""></div><h3 class="h3">The CTA</h3><p class="p">Tell them what to do, and why.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 1. hook ---------- -->
+<section class="sec" id="hook">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">1. The hook</h2><p class="lede">The first two seconds. It has two jobs, and it needs both.</p></div>
+
+    <div class="two">
+      <div class="card cardx">
+        <span class="label">Job 1 · Get interest</span>
+        <h3 class="h3">Open a loop.</h3>
+        <p class="p">Make them need to know what happens next. Curiosity, shock, or a story that's already moving.</p>
+        <ul class="ck" style="margin-top:18px">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Start in the action. No intro.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Text on screen that asks a question or makes a claim.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Keep it clean. One thing on screen, not five.</li>
+        </ul>
+      </div>
+      <div class="card cardx">
+        <span class="label">Job 2 · Get the right person</span>
+        <h3 class="h3">Talk to people who track food.</h3>
+        <p class="p">A hook that pulls in everyone gets views, but nobody downloads. The best steak in the world won't sell to a room full of vegans. Hook the people who care about food, fitness and health.</p>
+        <p class="p" style="margin-top:14px">Hormozi's rule: a hook is a <b style="color:var(--ink)">call out</b> (this is for you) plus a <b style="color:var(--ink)">promise</b> (watch this and you'll get something).</p>
+      </div>
+    </div>
+
+    <div class="two" style="margin-top:16px">
+      <div class="card cardx">
+        <span class="label">Formats that work</span>
+        <div class="chips">
+          <span class="chip">Day in my life</span><span class="chip">What I eat in a day</span><span class="chip">Workout vlog</span><span class="chip">Storytime</span><span class="chip">Gym skit</span><span class="chip">Healthy recipe</span><span class="chip">High-protein recipe</span><span class="chip">Weight loss journey</span>
+        </div>
+      </div>
+      <div class="card cardx">
+        <span class="label dim">Formats that don't</span>
+        <div class="chips">
+          <span class="chip off">Random comedy</span><span class="chip off">Pranks</span><span class="chip off">Dance trends</span><span class="chip off">Reaction videos</span><span class="chip off">Anything not about food or fitness</span>
+        </div>
+        <p class="p" style="margin-top:16px">Big views, zero downloads. Wrong room.</p>
+      </div>
+    </div>
+
+    <div class="card cardx" style="margin-top:16px">
+      <span class="label">Hook lines that work</span>
+      <div class="lines">
+        <div class="l"><span class="label dim">Call out</span><q>If you go to the gym but hate tracking food, watch this.</q></div>
+        <div class="l"><span class="label dim">Question</span><q>Would you track your calories if it took 3 seconds?</q></div>
+        <div class="l"><span class="label dim">Shock</span><q>I ate 3,000 calories today and here's exactly what it looked like.</q></div>
+        <div class="l"><span class="label dim">Story</span><q>I quit calorie counting for a year. Then this happened.</q></div>
+        <div class="l"><span class="label dim">Command</span><q>Stop guessing your macros. Do this instead.</q></div>
+        <div class="l"><span class="label dim">Anti-value</span><q>Here's why I'm deleting Meal Pic.</q></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 2. meat ---------- -->
+<section class="sec" id="meat">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">2. The meat</h2><p class="lede">Show the app doing the thing. This is the moment people download.</p></div>
+
+    <div class="grid c3 parts steps" style="margin-top:0">
+      <div class="part"><span class="num">1</span><div class="stage"><img src="../assets/lab/hiw_snap_t.png?v=1" alt=""></div><h3 class="h3">Snap the food</h3><p class="p">One photo. Your real plate.</p></div>
+      <div class="part"><span class="num">2</span><div class="stage"><img src="../assets/lab/hiw_result_t.png?v=1" alt=""></div><h3 class="h3">Macros load</h3><p class="p">Calories, protein, carbs, fat. On screen.</p></div>
+      <div class="part"><span class="num">3</span><div class="stage"><img src="../assets/lab/hiw_edit_t.png?v=1" alt=""></div><h3 class="h3">Fix anything</h3><p class="p">Tap to edit. Show that you can.</p></div>
+    </div>
+
+    <div class="demo">
+      <div class="stage dark"><div class="phone-vid"><video autoplay muted playsinline loop preload="metadata" poster="../assets/video/app_scan_dark.jpg" src="../assets/video/app_scan_dark.mp4" aria-label="Meal Pic scanning a meal"></video></div></div>
+      <div class="card side">
+        <span class="label">The magic moment</span>
+        <h3 class="h3">Snap → macros → edit. Every video.</h3>
+        <p class="p">Screen-record the real thing on your real food. Keep it on screen long enough to read. Talk over it, or let the text do it.</p>
+        <ul class="ck">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Show all three steps, 3 seconds or more.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Your real food, your real phone.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Say what it did for you, in one line.</li>
+        </ul>
+        <ul class="ck no" style="margin-top:12px">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>A one-second flash of the app icon.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>“I use Meal Pic” with nothing shown.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Listing features instead of showing one.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card script" style="margin-top:16px">
+      <span class="label">The anti-value trick</span>
+      <p>“Here's why I'm deleting Meal Pic.”</p>
+      <p class="dim">“It's not because it scans my food in one photo.”</p>
+      <p class="dim">“It's not because it gets my macros right.”</p>
+      <p class="dim">“It's not because I can fix anything with a tap.”</p>
+      <p>“It's because I have no excuse anymore.”</p>
+      <p class="p" style="margin-top:18px;font-size:17px;letter-spacing:-.01em;font-weight:600">Every “not because” is a feature. The viewer hears the value three times before the punchline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 3. cta ---------- -->
+<section class="sec" id="cta">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">3. The CTA</h2><p class="lede">Short. And give them a reason to tap your link instead of searching.</p></div>
+
+    <div class="formula">
+      <div class="glass card">What to do<small>“Tap the link in my bio”</small></div>
+      <span class="plus">+</span>
+      <div class="glass card">A reason why<small>“so you get…”</small></div>
+      <span class="plus">=</span>
+      <div class="glass card">They tap<small>Your link, not the App Store</small></div>
+    </div>
+
+    <div class="two">
+      <div class="card cardx">
+        <span class="label">Say this</span>
+        <div class="lines">
+          <div class="l"><span class="label dim">Trial</span><q>Link in my bio gets you 3 days free.</q></div>
+          <div class="l"><span class="label dim">Code</span><q>Use code SARAH in the app for your free trial.</q></div>
+          <div class="l"><span class="label dim">Because</span><q>Tap my link, because that's the only way you get the free trial.</q></div>
+        </div>
+      </div>
+      <div class="card cardx">
+        <span class="label dim">Not this</span>
+        <div class="lines">
+          <div class="l"><span class="label dim">No reason</span><q style="color:var(--sub)">Download Meal Pic.</q></div>
+          <div class="l"><span class="label dim">No action</span><q style="color:var(--sub)">It's a great app, check it out.</q></div>
+          <div class="l"><span class="label dim">Too long</span><q style="color:var(--sub)">So if you want to try it, there's a link, and a code, and you can also search…</q></div>
+        </div>
+        <p class="p" style="margin-top:16px">No reason, no tap. Your link is how the sale gets credited to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- hormozi rules ---------- -->
+<section class="sec">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">Hormozi’s rules</h2><p class="lede">Straight from the $100M Hooks playbook.</p></div>
+    <div class="grid c3">
+      <div class="card rule3"><p class="big">8/10</p><h3 class="h3">Hours on the hook.</h3><p class="p">If you have ten hours to make a video, spend eight on the first two seconds.</p></div>
+      <div class="card rule3"><p class="big">10×</p><h3 class="h3">Hooks per video.</h3><p class="p">Record ten different openings for one video. Post the best one.</p></div>
+      <div class="card rule3"><p class="big">70·20·10</p><h3 class="h3">Proven, twisted, wild.</h3><p class="p">70% hooks that already worked. 20% twists on them. 10% something new.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- checklist ---------- -->
+<section class="sec">
+  <div class="wrap">
+    <div class="intro"><h2 class="h2">Before you post</h2></div>
+    <div class="check" style="margin-top:32px">
+      <ul class="ck">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>First two seconds open a loop.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>It's a food, fitness or health video.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Snap → macros → edit is on screen, 3 seconds or more.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>You said what it did for you.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>CTA is one line with a reason.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path class="tick" d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Your link is in your bio and your code is in the caption.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- proof ---------- -->
+<section class="sec" id="videos">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">Videos that already went viral</h2><p class="lede">Watch the first two seconds of each one. That's the hook.</p></div>
+  </div>
+  <div class="reels" aria-label="Viral video examples"><div class="reels-track"><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/11543.jpg?v=2" data-src="../assets/reels/11543.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>70.9M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/19824.jpg?v=2" data-src="../assets/reels/19824.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12.53.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>67.6M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/21767.jpg?v=2" data-src="../assets/reels/21767.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>63.4M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/11365.jpg?v=2" data-src="../assets/reels/11365.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>35.4M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/16140.jpg?v=2" data-src="../assets/reels/16140.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>53.8M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/11367.jpg?v=2" data-src="../assets/reels/11367.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>42.5M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/21745.jpg?v=2" data-src="../assets/reels/21745.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>29.9M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/16367.jpg?v=2" data-src="../assets/reels/16367.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>28.1M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/16145.jpg?v=2" data-src="../assets/reels/16145.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>34.6M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/22738.jpg?v=2" data-src="../assets/reels/22738.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>25.9M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/16132.jpg?v=2" data-src="../assets/reels/16132.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>22.8M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/15890.jpg?v=2" data-src="../assets/reels/15890.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>22M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/11543.jpg?v=2" data-src="../assets/reels/11543.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>70.9M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/19824.jpg?v=2" data-src="../assets/reels/19824.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12.53.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>67.6M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/21767.jpg?v=2" data-src="../assets/reels/21767.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>63.4M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/11365.jpg?v=2" data-src="../assets/reels/11365.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>35.4M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/16140.jpg?v=2" data-src="../assets/reels/16140.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>53.8M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/11367.jpg?v=2" data-src="../assets/reels/11367.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>42.5M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/21745.jpg?v=2" data-src="../assets/reels/21745.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>29.9M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/16367.jpg?v=2" data-src="../assets/reels/16367.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>28.1M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/16145.jpg?v=2" data-src="../assets/reels/16145.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>34.6M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/22738.jpg?v=2" data-src="../assets/reels/22738.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>25.9M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/16132.jpg?v=2" data-src="../assets/reels/16132.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>22.8M views</figcaption></figure><figure class="reel"><video muted playsinline loop preload="none" poster="../assets/reels/15890.jpg?v=2" data-src="../assets/reels/15890.mp4?v=2"></video><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>22M views</figcaption></figure></div></div>
+</section>
+
+<!-- ---------- final ---------- -->
+<section class="sec final">
+  <div class="wrap">
+    <h2 class="h1">Hook. Meat. CTA.</h2>
+    <p class="lede">Now go make one.</p>
+    <div class="ctas"><a class="btn shine" href="/join/">Become a creator<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost" href="/dashboard/">Open my dashboard</a></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="label dim">© 2026 Meal Pic</span>
+    <span class="label dim"><a href="/join/">Become a creator</a><a href="/dashboard/">Creator login</a><a href="/creator-terms.html">Creator Agreement</a><a href="mailto:help@mealpic.app">Contact</a></span>
+  </div>
+</footer>
+
+<script>
+document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
+</script>
+<script>
+(function(){
+  var vids=document.querySelectorAll('.reel video'); if(!vids.length) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;
+    if(e.isIntersecting){ if(!v.src){v.src=v.dataset.src;v.load();} v.play().catch(function(){}); }
+    else v.pause(); });},{rootMargin:'200px 0px'});
+  vids.forEach(function(v){io.observe(v)});
+})();
+</script>
+</body>
+</html>
