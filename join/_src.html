@@ -963,14 +963,8 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
           <img class="pic3d" src="__ROOT__assets/lab/cash100_t.png?v=7" alt="">
           <h3 style="text-align:center" id="done-h">Application received</h3>
           <p class="lead" id="done-sub" style="text-align:center">We'll let you know if you're approved.</p>
-          <div class="shares" id="shares" hidden>
-            <div class="share" id="coderow"><div><div class="k">Your code</div><div class="v" id="d-code"></div></div><button class="copy" id="chg">Change</button><button class="copy" data-copy="d-code">Copy</button></div>
-            <div class="share edit" id="editrow" hidden><input class="field" id="newcode" autocapitalize="characters" autocorrect="off" maxlength="20" aria-label="New code"><button class="copy solid" id="savecode">Save</button></div>
-            <div class="share"><div><div class="k">Your link</div><div class="v" id="d-link"></div></div><button class="copy" data-copy="d-link">Copy</button></div>
-          </div>
-          <div class="err" id="e-change"></div>
         </div>
-        <div class="foot"><a class="btn" href="/dashboard/" id="done-dash" hidden>Open my dashboard</a><button class="btn" id="done-close">Done</button></div>
+        <div class="foot"><button class="btn" id="done-close">Done</button></div>
       </section>
     </div>
   </div>
@@ -1184,43 +1178,10 @@ $("b-sign").onclick = async () => {
   if (data.existing) await sb.rpc("creator_accept_agreement");
   finish(data.code, data.existing);
 };
-$("chg").onclick = () => { $("newcode").value = $("d-code").textContent; $("coderow").hidden = true; $("editrow").hidden = false; $("e-change").textContent = ""; $("newcode").focus(); };
-$("newcode").oninput = () => { $("newcode").value = $("newcode").value.toUpperCase().replace(/[^A-Z0-9]/g, ""); };
-$("newcode").onkeydown = e => { if (e.key === "Enter") $("savecode").click(); };
-$("savecode").onclick = async () => {
-  const c = $("newcode").value.toLowerCase();
-  if (!/^[a-z0-9]{3,20}$/.test(c)) { $("e-change").textContent = "Letters and numbers, 3 to 20 characters."; return; }
-  $("savecode").disabled = true;
-  const { data, error } = await sb.rpc("creator_change_code", { new_code: c });
-  $("savecode").disabled = false;
-  if (error || data?.error) {
-    $("e-change").textContent = data?.error === "taken" ? "That code's taken. Try another."
-      : data?.error === "used" ? "People already used this code, so it can't change now."
-      : "Couldn't change it. Try again.";
-    return;
-  }
-  $("d-code").textContent = data.code.toUpperCase(); $("d-link").textContent = `mealpic.app/${data.code}`;
-  $("editrow").hidden = true; $("coderow").hidden = false; $("e-change").textContent = "";
-};
 // "Watch this first" step REMOVED 2026-10-14 (Jack): signup goes straight to the link and code.
-// Applications (2026-10-14, Jack): new signups see "Application received"; only existing creators see their link + code.
-function finish(code, existing){
-  $("d-code").textContent = code.toUpperCase();
-  $("d-link").textContent = `mealpic.app/${code}`;
-  if (existing) {
-    $("done-h").textContent = "You're in!";
-    $("done-sub").textContent = "You're already set up. Here's your link and code.";
-    $("shares").hidden = false; $("done-dash").hidden = false; $("done-close").hidden = true;
-  }
-  go("done");
-}
+// Applications (2026-10-14, Jack): everyone ends on "Application received" (no link, code or dashboard here).
+function finish(code, existing){ go("done"); }
 $("done-close").onclick = () => $("close").click();
-document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
-  const t = $(b.dataset.copy).textContent, label = b.textContent;
-  try { await navigator.clipboard.writeText(b.dataset.copy === "d-link" ? "https://" + t : t); b.textContent = "Copied"; }
-  catch (e) { b.textContent = "Hold to copy"; }
-  setTimeout(() => b.textContent = label, 1600);
-});
 // ?start opens the signup straight away (for links that should skip the page).
 if (new URLSearchParams(location.search).has("start")) openFlow();
 // ?step=terms (or any step name) jumps straight to that screen, for checking copy.
