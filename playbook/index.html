@@ -140,12 +140,7 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <p class="p">A question the viewer wants answered. It can be stated or implied, verbal or non-verbal.</p>
   <h4>Two types of loops</h4>
   <ol class="ab">
-    <li><b>Visual.</b> Something interesting on screen. Best for grabbing attention.
-      <div class="anti">
-        <div class="clip"><video class="snd" playsinline loop muted autoplay preload="metadata" poster="../assets/video/mouse_hook.jpg?v=2" src="../assets/video/mouse_hook.mp4?v=2" aria-label="Trying to catch the rat in my house (gone wrong)"></video></div>
-        <p class="p">Is he able to catch the mouse? You have to keep watching to find out.<br><span class="cap">Tap for sound.</span></p>
-      </div>
-    </li>
+    <li><b>Visual.</b> Something interesting on screen. Best for grabbing attention.</li>
     <li><b>Verbal.</b> Something you say or put in text. Best for grabbing the <i>right</i> attention and keeping people watching.</li>
   </ol>
   <h4>Small things that help</h4>
@@ -167,10 +162,7 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
     <li>Talking head story time</li>
   </ul>
   <h4>Anti-example</h4>
-  <div class="anti">
-    <div class="clip"><video class="snd" playsinline loop muted autoplay preload="metadata" poster="../assets/video/creator_example.jpg?v=1" src="../assets/video/creator_example.mp4?v=1" aria-label="The Gatorade chicken video"></video></div>
-    <p class="p">The Gatorade chicken video got a ton of views, but it hooked the comedy audience, not the fitness audience. Big views, small sales.<br><span class="cap">Tap for sound.</span></p>
-  </div>
+  <p class="p">The Gatorade chicken video got a ton of views, but it hooked the comedy audience, not the fitness audience. Big views, small sales.</p>
 
   <!-- ---------- 2. meat ---------- -->
   <h2 class="h2" id="meat">2. Meat</h2>
@@ -234,10 +226,6 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <script>
 document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
-document.querySelectorAll("video.snd").forEach(function(v){
-  var c=v.closest(".anti").querySelector(".cap");
-  v.addEventListener("click",function(){v.muted=!v.muted;if(c)c.textContent=v.muted?"Tap for sound.":"Tap to mute.";if(v.paused)v.play().catch(function(){});});
-});
 </script>
 </body>
 </html>
