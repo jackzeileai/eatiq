@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Meal Pic Creator Playbook</title>
-<meta name="description" content="A winning Meal Pic video comes down to three parts: the hook, the meat, and the CTA.">
+<meta name="description" content="A successful Meal Pic video has three parts: the hook, the meat, and the CTA.">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="Meal Pic Creator Playbook">
 <meta property="og:description" content="The hook, the meat, and the CTA.">
@@ -24,36 +24,35 @@
 .book .label{display:block;margin-bottom:18px}
 .book .h1{margin-bottom:22px}
 .book .lede{color:var(--sub)}
-.book h2.h2{margin:96px 0 24px}
-.book p.p{font-size:19px;line-height:1.5;color:var(--ink);margin:0 0 18px}
-.book ol,.book ul{margin:0 0 18px;padding:0 0 0 26px;font-size:19px;line-height:1.5;font-weight:600;color:var(--ink)}
-.book li{margin:6px 0}
+.book h2.h2{margin:96px 0 28px}
+.book h3.h3{margin:40px 0 12px}
+.book h4{margin:26px 0 8px;font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.3}
+.book p.p{font-size:19px;line-height:1.5;color:var(--ink);margin:0 0 14px}
+.book p.p.sub{color:var(--sub)}
+.book ol,.book ul{margin:0 0 14px;padding:0 0 0 26px;font-size:19px;line-height:1.5;font-weight:600;color:var(--ink)}
+.book li{margin:5px 0}
 .book li::marker{font-weight:800}
-.book blockquote{margin:22px 0;padding:0 0 0 22px;border-left:3px solid var(--ink);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
-.book blockquote p{margin:0 0 8px}
-.book blockquote .dim{color:var(--sub)}
+.book ol.ab{list-style:upper-alpha}
+.book blockquote{margin:18px 0;padding:0 0 0 22px;border-left:3px solid var(--ink);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.book blockquote p{margin:0 0 6px}
 .book b{font-weight:800}
 
 /* pictures */
-.still{margin:28px 0 8px}
-.still .pic{width:min(280px,70vw);aspect-ratio:9/16;box-shadow:0 0 0 1px var(--hair)}
-.still .pic img{width:100%;height:100%;object-fit:cover;display:block}
-.still .cap{font-size:15px;color:var(--sub);font-weight:600;margin:12px 0 0}
+.shots{display:grid;gap:12px;margin:22px 0 10px}
+.shots .pic{box-shadow:0 0 0 1px var(--hair);background:#fff}
+.shots .pic img{width:100%;height:auto;display:block}
+.cap{font-size:15px;color:var(--sub);font-weight:600;margin:10px 0 0}
 
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 8px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 10px}
 .step3{text-align:center}
 .step3 .stage{height:190px;margin-bottom:12px}
 .step3 .stage img{max-height:140px;width:auto}
 .step3 b{display:block;font-size:17px;font-weight:800;letter-spacing:-.02em}
 
-.example{margin:28px 0 8px}
-.phone-vid{width:min(300px,76vw);aspect-ratio:1320/2868;border-radius:54px;overflow:hidden;background:#000;box-shadow:0 0 0 11px #1d1d1f,0 0 0 12px rgba(0,0,0,.08),0 50px 90px -40px rgba(0,0,0,.45);transform:translateZ(0);cursor:pointer;margin:0 auto}
+.anti{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin:22px 0 10px}
+.phone-vid{width:min(220px,60vw);aspect-ratio:1320/2868;border-radius:44px;overflow:hidden;background:#000;box-shadow:0 0 0 9px #1d1d1f,0 0 0 10px rgba(0,0,0,.08),0 40px 80px -36px rgba(0,0,0,.45);transform:translateZ(0);cursor:pointer;margin:10px}
 .phone-vid video{width:100%;height:100%;object-fit:cover;display:block}
-html[data-mode="dark"] .phone-vid{box-shadow:0 0 0 11px #2a2a2c,0 0 0 12px rgba(255,255,255,.12),0 50px 90px -40px rgba(0,0,0,.9)}
-.example{padding:12px 0 24px}
-.example .cap{text-align:center;font-size:15px;color:var(--sub);font-weight:600;margin:16px 0 0}
-
-.end{margin:96px 0 0;text-align:center}
+html[data-mode="dark"] .phone-vid{box-shadow:0 0 0 9px #2a2a2c,0 0 0 10px rgba(255,255,255,.12),0 40px 80px -36px rgba(0,0,0,.9)}
 
 /* nav + dark (same as /join) */
 .nav .brand span{color:var(--sub);font-weight:800}
@@ -70,7 +69,8 @@ html[data-mode="dark"] .glass{background:rgba(28,28,30,.6);box-shadow:inset 0 1p
 html[data-mode="dark"] .btn{background:#f5f5f7;color:#000}
 html[data-mode="dark"] .btn:hover{background:#fff}
 html[data-mode="dark"] .btn.shine::after{background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%)}
-html[data-mode="dark"] .stage,html[data-mode="dark"] .pic{background:#0d0d0f;box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .stage{background:#0d0d0f;box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .shots .pic{box-shadow:0 0 0 1px var(--hair)}
 html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 @media (max-width:900px){
@@ -81,6 +81,8 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   .step3 .stage{height:130px}
   .step3 .stage img{max-height:96px}
   .step3 b{font-size:15px}
+  .anti{grid-template-columns:1fr;gap:12px}
+  .anti .phone-vid{margin:10px auto}
 }
 @media (max-width:360px){.nav .brand{font-size:18px}.nav .mode-btn{display:none}}
 </style>
@@ -104,76 +106,121 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 <main class="book">
 
   <span class="label dim">Creator playbook</span>
-  <h1 class="h1">A winning video comes down to three parts.</h1>
-  <p class="lede">The hook, the meat, and the CTA.</p>
+  <h1 class="h1">A successful video has three parts.</h1>
+  <ol>
+    <li><a href="#hook"><b>The hook</b></a></li>
+    <li><a href="#meat"><b>The meat</b></a></li>
+    <li><a href="#cta"><b>The CTA</b></a></li>
+  </ol>
 
   <!-- ---------- 1. hook ---------- -->
-  <h2 class="h2" id="hook">1. The hook</h2>
-  <p class="p">The hook has two goals:</p>
-  <ol>
-    <li>Get people's interest.</li>
-    <li>Make sure it's targeted to the right person.</li>
-  </ol>
-  <p class="p">If it isn't targeted to the right person, you might get a lot of views, but nobody downloads the app and buys. It's like selling steak to vegans. You might have the best steak in the world, but a room full of vegans isn't interested.</p>
+  <h2 class="h2" id="hook">1. Hook</h2>
 
-  <p class="p"><b>Getting interest.</b> The best way to make a viral hook is to open a loop. Create a curiosity gap and make it very visual. Starting in the action with text on screen is a great way to do that. Keep it simple and clean, not too many elements. The loop can be curiosity, shock, or a story.</p>
-
-  <div class="still">
-    <div class="pic"><img src="../assets/video/creator_example_hook.jpg?v=1" alt="First frame of a Meal Pic creator video: pouring Gatorade into a pot, with the text How to make Gatorade Chicken"></div>
-    <p class="cap">Starts in the action, text on screen, one thing happening.</p>
+  <h3 class="h3">What is a hook?</h3>
+  <ul>
+    <li>The first 3 seconds of the video.</li>
+    <li>The algorithm grades it by <b>skip rate</b>: the % of people who leave in the first 3 seconds. Lower is better.</li>
+    <li>It's one of the biggest factors in whether a video goes viral.</li>
+  </ul>
+  <div class="shots">
+    <div class="pic"><img src="../assets/playbook/skip_rate.jpg?v=1" alt="Instagram insights: What impacts your views. Skip rate 25.6%, lower."></div>
+    <div class="pic"><img src="../assets/playbook/retention.jpg?v=1" alt="Instagram insights: How long people watched your reel. 80.9% still watching at 0:03."></div>
   </div>
 
-  <p class="p"><b>Targeting the right person.</b> These formats work:</p>
+  <h3 class="h3">A hook has two jobs</h3>
+  <ol>
+    <li>Get people's interest</li>
+    <li>Get the <b>right</b> people's interest</li>
+  </ol>
+
+  <h3 class="h3">Job 1: Get people's interest</h3>
+  <h4>How?</h4>
+  <p class="p">You open a loop.</p>
+  <h4>What is a loop?</h4>
+  <p class="p">A question the viewer wants answered. It can be stated or implied, verbal or non-verbal.</p>
+  <blockquote>
+    <p>“How does it go wrong?”</p>
+    <p>“Is he able to catch the mouse?”</p>
+  </blockquote>
+  <h4>Two types of loops</h4>
+  <ol class="ab">
+    <li><b>Visual.</b> Something interesting on screen. Best for grabbing attention.</li>
+    <li><b>Verbal.</b> Something you say or put in text. Best for grabbing the <i>right</i> attention and keeping people watching.</li>
+  </ol>
+  <h4>Small things that help</h4>
+  <ol>
+    <li>Don't reinvent the wheel. Copy winning hooks.</li>
+    <li>Start in the action. Put context in text on screen, don't explain it.</li>
+  </ol>
+
+  <h3 class="h3">Job 2: Get the right people's interest</h3>
+  <p class="p">The hook <b>and</b> the concept of the video need to be aimed at people who'd actually download a calorie tracking app. If not, you get views but no sales.</p>
+  <h4>Concepts that work</h4>
   <ul>
+    <li>Fitness vlogs</li>
     <li>Day in my life</li>
     <li>What I eat in a day</li>
-    <li>Workout videos</li>
-    <li>Storytime</li>
-    <li>A skit about health, fitness or the gym</li>
-    <li>Healthy recipes</li>
-    <li>High-protein recipes</li>
+    <li>Healthy cooking recipes</li>
+    <li>High protein recipes</li>
+    <li>Fitness videos in general</li>
+    <li>Talking head story time</li>
   </ul>
+  <h4>Anti-example</h4>
+  <div class="anti">
+    <div class="phone-vid"><video id="ex" playsinline loop muted autoplay preload="metadata" poster="../assets/video/creator_example.jpg?v=1" src="../assets/video/creator_example.mp4?v=1" aria-label="The Gatorade chicken video"></video></div>
+    <p class="p">The Gatorade chicken video got a ton of views, but it hooked the comedy audience, not the fitness audience. Big views, small sales.<br><span class="cap" id="excap">Tap for sound.</span></p>
+  </div>
 
   <!-- ---------- 2. meat ---------- -->
-  <h2 class="h2" id="meat">2. The meat</h2>
-  <p class="p">This is where you show the value and demonstrate the app. The magic moment, the thing that really sells it, is the food scan. It's three steps:</p>
-  <ol>
-    <li>Take a picture of the food.</li>
-    <li>The macros load.</li>
-    <li>Edit it.</li>
-  </ol>
+  <h2 class="h2" id="meat">2. Meat</h2>
 
+  <h3 class="h3">What is the meat?</h3>
+  <p class="p">Where you show the app and why it's valuable.</p>
+
+  <h3 class="h3">What do you show?</h3>
+  <p class="p">The magic moment: the <b>scan feature</b>.</p>
+  <ol>
+    <li>Take a picture of your food</li>
+    <li>Results load</li>
+    <li>Edit if needed</li>
+  </ol>
   <div class="steps">
     <div class="step3"><div class="stage"><img src="../assets/lab/hiw_snap_t.png?v=1" alt=""></div><b>Take a picture</b></div>
-    <div class="step3"><div class="stage"><img src="../assets/lab/hiw_result_t.png?v=1" alt=""></div><b>Macros load</b></div>
-    <div class="step3"><div class="stage"><img src="../assets/lab/hiw_edit_t.png?v=1" alt=""></div><b>Edit it</b></div>
+    <div class="step3"><div class="stage"><img src="../assets/lab/hiw_result_t.png?v=1" alt=""></div><b>Results load</b></div>
+    <div class="step3"><div class="stage"><img src="../assets/lab/hiw_edit_t.png?v=1" alt=""></div><b>Edit if needed</b></div>
   </div>
 
-  <p class="p" style="margin-top:28px">Here's what it looks like in a real video:</p>
-  <div class="example">
-    <div class="phone-vid"><video id="ex" playsinline loop muted autoplay preload="metadata" poster="../assets/video/creator_example.jpg?v=1" src="../assets/video/creator_example.mp4?v=1" aria-label="Meal Pic creator video: Gatorade chicken, scanned with the app"></video></div>
-    <p class="cap" id="excap">Tap for sound.</p>
-  </div>
+  <h3 class="h3">Why does it matter to you?</h3>
+  <p class="p">Pick one or two.</p>
+  <ul>
+    <li>Helped you lose weight</li>
+    <li>Makes calorie tracking easy</li>
+    <li>You're finally consistent and feel better</li>
+  </ul>
 
-  <p class="p" style="margin-top:28px">If you don't show the value of the app enough, people won't be interested and won't download.</p>
-  <p class="p">There are lots of ways to show value. One is anti-value:</p>
-  <blockquote>
-    <p>“Here's why I'm returning this thing.”</p>
-    <p class="dim">“It's not because X. It's not because Y. It's not because Z.”</p>
-  </blockquote>
-  <p class="p">X, Y and Z are all good features.</p>
+  <h3 class="h3">How do you frame it?</h3>
+  <ol class="ab">
+    <li><b>Friend recommendation.</b> “Here's a useful thing I use.”</li>
+    <li><b>Reverse value.</b> “Here's why I'm canceling my Meal Pic subscription.” It's not because:
+      <ul>
+        <li>Valuable feature 1</li>
+        <li>Valuable feature 2</li>
+        <li>Valuable feature 3</li>
+      </ul>
+    </li>
+  </ol>
 
   <!-- ---------- 3. cta ---------- -->
-  <h2 class="h2" id="cta">3. The CTA</h2>
-  <p class="p">The CTA tells people what to do after watching, and that's what gets the conversion. Keep it short and sweet.</p>
-  <p class="p">Most importantly, give the viewer a reason why they should click <b>your</b> link. What are they getting? Usually that's:</p>
-  <blockquote>
-    <p>“Click my link for a free 3-day trial.”</p>
-    <p>“Click my link for 3 days free.”</p>
-  </blockquote>
-  <p class="p">That's the “because”. Now it makes sense why they should go through your link.</p>
+  <h2 class="h2" id="cta">3. CTA</h2>
 
-  <p class="p end">That's it. Hook, meat, CTA.</p>
+  <h3 class="h3">What is the CTA?</h3>
+  <p class="p">What you tell the viewer to do at the end.</p>
+
+  <h3 class="h3">How do you do it?</h3>
+  <p class="p">Keep it short. Give them a <b>why</b>.</p>
+  <blockquote>
+    <p>“Click the link in my bio to get 3 days free.”</p>
+  </blockquote>
 
 </main>
 
