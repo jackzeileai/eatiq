@@ -19,39 +19,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/style/mono.css?v=1791820000">
 <style>
-/* ---------- layout only; the look comes from mono.css ---------- */
-.book{max-width:880px;margin:0 auto;padding:48px var(--gutter) 0}
-.book .label{display:block;margin-bottom:18px}
-.book .h1{font-size:clamp(34px,4.6vw,52px);margin-bottom:18px}
-.book .lede{color:var(--sub)}
-.book h2.h2{font-size:clamp(28px,3.4vw,38px);margin:72px 0 18px}
-.book h3.h3{font-size:21px;margin:32px 0 10px}
-.book h4{margin:22px 0 6px;font-size:16px;font-weight:800;letter-spacing:-.02em;line-height:1.3}
-.book p.p{font-size:16px;line-height:1.55;color:var(--ink);margin:0 0 12px}
-.book p.p.sub{color:var(--sub)}
-.book ol,.book ul{margin:0 0 12px;padding:0 0 0 24px;font-size:16px;line-height:1.55;font-weight:600;color:var(--ink)}
-.book li{margin:4px 0}
-.book li::marker{font-weight:800}
-.book ol.ab{list-style:upper-alpha}
-.book blockquote{margin:14px 0;padding:0 0 0 18px;border-left:3px solid var(--ink);font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
-.book blockquote p{margin:0 0 6px}
-.book b{font-weight:800}
+/* ---------- layout only; the look is mono.css + the /join tiles ---------- */
+.hero-apple{padding-top:64px}
+.hero-apple .lede{color:var(--sub)}
+.tiles{margin-top:56px}
+.tile{text-align:center;text-decoration:none;color:inherit;display:block}
+.tile .stage{aspect-ratio:1;height:auto;margin-bottom:22px;padding:28px;background:transparent;box-shadow:none}
+.tile .stage img{max-width:100%;max-height:100%;object-fit:contain}
+.tile .h3{font-size:28px;margin-bottom:8px}
+.tile .lede.sub{font-size:18px;color:var(--sub);margin:6px auto 0;max-width:320px}
 
-/* pictures */
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;margin:18px 0 8px}
-.shots .pic{box-shadow:0 0 0 1px var(--hair);background:#fff}
+.sec{padding-top:88px}
+.sec .split{margin:0 0 32px}
+.sec .split .lede{max-width:520px;justify-self:end;color:var(--sub)}
+.copy{max-width:760px}
+.copy .h3{margin:36px 0 10px}
+.copy .h3:first-child{margin-top:0}
+.copy .p{color:var(--ink);margin:0 0 12px}
+.copy .p.sub{color:var(--sub)}
+.copy ol,.copy ul{font-size:17px;line-height:1.5;font-weight:600;color:var(--ink);margin:0 0 12px;padding:0 0 0 28px}
+.copy ol.ab{list-style:upper-alpha}
+.copy li{padding:2px 0}
+.copy li::marker{font-weight:800}
+.copy li ul{margin:4px 0 0;padding-left:24px}
+.copy b{font-weight:800}
+.copy .label{display:block;margin:22px 0 6px}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;margin:20px 0 8px}
+.shots .pic{box-shadow:inset 0 0 0 1px var(--hair);background:#fff}
 .shots .pic img{width:100%;height:auto;display:block}
-.cap{font-size:14px;color:var(--sub);font-weight:600;margin:10px 0 0}
-
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 10px}
-.step3{text-align:center}
-.step3 .stage{height:170px;margin-bottom:10px}
-.step3 .stage img{max-height:124px;width:auto}
-.step3 b{display:block;font-size:15px;font-weight:800;letter-spacing:-.02em}
-
-.anti{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin:22px 0 10px}
-.clip{width:min(240px,64vw);aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 0 0 1px var(--hair);cursor:pointer}
-.clip video{width:100%;height:100%;object-fit:cover;display:block}
 
 /* nav + dark (same as /join) */
 .nav .brand span{color:var(--sub);font-weight:800}
@@ -68,21 +63,15 @@ html[data-mode="dark"] .glass{background:rgba(28,28,30,.6);box-shadow:inset 0 1p
 html[data-mode="dark"] .btn{background:#f5f5f7;color:#000}
 html[data-mode="dark"] .btn:hover{background:#fff}
 html[data-mode="dark"] .btn.shine::after{background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%)}
-html[data-mode="dark"] .stage{background:#0d0d0f;box-shadow:inset 0 0 0 1px var(--hair)}
-html[data-mode="dark"] .shots .pic{box-shadow:0 0 0 1px var(--hair)}
 html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 @media (max-width:900px){
-  .book{padding-top:32px}
-  .book h2.h2{margin-top:64px}
+  .hero-apple{padding-top:32px}
+  .tiles{margin-top:32px}
+  .sec{padding-top:56px}
+  .sec .split{margin-bottom:20px}
   .nav .links a.plain{display:none}
-  .steps{gap:8px}
-  .step3 .stage{height:130px}
-  .step3 .stage img{max-height:96px}
-  .step3 b{font-size:15px}
-  .anti{grid-template-columns:1fr;gap:12px}
   .shots{grid-template-columns:1fr}
-  .anti .clip{margin:0 auto}
 }
 @media (max-width:360px){.nav .brand{font-size:18px}.nav .mode-btn{display:none}}
 </style>
@@ -103,117 +92,127 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   </div>
 </header>
 
-<main class="book">
+<main>
 
-  <span class="label dim">Creator playbook</span>
-  <h1 class="h1">A successful video has three parts.</h1>
-  <ol>
-    <li><a href="#hook"><b>The hook</b></a></li>
-    <li><a href="#meat"><b>The meat</b></a></li>
-    <li><a href="#cta"><b>The CTA</b></a></li>
-  </ol>
-
-  <!-- ---------- 1. hook ---------- -->
-  <h2 class="h2" id="hook">1. Hook</h2>
-
-  <h3 class="h3">What is a hook?</h3>
-  <ul>
-    <li>The first 3 seconds of the video.</li>
-    <li>The algorithm grades it by <b>skip rate</b>: the % of people who leave in the first 3 seconds. Lower is better.</li>
-    <li>It's one of the biggest factors in whether a video goes viral.</li>
-  </ul>
-  <div class="shots">
-    <div class="pic"><img src="../assets/playbook/skip_rate.jpg?v=1" alt="Instagram insights: What impacts your views. Skip rate 25.6%, lower."></div>
-    <div class="pic"><img src="../assets/playbook/retention.jpg?v=1" alt="Instagram insights: How long people watched your reel. 80.9% still watching at 0:03."></div>
+<!-- ---------- hero + three-stepper ---------- -->
+<section class="hero-apple">
+  <div class="wrap">
+    <h1 class="h1">A successful video<br>has three parts.</h1>
+    <p class="lede">Nail all three and the video gets views and sales.</p>
+    <div class="grid c3 tiles">
+      <a class="tile" href="#hook"><div class="stage"><img src="../assets/lab/memoji_ringlight_white_t.png?v=7" alt=""></div><h3 class="h3">1. The Hook</h3><p class="lede sub">The first 3 seconds. Get the right people's interest.</p></a>
+      <a class="tile" href="#meat"><div class="stage"><img src="../assets/lab/hiw_snap_t.png?v=7" alt=""></div><h3 class="h3">2. The Meat</h3><p class="lede sub">Show the app and why it's valuable.</p></a>
+      <a class="tile" href="#cta"><div class="stage"><img src="../assets/lab/phone_link_t.png?v=7" alt=""></div><h3 class="h3">3. The CTA</h3><p class="lede sub">Tell the viewer what to do. Give them a why.</p></a>
+    </div>
   </div>
+</section>
 
-  <h3 class="h3">A hook has two jobs</h3>
-  <ol>
-    <li>Get people's interest</li>
-    <li>Get the <b>right</b> people's interest</li>
-  </ol>
+<!-- ---------- 1. hook ---------- -->
+<section class="sec" id="hook">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">1. The Hook</h2><p class="lede">The first 3 seconds of the video.</p></div>
+    <div class="copy">
 
-  <h3 class="h3">Job 1: Get people's interest</h3>
-  <h4>How?</h4>
-  <p class="p">You open a loop.</p>
-  <h4>What is a loop?</h4>
-  <p class="p">A question the viewer wants answered. It can be stated or implied, verbal or non-verbal.</p>
-  <h4>Two types of loops</h4>
-  <ol class="ab">
-    <li><b>Visual.</b> Something interesting on screen. Best for grabbing attention.</li>
-    <li><b>Verbal.</b> Something you say or put in text. Best for grabbing the <i>right</i> attention and keeping people watching.</li>
-  </ol>
-  <h4>Small things that help</h4>
-  <ol>
-    <li>Don't reinvent the wheel. Copy winning hooks.</li>
-    <li>Start in the action. Put context in text on screen, don't explain it.</li>
-  </ol>
-
-  <h3 class="h3">Job 2: Get the right people's interest</h3>
-  <p class="p">The hook <b>and</b> the concept of the video need to be aimed at people who'd actually download a calorie tracking app. If not, you get views but no sales.</p>
-  <h4>Concepts that work</h4>
-  <ul>
-    <li>Fitness vlogs</li>
-    <li>Day in my life</li>
-    <li>What I eat in a day</li>
-    <li>Healthy cooking recipes</li>
-    <li>High protein recipes</li>
-    <li>Fitness videos in general</li>
-    <li>Talking head story time</li>
-  </ul>
-  <h4>Anti-example</h4>
-  <p class="p">The Gatorade chicken video got a ton of views, but it hooked the comedy audience, not the fitness audience. Big views, small sales.</p>
-
-  <!-- ---------- 2. meat ---------- -->
-  <h2 class="h2" id="meat">2. Meat</h2>
-
-  <h3 class="h3">What is the meat?</h3>
-  <p class="p">Where you show the app and why it's valuable.</p>
-
-  <h3 class="h3">What do you show?</h3>
-  <p class="p">The magic moment: the <b>scan feature</b>.</p>
-  <ol>
-    <li>Take a picture of your food</li>
-    <li>Results load</li>
-    <li>Edit if needed</li>
-  </ol>
-  <div class="steps">
-    <div class="step3"><div class="stage"><img src="../assets/lab/hiw_snap_t.png?v=1" alt=""></div><b>Take a picture</b></div>
-    <div class="step3"><div class="stage"><img src="../assets/lab/hiw_result_t.png?v=1" alt=""></div><b>Results load</b></div>
-    <div class="step3"><div class="stage"><img src="../assets/lab/hiw_edit_t.png?v=1" alt=""></div><b>Edit if needed</b></div>
-  </div>
-
-  <h3 class="h3">Why does it matter to you?</h3>
-  <p class="p">Pick one or two.</p>
-  <ul>
-    <li>Helped you lose weight</li>
-    <li>Makes calorie tracking easy</li>
-    <li>You're finally consistent and feel better</li>
-  </ul>
-
-  <h3 class="h3">How do you frame it?</h3>
-  <ol class="ab">
-    <li><b>Friend recommendation.</b> “Here's a useful thing I use.”</li>
-    <li><b>Reverse value.</b> “Here's why I'm canceling my Meal Pic subscription.” It's not because:
+      <h3 class="h3">What is a hook?</h3>
       <ul>
-        <li>Valuable feature 1</li>
-        <li>Valuable feature 2</li>
-        <li>Valuable feature 3</li>
+        <li>The algorithm grades it by <b>skip rate</b>: the % of people who leave in the first 3 seconds. Lower is better.</li>
+        <li>It's one of the biggest factors in whether a video goes viral.</li>
       </ul>
-    </li>
-  </ol>
+      <div class="shots">
+        <div class="pic"><img src="../assets/playbook/skip_rate.jpg?v=1" alt="Instagram insights: What impacts your views. Skip rate 25.6%, lower."></div>
+        <div class="pic"><img src="../assets/playbook/retention.jpg?v=1" alt="Instagram insights: How long people watched your reel. 80.9% still watching at 0:03."></div>
+      </div>
 
-  <!-- ---------- 3. cta ---------- -->
-  <h2 class="h2" id="cta">3. CTA</h2>
+      <h3 class="h3">A hook has two jobs</h3>
+      <ol>
+        <li>Get people's interest</li>
+        <li>Get the <b>right</b> people's interest</li>
+      </ol>
 
-  <h3 class="h3">What is the CTA?</h3>
-  <p class="p">What you tell the viewer to do at the end.</p>
+      <h3 class="h3">Job 1: Get people's interest</h3>
+      <p class="p"><b>How?</b> You open a loop.</p>
+      <p class="p"><b>What is a loop?</b> A question the viewer wants answered. It can be stated or implied, verbal or non-verbal.</p>
+      <span class="label dim">Two types of loops</span>
+      <ol class="ab">
+        <li><b>Visual.</b> Something interesting on screen. Best for grabbing attention.</li>
+        <li><b>Verbal.</b> Something you say or put in text. Best for grabbing the <i>right</i> attention and keeping people watching.</li>
+      </ol>
+      <span class="label dim">Small things that help</span>
+      <ol>
+        <li>Don't reinvent the wheel. Copy winning hooks.</li>
+        <li>Start in the action. Put context in text on screen, don't explain it.</li>
+      </ol>
 
-  <h3 class="h3">How do you do it?</h3>
-  <p class="p">Keep it short. Give them a <b>why</b>.</p>
-  <blockquote>
-    <p>“Click the link in my bio to get 3 days free.”</p>
-  </blockquote>
+      <h3 class="h3">Job 2: Get the right people's interest</h3>
+      <p class="p">The hook <b>and</b> the concept of the video need to be aimed at people who'd actually download a calorie tracking app. If not, you get views but no sales.</p>
+      <span class="label dim">Concepts that work</span>
+      <ul>
+        <li>Fitness vlogs</li>
+        <li>Day in my life</li>
+        <li>What I eat in a day</li>
+        <li>Healthy cooking recipes</li>
+        <li>High protein recipes</li>
+        <li>Fitness videos in general</li>
+        <li>Talking head story time</li>
+      </ul>
+      <span class="label dim">Anti-example</span>
+      <p class="p">The Gatorade chicken video got a ton of views, but it hooked the comedy audience, not the fitness audience. Big views, small sales.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 2. meat ---------- -->
+<section class="sec" id="meat">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">2. The Meat</h2><p class="lede">Where you show the app and why it's valuable.</p></div>
+    <div class="copy">
+
+      <h3 class="h3">What do you show?</h3>
+      <p class="p">The magic moment: the <b>scan feature</b>.</p>
+      <ol>
+        <li>Take a picture of your food</li>
+        <li>Results load</li>
+        <li>Edit if needed</li>
+      </ol>
+
+      <h3 class="h3">Why does it matter to you?</h3>
+      <p class="p">Pick one or two.</p>
+      <ul>
+        <li>Helped you lose weight</li>
+        <li>Makes calorie tracking easy</li>
+        <li>You're finally consistent and feel better</li>
+      </ul>
+
+      <h3 class="h3">How do you frame it?</h3>
+      <ol class="ab">
+        <li><b>Friend recommendation.</b> “Here's a useful thing I use.”</li>
+        <li><b>Reverse value.</b> “Here's why I'm canceling my Meal Pic subscription.” It's not because:
+          <ul>
+            <li>Valuable feature 1</li>
+            <li>Valuable feature 2</li>
+            <li>Valuable feature 3</li>
+          </ul>
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 3. cta ---------- -->
+<section class="sec" id="cta">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">3. The CTA</h2><p class="lede">What you tell the viewer to do at the end.</p></div>
+    <div class="copy">
+
+      <h3 class="h3">How do you do it?</h3>
+      <p class="p">Keep it short. Give them a <b>why</b>.</p>
+      <p class="p sub">“Click the link in my bio to get 3 days free.”</p>
+
+    </div>
+  </div>
+</section>
 
 </main>
 
