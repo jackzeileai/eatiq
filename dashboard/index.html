@@ -89,6 +89,9 @@ input.code{letter-spacing:10px;font-size:28px;font-weight:800;text-align:center}
 .d-in input:focus{box-shadow:none}
 .d-hint{flex-basis:100%;text-align:right;font-size:14px;font-weight:600;color:var(--sub);min-height:20px;margin-top:-2px}
 .d-hint.bad{color:#ff3b30}
+.d-chips.left{justify-content:flex-start;margin-top:12px}
+.d-chip.pick.on{background:var(--ink);color:var(--paper);box-shadow:none}
+.d-warn{color:#ff3b30}
 @media (max-width:720px){.d-hint{text-align:left}}
 .d-card{border-radius:var(--app-r);box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);padding:var(--app-pad);min-width:0}
 .d-money{display:grid;grid-template-columns:1fr 1fr;gap:var(--app-gap)}
@@ -305,12 +308,18 @@ document.addEventListener("click", e => {
     return;
   }
   if (e.target.closest("[data-play]")) { playSetup(); return; }
+  const pm = e.target.closest("[data-pm]");
+  if (pm) { payMethod = pm.dataset.pm; render(); $("payhandle").focus(); return; }
   const id = e.target.closest("button")?.id;
-  if (id === "chg") { editing = true; render(); const i = $("newcode"); i.focus(); i.select(); }
+  if (id === "paychg") { payEditing = true; payMethod = data.payout?.method || ""; render(); if (payMethod) $("payhandle").focus(); }
+  else if (id === "paycancel") { payEditing = false; render(); }
+  else if (id === "paysave") savePayout();
+  else if (id === "chg") { editing = true; render(); const i = $("newcode"); i.focus(); i.select(); }
   else if (id === "cancelcode") { editing = false; render(); }
   else if (id === "savecode") saveCode();
 });
 document.addEventListener("input", e => {
+  if (e.target.id === "payhandle") { $("paysave").disabled = !payMethod || e.target.value.trim().length < 2; return; }
   if (e.target.id !== "newcode") return;
   const i = e.target; i.value = i.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
   const c = i.value.toLowerCase(), h = $("h-code"), b = $("savecode");
@@ -328,6 +337,7 @@ document.addEventListener("input", e => {
   }, 300);
 });
 document.addEventListener("keydown", e => {
+  if (e.target.id === "payhandle") { if (e.key === "Enter" && !$("paysave").disabled) savePayout(); if (e.key === "Escape") { payEditing = false; render(); } return; }
   if (e.target.id !== "newcode") return;
   if (e.key === "Enter" && !$("savecode").disabled) saveCode();
   if (e.key === "Escape") { editing = false; render(); }
@@ -345,6 +355,35 @@ async function saveCode(){
     return;
   }
   data.codes[0].code = r.code; editing = false; render();
+}
+
+// Payout details (2026-10-14): asked here, not in signup.
+let payEditing = false, payMethod = "";
+const PAYN = { venmo:["Venmo","@username"], paypal:["PayPal","you@example.com"], zelle:["Zelle","Phone or email"], cashapp:["Cash App","$cashtag"] };
+function payCard(){
+  const p = data.payout || {};
+  if (!payEditing) {
+    return p.method
+      ? `<div class="d-row"><span class="d-k">Payouts go to</span><b>${PAYN[p.method]?.[0] || esc(p.method)} · ${esc(p.handle)}</b></div>
+         <div class="d-chips left"><button class="d-chip plain" id="paychg">Change</button></div>`
+      : `<div class="d-row"><span class="d-k">Payouts go to</span><b class="d-warn">Not set yet</b></div>
+         <div class="d-chips left"><button class="d-chip solid" id="paychg">Add how we pay you</button></div>`;
+  }
+  return `<div class="d-row"><span class="d-k">How should we pay you?</span></div>
+    <div class="d-chips left">${Object.keys(PAYN).map(m => `<button class="d-chip pick${m === payMethod ? " on" : ""}" data-pm="${m}">${PAYN[m][0]}</button>`).join("")}</div>
+    ${payMethod ? `<div class="d-chips left">
+      <span class="d-chip d-in" onclick="$('payhandle').focus()"><em>${PAYN[payMethod][0]}</em><input id="payhandle" value="${esc(p.method === payMethod ? p.handle || "" : "")}" placeholder="${PAYN[payMethod][1]}" maxlength="120" autocapitalize="off" autocorrect="off" spellcheck="false" style="text-transform:none;width:14em" aria-label="Payout handle"></span>
+      <button class="d-chip solid" id="paysave" ${(p.method === payMethod && p.handle) ? "" : "disabled"}>Save</button>
+      <button class="d-chip plain" id="paycancel">Cancel</button>
+      <div class="d-hint" id="h-pay" style="text-align:left"></div></div>` : `<div class="d-chips left"><button class="d-chip plain" id="paycancel">Cancel</button></div>`}`;
+}
+async function savePayout(){
+  const h = $("payhandle").value.trim(), b = $("paysave"), hint = $("h-pay");
+  if (!payMethod || h.length < 2) return;
+  b.disabled = true; hint.className = "d-hint"; hint.textContent = "Saving…";
+  const { data:r, error } = await sb.rpc("creator_set_payout", { method: payMethod, handle: h });
+  if (error || r?.error) { hint.className = "d-hint bad"; hint.textContent = "Couldn't save that. Try again."; b.disabled = false; return; }
+  data.payout = { method: r.method, handle: r.handle }; payEditing = false; render();
 }
 
 async function load(){
@@ -419,6 +458,7 @@ function render(){
       <div class="d-card"><span class="d-k">Subscribers</span><b>${num(subs)}</b></div>
       <div class="d-card"><span class="d-k">Paid out</span><b>${cash(paidOut, true)}</b></div>
     </div>
+    <div class="d-card">${payCard()}</div>
     <div class="d-foot">Tap your code or link to copy it.${canChange ? " You can change your code until someone uses it." : ""}</div>
   </div>
   <div class="learn">

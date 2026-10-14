@@ -288,7 +288,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--ink);margin:0 0
 .share .v{font-size:19px;font-weight:800;margin-top:2px;word-break:break-all}
 .share>div{min-width:0;flex:1}
 #d-link{word-break:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#d-code{word-break:normal;overflow-wrap:anywhere}
+#d-link-code.dim{color:var(--sub);font-weight:600}
 @media (max-width:420px){#d-link,#d-code{font-size:17px}.share{gap:6px;padding:12px 12px 12px 16px}.share .copy{height:34px;padding:0 12px;font-size:13px}}
 .copy{flex:none;height:36px;padding:0 16px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink);font:600 14px var(--font);cursor:pointer}
 .copy:hover,.copy.solid{background:var(--ink);color:var(--bg)}
@@ -937,24 +937,14 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
         <div class="foot"><button class="btn" id="b-otp" disabled>Verify</button><button class="link" id="resend">Send a new code</button><button class="link" id="diffemail">Use a different email</button></div>
       </section>
       <section class="step" data-s="code">
-        <div class="body"><h3>Pick your code</h3><p class="lead">Short and easy to say.</p>
-          <label class="f" for="code">Creator code</label><input class="field" id="code" autocapitalize="characters" autocorrect="off" maxlength="20" placeholder="SARAH"><div class="hint" id="h-code">Letters and numbers, 3 to 20 characters.</div></div>
+        <div class="body"><h3>Pick your code</h3><p class="lead">Your followers type it in the app. It's also your link.</p>
+          <label class="f" for="code">Creator code</label><input class="field" id="code" autocapitalize="characters" autocorrect="off" maxlength="20" placeholder="SARAH"><div class="hint" id="h-code">Letters and numbers, 3 to 20 characters.</div>
+          <div class="shares" id="linkprev"><div class="share"><div><div class="k">Your link</div><div class="v" id="d-link">mealpic.app/<span id="d-link-code" class="dim">sarah</span></div></div></div></div></div>
         <div class="foot"><button class="btn" data-next id="b-code" disabled>Continue</button></div>
-      </section>
-      <section class="step" data-s="payout">
-        <div class="body"><h3>How should we pay you?</h3><p class="lead">Payouts go out every Friday.</p>
-          <div class="rows" id="opts">
-            <button class="opt" aria-pressed="false" data-m="venmo"><span class="tile logo" style="background:#008CFF"><svg viewBox="0 0 24 24"><path fill="#fff" d="M5.6 5.2h4.3l1.7 9.6c1.6-2.6 3.1-5.7 3.1-7.9 0-.7-.1-1.2-.4-1.6l3.9-.8c.4.7.6 1.6.6 2.7 0 3.5-3 8.1-5.4 11.6H8.2z"/></svg></span>Venmo<span class="radio"></span></button>
-            <button class="opt" aria-pressed="false" data-m="paypal"><span class="tile logo" style="background:#003087"><svg viewBox="-5 -5 34 34"><path fill="#fff" d="M7.016 19.198h-4.2a.562.562 0 0 1-.555-.65L5.093.584A.692.692 0 0 1 5.776 0h7.222c3.417 0 5.904 2.488 5.846 5.5-.006.25-.027.5-.066.747A6.794 6.794 0 0 1 12.071 12H8.743a.69.69 0 0 0-.682.583l-.325 2.056-.013.083-.692 4.39-.015.087zM19.79 6.142c-.01.087-.01.175-.023.261a7.76 7.76 0 0 1-7.695 6.598H9.007l-.283 1.795-.013.083-.692 4.39-.134.843-.014.088H6.86l-.497 3.15a.562.562 0 0 0 .555.65h3.612c.34 0 .63-.249.683-.585l.952-6.031a.692.692 0 0 1 .683-.584h2.126a6.793 6.793 0 0 0 6.707-5.752c.306-1.95-.466-3.744-1.89-4.906z"/></svg></span>PayPal<span class="radio"></span></button>
-            <button class="opt" aria-pressed="false" data-m="zelle"><span class="tile logo" style="background:#6D1ED4"><svg viewBox="-5 -5 34 34"><path fill="#fff" d="M13.559 24h-2.841a.483.483 0 0 1-.483-.483v-2.765H5.638a.667.667 0 0 1-.666-.666v-2.234a.67.67 0 0 1 .142-.412l8.139-10.382h-7.25a.667.667 0 0 1-.667-.667V3.914c0-.367.299-.666.666-.666h4.23V.483c0-.266.217-.483.483-.483h2.841c.266 0 .483.217.483.483v2.765h4.323c.367 0 .666.299.666.666v2.137a.67.67 0 0 1-.141.41l-8.19 10.481h7.665c.367 0 .666.299.666.666v2.477a.667.667 0 0 1-.666.667h-4.32v2.765a.483.483 0 0 1-.483.483Z"/></svg></span>Zelle<span class="radio"></span></button>
-            <button class="opt" aria-pressed="false" data-m="cashapp"><span class="tile logo" style="background:transparent"><svg viewBox="0 0 24 24"><path fill="#00D64F" d="M23.59 3.475a5.1 5.1 0 00-3.05-3.05c-1.31-.42-2.5-.42-4.92-.42H8.36c-2.4 0-3.61 0-4.9.4a5.1 5.1 0 00-3.05 3.06C0 4.765 0 5.965 0 8.365v7.27c0 2.41 0 3.6.4 4.9a5.1 5.1 0 003.05 3.05c1.3.41 2.5.41 4.9.41h7.28c2.41 0 3.61 0 4.9-.4a5.1 5.1 0 003.06-3.06c.41-1.3.41-2.5.41-4.9v-7.25c0-2.41 0-3.61-.41-4.91zm-6.17 4.63l-.93.93a.5.5 0 01-.67.01 5 5 0 00-3.22-1.18c-.97 0-1.94.32-1.94 1.21 0 .9 1.04 1.2 2.24 1.65 2.1.7 3.84 1.58 3.84 3.64 0 2.24-1.74 3.78-4.58 3.95l-.26 1.2a.49.49 0 01-.48.39H9.63l-.09-.01a.5.5 0 01-.38-.59l.28-1.27a6.54 6.54 0 01-2.88-1.57v-.01a.48.48 0 010-.68l1-.97a.49.49 0 01.67 0c.91.86 2.13 1.34 3.39 1.32 1.3 0 2.17-.55 2.17-1.42 0-.87-.88-1.1-2.54-1.72-1.76-.63-3.43-1.52-3.43-3.6 0-2.42 2.01-3.6 4.39-3.71l.25-1.23a.48.48 0 01.48-.38h1.78l.1.01c.26.06.43.31.37.57l-.27 1.37c.9.3 1.75.77 2.48 1.39l.02.02c.19.2.19.5 0 .68z"/></svg></span>Cash App<span class="radio"></span></button>
-          </div>
-          <div class="payfield" id="paybox"><label class="f" for="payhandle" id="l-pay">Your Venmo</label><input class="field" id="payhandle" autocapitalize="off" autocorrect="off" placeholder="@username"></div></div>
-        <div class="foot"><button class="btn" data-next id="b-pay" disabled>Continue</button></div>
       </section>
       <section class="step" data-s="terms">
         <div class="body"><h3>Last step</h3><p class="lead">Agree to the terms and send your application.</p>
-          <label class="opt check" id="agreebox"><input type="checkbox" id="agree" class="vh"><span style="font-weight:600">I agree to the <a href="/creator-terms.html" target="_blank">Creator Agreement</a> and <a href="/terms.html" target="_blank">Terms</a>, including that by posting videos about Meal Pic, I give Meal Pic the right, in perpetuity, to use them as marketing and advertising.</span><span class="radio"></span></label>
+          <label class="opt check" id="agreebox"><input type="checkbox" id="agree" class="vh"><span style="font-weight:600">I agree to the <a href="/creator-terms.html" target="_blank">Creator Agreement</a> and <a href="/terms.html" target="_blank">Terms</a>.</span><span class="radio"></span></label>
           <div class="err" id="e-sign"></div></div>
         <div class="foot"><button class="btn" id="b-sign" disabled>Send my application</button></div>
       </section>
@@ -1030,7 +1020,7 @@ new IntersectionObserver(([e]) => $("mobilebar").classList.toggle("show", !e.isI
 // ---- signup (shares the dashboard's sign-in) ----
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
 const steps = [...document.querySelectorAll(".step")].map(s => s.dataset.s);
-let at = 0, method = "", checkT = null, oldCode = "";
+let at = 0, checkT = null, oldCode = "";
 
 function openFlow(){
   $("overlay").classList.add("open"); document.body.classList.add("locked");
@@ -1133,6 +1123,7 @@ $("b-otp").onclick = async () => {
 $("code").oninput = () => {
   $("code").dataset.touched = "1";
   $("code").value = $("code").value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const lc = $("d-link-code"); lc.textContent = $("code").value.toLowerCase() || "sarah"; lc.classList.toggle("dim", !$("code").value);
   checkCode();
 };
 function checkCode(){
@@ -1151,15 +1142,6 @@ function checkCode(){
   }, 300);
 }
 
-const PAY = { venmo:["Your Venmo","@username"], paypal:["Your PayPal email","you@example.com"], zelle:["Your Zelle phone or email","Phone or email"], cashapp:["Your Cash App","$cashtag"] };
-document.querySelectorAll(".opt[data-m]").forEach(o => o.onclick = () => {
-  method = o.dataset.m;
-  document.querySelectorAll(".opt[data-m]").forEach(x => { x.classList.toggle("on", x === o); x.setAttribute("aria-pressed", x === o); });
-  $("paybox").style.display = "block"; $("l-pay").textContent = PAY[method][0]; $("payhandle").placeholder = PAY[method][1];
-  $("payhandle").focus(); payReady();
-});
-const payReady = () => { $("b-pay").disabled = !method || $("payhandle").value.trim().length < 2; };
-$("payhandle").oninput = payReady;
 
 $("agree").onchange = () => { $("b-sign").disabled = !$("agree").checked; $("agreebox").classList.toggle("on", $("agree").checked); };
 $("b-sign").onclick = async () => {
@@ -1171,7 +1153,7 @@ $("b-sign").onclick = async () => {
   }
   const { data, error } = await sb.rpc("creator_signup", {
     code: $("code").value.toLowerCase(), name: $("name").value.trim(), handle: handleText(),
-    payout_method: method, payout_handle: $("payhandle").value.trim(), phone: phoneValue()
+    payout_method: "", payout_handle: "", phone: phoneValue()  // payout details are added in the dashboard
   });
   if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
   if (data?.error === "taken") { go("code"); checkCode(); return; }
