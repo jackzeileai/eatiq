@@ -763,6 +763,34 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
 @media (max-width:900px){.split-hero .hero-cols{grid-template-columns:minmax(0,1fr) !important}.split-hero .hero-cols>.quick{min-width:0 !important;width:100% !important;max-width:520px !important;box-sizing:border-box}}
 @media (max-width:360px){.btn.shine{max-width:100%;box-sizing:border-box}.nav .brand{font-size:18px}.nav .mode-btn{display:none}.split-hero .h-hero{font-size:12.5vw !important}}
 @media (max-width:360px){.qhead .ask{height:56px}}
+/* vs table: Meal Pic vs TikTok Shop */
+.vs{max-width:880px;margin:0 auto;border-radius:24px;overflow:hidden}
+.vs-row{display:grid;grid-template-columns:1.1fr 1.5fr 1.5fr;align-items:center;gap:16px;padding:22px 28px;box-shadow:inset 0 1px 0 var(--hair)}
+.vs-row:first-child{box-shadow:none;padding-top:24px;padding-bottom:18px;align-items:end}
+.vs-k{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
+.vs-head .vs-name{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.vs-head .vs-name.them{color:var(--sub)}
+.vs-head .vs-name img{width:22px;height:22px;object-fit:contain}
+.vs-c{display:flex;align-items:center;gap:12px;font-size:18px;line-height:1.3;letter-spacing:-.01em}
+.vs-c i{flex:none;width:24px;height:24px;border-radius:999px;display:grid;place-items:center}
+.vs-c i svg{width:13px;height:13px}
+.vs-c.them{color:var(--sub);font-weight:600}
+.vs-c.them i{box-shadow:inset 0 0 0 1.5px var(--hair);color:var(--sub)}
+.vs-c.us{color:var(--ink);font-weight:800}
+.vs-c.us i{background:var(--ink);color:var(--paper)}
+.vs-c .fifty{font-size:1.5em;line-height:1;letter-spacing:-.04em;margin-right:0}
+html[data-mode="dark"] .vs-c.them i{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16)}
+html[data-mode="dark"] .vs-head .vs-name img{filter:invert(1)}
+@media (max-width:720px){
+  .vs{border-radius:20px}
+  .vs-row{grid-template-columns:1fr;gap:12px;padding:18px 20px}
+  .vs-row:first-child{display:none}
+  .vs-k{margin-bottom:2px}
+  .vs-c{font-size:17px}
+  .vs-c::before{flex:none;width:84px;white-space:nowrap;font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.02em}
+  .vs-c.them::before{content:"TikTok Shop"}
+  .vs-c.us::before{content:"Meal Pic";color:var(--ink);font-weight:800}
+}
 </style>
 </head>
 <body>
@@ -817,6 +845,19 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
   </div>
 </section>
 
+
+<section class="sec" id="vs">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">Meal Pic vs TikTok Shop</h2><p class="lede">Why creators make more with us.</p></div>
+    <div class="vs card" aria-label="Meal Pic compared with TikTok Shop">
+      <div class="vs-row vs-head"><span class="vs-k">&nbsp;</span><span class="vs-name them">TikTok Shop</span><span class="vs-name"><img src="__ROOT__assets/mark-black.png" alt="">Meal Pic</span></div>
+      <div class="vs-row"><span class="vs-k">Getting started</span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>Request samples, then wait for shipping.</span></span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>Start today. Nothing to ship.</span></span></div>
+      <div class="vs-row"><span class="vs-k">Going viral</span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>A product that’s hard to make viral.</span></span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>Proven viral product. Millions of views.</span></span></div>
+      <div class="vs-row"><span class="vs-k">Commission</span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>13% on average.</span></span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span><span class="fifty">50%</span> of revenue.</span></span></div>
+      <div class="vs-row"><span class="vs-k">How you’re paid</span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>Once, on the sale.</span></span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>Every month, for as long as they subscribe.</span></span></div>
+    </div>
+  </div>
+</section>
 
 <section class="sec" id="videos">
   <div class="wrap">
