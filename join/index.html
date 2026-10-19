@@ -809,6 +809,10 @@ html:not([data-mode="dark"]) .d-card,html:not([data-mode="dark"]) .d-chip{backgr
 }
 .nav .links a.plain.login{display:inline-flex;white-space:nowrap}
 @media (max-width:480px){.nav .brand span{display:none}}
+/* signup panel: Continue sits right under the question, no dead space; panel hugs its content */
+.sheet{min-height:0}
+.step .body{flex:none}
+.step .foot{padding-top:8px}
 </style>
 <!-- Meta Pixel (same pixel as the home page); Lead fires when an application is received -->
 <script>
@@ -1207,7 +1211,8 @@ $("b-otp").onclick = async () => {
 
 $("code").oninput = () => {
   $("code").dataset.touched = "1";
-  $("code").value = $("code").value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  // Same rule as creator_code_available(): a-z 0-9 only, max 20 (toUpperCase can grow a string, e.g. ß → SS, past maxlength).
+  $("code").value = $("code").value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 20);
   const lc = $("d-link-code"); lc.textContent = $("code").value.toLowerCase() || "sarah"; lc.classList.toggle("dim", !$("code").value);
   checkCode();
 };
