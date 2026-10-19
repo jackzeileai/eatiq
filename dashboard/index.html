@@ -323,7 +323,7 @@ document.addEventListener("click", e => {
 document.addEventListener("input", e => {
   if (e.target.id === "payhandle") { $("paysave").disabled = !payMethod || e.target.value.trim().length < 2; return; }
   if (e.target.id !== "newcode") return;
-  const i = e.target; i.value = i.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const i = e.target; i.value = i.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 20);
   const c = i.value.toLowerCase(), h = $("h-code"), b = $("savecode");
   b.disabled = true; h.className = "d-hint"; clearTimeout(checkT);
   if (c === data.codes[0].code) { h.textContent = "That's your code now."; return; }
