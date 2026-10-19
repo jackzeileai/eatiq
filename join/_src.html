@@ -798,13 +798,13 @@ html[data-mode="dark"] .vs-head .vs-name img{filter:invert(1)}
 html:not([data-mode="dark"]) .dash{background:#f2f2f7 !important}
 html:not([data-mode="dark"]) .d-card,html:not([data-mode="dark"]) .d-chip{background:#fff}
 @media (max-width:720px){.tile .stage img.pct{width:68%;height:68%;margin:auto}.tile .stage:has(img.pct){display:grid;place-items:center}}
-/* phone: signup panel goes full screen (the base .sheet rules sit below the early phone block and were winning) */
+/* phone: signup panel is a floating card that hugs its content (not full screen) */
 @media (max-width:720px){
-  .overlay{padding:0}
-  .sheet{max-width:none;height:100%;height:100dvh;min-height:0;max-height:none;border-radius:0;box-shadow:none}
-  .sheet .bar{padding-top:env(safe-area-inset-top);height:calc(56px + env(safe-area-inset-top))}
-  .step .body{padding:4px 20px 8px}
-  .step .foot{padding:12px 20px max(16px,env(safe-area-inset-bottom))}
+  .overlay{padding:16px}
+  .sheet{max-width:480px;height:auto;min-height:0;max-height:calc(100dvh - 32px);border-radius:28px}
+  .sheet .bar{padding-top:0;height:56px}
+  .step .body{padding:4px 22px 8px}
+  .step .foot{padding:8px 22px 22px}
   .step h3{font-size:28px}
 }
 .nav .links a.plain.login{display:inline-flex;white-space:nowrap}
