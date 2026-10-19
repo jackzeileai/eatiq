@@ -229,9 +229,9 @@ html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter
   <section id="s-none" class="auth hidden">
     <img class="mark" src="../assets/mark-black.png" alt="">
     <h1>No creator code yet</h1>
-    <p>This email, <b id="noneemail"></b>, isn't a creator yet. Sign up in about a minute and your code works right away.</p>
-    <a class="btn" href="/join/?start">Become a creator</a>
-    <p class="fallback">Already have a code? Email <a href="mailto:help@mealpic.app" style="color:var(--ink)">help@mealpic.app</a></p>
+    <p>We couldn't find a creator account for <b id="noneemail"></b>. Signed up with a different email? Log in with that one.</p>
+    <button class="btn" id="otheremail">Use a different email</button>
+    <p class="fallback">New here? <a href="/join/?start" style="color:var(--ink)">Apply to be a creator</a><br>Stuck? Email <a href="mailto:help@mealpic.app" style="color:var(--ink)">help@mealpic.app</a></p>
   </section>
 
   <section id="s-agree" class="auth hidden">
@@ -298,6 +298,7 @@ $("f-code").onsubmit = async e => {
 };
 $("back").onclick = () => show("s-email");
 $("out").onclick = async () => { await sb.auth.signOut(); show("s-email"); };
+$("otheremail").onclick = () => $("out").onclick();
 document.addEventListener("click", e => {
   const c = e.target.closest("[data-copy]");
   if (c) {
