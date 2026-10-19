@@ -782,12 +782,22 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
 html[data-mode="dark"] .vs-head .vs-name img{filter:invert(1)}
 @media (max-width:720px){
   .vs{border-radius:20px}
-  .vs-row{grid-template-columns:1fr;gap:10px;padding:18px 20px}
-  .vs-row:first-child{display:none}
-  .vs-k{margin-bottom:2px}
-  .vs-c{font-size:17px}
+  .vs-row{grid-template-columns:1fr 1fr;gap:10px 14px;padding:16px 18px;align-items:start}
+  .vs-row:first-child{padding:18px 18px 12px}
+  .vs-head .vs-k{display:none}
+  .vs-head .vs-name{font-size:17px;gap:6px}
+  .vs-head .vs-name img{width:18px;height:18px}
+  .vs-k{grid-column:1/-1;font-size:12px}
+  .vs-c{font-size:15px;gap:8px;align-items:flex-start;line-height:1.25}
+  .vs-c i{width:20px;height:20px}
+  .vs-c i svg{width:11px;height:11px}
+  .vs-c .fifty{font-size:1.3em}
 
 }
+/* dashboard: grey frame so the white cards stand off the page */
+html:not([data-mode="dark"]) .dash{background:#f2f2f7 !important}
+html:not([data-mode="dark"]) .d-card,html:not([data-mode="dark"]) .d-chip{background:#fff}
+@media (max-width:720px){.tile .stage img.pct{width:68%;height:68%;margin:auto}.tile .stage:has(img.pct){display:grid;place-items:center}}
 </style>
 <!-- Meta Pixel (same pixel as the home page); Lead fires when an application is received -->
 <script>
@@ -851,7 +861,7 @@ fbq('init','1873631240283364');fbq('track','PageView');
   <div class="wrap">
     <div class="split"><h2 class="h2">Three ways you get paid</h2><p class="lede">Every creator earns all three.</p></div>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../../assets/lab/fifty_red_t.png?v=1" alt=""></div><h3 class="h3">1. 50% of revenue</h3><p class="lede sub">Half of all revenue that comes in through your affiliate link or code.</p></div>
+      <div class="tile"><div class="stage white"><img class="pct" src="../../assets/lab/fifty_red_t.png?v=1" alt=""></div><h3 class="h3">1. 50% of revenue</h3><p class="lede sub">Half of all revenue that comes in through your affiliate link or code.</p></div>
       <div class="tile"><div class="stage white"><img src="../../assets/lab/pay_retainer_t.png?v=1" alt=""></div><h3 class="h3">2. Monthly retainer</h3><p class="lede sub">A guaranteed base retainer, paid to you every month.</p></div>
       <div class="tile"><div class="stage white"><img src="../../assets/lab/pay_ads_t.png?v=2" alt=""></div><h3 class="h3">3. A cut of ad spend</h3><p class="lede sub">If your videos are selected to run as ads, you get a percentage of the ad spend.</p></div>
     </div>
