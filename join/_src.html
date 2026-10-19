@@ -439,9 +439,7 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--ink);margin:0 0
 
 /* ---------- phone: tiles become a swipe row, labels simplified ---------- */
 @media (max-width:720px){
-  .grid.c3{display:flex;grid-template-columns:none;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * var(--gutter));padding:0 var(--gutter) 8px;scrollbar-width:none}
-  .grid.c3::-webkit-scrollbar{display:none}
-  .grid.c3 .tile{flex:0 0 78%;scroll-snap-align:center}
+  .grid.c3{display:grid;grid-template-columns:1fr;gap:40px}
   .tile .stage{height:220px;padding:18px}
   .tile .h3{font-size:22px}
   .tile .lede.sub{font-size:16px}
@@ -756,6 +754,7 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
 /* the cash stack fills the empty right side of the Next payout card */
 .d-pay{position:relative}
 .d-cash{position:absolute;right:6%;top:50%;width:min(40%,170px);transform:translateY(-50%) rotate(-8deg);filter:drop-shadow(0 14px 16px rgba(0,0,0,.16));pointer-events:none}
+@media (max-width:720px){.d-cash{width:min(30%,110px);right:5%}}
 /* ===== grid + rhythm pass (2026-10-11): every section's content sits the same distance below the previous one (96 desktop, 88 phone), same as /home ===== */
 @media (min-width:901px){#how,#videos{padding-top:74px !important}#get{padding-top:35px !important}#credit{padding-top:96px !important}#faq{padding-top:58px !important}.sec.final{padding-top:98px !important}}
 @media (max-width:900px){#how{padding-top:46px !important}#videos{padding-top:51px !important}#get{padding-top:32px !important}#credit{padding-top:64px !important}#faq{padding-top:34px !important}.sec.final{padding-top:92px !important}}
@@ -783,13 +782,11 @@ html[data-mode="dark"] .d-stats .d-card:nth-child(3) b{color:#ff6fae}html[data-m
 html[data-mode="dark"] .vs-head .vs-name img{filter:invert(1)}
 @media (max-width:720px){
   .vs{border-radius:20px}
-  .vs-row{grid-template-columns:1fr;gap:12px;padding:18px 20px}
+  .vs-row{grid-template-columns:1fr;gap:10px;padding:18px 20px}
   .vs-row:first-child{display:none}
   .vs-k{margin-bottom:2px}
   .vs-c{font-size:17px}
-  .vs-c::before{flex:none;width:84px;white-space:nowrap;font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.02em}
-  .vs-c.them::before{content:"TikTok Shop"}
-  .vs-c.us::before{content:"Meal Pic";color:var(--ink);font-weight:800}
+
 }
 </style>
 <!-- Meta Pixel (same pixel as the home page); Lead fires when an application is received -->
