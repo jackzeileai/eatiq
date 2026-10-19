@@ -792,6 +792,11 @@ html[data-mode="dark"] .vs-head .vs-name img{filter:invert(1)}
   .vs-c.us::before{content:"Meal Pic";color:var(--ink);font-weight:800}
 }
 </style>
+<!-- Meta Pixel (same pixel as the home page); Lead fires when an application is received -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1873631240283364');fbq('track','PageView');
+</script>
 </head>
 <body>
 
@@ -1226,7 +1231,7 @@ $("b-sign").onclick = async () => {
 };
 // "Watch this first" step REMOVED 2026-10-14 (Jack): signup goes straight to the link and code.
 // Applications (2026-10-14, Jack): everyone ends on "Application received" (no link, code or dashboard here).
-function finish(code, existing){ go("done"); }
+function finish(code, existing){ go("done"); try{ fbq("track","Lead"); }catch(e){} }
 $("done-close").onclick = () => $("close").click();
 // ?start opens the signup straight away (for links that should skip the page).
 if (new URLSearchParams(location.search).has("start")) openFlow();
