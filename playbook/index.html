@@ -73,7 +73,7 @@ html[data-mode="dark"] .reel{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
 html[data-mode="dark"] .reel.textcard,html[data-mode="dark"] .callout{background:#161617}
 .reel.vid{cursor:pointer}
 .reel.vid video{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;display:block;background:#000}
-.playbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border:0;border-radius:50%;display:grid;place-items:center;padding:0 0 0 5px;color:#000;background:rgba(255,255,255,.88);backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 14px 34px -10px rgba(0,0,0,.55);cursor:pointer;transition:transform .2s ease,opacity .2s ease}
+.playbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border:0;border-radius:50%;display:grid;place-items:center;padding:0 0 0 5px;color:#000;background:rgba(255,255,255,.88);backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 14px 34px -10px rgba(0,0,0,.55);cursor:pointer;transition:transform .2s ease,opacity .2s ease}
 .reel.vid:hover .playbtn{transform:translate(-50%,-50%) scale(1.08)}
 .reel.vid.playing .playbtn,.reel.vid.playing figcaption{opacity:0;pointer-events:none}
 .reel.vid figcaption{transition:opacity .2s ease}
@@ -112,6 +112,47 @@ html[data-mode="dark"] .rules{background:#161617;box-shadow:inset 0 0 0 1px rgba
   .reel.textcard{padding:14px 12px}
   .reel.textcard p{font-size:12.5px;margin-top:10px}
   #ideas .grid.c3{row-gap:28px}
+}
+
+/* ---------- calmer scale (Jack 2026-10-20: "too big") — a brief reads like a doc, not a landing hero ---------- */
+.bhero{padding:96px 0 0}
+html[data-embed] .bhero{padding-top:24px}
+.bhero .h-hero{font-size:clamp(36px,4vw,52px);line-height:1.05;letter-spacing:-.035em;white-space:nowrap}
+.sec{padding-top:72px}
+.sec .split{margin:0 auto 28px}
+.sec .split .h2{font-size:clamp(26px,2.6vw,34px);line-height:1.1;letter-spacing:-.03em}
+.sec .split .lede{font-size:17px;max-width:620px;margin-top:12px}
+.tile .stage,.grid.c2 .tile .stage{height:170px;padding:16px;margin-bottom:16px}
+.tile .h3{font-size:20px;line-height:1.2;letter-spacing:-.02em;margin-bottom:6px}
+.tile .lede.sub{font-size:15px;line-height:1.45;max-width:300px}
+.grid.c2.two{max-width:720px}
+.grid.c3{max-width:960px;margin-left:auto;margin-right:auto}
+.formula{margin-top:36px;font-size:clamp(20px,2vw,26px)}
+.rules{max-width:760px}
+.rules-row{grid-template-columns:180px 1fr;padding:18px 24px}
+.rules-k{font-size:12px}
+.rules-v{font-size:16px}
+.reel{width:200px;border-radius:18px}
+.callout{max-width:960px;margin-top:48px;padding:32px 24px 24px}
+.callout>.h3{font-size:clamp(20px,2vw,24px)}
+#ideas .grid.c3{row-gap:36px}
+.reel.textcard p{font-size:14px}
+@media (max-width:720px){
+  .bhero{padding-top:88px}
+  .bhero .h-hero{font-size:30px;white-space:normal}
+  .sec{padding-top:52px}
+  .sec .split .h2{font-size:24px}
+  .sec .split .lede{font-size:15px}
+  .tile .stage,.grid.c2 .tile .stage,.grid.c4 .tile .stage{height:90px;padding:6px;margin-bottom:10px}
+  .tile .h3,.grid.c4 .tile .h3,.grid.c2 .tile .h3{font-size:15px}
+  .tile .lede.sub,.grid.c4 .tile .lede.sub,.grid.c2 .tile .lede.sub{font-size:12.5px}
+  .formula{font-size:18px;margin-top:28px}
+  .rules-row{grid-template-columns:1fr;padding:14px 16px}
+  .rules-v{font-size:15px}
+  .reel{width:58%;max-width:200px}
+  .callout{margin-top:36px;padding:20px 10px 14px}
+  .callout>.h3{font-size:18px}
+  .playbtn{width:52px;height:52px}
 }
 
 /* nav + dark (same as /join) */
