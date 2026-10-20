@@ -400,6 +400,8 @@ const PAYN = { venmo:"Venmo", paypal:"PayPal", zelle:"Zelle", cashapp:"Cash App"
 // Flip to true once creator-stripe runs on the LIVE Stripe key. Until then the card shows but
 // the button is off, so nobody types real bank details into the Stripe sandbox.
 const STRIPE_LIVE = false;
+// Jack 2026-10-20: hide the "Payouts go to" card for now. Flip to true to bring it back.
+const SHOW_PAYOUT_CARD = false;
 let payBusy = false;
 function payCard(){
   const p = data.payout || {};
@@ -505,7 +507,7 @@ function render(){
       <div class="d-card"><span class="d-k">Subscribers</span><b>${num(subs)}</b></div>
       <div class="d-card"><span class="d-k">Paid out</span><b>${cash(paidOut, true)}</b></div>
     </div>
-    <div class="d-card">${payCard()}</div>
+    ${SHOW_PAYOUT_CARD ? `<div class="d-card">${payCard()}</div>` : ""}
   </div>
   <div class="learn">
     ${learnCard(COURSE_URL, "The Course", "How to make videos that sell, from a creator with over 1 billion views.")}
