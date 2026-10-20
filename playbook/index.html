@@ -107,6 +107,11 @@ html[data-mode="dark"] .readtime{background:rgba(29,29,31,.7)}
 .tile .bul li{position:relative;padding-left:16px;font-size:15px;line-height:1.45;font-weight:500;color:var(--sub);text-wrap:pretty}
 .tile .bul li::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--ink)}
 @media (max-width:720px){.tile .bul{gap:4px}.tile .bul li{font-size:12.5px;padding-left:11px}.tile .bul li::before{width:4px;height:4px;left:0}}
+.clipcard{height:100%;aspect-ratio:9/16;margin:0 auto;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 18px 36px -18px rgba(0,0,0,.45)}
+.clipcard video,.clipcard img{width:100%;height:100%;object-fit:cover;display:block}
+.mm-row .clipcard{height:auto;width:100%;max-width:180px}
+html[data-mode="dark"] .clipcard{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+@media (max-width:720px){.clipcard{border-radius:12px}}
 .ctabar{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:12px}
 .ctabar .small{color:var(--sub);font-weight:600}
 html[data-mode="dark"] .rules{background:#161617;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
@@ -227,7 +232,6 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <div class="wrap">
     <div class="titlerow"><h1 class="h-hero">Meal Pic Creative Brief</h1><span class="readtime">6 min read</span></div>
     <p class="lede intro">In this brief, we’ll teach you the most important parts of making a successful Meal Pic video.</p>
-    <p class="lede"><b>Make great videos with Meal Pic in them.</b> You know your audience better than we do, so you get full creative control. No script, no approval. The one must: show the app working on a real meal.</p>
   </div>
 </section>
 
@@ -276,15 +280,15 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
       <h3 class="h3">Every integration MUST include 3 parts:</h3>
     <div class="grid c3">
       <div class="tile"><div class="stage white"><img src="../assets/lab/pb_target_t.png" alt=""></div><h3 class="h3">1. The theme</h3><ul class="bul"><li>Get the RIGHT people interested.</li><li>Make the video about something a person who’d download a calorie tracker cares about.</li></ul></div>
-      <div class="tile"><div class="stage white"><div class="mini-phone"><video autoplay muted loop playsinline poster="../assets/video/app_scan_light.jpg" src="../assets/video/app_scan_light.mp4"></video></div></div><h3 class="h3">2. The magic moment</h3><ul class="bul"><li>Snap the photo, the calories and macros load, keep going.</li><li>Do this in the first 15 seconds.</li><li>Say in one line why it matters to you (“I stopped guessing,” “I’m finally losing weight without weighing my food”).</li></ul></div>
+      <div class="tile"><div class="stage white"><div class="clipcard"><video autoplay muted loop playsinline poster="../assets/video/brief/scan_steak.jpg" src="../assets/video/brief/scan_steak.mp4"></video></div></div><h3 class="h3">2. The magic moment</h3><ul class="bul"><li>Snap the photo, the calories and macros load, keep going.</li><li>Do this in the first 15 seconds.</li><li>Say in one line why it matters to you (“I stopped guessing,” “I’m finally losing weight without weighing my food”).</li></ul></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cta_t.png" alt=""></div><h3 class="h3">3. The CTA</h3><ul class="bul"><li>Short, with a reason.</li><li>“Link in my bio gets you 3 days free.”</li></ul></div>
     </div>
       <div class="mm-steps">
         <p class="mm-title">The magic moment, step by step</p>
         <div class="mm-row">
-          <figure><div class="mini-phone"><img src="../assets/video/brief/mm_scan.jpg" alt="Scanning a poke bowl"></div><figcaption><b>1. Scan</b></figcaption></figure>
-          <figure><div class="mini-phone"><img src="../assets/video/brief/mm_load.jpg" alt="Calories and macros loading"></div><figcaption><b>2. Load</b></figcaption></figure>
-          <figure><div class="mini-phone"><img src="../assets/video/brief/mm_edit.jpg" alt="Editing the meal"></div><figcaption><b>3. Edit</b></figcaption></figure>
+          <figure><div class="clipcard"><img src="../assets/video/brief/mm_scan.jpg" alt="Scanning a poke bowl"></div><figcaption><b>1. Scan</b></figcaption></figure>
+          <figure><div class="clipcard"><img src="../assets/video/brief/mm_load.jpg" alt="Calories and macros loading"></div><figcaption><b>2. Load</b></figcaption></figure>
+          <figure><div class="clipcard"><img src="../assets/video/brief/mm_edit.jpg" alt="Editing the meal"></div><figcaption><b>3. Edit</b></figcaption></figure>
         </div>
       </div>
     </div>
@@ -297,8 +301,10 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
     <div class="split"><h2 class="h2">Examples of a bad video</h2></div>
     <div class="reelrow">
       <figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/DdQvlsMC6o5.jpg" src="../assets/video/brief/DdQvlsMC6o5.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>3.8M views</figcaption></figure>
-      <div class="reel textcard"><img src="../assets/lab/memoji_ramen_t.png" alt=""><p><b>Example 2:</b> a mukbang. The audience is there to watch someone eat 8,000 calories, not to count their own.</p></div>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/DLp8XxiSa6i.jpg" src="../assets/video/brief/DLp8XxiSa6i.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button></figure>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/DQxJYr6EfGB.jpg" src="../assets/video/brief/DQxJYr6EfGB.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button></figure>
     </div>
+    <p class="aside"><b>Example 2:</b> a mukbang. The audience is there to watch someone eat 8,000 calories, not to count their own.</p>
   </div>
 </section>
 
