@@ -368,7 +368,7 @@ async function saveCode(){
   editing = false; await load();
 }
 
-// Payout details (2026-10-14): asked here, not in signup.
+// Payout details (2026-10-14): asked here, not in signup. Card HIDDEN from the dashboard 2026-10-20 (Jack); functions kept.
 let payEditing = false, payMethod = "";
 const PAYN = { venmo:["Venmo","@username"], paypal:["PayPal","you@example.com"], zelle:["Zelle","Phone or email"], cashapp:["Cash App","$cashtag"] };
 function payCard(){
@@ -471,7 +471,6 @@ function render(){
       <div class="d-card"><span class="d-k">Subscribers</span><b>${num(subs)}</b></div>
       <div class="d-card"><span class="d-k">Paid out</span><b>${cash(paidOut, true)}</b></div>
     </div>
-    <div class="d-card">${payCard()}</div>
   </div>
   <div class="learn">
     ${learnCard(COURSE_URL, "The Course", "How to make videos that sell, from a creator with over 1 billion views.")}
