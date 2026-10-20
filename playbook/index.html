@@ -94,6 +94,19 @@ html[data-mode="dark"] .mini-phone{box-shadow:0 0 0 5px #2a2a2c,0 0 0 6px rgba(2
 .mm-row figcaption{margin-top:14px;font-size:17px}
 .mm-row figcaption b{font-weight:800}
 @media (max-width:720px){.mini-phone{border-radius:14px;box-shadow:0 0 0 3px #1d1d1f,0 12px 24px -14px rgba(0,0,0,.45)}.mm-row{gap:10px}.mm-row figcaption{font-size:14px;margin-top:10px}.mm-title{font-size:15px}}
+.titlerow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.titlerow .h-hero{margin:0;max-width:none}
+.readtime{display:inline-flex;align-items:center;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.01em;color:var(--sub);background:rgba(255,255,255,.7);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .readtime{background:rgba(29,29,31,.7)}
+.bhero .lede.intro{color:var(--ink);font-weight:700;font-size:21px;max-width:600px;margin-top:22px;letter-spacing:-.01em}
+.bhero .lede{max-width:600px;margin:14px auto 0;font-size:17px;line-height:1.5}
+.bhero .lede b{color:var(--ink);font-weight:800}
+#priorities{padding-top:48px}
+@media (max-width:720px){.readtime{font-size:12px;padding:5px 11px}.bhero .lede.intro{font-size:17px}.bhero .lede{font-size:15px}#priorities{padding-top:36px}}
+.tile .bul{list-style:none;margin:0 auto;padding:0;max-width:320px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.tile .bul li{position:relative;padding-left:16px;font-size:15px;line-height:1.45;font-weight:500;color:var(--sub);text-wrap:pretty}
+.tile .bul li::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--ink)}
+@media (max-width:720px){.tile .bul{gap:4px}.tile .bul li{font-size:12.5px;padding-left:11px}.tile .bul li::before{width:4px;height:4px;left:0}}
 .ctabar{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:12px}
 .ctabar .small{color:var(--sub);font-weight:600}
 html[data-mode="dark"] .rules{background:#161617;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
@@ -212,18 +225,19 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 <!-- ---------- Creative Brief: wording mirrors the Notion brief word for word (2026-10-20); layout like /join ---------- -->
 <section class="bhero" id="content">
   <div class="wrap">
-    <h1 class="h-hero">Meal Pic Creative Brief</h1>
+    <div class="titlerow"><h1 class="h-hero">Meal Pic Creative Brief</h1><span class="readtime">6 min read</span></div>
+    <p class="lede intro">In this brief, we’ll teach you the most important parts of making a successful Meal Pic video.</p>
+    <p class="lede"><b>Make great videos with Meal Pic in them.</b> You know your audience better than we do, so you get full creative control. No script, no approval. The one must: show the app working on a real meal.</p>
   </div>
 </section>
 
 <section class="sec" id="priorities">
   <div class="wrap">
-    <div class="split"><h2 class="h2">Content</h2><p class="lede"><b>Make great videos with Meal Pic in them.</b> You know your audience better than we do, so you get full creative control. No script, no approval. The one must: show the app working on a real meal.</p></div>
-    <div class="grid c2 two">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_snap_t.png" alt=""></div><h3 class="h3">Priority 1: Promote app</h3><p class="lede sub">Make the app a big part of the video, not a half-second cutaway. Show the magic moment: snap your food, the calories load, then edit them.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_eyes_t.png" alt=""></div><h3 class="h3">Priority 2: Get views</h3><p class="lede sub">Make the best video you can so it reaches as many people as possible.</p></div>
+        <div class="grid c2 two">
+      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_snap_t.png" alt=""></div><h3 class="h3">Priority 1: Promote app</h3><ul class="bul"><li>Make the app a big part of the video, not a half-second cutaway.</li><li>Show the magic moment: snap your food, the calories load, then edit them.</li></ul></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_eyes_t.png" alt=""></div><h3 class="h3">Priority 2: Get views</h3><ul class="bul"><li>Make the best video you can so it reaches as many people as possible.</li></ul></div>
     </div>
-    <p class="formula">Views × how well you sell the app <span>= money for you.</span></p>
+    <p class="formula">How well you promote the app × views <span>= $$$ for you.</span></p>
   </div>
 </section>
 
@@ -241,29 +255,29 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <section class="sec" id="good">
   <div class="wrap">
-    <div class="split"><h2 class="h2">Examples of a good promotion</h2></div>
+    <div class="split"><h2 class="h2">Examples of a good video</h2></div>
     <div class="reelrow">
-      <figure class="reel vid"><video playsinline preload="none" poster="../assets/proof/6.jpg" src="../assets/video/brief/DHL7Jw2oNcv.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 1 · 10.3M views</figcaption></figure>
-      <figure class="reel vid"><video playsinline preload="none" poster="../assets/proof/brief_jessi.jpg" src="../assets/video/brief/DWxPnb8DE44.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 2</figcaption></figure>
-      <figure class="reel vid"><video playsinline preload="none" poster="../assets/proof/brief_diana.jpg" src="../assets/video/brief/DMGkJziSg4W.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 3</figcaption></figure>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/DHL7Jw2oNcv.jpg" src="../assets/video/brief/DHL7Jw2oNcv.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>10.3M views</figcaption></figure>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/DWxPnb8DE44.jpg" src="../assets/video/brief/DWxPnb8DE44.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>5.7M views</figcaption></figure>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/DMGkJziSg4W.jpg" src="../assets/video/brief/DMGkJziSg4W.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>2.5M views</figcaption></figure>
     </div>
   </div>
 </section>
 
 <section class="sec" id="why">
   <div class="wrap">
-    <div class="split"><h2 class="h2">Why are these good promotions?</h2></div>
+    <div class="split"><h2 class="h2">Why are these good videos?</h2></div>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_wand_t.png" alt=""></div><h3 class="h3">1. They show the magic moment.</h3><p class="lede sub">Point the camera at food, the calories pop up. People see it and think “wait, what app is that?” That moment sells the app for you.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">2. The app is the main character.</h3><p class="lede sub">The whole video revolves around what the app shows. Take the app out and there’s no video.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_dumbbell_t.png" alt=""></div><h3 class="h3">3. The theme is something the RIGHT people care about.</h3><p class="lede sub">Losing weight, getting lean, eating more protein, eating healthy. Those viewers download. The wrong viewers just watch.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_wand_t.png" alt=""></div><h3 class="h3">1. They show the magic moment.</h3><ul class="bul"><li>Point the camera at food, the calories pop up.</li><li>People see it and think “wait, what app is that?”</li><li>That moment sells the app for you.</li></ul></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">2. The app is the main character.</h3><ul class="bul"><li>The whole video revolves around what the app shows.</li><li>Take the app out and there’s no video.</li></ul></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_dumbbell_t.png" alt=""></div><h3 class="h3">3. The theme is something the RIGHT people care about.</h3><ul class="bul"><li>Losing weight, getting lean, eating more protein, eating healthy.</li><li>Those viewers download.</li><li>The wrong viewers just watch.</li></ul></div>
     </div>
     <div class="callout card">
       <h3 class="h3">Every integration MUST include 3 parts:</h3>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_target_t.png" alt=""></div><h3 class="h3">1. The theme</h3><p class="lede sub">Get the RIGHT people interested. Make the video about something a person who’d download a calorie tracker cares about.</p></div>
-      <div class="tile"><div class="stage white"><div class="mini-phone"><video autoplay muted loop playsinline poster="../assets/video/app_scan_light.jpg" src="../assets/video/app_scan_light.mp4"></video></div></div><h3 class="h3">2. The magic moment</h3><p class="lede sub">Snap the photo, the calories and macros load, keep going. Do this in the first 15 seconds. Say in one line why it matters to you (“I stopped guessing,” “I’m finally losing weight without weighing my food”).</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cta_t.png" alt=""></div><h3 class="h3">3. The CTA</h3><p class="lede sub">Short, with a reason. “Link in my bio gets you 3 days free.”</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_target_t.png" alt=""></div><h3 class="h3">1. The theme</h3><ul class="bul"><li>Get the RIGHT people interested.</li><li>Make the video about something a person who’d download a calorie tracker cares about.</li></ul></div>
+      <div class="tile"><div class="stage white"><div class="mini-phone"><video autoplay muted loop playsinline poster="../assets/video/app_scan_light.jpg" src="../assets/video/app_scan_light.mp4"></video></div></div><h3 class="h3">2. The magic moment</h3><ul class="bul"><li>Snap the photo, the calories and macros load, keep going.</li><li>Do this in the first 15 seconds.</li><li>Say in one line why it matters to you (“I stopped guessing,” “I’m finally losing weight without weighing my food”).</li></ul></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cta_t.png" alt=""></div><h3 class="h3">3. The CTA</h3><ul class="bul"><li>Short, with a reason.</li><li>“Link in my bio gets you 3 days free.”</li></ul></div>
     </div>
       <div class="mm-steps">
         <p class="mm-title">The magic moment, step by step</p>
@@ -280,9 +294,9 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <section class="sec" id="bad">
   <div class="wrap">
-    <div class="split"><h2 class="h2">Examples of a bad promotion</h2></div>
+    <div class="split"><h2 class="h2">Examples of a bad video</h2></div>
     <div class="reelrow">
-      <figure class="reel vid"><video playsinline preload="none" poster="../assets/proof/5.jpg" src="../assets/video/brief/DdQvlsMC6o5.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 1 · 3.7M views</figcaption></figure>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/DdQvlsMC6o5.jpg" src="../assets/video/brief/DdQvlsMC6o5.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>3.8M views</figcaption></figure>
       <div class="reel textcard"><img src="../assets/lab/memoji_ramen_t.png" alt=""><p><b>Example 2:</b> a mukbang. The audience is there to watch someone eat 8,000 calories, not to count their own.</p></div>
     </div>
   </div>
@@ -290,10 +304,10 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <section class="sec" id="whybad">
   <div class="wrap">
-    <div class="split"><h2 class="h2">Why is this a bad promotion?</h2></div>
+    <div class="split"><h2 class="h2">Why are these bad videos?</h2></div>
     <div class="grid c2 two">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cancel_t.png" alt=""></div><h3 class="h3">1. Wrong crowd.</h3><p class="lede sub">It hooked comedy fans, not people who want to eat better. Big views, almost no downloads.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_clock_t.png" alt=""></div><h3 class="h3">2. The app was a tangent.</h3><p class="lede sub">It showed up for half a second and didn’t fit the video.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cancel_t.png" alt=""></div><h3 class="h3">1. Wrong crowd.</h3><ul class="bul"><li>It hooked comedy fans, not people who want to eat better.</li><li>Big views, almost no downloads.</li></ul></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_clock_t.png" alt=""></div><h3 class="h3">2. The app was a tangent.</h3><ul class="bul"><li>It showed up for half a second and didn’t fit the video.</li></ul></div>
     </div>
   </div>
 </section>
