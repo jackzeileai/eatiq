@@ -5,10 +5,10 @@
 <script>if(/[?&]embed\b/.test(location.search)){document.documentElement.dataset.embed="1"}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Meal Pic Creator Playbook</title>
-<meta name="description" content="A successful Meal Pic video has three parts: the hook, the meat, and the CTA.">
+<title>Meal Pic Creative Brief</title>
+<meta name="description" content="What to make for Meal Pic, what we need from you, and what good looks like.">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Meal Pic Creator Playbook">
+<meta property="og:title" content="Meal Pic Creative Brief">
 <meta property="og:description" content="The hook, the meat, and the CTA.">
 <meta property="og:image" content="https://mealpic.app/assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2" media="(prefers-color-scheme: light)">
@@ -61,6 +61,21 @@ html[data-embed] .sec.first{padding-top:8px}
 .shots .pic{box-shadow:inset 0 0 0 1px var(--hair);background:#fff}
 .shots .pic img{width:100%;height:auto;display:block}
 
+.note{padding:22px 26px;border-radius:18px;background:#fff6b6;color:#1d1d1f;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.note .h3{margin-top:0}
+.note ul{color:#1d1d1f}
+html[data-mode="dark"] .note{background:#3a3310;color:#f5f5f7;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+html[data-mode="dark"] .note ul{color:#f5f5f7}
+.copy a{color:inherit}
+.egs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:4px 0 8px}
+.eg{display:block;text-decoration:none;color:inherit}
+.eg img{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;box-shadow:inset 0 0 0 1px var(--hair);margin-bottom:10px}
+.eg b{display:block;font-size:15px;font-weight:800}
+.eg span{display:block;font-size:14px;color:var(--sub);font-weight:500;margin-top:2px}
+#parts{padding-bottom:0}
+#parts .split{margin-bottom:0;padding-top:28px;border-top:1px solid var(--hair)}
+@media (max-width:900px){.egs{grid-template-columns:repeat(2,1fr)}}
+
 /* nav + dark (same as /join) */
 .nav .brand span{color:var(--sub);font-weight:800}
 .mode-btn{display:grid;place-items:center;width:40px;height:40px;margin-left:4px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
@@ -99,11 +114,11 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <header class="nav float">
   <div class="wrap glass">
-    <a class="brand" href="/join/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Playbook</span></a>
+    <a class="brand" href="/join/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Brief</span></a>
     <nav class="links">
-      <a class="plain" href="#hook">Hook</a>
-      <a class="plain" href="#meat">Meat</a>
-      <a class="plain" href="#cta">CTA</a>
+      <a class="plain" href="#note">Rules</a>
+      <a class="plain" href="#good">Examples</a>
+      <a class="plain" href="#parts">The 3 parts</a>
       <a class="plain" href="/dashboard/">Log in</a>
       <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
       <a class="btn small shine" href="/join/">Apply</a>
@@ -113,22 +128,122 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <main>
 
-<!-- ---------- hero + three-stepper ---------- -->
-<section class="sec first">
+<!-- ---------- Creative Brief (Jack's UGC Content Brief template, 2026-10-20: same sections, same order) ---------- -->
+<section class="sec first" id="content">
   <div class="wrap">
-    <div class="split"><h1 class="h2">A successful video has three parts.</h1><p class="lede">Nail all three and the video gets views and sales.</p></div>
-    <div class="grid c3">
-      <a class="tile" href="#hook"><div class="stage"><img src="../assets/lab/pb_hook_t.png?v=1" alt=""></div><h3 class="h3">1. The Hook</h3><p class="lede sub">The first 3 seconds. Get the right people's interest.</p></a>
-      <a class="tile" href="#meat"><div class="stage"><img src="../assets/lab/pb_meat_t.png?v=1" alt=""></div><h3 class="h3">2. The Meat</h3><p class="lede sub">Show the app and why it's valuable.</p></a>
-      <a class="tile" href="#cta"><div class="stage"><img src="../assets/lab/pb_cta_t.png?v=2" alt=""></div><h3 class="h3">3. The CTA</h3><p class="lede sub">Tell the viewer what to do. Give them a why.</p></a>
+    <div class="split"><h1 class="h2">Meal Pic Creative Brief</h1><p class="lede">What to make, what we need from you, and what good looks like.</p></div>
+    <div class="copy">
+
+      <h3 class="h3">Content</h3>
+      <p class="p">Meal Pic should show up inside a video you'd make anyway: you scan a real meal, the calories load, you keep going. It's a thing you use, not an ad read.</p>
+      <ul>
+        <li><b>Priority 1 · Seamless integration.</b> A what-I-eat-in-a-day, day-in-my-life or recipe video where you scan your food with Meal Pic on camera.</li>
+        <li><b>Priority 2 · Dedicated video.</b> A video about the app itself: how you track calories now, why it stuck.</li>
+      </ul>
+
     </div>
+  </div>
+</section>
+
+<section class="sec" id="note">
+  <div class="wrap">
+    <div class="copy">
+      <div class="note">
+        <h3 class="h3">Important note</h3>
+        <ul>
+          <li><b>Send every video to us for approval before you post it.</b> Email it to <a href="mailto:partnerships@mealpic.app">partnerships@mealpic.app</a>.</li>
+          <li><b>Posting requirements.</b> Say your code in the video, put your link (mealpic.app/YOURCODE) in your bio, and tag @mealpic.app.</li>
+          <li><b>Reply to at least 3 comments about Meal Pic</b> on every post.</li>
+          <li><b>Send us the post link as soon as it's up</b>, same email.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="good">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">Examples of a good promotion</h2></div>
+    <div class="copy">
+      <div class="egs">
+        <a class="eg" href="https://www.instagram.com/reel/DBXGPdmt36D/" target="_blank" rel="noopener"><img src="../assets/proof/4.jpg" alt=""><b>Example 1</b><span>Eating on camera, scan the meal · 42.5M views</span></a>
+        <a class="eg" href="https://www.instagram.com/reel/DHL7Jw2oNcv/" target="_blank" rel="noopener"><img src="../assets/proof/6.jpg" alt=""><b>Example 2</b><span>950 cal vs 210 cal · 10.3M views</span></a>
+      </div>
+
+      <h3 class="h3">Why are these good promotions?</h3>
+      <ol>
+        <li>They hook people who actually care about calories, so the views turn into downloads.</li>
+        <li>The app shows up on a real plate in a real moment, not in a pitch.</li>
+        <li>The first 3 seconds open a loop you want to see closed.</li>
+      </ol>
+
+      <h3 class="h3">Every integration must include 3 parts</h3>
+      <ol>
+        <li><a href="#hook"><b>The Hook</b></a> · the first 3 seconds. Get the right people's interest.</li>
+        <li><a href="#meat"><b>The Meat</b></a> · show the scan and why it matters to you.</li>
+        <li><a href="#cta"><b>The CTA</b></a> · tell them what to do and give them a why.</li>
+      </ol>
+      <p class="p sub">Each part is broken down at the bottom of this page.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="bad">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">Examples of a bad promotion</h2></div>
+    <div class="copy">
+      <div class="egs">
+        <a class="eg" href="https://www.instagram.com/p/DdQvlsMC6o5/" target="_blank" rel="noopener"><img src="../assets/proof/5.jpg" alt=""><b>Example 1</b><span>Gatorade chicken · 3.7M views</span></a>
+      </div>
+
+      <h3 class="h3">Why is this a bad promotion?</h3>
+      <ol>
+        <li>It hooked the comedy audience, not the fitness audience.</li>
+        <li>Big views, almost no downloads. The wrong people watched.</li>
+        <li>The app was a prop in a joke, not a thing anyone wanted to use.</li>
+      </ol>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="ideas">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">Video ideas</h2></div>
+    <div class="copy">
+      <ol>
+        <li><b>What I eat in a day.</b> Scan every meal as you go. The calories add up on screen.</li>
+        <li><b>“I tracked everything I ate for 7 days.”</b> Day-in-my-life with the app in every meal, and what changed.</li>
+        <li><b>High-protein recipe.</b> Cook it, plate it, scan it at the end to show the macros.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="testflight">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">TestFlight links</h2><p class="lede">Get the app free while you're a creator.</p></div>
+    <div class="copy">
+      <ul>
+        <li><b>iOS:</b> <a href="https://testflight.apple.com/join/u9uPdBQW" target="_blank" rel="noopener">testflight.apple.com/join/u9uPdBQW</a></li>
+        <li><b>Android:</b> no Android app yet. Meal Pic is iPhone only.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the three parts, in detail (the original playbook, unchanged) ---------- -->
+<section class="sec" id="parts">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">The three parts, in detail</h2><p class="lede">Nail all three and the video gets views and sales.</p></div>
   </div>
 </section>
 
 <!-- ---------- 1. hook ---------- -->
 <section class="sec" id="hook">
   <div class="wrap">
-    <div class="split"><h2 class="h2">1. The Hook</h2><p class="lede">The first 3 seconds of the video.</p></div>
+    <div class="split"><h2 class="h2">Part 1 · The Hook</h2><p class="lede">The first 3 seconds of the video.</p></div>
     <div class="copy">
 
       <h3 class="h3">What is a hook?</h3>
@@ -183,7 +298,7 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 <!-- ---------- 2. meat ---------- -->
 <section class="sec" id="meat">
   <div class="wrap">
-    <div class="split"><h2 class="h2">2. The Meat</h2><p class="lede">Where you show the app and why it's valuable.</p></div>
+    <div class="split"><h2 class="h2">Part 2 · The Meat</h2><p class="lede">Where you show the app and why it's valuable.</p></div>
     <div class="copy">
 
       <h3 class="h3">What do you show?</h3>
@@ -215,7 +330,7 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 <!-- ---------- 3. cta ---------- -->
 <section class="sec" id="cta">
   <div class="wrap">
-    <div class="split"><h2 class="h2">3. The CTA</h2><p class="lede">What you tell the viewer to do at the end.</p></div>
+    <div class="split"><h2 class="h2">Part 3 · The CTA</h2><p class="lede">What you tell the viewer to do at the end.</p></div>
     <div class="copy">
 
       <h3 class="h3">How do you do it?</h3>
