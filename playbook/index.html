@@ -324,6 +324,9 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 @media (max-width:959px){.fmt{grid-template-columns:240px 1fr}}
 @media (max-width:899px){.fmt{grid-template-columns:1fr;gap:14px}}
 @media (max-width:720px){.badcol .reel figcaption,.fmt-vids .reel figcaption,.reel figcaption{padding:3px 6px;left:6px;bottom:6px;gap:3px}.reel figcaption svg{width:10px;height:10px}}
+/* titles in a row take the same height so every bullet list starts on one line */
+.grid.c3 .tile .h3,.grid.c2 .tile .h3{min-height:2.4em;display:flex;align-items:flex-end;justify-content:center;text-wrap:balance}
+@media (max-width:720px){.grid.c3 .tile .h3{min-height:3.6em}}
 </style>
 </head>
 <body>
@@ -402,9 +405,9 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <div class="wrap">
     <div class="split"><h2 class="h2">Why are these good videos?</h2></div>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_dumbbell_t.png" alt=""></div><h3 class="h3">1. It’s for the right people.</h3><ul class="bul"><li>The topic is weight loss, getting lean, protein or eating healthy.</li><li>That crowd downloads a calorie app.</li><li>The wrong crowd just watches.</li></ul></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">2. The app is the main character.</h3><ul class="bul"><li>The app drives the video, not a quick cameo.</li><li>It solves a real problem on screen.</li></ul></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_wand_t.png" alt=""></div><h3 class="h3">3. It shows the magic moment.</h3><ul class="bul"><li>Scan the food, the calories load, edit if needed.</li><li>Viewers think, “Wait, what app is that?”</li><li>That moment does the selling for you.</li></ul></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_dumbbell_t.png" alt=""></div><h3 class="h3">1. It’s for the right people</h3><ul class="bul"><li>The topic is weight loss, getting lean, protein, eating healthy, etc.</li><li>10K of the right viewers &gt; 1M random viewers.</li></ul></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">2. The app is the main character</h3><ul class="bul"><li>The app drives the video, not a quick cameo.</li><li>It solves a real problem on screen.</li><li>Viewers think, “Wait, what app is that?”</li></ul></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_wand_t.png" alt=""></div><h3 class="h3">3. It shows the magic moment</h3><ul class="bul"><li>Scan the food, the calories load, edit if needed.</li><li>It shows the value, so the moment does the selling for you.</li></ul></div>
     </div>
   </div>
 </section>
