@@ -39,7 +39,7 @@ html[data-mode="dark"] .mode-btn .i-moon{display:none}
 .nav .links a.tab{color:var(--sub)}
 .nav .links a.tab.on{color:var(--ink)}
 .nav .links a.tab:hover{color:var(--ink)}
-#s-brief{padding:0}
+#s-brief{padding:0;margin:0 calc(-1 * var(--gutter))} /* bleed to the page edge: the brief brings its own gutters, so phones don't get 32px of margin */
 #briefFrame{display:block;width:100%;border:0;min-height:60vh;background:transparent;color-scheme:light dark}
 @media (max-width:980px){.nav .links a.navx{display:block}.nav .links a.navx.hidden{display:none}}
 @media (max-width:720px){.nav .links a.navx{font-size:14px;padding:8px 6px}}
@@ -281,7 +281,7 @@ function sizeBrief(){ const f = $("briefFrame"); try { const h = f.contentDocume
 function showBrief(on){
   briefOn = on;
   const f = $("briefFrame");
-  if (on && !f.src) { f.src = "../playbook/?embed=1&v=" + Date.now(); /* always the latest brief */ f.addEventListener("load", () => { sizeBrief(); setTimeout(sizeBrief, 400); setTimeout(sizeBrief, 1500); }); }
+  if (on && !f.src) { f.src = "../playbook/?embed=1&v=" + Date.now(); /* always the latest brief */ f.addEventListener("load", () => { sizeBrief(); setTimeout(sizeBrief, 400); setTimeout(sizeBrief, 1500); try { if (window.ResizeObserver && f.contentDocument && f.contentDocument.body) new ResizeObserver(sizeBrief).observe(f.contentDocument.body); } catch (e) {} }); }
   $("s-brief").classList.toggle("hidden", !on);
   $("s-stats").classList.toggle("hidden", on);
   $("navBrief").classList.toggle("on", on);
