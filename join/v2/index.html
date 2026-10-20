@@ -838,7 +838,7 @@ fbq('init','1873631240283364');fbq('track','PageView');
 
 <header class="nav float">
   <div class="wrap glass">
-    <a class="brand" href="/"><img class="mark" src="../../assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
+    <a class="brand" href="/join/"><img class="mark" src="../../assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
       <a class="plain" href="#how">How it works</a>
       <a class="plain" href="#faq">FAQ</a>
@@ -1117,6 +1117,8 @@ new IntersectionObserver(([e]) => $("mobilebar").classList.toggle("show", !e.isI
 
 // ---- signup (shares the dashboard's sign-in) ----
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
+// Already signed in to the creator dashboard (same storage key): the top-bar link says so.
+sb.auth.getSession().then(({ data:{ session } }) => { if (session) document.querySelectorAll("a.login").forEach(a => { a.textContent = "Dashboard"; }); }).catch(() => {});
 // Outreach click tracking (2026-10-14): emails link to /join?ref=<handle>; log one row so we can see
 // who clicked (link_clicks, source join_email, referrer = handle). The affiliate brain reads these.
 (function(){try{var ref=new URLSearchParams(location.search).get("ref");if(!ref||!/^[a-z0-9._-]{1,40}$/i.test(ref))return;

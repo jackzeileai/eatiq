@@ -199,7 +199,7 @@ html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter
 <body>
 <header class="nav float">
   <div class="wrap glass">
-    <a class="brand" href="/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
+    <a class="brand" id="brandLink" href="/dashboard/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
       <a class="plain navx tab on hidden" id="navDash" href="#">Dashboard</a>
       <a class="plain navx tab hidden" id="navBrief" href="#brief">Creative Brief</a>
@@ -307,6 +307,8 @@ window.addEventListener("resize", () => { if (tab === "brief") sizeBrief(); });
 $("navBrief").onclick = (e) => { e.preventDefault(); showTab("brief"); };
 $("navAcct").onclick = (e) => { e.preventDefault(); showTab("account"); };
 $("navDash").onclick = (e) => { e.preventDefault(); showTab("dash"); };
+// The logo = "my dashboard": signed in, switch to the Dashboard tab in place; signed out, it just reloads the login.
+$("brandLink").onclick = (e) => { if (!$("s-stats").classList.contains("hidden")) { e.preventDefault(); showTab("dash"); } };
 function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); if (id !== "s-stats") { $("s-brief").classList.add("hidden"); $("s-account").classList.add("hidden"); tab = "dash"; } else if (location.hash === "#brief" || tab === "brief") showTab("brief"); else if (location.hash === "#account" || tab === "account") showTab("account"); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-agree")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
 const num = n => Number(n||0).toLocaleString("en-US");
 // Whole dollars like the /join example ($346); cents only when there are some.
