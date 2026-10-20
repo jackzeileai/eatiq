@@ -472,7 +472,6 @@ function render(){
       <div class="d-card"><span class="d-k">Paid out</span><b>${cash(paidOut, true)}</b></div>
     </div>
     <div class="d-card">${payCard()}</div>
-    <div class="d-foot">Tap your code or link to copy it.${old.length ? ` Your old ${old.length === 1 ? "code" : "codes"} ${old.map(c => esc(c.code.toUpperCase())).join(", ")} still ${old.length === 1 ? "works" : "work"} and still ${old.length === 1 ? "counts" : "count"} for you.` : ""}${canChange ? ` You can change your code ${data.renames_left === 1 ? "once more" : data.renames_left + " more times"}; the old one keeps working.` : ""}</div>
   </div>
   <div class="learn">
     ${learnCard(COURSE_URL, "The Course", "How to make videos that sell, from a creator with over 1 billion views.")}
