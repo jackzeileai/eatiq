@@ -141,6 +141,17 @@ html[data-mode="dark"] .clipcard{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
 html[data-mode="dark"] .fmt-n{background:#f5f5f7;color:#000}
 @media (max-width:720px){.fmts{border-radius:20px}.fmt{grid-template-columns:1fr;gap:12px;padding:18px 16px}.fmt-text .h3{font-size:17px}.fmt-text p{font-size:14px}.fmt-n{width:24px;height:24px;font-size:12px;margin-bottom:6px}.fmt-vids .reel{width:112px}}
 .callout{max-width:none !important;margin:0 !important;padding:0 !important;border-radius:0 !important;box-shadow:none !important;background:none !important}
+/* hero: bigger, with the /join colour gradient on "Creative Brief" */
+.fifty{background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.85) 50%,transparent 62%) -150% 0/250% 100% no-repeat,linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:fiftyflow 3.6s ease-in-out infinite;padding-right:.04em}
+@keyframes fiftyflow{0%,45%{background-position:-150% 0,0 0}100%{background-position:250% 0,0 0}}
+@media (prefers-reduced-motion:reduce){.fifty{animation:none}}
+.bhero{padding-top:120px}
+html[data-embed] .bhero{padding-top:48px}
+.titlerow{flex-direction:column;gap:18px}
+.titlerow .h-hero{font-size:clamp(48px,6.4vw,84px) !important;line-height:1 !important;letter-spacing:-.045em !important;white-space:normal !important;text-wrap:balance}
+.titlerow .readtime{order:-1}
+.bhero .lede.intro{color:var(--sub) !important;font-weight:500 !important;font-size:20px !important;line-height:1.45;max-width:520px;margin-top:20px;letter-spacing:-.005em}
+@media (max-width:720px){.bhero{padding-top:96px}html[data-embed] .bhero{padding-top:28px}.titlerow .h-hero{font-size:44px !important}.bhero .lede.intro{font-size:16px !important}}
 /* inside the dashboard tab (960px wide): keep rows side by side, no inner scrollbar */
 html[data-embed],html[data-embed] body{overflow:hidden}
 @media (min-width:721px) and (max-width:980px){
@@ -266,7 +277,7 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 <!-- ---------- Creative Brief: wording mirrors the Notion brief word for word (2026-10-20); layout like /join ---------- -->
 <section class="bhero" id="content">
   <div class="wrap">
-    <div class="titlerow"><h1 class="h-hero">Meal Pic Creative Brief</h1><span class="readtime">6 min read</span></div>
+    <div class="titlerow"><h1 class="h-hero">Meal Pic <span class="fifty">Creative Brief</span></h1><span class="readtime">6 min read</span></div>
     <p class="lede intro">In this brief, we’ll teach you the most important parts of making a successful Meal Pic video.</p>
   </div>
 </section>
