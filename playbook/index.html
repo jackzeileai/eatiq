@@ -2,7 +2,7 @@
 <html lang="en" data-theme="app">
 <script>try{var m=localStorage.getItem("mp-mode");document.documentElement.dataset.mode=m||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.mode="light"}</script>
 <head>
-<script>if(/[?&]embed\b/.test(location.search)){document.documentElement.dataset.embed="1"}</script>
+<script>if(/[?&]embed\b/.test(location.search)||window.top!==window.self){document.documentElement.dataset.embed="1"}else{location.replace("/dashboard/#brief")}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Meal Pic Creative Brief</title>
