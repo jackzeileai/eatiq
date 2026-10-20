@@ -24,7 +24,7 @@ const STORE_PAGE = `https://apps.apple.com/us/app/id${APP_ID}`;
 const RESERVED = new Set(("mealpic meal free test admin apple support help discount promo code creator official " +
   "assets dashboard download home join lab paid start text today pay privacy terms index www api app apps login signin " +
   "signup account about blog creators faq contact legal store ios android press jobs team static public images img css js " +
-  "video videos reels style course library fb ig tt yt playbook cname robots sitemap favicon affiliate affiliates partner " +
+  "video videos reels style course library fb ig tt yt playbook brief creativebrief cname robots sitemap favicon affiliate affiliates partner " +
   "partners referral referrals ref invite invites share link links go auth functions rest storage click clicks redirect " +
   "mail email pricing price plans plan checkout buy shop news updates status docs dev null undefined true false none").split(" "));
 

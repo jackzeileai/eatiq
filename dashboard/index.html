@@ -287,8 +287,8 @@ function showBrief(on){
   $("navBrief").classList.toggle("on", on);
   $("navDash").classList.toggle("on", !on);
   if (on) sizeBrief();
-  const want = on ? "#brief" : "";
-  if (location.hash !== want) history.replaceState(null, "", location.pathname + location.search + want);
+  // The brief tab shows as mealpic.app/brief (that path bounces back here with #brief).
+  history.replaceState(null, "", on ? "/brief" : "/dashboard/" + location.search);
   window.scrollTo(0, 0);
 }
 window.addEventListener("resize", () => { if (briefOn) sizeBrief(); });
