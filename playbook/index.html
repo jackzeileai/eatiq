@@ -64,6 +64,19 @@ html[data-mode="dark"] .reel{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
 .aside{text-align:center;max-width:560px;margin:28px auto 0;font-size:18px;font-weight:500;color:var(--sub);text-wrap:balance}
 .aside b{color:var(--ink);font-weight:800}
 #ideas .grid.c3{row-gap:48px}
+.callout{max-width:1100px;margin:64px auto 0;padding:40px 32px 32px;border-radius:24px}
+.callout>.h3{text-align:center;font-size:clamp(26px,3vw,36px);letter-spacing:-.035em;margin:0 0 8px}
+.reel.textcard{background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px 20px;text-align:center}
+.reel.textcard img{position:static;inset:auto;width:70%;height:auto;object-fit:contain;transform:none}
+.reel.textcard p{margin:18px 0 0;font-size:15px;font-weight:500;line-height:1.4;color:var(--sub);text-wrap:balance}
+.reel.textcard b{color:var(--ink);font-weight:800}
+html[data-mode="dark"] .reel.textcard,html[data-mode="dark"] .callout{background:#161617}
+.reel.vid{cursor:pointer}
+.reel.vid video{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;display:block;background:#000}
+.playbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border:0;border-radius:50%;display:grid;place-items:center;padding:0 0 0 5px;color:#000;background:rgba(255,255,255,.88);backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 14px 34px -10px rgba(0,0,0,.55);cursor:pointer;transition:transform .2s ease,opacity .2s ease}
+.reel.vid:hover .playbtn{transform:translate(-50%,-50%) scale(1.08)}
+.reel.vid.playing .playbtn,.reel.vid.playing figcaption{opacity:0;pointer-events:none}
+.reel.vid figcaption{transition:opacity .2s ease}
 .ctabar{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:12px}
 .ctabar .small{color:var(--sub);font-weight:600}
 html[data-mode="dark"] .rules{background:#161617;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
@@ -92,7 +105,12 @@ html[data-mode="dark"] .rules{background:#161617;box-shadow:inset 0 0 0 1px rgba
   .reelrow{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:10px;margin:0 calc(-1 * var(--gutter,16px));padding:0 var(--gutter,16px) 8px;scroll-snap-type:x mandatory;scrollbar-width:none}
   .reelrow::-webkit-scrollbar{display:none}
   .reel{width:62%;max-width:240px;border-radius:18px;scroll-snap-align:center}
-  .aside{font-size:15px}
+  .playbtn{width:60px;height:60px}
+  .playbtn svg{width:24px;height:24px}
+  .callout{margin-top:44px;padding:24px 12px 16px;border-radius:20px}
+  .callout>.h3{font-size:22px}
+  .reel.textcard{padding:14px 12px}
+  .reel.textcard p{font-size:12.5px;margin-top:10px}
   #ideas .grid.c3{row-gap:28px}
 }
 
@@ -167,9 +185,9 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <div class="wrap">
     <div class="split"><h2 class="h2">Examples of a good promotion</h2></div>
     <div class="reelrow">
-      <a class="reel" href="https://www.instagram.com/reel/DHL7Jw2oNcv/" target="_blank" rel="noopener"><img src="../assets/proof/6.jpg" alt=""><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>950 cal vs 210 cal · 10.3M views</figcaption></a>
-      <a class="reel" href="https://www.instagram.com/reel/DWxPnb8DE44/" target="_blank" rel="noopener"><img src="../assets/proof/brief_jessi.jpg" alt=""><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 2</figcaption></a>
-      <a class="reel" href="https://www.instagram.com/reel/DMGkJziSg4W/" target="_blank" rel="noopener"><img src="../assets/proof/brief_diana.jpg" alt=""><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 3</figcaption></a>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/proof/6.jpg" src="../assets/video/brief/DHL7Jw2oNcv.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 1 · 10.3M views</figcaption></figure>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/proof/brief_jessi.jpg" src="../assets/video/brief/DWxPnb8DE44.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 2</figcaption></figure>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/proof/brief_diana.jpg" src="../assets/video/brief/DMGkJziSg4W.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 3</figcaption></figure>
     </div>
   </div>
 </section>
@@ -182,12 +200,8 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
       <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">The app is the main character.</h3><p class="lede sub">The whole video revolves around what the app shows. Take the app out and there’s no video.</p></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/pb_dumbbell_t.png" alt=""></div><h3 class="h3">The theme is something the RIGHT people care about.</h3><p class="lede sub">Losing weight, getting lean, eating more protein, eating healthy. Those viewers download. The wrong viewers just watch.</p></div>
     </div>
-  </div>
-</section>
-
-<section class="sec" id="parts">
-  <div class="wrap">
-    <div class="split"><h2 class="h2">Every integration MUST include 3 parts</h2></div>
+    <div class="callout card">
+      <h3 class="h3">Every integration MUST include 3 parts:</h3>
     <div class="grid c3">
       <div class="tile"><div class="stage white"><img src="../assets/lab/pb_target_t.png" alt=""></div><h3 class="h3">The theme</h3><p class="lede sub">Grab the RIGHT people. Open a question they want answered, about something only people into working out, weight loss, calorie tracking or the gym would stop for.</p></div>
       <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_result_t.png" alt=""></div><h3 class="h3">The magic moment</h3><p class="lede sub">Snap the photo, the calories and macros load, keep going. Do this in the first 15 seconds. Say in one line why it matters to you (“I stopped guessing,” “I’m finally losing weight without weighing my food”).</p></div>
@@ -200,9 +214,9 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <div class="wrap">
     <div class="split"><h2 class="h2">Examples of a bad promotion</h2></div>
     <div class="reelrow">
-      <a class="reel" href="https://www.instagram.com/p/DdQvlsMC6o5/" target="_blank" rel="noopener"><img src="../assets/proof/5.jpg" alt=""><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Gatorade chicken · 3.7M views</figcaption></a>
+      <figure class="reel vid"><video playsinline preload="none" poster="../assets/proof/5.jpg" src="../assets/video/brief/DdQvlsMC6o5.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>Example 1 · 3.7M views</figcaption></figure>
+      <div class="reel textcard"><img src="../assets/lab/memoji_ramen_t.png" alt=""><p><b>Example 2:</b> a mukbang. The audience is there to watch someone eat 8,000 calories, not to count their own.</p></div>
     </div>
-    <p class="aside"><b>Example 2:</b> a mukbang. The audience is there to watch someone eat 8,000 calories, not to count their own.</p>
   </div>
 </section>
 
@@ -251,6 +265,16 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <script>
 document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
+// example reels: tap to play with sound, tap again to pause; only one plays at a time
+document.querySelectorAll(".reel.vid").forEach(function(f){
+  var v=f.querySelector("video");
+  f.addEventListener("click",function(){
+    if(v.paused){document.querySelectorAll(".reel.vid video").forEach(function(o){if(o!==v)o.pause()});v.play()}else{v.pause()}
+  });
+  v.addEventListener("play",function(){f.classList.add("playing")});
+  v.addEventListener("pause",function(){f.classList.remove("playing")});
+  v.addEventListener("ended",function(){f.classList.remove("playing");v.currentTime=0});
+});
 </script>
 </body>
 </html>
