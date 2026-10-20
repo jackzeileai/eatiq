@@ -140,6 +140,7 @@ html[data-mode="dark"] .clipcard{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
 .fmt-vids .openbtn svg{width:12px;height:12px}
 html[data-mode="dark"] .fmt-n{background:#f5f5f7;color:#000}
 @media (max-width:720px){.fmts{border-radius:20px}.fmt{grid-template-columns:1fr;gap:12px;padding:18px 16px}.fmt-text .h3{font-size:17px}.fmt-text p{font-size:14px}.fmt-n{width:24px;height:24px;font-size:12px;margin-bottom:6px}.fmt-vids .reel{width:112px}}
+.callout{max-width:none !important;margin:0 !important;padding:0 !important;border-radius:0 !important;box-shadow:none !important;background:none !important}
 /* inside the dashboard tab (960px wide): keep rows side by side, no inner scrollbar */
 html[data-embed],html[data-embed] body{overflow:hidden}
 @media (min-width:721px) and (max-width:980px){
@@ -283,8 +284,8 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <section class="sec" id="parts">
   <div class="wrap">
-    <div class="callout card">
-      <h3 class="h3">Every integration should include 3 parts:</h3>
+    <div class="callout">
+      <div class="split"><h2 class="h2">Every integration should include 3 parts</h2></div>
     <div class="grid c3">
       <div class="tile"><div class="stage white"><img src="../assets/lab/pb_target_t.png" alt=""></div><h3 class="h3">1. The theme</h3><ul class="bul"><li>Get the RIGHT people interested.</li><li>Make the video about something a person who’d download a calorie tracker cares about.</li></ul></div>
       <div class="tile"><div class="stage white"><div class="clipcard"><video autoplay muted loop playsinline poster="../assets/video/brief/scan_steak.jpg" src="../assets/video/brief/scan_steak.mp4"></video></div></div><h3 class="h3">2. The magic moment</h3><ul class="bul"><li>Show the app on screen: scan your food, the calories load, edit if needed.</li><li>Do this in the first 15 seconds.</li><li>Say a line about why you use it: “I use Meal Pic because all I have to do is take a picture and it tracks all the calories for me.”</li></ul></div>
