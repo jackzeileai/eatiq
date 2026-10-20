@@ -281,7 +281,7 @@ function sizeBrief(){ const f = $("briefFrame"); try { const h = f.contentDocume
 function showBrief(on){
   briefOn = on;
   const f = $("briefFrame");
-  if (on && !f.src) { f.src = "../playbook/?embed=1&v=" + Date.now();  // always the latest brief, never a cached copy f.addEventListener("load", () => { sizeBrief(); setTimeout(sizeBrief, 400); setTimeout(sizeBrief, 1500); }); }
+  if (on && !f.src) { f.src = "../playbook/?embed=1&v=" + Date.now(); /* always the latest brief */ f.addEventListener("load", () => { sizeBrief(); setTimeout(sizeBrief, 400); setTimeout(sizeBrief, 1500); }); }
   $("s-brief").classList.toggle("hidden", !on);
   $("s-stats").classList.toggle("hidden", on);
   $("navBrief").classList.toggle("on", on);
