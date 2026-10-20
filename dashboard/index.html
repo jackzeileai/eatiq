@@ -332,8 +332,11 @@ document.addEventListener("input", e => {
   const i = e.target; i.value = i.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 20);
   const c = i.value.toLowerCase(), h = $("h-code"), b = $("savecode");
   b.disabled = true; h.className = "d-hint"; clearTimeout(checkT);
-  if (c === data.codes[0].code) { h.textContent = "That's your code now."; return; }
+  const cur = data.primary || data.codes[0].code;
+  if (c === cur) { h.textContent = "That's your code now."; return; }
   if (c.length < 3) { h.textContent = "Letters and numbers, 3 to 20 characters."; return; }
+  // One of this creator's old codes: switching back is free (no new code, doesn't use a change).
+  if (data.codes.some(x => x.code === c)) { h.textContent = `${c.toUpperCase()} is your old code. Save to switch back to it.`; b.disabled = false; return; }
   h.textContent = "Checking…";
   checkT = setTimeout(async () => {
     const { data:ok, error } = await sb.rpc("creator_code_available", { code: c });
@@ -358,11 +361,12 @@ async function saveCode(){
   if (error || r?.error) {
     h.className = "d-hint bad";
     h.textContent = r?.error === "taken" ? "That code's taken. Try another."
-      : r?.error === "used" ? "People already used your code, so it can't change now."
+      : r?.error === "limit" ? "You've changed your code 3 times, that's the max."
       : "Couldn't change it. Try again.";
     return;
   }
-  data.codes[0].code = r.code; editing = false; render();
+  // The old code stays as an alias, so re-pull the dashboard instead of patching one row.
+  editing = false; await load();
 }
 
 // Payout details (2026-10-14): asked here, not in signup.
@@ -422,12 +426,14 @@ function render(){
   const earnedAll = sum(all, "owed");
   const next = Math.max(0, earnedAll - paidOut);
   const cutM = all.reduce((a, c) => a + Number(c.mrr || 0) * (100 - Number(c.apple_fee_pct ?? 15)) / 100 * c.pct / 100, 0);
-  const first = all[0];
+  // The current code; old ones (retired) still work and still count, so totals above sum every code.
+  const first = all.find(c => c.code === data.primary) || all.find(c => !c.retired) || all[0];
+  const old = all.filter(c => c.code !== first.code);
   const days = data.daily || [], max = Math.max(1, ...days.map(d => d.uses));
   const total30 = days.reduce((a, d) => a + d.uses, 0);
+  // Same rule as creator_change_code(): up to 3 changes, old codes keep working.
+  const canChange = (data.renames_left ?? 0) > 0;
   // Live paying subscribers right now (monthly + yearly that haven't lapsed).
-  // Same rule as creator_change_code(): only one code, nobody has entered it, nothing paid out.
-  const canChange = all.length === 1 && !sum(all,"entered") && !(data.paid || []).length && !(data.daily || []).some(d => d.uses);
   const subs = sum(all,"monthly_active") + sum(all,"yearly_active");
 
   $("dash").innerHTML = `
@@ -439,7 +445,7 @@ function render(){
         <button class="d-chip solid" id="savecode" disabled>Save</button>
         <button class="d-chip plain" id="cancelcode">Cancel</button>
         <div class="d-hint" id="h-code">Letters and numbers, 3 to 20 characters.</div>` : `
-        <button class="d-chip" data-copy="${esc(first.code.toUpperCase())}" title="Copy code"><em>Code</em>${all.map(c => esc(c.code.toUpperCase())).join(", ")}</button>
+        <button class="d-chip" data-copy="${esc(first.code.toUpperCase())}" title="Copy code"><em>Code</em>${esc(first.code.toUpperCase())}</button>
         <button class="d-chip" data-copy="https://mealpic.app/${esc(first.code)}" title="Copy link"><em>Link</em>mealpic.app/${esc(first.code)}</button>
         ${canChange ? `<button class="d-chip plain" id="chg">Change</button>` : ""}`}
       </div>
@@ -467,7 +473,7 @@ function render(){
       <div class="d-card"><span class="d-k">Paid out</span><b>${cash(paidOut, true)}</b></div>
     </div>
     <div class="d-card">${payCard()}</div>
-    <div class="d-foot">Tap your code or link to copy it.${canChange ? " You can change your code until someone uses it." : ""}</div>
+    <div class="d-foot">Tap your code or link to copy it.${old.length ? ` Your old ${old.length === 1 ? "code" : "codes"} ${old.map(c => esc(c.code.toUpperCase())).join(", ")} still ${old.length === 1 ? "works" : "work"} and still ${old.length === 1 ? "counts" : "count"} for you.` : ""}${canChange ? ` You can change your code ${data.renames_left === 1 ? "once more" : data.renames_left + " more times"}; the old one keeps working.` : ""}</div>
   </div>
   <div class="learn">
     ${learnCard(COURSE_URL, "The Course", "How to make videos that sell, from a creator with over 1 billion views.")}

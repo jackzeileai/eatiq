@@ -19,6 +19,14 @@ const API = "https://bvaumyrtcuehlipiaxlv.supabase.co/rest/v1/link_clicks";
 const KEY = "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7"; // public, insert-only under RLS
 const FIXED = { "/ig": "ig_bio", "/tt": "tt_bio", "/yt": "yt", "/fb": "meta_ads", "/download": "" };
 const STORE_PAGE = `https://apps.apple.com/us/app/id${APP_ID}`;
+// Site paths that can never be creator links (2026-10-19). Same list as creator_code_available()
+// in Supabase (migration 0094) — the DB refuses these at signup, this is the belt to that brace.
+const RESERVED = new Set(("mealpic meal free test admin apple support help discount promo code creator official " +
+  "assets dashboard download home join lab paid start text today pay privacy terms index www api app apps login signin " +
+  "signup account about blog creators faq contact legal store ios android press jobs team static public images img css js " +
+  "video videos reels style course library fb ig tt yt playbook cname robots sitemap favicon affiliate affiliates partner " +
+  "partners referral referrals ref invite invites share link links go auth functions rest storage click clicks redirect " +
+  "mail email pricing price plans plan checkout buy shop news updates status docs dev null undefined true false none").split(" "));
 
 function sourceFor(path, url, referrer) {
   if (FIXED[path]) return FIXED[path];
@@ -92,7 +100,7 @@ export default {
     // Creator links (2026-10-08): mealpic.app/c/<code> → the static /c/ page (it reads
     // the code from the path, copies the link for the app to pick up, then goes to the
     // App Store with ct=cr_<code>). The click is logged here as source cr_<code>.
-    const creator = url.pathname.match(/^\/c\/([A-Za-z0-9]{3,20})\/?$/);
+    const creator = url.pathname.match(/^\/c\/([A-Za-z0-9]{3,20})\/?$/i);
     if (creator && (request.method === "GET" || request.method === "HEAD")) {
       const ua = request.headers.get("User-Agent") || "";
       if (!/bot|crawl|spider|preview|facebookexternalhit|facebot|whatsapp|telegram|slack|discord|linkedin|pinterest|snapchat/i.test(ua)) {
@@ -102,9 +110,10 @@ export default {
     }
     // Short creator links (2026-10-10): mealpic.app/<code> works like /c/<code>. Only when
     // <code> is a real creator code (looked up, cached 5 min), so typos and site paths
-    // still fall through to GitHub Pages. Site paths are also reserved in creator_code_available().
+    // still fall through to GitHub Pages. Site paths (RESERVED) are never looked up, so /playbook
+    // stays the playbook even if a code by that name ever slipped into the table.
     const short = url.pathname.match(/^\/([A-Za-z0-9]{3,20})\/?$/);
-    if (short && (request.method === "GET" || request.method === "HEAD") && await isCreator(short[1].toLowerCase(), ctx)) {
+    if (short && !RESERVED.has(short[1].toLowerCase()) && (request.method === "GET" || request.method === "HEAD") && await isCreator(short[1].toLowerCase(), ctx)) {
       const ua = request.headers.get("User-Agent") || "";
       if (!/bot|crawl|spider|preview|facebookexternalhit|facebot|whatsapp|telegram|slack|discord|linkedin|pinterest|snapchat/i.test(ua)) {
         ctx.waitUntil(logClick(request, "/c", "cr_" + short[1].toLowerCase()));
