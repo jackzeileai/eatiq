@@ -36,6 +36,11 @@ html[data-mode="dark"] .mode-btn .i-moon{display:none}
 .nav .links a.soon:hover{color:var(--ink)}
 .nav .links a.soon small{margin-left:6px;font-size:11px;font-weight:700;color:var(--sub);padding:2px 7px;border-radius:999px;box-shadow:var(--edge)}
 
+.nav .links a.tab{color:var(--sub)}
+.nav .links a.tab.on{color:var(--ink)}
+.nav .links a.tab:hover{color:var(--ink)}
+#s-brief{padding:0}
+#briefFrame{display:block;width:100%;border:0;min-height:60vh;background:transparent;color-scheme:light dark}
 @media (max-width:980px){.nav .links a.navx{display:block}.nav .links a.navx.hidden{display:none}}
 @media (max-width:720px){.nav .links a.navx{font-size:14px;padding:8px 6px}}
 
@@ -193,7 +198,8 @@ html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter
   <div class="wrap glass">
     <a class="brand" href="/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
-      <a class="plain navx hidden" id="navBrief" href="../playbook/">Creative Brief</a>
+      <a class="plain navx tab on hidden" id="navDash" href="#">Dashboard</a>
+      <a class="plain navx tab hidden" id="navBrief" href="#brief">Creative Brief</a>
       <a class="plain navx hidden" id="navCourse">Course</a>
       <a class="plain navx hidden" id="navLib">Library</a>
       <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
@@ -249,6 +255,8 @@ html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter
 
   <section id="s-stats" class="hidden"><div id="dash"></div></section>
 
+  <section id="s-brief" class="hidden"><iframe id="briefFrame" title="Creative Brief"></iframe></section>
+
   <div id="loading" class="loading">Loading…</div>
 </div>
 
@@ -265,7 +273,28 @@ const LIBRARY_URL = ""; const COURSE_URL = "";
 const sb = supabase.createClient("https://bvaumyrtcuehlipiaxlv.supabase.co", "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7", {auth:{storageKey:"mp-creator"}});
 const $ = id => document.getElementById(id);
 const screens = ["s-email","s-code","s-none","s-agree","s-stats","loading"];
-function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-agree")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
+// Dashboard / Creative Brief tabs. The brief is /playbook/ shown in place (?embed hides its
+// own top bar); #brief in the URL reopens it after a reload. Same-origin, so the frame
+// sizes itself to its content and the page scrolls as one.
+let briefOn = false;
+function sizeBrief(){ const f = $("briefFrame"); try { const h = f.contentDocument && f.contentDocument.documentElement.scrollHeight; if (h) f.style.height = h + "px"; } catch (e) {} }
+function showBrief(on){
+  briefOn = on;
+  const f = $("briefFrame");
+  if (on && !f.src) { f.src = "../playbook/?embed=1"; f.addEventListener("load", () => { sizeBrief(); setTimeout(sizeBrief, 400); setTimeout(sizeBrief, 1500); }); }
+  $("s-brief").classList.toggle("hidden", !on);
+  $("s-stats").classList.toggle("hidden", on);
+  $("navBrief").classList.toggle("on", on);
+  $("navDash").classList.toggle("on", !on);
+  if (on) sizeBrief();
+  const want = on ? "#brief" : "";
+  if (location.hash !== want) history.replaceState(null, "", location.pathname + location.search + want);
+  window.scrollTo(0, 0);
+}
+window.addEventListener("resize", () => { if (briefOn) sizeBrief(); });
+$("navBrief").onclick = (e) => { e.preventDefault(); showBrief(true); };
+$("navDash").onclick = (e) => { e.preventDefault(); showBrief(false); };
+function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); if (id !== "s-stats") { $("s-brief").classList.add("hidden"); briefOn = false; } else if (location.hash === "#brief" || briefOn) showBrief(true); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-agree")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
 const num = n => Number(n||0).toLocaleString("en-US");
 // Whole dollars like the /join example ($346); cents only when there are some.
 // whole=true drops cents from $1,000 up so big totals fit their tile.
