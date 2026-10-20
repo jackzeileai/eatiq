@@ -94,6 +94,9 @@ input.code{letter-spacing:10px;font-size:28px;font-weight:800;text-align:center}
 .d-chip.d-in{cursor:text;box-shadow:inset 0 0 0 1.5px var(--ink)}
 .d-in input{width:9.5em;height:auto;line-height:1.2;border:0;padding:0;margin:0;background:none;box-shadow:none;border-radius:0;font:700 15px var(--font);letter-spacing:0;text-transform:uppercase;color:var(--ink);outline:none}
 .d-in input:focus{box-shadow:none}
+.d-in input.mail{width:15em;text-transform:none} /* Account tab: email + 6-digit code */
+.d-in input.otp{width:5em;letter-spacing:2px}
+.acct .d-row + .d-row{margin-top:14px}
 .d-hint{flex-basis:100%;text-align:right;font-size:14px;font-weight:600;color:var(--sub);min-height:20px;margin-top:-2px}
 .d-hint.bad{color:#ff3b30}
 .d-chips.left{justify-content:flex-start;margin-top:12px}
@@ -200,6 +203,7 @@ html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter
     <nav class="links">
       <a class="plain navx tab on hidden" id="navDash" href="#">Dashboard</a>
       <a class="plain navx tab hidden" id="navBrief" href="#brief">Creative Brief</a>
+      <a class="plain navx tab hidden" id="navAcct" href="#account">Account</a>
       <a class="plain navx hidden" id="navCourse">Course</a>
       <a class="plain navx hidden" id="navLib">Library</a>
       <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
@@ -257,6 +261,8 @@ html[data-mode="dark"] .brand img.mark,html[data-mode="dark"] .auth .mark{filter
 
   <section id="s-brief" class="hidden"><iframe id="briefFrame" title="Creative Brief"></iframe></section>
 
+  <section id="s-account" class="hidden"><div id="acct"></div></section>
+
   <div id="loading" class="loading">Loading…</div>
 </div>
 
@@ -276,25 +282,32 @@ const screens = ["s-email","s-code","s-none","s-agree","s-stats","loading"];
 // Dashboard / Creative Brief tabs. The brief is /playbook/ shown in place (?embed hides its
 // own top bar); #brief in the URL reopens it after a reload. Same-origin, so the frame
 // sizes itself to its content and the page scrolls as one.
-let briefOn = false;
+// Dashboard / Creative Brief / Account tabs. The brief is /playbook/ shown in place (?embed hides its
+// own top bar); #brief or #account in the URL reopens that tab after a reload. Same-origin, so the
+// frame sizes itself to its content and the page scrolls as one.
+let tab = "dash";
 function sizeBrief(){ const f = $("briefFrame"); try { const h = f.contentDocument && f.contentDocument.documentElement.scrollHeight; if (h) f.style.height = h + "px"; } catch (e) {} }
-function showBrief(on){
-  briefOn = on;
+function showTab(t){
+  tab = t;
   const f = $("briefFrame");
-  if (on && !f.src) { f.src = "../playbook/?embed=1&v=" + Date.now(); /* always the latest brief */ f.addEventListener("load", () => { sizeBrief(); setTimeout(sizeBrief, 400); setTimeout(sizeBrief, 1500); try { if (window.ResizeObserver && f.contentDocument && f.contentDocument.body) new ResizeObserver(sizeBrief).observe(f.contentDocument.body); } catch (e) {} }); }
-  $("s-brief").classList.toggle("hidden", !on);
-  $("s-stats").classList.toggle("hidden", on);
-  $("navBrief").classList.toggle("on", on);
-  $("navDash").classList.toggle("on", !on);
-  if (on) sizeBrief();
+  if (t === "brief" && !f.src) { f.src = "../playbook/?embed=1&v=" + Date.now(); /* always the latest brief */ f.addEventListener("load", () => { sizeBrief(); setTimeout(sizeBrief, 400); setTimeout(sizeBrief, 1500); try { if (window.ResizeObserver && f.contentDocument && f.contentDocument.body) new ResizeObserver(sizeBrief).observe(f.contentDocument.body); } catch (e) {} }); }
+  $("s-brief").classList.toggle("hidden", t !== "brief");
+  $("s-account").classList.toggle("hidden", t !== "account");
+  $("s-stats").classList.toggle("hidden", t !== "dash");
+  $("navBrief").classList.toggle("on", t === "brief");
+  $("navAcct").classList.toggle("on", t === "account");
+  $("navDash").classList.toggle("on", t === "dash");
+  if (t === "brief") sizeBrief();
+  if (t === "account") renderAccount();
   // The brief tab shows as mealpic.app/brief (that path bounces back here with #brief).
-  history.replaceState(null, "", on ? "/brief" : "/dashboard/" + location.search);
+  history.replaceState(null, "", t === "brief" ? "/brief" : t === "account" ? "/dashboard/#account" : "/dashboard/" + location.search);
   window.scrollTo(0, 0);
 }
-window.addEventListener("resize", () => { if (briefOn) sizeBrief(); });
-$("navBrief").onclick = (e) => { e.preventDefault(); showBrief(true); };
-$("navDash").onclick = (e) => { e.preventDefault(); showBrief(false); };
-function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); if (id !== "s-stats") { $("s-brief").classList.add("hidden"); briefOn = false; } else if (location.hash === "#brief" || briefOn) showBrief(true); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-agree")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
+window.addEventListener("resize", () => { if (tab === "brief") sizeBrief(); });
+$("navBrief").onclick = (e) => { e.preventDefault(); showTab("brief"); };
+$("navAcct").onclick = (e) => { e.preventDefault(); showTab("account"); };
+$("navDash").onclick = (e) => { e.preventDefault(); showTab("dash"); };
+function show(id){ screens.forEach(s => $(s).classList.toggle("hidden", s !== id)); if (id !== "s-stats") { $("s-brief").classList.add("hidden"); $("s-account").classList.add("hidden"); tab = "dash"; } else if (location.hash === "#brief" || tab === "brief") showTab("brief"); else if (location.hash === "#account" || tab === "account") showTab("account"); $("out").classList.toggle("hidden", !(id==="s-stats"||id==="s-agree")); document.querySelectorAll(".navx").forEach(a => a.classList.toggle("hidden", id!=="s-stats")); }
 const num = n => Number(n||0).toLocaleString("en-US");
 // Whole dollars like the /join example ($346); cents only when there are some.
 // whole=true drops cents from $1,000 up so big totals fit their tile.
@@ -351,6 +364,10 @@ document.addEventListener("click", e => {
   else if (id === "chg") { editing = true; render(); const i = $("newcode"); i.focus(); i.select(); }
   else if (id === "cancelcode") { editing = false; render(); }
   else if (id === "savecode") saveCode();
+  else if (id === "chgmail") { mail = { step:"email" }; renderAccount(); $("newmail").focus(); }
+  else if (id === "cancelmail") { mail = null; renderAccount(); }
+  else if (id === "sendmail") sendMailCode();
+  else if (id === "confirmmail") confirmMail();
 });
 document.addEventListener("input", e => {
   if (e.target.id !== "newcode") return;
@@ -373,6 +390,9 @@ document.addEventListener("input", e => {
   }, 300);
 });
 document.addEventListener("keydown", e => {
+  if (e.target.id === "newmail" && e.key === "Enter") sendMailCode();
+  if (e.target.id === "mailcode" && e.key === "Enter") confirmMail();
+  if ((e.target.id === "newmail" || e.target.id === "mailcode") && e.key === "Escape") { mail = null; renderAccount(); }
   if (e.target.id !== "newcode") return;
   if (e.key === "Enter" && !$("savecode").disabled) saveCode();
   if (e.key === "Escape") { editing = false; render(); }
@@ -391,6 +411,72 @@ async function saveCode(){
   }
   // The old code stays as an alias, so re-pull the dashboard instead of patching one row.
   editing = false; await load();
+}
+
+// Account tab (Jack, 2026-10-20). Changing email: creator_email_available() checks the address,
+// auth emails a 6-digit code to the NEW address (secure email change is off, so only that one
+// code), verifyOtp(type email_change) switches the login, and the creator_follow_email_change
+// trigger on auth.users moves every creator_codes row to the new email.
+let mail = null, myEmail = "";
+function renderAccount(){
+  if (!data) return;
+  const first = data.codes.find(c => c.code === data.primary) || data.codes.find(c => !c.retired) || data.codes[0];
+  const m = mail;
+  const emailRow = !m ? `
+      <div class="d-row"><span class="d-k">Email</span><b>${esc(myEmail)}</b></div>
+      <div class="d-chips left"><button class="d-chip plain" id="chgmail">Change email</button></div>` : m.step === "email" ? `
+      <div class="d-row"><span class="d-k">New email</span></div>
+      <div class="d-chips left">
+        <span class="d-chip d-in" onclick="$('newmail').focus()"><input id="newmail" class="mail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com" value="${esc(m.email || "")}" aria-label="New email"></span>
+        <button class="d-chip solid" id="sendmail" ${m.busy ? "disabled" : ""}>${m.busy ? "Sending…" : "Send code"}</button>
+        <button class="d-chip plain" id="cancelmail">Cancel</button>
+        <div class="d-hint ${m.bad ? "bad" : ""}" id="h-mail" style="text-align:left">${esc(m.msg || "We'll email a 6-digit code to the new address.")}</div>
+      </div>` : `
+      <div class="d-row"><span class="d-k">Code sent to ${esc(m.email)}</span></div>
+      <div class="d-chips left">
+        <span class="d-chip d-in" onclick="$('mailcode').focus()"><input id="mailcode" class="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="6" aria-label="Code"></span>
+        <button class="d-chip solid" id="confirmmail" ${m.busy ? "disabled" : ""}>${m.busy ? "Checking…" : "Confirm"}</button>
+        <button class="d-chip plain" id="cancelmail">Cancel</button>
+        <div class="d-hint ${m.bad ? "bad" : ""}" id="h-mail" style="text-align:left">${esc(m.msg || "Enter the code to switch your login to this email.")}</div>
+      </div>`;
+  $("acct").innerHTML = `
+  <div class="dash acct">
+    <div class="d-top"><span class="d-title">Account</span></div>
+    <div class="d-card">
+      <div class="d-row"><span class="d-k">Name</span><b>${esc(first.name)}</b></div>
+      <div class="d-row"><span class="d-k">Code</span><b>${esc(first.code.toUpperCase())}</b></div>
+    </div>
+    <div class="d-card" id="mailcard">${emailRow}</div>
+    ${SHOW_PAYOUT_CARD ? `<div class="d-card">${payCard()}</div>` : ""}
+  </div>
+  <p class="foot">You log in to this dashboard with your email. Questions? <a href="mailto:partnerships@mealpic.app">partnerships@mealpic.app</a></p>`;
+}
+async function sendMailCode(){
+  const email = ($("newmail")?.value || "").trim().toLowerCase();
+  mail = { step:"email", email, busy:true }; renderAccount();
+  const { data:r, error:e1 } = await sb.rpc("creator_email_available", { new_email: email });
+  const why = e1 ? "Couldn't check that email. Try again."
+    : r?.error === "invalid" ? "That doesn't look like an email."
+    : r?.error === "same" ? "That's already your email."
+    : r?.error === "taken" ? "That email is already used by another account."
+    : "";
+  if (why) { mail = { step:"email", email, msg:why, bad:true }; renderAccount(); $("newmail").focus(); return; }
+  const { error } = await sb.auth.updateUser({ email });
+  if (error) { mail = { step:"email", email, msg:"Couldn't send the code. Try again in a minute.", bad:true }; renderAccount(); return; }
+  mail = { step:"code", email }; renderAccount(); $("mailcode").focus();
+}
+async function confirmMail(){
+  const token = ($("mailcode")?.value || "").trim(), email = mail.email;
+  if (!/^\d{6}$/.test(token)) { mail = { ...mail, msg:"The code is 6 digits.", bad:true }; renderAccount(); $("mailcode").focus(); return; }
+  mail = { ...mail, busy:true, msg:"" }; renderAccount();
+  const { error } = await sb.auth.verifyOtp({ email, token, type:"email_change" });
+  if (error) { mail = { step:"code", email, msg:"That code didn't work. Check it, or cancel and send a new one.", bad:true }; renderAccount(); $("mailcode").focus(); return; }
+  await sb.auth.refreshSession();
+  myEmail = email; mail = null;
+  const { data:d } = await sb.rpc("creator_dashboard"); if (d && d.codes && d.codes.length) data = d;
+  renderAccount();
+  const h = $("mailcard");
+  if (h) h.insertAdjacentHTML("beforeend", `<div class="d-hint" style="text-align:left;margin-top:10px">Done. You'll log in with ${esc(email)} from now on.</div>`);
 }
 
 // Payout details: Stripe Connect since 2026-10-20 (Jack: "lets setup stripe"). Stripe's own page
@@ -431,7 +517,7 @@ async function load(){
   if (!session) { show("s-email"); return; }
   const { data:d, error } = await sb.rpc("creator_dashboard");
   if (error) { show("s-email"); $("e-email").textContent = "Something went wrong. Try signing in again."; return; }
-  data = d;
+  data = d; myEmail = session.user.email;
   if (!d.codes || !d.codes.length) { $("noneemail").textContent = session.user.email; show("s-none"); return; }
   // Creator Agreement gate: no link or code until the current version is accepted.
   const { data:needs } = await sb.rpc("creator_needs_agreement");
