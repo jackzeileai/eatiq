@@ -131,7 +131,7 @@ html[data-mode="dark"] .d-bars i.wk{background:#f5f5f7;box-shadow:none}
 html[data-mode="dark"] .d-pay .d-big{background:linear-gradient(95deg,#a28bff 0%,#d77bff 30%,#ff6fae 58%,#ffa04d 85%,#ffc65a 100%);-webkit-background-clip:text;background-clip:text}
 
 /* course + library links */
-.learn{display:grid;grid-template-columns:1fr 1fr;gap:var(--app-gap);margin-top:var(--app-gap)}
+.learn{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--app-gap);margin-top:var(--app-gap)}
 .lcard{display:flex;align-items:center;gap:16px;padding:var(--app-pad);border-radius:var(--app-r);background:var(--card-bg);box-shadow:var(--edge);color:var(--ink);text-decoration:none;min-width:0}
 .lcard div{flex:1;min-width:0}
 .lcard b{display:block;font-size:20px;font-weight:800;letter-spacing:-.025em}
@@ -358,6 +358,7 @@ document.addEventListener("click", e => {
     return;
   }
   if (e.target.closest("[data-play]")) { playSetup(); return; }
+  if (e.target.closest('a.lcard[href="#brief"]')) { e.preventDefault(); showTab("brief"); return; }
   const id = e.target.closest("button")?.id;
   if (id === "paylink") openStripe("link");
   else if (id === "paymanage") openStripe("manage");
@@ -608,6 +609,7 @@ function render(){
     ${SHOW_PAYOUT_CARD ? `<div class="d-card">${payCard()}</div>` : ""}
   </div>
   <div class="learn">
+    ${learnCard("#brief", "Creative Brief", "Hook, meat and CTA: the formula every Meal Pic video follows.")}
     ${learnCard(COURSE_URL, "The Course", "How to make videos that sell, from a creator with over 1 billion views.")}
     ${learnCard(LIBRARY_URL, "Video Library", "Videos that already went viral, and why each one worked.")}
   </div>
@@ -639,8 +641,9 @@ function playSetup(){
 }
 function learnCard(url, k, s){
   const inner = `<div><b>${k}</b><span>${s}</span></div>`;
+  const ext = url && !url.startsWith("#") ? ` target="_blank" rel="noopener"` : "";
   return url
-    ? `<a class="lcard" href="${esc(url)}" target="_blank" rel="noopener">${inner}<i class="go"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>`
+    ? `<a class="lcard" href="${esc(url)}"${ext}>${inner}<i class="go"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>`
     : `<div class="lcard off">${inner}<i class="soon">Soon</i></div>`;
 }
 function fmtDate(iso){ const [y,m,d] = iso.split("-").map(Number); return new Date(y, m-1, d).toLocaleDateString("en-US",{month:"short",day:"numeric"}); }
