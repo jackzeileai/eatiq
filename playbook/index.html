@@ -77,6 +77,23 @@ html[data-mode="dark"] .reel.textcard,html[data-mode="dark"] .callout{background
 .reel.vid:hover .playbtn{transform:translate(-50%,-50%) scale(1.08)}
 .reel.vid.playing .playbtn,.reel.vid.playing figcaption{opacity:0;pointer-events:none}
 .reel.vid figcaption{transition:opacity .2s ease}
+.ideas{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 24px;max-width:860px;margin:0 auto}
+.idea{text-align:center}
+.idea .reel{width:100%;max-width:200px;margin:0 auto 16px}
+.idea .h3{font-size:18px;line-height:1.2;letter-spacing:-.02em;margin-bottom:6px;text-wrap:balance}
+.idea .lede.sub{font-size:15px;line-height:1.45;color:var(--sub);font-weight:500;margin:0 auto;max-width:260px;text-wrap:balance}
+@media (max-width:720px){.ideas{gap:28px 10px}.idea .reel{border-radius:14px;margin-bottom:10px}.idea .reel figcaption{font-size:10px;padding:4px 7px;left:6px;bottom:6px}.idea .playbtn{width:40px;height:40px}.idea .playbtn svg{width:18px;height:18px}.idea .h3{font-size:14px}.idea .lede.sub{font-size:12px}}
+.mini-phone{height:100%;aspect-ratio:660/1434;margin:0 auto;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 0 0 5px #1d1d1f,0 18px 36px -18px rgba(0,0,0,.45)}
+.mini-phone video,.mini-phone img{width:100%;height:100%;object-fit:cover;display:block}
+html[data-mode="dark"] .mini-phone{box-shadow:0 0 0 5px #2a2a2c,0 0 0 6px rgba(255,255,255,.12)}
+.mm-steps{margin-top:36px;padding-top:28px;box-shadow:inset 0 1px 0 var(--hair)}
+.mm-title{text-align:center;font-size:18px;font-weight:800;letter-spacing:-.02em;margin:0 0 20px}
+.mm-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:620px;margin:0 auto}
+.mm-row figure{margin:0;text-align:center}
+.mm-row .mini-phone{height:auto;width:100%;max-width:170px}
+.mm-row figcaption{margin-top:14px;font-size:17px}
+.mm-row figcaption b{font-weight:800}
+@media (max-width:720px){.mini-phone{border-radius:14px;box-shadow:0 0 0 3px #1d1d1f,0 12px 24px -14px rgba(0,0,0,.45)}.mm-row{gap:10px}.mm-row figcaption{font-size:14px;margin-top:10px}.mm-title{font-size:15px}}
 .ctabar{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:12px}
 .ctabar .small{color:var(--sub);font-weight:600}
 html[data-mode="dark"] .rules{background:#161617;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
@@ -214,10 +231,10 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <div class="wrap">
     <div class="split"><h2 class="h2">Important note</h2></div>
     <div class="rules card">
-      <div class="rules-row"><span class="rules-k">No approval needed</span><span class="rules-v">Post when it’s ready. If you’re not sure about an idea, text or email us, but you don’t have to.</span></div>
-      <div class="rules-row"><span class="rules-k">Get downloads</span><span class="rules-v">Say to use your code in the video and put your link (<b>mealpic.app/YOURCODE</b>) in your bio.</span></div>
-      <div class="rules-row"><span class="rules-k">Get credit</span><span class="rules-v">Tag <b>@mealpic.app</b> and use <b>#mealpicapp</b> so the video counts toward your monthly total.</span></div>
-      <div class="rules-row"><span class="rules-k">Get even more downloads</span><span class="rules-v">Reply to at least 3 comments about Meal Pic on every post. If someone asks “what app is that?”, answer: <b>“It’s Meal Pic! Use code YOURCODE for 3 days free.”</b></span></div>
+      <div class="rules-row"><span class="rules-k">No approval needed</span><span class="rules-v">Post whenever it’s ready. Questions? Text or email us.</span></div>
+      <div class="rules-row"><span class="rules-k">Get downloads</span><span class="rules-v">Tell people to use your code, and put your link (<b>mealpic.app/YOURCODE</b>) in your bio.</span></div>
+      <div class="rules-row"><span class="rules-k">Get credit</span><span class="rules-v">Tag <b>@mealpic.app</b> and add <b>#mealpicapp</b>. That’s how the video counts toward your monthly total.</span></div>
+      <div class="rules-row"><span class="rules-k">Get even more downloads</span><span class="rules-v">Reply to at least 3 comments about Meal Pic on every post. When someone asks “what app is that?”, reply: <b>“It’s Meal Pic! Use code YOURCODE for 3 days free.”</b></span></div>
     </div>
   </div>
 </section>
@@ -237,18 +254,28 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <div class="wrap">
     <div class="split"><h2 class="h2">Why are these good promotions?</h2></div>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_wand_t.png" alt=""></div><h3 class="h3">They show the magic moment.</h3><p class="lede sub">Point the camera at food, the calories pop up. People see it and think “wait, what app is that?” That moment sells the app for you.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">The app is the main character.</h3><p class="lede sub">The whole video revolves around what the app shows. Take the app out and there’s no video.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_dumbbell_t.png" alt=""></div><h3 class="h3">The theme is something the RIGHT people care about.</h3><p class="lede sub">Losing weight, getting lean, eating more protein, eating healthy. Those viewers download. The wrong viewers just watch.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_wand_t.png" alt=""></div><h3 class="h3">1. They show the magic moment.</h3><p class="lede sub">Point the camera at food, the calories pop up. People see it and think “wait, what app is that?” That moment sells the app for you.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_code_t.png" alt=""></div><h3 class="h3">2. The app is the main character.</h3><p class="lede sub">The whole video revolves around what the app shows. Take the app out and there’s no video.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_dumbbell_t.png" alt=""></div><h3 class="h3">3. The theme is something the RIGHT people care about.</h3><p class="lede sub">Losing weight, getting lean, eating more protein, eating healthy. Those viewers download. The wrong viewers just watch.</p></div>
     </div>
     <div class="callout card">
       <h3 class="h3">Every integration MUST include 3 parts:</h3>
     <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_target_t.png" alt=""></div><h3 class="h3">The theme</h3><p class="lede sub">Grab the RIGHT people. Open a question they want answered, about something only people into working out, weight loss, calorie tracking or the gym would stop for.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/hiw_result_t.png" alt=""></div><h3 class="h3">The magic moment</h3><p class="lede sub">Snap the photo, the calories and macros load, keep going. Do this in the first 15 seconds. Say in one line why it matters to you (“I stopped guessing,” “I’m finally losing weight without weighing my food”).</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cta_t.png" alt=""></div><h3 class="h3">The CTA</h3><p class="lede sub">Short, with a reason. “Link in my bio gets you 3 days free.”</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_target_t.png" alt=""></div><h3 class="h3">1. The theme</h3><p class="lede sub">Get the RIGHT people interested. Make the video about something a person who’d download a calorie tracker cares about.</p></div>
+      <div class="tile"><div class="stage white"><div class="mini-phone"><video autoplay muted loop playsinline poster="../assets/video/app_scan_light.jpg" src="../assets/video/app_scan_light.mp4"></video></div></div><h3 class="h3">2. The magic moment</h3><p class="lede sub">Snap the photo, the calories and macros load, keep going. Do this in the first 15 seconds. Say in one line why it matters to you (“I stopped guessing,” “I’m finally losing weight without weighing my food”).</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cta_t.png" alt=""></div><h3 class="h3">3. The CTA</h3><p class="lede sub">Short, with a reason. “Link in my bio gets you 3 days free.”</p></div>
+    </div>
+      <div class="mm-steps">
+        <p class="mm-title">The magic moment, step by step</p>
+        <div class="mm-row">
+          <figure><div class="mini-phone"><img src="../assets/video/brief/mm_scan.jpg" alt="Scanning a poke bowl"></div><figcaption><b>1. Scan</b></figcaption></figure>
+          <figure><div class="mini-phone"><img src="../assets/video/brief/mm_load.jpg" alt="Calories and macros loading"></div><figcaption><b>2. Load</b></figcaption></figure>
+          <figure><div class="mini-phone"><img src="../assets/video/brief/mm_edit.jpg" alt="Editing the meal"></div><figcaption><b>3. Edit</b></figcaption></figure>
+        </div>
+      </div>
     </div>
   </div>
+  
 </section>
 
 <section class="sec" id="bad">
@@ -265,8 +292,8 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <div class="wrap">
     <div class="split"><h2 class="h2">Why is this a bad promotion?</h2></div>
     <div class="grid c2 two">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cancel_t.png" alt=""></div><h3 class="h3">Wrong crowd.</h3><p class="lede sub">It hooked comedy fans, not people who want to eat better. Big views, almost no downloads.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_clock_t.png" alt=""></div><h3 class="h3">The app was a tangent.</h3><p class="lede sub">It showed up for half a second and didn’t fit the video.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_cancel_t.png" alt=""></div><h3 class="h3">1. Wrong crowd.</h3><p class="lede sub">It hooked comedy fans, not people who want to eat better. Big views, almost no downloads.</p></div>
+      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_clock_t.png" alt=""></div><h3 class="h3">2. The app was a tangent.</h3><p class="lede sub">It showed up for half a second and didn’t fit the video.</p></div>
     </div>
   </div>
 </section>
@@ -274,13 +301,13 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 <section class="sec" id="ideas">
   <div class="wrap">
     <div class="split"><h2 class="h2">Video ideas</h2></div>
-    <div class="grid c3">
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_shoe_t.png" alt=""></div><h3 class="h3">Anything gym / fitness / weight loss related</h3></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/memoji_film_t.png" alt=""></div><h3 class="h3">Day in the life</h3></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_salad_t.png" alt=""></div><h3 class="h3">What I eat in a day</h3><p class="lede sub">Scan every meal as you go, and the total adds up at the end.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_calendar_t.png" alt=""></div><h3 class="h3">“I tracked everything I ate for 7 days”</h3><p class="lede sub">A day-in-my-life with Meal Pic at every meal, and what changed.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/burger_t.png" alt=""></div><h3 class="h3">Guess the calories</h3><p class="lede sub">Two meals that look the same (or a “healthy” one that isn’t), guess first, then scan to reveal.</p></div>
-      <div class="tile"><div class="stage white"><img src="../assets/lab/pb_pan_t.png" alt=""></div><h3 class="h3">Healthy / High-protein recipe</h3><p class="lede sub">Cook it, plate it, scan it at the end to show the macros.</p></div>
+    <div class="ideas">
+      <div class="idea"><figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/idea_19817.jpg" src="../assets/video/brief/idea_19817.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M16.6 2h-3.4v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.4 6.4 0 1 0 5.4 6.3V8.6a8 8 0 0 0 4.4 1.4V6.6a4.6 4.6 0 0 1-4.4-4.6z"/></svg>170.7M views</figcaption></figure><h3 class="h3">1. Anything gym / fitness / weight loss related</h3></div>
+      <div class="idea"><figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/idea_19841.jpg" src="../assets/video/brief/idea_19841.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M16.6 2h-3.4v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.4 6.4 0 1 0 5.4 6.3V8.6a8 8 0 0 0 4.4 1.4V6.6a4.6 4.6 0 0 1-4.4-4.6z"/></svg>15.2M views</figcaption></figure><h3 class="h3">2. Day in the life</h3></div>
+      <div class="idea"><figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/idea_19824.jpg" src="../assets/video/brief/idea_19824.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M16.6 2h-3.4v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.4 6.4 0 1 0 5.4 6.3V8.6a8 8 0 0 0 4.4 1.4V6.6a4.6 4.6 0 0 1-4.4-4.6z"/></svg>67.6M views</figcaption></figure><h3 class="h3">3. What I eat in a day</h3><p class="lede sub">Scan every meal as you go, and the total adds up at the end.</p></div>
+      <div class="idea"><figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/idea_19821.jpg" src="../assets/video/brief/idea_19821.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M16.6 2h-3.4v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.4 6.4 0 1 0 5.4 6.3V8.6a8 8 0 0 0 4.4 1.4V6.6a4.6 4.6 0 0 1-4.4-4.6z"/></svg>91M views</figcaption></figure><h3 class="h3">4. “I tracked everything I ate for 7 days”</h3><p class="lede sub">A day-in-my-life with Meal Pic at every meal, and what changed.</p></div>
+      <div class="idea"><figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/idea_11543.jpg" src="../assets/video/brief/idea_11543.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>70.9M views</figcaption></figure><h3 class="h3">5. Guess the calories</h3><p class="lede sub">Two meals that look the same (or a “healthy” one that isn’t), guess first, then scan to reveal.</p></div>
+      <div class="idea"><figure class="reel vid"><video playsinline preload="none" poster="../assets/video/brief/idea_16070.jpg" src="../assets/video/brief/idea_16070.mp4"></video><button class="playbtn" type="button" aria-label="Play video"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/></svg></button><figcaption><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>50M views</figcaption></figure><h3 class="h3">6. Healthy / High-protein recipe</h3><p class="lede sub">Cook it, plate it, scan it at the end to show the macros.</p></div>
     </div>
   </div>
 </section>
