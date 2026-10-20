@@ -368,6 +368,9 @@ async function saveCode(){
 // collects bank, ID and tax form; the creator-stripe edge function marks them ready and the
 // dashboard shows "Bank ••1234". Older Venmo/PayPal/Zelle/Cash App picks still show until they connect.
 const PAYN = { venmo:"Venmo", paypal:"PayPal", zelle:"Zelle", cashapp:"Cash App" };
+// Flip to true once creator-stripe runs on the LIVE Stripe key. Until then the card shows but
+// the button is off, so nobody types real bank details into the Stripe sandbox.
+const STRIPE_LIVE = false;
 let payBusy = false;
 function payCard(){
   const p = data.payout || {};
@@ -376,8 +379,8 @@ function payCard(){
       <div class="d-chips left"><button class="d-chip plain" id="paymanage" ${payBusy ? "disabled" : ""}>Change bank</button></div>`;
   }
   return `<div class="d-row"><span class="d-k">Payouts go to</span>${p.method ? `<b>${PAYN[p.method] || esc(p.method)} · ${esc(p.handle)}</b>` : `<b class="d-warn">Not set yet</b>`}</div>
-    <div class="d-chips left"><button class="d-chip solid" id="paylink" ${payBusy ? "disabled" : ""}>${payBusy ? "Opening Stripe…" : data.stripe_pending ? "Finish on Stripe" : "Connect your bank"}</button></div>
-    <div class="d-hint" id="h-pay" style="text-align:left">${data.stripe_pending ? "Stripe still needs a few details before we can pay you." : "Takes 2 minutes on Stripe. We never see your bank details."}</div>`;
+    <div class="d-chips left"><button class="d-chip solid" id="paylink" ${payBusy || !STRIPE_LIVE ? "disabled" : ""}>${payBusy ? "Opening Stripe…" : data.stripe_pending ? "Finish on Stripe" : "Connect your bank"}</button></div>
+    <div class="d-hint" id="h-pay" style="text-align:left">${!STRIPE_LIVE ? "Opening soon. We'll let you know when you can connect your bank." : data.stripe_pending ? "Stripe still needs a few details before we can pay you." : "Takes 2 minutes on Stripe. We never see your bank details."}</div>`;
 }
 async function stripeCall(action){
   const { data:r, error } = await sb.functions.invoke("creator-stripe", { body: { action } });
