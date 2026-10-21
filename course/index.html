@@ -333,33 +333,35 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 /* ---------- The Course (2026-10-21): layout only. No cards, no outlines. Left table of contents, every section folds. The words are Jack's. ---------- */
 .titlerow .h-hero{white-space:normal !important}
 #intro.sec{padding-top:8px !important}
-.trio.intro3{align-items:start;gap:24px;max-width:760px;margin:36px auto 0}
+.goals{list-style:none;margin:20px auto 0;padding:0;display:flex;flex-direction:column;gap:8px;text-align:center}
+.goals li{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
 .shotbox{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;margin:0 0 16px}
 .trio.intro3 .shotbox img{display:block;width:100%;height:100%;max-width:none;margin:0;object-fit:cover}
 .shotbox .chip{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:12.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);white-space:nowrap}
 /* page = table of contents on the left, the article on the right */
-.page{display:grid;grid-template-columns:172px minmax(0,1fr);gap:48px;max-width:1040px;margin:56px auto 0;padding:0 24px;align-items:start}
-.toc{position:sticky;top:24px}
-.toc .k{display:block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);margin-bottom:14px}
-.toc a{display:block;padding:6px 0;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--sub);text-decoration:none;line-height:1.3}
-.toc a.sub{padding-left:14px;font-size:14px;font-weight:600}
+.page{max-width:808px;margin:48px auto 0;padding:0 24px}
+.toc{text-align:center;margin:0 auto 40px}
+.toc .k{display:block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);margin-bottom:12px}
+.toc a{display:block;padding:5px 0;font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--sub);text-decoration:none;line-height:1.3}
+.toc a.sub{font-size:14px;font-weight:600}
 .toc a:hover,.toc a.on{color:var(--ink)}
 .article{min-width:0}
-.article .sec{padding:0 0 56px;text-align:left}
+.article .sec{padding:0 0 64px;text-align:center}
 .article .sec:last-child{padding-bottom:0}
 /* a fold: the heading is the button */
-.fold-h{display:flex;align-items:center;gap:14px;width:100%;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
-.fold-h .h2{margin:0;text-align:left;font-size:clamp(30px,3.6vw,44px);line-height:1.05;letter-spacing:-.035em}
+.fold-h{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:0;border:0;background:none;text-align:center;cursor:pointer;color:var(--ink);font:inherit}
+.fold-h .h2{margin:0;text-align:center;font-size:clamp(30px,3.6vw,44px);line-height:1.05;letter-spacing:-.035em}
 .fold-h .h2.sm{font-size:clamp(26px,3vw,36px)}
-.fold-h .chev{flex:none;margin-left:auto;color:var(--sub);transition:transform .25s}
+.fold-h .chev{flex:none;color:var(--sub);transition:transform .25s}
 .fold:not(.open) .fold-h .chev{transform:rotate(-90deg)}
 .fold-b{padding-top:24px}
 .fold:not(.open) .fold-b{display:none}
 .part{margin-top:56px}
 .part .fold-h img{width:56px;height:56px;object-fit:contain;flex:none}
+.part .fold-h .chev{position:static}
 .part .fold-b{padding-top:20px}
 /* words */
-.bul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;max-width:680px}
+.bul{list-style:none;margin:0 auto;padding:0;display:flex;flex-direction:column;gap:12px;max-width:640px;text-align:left}
 .bul li{position:relative;padding-left:24px;font-size:18px;line-height:1.5;font-weight:500;color:var(--sub);text-wrap:pretty}
 .bul li b{color:var(--ink);font-weight:800}
 .bul li::before{content:"";position:absolute;left:4px;top:.66em;width:7px;height:7px;border-radius:50%;background:var(--ink)}
@@ -367,34 +369,34 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 .bul .sub li{padding-left:20px;font-size:17px}
 .bul .sub li::before{width:9px;height:2px;border-radius:0;top:.8em;left:0;background:var(--sub)}
 .bul+.bul,.pair+.bul,.lead+.bul{margin-top:24px}
-.lead{max-width:680px;margin:32px 0 0;font-size:19px;line-height:1.45;font-weight:600;color:var(--ink);letter-spacing:-.01em;text-wrap:pretty}
+.lead{max-width:640px;margin:32px auto 0;text-align:center;font-size:19px;line-height:1.45;font-weight:600;color:var(--ink);letter-spacing:-.01em;text-wrap:pretty}
 .lead b{font-weight:800}
 .fold-b>.lead:first-child{margin-top:0}
-.tip-h{margin:56px 0 0;font-size:22px;letter-spacing:-.02em;text-align:left}
+.tip-h{margin:56px 0 0;font-size:22px;letter-spacing:-.02em;text-align:center}
 .tip-h+.lead{margin-top:10px;font-weight:500;color:var(--sub);font-size:17px}
 .tip-h+.bul{margin-top:14px}
 /* pictures */
-.annot{position:relative;margin:28px 0 0;padding-top:48px;max-width:340px}
+.annot{position:relative;margin:28px auto 0;padding-top:48px;max-width:340px}
 .annot img{display:block;width:100%;height:auto}
 .annot .arrow{position:absolute;left:62%;top:0;width:60px;height:auto;color:#e0322b}
-.annot figcaption{margin-top:12px;font-size:14px;font-weight:600;color:var(--sub)}
-.formula{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+.annot figcaption{margin-top:12px;font-size:14px;font-weight:600;color:var(--sub);text-align:center}
+.formula{list-style:none;margin:24px auto 0;padding:0;display:inline-flex;flex-direction:column;gap:16px;text-align:left}
 .formula li{display:flex;align-items:center;gap:18px}
 .formula li span{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
 .formula img{width:64px;height:64px;object-fit:contain;flex:none}
-.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:28px 0 0;max-width:680px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:28px auto 0;max-width:680px}
 .trio figure{margin:0;text-align:center}
 .trio img{display:block;width:auto;height:120px;max-width:100%;margin:0 auto 14px;object-fit:contain}
 .trio figcaption{font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:var(--ink);text-wrap:balance}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:32px 0 0;align-items:end;max-width:800px}
-.pair figure{margin:0;text-align:left}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:32px auto 0;align-items:end;max-width:720px}
+.pair figure{margin:0;text-align:center}
 .pair img{display:block;width:100%;height:auto;border-radius:18px}
 .pair figcaption{margin-top:10px;font-size:14px;font-weight:600;color:var(--sub)}
 .pair figcaption b{color:var(--ink);font-weight:800}
 /* example videos: views on top, the description under */
-.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 16px;margin:24px 0 0}
-.vgrid.three{grid-template-columns:repeat(3,1fr);max-width:600px}
-.vgrid.two-up{grid-template-columns:repeat(2,1fr);gap:28px;max-width:600px}
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 16px;margin:24px auto 0}
+.vgrid.three{grid-template-columns:repeat(3,1fr);max-width:580px}
+.vgrid.two-up{grid-template-columns:repeat(2,1fr);gap:28px;max-width:560px}
 .vid{margin:0;text-align:left}
 .vid .frame{position:relative;aspect-ratio:9/16;border-radius:20px;overflow:hidden;background:#000;cursor:pointer}
 .vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
@@ -406,15 +408,15 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 .vid figcaption span{font-size:14px;line-height:1.4;font-weight:500;color:var(--sub);text-wrap:pretty}
 .vid figcaption span i{font-style:normal;font-weight:800;color:var(--ink)}
 /* the big pro-tip rows */
-.tips{display:flex;flex-direction:column;gap:48px}
+.tips{display:flex;flex-direction:column;gap:48px;max-width:680px;margin:0 auto;text-align:left}
 .tips .row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:28px;align-items:start}
 .tips .row.one{align-items:center}
 .tips .row img{width:96px;height:96px;object-fit:contain;display:block}
 .tips .row .h3{font-size:22px;line-height:1.2;letter-spacing:-.02em;text-align:left;margin:0 0 12px;padding-top:6px}
 .tips .row.one .h3{margin:0;padding:0}
 .tips .row .bul li{font-size:17px}
-.library{margin:40px 0 48px}
-.library .reels{max-width:none;margin:0 -24px}
+.library{margin:40px 0 48px;width:100vw;margin-left:calc(50% - 50vw)}
+.library .reels{max-width:none;margin:0}
 .reels{overflow:hidden;max-width:1320px;margin:0 auto;padding:8px 0 40px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
 .reels-track{display:flex;gap:16px;width:max-content;animation:reels 70s linear infinite}
 .reels:hover .reels-track{animation-play-state:paused}
@@ -424,10 +426,7 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 .reel video{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;display:block}
 .reel figcaption{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:12.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);white-space:nowrap}
 @media (max-width:820px){
-  .page{grid-template-columns:1fr;gap:32px;margin-top:40px}
-  .toc{position:static;display:flex;flex-wrap:wrap;gap:4px 18px}
-  .toc .k{width:100%;margin-bottom:6px}
-  .toc a.sub{display:none}
+  .page{margin-top:40px}.toc{margin-bottom:48px}
   .vgrid{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:720px){
@@ -439,12 +438,12 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   .lead{font-size:17px;margin-top:24px}.tip-h{margin-top:40px;font-size:19px}.tip-h+.lead{font-size:15px}
   .annot{max-width:300px;padding-top:44px}.annot .arrow{width:54px}.formula li{font-size:18px;gap:14px}.formula img{width:52px;height:52px}
   .trio{gap:12px}.trio img{height:72px;margin-bottom:10px}.trio figcaption{font-size:14px}
-  .trio.intro3{gap:10px;margin-top:24px}.shotbox{border-radius:14px;margin-bottom:10px}.shotbox .chip{font-size:10px;padding:4px 7px;left:6px;bottom:6px}
+  .goals li{font-size:17px}
   .pair{grid-template-columns:1fr;gap:18px;margin-top:24px}
   .vgrid,.vgrid.three,.vgrid.two-up{grid-template-columns:repeat(2,1fr);gap:20px 12px}
   .vid .frame{border-radius:14px}.vid .play{width:44px;height:44px;margin:-22px 0 0 -22px}.vid figcaption b{font-size:15px}.vid figcaption span{font-size:13px}
   .tips{gap:36px}.tips .row{grid-template-columns:64px minmax(0,1fr);gap:14px}.tips .row img{width:64px;height:64px}.tips .row .h3{font-size:17px;padding-top:2px;margin-bottom:8px}.tips .row .bul li{font-size:15px}
-  .library{margin:28px 0 36px}.library .reels{margin:0 -16px}
+  .library{margin:28px 0 36px;margin-left:calc(50% - 50vw)}
 }
 </style>
 </head>
@@ -476,11 +475,11 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 
 <section class="sec" id="intro">
   <div class="wrap">
-    <div class="trio intro3">
-      <figure><div class="shotbox"><img src="assets/viral.jpg" alt=""><span class="chip"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="17.4" cy="6.6" r="1.5" fill="currentColor"/></svg>34.3M views</span></div><figcaption>1. Make Viral Videos</figcaption></figure>
-      <figure><div class="shotbox"><img src="assets/ad.jpg" alt=""><span class="chip">Sponsored</span></div><figcaption>2. Make Winning Ads</figcaption></figure>
-      <figure><div class="shotbox"><img src="assets/payout.jpg" alt=""></div><figcaption>3. Combine Them To Make A Fuuuuuck Ton Of Money</figcaption></figure>
-    </div>
+    <ol class="goals">
+      <li>1. Make Viral Videos</li>
+      <li>2. Make Winning Ads</li>
+      <li>3. Combine Them To Make A Fuuuuuck Ton Of Money</li>
+    </ol>
   </div>
 </section>
 
