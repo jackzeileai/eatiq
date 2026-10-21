@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en" data-theme="app">
+<script>try{var m=localStorage.getItem("mp-mode");document.documentElement.dataset.mode=m||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.mode="light"}</script>
+<head>
+<script>if(/[?&]embed\b/.test(location.search)||window.top!==window.self){document.documentElement.dataset.embed="1"}else{location.replace("/dashboard/#course")}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meal Pic Course · The Viral Video + Winning Ads</title>
+<meta name="description" content="How to make viral videos, how to make winning ads, and how to combine them.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="The Viral Video + Winning Ads">
+<meta property="og:description" content="The Meal Pic creator course.">
+<meta property="og:image" content="https://mealpic.app/assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-dark.png?v=2" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style/mono.css?v=1791820000">
+<style>
+/* ---------- copied from /playbook (the Creative Brief): one look for every creator page ---------- */
+/* ---------- layout only; the look is mono.css + the /join sections (tiles, reels, table) ---------- */
+.sec{padding-top:88px}
+html[data-embed] header.nav{display:none}
+.sec .split{display:block;text-align:center;max-width:760px;margin:0 auto 36px}
+.sec .split .h2{margin:0 auto}
+.sec .split .lede{max-width:560px;margin:18px auto 0;color:var(--sub);font-weight:500;font-size:18px;text-wrap:balance}
+/* hero */
+.bhero{text-align:center;padding:120px 0 0}
+html[data-embed] .bhero{padding-top:40px}
+.bhero .h-hero{font-size:clamp(48px,6.6vw,96px);line-height:.98;letter-spacing:-.04em;max-width:900px;margin:0 auto}
+.bhero .lede{max-width:560px;margin:24px auto 0;font-size:21px;font-weight:500;color:var(--sub);text-wrap:balance}
+/* tiles, same as /join How it works */
+.tile{text-align:center}
+.tile .stage{height:280px;margin-bottom:24px;padding:24px;background:transparent;box-shadow:none}
+.tile .stage img{width:100%;height:100%;object-fit:contain}
+.grid.c2 .tile .stage{height:300px}
+.grid.c2.two{max-width:860px;margin-left:auto;margin-right:auto}
+.grid.c4{grid-template-columns:repeat(4,1fr)}
+.grid.c4 .tile .stage{height:200px;padding:16px}
+.grid.c4 .tile .h3{font-size:22px}
+.tile .h3{font-size:28px;margin-bottom:8px}
+.tile .lede.sub{font-size:18px;color:var(--sub);font-weight:500;margin:0 auto;max-width:340px;text-wrap:balance}
+.grid.c4 .tile .lede.sub{font-size:16px}
+/* the formula */
+.formula{text-align:center;margin:56px auto 0;font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1.1;text-wrap:balance}
+.formula span{color:var(--sub)}
+/* rules: the /join comparison-table card */
+.rules{max-width:880px;margin:0 auto;border-radius:24px;overflow:hidden}
+.rules-row{display:grid;grid-template-columns:200px 1fr;align-items:center;gap:24px;padding:24px 28px;box-shadow:inset 0 1px 0 var(--hair)}
+.rules-row:first-child{box-shadow:none}
+.rules-k{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sub)}
+.rules-v{font-size:18px;font-weight:600;line-height:1.4;letter-spacing:-.01em;color:var(--ink)}
+.rules-v b{font-weight:800}
+/* reels: the /join proof cards, static and clickable */
+.reelrow{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+.reel{position:relative;display:block;flex:none;margin:0;width:240px;aspect-ratio:9/16;border-radius:22px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 48px -28px rgba(0,0,0,.4)}
+.reel img{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;display:block;transition:transform .4s ease}
+.reel:hover img{transform:scale(1.03)}
+.reel figcaption{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:12.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+html[data-mode="dark"] .reel{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.split .lede b{color:var(--ink);font-weight:800}
+.aside{text-align:center;max-width:560px;margin:28px auto 0;font-size:18px;font-weight:500;color:var(--sub);text-wrap:balance}
+.aside b{color:var(--ink);font-weight:800}
+#ideas .grid.c3{row-gap:48px}
+.callout{max-width:1100px;margin:64px auto 0;padding:40px 32px 32px;border-radius:24px}
+.callout>.h3{text-align:center;font-size:clamp(26px,3vw,36px);letter-spacing:-.035em;margin:0 0 8px}
+.reel.textcard{background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px 20px;text-align:center}
+.reel.textcard img{position:static;inset:auto;width:70%;height:auto;object-fit:contain;transform:none}
+.reel.textcard p{margin:18px 0 0;font-size:15px;font-weight:500;line-height:1.4;color:var(--sub);text-wrap:balance}
+.reel.textcard b{color:var(--ink);font-weight:800}
+html[data-mode="dark"] .reel.textcard,html[data-mode="dark"] .callout{background:#161617}
+.reel.vid{cursor:pointer}
+.reel.vid video{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;display:block;background:#000}
+.playbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border:0;border-radius:50%;display:grid;place-items:center;padding:0 0 0 5px;color:#000;background:rgba(255,255,255,.88);backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 14px 34px -10px rgba(0,0,0,.55);cursor:pointer;transition:transform .2s ease,opacity .2s ease}
+.reel.vid:hover .playbtn{transform:translate(-50%,-50%) scale(1.08)}
+.reel.vid.playing .playbtn,.reel.vid.playing figcaption{opacity:0;pointer-events:none}
+.reel.vid figcaption{transition:opacity .2s ease}
+.ideas{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 24px;max-width:860px;margin:0 auto}
+.idea{text-align:center}
+.idea .reel{width:100%;max-width:200px;margin:0 auto 16px}
+.idea .h3{font-size:18px;line-height:1.2;letter-spacing:-.02em;margin-bottom:6px;text-wrap:balance}
+.idea .lede.sub{font-size:15px;line-height:1.45;color:var(--sub);font-weight:500;margin:0 auto;max-width:260px;text-wrap:balance}
+@media (max-width:720px){.ideas{gap:28px 10px}.idea .reel{border-radius:14px;margin-bottom:10px}.idea .reel figcaption{font-size:10px;padding:4px 7px;left:6px;bottom:6px}.idea .playbtn{width:40px;height:40px}.idea .playbtn svg{width:18px;height:18px}.idea .h3{font-size:14px}.idea .lede.sub{font-size:12px}}
+.mini-phone{height:100%;aspect-ratio:660/1434;margin:0 auto;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 0 0 5px #1d1d1f,0 18px 36px -18px rgba(0,0,0,.45)}
+.mini-phone video,.mini-phone img{width:100%;height:100%;object-fit:cover;display:block}
+html[data-mode="dark"] .mini-phone{box-shadow:0 0 0 5px #2a2a2c,0 0 0 6px rgba(255,255,255,.12)}
+.mm-steps{margin-top:36px;padding-top:28px;box-shadow:inset 0 1px 0 var(--hair)}
+.mm-title{text-align:center;font-size:18px;font-weight:800;letter-spacing:-.02em;margin:0 0 20px}
+.mm-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:620px;margin:0 auto}
+.mm-row figure{margin:0;text-align:center}
+.mm-row .mini-phone{height:auto;width:100%;max-width:170px}
+.mm-row figcaption{margin-top:14px;font-size:17px}
+.mm-row figcaption b{font-weight:800}
+@media (max-width:720px){.mini-phone{border-radius:14px;box-shadow:0 0 0 3px #1d1d1f,0 12px 24px -14px rgba(0,0,0,.45)}.mm-row{gap:10px}.mm-row figcaption{font-size:14px;margin-top:10px}.mm-title{font-size:15px}}
+.titlerow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.titlerow .h-hero{margin:0;max-width:none}
+.readtime{display:inline-flex;align-items:center;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.01em;color:var(--sub);background:rgba(255,255,255,.7);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);box-shadow:inset 0 0 0 1px var(--hair)}
+html[data-mode="dark"] .readtime{background:rgba(29,29,31,.7)}
+.bhero .lede.intro{color:var(--ink);font-weight:700;font-size:21px;max-width:600px;margin-top:22px;letter-spacing:-.01em}
+.bhero .lede{max-width:600px;margin:14px auto 0;font-size:17px;line-height:1.5}
+.bhero .lede b{color:var(--ink);font-weight:800}
+#priorities{padding-top:72px}
+@media (max-width:720px){.readtime{font-size:12px;padding:5px 11px}.bhero .lede.intro{font-size:17px}.bhero .lede{font-size:15px}#priorities{padding-top:36px}}
+.tile .bul{list-style:none;margin:0 auto;padding:0;max-width:320px;text-align:left;display:flex;flex-direction:column;gap:6px}
+.tile .bul li{position:relative;padding-left:16px;font-size:15px;line-height:1.45;font-weight:500;color:var(--sub);text-wrap:pretty}
+.tile .bul li::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--ink)}
+@media (max-width:720px){.tile .bul{gap:4px}.tile .bul li{font-size:12.5px;padding-left:11px}.tile .bul li::before{width:4px;height:4px;left:0}}
+.clipcard{height:100%;aspect-ratio:9/16;margin:0 auto;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 18px 36px -18px rgba(0,0,0,.45)}
+.clipcard video,.clipcard img{width:100%;height:100%;object-fit:cover;display:block}
+.mm-row .clipcard{height:auto;width:100%;max-width:180px;border-radius:12px}
+.tile .clipcard{border-radius:8px;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 10px 20px -12px rgba(0,0,0,.35)}
+html[data-mode="dark"] .clipcard{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+@media (max-width:720px){.clipcard{border-radius:12px}.tile .clipcard{border-radius:6px}}
+.openbtn{position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);transition:transform .15s ease,background .15s ease}
+.openbtn:hover{transform:scale(1.08);background:rgba(0,0,0,.6)}
+.reel.vid.playing .openbtn{opacity:1}
+@media (max-width:720px){.openbtn{width:28px;height:28px;top:7px;right:7px}.openbtn svg{width:12px;height:12px}}
+.badgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:860px;margin:0 auto}
+.badcol .reel{width:100%;max-width:220px;margin:0 auto 18px}
+.badcol .bul{list-style:none;margin:0 auto;padding:0;max-width:240px;display:flex;flex-direction:column;gap:6px}
+.badcol .bul li{position:relative;padding-left:16px;font-size:15px;line-height:1.45;font-weight:500;color:var(--sub)}
+.badcol .bul li b{color:var(--ink);font-weight:800}
+.badcol .bul li::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--ink)}
+@media (max-width:720px){.badgrid{gap:10px}.badcol .reel{border-radius:14px;margin-bottom:10px}.badcol .reel figcaption{font-size:10px;padding:4px 7px;left:6px;bottom:6px}.badcol .playbtn{width:40px;height:40px}.badcol .bul li{font-size:12px;padding-left:10px}.badcol .bul li::before{width:4px;height:4px;left:0}}
+.fmts{max-width:900px;margin:0 auto;border-radius:24px;box-shadow:inset 0 0 0 1px var(--hair);overflow:hidden}
+.fmt{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:center;padding:18px 28px;box-shadow:inset 0 1px 0 var(--hair)}
+.fmt:first-child{box-shadow:none}
+.fmt-n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper,#fff);font-size:14px;font-weight:800;margin-bottom:10px}
+.fmt-text .h3{font-size:20px;line-height:1.2;letter-spacing:-.02em;margin:0}
+.fmt-text p{margin:6px 0 0;font-size:15px;line-height:1.45;font-weight:500;color:var(--sub)}
+.fmt-vids{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.fmt-vids::-webkit-scrollbar{display:none}
+.fmt-vids .reel{width:116px;border-radius:14px}
+.fmt-vids .reel figcaption{font-size:10.5px;padding:4px 8px;left:7px;bottom:7px}
+.fmt-vids .playbtn{width:44px;height:44px}
+.fmt-vids .playbtn svg{width:20px;height:20px}
+.fmt-vids .openbtn{width:26px;height:26px;top:7px;right:7px}
+.fmt-vids .openbtn svg{width:12px;height:12px}
+html[data-mode="dark"] .fmt-n{background:#f5f5f7;color:#000}
+@media (max-width:720px){.fmts{border-radius:20px}.fmt{grid-template-columns:1fr;gap:12px;padding:18px 16px}.fmt-text .h3{font-size:17px}.fmt-text p{font-size:14px}.fmt-n{width:24px;height:24px;font-size:12px;margin-bottom:6px}.fmt-vids .reel{width:112px}}
+.callout{max-width:none !important;margin:0 !important;padding:0 !important;border-radius:0 !important;box-shadow:none !important;background:none !important}
+/* hero: bigger, with the /join colour gradient on "Creative Brief" */
+.fifty{background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.85) 50%,transparent 62%) -150% 0/250% 100% no-repeat,linear-gradient(95deg,#7b5cff 0%,#c64bff 30%,#ff4f9a 58%,#ff8a2b 85%,#ffb02e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:fiftyflow 3.6s ease-in-out infinite;padding-right:.04em}
+@keyframes fiftyflow{0%,45%{background-position:-150% 0,0 0}100%{background-position:250% 0,0 0}}
+@media (prefers-reduced-motion:reduce){.fifty{animation:none}}
+.bhero{padding-top:120px}
+html[data-embed] .bhero{padding-top:48px}
+.titlerow{flex-direction:column;gap:18px}
+.titlerow .h-hero{font-size:clamp(48px,6.4vw,84px) !important;line-height:1 !important;letter-spacing:-.045em !important;white-space:normal !important;text-wrap:balance}
+.titlerow .readtime{order:-1}
+.bhero .lede.intro{color:var(--sub) !important;font-weight:500 !important;font-size:20px !important;line-height:1.45;max-width:520px;margin-top:20px;letter-spacing:-.005em}
+@media (max-width:720px){.bhero{padding-top:96px}html[data-embed] .bhero{padding-top:28px}.titlerow .h-hero{font-size:44px !important}.bhero .lede.intro{font-size:16px !important}}
+.bul .sub{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
+.bul .sub li{padding-left:14px;color:var(--sub);font-size:.95em}
+.bul .sub li::before{width:6px;height:1.5px;border-radius:0;top:.72em;background:var(--sub)}
+/* the formula as an equation */
+.eq{display:flex;align-items:center;justify-content:center;gap:16px;margin:48px auto 0;flex-wrap:nowrap}
+.eq .term{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:84px;padding:14px 22px;border-radius:20px;box-shadow:inset 0 0 0 1px var(--hair);background:var(--paper,#fff);font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.15;text-align:center;color:var(--ink)}
+.eq .term.money{padding:10px 26px}
+.eq .term.money .fifty{font-size:40px;line-height:1;letter-spacing:-.03em}
+.eq .term small{display:block;margin-top:4px;font-size:13px;font-weight:700;color:var(--sub);letter-spacing:0}
+.eq .op{font-size:30px;font-weight:700;color:var(--sub);line-height:1}
+html[data-mode="dark"] .eq .term{background:#161617;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+@media (max-width:720px){.eq{gap:8px;margin-top:32px}.eq .term{min-height:64px;padding:10px 12px;border-radius:14px;font-size:14px}.eq .term.money{padding:8px 14px}.eq .term.money .fifty{font-size:28px}.eq .term small{font-size:11px}.eq .op{font-size:20px}}
+.checks{list-style:none;margin:0 auto;padding:0;max-width:240px;display:flex;flex-direction:column;gap:8px}
+.checks li{display:flex;align-items:flex-start;gap:9px;font-size:15px;line-height:1.35;font-weight:600;color:var(--ink)}
+.checks li.miss{color:var(--sub)}
+.checks .ck{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;color:#fff;margin-top:-1px}
+.checks .ck svg{width:11px;height:11px}
+.checks .ck.yes{background:var(--green,#34c759)}
+.checks .ck.no{background:var(--red,#ff3b30)}
+@media (max-width:720px){.checks{gap:6px}.checks li{font-size:12px;gap:6px}.checks .ck{width:16px;height:16px}.checks .ck svg{width:9px;height:9px}}
+/* Get started: tighter, calmer */
+#testflight .split{margin-bottom:20px}
+#testflight .ctabar{margin-top:0;gap:10px}
+#testflight .ctabar .small{font-size:14px;font-weight:500}
+#testflight .btn:focus{outline:none}
+#testflight .btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+/* inside the dashboard tab (960px wide): keep rows side by side, no inner scrollbar */
+html[data-embed],html[data-embed] body{overflow:hidden}
+@media (min-width:721px) and (max-width:980px){
+  .grid.c3{grid-template-columns:repeat(3,1fr)}
+  .grid.c2{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr}
+}
+.ctabar{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.ctabar .small{color:var(--sub);font-weight:600}
+html[data-mode="dark"] .rules{background:#161617;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+
+@media (max-width:980px){.grid.c4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:720px){
+  .sec{padding-top:56px}
+  .bhero{padding-top:96px}
+  .bhero .h-hero{font-size:52px}
+  .bhero .lede{font-size:17px}
+  .sec .split .h2{font-size:38px}
+  .sec .split .lede{font-size:17px}
+  /* tiles stay side by side in a row, just smaller */
+  .grid.c3{grid-template-columns:repeat(3,1fr);gap:12px}
+  .grid.c2{grid-template-columns:repeat(2,1fr);gap:16px}
+  .grid.c4{grid-template-columns:repeat(2,1fr);gap:28px 16px}
+  .tile .stage,.grid.c2 .tile .stage,.grid.c4 .tile .stage{height:110px;padding:8px;margin-bottom:12px}
+  .tile .h3,.grid.c4 .tile .h3{font-size:16px;line-height:1.15;letter-spacing:-.02em;margin-bottom:6px}
+  .tile .lede.sub,.grid.c4 .tile .lede.sub{font-size:13px;line-height:1.35}
+  .grid.c2 .tile .h3{font-size:18px}
+  .grid.c2 .tile .lede.sub{font-size:14px}
+  .rules{border-radius:20px}
+  .rules-row{grid-template-columns:1fr;gap:6px;padding:18px}
+  .rules-k{font-size:12px}
+  .rules-v{font-size:16px}
+  .reelrow{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:10px;margin:0 calc(-1 * var(--gutter,16px));padding:0 var(--gutter,16px) 8px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .reelrow::-webkit-scrollbar{display:none}
+  .reel{width:62%;max-width:240px;border-radius:18px;scroll-snap-align:center}
+  .playbtn{width:60px;height:60px}
+  .playbtn svg{width:24px;height:24px}
+  .callout{margin-top:44px;padding:24px 12px 16px;border-radius:20px}
+  .callout>.h3{font-size:22px}
+  .reel.textcard{padding:14px 12px}
+  .reel.textcard p{font-size:12.5px;margin-top:10px}
+  #ideas .grid.c3{row-gap:28px}
+}
+
+/* ---------- calmer scale (Jack 2026-10-20: "too big") — a brief reads like a doc, not a landing hero ---------- */
+.bhero{padding:96px 0 0}
+html[data-embed] .bhero{padding-top:24px}
+.bhero .h-hero{font-size:clamp(36px,4vw,52px);line-height:1.05;letter-spacing:-.035em;white-space:nowrap}
+.sec{padding-top:72px}
+.sec .split{margin:0 auto 28px}
+.sec .split .h2{font-size:clamp(26px,2.6vw,34px);line-height:1.1;letter-spacing:-.03em}
+.sec .split .lede{font-size:17px;max-width:620px;margin-top:12px}
+.tile .stage,.grid.c2 .tile .stage{height:170px;padding:16px;margin-bottom:16px}
+.tile .h3{font-size:20px;line-height:1.2;letter-spacing:-.02em;margin-bottom:6px}
+.tile .lede.sub{font-size:15px;line-height:1.45;max-width:300px}
+.grid.c2.two{max-width:720px}
+.grid.c3{max-width:960px;margin-left:auto;margin-right:auto}
+.formula{margin-top:36px;font-size:clamp(20px,2vw,26px)}
+.rules{max-width:760px}
+.rules-row{grid-template-columns:180px 1fr;padding:18px 24px}
+.rules-k{font-size:12px}
+.rules-v{font-size:16px}
+.reel{width:200px;border-radius:18px}
+.callout{max-width:960px;margin-top:0;padding:32px 24px 24px}
+.callout>.h3{font-size:clamp(20px,2vw,24px)}
+#ideas .grid.c3{row-gap:36px}
+.reel.textcard p{font-size:14px}
+@media (max-width:720px){
+  .bhero{padding-top:88px}
+  .bhero .h-hero{font-size:30px;white-space:normal}
+  .sec{padding-top:52px}
+  .sec .split .h2{font-size:24px}
+  .sec .split .lede{font-size:15px}
+  .tile .stage,.grid.c2 .tile .stage,.grid.c4 .tile .stage{height:90px;padding:6px;margin-bottom:10px}
+  .tile .h3,.grid.c4 .tile .h3,.grid.c2 .tile .h3{font-size:15px}
+  .tile .lede.sub,.grid.c4 .tile .lede.sub,.grid.c2 .tile .lede.sub{font-size:12.5px}
+  .formula{font-size:18px;margin-top:28px}
+  .rules-row{grid-template-columns:1fr;padding:14px 16px}
+  .rules-v{font-size:15px}
+  .reel{width:58%;max-width:200px}
+  .callout{margin-top:0;padding:20px 10px 14px}
+  .callout>.h3{font-size:18px}
+  .playbtn{width:52px;height:52px}
+}
+
+/* nav + dark (same as /join) */
+.nav .brand span{color:var(--sub);font-weight:800}
+.mode-btn{display:grid;place-items:center;width:40px;height:40px;margin-left:4px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
+.mode-btn:hover{background:rgba(0,0,0,.06)}
+.mode-btn .i-sun{display:none}
+html[data-mode="dark"] .mode-btn .i-sun{display:block}
+html[data-mode="dark"] .mode-btn .i-moon{display:none}
+html[data-mode="dark"]{--paper:#000;--ink:#f5f5f7;--sub:#a1a1a6;--faint:#6e6e73;--hair:rgba(255,255,255,.14);--hair-2:rgba(255,255,255,.08);color-scheme:dark}
+html[data-mode="dark"]{background:#000;color:var(--ink)}
+html[data-mode="dark"] body{background:#000}
+html[data-mode="dark"] .mode-btn:hover{background:rgba(255,255,255,.1)}
+html[data-mode="dark"] .glass{background:rgba(28,28,30,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.08),0 12px 32px -14px rgba(0,0,0,.8)}
+html[data-mode="dark"] .btn{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .btn:hover{background:#fff}
+html[data-mode="dark"] .btn.shine::after{background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%)}
+html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
+
+@media (max-width:360px){.nav .brand{font-size:18px}.nav .mode-btn{display:none}}
+/* ---------- ONE type + spacing scale for the whole brief (last word; 2026-10-20) ----------
+   section title 36 / tile title 20 / body 15 / small 13. Section gap 96, title→content 32, picture→title 16, title→bullets 10. */
+.sec{padding-top:88px !important}
+#priorities{padding-top:72px !important}
+.sec .split{margin:0 auto 32px !important}
+.sec .split .h2{font-size:48px !important;line-height:1.1 !important;letter-spacing:-.035em !important}
+.sec .split .lede{font-size:17px !important;margin-top:10px !important}
+.tile .stage,.grid.c2 .tile .stage{height:160px !important;padding:12px !important;margin-bottom:16px !important}
+.tile .h3,.fmt-text .h3{font-size:20px !important;line-height:1.2 !important;letter-spacing:-.02em !important;margin:0 0 10px !important}
+.tile .bul{max-width:300px !important;gap:8px !important}
+.tile .bul li,.badcol .bul li,.checks li,.fmt-text p,.rules-v{font-size:15px !important;line-height:1.5 !important}
+.grid.c2.two,.grid.c3,.badgrid{column-gap:40px !important}
+.eq{margin-top:56px !important}
+.mm-row figcaption{font-size:15px !important;margin-top:12px !important}
+@media (max-width:720px){
+  .sec{padding-top:64px !important}
+  .sec .split{margin-bottom:24px !important}
+  .sec .split .h2{font-size:30px !important}
+  .sec .split .lede{font-size:15px !important}
+  .tile .stage,.grid.c2 .tile .stage{height:96px !important;padding:6px !important;margin-bottom:10px !important}
+  .tile .h3,.fmt-text .h3{font-size:15px !important;margin-bottom:6px !important}
+  .tile .bul li,.badcol .bul li,.checks li,.fmt-text p,.rules-v{font-size:12.5px !important;line-height:1.45 !important}
+  .grid.c2.two,.grid.c3,.badgrid{column-gap:12px !important}
+  .eq{margin-top:36px !important}
+  .mm-row figcaption{font-size:13px !important}
+}
+/* formats: videos in a grid, never a sideways scroll */
+.fmt-vids{display:grid !important;grid-template-columns:repeat(4,1fr);gap:12px;overflow:visible !important}
+.fmt-vids .reel{width:100% !important;max-width:none}
+.libnote{text-align:center;margin:28px auto 0;font-size:15px;font-weight:500;color:var(--sub)}
+.libnote b{color:var(--ink);font-weight:800}
+@media (max-width:720px){.fmt-vids{grid-template-columns:repeat(2,1fr);gap:8px}}
+/* fit at every width (2026-10-20): nothing under 12px, captions never clip, formats stack on tablets instead of 74px clips */
+.badcol .reel figcaption,.fmt-vids .reel figcaption,.reel figcaption{font-size:12px !important;gap:5px;padding:4px 8px;left:8px;bottom:8px;white-space:nowrap}
+.fmt-vids .reel figcaption{gap:4px;padding:4px 7px;left:7px;bottom:7px}
+.reel figcaption svg{width:12px;height:12px;flex:none}
+@media (min-width:600px) and (max-width:720px){.fmt-vids{grid-template-columns:repeat(4,1fr)}}
+.eq .term small{font-size:12px !important}
+.ctabar .small{text-align:center}
+.bul .sub li::before{height:2px}
+@media (max-width:959px){.fmt{grid-template-columns:240px 1fr}}
+@media (max-width:899px){.fmt{grid-template-columns:1fr;gap:14px}}
+@media (max-width:720px){.badcol .reel figcaption,.fmt-vids .reel figcaption,.reel figcaption{padding:3px 6px;left:6px;bottom:6px;gap:3px}.reel figcaption svg{width:10px;height:10px}}
+/* titles in a row take the same height so every bullet list starts on one line */
+.grid.c3 .tile .h3,.grid.c2 .tile .h3{min-height:2.4em;display:flex;align-items:flex-end;justify-content:center;text-wrap:balance}
+@media (max-width:720px){.grid.c3 .tile .h3{min-height:3.6em}}
+
+/* ---------- The Course (2026-10-21): layout only. Same look as the Creative Brief; the words are Jack's. ---------- */
+.titlerow .h-hero{white-space:normal !important}
+.intro-list{list-style:none;margin:28px auto 0;padding:0;display:flex;flex-direction:column;gap:12px;max-width:420px;text-align:left}
+.intro-list li{display:flex;align-items:center;gap:14px;font-size:19px;font-weight:700;letter-spacing:-.015em;color:var(--ink)}
+.intro-list .fmt-n{margin:0;flex:none}
+.doc{max-width:700px;margin:0 auto}
+.doc .bul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.doc .bul li{position:relative;padding-left:22px;font-size:17px;line-height:1.5;font-weight:500;color:var(--sub);text-wrap:pretty}
+.doc .bul li b{color:var(--ink);font-weight:800}
+.doc .bul li::before{content:"";position:absolute;left:4px;top:.66em;width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.doc .bul .sub{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.doc .bul .sub li{padding-left:18px;font-size:16px;color:var(--sub)}
+.doc .bul .sub li::before{width:8px;height:2px;border-radius:0;top:.78em;left:0;background:var(--sub)}
+.doc .bul .sub li b{font-weight:800}
+.doc .h3{font-size:22px;line-height:1.2;letter-spacing:-.025em;margin:40px 0 14px;text-align:left}
+.doc .h3:first-child{margin-top:0}
+.doc .lead{font-size:17px;line-height:1.5;font-weight:500;color:var(--sub);margin:0 0 14px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:center;max-width:960px;margin:0 auto}
+.two .doc{max-width:none;margin:0}
+.shot{display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 24px 48px -28px rgba(0,0,0,.4)}
+.shot.phone{border-radius:34px}
+html[data-mode="dark"] .shot{box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:960px;margin:40px auto}
+.pair{align-items:end}
+.pair figure{margin:0;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.pair figcaption{margin-top:12px;font-size:15px;font-weight:600;color:var(--sub)}
+.pair figcaption b{color:var(--ink);font-weight:800}
+.steps{max-width:700px;margin:40px auto 0;border-radius:24px;box-shadow:inset 0 0 0 1px var(--hair);overflow:hidden}
+.steps .row{display:flex;align-items:flex-start;gap:18px;padding:20px 24px;box-shadow:inset 0 1px 0 var(--hair)}
+.steps .row:first-child{box-shadow:none}
+.steps .fmt-n{margin:1px 0 0;flex:none}
+.steps .row .t{font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.3;color:var(--ink)}
+.steps .row .t.caps{text-transform:uppercase;letter-spacing:.02em;font-size:16px}
+.steps .row .bul{margin-top:10px;gap:8px}
+.steps .row .bul li{font-size:16px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:960px;margin:0 auto;align-items:start}
+.cols .doc{max-width:none;margin:0}
+.links{margin:16px 0 0;border-radius:18px;box-shadow:inset 0 0 0 1px var(--hair);overflow:hidden}
+.links a{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;text-decoration:none;color:var(--ink);font-size:16px;font-weight:700;letter-spacing:-.01em;box-shadow:inset 0 1px 0 var(--hair)}
+.links a:first-child{box-shadow:none}
+.links a span{color:var(--sub);font-weight:600;font-size:14px;flex:none}
+.links a:hover{background:rgba(0,0,0,.03)}
+html[data-mode="dark"] .links a:hover{background:rgba(255,255,255,.05)}
+.tip{margin-top:22px;padding:18px 22px;border-radius:18px;box-shadow:inset 0 0 0 1px var(--hair)}
+.tip .k{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin-bottom:8px}
+.tip .bul li{text-transform:uppercase;letter-spacing:.02em;font-weight:800;color:var(--ink);font-size:15px}
+.tip.plain .bul li{text-transform:none;letter-spacing:0;font-weight:500;color:var(--sub);font-size:16px}
+@media (max-width:980px){.two{grid-template-columns:minmax(0,1fr) 240px;gap:32px}}
+@media (max-width:720px){
+  .intro-list{gap:8px;margin-top:20px}.intro-list li{font-size:15px;gap:10px}
+  .doc .bul li{font-size:15px;padding-left:18px}.doc .bul li::before{left:2px}
+  .doc .bul .sub li{font-size:14px}.doc .h3{font-size:18px;margin:28px 0 10px}.doc .lead{font-size:15px}
+  .two{grid-template-columns:1fr;gap:24px}.two .shot.phone{max-width:240px;margin:0 auto}
+  .pair{grid-template-columns:1fr;gap:16px;margin:28px auto}
+  .steps{border-radius:18px}.steps .row{padding:14px 16px;gap:12px}.steps .row .t{font-size:16px}.steps .row .t.caps{font-size:14px}.steps .row .bul li{font-size:14px}
+  .cols{grid-template-columns:1fr;gap:40px}
+  .links a{font-size:14px;padding:12px 14px}.links a span{font-size:12px}
+  .tip{padding:14px 16px}.tip .bul li{font-size:13px}.tip.plain .bul li{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav float">
+  <div class="wrap glass">
+    <a class="brand" href="/join/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Course</span></a>
+    <nav class="links">
+      <a class="plain" href="#hook">Hook</a>
+      <a class="plain" href="#loop">Keep watching</a>
+      <a class="plain" href="#tips">Pro tips</a>
+      <a class="plain" href="/dashboard/">Log in</a>
+      <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
+      <a class="btn small shine" href="/join/">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ---------- The Course: Jack's Notion page "The Viral Video + Winning Ads" (2026-10-21), his words and order; layout like the Creative Brief ---------- -->
+<section class="bhero" id="content">
+  <div class="wrap">
+    <div class="titlerow"><h1 class="h-hero">The Viral Video + <span class="fifty">Winning Ads</span></h1><span class="readtime">5 min read</span></div>
+    <p class="lede intro">In this page I will teach you how to:</p>
+    <ol class="intro-list">
+      <li><span class="fmt-n">1</span>Make Viral Videos</li>
+      <li><span class="fmt-n">2</span>Make Winning Ads</li>
+      <li><span class="fmt-n">3</span>Combine Them To Make A Fuuuuuck Ton Of Money</li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="viral">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">How To Make Viral Videos</h2></div>
+    <div class="two">
+      <div class="doc">
+        <ul class="bul">
+          <li>Before I teach you how to make a viral video it is important to understand how the algorithm works.</li>
+          <li>Lucky for us Instagram tells us exactly what it’s looking for, in order of importance.</li>
+          <li>The biggest 3 factors are <b>skip rate, share rate, and like rate</b>. I will teach you how to master all of them with my viral video formula.</li>
+        </ul>
+      </div>
+      <img class="shot phone" src="assets/algo.jpg" alt="Instagram insights: what impacts your views, listed in order of importance. Skip rate, share rate, like rate, save rate, repost rate, comment rate.">
+    </div>
+    <div class="steps">
+      <div class="row"><span class="fmt-n">1</span><div><div class="t">Hook</div></div></div>
+      <div class="row"><span class="fmt-n">2</span><div><div class="t">Reason to keep watching</div></div></div>
+      <div class="row"><span class="fmt-n">3</span><div><div class="t">Shareable moment</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="hook">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">1. The Hook</h2></div>
+    <div class="doc">
+      <ul class="bul">
+        <li>The hook is the opening of the video.</li>
+        <li>It is whatever gets the attention of your audience.</li>
+        <li><b>It’s THE biggest factor on if a video goes viral.</b></li>
+        <li><b>The algorithm grades it by skip rate: the % of people who leave in the first 3 seconds. Lower is better.</b></li>
+      </ul>
+    </div>
+    <div class="pair">
+      <figure><img class="shot" src="assets/hook1.jpg" alt="Instagram insights: skip rate 25.6%, lower than average."><figcaption><b>Skip rate</b> · lower is better</figcaption></figure>
+      <figure><img class="shot" src="assets/hook2.jpg" alt="Instagram insights: how long people watched your reel. 80.9% still watching at 3 seconds."><figcaption><b>80.9% still watching at 0:03</b></figcaption></figure>
+    </div>
+    <div class="doc">
+      <ul class="bul">
+        <li>On IG &amp; TikTok there are no titles or thumbnails. Instead, the opening frames of your video are what is setting the viewer’s expectations (and “hooking” them).</li>
+        <li>Viewers decide if they are going to watch the video within the first few seconds. If your opening doesn’t hook them it’s game over.</li>
+        <li>Every video that has ever gone viral ever has a good hook.</li>
+        <li>There are an infinite number of good hooks, but I’ll teach you how I like to think about them.</li>
+        <li>A good hook gets their attention but then also promises that the rest of the video will have value (ie the rest of the video will be entertaining or teach them a good piece of knowledge etc).</li>
+      </ul>
+    </div>
+    <div class="cols">
+      <div class="doc">
+        <h3 class="h3">Visual</h3>
+        <ul class="bul">
+          <li>This is often what carries a video right now.</li>
+          <li>You want anything that is intriguing:
+            <ul class="sub">
+              <li>A hot girl dancing</li>
+              <li>A rat in a living room</li>
+              <li>A guy hanging off a sign</li>
+              <li>A really yummy looking chocolate cake</li>
+              <li>A kid running in a horse walker</li>
+              <li>2 guys blindfolded playing a game</li>
+              <li>Any cool piece of action. Sometimes I start videos with the most interesting part, which is the ending.</li>
+              <li>A cute dog</li>
+              <li>A chicken eating a snake</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="tip"><span class="k">Pro tips</span><ul class="bul"><li>Steal other people’s hooks</li><li>Start in the action</li><li>Keep it visually simple (reduce elements)</li></ul></div>
+      </div>
+      <div class="doc">
+        <h3 class="h3">Verbal</h3>
+        <ul class="bul">
+          <li>This (in my experience) is a little less important than the visual hook for getting views.</li>
+          <li>But it is more important for getting THE RIGHT people to watch your video (more on that later).</li>
+          <li>These videos are not super visually intriguing but have crazy opening hooks.</li>
+          <li>The same thing goes: you want anything that is VERBALLY intriguing.</li>
+        </ul>
+        <div class="links">
+          <a href="https://www.tiktok.com/@reesamteesa/video/7335420025240554782" target="_blank" rel="noopener">“who tf did i marry”<span>@reesamteesa</span></a>
+          <a href="https://www.tiktok.com/@nursehadley/video/7385228290614660383" target="_blank" rel="noopener">@nursehadley<span>TikTok</span></a>
+          <a href="https://www.tiktok.com/@nursehadley/video/6893165004485397766" target="_blank" rel="noopener">@nursehadley<span>TikTok</span></a>
+        </div>
+        <div class="tip plain"><span class="k">Pro tip</span><ul class="bul"><li>Make your verbal hook visual by writing it as text on screen.</li><li>Give the viewer a reason to wait until the end with a verbal hook.</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="loop">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">2. A Reason To Keep Watching</h2></div>
+    <div class="doc">
+      <ul class="bul">
+        <li>There’s an infinite number of ways to do this but I’ll boil it down.</li>
+        <li>Basically the viewer will keep watching if either:
+          <ul class="sub">
+            <li>It’s really entertaining (ex. a dance video: there’s not really an open loop but the video is very entertaining)</li>
+            <li>There’s an open loop</li>
+          </ul>
+        </li>
+        <li>I recommend doing both obviously, but using an open loop is a fantastic device if you are not sitting on absolute gold footage, and it helps extend watch time.</li>
+        <li>Note: often the hook bleeds into the open loop, and that’s good!</li>
+        <li>An open loop is basically some sort of question (can be explicit or implied) that the viewer wants to see resolved.</li>
+        <li>When I say a “question” do not take it super literally… a LOT of things can be an open loop.</li>
+        <li><b>Once the loop is closed, viewer interest drops significantly!</b></li>
+        <li>Even if the viewer sees something that answers the question, that can close the loop.
+          <ul class="sub"><li>The stronger they want to see the loop get closed, the more engaged they will be.</li></ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="share">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">3. A Shareable Moment</h2></div>
+    <div class="doc">
+      <ul class="bul">
+        <li>This last piece is not REQUIRED to make a viral video, but a LOT have them.</li>
+        <li>It increases the shareability (the second most important metric).</li>
+        <li>AND increases the rewatch rate… making our skip rate EVEN better.</li>
+        <li>Basically I put a little crazy moment at the end that makes the viewer go “what was that”, and then they have to rewatch the video again, and it makes them laugh and share it to a friend.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="tips">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">Other Very Important Pro Tips</h2></div>
+    <div class="steps">
+      <div class="row"><span class="fmt-n">1</span><div><div class="t caps">Copy copy copy</div>
+        <ul class="bul">
+          <li>The absolute most guaranteed and most reliable way to make a viral video is to copy what already worked.</li>
+          <li>There are 34 MILLION new videos uploaded to TikTok every single day, and the algorithm pushes the best of the best of the best to the top.</li>
+          <li>It is possible to make completely new stuff and beat the 34 million (I’ve done it) but trust me, a billion views later, I wouldn’t do it again. It is FAR easier to look at the cream of the crop and just copy them.</li>
+          <li>Lucky for you, we have a library of successful videos from other creators (hint: replicate stuff with higher views).</li>
+        </ul></div></div>
+      <div class="row"><span class="fmt-n">2</span><div><div class="t caps">Cut out dead space</div></div></div>
+      <div class="row"><span class="fmt-n">3</span><div><div class="t caps">Make your videos visually simple and easy to understand</div></div></div>
+      <div class="row"><span class="fmt-n">4</span><div><div class="t caps">Start in the action</div></div></div>
+      <div class="row"><span class="fmt-n">5</span><div><div class="t caps">Trial reels to test</div></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="label dim">© 2026 Meal Pic</span>
+    <span class="label dim"><a href="/join/">Apply to be a creator</a><a href="/dashboard/">Creator login</a><a href="/creator-terms.html">Creator Agreement</a><a href="mailto:partnerships@mealpic.app">Contact</a></span>
+  </div>
+</footer>
+
+<script>
+document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
+</script>
+</body>
+</html>
