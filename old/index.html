@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en" data-theme="app">
+<script>try{var m=localStorage.getItem("mp-mode");document.documentElement.dataset.mode=m||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.mode="light"}</script>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meal Pic Creator Playbook</title><meta name="robots" content="noindex">
+<meta name="description" content="A successful Meal Pic video has three parts: the hook, the meat, and the CTA.">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Meal Pic Creator Playbook">
+<meta property="og:description" content="The hook, the meat, and the CTA.">
+<meta property="og:image" content="https://mealpic.app/assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-dark.png?v=2" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style/mono.css?v=1791820000">
+<style>
+/* ---------- layout only; the look is mono.css + the /join 'How it works' section ---------- */
+.sec{padding-top:88px}
+.sec.first{padding-top:72px}
+.sec .split{display:block;text-align:center;max-width:760px;margin:0 auto 36px}
+.sec .split .h2{margin:0 auto}
+.sec .split .lede{max-width:560px;margin:18px auto 0;color:var(--sub);font-weight:500;text-wrap:balance}
+.tile{text-align:center;text-decoration:none;color:inherit;display:block}
+.sec .split .h2{font-size:clamp(32px,3.6vw,46px)}
+.sec .split .lede{font-size:18px}
+.tile .stage{height:190px;padding:16px;margin-bottom:16px;background:transparent;box-shadow:none}
+.tile .stage img{width:100%;height:100%;object-fit:contain}
+.tile .h3{font-size:22px;margin-bottom:6px}
+.tile .lede.sub{font-size:16px;color:var(--sub);margin:4px auto 0;max-width:320px;text-wrap:balance}
+/* picture per point */
+.icons{display:grid;grid-template-columns:repeat(var(--n,2),1fr);gap:20px;margin:18px 0 8px}
+.icons .ic{text-align:center}
+.icons .ic img{display:block;width:100%;height:150px;object-fit:contain;margin:0 auto 12px}
+.icons .ic b{display:block;font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.25;text-wrap:balance}
+.icons .ic span{display:block;font-size:15px;font-weight:500;color:var(--sub);line-height:1.4;margin-top:4px;text-wrap:balance}
+.icons.sm{--n:4;gap:14px}
+.icons.sm .ic img{height:96px;margin-bottom:8px}
+.icons.sm .ic b{font-size:15px}
+
+.copy{max-width:760px;margin:0 auto}
+.copy .h3{margin:36px 0 10px}
+.copy .h3:first-child{margin-top:0}
+.copy .p{color:var(--ink);margin:0 0 12px}
+.copy .p.sub{color:var(--sub)}
+.copy ol,.copy ul{font-size:17px;line-height:1.5;font-weight:600;color:var(--ink);margin:0 0 12px;padding:0 0 0 28px}
+.copy ol.ab{list-style:upper-alpha}
+.copy li{padding:2px 0}
+.copy li::marker{font-weight:800}
+.copy li ul{margin:4px 0 0;padding-left:24px}
+.copy b{font-weight:800}
+.copy .label{display:block;margin:22px 0 6px}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;margin:20px 0 8px}
+.shots .pic{box-shadow:inset 0 0 0 1px var(--hair);background:#fff}
+.shots .pic img{width:100%;height:auto;display:block}
+
+/* nav + dark (same as /join) */
+.nav .brand span{color:var(--sub);font-weight:800}
+.mode-btn{display:grid;place-items:center;width:40px;height:40px;margin-left:4px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}
+.mode-btn:hover{background:rgba(0,0,0,.06)}
+.mode-btn .i-sun{display:none}
+html[data-mode="dark"] .mode-btn .i-sun{display:block}
+html[data-mode="dark"] .mode-btn .i-moon{display:none}
+html[data-mode="dark"]{--paper:#000;--ink:#f5f5f7;--sub:#a1a1a6;--faint:#6e6e73;--hair:rgba(255,255,255,.14);--hair-2:rgba(255,255,255,.08);color-scheme:dark}
+html[data-mode="dark"]{background:#000;color:var(--ink)}
+html[data-mode="dark"] body{background:#000}
+html[data-mode="dark"] .mode-btn:hover{background:rgba(255,255,255,.1)}
+html[data-mode="dark"] .glass{background:rgba(28,28,30,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 0 1px rgba(255,255,255,.08),0 12px 32px -14px rgba(0,0,0,.8)}
+html[data-mode="dark"] .btn{background:#f5f5f7;color:#000}
+html[data-mode="dark"] .btn:hover{background:#fff}
+html[data-mode="dark"] .btn.shine::after{background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%)}
+html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
+
+@media (max-width:900px){
+  .sec,.sec.first{padding-top:56px}
+  .sec .split{margin:0 auto 28px}
+  .sec .split .h2{font-size:32px}
+  .sec .split .lede{font-size:16px}
+  .tile .stage{height:150px;padding:12px}
+  .tile .h3{font-size:20px}
+  .tile .lede.sub{font-size:15px}
+  .icons .ic img{height:110px}
+  .icons.sm{--n:3}
+  .icons.sm .ic img{height:80px}
+  .nav .links a.plain{display:none}
+  .shots{grid-template-columns:1fr}
+}
+@media (max-width:360px){.nav .brand{font-size:18px}.nav .mode-btn{display:none}}
+</style>
+</head>
+<body>
+
+<header class="nav float">
+  <div class="wrap glass">
+    <a class="brand" href="/join/"><img class="mark" src="../assets/mark-black.png" alt="">Meal Pic <span>Playbook</span></a>
+    <nav class="links">
+      <a class="plain" href="#hook">Hook</a>
+      <a class="plain" href="#meat">Meat</a>
+      <a class="plain" href="#cta">CTA</a>
+      <a class="plain" href="/dashboard/">Log in</a>
+      <button class="mode-btn" id="modeBtn" aria-label="Switch light or dark"><svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
+      <a class="btn small shine" href="/join/">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ---------- hero + three-stepper ---------- -->
+<section class="sec first">
+  <div class="wrap">
+    <div class="split"><h1 class="h2">A successful video has three parts.</h1><p class="lede">Nail all three and the video gets views and sales.</p></div>
+    <div class="grid c3">
+      <a class="tile" href="#hook"><div class="stage"><img src="../assets/lab/pb_hook_t.png?v=1" alt=""></div><h3 class="h3">1. The Hook</h3><p class="lede sub">The first 3 seconds. Get the right people's interest.</p></a>
+      <a class="tile" href="#meat"><div class="stage"><img src="../assets/lab/pb_meat_t.png?v=1" alt=""></div><h3 class="h3">2. The Meat</h3><p class="lede sub">Show the app and why it's valuable.</p></a>
+      <a class="tile" href="#cta"><div class="stage"><img src="../assets/lab/pb_cta_t.png?v=2" alt=""></div><h3 class="h3">3. The CTA</h3><p class="lede sub">Tell the viewer what to do. Give them a why.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 1. hook ---------- -->
+<section class="sec" id="hook">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">1. The Hook</h2><p class="lede">The first 3 seconds of the video.</p></div>
+    <div class="copy">
+
+      <h3 class="h3">What is a hook?</h3>
+      <ul>
+        <li>The algorithm grades it by <b>skip rate</b>: the % of people who leave in the first 3 seconds. Lower is better.</li>
+        <li>It's one of the biggest factors in whether a video goes viral.</li>
+      </ul>
+      <div class="shots">
+        <div class="pic"><img src="../assets/playbook/skip_rate.jpg?v=1" alt="Instagram insights: What impacts your views. Skip rate 25.6%, lower."></div>
+        <div class="pic"><img src="../assets/playbook/retention.jpg?v=1" alt="Instagram insights: How long people watched your reel. 80.9% still watching at 0:03."></div>
+      </div>
+
+      <h3 class="h3">A hook has two jobs</h3>
+      <div class="icons">
+        <div class="ic"><img src="../assets/lab/pb_magnet_t.png?v=1" alt=""><b>1. Get people's interest</b></div>
+        <div class="ic"><img src="../assets/lab/pb_target_t.png?v=1" alt=""><b>2. Get the <i>right</i> people's interest</b></div>
+      </div>
+
+      <h3 class="h3">Job 1: Get people's interest</h3>
+      <p class="p"><b>How?</b> You open a loop.</p>
+      <p class="p"><b>What is a loop?</b> A question the viewer wants answered. It can be stated or implied, verbal or non-verbal.</p>
+      <span class="label dim">Two types of loops</span>
+      <div class="icons">
+        <div class="ic"><img src="../assets/lab/pb_eyes_t.png?v=1" alt=""><b>A. Visual</b><span>Something interesting on screen. Best for grabbing attention.</span></div>
+        <div class="ic"><img src="../assets/lab/pb_bubble_t.png?v=1" alt=""><b>B. Verbal</b><span>Something you say or put in text. Best for grabbing the <i>right</i> attention and keeping people watching.</span></div>
+      </div>
+      <span class="label dim">Small things that help</span>
+      <div class="icons">
+        <div class="ic"><img src="../assets/lab/pb_copy_t.png?v=1" alt=""><b>Don't reinvent the wheel</b><span>Copy winning hooks.</span></div>
+        <div class="ic"><img src="../assets/lab/pb_clap_t.png?v=1" alt=""><b>Start in the action</b><span>Put context in text on screen, don't explain it.</span></div>
+      </div>
+
+      <h3 class="h3">Job 2: Get the right people's interest</h3>
+      <p class="p">The hook <b>and</b> the concept of the video need to be aimed at people who'd actually download a calorie tracking app. If not, you get views but no sales.</p>
+      <span class="label dim">Concepts that work</span>
+      <div class="icons sm">
+        <div class="ic"><img src="../assets/lab/memoji_filming_t.png?v=1" alt=""><b>Fitness vlogs</b></div>
+        <div class="ic"><img src="../assets/lab/pb_clock_t.png?v=1" alt=""><b>Day in my life</b></div>
+        <div class="ic"><img src="../assets/lab/pb_salad_t.png?v=1" alt=""><b>What I eat in a day</b></div>
+        <div class="ic"><img src="../assets/lab/pb_pan_t.png?v=1" alt=""><b>Healthy cooking recipes</b></div>
+        <div class="ic"><img src="../assets/lab/pb_chicken_t.png?v=1" alt=""><b>High protein recipes</b></div>
+        <div class="ic"><img src="../assets/lab/pb_dumbbell_t.png?v=1" alt=""><b>Fitness videos in general</b></div>
+        <div class="ic"><img src="../assets/lab/pb_book_t.png?v=1" alt=""><b>Talking head story time</b></div>
+      </div>
+      <span class="label dim">Anti-example</span>
+      <p class="p">The Gatorade chicken video got a ton of views, but it hooked the comedy audience, not the fitness audience. Big views, small sales.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 2. meat ---------- -->
+<section class="sec" id="meat">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">2. The Meat</h2><p class="lede">Where you show the app and why it's valuable.</p></div>
+    <div class="copy">
+
+      <h3 class="h3">What do you show?</h3>
+      <p class="p">The magic moment: the <b>scan feature</b>.</p>
+      <div class="icons" style="--n:3">
+        <div class="ic"><img src="../assets/lab/hiw_snap_t.png?v=1" alt=""><b>1. Take a picture of your food</b></div>
+        <div class="ic"><img src="../assets/lab/hiw_result_t.png?v=1" alt=""><b>2. Results load</b></div>
+        <div class="ic"><img src="../assets/lab/hiw_edit_t.png?v=1" alt=""><b>3. Edit if needed</b></div>
+      </div>
+
+      <h3 class="h3">Why does it matter to you?</h3>
+      <p class="p">Pick one or two.</p>
+      <div class="icons" style="--n:3">
+        <div class="ic"><img src="../assets/lab/pb_shoe_t.png?v=1" alt=""><b>Helped you lose weight</b></div>
+        <div class="ic"><img src="../assets/lab/pb_wand_t.png?v=1" alt=""><b>Makes calorie tracking easy</b></div>
+        <div class="ic"><img src="../assets/lab/pb_calendar_t.png?v=1" alt=""><b>You're finally consistent and feel better</b></div>
+      </div>
+
+      <h3 class="h3">How do you frame it?</h3>
+      <div class="icons">
+        <div class="ic"><img src="../assets/lab/course_memoji_t.png?v=1" alt=""><b>A. Friend recommendation</b><span>“Here's a useful thing I use.”</span></div>
+        <div class="ic"><img src="../assets/lab/pb_cancel_t.png?v=1" alt=""><b>B. Reverse value</b><span>“Here's why I'm canceling my Meal Pic subscription.” It's not because: valuable feature 1, valuable feature 2, valuable feature 3.</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 3. cta ---------- -->
+<section class="sec" id="cta">
+  <div class="wrap">
+    <div class="split"><h2 class="h2">3. The CTA</h2><p class="lede">What you tell the viewer to do at the end.</p></div>
+    <div class="copy">
+
+      <h3 class="h3">How do you do it?</h3>
+      <p class="p">Keep it short. Give them a <b>why</b>.</p>
+      <div class="icons" style="--n:1">
+        <div class="ic"><img src="../assets/lab/profile_link_t.png?v=1" alt=""><b>“Click the link in my bio to get 3 days free.”</b></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="label dim">© 2026 Meal Pic</span>
+    <span class="label dim"><a href="/join/">Apply to be a creator</a><a href="/dashboard/">Creator login</a><a href="/creator-terms.html">Creator Agreement</a><a href="mailto:help@mealpic.app">Contact</a></span>
+  </div>
+</footer>
+
+<script>
+document.getElementById("modeBtn").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.mode==="dark"?"light":"dark";r.dataset.mode=n;try{localStorage.setItem("mp-mode",n)}catch(e){}});
+</script>
+</body>
+</html>
