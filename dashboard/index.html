@@ -361,9 +361,12 @@ document.addEventListener("click", e => {
   }
   if (e.target.closest("[data-play]")) { playSetup(); return; }
   if (e.target.closest('a.lcard[href="#brief"]')) { e.preventDefault(); showTab("brief"); return; }
+  const pm = e.target.closest("[data-pm]");
+  if (pm) { payMethod = pm.dataset.pm; render(); $("payhandle").focus(); return; }
   const id = e.target.closest("button")?.id;
-  if (id === "paylink") openStripe("link");
-  else if (id === "paymanage") openStripe("manage");
+  if (id === "paychg") { payEditing = true; payMethod = data.payout?.method in PAYN ? data.payout.method : Object.keys(PAYN)[0]; render(); $("payhandle").focus(); }
+  else if (id === "paycancel") { payEditing = false; render(); }
+  else if (id === "paysave") savePayout();
   else if (id === "chg") { editingAcct = false; renderAccount(); editing = true; render(); const i = $("newcode"); i.focus(); i.select(); }
   else if (id === "chgcode") { editing = false; render(); editingAcct = true; renderAccount(); const i = $("newcode"); i.focus(); i.select(); }
   else if (id === "cancelcode") { editing = false; editingAcct = false; render(); renderAccount(); }
@@ -374,6 +377,7 @@ document.addEventListener("click", e => {
   else if (id === "confirmmail") confirmMail();
 });
 document.addEventListener("input", e => {
+  if (e.target.id === "payhandle") { $("paysave").disabled = !payMethod || e.target.value.trim().length < 2; return; }
   if (e.target.id !== "newcode") return;
   const i = e.target; i.value = i.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 20);
   const c = i.value.toLowerCase(), h = $("h-code"), b = $("savecode");
@@ -394,6 +398,7 @@ document.addEventListener("input", e => {
   }, 300);
 });
 document.addEventListener("keydown", e => {
+  if (e.target.id === "payhandle") { if (e.key === "Enter" && !$("paysave").disabled) savePayout(); if (e.key === "Escape") { payEditing = false; render(); } return; }
   if (e.target.id === "newmail" && e.key === "Enter") sendMailCode();
   if (e.target.id === "mailcode" && e.key === "Enter") confirmMail();
   if ((e.target.id === "newmail" || e.target.id === "mailcode") && e.key === "Escape") { mail = null; renderAccount(); }
@@ -494,35 +499,49 @@ async function confirmMail(){
   if (h) h.insertAdjacentHTML("beforeend", `<div class="d-hint" style="text-align:left;margin-top:10px">Done. You'll log in with ${esc(email)} from now on.</div>`);
 }
 
-// Payout details: Stripe Connect since 2026-10-20 (Jack: "lets setup stripe"). Stripe's own page
-// collects bank, ID and tax form; the creator-stripe edge function marks them ready and the
-// dashboard shows "Bank ••1234". Older Venmo/PayPal/Zelle/Cash App picks still show until they connect.
-const PAYN = { venmo:"Venmo", paypal:"PayPal", zelle:"Zelle", cashapp:"Cash App" };
-// Flip to true once creator-stripe runs on the LIVE Stripe key. Until then the card shows but
-// the button is off, so nobody types real bank details into the Stripe sandbox.
-const STRIPE_LIVE = false;
-// Jack 2026-10-20: hide the "Payouts go to" card for now. Flip to true to bring it back.
-const SHOW_PAYOUT_CARD = false;
-let payBusy = false;
+// Payout details (2026-10-14 editor, back on 2026-10-20): Jack's auto-approval walkthrough says
+// "add your Venmo in the dashboard", so the card is visible again and takes a Venmo handle
+// (creator_set_payout). Venmo only for now; add keys to PAYN to offer more. The Stripe Connect
+// path (stripeCall / openStripe below) stays for when payouts move to Stripe.
+const SHOW_PAYOUT_CARD = true;
+let payEditing = false, payMethod = "";
+const PAYN = { venmo:["Venmo","@username"] };
 function payCard(){
   const p = data.payout || {};
   if (p.method === "stripe") {
-    return `<div class="d-row"><span class="d-k">Payouts go to</span><b>${esc(p.handle || "Stripe")}</b></div>
-      <div class="d-chips left"><button class="d-chip plain" id="paymanage" ${payBusy ? "disabled" : ""}>Change bank</button></div>`;
+    return `<div class="d-row"><span class="d-k">Payouts go to</span><b>${esc(p.handle || "Stripe")}</b></div>`;
   }
-  return `<div class="d-row"><span class="d-k">Payouts go to</span>${p.method ? `<b>${PAYN[p.method] || esc(p.method)} · ${esc(p.handle)}</b>` : `<b class="d-warn">Not set yet</b>`}</div>
-    <div class="d-chips left"><button class="d-chip solid" id="paylink" ${payBusy || !STRIPE_LIVE ? "disabled" : ""}>${payBusy ? "Opening Stripe…" : data.stripe_pending ? "Finish on Stripe" : "Connect your bank"}</button></div>
-    <div class="d-hint" id="h-pay" style="text-align:left">${!STRIPE_LIVE ? "Opening soon. We'll let you know when you can connect your bank." : data.stripe_pending ? "Stripe still needs a few details before we can pay you." : "Takes 2 minutes on Stripe. We never see your bank details."}</div>`;
+  if (!payEditing) {
+    return p.method
+      ? `<div class="d-row"><span class="d-k">Payouts go to</span><b>${PAYN[p.method]?.[0] || esc(p.method)} · ${esc(p.handle)}</b></div>
+         <div class="d-chips left"><button class="d-chip plain" id="paychg">Change</button></div>`
+      : `<div class="d-row"><span class="d-k">Payouts go to</span><b class="d-warn">Not set yet</b></div>
+         <div class="d-chips left"><button class="d-chip solid" id="paychg">Add your Venmo</button></div>`;
+  }
+  const methods = Object.keys(PAYN);
+  return `<div class="d-row"><span class="d-k">How should we pay you?</span></div>
+    ${methods.length > 1 ? `<div class="d-chips left">${methods.map(m => `<button class="d-chip pick${m === payMethod ? " on" : ""}" data-pm="${m}">${PAYN[m][0]}</button>`).join("")}</div>` : ""}
+    ${payMethod ? `<div class="d-chips left">
+      <span class="d-chip d-in" onclick="$('payhandle').focus()"><em>${PAYN[payMethod][0]}</em><input id="payhandle" value="${esc(p.method === payMethod ? p.handle || "" : "")}" placeholder="${PAYN[payMethod][1]}" maxlength="120" autocapitalize="off" autocorrect="off" spellcheck="false" style="text-transform:none;width:14em" aria-label="Payout handle"></span>
+      <button class="d-chip solid" id="paysave" ${(p.method === payMethod && p.handle) ? "" : "disabled"}>Save</button>
+      <button class="d-chip plain" id="paycancel">Cancel</button>
+      <div class="d-hint" id="h-pay" style="text-align:left"></div></div>` : `<div class="d-chips left"><button class="d-chip plain" id="paycancel">Cancel</button></div>`}`;
+}
+async function savePayout(){
+  const h = $("payhandle").value.trim(), b = $("paysave"), hint = $("h-pay");
+  if (!payMethod || h.length < 2) return;
+  b.disabled = true; hint.className = "d-hint"; hint.textContent = "Saving…";
+  const { data:r, error } = await sb.rpc("creator_set_payout", { method: payMethod, handle: h });
+  if (error || r?.error) { hint.className = "d-hint bad"; hint.textContent = "Couldn't save that. Try again."; b.disabled = false; return; }
+  data.payout = { method: r.method, handle: r.handle }; payEditing = false; render();
 }
 async function stripeCall(action){
   const { data:r, error } = await sb.functions.invoke("creator-stripe", { body: { action } });
   return error ? { error: "failed" } : r;
 }
 async function openStripe(action){
-  payBusy = true; render();
   const r = await stripeCall(action);
   if (r?.url) { location.href = r.url; return; }
-  payBusy = false; render();
   const h = $("h-pay"); if (h) { h.className = "d-hint bad"; h.textContent = "Couldn't open Stripe. Try again."; }
 }
 
