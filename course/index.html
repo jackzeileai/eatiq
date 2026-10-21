@@ -345,7 +345,7 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 .toc a.sub{padding-left:14px;font-size:14px;font-weight:600}
 .toc a:hover,.toc a.on{color:var(--ink)}
 .article{min-width:0}
-.article .sec{padding:0 0 72px;text-align:left}
+.article .sec{padding:0 0 56px;text-align:left}
 .article .sec:last-child{padding-bottom:0}
 /* a fold: the heading is the button */
 .fold-h{display:flex;align-items:center;gap:14px;width:100%;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
@@ -374,17 +374,20 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 .tip-h+.lead{margin-top:10px;font-weight:500;color:var(--sub);font-size:17px}
 .tip-h+.bul{margin-top:14px}
 /* pictures */
-.two{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:center}
-.annot{position:relative;margin:0;padding-top:52px}
+.annot{position:relative;margin:28px 0 0;padding-top:48px;max-width:340px}
 .annot img{display:block;width:100%;height:auto}
-.annot .arrow{position:absolute;right:-6px;top:0;width:64px;height:auto;color:#e0322b}
+.annot .arrow{position:absolute;left:62%;top:0;width:60px;height:auto;color:#e0322b}
 .annot figcaption{margin-top:12px;font-size:14px;font-weight:600;color:var(--sub)}
+.formula{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+.formula li{display:flex;align-items:center;gap:18px}
+.formula li span{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.formula img{width:64px;height:64px;object-fit:contain;flex:none}
 .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:28px 0 0;max-width:680px}
 .trio figure{margin:0;text-align:center}
 .trio img{display:block;width:auto;height:120px;max-width:100%;margin:0 auto 14px;object-fit:contain}
 .trio figcaption{font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:var(--ink);text-wrap:balance}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:32px 0 0;align-items:end;max-width:800px}
-.pair figure{margin:0;text-align:center}
+.pair figure{margin:0;text-align:left}
 .pair img{display:block;width:100%;height:auto;border-radius:18px}
 .pair figcaption{margin-top:10px;font-size:14px;font-weight:600;color:var(--sub)}
 .pair figcaption b{color:var(--ink);font-weight:800}
@@ -434,7 +437,7 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   .part{margin-top:40px}.part .fold-h img{width:40px;height:40px}
   .bul li{font-size:16px;padding-left:20px}.bul li::before{left:2px;width:6px;height:6px}.bul .sub li{font-size:15px}
   .lead{font-size:17px;margin-top:24px}.tip-h{margin-top:40px;font-size:19px}.tip-h+.lead{font-size:15px}
-  .two{grid-template-columns:1fr;gap:20px}.annot{max-width:300px;padding-top:44px}.annot .arrow{width:54px}
+  .annot{max-width:300px;padding-top:44px}.annot .arrow{width:54px}.formula li{font-size:18px;gap:14px}.formula img{width:52px;height:52px}
   .trio{gap:12px}.trio img{height:72px;margin-bottom:10px}.trio figcaption{font-size:14px}
   .trio.intro3{gap:10px;margin-top:24px}.shotbox{border-radius:14px;margin-bottom:10px}.shotbox .chip{font-size:10px;padding:4px 7px;left:6px;bottom:6px}
   .pair{grid-template-columns:1fr;gap:18px;margin-top:24px}
@@ -497,20 +500,18 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
   <button class="fold-h" aria-expanded="true"><h2 class="h2">How To Make Viral Videos</h2><svg class="chev" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <div class="fold-b">
 
-<div class="two">
-  <div><ul class="bul"><li>Before we make anything, you need to know what the algorithm is actually grading.</li><li>Lucky for us, Instagram tells you exactly what it’s looking for, in order of importance.</li><li>The big three are <b>skip rate</b>, <b>share rate</b> and <b>like rate</b>. Nail those and the rest follows. My viral video formula is built to hit all three.</li></ul></div>
-  <figure class="annot">
-    <svg class="arrow" viewBox="0 0 72 60" fill="none" aria-hidden="true"><path d="M66 6c-6 22-22 38-48 44" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M28 54l-12-2 4-11" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <img src="assets/algo_list.jpg" alt="Instagram insights: what impacts your views, listed in order of importance.">
-    <figcaption>From Instagram’s Edits app.</figcaption>
-  </figure>
-</div>
+<ul class="bul"><li>Before we make anything, you need to know what the algorithm is actually grading.</li><li>Lucky for us, Instagram tells you exactly what it’s looking for, in order of importance.</li><li>The big three are <b>skip rate</b>, <b>share rate</b> and <b>like rate</b>. Nail those and the rest follows. My viral video formula is built to hit all three.</li></ul>
+<figure class="annot">
+  <svg class="arrow" viewBox="0 0 72 60" fill="none" aria-hidden="true"><path d="M66 6c-6 22-22 38-48 44" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M28 54l-12-2 4-11" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <img src="assets/algo_list.jpg" alt="Instagram insights: what impacts your views, listed in order of importance.">
+  <figcaption>From Instagram’s Edits app.</figcaption>
+</figure>
 <p class="lead">Every viral video I’ve made has the same three parts. This is the formula, and the rest of this page walks through each one:</p>
-<div class="trio">
-  <figure><img src="../assets/lab/pb_hook_t.png" alt=""><figcaption>1. Hook</figcaption></figure>
-  <figure><img src="assets/openloop_t.png" alt=""><figcaption>2. Reason to keep watching</figcaption></figure>
-  <figure><img src="assets/share_t.png" alt=""><figcaption>3. Shareable moment</figcaption></figure>
-</div>
+<ol class="formula">
+  <li><img src="../assets/lab/pb_hook_t.png" alt=""><span>1. Hook</span></li>
+  <li><img src="assets/openloop_t.png" alt=""><span>2. Reason to keep watching</span></li>
+  <li><img src="assets/share_t.png" alt=""><span>3. Shareable moment</span></li>
+</ol>
   </div>
 </section>
 <section class="sec fold open" id="hook">
