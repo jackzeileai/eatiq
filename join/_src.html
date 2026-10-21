@@ -287,10 +287,10 @@ label.f{display:block;font-weight:600;font-size:13px;color:var(--ink);margin:0 0
 .share .k{color:var(--ink);font-size:13px;font-weight:600}
 .share .v{font-size:19px;font-weight:800;margin-top:2px;word-break:break-all}
 .share>div{min-width:0;flex:1}
-#d-link{word-break:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#d-link,#done-link{word-break:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #d-link-code.dim{color:var(--sub);font-weight:600}
 .shares.pick{margin-top:0}.shares.pick .share.edit .field{margin-top:4px;font-size:19px;letter-spacing:.02em}.shares.pick .share.edit .field::placeholder{font-weight:600}
-@media (max-width:420px){#d-link,#d-code{font-size:17px}.share{gap:6px;padding:12px 12px 12px 16px}.share .copy{height:34px;padding:0 12px;font-size:13px}}
+@media (max-width:420px){#d-link,#done-link,#d-code{font-size:17px}.share{gap:6px;padding:12px 12px 12px 16px}.share .copy{height:34px;padding:0 12px;font-size:13px}}
 .copy{flex:none;height:36px;padding:0 16px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink);font:600 14px var(--font);cursor:pointer}
 .copy:hover,.copy.solid{background:var(--ink);color:var(--bg)}
 /* less grey: labels, links and bold bits are black; Continue stays black until it works */
@@ -1054,7 +1054,7 @@ fbq('init','1873631240283364');fbq('track','PageView');
           <div class="shares" id="shares">
             <div class="share" id="coderow"><div><div class="k">Your code</div><div class="v" id="d-code"></div></div><button class="copy" id="chg">Change</button><button class="copy" data-copy="d-code">Copy</button></div>
             <div class="share edit" id="editrow" hidden><input class="field" id="newcode" autocapitalize="characters" autocorrect="off" maxlength="20" aria-label="New code"><button class="copy solid" id="savecode">Save</button></div>
-            <div class="share"><div><div class="k">Your link</div><div class="v" id="d-link"></div></div><button class="copy" data-copy="d-link">Copy</button></div>
+            <div class="share"><div><div class="k">Your link</div><div class="v" id="done-link"></div></div><button class="copy" data-copy="done-link">Copy</button></div>
           </div>
           <div class="err" id="e-change"></div>
         </div>
@@ -1292,19 +1292,19 @@ $("savecode").onclick = async () => {
       : "Couldn't change it. Try again.";
     return;
   }
-  $("d-code").textContent = data.code.toUpperCase(); $("d-link").textContent = `mealpic.app/${data.code}`;
+  $("d-code").textContent = data.code.toUpperCase(); $("done-link").textContent = `mealpic.app/${data.code}`;
   $("editrow").hidden = true; $("coderow").hidden = false; $("e-change").textContent = "";
 };
 function finish(code, existing){
   $("d-code").textContent = code.toUpperCase();
-  $("d-link").textContent = `mealpic.app/${code}`;
+  $("done-link").textContent = `mealpic.app/${code}`;
   if (existing) $("done-sub").textContent = "You're already set up. Here's your link and code.";
   go("done");
   if (!existing) { try{ fbq("track","Lead"); }catch(e){} }
 }
 document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
   const t = $(b.dataset.copy).textContent, label = b.textContent;
-  try { await navigator.clipboard.writeText(b.dataset.copy === "d-link" ? "https://" + t : t); b.textContent = "Copied"; }
+  try { await navigator.clipboard.writeText(b.dataset.copy === "done-link" ? "https://" + t : t); b.textContent = "Copied"; }
   catch (e) { b.textContent = "Hold to copy"; }
   setTimeout(() => b.textContent = label, 1600);
 });
