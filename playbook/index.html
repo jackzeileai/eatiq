@@ -177,6 +177,8 @@ html[data-mode="dark"] .eq .term{background:#161617;box-shadow:inset 0 0 0 1px r
 #testflight .ctabar{margin-top:0;gap:10px}
 #testflight .ctabar .small{font-size:14px;font-weight:500}
 #testflight .btn:focus{outline:none}
+#testflight .tfmail{flex:1 1 240px;min-width:0;font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--ink,#111);border-radius:999px;background:transparent;color:inherit}
+#testflight .btn:disabled{opacity:.6;cursor:default}
 #testflight .btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 /* inside the dashboard tab (960px wide): keep rows side by side, no inner scrollbar */
 html[data-embed],html[data-embed] body{overflow:hidden}
@@ -492,10 +494,34 @@ html[data-mode="dark"] .brand img{content:url("../assets/mark-white.png")}
 <section class="sec" id="testflight">
   <div class="wrap">
     <div class="split"><h2 class="h2">Get started</h2><p class="lede">Download Meal Pic and use it free while you’re a creator.</p></div>
-    <div class="ctabar">
-      <a class="btn shine" href="https://testflight.apple.com/join/u9uPdBQW" target="_blank" rel="noopener">Download Meal Pic free<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <span class="small">Opens in TestFlight on your iPhone. iPhone only for now.</span>
+    <div class="ctabar" id="tfbar">
+      <button class="btn shine" type="button" id="tfbtn">Email me the download link<svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <span class="small" id="tfnote">We'll email you your TestFlight link. Open it on your iPhone.</span>
     </div>
+    <form class="ctabar" id="tfform" hidden onsubmit="return false">
+      <input class="tfmail" id="tfmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="The email you signed up with" aria-label="Your email">
+      <button class="btn shine" type="submit" id="tfsend">Send it</button>
+    </form>
+<script>
+// "Email me the download link" (Jack, 2026-10-22): the button sends an email with THEIR TestFlight link
+// (mealpic.app/go/<code>/testflight) instead of opening a link nobody can trace. Inside the dashboard
+// the email is known; standalone, ask for it.
+(function(){
+  var BRAIN="https://affiliate-brain-production.up.railway.app/p/testflight";
+  var btn=document.getElementById("tfbtn"),note=document.getElementById("tfnote"),form=document.getElementById("tfform"),mail=document.getElementById("tfmail"),send=document.getElementById("tfsend");
+  function known(){try{return (window.parent&&window.parent!==window&&window.parent.__creatorEmail)||""}catch(e){return ""}}
+  function go(email){
+    btn.disabled=true;send.disabled=true;note.textContent="Sending…";
+    fetch(BRAIN,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({email:email})})
+      .then(function(r){return r.json()}).then(function(j){
+        form.hidden=true;btn.hidden=true;
+        note.textContent=j&&j.ok?"Sent. Check "+email+" on your iPhone and tap the link.":"Couldn't send. Email partnerships@mealpic.app and we'll send it by hand.";
+      }).catch(function(){btn.disabled=false;send.disabled=false;note.textContent="Couldn't send. Email partnerships@mealpic.app and we'll send it by hand."});
+  }
+  btn.addEventListener("click",function(){var e=known();if(e){go(e)}else{form.hidden=false;mail.focus()}});
+  form.addEventListener("submit",function(){var e=(mail.value||"").trim();if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e))go(e);else mail.focus()});
+})();
+</script>
   </div>
 </section>
 

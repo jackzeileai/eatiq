@@ -561,7 +561,7 @@ async function load(){
   if (!session) { show("s-email"); return; }
   const { data:d, error } = await sb.rpc("creator_dashboard");
   if (error) { show("s-email"); $("e-email").textContent = "Something went wrong. Try signing in again."; return; }
-  data = d; myEmail = session.user.email;
+  data = d; myEmail = session.user.email; window.__creatorEmail = session.user.email;   // the framed brief reads this
   if (!d.codes || !d.codes.length) { $("noneemail").textContent = session.user.email; show("s-none"); return; }
   // Creator Agreement gate: no link or code until the current version is accepted.
   const { data:needs } = await sb.rpc("creator_needs_agreement");

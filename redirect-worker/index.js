@@ -97,6 +97,19 @@ export default {
       const type = card[2] ? "image/png" : r.status === 200 ? "text/html; charset=utf-8" : "text/plain; charset=utf-8";
       return new Response(r.body, { status: r.status, headers: { "content-type": type, "cache-control": r.headers.get("cache-control") || "no-store" } });
     }
+    // Per-creator links in the welcome email + brief (2026-10-22): mealpic.app/go/<code>/<target>
+    // logs ONE row (source tf_/brief_/dash_ + code) so the funnel knows who tapped what, then sends
+    // them on. Bots and link previews are not logged.
+    const go = url.pathname.match(/^\/go\/([A-Za-z0-9]{3,20})\/(brief|dashboard|testflight)\/?$/i);
+    if (go && (request.method === "GET" || request.method === "HEAD")) {
+      const ua = request.headers.get("User-Agent") || "";
+      const code = go[1].toLowerCase(), target = go[2].toLowerCase();
+      if (!/bot|crawl|spider|preview|facebookexternalhit|facebot|whatsapp|telegram|slack|discord|linkedin|pinterest|snapchat|GoogleImageProxy|YahooMailProxy/i.test(ua)) {
+        ctx.waitUntil(logClick(request, "/go", { brief: "brief_", dashboard: "dash_", testflight: "tf_" }[target] + code));
+      }
+      const to = target === "testflight" ? "https://testflight.apple.com/join/u9uPdBQW" : target === "brief" ? "https://mealpic.app/brief" : "https://mealpic.app/dashboard/";
+      return new Response(null, { status: 302, headers: { Location: to, "cache-control": "no-store" } });
+    }
     // Creator links (2026-10-08): mealpic.app/c/<code> → the static /c/ page (it reads
     // the code from the path, copies the link for the app to pick up, then goes to the
     // App Store with ct=cr_<code>). The click is logged here as source cr_<code>.
