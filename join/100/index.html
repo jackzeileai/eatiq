@@ -1295,7 +1295,14 @@ function finish(code, existing){
   $("done-link").textContent = `mealpic.app/${code}`;
   if (existing) $("done-sub").textContent = "You're already set up. Here's your link and code.";
   go("done");
-  if (!existing) { px("Lead"); px("CompleteRegistration"); }
+  if (!existing) {
+    // event_id "signup:<code>" matches the server-side (Conversions API) copy the affiliate brain sends, so Meta dedupes.
+    try { fbq("track", "Lead", { content_name: PX_PAGE }, { eventID: "signup:" + code }); fbq("track", "CompleteRegistration", { content_name: PX_PAGE }, { eventID: "signup:" + code }); } catch (e) {}
+    try { const ck = n => (document.cookie.match(new RegExp("(?:^|; )" + n + "=([^;]*)")) || [])[1] || "";
+      let fbc = ck("_fbc"); const cid = new URLSearchParams(location.search).get("fbclid");
+      if (!fbc && cid) fbc = "fb.1." + Date.now() + "." + cid;
+      sb.rpc("creator_set_fb", { fbp: ck("_fbp"), fbc }); } catch (e) {}
+  }
 }
 document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
   const t = $(b.dataset.copy).textContent, label = b.textContent;
