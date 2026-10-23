@@ -6,6 +6,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Creator Dashboard · Meal Pic</title>
 <meta name="robots" content="noindex">
+<!-- Meta Pixel (same pixel as /join). DashboardOpened = they made it all the way in; the ads to /join/100 optimise on this funnel. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1873631240283364');fbq('track','PageView');
+</script>
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon.png?v=2" media="(prefers-color-scheme: light)">
@@ -563,6 +568,7 @@ async function load(){
   if (error) { show("s-email"); $("e-email").textContent = "Something went wrong. Try signing in again."; return; }
   data = d; myEmail = session.user.email; window.__creatorEmail = session.user.email;   // the framed brief reads this
   if (!d.codes || !d.codes.length) { $("noneemail").textContent = session.user.email; show("s-none"); return; }
+  try { fbq("trackCustom", "DashboardOpened", { content_name: (d.codes[0].deal || "standard") }); } catch (e) {}   // signed in with a creator account
   // Creator Agreement gate: no link or code until the current version is accepted.
   const { data:needs } = await sb.rpc("creator_needs_agreement");
   if (needs) { show("s-agree"); return; }
@@ -649,7 +655,7 @@ function render(){
     ? data.history.map(h => `<div class="r"><span>${fmtDate(h.paid_on)}</span><b>${cash(h.amount)}</b></div>`).join("")
     : `<div class="empty">No payouts yet. Your first one goes out ${nextPayout()}.</div>`}</div>
 
-  <p class="foot">Payouts go out every Friday, once a subscriber's free trial ends and their first payment goes through. Earnings are your 50% of the revenue: what Apple pays us after its commission, minus refunds.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:partnerships@mealpic.app">partnerships@mealpic.app</a></p>`;
+  <p class="foot">Payouts go out every Friday, once a subscriber's free trial ends and their first payment goes through. Earnings are your ${first.pct}% of the revenue: what Apple pays us after its commission, minus refunds.<br>If a subscriber is refunded after you've been paid, that amount comes off your next payout.<br>Downloads are people who entered your code in the app. Questions? <a href="mailto:partnerships@mealpic.app">partnerships@mealpic.app</a></p>`;
 }
 // "Watch this first" setup card — REMOVED from the dashboard 2026-10-14 (Jack). Functions kept for when the video exists.
 const SETUP_VIDEO_URL = "", SETUP_POSTER = "";

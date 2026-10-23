@@ -828,7 +828,7 @@ html:not([data-mode="dark"]) .d-card,html:not([data-mode="dark"]) .d-chip{backgr
   .tile .h3{margin-bottom:4px}
 }
 </style>
-<!-- Meta Pixel (same pixel as the home page); Lead fires when an application is received -->
+<!-- Meta Pixel (same pixel as the home page); ApplyStarted → ApplyVerified → Lead + CompleteRegistration, see px() below -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1873631240283364');fbq('track','PageView');
@@ -896,6 +896,7 @@ fbq('init','1873631240283364');fbq('track','PageView');
     </div>
   </div>
 </section>
+
 
 
 <section class="sec" id="vs">
@@ -1070,7 +1071,7 @@ const $ = id => document.getElementById(id);
 const money = n => "$" + Math.round(n).toLocaleString("en-US");
 
 // ---- calculator (list price × what Apple leaves us × your cut) ----
-const MONTHLY = 29.99, APPLE_FEE = .15, CUT = .5;
+const MONTHLY = 29.99, APPLE_FEE = .15, CUT = .5;   // CUT: 50% standard deal, 100% on /join/100
 $("pm").textContent = `They pay $${MONTHLY} a month`;
 let shown = 0, raf = 0;
 function tween(target){
@@ -1129,13 +1130,18 @@ sb.auth.getSession().then(({ data:{ session } }) => { if (session) document.quer
 // who clicked (link_clicks, source join_email, referrer = handle). The affiliate brain reads these.
 (function(){try{var ref=new URLSearchParams(location.search).get("ref");if(!ref||!/^[a-z0-9._-]{1,40}$/i.test(ref))return;
 fetch("https://bvaumyrtcuehlipiaxlv.supabase.co/rest/v1/link_clicks",{method:"POST",headers:{apikey:"sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7",Authorization:"Bearer sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7","Content-Type":"application/json",Prefer:"return=minimal"},
-body:JSON.stringify({source:"join_email",path:"/join",referrer:ref.toLowerCase(),ua:navigator.userAgent.slice(0,500)})}).catch(function(){});}catch(e){}})();
+body:JSON.stringify({source:"join_email",path:"/join/",referrer:ref.toLowerCase(),ua:navigator.userAgent.slice(0,500)})}).catch(function(){});}catch(e){}})();
+// Meta pixel steps (2026-10-22, for the ads that land here): ApplyStarted (sheet opened) → ApplyVerified (email code
+// accepted) → Lead + CompleteRegistration (You're in!). content_name tells /join from /join/100 in Events Manager.
+const PX_PAGE = "join"; let pxStarted = false;
+function px(ev, custom){ try { fbq(custom ? "trackCustom" : "track", ev, { content_name: PX_PAGE }); } catch (e) {} }
 const steps = [...document.querySelectorAll(".step")].map(s => s.dataset.s);
 let at = 0, checkT = null, oldCode = "";
 
 function openFlow(){
   $("overlay").classList.add("open"); document.body.classList.add("locked");
   requestAnimationFrame(() => $("overlay").classList.add("show"));
+  if (!pxStarted) { pxStarted = true; px("ApplyStarted", true); }
   if (!document.querySelector(".step.on")) go("name");
   else if (steps[at] === "verify") go("email");
 }
@@ -1221,6 +1227,7 @@ $("b-otp").onclick = async () => {
   $("b-otp").disabled = true; $("e-otp").textContent = "";
   const { error } = await sb.auth.verifyOtp({ email:$("sentto").textContent, token:$("otp").value, type:"email" });
   if (error) { $("b-otp").disabled = false; $("e-otp").textContent = "That code didn't work. Check it or send a new one."; return; }
+  px("ApplyVerified", true);
   const { data } = await sb.rpc("creator_dashboard");
   if (data?.codes?.length) {
     // Signed up before the Creator Agreement: accept it before seeing the link and code.
@@ -1265,7 +1272,8 @@ $("b-sign").onclick = async () => {
   }
   const { data, error } = await sb.rpc("creator_signup", {
     code: $("code").value.toLowerCase(), name: $("name").value.trim(), handle: handleText(),
-    payout_method: "", payout_handle: "", phone: phoneValue()  // payout details are added in the dashboard
+    payout_method: "", payout_handle: "", phone: phoneValue(),  // payout details are added in the dashboard
+    deal: "standard"   // standard (50% + retainer + ad spend) or rev100 (100% of revenue, nothing else) — set per page at build time
   });
   if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
   if (data?.error === "taken") { go("code"); checkCode(); return; }
@@ -1300,7 +1308,7 @@ function finish(code, existing){
   $("done-link").textContent = `mealpic.app/${code}`;
   if (existing) $("done-sub").textContent = "You're already set up. Here's your link and code.";
   go("done");
-  if (!existing) { try{ fbq("track","Lead"); }catch(e){} }
+  if (!existing) { px("Lead"); px("CompleteRegistration"); }
 }
 document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
   const t = $(b.dataset.copy).textContent, label = b.textContent;

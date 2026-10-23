@@ -4,11 +4,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Meal Pic Creators · Earn 50% of the revenue</title>
-<meta name="description" content="Earn 50% of the revenue from every Meal Pic subscription you bring in, plus a library of proven reels and a step-by-step playbook for videos that sell. Paid every Friday.">
+<title>Meal Pic Creators · Earn __PCT__% of the revenue</title>
+<meta name="description" content="Earn __PCT__% of the revenue from every Meal Pic subscription you bring in, plus a library of proven reels and a step-by-step playbook for videos that sell. Paid every Friday.">
 __THEME_COLOR__
 <meta property="og:title" content="Get paid to share Meal Pic">
-<meta property="og:description" content="Earn 50% of the revenue from every subscription you bring in, on every renewal. Paid every Friday.">
+<meta property="og:description" content="Earn __PCT__% of the revenue from every subscription you bring in, on every renewal. Paid every Friday.">
 <meta property="og:image" content="https://mealpic.app/assets/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="64x64" href="__ROOT__assets/favicon.png?v=2" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/png" sizes="64x64" href="__ROOT__assets/favicon-dark.png?v=2" media="(prefers-color-scheme: dark)">
@@ -828,7 +828,7 @@ html:not([data-mode="dark"]) .d-card,html:not([data-mode="dark"]) .d-chip{backgr
   .tile .h3{margin-bottom:4px}
 }
 </style>
-<!-- Meta Pixel (same pixel as the home page); Lead fires when an application is received -->
+<!-- Meta Pixel (same pixel as the home page); ApplyStarted → ApplyVerified → Lead + CompleteRegistration, see px() below -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1873631240283364');fbq('track','PageView');
@@ -838,7 +838,7 @@ fbq('init','1873631240283364');fbq('track','PageView');
 
 <header class="nav float">
   <div class="wrap glass">
-    <a class="brand" href="/join/"><img class="mark" src="__ROOT__assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
+    <a class="brand" href="__PATH__"><img class="mark" src="__ROOT__assets/mark-black.png" alt="">Meal Pic <span>Creators</span></a>
     <nav class="links">
       <a class="plain" href="#how">How it works</a>
       <a class="plain" href="#faq">FAQ</a>
@@ -855,8 +855,8 @@ fbq('init','1873631240283364');fbq('track','PageView');
   <div class="wrap">
     <div class="hero-cols">
       <div class="hero-copy">
-        <h1 class="h-hero"><span class="two">Get <span class="fifty">50%</span> of<br>revenue</span></h1>
-        <p class="lede">Make videos for Meal Pic. Keep 50% of all revenue you generate, for life.</p>
+        <h1 class="h-hero"><span class="two">Get <span class="fifty">__PCT__%</span> of<br>revenue</span></h1>
+        <p class="lede">Make videos for Meal Pic. Keep __PCT__% of all revenue you generate, for life.</p>
         <div class="ctas"><button class="btn shine" data-open>Apply to be a creator<span class="free">(it's free)</span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         
       </div>
@@ -880,12 +880,13 @@ fbq('init','1873631240283364');fbq('track','PageView');
     <div class="grid c3">
       <div class="tile"><div class="stage white"><img src="__ROOT__assets/lab/profile_link_t.png?v=7" alt=""></div><h3 class="h3">1. Get Your Link</h3><p class="lede sub">Sign up for free to get your affiliate link and code.</p></div>
       <div class="tile"><div class="stage white"><img src="__ROOT__assets/lab/memoji_ringlight_white_t.png?v=7" alt=""></div><h3 class="h3">2. Start Making Videos</h3><p class="lede sub">Film yourself using Meal Pic. Post it to Instagram and TikTok.</p></div>
-      <div class="tile"><div class="stage white"><img class="sm" src="__ROOT__assets/lab/venmo_t.png?v=7" alt=""></div><h3 class="h3">3. Get Paid</h3><p class="lede sub">Get 50% of the revenue you bring in, for life. Paid every Friday.</p></div>
+      <div class="tile"><div class="stage white"><img class="sm" src="__ROOT__assets/lab/venmo_t.png?v=7" alt=""></div><h3 class="h3">3. Get Paid</h3><p class="lede sub">Get __PCT__% of the revenue you bring in, for life. Paid every Friday.</p></div>
     </div>
     <div class="ctabar"><button class="btn shine" data-open>Apply to be a creator<span class="free">(it's free)</span><svg class="arr" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
   </div>
 </section>
 
+<!--deal:50-->
 <section class="sec" id="pay">
   <div class="wrap">
     <div class="split"><h2 class="h2">Three ways you get paid</h2><p class="lede">You don't pick one. You get all three, stacked.</p></div>
@@ -896,6 +897,7 @@ fbq('init','1873631240283364');fbq('track','PageView');
     </div>
   </div>
 </section>
+<!--/deal-->
 
 
 <section class="sec" id="vs">
@@ -905,10 +907,10 @@ fbq('init','1873631240283364');fbq('track','PageView');
       <div class="vs-row vs-head"><span class="vs-k">&nbsp;</span><span class="vs-name"><img src="__ROOT__assets/mark-black.png" alt="">Meal Pic</span><span class="vs-name them">TikTok Shop</span></div>
       <div class="vs-row"><span class="vs-k">Getting started</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>Start today, nothing to ship</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>Wait weeks for samples</span></span></div>
       <div class="vs-row"><span class="vs-k">Going viral</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>Proven viral product</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>Rarely goes viral</span></span></div>
-      <div class="vs-row"><span class="vs-k">Commission</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span><span class="fifty">50%</span> of revenue</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>13% on average</span></span></div>
+      <div class="vs-row"><span class="vs-k">Commission</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span><span class="fifty">__PCT__%</span> of revenue</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>13% on average</span></span></div>
       <div class="vs-row"><span class="vs-k">Recurring revenue</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>Paid every month they stay</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>Paid once</span></span></div>
-      <div class="vs-row"><span class="vs-k">Base retainer</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>Guaranteed monthly retainer</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>None</span></span></div>
-      <div class="vs-row"><span class="vs-k">Paid ads</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>3% of ad spend</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>0% of ad spend</span></span></div>
+      <!--deal:50--><div class="vs-row"><span class="vs-k">Base retainer</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>Guaranteed monthly retainer</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>None</span></span></div><!--/deal-->
+      <!--deal:50--><div class="vs-row"><span class="vs-k">Paid ads</span><span class="vs-c us"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5l5 5L19.5 7"/></svg></i><span>3% of ad spend</span></span><span class="vs-c them"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></i><span>0% of ad spend</span></span></div><!--/deal-->
     </div>
   </div>
 </section>
@@ -1070,7 +1072,7 @@ const $ = id => document.getElementById(id);
 const money = n => "$" + Math.round(n).toLocaleString("en-US");
 
 // ---- calculator (list price × what Apple leaves us × your cut) ----
-const MONTHLY = 29.99, APPLE_FEE = .15, CUT = .5;
+const MONTHLY = 29.99, APPLE_FEE = .15, CUT = __CUT__;   // CUT: 50% standard deal, 100% on /join/100
 $("pm").textContent = `They pay $${MONTHLY} a month`;
 let shown = 0, raf = 0;
 function tween(target){
@@ -1129,13 +1131,18 @@ sb.auth.getSession().then(({ data:{ session } }) => { if (session) document.quer
 // who clicked (link_clicks, source join_email, referrer = handle). The affiliate brain reads these.
 (function(){try{var ref=new URLSearchParams(location.search).get("ref");if(!ref||!/^[a-z0-9._-]{1,40}$/i.test(ref))return;
 fetch("https://bvaumyrtcuehlipiaxlv.supabase.co/rest/v1/link_clicks",{method:"POST",headers:{apikey:"sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7",Authorization:"Bearer sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7","Content-Type":"application/json",Prefer:"return=minimal"},
-body:JSON.stringify({source:"join_email",path:"/join",referrer:ref.toLowerCase(),ua:navigator.userAgent.slice(0,500)})}).catch(function(){});}catch(e){}})();
+body:JSON.stringify({source:"join_email",path:"__PATH__",referrer:ref.toLowerCase(),ua:navigator.userAgent.slice(0,500)})}).catch(function(){});}catch(e){}})();
+// Meta pixel steps (2026-10-22, for the ads that land here): ApplyStarted (sheet opened) → ApplyVerified (email code
+// accepted) → Lead + CompleteRegistration (You're in!). content_name tells /join from /join/100 in Events Manager.
+const PX_PAGE = "__PAGE__"; let pxStarted = false;
+function px(ev, custom){ try { fbq(custom ? "trackCustom" : "track", ev, { content_name: PX_PAGE }); } catch (e) {} }
 const steps = [...document.querySelectorAll(".step")].map(s => s.dataset.s);
 let at = 0, checkT = null, oldCode = "";
 
 function openFlow(){
   $("overlay").classList.add("open"); document.body.classList.add("locked");
   requestAnimationFrame(() => $("overlay").classList.add("show"));
+  if (!pxStarted) { pxStarted = true; px("ApplyStarted", true); }
   if (!document.querySelector(".step.on")) go("name");
   else if (steps[at] === "verify") go("email");
 }
@@ -1221,6 +1228,7 @@ $("b-otp").onclick = async () => {
   $("b-otp").disabled = true; $("e-otp").textContent = "";
   const { error } = await sb.auth.verifyOtp({ email:$("sentto").textContent, token:$("otp").value, type:"email" });
   if (error) { $("b-otp").disabled = false; $("e-otp").textContent = "That code didn't work. Check it or send a new one."; return; }
+  px("ApplyVerified", true);
   const { data } = await sb.rpc("creator_dashboard");
   if (data?.codes?.length) {
     // Signed up before the Creator Agreement: accept it before seeing the link and code.
@@ -1265,7 +1273,8 @@ $("b-sign").onclick = async () => {
   }
   const { data, error } = await sb.rpc("creator_signup", {
     code: $("code").value.toLowerCase(), name: $("name").value.trim(), handle: handleText(),
-    payout_method: "", payout_handle: "", phone: phoneValue()  // payout details are added in the dashboard
+    payout_method: "", payout_handle: "", phone: phoneValue(),  // payout details are added in the dashboard
+    deal: "__DEAL__"   // standard (50% + retainer + ad spend) or rev100 (100% of revenue, nothing else) — set per page at build time
   });
   if (error) { $("b-sign").disabled = false; $("e-sign").textContent = "Something went wrong. Try again."; return; }
   if (data?.error === "taken") { go("code"); checkCode(); return; }
@@ -1300,7 +1309,7 @@ function finish(code, existing){
   $("done-link").textContent = `mealpic.app/${code}`;
   if (existing) $("done-sub").textContent = "You're already set up. Here's your link and code.";
   go("done");
-  if (!existing) { try{ fbq("track","Lead"); }catch(e){} }
+  if (!existing) { px("Lead"); px("CompleteRegistration"); }
 }
 document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
   const t = $(b.dataset.copy).textContent, label = b.textContent;
