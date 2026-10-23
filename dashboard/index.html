@@ -568,7 +568,7 @@ async function load(){
   if (error) { show("s-email"); $("e-email").textContent = "Something went wrong. Try signing in again."; return; }
   data = d; myEmail = session.user.email; window.__creatorEmail = session.user.email;   // the framed brief reads this
   if (!d.codes || !d.codes.length) { $("noneemail").textContent = session.user.email; show("s-none"); return; }
-  try { fbq("trackCustom", "DashboardOpened", { content_name: (d.codes[0].deal || "standard") }); } catch (e) {}   // signed in with a creator account
+  try { fbq("trackCustom", "DashboardOpened", { content_name: Number(d.codes[0].pct) === 100 ? "rev100" : "standard" }); } catch (e) {}   // signed in with a creator account
   // Creator Agreement gate: no link or code until the current version is accepted.
   const { data:needs } = await sb.rpc("creator_needs_agreement");
   if (needs) { show("s-agree"); return; }
