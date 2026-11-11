@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text Messaging Terms | Meal Pic</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://mealpic.app/sms.html">
+<meta name="theme-color" content="#fffdf8">
+<style>
+  :root{
+    --bg:#fffdf8; --bg2:#fdf8ee; --card:#ffffff; --ink:#111318; --ink2:#5b6170; --ink3:#8a90a0;
+    --line:#ebe7dd; --line2:#e2ddd0; --black:#0d0f14; --blue:#0a84ff;
+    --pink:#e8336f; --green:#34c759; --teal:#30b0c7; --purple:#af52de;
+    --max:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  .badge{display:inline-block;height:44px;transition:transform .12s ease-out,opacity .12s}
+  .badge img{height:44px;width:auto}
+  .badge:hover{opacity:.85}.badge:active{transform:scale(.98)}
+  .badge.sm{height:36px}.badge.sm img{height:36px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,253,248,.85);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:24px;letter-spacing:-.02em}
+  .brand img{width:32px;height:32px}
+  .navlinks{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:500;color:var(--ink)}
+  .navlinks a{opacity:.8}.navlinks a:hover{opacity:1}
+  @media (max-width:760px){.navlinks{display:none}}
+
+  /* hero */
+  .hero{padding:56px 0 24px;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 8px;font-size:13.5px;font-weight:600;color:var(--ink2);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .eyebrow .ic{width:22px;height:22px;border-radius:50%;background:var(--black);display:grid;place-items:center}
+  .eyebrow .ic img{width:14px;height:14px}
+  .meet{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:18px 0 2px;line-height:1.1}
+  h1{font-size:46px;line-height:1.12;letter-spacing:-.022em;margin:0 0 16px;font-weight:600;text-wrap:balance}
+  .lede{font-size:17px;color:var(--ink2);max-width:32em;margin:0 0 22px}
+  .cta-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .cta-row .fine{font-size:13px;color:var(--ink3)}
+
+  .phones{position:relative;height:560px}
+  .phones img{position:absolute;width:270px;height:auto;filter:drop-shadow(0 24px 40px rgba(17,19,24,.22))}
+  .phones .p1{left:8%;top:40px;transform:rotate(-5deg)}
+  .phones .p2{right:4%;top:0;transform:rotate(4deg)}
+  .phones .arrow{position:absolute;left:44%;top:230px;width:64px;height:auto;filter:none;transform:rotate(12deg)}
+  @media (max-width:900px){
+    .hero{padding:36px 0 8px}
+    .hero .wrap{grid-template-columns:1fr}
+    .meet{font-size:28px}h1{font-size:36px}
+    .phones{height:520px;margin-top:8px}
+    .phones img{width:230px}
+    .phones .p1{left:2%;top:30px}.phones .p2{right:2%}
+    .phones .arrow{left:42%;top:220px;width:52px}
+  }
+  @media (max-width:420px){.phones{height:440px}.phones img{width:190px}.phones .arrow{top:190px;width:44px}}
+
+  /* sections */
+  section{padding:80px 0}
+  .sec-h{text-align:center;max-width:46em;margin:0 auto 40px}
+  h2{font-size:40px;line-height:1.1;letter-spacing:-.022em;margin:0 0 10px;font-weight:600;text-wrap:balance}
+  .sec-h p{color:var(--ink2);font-size:18px;margin:0}
+
+  /* include */
+  .include{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+  .include .shot{width:min(100%,320px);margin:0 auto;filter:drop-shadow(0 24px 40px rgba(17,19,24,.18))}
+  .cards{display:grid;gap:12px}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .fcard.on{background:#f4f6fb;border-color:#c9d3e6;box-shadow:0 0 0 3px rgba(10,132,255,.08)}
+  .fcard h3{margin:0 0 6px;font-size:17px;font-weight:700;letter-spacing:-.01em}
+  .fcard p{margin:0;color:var(--ink2);font-size:15.5px}
+  @media (max-width:860px){.include{grid-template-columns:1fr;gap:28px}.include .shot{width:min(72%,280px)}}
+
+  /* why */
+  .why{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .why3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .wcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .wcard .ic{width:44px;height:44px;border-radius:12px;background:#f1f3f8;display:grid;place-items:center;margin-bottom:16px}
+  .wcard .ic svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .wcard h3{margin:0 0 6px;font-size:18px;font-weight:700;letter-spacing:-.01em}
+  .wcard p{margin:0;color:var(--ink2);font-size:15.5px}
+  @media (max-width:800px){.why3{grid-template-columns:1fr}}
+
+  /* macro strip */
+  .macros{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:820px;margin:40px auto 0}
+  .macro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;text-align:center}
+  .macro .k{font-size:12px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+  .macro .v{font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .macro.cal .v{color:var(--pink)}.macro.p .v{color:var(--green)}.macro.c .v{color:var(--teal)}.macro.f .v{color:var(--purple)}
+  @media (max-width:640px){.macros{grid-template-columns:repeat(2,1fr)}}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto}
+  details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:600;font-size:17px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:22px;font-weight:300;color:var(--ink3);flex:none;transition:transform .15s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p,details ol{color:var(--ink2);margin:10px 0 0;font-size:15.5px}
+  details ol{padding-left:20px}
+  details p b{color:var(--ink)}
+  details p a{text-decoration:underline}
+
+  /* final cta */
+  .final{background:var(--black);color:#fff;text-align:center;padding:84px 24px;border-radius:28px;margin:0 28px 28px}
+  .final h2{color:#fff;font-weight:700}
+  .final p{color:rgba(255,255,255,.7);font-size:17px;max-width:38em;margin:0 auto 24px}
+  .final .fine{font-size:12.5px;color:rgba(255,255,255,.5);margin-top:16px}
+  .final .fine a{text-decoration:underline}
+  @media (max-width:640px){.final{margin:0 12px 12px;padding:56px 20px;border-radius:20px}}
+
+  footer{padding:24px 0 40px;color:var(--ink3);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+  footer .links{display:flex;gap:22px;flex-wrap:wrap}
+  footer .links a:hover{color:var(--ink)}
+
+  .article{max-width:760px;margin:0 auto;padding:56px 28px 72px}
+  .article h1{font-size:42px;line-height:1.08;letter-spacing:-.022em;margin:0 0 6px;font-weight:700}
+  .article .updated{color:var(--ink3);font-size:15px;margin:0 0 28px}
+  .article h2{font-size:24px;letter-spacing:-.015em;margin:34px 0 10px;font-weight:700;text-align:left}
+  .article p,.article li{color:var(--ink2);font-size:17px;line-height:1.6}
+  .article ul,.article ol{padding-left:22px}
+  .article li{margin:6px 0}
+  .article a{color:var(--blue);text-decoration:underline}
+  .article table{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .article th,.article td{text-align:left;padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+  .article th{color:var(--ink3);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;border-top:0;background:var(--bg2)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/home/"><img src="assets/mark-black.png" alt="" width="32" height="32">Meal Pic</a>
+    <div class="navlinks">
+      <a href="/home/#how">How it works</a>
+      <a href="/home/#faq">FAQ</a>
+      <a href="support.html">Support</a>
+    </div>
+    <a class="badge sm" href="https://apps.apple.com/us/app/id6802901402" target="_blank" rel="noopener" aria-label="Download on the App Store"><img src="assets/appstore-badge.svg" alt="Download on the App Store"></a>
+  </div>
+</nav>
+<main class="article">
+<h1>Text Messaging Terms</h1>
+<p class="updated">Last updated 11 November 2026</p>
+
+<h2>What this is</h2>
+<p>Meal Pic is a calorie and macro tracking app. If you choose to, you can also log your food by text message and get a daily reminder to log. This page explains how that works.</p>
+
+<h2>How you sign up</h2>
+<p>Texting is optional and always starts with you. Inside the Meal Pic app, tap <strong>Set Up Texting</strong>. Your phone opens a new message to Meal Pic at <strong>+1 (833) 208-3622</strong> with the words "Hey Meal Pic, let's set up texting" already typed. You send that message yourself. Sending it is how you agree to receive text messages from Meal Pic at that number. We never text a number that has not texted us first.</p>
+<p>By sending that first message you agree to receive recurring automated text messages from Meal Pic: replies to the food you send, and a daily reminder to log at the time you pick. Consent is not a condition of buying anything.</p>
+
+<h2>What you will get</h2>
+<ul>
+<li>A reply each time you text a meal, with its calories and macros, and a note that it was added to your app.</li>
+<li>One daily reminder to log your food, at the time you choose. You can change the time or turn it off by text.</li>
+<li>Answers to questions you text us about your food log or the app.</li>
+</ul>
+<p>Message frequency varies with how often you text us; reminders are about one message per day. Message and data rates may apply.</p>
+
+<h2>How to stop or get help</h2>
+<p>Reply <strong>STOP</strong> at any time to stop all messages. Reply <strong>START</strong> to turn them back on. Reply <strong>HELP</strong> for help, or email <a href="mailto:help@mealpic.app">help@mealpic.app</a>.</p>
+
+<h2>Your privacy</h2>
+<p>We use your mobile number only to send you these messages and to match your texts to your Meal Pic account. We do not sell, rent or share your mobile number or your text messaging consent with third parties or affiliates for marketing or promotional purposes. Messages are delivered through Twilio, our messaging provider. See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms</a>.</p>
+
+<h2>Carriers</h2>
+<p>Carriers are not liable for delayed or undelivered messages.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Church Street Studios · Meal Pic</div>
+    <div class="links">
+      <a href="support.html">Support</a>
+      <a href="mailto:help@mealpic.app">help@mealpic.app</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
