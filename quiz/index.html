@@ -19,7 +19,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
-<link rel="preload" as="image" href="a/phone.png">
+<link rel="preload" as="image" href="a/phone.png?v=2">
 <style>
 :root{
   --bg:#f2f2f7; --card:#ffffff; --ink:#0b0b0f; --soft:#6d6d76; --faint:#b9b9c0; --line:rgba(0,0,0,.09);
@@ -321,7 +321,7 @@ function ruler(key, label) {
     <div class="read"><small>${label}</small><b><span id="rv">${v}</span> ${kg ? "kg" : "lbs"}</b></div>
     <div class="ruler"><div class="track" data-ruler="${key}" data-min="${min}" data-max="${max}"><div class="pad"></div><div class="ticks" style="width:${(max - min) * 9 + 2}px"></div><div class="pad"></div></div></div>`;
 }
-const phone = (inner, h) => `<div class="phone" style="height:${h}"><div class="scr">${inner}</div><img src="a/phone.png" alt=""></div>`;
+const phone = (inner, h) => `<div class="phone" style="height:${h}"><div class="scr">${inner}</div><img src="a/phone.png?v=2" alt=""></div>`;
 const dial = icon => `<div class="ring"><div class="dial">${Array.from({ length: 12 }, (_, i) => `<i style="transform:rotate(${i * 30}deg) translateY(-70px);opacity:${i % 3 ? .55 : 1}"></i>`).join("")}${icon}</div></div>`;
 const REVIEWS = [
   ["Jack Z", "ReviewerJack", "This is the only one where the UI is nice and the macros are actually accurate."],
@@ -331,7 +331,7 @@ const REVIEWS = [
   ["Adamniel", "ReviewerAdamniel", "Wow"]];
 const ratingBadge = faces => `<div class="badge"><div class="rate">${ic("laurel.leading")}<div><b>4.9</b>${stars()}<small>App Store rating</small></div>${ic("laurel.trailing")}</div>
   <div class="faces"><div>${faces.map(f => `<img src="a/${f}.jpg" alt="">`).join("")}</div><small>Real reviews</small></div></div>`;
-const clip = (name) => `<video src="a/${name}.mp4" poster="a/${name === "scan-demo" ? "scan-demo.jpg" : "first-meal-poster.jpg"}" autoplay muted loop playsinline></video>`;
+const clip = (name) => `<video src="a/${name}.mp4?v=2" poster="a/${name === "scan-demo" ? "scan-demo.jpg" : "first-meal-poster.jpg"}" autoplay muted loop playsinline></video>`;
 
 // ---- every screen: { body, foot, after(el) } ----
 const PAGES = {
