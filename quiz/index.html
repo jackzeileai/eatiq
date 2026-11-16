@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meal Pic | Get your calorie plan</title>
+<!-- Web-to-app quiz (2026-11-16, Jack: "the web app viewers take the quiz in the web app").
+     Quiz -> plan -> account (Google / email / phone) -> Stripe checkout -> "download the app and sign in".
+     The account carries the plan (user metadata `plan` + the answers), so the app's welcome "Sign In"
+     recognises it as finished and lands on "You're all set" (TextSignIn.settle / PlanBackup.restoreIfReturning).
+     The calorie maths below is a line-for-line port of NutritionCalculator (MenuView.swift): change both together.
+     Apple sign-in is NOT here yet: Supabase only has the app's bundle id for Apple, the web needs a Services ID. -->
+<meta name="description" content="Answer a few questions and get your custom calorie and macro plan. Then track every meal with a photo.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#f2f2f7; --card:#ffffff; --ink:#0a0a0f; --soft:#6e6e78; --line:rgba(0,0,0,.10);
+  --blue:#007aff; --green:#1faa59; --red:#d93025; --tan:#c8915c; --pick:#0a0a0f; --pickink:#ffffff;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#000000; --card:#1c1c1e; --ink:#f5f5f7; --soft:#9a9aa3; --line:rgba(255,255,255,.14);
+         --pick:#f5f5f7; --pickink:#0a0a0f; }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font:17px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+#app{max-width:480px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;padding:0 22px calc(18px + env(safe-area-inset-bottom))}
+.top{height:56px;display:flex;align-items:center;gap:12px;padding-top:env(safe-area-inset-top)}
+.back{width:44px;height:44px;margin-left:-12px;border:0;background:none;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.back[hidden]{visibility:hidden;display:flex}
+.bar{flex:1;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ink);border-radius:2px;transition:width .3s ease}
+h1{font-size:30px;line-height:1.14;letter-spacing:-.02em;margin:10px 0 8px;font-weight:700}
+.sub{color:var(--soft);font-size:16px;margin:0 0 22px}
+.body{flex:1;display:flex;flex-direction:column}
+.fill{flex:1}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{width:100%;min-height:68px;border:0;border-radius:18px;background:var(--card);color:var(--ink);font-weight:600;font-size:18px;line-height:1.2;font-family:inherit;text-align:left;padding:14px 20px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.opt small{font-weight:400;font-size:14px;color:var(--soft)}
+.opt.on{background:var(--pick);color:var(--pickink)}
+.opt.on small{color:var(--pickink);opacity:.7}
+.cta{width:100%;min-height:60px;border:0;border-radius:30px;background:var(--blue);color:#fff;font-weight:600;font-size:18px;line-height:1;font-family:inherit;cursor:pointer;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:10px}
+.cta:disabled{opacity:.4;cursor:default}
+.cta.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.cta.dark{background:var(--pick);color:var(--pickink)}
+.link{background:none;border:0;color:var(--soft);font-weight:400;font-size:15px;line-height:1;font-family:inherit;min-height:44px;width:100%;cursor:pointer}
+.field{width:100%;min-height:60px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);font-weight:500;font-size:20px;line-height:1;font-family:inherit;padding:0 18px;outline:none;-webkit-appearance:none;appearance:none}
+.field:focus{border-color:var(--blue)}
+.row{display:flex;gap:10px}
+.row>*{flex:1;min-width:0}
+label.cap{display:block;font-size:14px;color:var(--soft);margin:14px 0 6px}
+.err{color:var(--red);font-size:14px;min-height:20px;margin:8px 0 0}
+.note{color:var(--soft);font-size:13px;text-align:center;margin:12px 0 0;line-height:1.4}
+.note a{color:inherit}
+.hero{text-align:center;margin-top:8vh}
+.hero h1{font-size:36px}
+.logo{font-weight:700;font-size:20px;letter-spacing:-.01em}
+.card{background:var(--card);border-radius:22px;padding:20px}
+.kcal{font-size:54px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.kcal span{font-size:18px;font-weight:600;color:var(--soft);letter-spacing:0;margin-left:6px}
+.macros{display:flex;gap:10px;margin-top:16px}
+.macros div{flex:1;background:var(--bg);border-radius:14px;padding:12px 8px;text-align:center}
+.macros b{display:block;font-size:22px}
+.macros small{color:var(--soft);font-size:13px}
+.goal{font-size:20px;font-weight:600;margin:0 0 16px;line-height:1.3}
+.goal em{font-style:normal;color:var(--tan)}
+.ring{width:84px;height:84px;border-radius:50%;margin:0 auto 18px;border:6px solid var(--line);border-top-color:var(--green);animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tick{width:84px;height:84px;border-radius:50%;background:rgba(31,170,89,.14);color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.plan{position:relative;width:100%;border:2px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);padding:18px 20px;text-align:left;cursor:pointer;font-family:inherit;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}
+.plan.on{border-color:var(--ink)}
+.plan b{font-size:19px;display:block}
+.plan small{color:var(--soft);font-size:14px}
+.plan .px{text-align:right}
+.plan .px b{font-size:21px}
+.tag{position:absolute;top:-12px;right:16px;background:var(--pick);color:var(--pickink);font-size:12px;font-weight:700;letter-spacing:.06em;padding:5px 10px;border-radius:10px}
+.center{text-align:center}
+.steps{margin:18px 0 0;padding:0;list-style:none;text-align:left}
+.steps li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;font-size:17px}
+.steps i{flex:0 0 28px;height:28px;border-radius:50%;background:var(--pick);color:var(--pickink);font-style:normal;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+"use strict";
+const SB_URL = "https://bvaumyrtcuehlipiaxlv.supabase.co";
+const SB_KEY = "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7";
+const APP_STORE = "https://apps.apple.com/app/id6802901402";
+const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { storageKey: "mp-quiz" } });
+const app = document.getElementById("app");
+const KEY = "mp-quiz-state";
+
+// ---- state (kept in the browser so a Google round trip or a reload loses nothing) ----
+let S = { step: "intro", sex: "", workouts: "", bm: "", bd: "", by: "", ft: "", inch: "", weight: "", goal: "", goalWeight: "", pace: 1.0,
+          authMode: "", address: "", sent: false, plan: "yearly" };
+try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
+let save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+let prices = null, busy = false, err = "";
+
+// ---- the plan: a port of NutritionCalculator.targets (balanced diet style) ----
+function age() {
+  const now = new Date(), y = +S.by, m = +S.bm, d = +S.bd;
+  let a = now.getFullYear() - y;
+  if (now.getMonth() + 1 < m || (now.getMonth() + 1 === m && now.getDate() < d)) a--;
+  return a;
+}
+const heightIn = () => (+S.ft) * 12 + (+S.inch);
+const direction = () => S.goal === "Lose weight" ? "lose" : S.goal === "Gain weight" ? "gain" : "maintain";
+const activity = () => ({ "0-2": "light", "3-5": "moderate", "6+": "active" })[S.workouts] || "light";
+function targets() {
+  const kg = (+S.weight) * 0.453592, cm = heightIn() * 2.54;
+  const sexK = S.sex === "Male" ? 5 : S.sex === "Female" ? -161 : -78;
+  const bmr = 10 * kg + 6.25 * cm - 5 * age() + sexK;
+  const maintenance = bmr * ({ light: 1.375, moderate: 1.55, active: 1.725 })[activity()];
+  const dir = direction(), delta = (dir === "maintain" ? 0 : +S.pace) * 3500 / 7;
+  let cal = dir === "lose" ? maintenance - delta : dir === "gain" ? maintenance + delta : maintenance;
+  const floor = S.sex === "Male" ? 1500 : 1200;
+  if (cal < floor) cal = floor;
+  const protein = Math.min((+S.weight) * 0.8, cal * 0.40 / 4);
+  const fat = Math.min(cal * 0.27 / 9, (cal - protein * 4) / 9);
+  const carbs = Math.max(0, (cal - protein * 4 - fat * 9) / 4);
+  return { calories: Math.round(cal / 10) * 10, protein: Math.round(protein), carbs: Math.round(carbs), fat: Math.round(fat) };
+}
+function goalLine() {
+  const dir = direction();
+  if (dir === "maintain") return `Goal: Maintain <em>${+S.weight} lbs</em>`;
+  const lbs = Math.abs((+S.goalWeight) - (+S.weight));
+  const when = new Date(Date.now() + Math.round(lbs / (+S.pace) * 7) * 864e5);
+  const date = when.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  return `Goal: ${dir === "lose" ? "Lose" : "Gain"} <em>${lbs} lbs</em><br>by <em>${date}</em>`;
+}
+
+// ---- steps ----
+function order() {
+  const o = ["intro", "sex", "workouts", "birthday", "body", "goal"];
+  if (direction() !== "maintain") o.push("goalWeight", "pace");
+  return o.concat(["building", "plan", "account", "pay", "done"]);
+}
+const QUESTIONS = 8;
+function go(step) { S.step = step; err = ""; save(); render(); window.scrollTo(0, 0); }
+function next() { const o = order(); go(o[Math.min(o.indexOf(S.step) + 1, o.length - 1)]); }
+function back() {
+  if (S.step === "account" && S.authMode) { S.authMode = ""; S.sent = false; err = ""; save(); return render(); }
+  const o = order(), i = o.indexOf(S.step);
+  let p = o[Math.max(i - 1, 0)];
+  if (p === "building") p = o[i - 2];
+  go(p);
+}
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const opt = (key, value, detail) =>
+  `<button class="opt ${S[key] === value ? "on" : ""}" data-pick="${key}" data-value="${esc(value)}">${esc(value)}${detail ? `<small>${esc(detail)}</small>` : ""}</button>`;
+const select = (key, label, values) =>
+  `<select class="field" data-key="${key}" aria-label="${label}"><option value="">${label}</option>${values.map(v =>
+    `<option value="${v[0]}" ${String(S[key]) === String(v[0]) ? "selected" : ""}>${v[1]}</option>`).join("")}</select>`;
+const cta = (label, ok = true, id = "next") => `<button class="cta" id="${id}" ${ok && !busy ? "" : "disabled"}>${busy ? "One moment…" : label}</button>`;
+const errLine = () => `<p class="err" role="alert">${esc(err)}</p>`;
+const validBody = () => S.ft && S.inch !== "" && +S.weight >= 70 && +S.weight <= 600;
+const validBirthday = () => S.bm && S.bd && S.by && age() >= 13 && age() <= 100;
+function validGoalWeight() {
+  const g = +S.goalWeight, w = +S.weight;
+  if (!(g >= 70 && g <= 600)) return false;
+  return direction() === "lose" ? g < w : g > w;
+}
+function money(p) { return p ? new Intl.NumberFormat("en-US", { style: "currency", currency: (p.currency || "usd").toUpperCase() }).format(p.amount / 100) : "…"; }
+
+function screen() {
+  const t = S.step;
+  if (t === "intro") return `
+    <div class="hero"><div class="logo">Meal Pic</div>
+      <h1>Calorie tracking<br>made easy</h1>
+      <p class="sub">Answer a few quick questions and get your custom calorie plan.</p></div>
+    <div class="fill"></div>${cta("Get Started")}`;
+  if (t === "sex") return `<h1>Choose your gender</h1><p class="sub">This will be used to calibrate your custom plan.</p>
+    <div class="opts">${opt("sex", "Male")}${opt("sex", "Female")}${opt("sex", "Other")}</div><div class="fill"></div>${cta("Continue", !!S.sex)}`;
+  if (t === "workouts") return `<h1>How many workouts do you do per week?</h1><p class="sub">This will be used to calibrate your custom plan.</p>
+    <div class="opts">${opt("workouts", "0-2", "Workouts now and then")}${opt("workouts", "3-5", "A few workouts per week")}${opt("workouts", "6+", "Dedicated athlete")}</div>
+    <div class="fill"></div>${cta("Continue", !!S.workouts)}`;
+  if (t === "birthday") {
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"].map((m, i) => [i + 1, m]);
+    const days = Array.from({ length: 31 }, (_, i) => [i + 1, i + 1]);
+    const y0 = new Date().getFullYear() - 13, years = Array.from({ length: 88 }, (_, i) => [y0 - i, y0 - i]);
+    return `<h1>When were you born?</h1><p class="sub">This will be used to calibrate your custom plan.</p>
+      <div class="row">${select("bm", "Month", months)}</div><div class="row" style="margin-top:10px">${select("bd", "Day", days)}${select("by", "Year", years)}</div>
+      <div class="fill"></div>${cta("Continue", validBirthday())}`;
+  }
+  if (t === "body") {
+    const ft = [3, 4, 5, 6, 7].map(v => [v, v + " ft"]), inch = Array.from({ length: 12 }, (_, i) => [i, i + " in"]);
+    return `<h1>Height &amp; weight</h1><p class="sub">This will be used to calibrate your custom plan.</p>
+      <label class="cap">Height</label><div class="row">${select("ft", "Feet", ft)}${select("inch", "Inches", inch)}</div>
+      <label class="cap" for="w">Weight (lbs)</label>
+      <input class="field" id="w" data-key="weight" inputmode="numeric" pattern="[0-9]*" placeholder="160" value="${esc(S.weight)}">
+      <div class="fill"></div>${cta("Continue", validBody())}`;
+  }
+  if (t === "goal") return `<h1>What is your goal?</h1><p class="sub">This helps us generate a plan for your calorie intake.</p>
+    <div class="opts">${opt("goal", "Lose weight")}${opt("goal", "Maintain")}${opt("goal", "Gain weight")}</div><div class="fill"></div>${cta("Continue", !!S.goal)}`;
+  if (t === "goalWeight") return `<h1>What is your goal weight?</h1><p class="sub">You weigh ${+S.weight} lbs now.</p>
+    <input class="field" data-key="goalWeight" inputmode="numeric" pattern="[0-9]*" placeholder="${direction() === "lose" ? Math.max(70, +S.weight - 15) : +S.weight + 10}" value="${esc(S.goalWeight)}" aria-label="Goal weight in pounds">
+    <div class="fill"></div>${cta("Continue", validGoalWeight())}`;
+  if (t === "pace") {
+    const verb = direction() === "lose" ? "Lose" : "Gain";
+    const row = (v, name, d) => `<button class="opt ${+S.pace === v ? "on" : ""}" data-pace="${v}">${name}<small>${verb} ${v} lb a week${d ? " · " + d : ""}</small></button>`;
+    return `<h1>How fast do you want to reach your goal?</h1><p class="sub">You can change this any time in the app.</p>
+      <div class="opts">${row(0.5, "Slow and steady")}${row(1.0, "Recommended", "easiest to stick with")}${row(1.5, "Fast")}</div>
+      <div class="fill"></div>${cta("Continue")}`;
+  }
+  if (t === "building") return `<div class="fill"></div><div class="center"><div class="ring"></div><h1>We're building your custom plan</h1><p class="sub">Balancing your calories and macros…</p></div><div class="fill"></div>`;
+  if (t === "plan") {
+    const p = targets();
+    return `<h1>Your custom plan is ready</h1><p class="goal">${goalLine()}</p>
+      <div class="card"><div class="kcal">${p.calories.toLocaleString("en-US")}<span>calories a day</span></div>
+        <div class="macros"><div><b>${p.protein}g</b><small>Protein</small></div><div><b>${p.carbs}g</b><small>Carbs</small></div><div><b>${p.fat}g</b><small>Fat</small></div></div></div>
+      <p class="note">An estimate from your answers, not medical advice. You can edit every number in the app.</p>
+      <div class="fill"></div>${cta("Continue")}`;
+  }
+  if (t === "account") return accountScreen();
+  if (t === "pay") {
+    const y = prices && prices.yearly, m = prices && prices.monthly, trial = prices ? prices.trial_days : 3;
+    const perWeek = y ? money({ amount: y.amount / 52, currency: y.currency }) : "…";
+    const yearly = S.plan === "yearly";
+    return `<h1>${trial > 0 ? `Start your ${trial}-day free trial` : "Unlock Meal Pic"}</h1><p class="sub">Your plan is saved. Unlock the app to start tracking.</p>
+      <button class="plan ${yearly ? "on" : ""}" data-plan="yearly">${trial > 0 ? `<span class="tag">${trial} DAYS FREE</span>` : ""}
+        <span><b>Yearly</b><small>${money(y)} a year</small></span><span class="px"><b>${perWeek}</b><small>per week</small></span></button>
+      <button class="plan ${yearly ? "" : "on"}" data-plan="monthly"><span><b>Monthly</b><small>billed every month</small></span><span class="px"><b>${money(m)}</b><small>per month</small></span></button>
+      ${errLine()}<div class="fill"></div>
+      ${cta(yearly && trial > 0 ? `Start My ${trial}-Day Free Trial` : "Continue", !!prices, "checkout")}
+      <p class="note">${yearly && trial > 0 ? `${trial} days free, then ${money(y)} per year.` : `${money(m)} per month.`} Renews until you cancel. Cancel any time.<br>
+        <a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a></p>`;
+  }
+  if (t === "done") return `<div class="fill"></div><div class="center"><div class="tick"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1>You're all set!</h1><p class="sub">Your plan is saved to your account.</p></div>
+    <ul class="steps"><li><i>1</i><span>Download Meal Pic on your iPhone.</span></li>
+      <li><i>2</i><span>Tap <b>Sign In</b> on the first screen.</span></li>
+      <li><i>3</i><span>Choose <b>${esc(S.method || "the same way you signed up here")}</b>. Your plan is already there.</span></li></ul>
+    <div class="fill"></div><a class="cta" style="text-decoration:none" href="${APP_STORE}">Download Meal Pic</a>`;
+  return "";
+}
+
+function accountScreen() {
+  if (!S.authMode) return `<h1>Save your plan</h1><p class="sub">Create your account. You'll use it to sign in to the app.</p>
+    <div class="opts">
+      <button class="cta dark" id="google" style="margin-top:0" ${busy ? "disabled" : ""}><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.800 7.200l7.600 5.900c4.500-4.100 7-10.200 7-17.600z"/><path fill="#FBBC05" d="M10.500 28.600A14.500 14.500 0 0 1 9.500 24c0-1.600.3-3.200.8-4.600l-7.900-6.200A24 24 0 0 0 0 24c0 3.900.9 7.500 2.600 10.800l7.900-6.200z"/><path fill="#34A853" d="M24 48c6.500 0 11.900-2.100 15.900-5.800l-7.600-5.900c-2.100 1.400-4.900 2.300-8.300 2.300-6.300 0-11.600-4.200-13.500-9.900l-7.900 6.200C6.500 42.600 14.600 48 24 48z"/></svg>Continue with Google</button>
+      <button class="cta line" data-auth="email" style="margin-top:0">Continue with email</button>
+      <button class="cta line" data-auth="phone" style="margin-top:0">Continue with phone</button>
+    </div>${errLine()}<div class="fill"></div>
+    <p class="note">By continuing you agree to Meal Pic's <a href="../terms.html">Terms</a> and <a href="../privacy.html">Privacy Policy</a>.</p>`;
+  const email = S.authMode === "email";
+  if (!S.sent) return `<h1>${email ? "What's your email?" : "What's your number?"}</h1>
+    <p class="sub">${email ? "We'll send you a 6-digit code. No password to remember." : "We'll text you a 6-digit code. Outside the US? Include your country code."}</p>
+    <input class="field" id="addr" data-key="address" ${email ? 'type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"' : 'type="tel" inputmode="tel" autocomplete="tel" placeholder="555 123 4567"'} value="${esc(S.address)}" autocapitalize="off" autocorrect="off">
+    ${errLine()}${cta("Send code", S.address.trim().length >= 4, "send")}<button class="link" id="other">Use another method</button><div class="fill"></div>`;
+  return `<h1>Enter your code</h1><p class="sub">We sent a 6-digit code to ${esc(S.address)}.</p>
+    <input class="field" id="code" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" placeholder="123456">
+    ${errLine()}${cta("Verify", true, "verify")}<button class="link" id="resend">${email ? "Use a different email" : "Use a different phone number"}</button><div class="fill"></div>`;
+}
+
+function render() {
+  const o = order(), i = o.indexOf(S.step);
+  const chrome = !["intro", "building", "done"].includes(S.step);
+  const showBack = chrome && !(S.step === "pay");
+  const pct = Math.min(100, Math.round(Math.min(i, QUESTIONS) / QUESTIONS * 100));
+  app.innerHTML = `<div class="top">${chrome ? `<button class="back" id="back" aria-label="Back" ${showBack ? "" : "hidden"}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><div class="bar"><i style="width:${pct}%"></i></div>` : ""}</div>
+    <div class="body">${screen()}</div>`;
+  const f = app.querySelector("#addr, #code"); if (f) f.focus();
+  if (S.step === "building") setTimeout(() => { if (S.step === "building") next(); }, 2200);
+  if (S.step === "pay" && !prices) loadPrices();
+}
+
+// ---- sign-in ----
+function normalPhone(raw) {
+  const d = raw.replace(/\D/g, "");
+  if (raw.trim().startsWith("+")) return "+" + d;
+  if (d.length === 10) return "+1" + d;
+  return "+" + d;
+}
+const friendly = e => {
+  const m = (e && e.message) || "";
+  if (/rate|too many|seconds/i.test(m)) return "Too many tries. Wait a minute and try again.";
+  if (/expired|invalid/i.test(m)) return "That code isn't right. Check it and try again.";
+  return m || "That didn't go through. Please try again.";
+};
+async function work(fn) {
+  if (busy) return; busy = true; err = ""; render();
+  try { await fn(); } catch (e) { err = friendly(e); }
+  busy = false; render();
+}
+const sendCode = () => work(async () => {
+  const a = S.address.trim();
+  const r = S.authMode === "email" ? await sb.auth.signInWithOtp({ email: a, options: { shouldCreateUser: true } })
+                                   : await sb.auth.signInWithOtp({ phone: normalPhone(a) });
+  if (r.error) throw r.error;
+  S.sent = true; save();
+});
+const verifyCode = () => {
+  // Read the field BEFORE `work` redraws the page.
+  const token = (document.getElementById("code").value || "").replace(/\D/g, "");
+  return work(async () => {
+  if (token.length < 6) throw new Error("Enter the 6-digit code.");
+  const a = S.address.trim();
+  const r = S.authMode === "email" ? await sb.auth.verifyOtp({ email: a, token, type: "email" })
+                                   : await sb.auth.verifyOtp({ phone: normalPhone(a), token, type: "sms" });
+  if (r.error) throw r.error;
+  await signedIn(r.data.session, S.authMode === "email" ? "Continue with email" : "Continue with phone");
+  });
+};
+const google = () => work(async () => {
+  S.pendingGoogle = true; save();
+  const r = await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname } });
+  if (r.error) { S.pendingGoogle = false; save(); throw r.error; }
+  await new Promise(() => {});   // the page is leaving for Google
+});
+
+/// The account now exists: put the plan and the answers on it, then on to payment
+/// (or straight to "all set" for an account that already pays).
+async function signedIn(session, method) {
+  if (!session) throw new Error("That sign-in didn't go through. Please try again.");
+  const t = targets(), dir = direction();
+  const pad = n => String(n).padStart(2, "0");
+  const r = await sb.auth.updateUser({ data: {
+    plan: { calories: t.calories, protein: t.protein, carbs: t.carbs, fat: t.fat, rollover: true, updated_at: new Date().toISOString() },
+    calorie_goal: t.calories, sex: S.sex, height_in: heightIn(), weight_lb: +S.weight,
+    goal_weight_lb: dir === "maintain" ? +S.weight : +S.goalWeight, goal: S.goal,
+    weekly_rate_tenths: Math.round(+S.pace * 10), activity: activity(), dob: `${S.by}-${pad(S.bm)}-${pad(S.bd)}`,
+    terms_accepted: true, source: "web_quiz",
+  } });
+  if (r.error) throw r.error;
+  S.method = method; S.authMode = ""; S.sent = false; S.pendingGoogle = false;
+  const paid = await sb.rpc("stripe_entitled", { allow_test: false });
+  S.step = paid.data === true ? "done" : "pay"; save();
+}
+
+// ---- payment ----
+async function checkoutCall(body) {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { S.step = "account"; save(); throw new Error("Please sign in again."); }
+  const res = await fetch(SB_URL + "/functions/v1/stripe-checkout", { method: "POST",
+    headers: { "content-type": "application/json", apikey: SB_KEY, authorization: "Bearer " + session.access_token },
+    body: JSON.stringify(Object.assign({ source: "web" }, body)) });
+  const out = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error("We couldn't reach checkout. Please try again.");
+  return out;
+}
+async function loadPrices() {
+  try { prices = await checkoutCall({ action: "prices" }); } catch (e) { err = friendly(e); }
+  if (S.step === "pay" || S.step === "account") render();
+}
+const checkout = () => work(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  const out = await checkoutCall({ plan: S.plan, email: session && session.user && session.user.email || undefined });
+  if (!out.url) throw new Error("We couldn't reach checkout. Please try again.");
+  location.href = out.url;
+  await new Promise(() => {});
+});
+
+// ---- events ----
+app.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b || b.disabled) return;
+  if (b.dataset.pick) { S[b.dataset.pick] = b.dataset.value; save(); return render(); }
+  if (b.dataset.pace) { S.pace = +b.dataset.pace; save(); return render(); }
+  if (b.dataset.plan) { S.plan = b.dataset.plan; save(); return render(); }
+  if (b.dataset.auth) { S.authMode = b.dataset.auth; S.address = ""; S.sent = false; err = ""; save(); return render(); }
+  if (b.id === "back") return back();
+  if (b.id === "next") return next();
+  if (b.id === "google") return google();
+  if (b.id === "send") return sendCode();
+  if (b.id === "verify") return verifyCode();
+  if (b.id === "other") { S.authMode = ""; err = ""; save(); return render(); }
+  if (b.id === "resend") { S.sent = false; err = ""; save(); return render(); }
+  if (b.id === "checkout") return checkout();
+});
+// Typing must not rebuild the page (it would drop the keyboard): update the state and the button only.
+function typed(e) {
+  const el = e.target, key = el.dataset && el.dataset.key; if (!key) return;
+  S[key] = el.value; save();
+  const btn = app.querySelector(".cta");
+  const ok = S.step === "birthday" ? validBirthday() : S.step === "body" ? validBody() : S.step === "goalWeight" ? validGoalWeight()
+           : S.step === "account" ? S.address.trim().length >= 4 : true;
+  if (btn) btn.disabled = !ok;
+}
+app.addEventListener("input", typed);
+app.addEventListener("change", typed);
+app.addEventListener("keydown", e => { if (e.key === "Enter") { const b = app.querySelector(".cta:not([disabled])"); if (b && e.target.matches("input")) b.click(); } });
+
+// ---- start ----
+(async function start() {
+  const q = new URLSearchParams(location.search);
+  // One row per landing, so each ad's clicks can be counted (same table /join uses). ?ref=ad-<id>.
+  try { const ref = q.get("ref"); if (ref && /^[a-z0-9._-]{1,40}$/i.test(ref)) fetch(SB_URL + "/rest/v1/link_clicks", { method: "POST",
+    headers: { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+    body: JSON.stringify({ source: "quiz", path: "/quiz/", referrer: ref.toLowerCase(), ua: navigator.userAgent.slice(0, 500) }) }).catch(() => {}); } catch (e) {}
+
+  // ?preview=<step>: that screen with sample answers, nothing saved (for screenshots).
+  const pv = q.get("preview");
+  if (pv) { Object.assign(S, { sex: "Male", workouts: "3-5", bm: 6, bd: 14, by: 1996, ft: 5, inch: 10, weight: "185", goal: "Lose weight", goalWeight: "170", pace: 1.0,
+      authMode: "", sent: false, method: "Sign in with Google", step: pv.split(":")[0] });
+    if (pv.includes(":")) { S.authMode = pv.split(":")[1]; S.sent = pv.split(":")[2] === "sent"; S.address = S.authMode === "email" ? "you@example.com" : "303 555 0142"; }
+    if (S.step === "pay") prices = { trial_days: 3, yearly: { amount: 5999, currency: "usd" }, monthly: { amount: 1999, currency: "usd" } };
+    save = () => {}; render(); return; }
+  if (q.get("paid") === "1") { S.step = "done"; save(); history.replaceState(null, "", location.pathname); }
+  else if (q.get("paid") === "0") { S.step = "pay"; save(); history.replaceState(null, "", location.pathname); }
+  render();
+
+  const { data: { session } } = await sb.auth.getSession();
+  if (S.pendingGoogle) {
+    // Back from Google.
+    if (session) { busy = true; render(); try { await signedIn(session, "Sign in with Google"); } catch (e) { err = friendly(e); S.step = "account"; } busy = false; }
+    else { S.pendingGoogle = false; S.step = "account"; err = "That sign-in didn't go through. Please try again."; }
+    save(); history.replaceState(null, "", location.pathname); render();
+  } else if (!session && (S.step === "pay")) { go("account"); }
+})();
+</script>
+</body>
+</html>
