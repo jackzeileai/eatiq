@@ -2,150 +2,241 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Meal Pic | Get your calorie plan</title>
-<!-- Web-to-app quiz (2026-11-16, Jack: "the web app viewers take the quiz in the web app").
-     Quiz -> plan -> account (Google / email / phone) -> Stripe checkout -> "download the app and sign in".
-     The account carries the plan (user metadata `plan` + the answers), so the app's welcome "Sign In"
-     recognises it as finished and lands on "You're all set" (TextSignIn.settle / PlanBackup.restoreIfReturning).
-     The calorie maths below is a line-for-line port of NutritionCalculator (MenuView.swift): change both together.
-     Apple sign-in is NOT here yet: Supabase only has the app's bundle id for Apple, the web needs a Services ID. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>Meal Pic | Calorie tracking made easy</title>
+<!-- THE WEB QUIZ = THE APP'S H12 FLOW, SCREEN FOR SCREEN (Jack, 2026-11-16: "It needs to be the exact same… It should be H12").
+     Order, wording and options are copied from OnboardingFlow.swift's H5/H12 step list; icons are the app's own
+     (quiz/a/i = its SF Symbols as masks), the phone frame, clips, brand tiles and reviewer photos are the app's files.
+     Deliberate web differences:
+       - no Apple tracking sheet, no Apple rating pop-up (the reviews page stays), no notifications page
+       - the paywall's "reminder" page is left out and the timeline's middle step reads "Keep logging your meals"
+         (the app's own wording when its trial notice is off): the web cannot send that reminder
+       - plans are Monthly + Yearly (what Stripe sells), not Weekly + Yearly; no spin wheel; no pencils on the plan
+       - the account (Google / email / phone) is made when they tap the paywall button, right before Stripe
+     The calorie maths is a port of NutritionCalculator (MenuView.swift), balanced style: change both together.
+     The account carries the plan (user metadata `plan` + the answers) so the app's Sign In lands on "You're all set". -->
 <meta name="description" content="Answer a few questions and get your custom calorie and macro plan. Then track every meal with a photo.">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preload" as="image" href="a/phone.png">
 <style>
 :root{
-  --bg:#f2f2f7; --card:#ffffff; --ink:#0a0a0f; --soft:#6e6e78; --line:rgba(0,0,0,.10);
-  --blue:#007aff; --green:#1faa59; --red:#d93025; --tan:#c8915c; --pick:#0a0a0f; --pickink:#ffffff;
+  --bg:#f2f2f7; --card:#ffffff; --ink:#0b0b0f; --soft:#6d6d76; --faint:#b9b9c0; --line:rgba(0,0,0,.09);
+  --blue:#007aff; --green:#34c759; --red:#e5484d; --tan:#c8915c; --gold:#e3ad45; --pick:#0b0b0f; --pickink:#fff; --well:rgba(120,120,128,.14);
 }
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#000000; --card:#1c1c1e; --ink:#f5f5f7; --soft:#9a9aa3; --line:rgba(255,255,255,.14);
-         --pick:#f5f5f7; --pickink:#0a0a0f; }
+  :root{ --bg:#000; --card:#1c1c1e; --ink:#f5f5f7; --soft:#9a9aa3; --faint:#55555c; --line:rgba(255,255,255,.14);
+         --pick:#f5f5f7; --pickink:#0b0b0f; --well:rgba(120,120,128,.26); }
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%}
-body{background:var(--bg);color:var(--ink);font:17px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-#app{max-width:480px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;padding:0 22px calc(18px + env(safe-area-inset-bottom))}
-.top{height:52px;display:flex;align-items:center;gap:8px;padding-top:env(safe-area-inset-top);padding-right:36px}
-.back{width:44px;height:44px;margin-left:-12px;border:0;background:none;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer}
-.back[hidden]{visibility:hidden;display:flex}
-.bar{flex:1;height:3px;border-radius:2px;background:var(--line);overflow:hidden}
-.bar i{display:block;height:100%;background:var(--ink);border-radius:2px;transition:width .3s ease}
-h1{font-size:30px;line-height:1.16;letter-spacing:-.02em;margin:14px 0 10px;font-weight:700}
-.sub{color:var(--soft);font-size:14px;margin:0 0 12px}
-.body{flex:1;display:flex;flex-direction:column}
-.fill{flex:1}
-.mid{flex:1;display:flex;flex-direction:column;justify-content:center;padding:10px 0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
+body{background:var(--bg);color:var(--ink);font:16px/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+button{font-family:inherit;color:inherit}
+#app{position:relative;max-width:480px;margin:0 auto;height:100dvh;overflow:hidden}
+#head{position:absolute;z-index:5;left:0;right:0;top:env(safe-area-inset-top);height:48px;display:flex;align-items:center;padding:0 60px 0 12px;transition:opacity .25s}
+#head.off{opacity:0;pointer-events:none}
+#head.bare .bar{visibility:hidden}
+.back{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.bar{flex:1;height:3px;border-radius:2px;background:var(--line);overflow:hidden;margin-left:6px}
+.bar i{display:block;height:100%;background:var(--ink);border-radius:2px;transition:width .35s ease}
+.page{position:absolute;inset:0;display:flex;flex-direction:column;padding-top:calc(env(safe-area-inset-top) + 48px);background:var(--bg);transition:transform .42s cubic-bezier(.32,.72,0,1);will-change:transform}
+.page.nohead{padding-top:env(safe-area-inset-top)}
+.scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding:0 24px;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+.scroll>*{flex-shrink:0}
+.foot{padding:10px 24px calc(18px + env(safe-area-inset-bottom))}
+.mid{margin:auto 0;padding:14px 0}
+h1{font-size:28px;line-height:1.18;letter-spacing:-.02em;margin:10px 0 0;font-weight:700}
+.sub{color:var(--soft);font-size:14px;margin:8px 0 0}
+.center{text-align:center}
+.ic{display:inline-block;width:22px;height:22px;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;flex:0 0 auto}
 .opts{display:flex;flex-direction:column;gap:10px}
-.opt{width:100%;min-height:58px;border:1.5px solid transparent;border-radius:16px;background:var(--card);color:var(--ink);font-weight:600;font-size:17px;line-height:1.2;font-family:inherit;text-align:left;padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:0 0 0 1px var(--line)}
-.opt .ic{flex:0 0 24px;height:24px;display:flex;align-items:center;justify-content:center}
-.opt .tx{flex:1;display:flex;flex-direction:column;gap:3px}
-.opt small{font-weight:400;font-size:13px;color:var(--soft)}
-.opt .rad{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--line)}
-.opt.on{border-color:var(--ink);box-shadow:none}
-.opt.on .rad{border:7px solid var(--ink)}
-.seg{align-self:center;display:flex;background:var(--card);border-radius:22px;padding:3px;box-shadow:0 0 0 1px var(--line);margin-bottom:26px}
-.seg span{min-width:128px;text-align:center;font-size:14px;font-weight:600;padding:10px 0;border-radius:19px}
+.opt{width:100%;min-height:52px;border:0;border-radius:14px;background:var(--card);font-weight:600;font-size:16px;text-align:left;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:0 0 0 1px var(--line);transition:transform .12s}
+.opt:active{transform:scale(.985)}
+.opt .lead{flex:0 0 26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.opt .lead .ic{width:20px;height:20px}
+.opt .lead img{width:28px;height:28px;border-radius:7px;display:block}
+.opt .lead.tile{background:#48484a;color:#fff;border-radius:7px;width:28px;height:28px;flex-basis:28px}
+.opt .lead.tile .ic{width:16px;height:16px}
+.opt .tx{flex:1;display:flex;flex-direction:column;gap:2px}
+.opt small{font-weight:400;font-size:12px;color:var(--soft)}
+.opt .rad{flex:0 0 20px;height:20px;border-radius:50%;border:1.5px solid var(--line)}
+.opt.on{box-shadow:0 0 0 2px var(--ink)}
+.opt.on .rad{border:6px solid var(--ink)}
+.cta{width:100%;height:54px;border:0;border-radius:27px;background:var(--blue);color:#fff;font-weight:600;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;transition:opacity .2s,transform .12s}
+.cta:active{transform:scale(.98)}
+.cta:disabled{opacity:.36}
+.cta.line{background:var(--card);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.cta.dark{background:var(--pick);color:var(--pickink)}
+.link{background:none;border:0;color:var(--soft);font-size:14px;min-height:44px;width:100%;cursor:pointer}
+.link b{color:var(--ink)}
+.seg{display:flex;width:max-content;background:var(--card);border-radius:22px;padding:3px;box-shadow:0 0 0 1px var(--line);margin:0 auto 34px}
+.seg button{min-width:120px;border:0;background:none;font-size:14px;font-weight:600;padding:10px 0;border-radius:19px;cursor:pointer}
 .seg .on{background:var(--pick);color:var(--pickink)}
-.wheels{position:relative;display:flex;justify-content:center;gap:6px;height:220px}
-.wheels:before{content:"";position:absolute;left:8%;right:8%;top:88px;height:44px;border-radius:12px;background:rgba(120,120,128,.14);pointer-events:none}
-.wheels.two:before{display:none}
-.wheel{position:relative;height:220px;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  -webkit-mask-image:linear-gradient(transparent,#000 38%,#000 62%,transparent);mask-image:linear-gradient(transparent,#000 38%,#000 62%,transparent)}
+.wheels{position:relative;display:flex;justify-content:center;height:238px;margin:0 auto}
+.wheels .pill{position:absolute;left:0;right:0;top:102px;height:34px;border-radius:9px;background:var(--well);pointer-events:none}
+.wheels.two{gap:14px}.wheels.two .pill{display:none}
+.wheel{position:relative;height:238px;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;perspective:900px;touch-action:pan-y}
 .wheel::-webkit-scrollbar{display:none}
-.wheel div{height:44px;line-height:44px;scroll-snap-align:center;text-align:center;font-size:23px;white-space:nowrap;padding:0 14px}
-.wheel:before,.wheel:after{content:"";display:block;height:88px}
-.wheels.two .wheel{flex:0 0 150px;background:linear-gradient(transparent 88px,rgba(120,120,128,.14) 88px,rgba(120,120,128,.14) 132px,transparent 132px);border-radius:12px}
+.wheel:before,.wheel:after{content:"";display:block;height:102px}
+.wheel div{height:34px;line-height:34px;scroll-snap-align:center;text-align:center;font-size:22px;white-space:nowrap;padding:0 16px;color:var(--soft);backface-visibility:hidden}
+.wheel div.sel{color:var(--ink)}
+.wheels.two .wheel{flex:0 0 150px;background:linear-gradient(transparent 102px,var(--well) 102px,var(--well) 136px,transparent 136px);border-radius:9px}
 .read{text-align:center}
-.read small{display:block;font-size:17px;color:var(--ink);margin-bottom:6px}
+.read small{display:block;font-size:16px;margin-bottom:4px}
 .read b{font-size:34px;font-weight:700;letter-spacing:-.01em}
-.ruler{position:relative;margin:14px -22px 0;height:74px}
-.ruler:after{content:"";position:absolute;left:50%;top:0;width:2.5px;margin-left:-1.25px;height:74px;background:var(--ink);pointer-events:none}
-.ruler .track{height:74px;overflow-x:scroll;scrollbar-width:none;-webkit-overflow-scrolling:touch;display:flex;align-items:flex-end}
+.ruler{position:relative;margin:10px -24px 0;height:70px}
+.ruler:after{content:"";position:absolute;left:50%;top:0;width:2.5px;margin-left:-1.25px;height:70px;background:var(--ink);border-radius:1px;pointer-events:none}
+.ruler .track{height:70px;overflow-x:scroll;scrollbar-width:none;-webkit-overflow-scrolling:touch;display:flex;align-items:flex-end}
 .ruler .track::-webkit-scrollbar{display:none}
 .ruler .pad{flex:0 0 50%}
-.ruler .ticks{flex:0 0 auto;height:52px;background:
-  linear-gradient(90deg,var(--ink) 1.5px,transparent 1.5px) 0 100%/100px 52px repeat-x,
-  linear-gradient(90deg,var(--soft) 1px,transparent 1px) 0 100%/10px 30px repeat-x}
-.pacehead{display:flex;justify-content:space-between;align-items:flex-end;margin:22px 0 12px;font-size:15px;font-weight:600}
-.pacehead span{text-align:center;color:var(--ink)}
+.ruler .ticks{flex:0 0 auto;height:48px;background:
+  linear-gradient(90deg,var(--ink) 1.5px,transparent 1.5px) 0 100%/90px 48px repeat-x,
+  linear-gradient(90deg,var(--soft) 1px,transparent 1px) 0 100%/9px 28px repeat-x}
+.pacehead{display:flex;justify-content:space-between;align-items:flex-end;margin:20px 0 10px;font-size:14px;font-weight:600}
+.pacehead span{display:flex;flex-direction:column;align-items:center;gap:6px;transition:color .2s}
 .pacehead span.on{color:var(--tan)}
-.pacehead svg{display:block;margin:0 auto 6px}
+.pacehead .ic{width:34px;height:26px}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;margin:0}
 input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--ink) var(--fill,33%),var(--line) var(--fill,33%))}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.3);margin-top:-11px}
-.tip{background:var(--card);border-radius:16px;padding:16px;margin-top:18px;font-size:15px;color:var(--soft)}
-.tip b{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}
-.tip b em{font-style:normal;color:var(--tan);font-weight:600}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.28);margin-top:-10.5px}
+.tip{background:var(--card);border-radius:16px;padding:16px;margin-top:16px;font-size:14px;color:var(--soft)}
+.tip b{display:block;color:var(--ink);font-size:16px;margin-bottom:6px;font-weight:600}
+.tip em,.tan{font-style:normal;color:var(--tan)}
 .tip p{margin:0 0 8px}
-.ringbox{position:relative;width:210px;height:210px;margin:24px auto}
-.ringbox svg{transform:rotate(-90deg)}
-.ringbox b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:700;letter-spacing:-.02em}
-.ringbox b i{font-style:normal;font-size:22px;color:var(--soft);margin:14px 0 0 2px}
-.checks{list-style:none;margin:10px auto 0;padding:0;width:210px;font-size:16px;font-weight:600}
-.checks li{display:flex;align-items:center;gap:12px;padding:6px 0;opacity:.25;transition:opacity .3s}
-.checks li.on{opacity:1}
-.checks i{flex:0 0 18px;height:18px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center}
-.badge{width:34px;height:34px;border-radius:50%;background:var(--pick);color:var(--pickink);display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.goalhead{text-align:center;font-size:28px;font-weight:700;line-height:1.2;letter-spacing:-.02em;margin:0 0 22px}
-.goalhead em{font-style:normal;color:var(--tan)}
-.sec{font-size:17px;font-weight:700;margin:0 0 2px}
-.secsub{font-size:13px;color:var(--soft);margin:0 0 10px}
-.chart{position:relative;margin:8px 0 26px}
-.chart svg{display:block;width:100%;height:auto}
-.chart .ends{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);margin-top:4px}
+.card{background:var(--card);border-radius:22px;padding:20px}
+.card h3{margin:0 0 6px;font-size:18px;font-weight:600}
+.card .cap{font-size:15px;color:var(--soft);text-align:center;margin:12px 0 0}
+.card svg{display:block;width:100%;height:auto}
+.big{font-size:27px;font-weight:700;line-height:1.25;letter-spacing:-.02em;text-align:center;margin:0}
+.ring{width:230px;height:230px;border-radius:50%;margin:0 auto;background:conic-gradient(from 200deg,#f0d3e3,#d9d0ee,#d4cfee,#ecd6e6,#f0d3e3);display:flex;align-items:center;justify-content:center}
+.ring .dial{width:166px;height:166px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;position:relative}
+.ring .dial i{position:absolute;left:50%;top:50%;width:3px;height:7px;margin:-3.5px 0 0 -1.5px;border-radius:2px;background:var(--ink)}
+.ring .ic{width:64px;height:64px}
+.perso{position:relative;background:var(--card);border-radius:18px;padding:26px 18px 18px;text-align:center;margin-top:44px}
+.perso .dot{position:absolute;left:50%;top:-18px;margin-left:-18px;width:36px;height:36px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center}
+.perso b{font-size:17px}.perso p{margin:4px 0 0;font-size:14px;color:var(--soft)}
+.roll{background:var(--card);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:18px;box-shadow:0 6px 18px rgba(0,0,0,.06);margin-bottom:16px}
+.roll small{display:block;font-size:12px;color:var(--soft)}.roll b{font-size:22px}.roll em{font-style:normal;font-size:12px;font-weight:600;display:block}
+.cmp{border-radius:22px;padding:18px 18px 16px;background:linear-gradient(135deg,rgba(210,235,215,.5),rgba(235,235,240,.6) 45%,rgba(245,215,225,.5))}
+.cmp .cols{display:flex;gap:16px;justify-content:center}
+.cmp .col{width:112px;height:240px;border-radius:16px;background:var(--card);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;text-align:center;font-weight:600;font-size:15px}
+.cmp .col span{padding-top:16px}
+.cmp .col div{border-radius:16px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px}
+.cmp p{text-align:center;margin:16px 0 0;font-size:14px;color:var(--soft)}
+.badge{display:flex;align-items:center;justify-content:center;gap:26px;margin:14px 0 18px}
+.rate{display:flex;align-items:center;gap:8px;color:var(--soft)}
+.rate>.ic{width:26px;height:46px;opacity:.7}
+.rate b{display:block;font-size:28px;color:var(--ink);line-height:1;text-align:center}
+.stars{color:var(--gold);display:flex;gap:2px}
+.rate .stars{margin:4px 0}.rate .stars .ic{width:14px;height:14px}
+.rate small,.faces small{display:block;font-size:12px;color:var(--soft);text-align:center}
+.faces div{display:flex;justify-content:center;margin-bottom:8px}
+.faces img{width:42px;height:42px;border-radius:50%;border:2px solid var(--bg);margin-left:-12px;object-fit:cover}.faces img:first-child{margin-left:0}
+.rev{background:var(--card);border-radius:18px;padding:16px 18px;margin-bottom:12px}
+.rev .who{display:flex;align-items:center;gap:12px;font-weight:600;font-size:16px}
+.rev .who img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+.rev .who .stars{margin-left:auto;gap:3px}.rev .stars .ic{width:16px;height:16px}
+.rev p{margin:12px 0 0;font-size:15px;color:var(--soft)}
+.codebox{display:flex;align-items:center;background:var(--card);border-radius:16px;box-shadow:0 0 0 1px var(--line);padding:6px 6px 6px 16px}
+.codebox input{flex:1;min-width:0;border:0;background:none;outline:none;font:inherit;font-size:16px;color:var(--ink);height:40px;user-select:text;-webkit-user-select:text}
+.codebox button{border:0;border-radius:20px;background:var(--faint);color:#fff;font-weight:600;font-size:15px;padding:0 16px;height:36px}
+.codebox button.ready{background:var(--ink);color:var(--bg)}
+.field{width:100%;height:56px;border:0;border-radius:16px;background:var(--card);box-shadow:0 0 0 1px var(--line);color:var(--ink);font-size:19px;font-weight:500;font-family:inherit;padding:0 18px;outline:none;-webkit-appearance:none;user-select:text;-webkit-user-select:text}
+.field:focus{box-shadow:0 0 0 2px var(--blue)}
+.err{color:var(--red);font-size:14px;min-height:20px;margin:8px 0}
+.note{color:var(--soft);font-size:12px;text-align:center;margin:10px 0 0;line-height:1.45}.note a{color:inherit}
+.load{position:relative;width:216px;height:216px;margin:22px auto}
+.load svg{transform:rotate(-90deg)}
+.load b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:700;letter-spacing:-.02em}
+.load b i{font-style:normal;font-size:22px;color:var(--soft);margin:16px 0 0 2px}
+.checks{list-style:none;margin:6px auto 0;padding:0;width:216px;font-size:15px;font-weight:600;text-align:left}
+.checks li{display:flex;align-items:center;gap:12px;padding:6px 0;color:var(--faint)}
+.checks li i{flex:0 0 18px;height:18px;border-radius:50%;border:1.5px solid var(--line)}
+.checks li.now{color:var(--ink)}.checks li.now i{border-color:var(--ink);border-right-color:transparent;animation:spin .8s linear infinite}
+.checks li.on{color:var(--ink)}.checks li.on i,.scan li i{border:0;background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tickbadge{width:36px;height:36px;border-radius:50%;background:var(--pick);color:var(--pickink);display:flex;align-items:center;justify-content:center;margin:4px auto 10px}
+.tickbadge .ic{width:16px;height:16px}
+.sec{font-size:17px;font-weight:600;margin:0 0 2px}.secsub{font-size:13px;color:var(--soft);margin:0 0 10px}
+.ends{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);margin-top:4px}
 .rec{background:var(--card);border-radius:16px;padding:14px;display:flex;align-items:center;gap:14px}
-.rec .tile{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center}
-.rec b{font-size:28px;display:block;line-height:1.1}
-.rec small,.mac small{color:var(--soft);font-size:13px}
+.rec .tile{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(255,45,85,.14);color:#ff2d55}
+.rec b{font-size:30px;display:block;line-height:1.05}.rec small,.mac small{color:var(--soft);font-size:14px}
 .macs{display:flex;gap:10px;margin-top:10px}
 .mac{flex:1;background:var(--card);border-radius:16px;padding:12px}
-.mac .dot{width:22px;height:22px;border-radius:50%;margin-bottom:10px}
-.mac b{font-size:21px;display:block}
-.cta{width:100%;min-height:60px;border:0;border-radius:30px;background:var(--blue);color:#fff;font-weight:600;font-size:18px;line-height:1;font-family:inherit;cursor:pointer;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:10px}
-.cta:disabled{opacity:.35;cursor:default}
-.cta.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
-.cta.dark{background:var(--pick);color:var(--pickink)}
-.link{background:none;border:0;color:var(--soft);font-weight:400;font-size:15px;line-height:1;font-family:inherit;min-height:44px;width:100%;cursor:pointer}
-.field{width:100%;min-height:60px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);font-weight:500;font-size:20px;line-height:1;font-family:inherit;padding:0 18px;outline:none;-webkit-appearance:none;appearance:none}
-.field:focus{border-color:var(--blue)}
-.row{display:flex;gap:10px}
-.row>*{flex:1;min-width:0}
-label.cap{display:block;font-size:14px;color:var(--soft);margin:14px 0 6px}
-.err{color:var(--red);font-size:14px;min-height:20px;margin:8px 0 0}
-.note{color:var(--soft);font-size:13px;text-align:center;margin:12px 0 0;line-height:1.4}
-.note a{color:inherit}
-.hero{text-align:center;margin-top:8vh}
-.hero h1{font-size:36px}
-.logo{font-weight:700;font-size:20px;letter-spacing:-.01em}
-.card{background:var(--card);border-radius:22px;padding:20px}
-.kcal{font-size:54px;font-weight:700;letter-spacing:-.03em;line-height:1}
-.kcal span{font-size:18px;font-weight:600;color:var(--soft);letter-spacing:0;margin-left:6px}
-.macros{display:flex;gap:10px;margin-top:16px}
-.macros div{flex:1;background:var(--bg);border-radius:14px;padding:12px 8px;text-align:center}
-.macros b{display:block;font-size:22px}
-.macros small{color:var(--soft);font-size:13px}
-.goal{font-size:20px;font-weight:600;margin:0 0 16px;line-height:1.3}
-.goal em{font-style:normal;color:var(--tan)}
-.ring{width:84px;height:84px;border-radius:50%;margin:0 auto 18px;border:6px solid var(--line);border-top-color:var(--green);animation:spin .9s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.tick{width:84px;height:84px;border-radius:50%;background:rgba(31,170,89,.14);color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
-.plan{position:relative;width:100%;border:2px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);padding:18px 20px;text-align:left;cursor:pointer;font-family:inherit;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}
-.plan.on{border-color:var(--ink)}
-.plan b{font-size:19px;display:block}
-.plan small{color:var(--soft);font-size:14px}
-.plan .px{text-align:right}
-.plan .px b{font-size:21px}
-.tag{position:absolute;top:-12px;right:16px;background:var(--pick);color:var(--pickink);font-size:12px;font-weight:700;letter-spacing:.06em;padding:5px 10px;border-radius:10px}
-.center{text-align:center}
-.steps{margin:18px 0 0;padding:0;list-style:none;text-align:left}
-.steps li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;font-size:17px}
+.mac .dot{width:24px;height:24px;border-radius:50%;margin-bottom:12px;display:flex;align-items:center;justify-content:center}.mac .dot .ic{width:12px;height:12px}
+.mac b{font-size:22px;display:block}
+.info{background:var(--card);border-radius:16px;padding:6px 16px}
+.info div{display:flex;align-items:center;gap:14px;padding:11px 0;font-size:15px;border-top:1px solid var(--line)}.info div:first-child{border:0}
+.info .ic{width:18px;height:18px}
+.phone{position:relative;aspect-ratio:1000/2044;margin:0 auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.18))}
+.phone>img{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.phone .scr{position:absolute;left:5.3%;top:2.5%;width:89.4%;height:95%;border-radius:11% / 5.2%;overflow:hidden;background:#000}
+.phone video{width:100%;height:100%;object-fit:cover;display:block}
+.cam{position:absolute;inset:0;z-index:1}
+.cam .br{position:absolute;left:14%;right:14%;top:18%;height:56%}
+.cam .br i{position:absolute;width:42px;height:42px;border:3px solid #fff}
+.cam .br i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-top-left-radius:12px}.cam .br i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-top-right-radius:12px}
+.cam .br i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-bottom-left-radius:12px}.cam .br i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-bottom-right-radius:12px}
+.shutter{position:absolute;left:50%;bottom:5.5%;width:66px;height:66px;margin-left:-33px;border-radius:50%;border:4px solid #fff;background:none;padding:0;cursor:pointer;z-index:3}
+.shutter:before{content:"";position:absolute;inset:3px;border-radius:50%;background:#fff;transition:transform .12s}.shutter:active:before{transform:scale(.88)}
+.scan{position:absolute;inset:0;z-index:1;background:rgba(0,0,0,.28);opacity:0;transition:opacity .3s;color:#fff}
+.scan.on{opacity:1}
+.scan .r{position:absolute;left:50%;top:40%;width:150px;height:150px;margin:-75px 0 0 -75px}
+.scan .r svg{transform:rotate(-90deg)}
+.scan .r b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700}
+.scan .r b i{font-style:normal;font-size:16px;margin:10px 0 0 1px}
+.scan ul{position:absolute;left:9%;bottom:5%;list-style:none;margin:0;padding:0;font-size:14px;font-weight:600}
+.scan li{display:flex;align-items:center;gap:10px;padding:5px 0;opacity:0;transform:translateY(6px);transition:all .3s}
+.scan li.on{opacity:1;transform:none}
+.scan li i{width:20px;height:20px;border-radius:50%}
+.meal{background:var(--card);border-radius:20px;padding:10px;display:flex;gap:12px;box-shadow:0 6px 18px rgba(0,0,0,.07)}
+.meal img{width:96px;height:96px;border-radius:14px;object-fit:cover}
+.meal b{font-size:17px}.meal small{display:block;color:var(--soft);font-size:13px;margin:4px 0}
+.meal em{font-style:normal;color:#ff2d55;font-weight:700;font-size:18px}.meal em i{font-style:normal;font-size:10px}
+.meal .m{font-size:14px;font-weight:600}.meal .m i{font-style:normal;font-size:10px;color:var(--soft);font-weight:400;margin:0 2px 0 10px}.meal .m i:first-child{margin-left:0}
+.edit{background:var(--card);border-radius:20px;padding:4px 14px;margin-top:14px;box-shadow:0 6px 18px rgba(0,0,0,.07)}
+.edit div{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:16px}.edit div:first-child{border:0}
+.edit .ic{width:16px;height:18px}.edit b{margin-left:auto;font-size:18px}.edit small{width:22px;color:var(--soft);font-size:12px}
+.edit .pm{display:flex;background:var(--well);border-radius:16px;overflow:hidden}.edit .pm button{border:0;background:none;width:46px;height:32px;font-size:22px;line-height:1}
+.nopay{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:16px;margin:0 0 12px}.nopay .ic{width:14px;height:14px}
+.tl{position:relative;margin:18px 0 0 4px}
+.tl:before{content:"";position:absolute;left:11px;top:6px;bottom:20px;width:20px;border-radius:10px;background:rgba(0,122,255,.14)}
+.tl>div{position:relative;display:flex;gap:16px;padding-bottom:22px}
+.tl i{flex:0 0 42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid var(--bg)}
+.tl i .ic{width:18px;height:18px}
+.tl b{display:block;font-size:20px;font-weight:600}.tl p{margin:2px 0 0;color:var(--soft);font-size:16px}
+.plans{display:flex;gap:12px;margin-top:6px}
+.plan{position:relative;flex:1;border:0;border-radius:18px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:16px 14px;text-align:left;cursor:pointer}
+.plan.on{box-shadow:0 0 0 2px var(--ink)}
+.plan .tag{position:absolute;top:-22px;right:14px;background:var(--faint);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:8px 8px 0 0}
+.plan.on .tag{background:var(--pick);color:var(--pickink)}
+.plan .nm{display:flex;justify-content:space-between;font-size:18px;font-weight:500}
+.plan .rad{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line)}
+.plan.on .rad{border:0;background:var(--pick);color:var(--pickink);display:flex;align-items:center;justify-content:center}
+.plan .rad .ic{display:none;width:11px;height:11px}.plan.on .rad .ic{display:block}
+.plan .px{font-size:30px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}.plan .px small{font-size:17px;font-weight:600}
+.plan .by{font-size:14px;color:var(--soft)}
+#sheet{position:absolute;inset:0;z-index:20;background:var(--bg);transform:translateY(100%);transition:transform .42s cubic-bezier(.32,.72,0,1);display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 4px) 24px calc(18px + env(safe-area-inset-bottom))}
+#sheet.up{transform:none}
+#sheet .back{margin-left:-12px}
+#sheet .stack{display:flex;flex-direction:column;gap:14px;margin-top:26px}
+#sheet .cta{height:62px;border-radius:31px;font-size:19px}
+.tick{width:86px;height:86px;border-radius:50%;background:rgba(52,199,89,.16);color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}.tick .ic{width:38px;height:38px}
+.steps{margin:22px 0 0;padding:0;list-style:none}
+.steps li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;font-size:16px}
 .steps i{flex:0 0 28px;height:28px;border-radius:50%;background:var(--pick);color:var(--pickink);font-style:normal;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+  <div id="head" class="off"><button class="back" id="back" aria-label="Back"><span class="ic" style="--m:url(a/i/chevron.left.png);width:18px;height:18px"></span></button><div class="bar"><i id="prog"></i></div></div>
+  <div id="stage"></div>
+  <div id="sheet"></div>
+</div>
+<label id="haplabel" for="hapsw"></label><input type="checkbox" switch id="hapsw" tabindex="-1" aria-hidden="true" style="position:absolute;opacity:0;pointer-events:none;left:-99px">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 "use strict";
@@ -153,410 +244,517 @@ const SB_URL = "https://bvaumyrtcuehlipiaxlv.supabase.co";
 const SB_KEY = "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7";
 const APP_STORE = "https://apps.apple.com/app/id6802901402";
 const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { storageKey: "mp-quiz" } });
-const app = document.getElementById("app");
-const KEY = "mp-quiz-state";
+const stage = document.getElementById("stage"), head = document.getElementById("head"), prog = document.getElementById("prog"), sheet = document.getElementById("sheet");
+const KEY = "mp-quiz-h12";
+const NOW = new Date();
 
 // ---- state (kept in the browser so a Google round trip or a reload loses nothing) ----
-const NOW = new Date();
-let S = { step: "intro", sex: "", workouts: "", bm: NOW.getMonth() + 1, bd: NOW.getDate(), by: NOW.getFullYear() - 25, ft: 5, inch: 8, weight: 160, goal: "", goalWeight: 0, pace: 1.2,
-          authMode: "", address: "", sent: false, plan: "yearly" };
+let S = { step: "welcome", sex: "", workouts: "", source: "", tried: "", ft: 5, inch: 8, hunit: "ft", weight: 160, unit: "lbs",
+          bm: NOW.getMonth() + 1, bd: NOW.getDate(), by: NOW.getFullYear() - 25, pro: "", goal: "", goalWeight: 0, pace: 1.2,
+          obstacle: "", diet: "", accomplish: "", rollover: "Yes", code: "", codeName: "", plan: "yearly", method: "" };
 try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
 let save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
-let prices = null, busy = false, err = "";
+// What the two plans cost. Shown before there is an account, and the server only quotes prices to a
+// signed-in caller, so these are written here. KEEP IN STEP WITH STRIPE (yearly carries the free trial).
+const prices = { trial_days: 3, yearly: { amount: 5999, currency: "usd" }, monthly: { amount: 2999, currency: "usd" } };
+
+// ---- a tap you can feel: iOS Safari ticks when a "switch" checkbox flips; Android vibrates ----
+const hapLabel = document.getElementById("haplabel");
+function haptic() { try { if (navigator.vibrate) navigator.vibrate(8); else hapLabel.click(); } catch (e) {} }
 
 // ---- the plan: a port of NutritionCalculator.targets (balanced diet style) ----
 function age() {
-  const now = new Date(), y = +S.by, m = +S.bm, d = +S.bd;
-  let a = now.getFullYear() - y;
-  if (now.getMonth() + 1 < m || (now.getMonth() + 1 === m && now.getDate() < d)) a--;
-  return a;
+  let a = NOW.getFullYear() - (+S.by);
+  if (NOW.getMonth() + 1 < +S.bm || (NOW.getMonth() + 1 === +S.bm && NOW.getDate() < +S.bd)) a--;
+  return Math.min(100, Math.max(13, a));
 }
 const heightIn = () => (+S.ft) * 12 + (+S.inch);
 const direction = () => S.goal === "Lose weight" ? "lose" : S.goal === "Gain weight" ? "gain" : "maintain";
 const activity = () => ({ "0-2": "light", "3-5": "moderate", "6+": "active" })[S.workouts] || "light";
-function targets() {
+const ACT_TITLE = { light: "Lightly active", moderate: "Moderately active", active: "Very active" };
+function targets(rate) {
   const kg = (+S.weight) * 0.453592, cm = heightIn() * 2.54;
-  const sexK = S.sex === "Male" ? 5 : S.sex === "Female" ? -161 : -78;
-  const bmr = 10 * kg + 6.25 * cm - 5 * age() + sexK;
+  const bmr = 10 * kg + 6.25 * cm - 5 * age() + (S.sex === "Male" ? 5 : S.sex === "Female" ? -161 : -78);
   const maintenance = bmr * ({ light: 1.375, moderate: 1.55, active: 1.725 })[activity()];
-  const dir = direction(), delta = (dir === "maintain" ? 0 : +S.pace) * 3500 / 7;
+  const dir = direction(), delta = (dir === "maintain" ? 0 : (rate || +S.pace)) * 3500 / 7;
   let cal = dir === "lose" ? maintenance - delta : dir === "gain" ? maintenance + delta : maintenance;
-  const floor = S.sex === "Male" ? 1500 : 1200;
-  if (cal < floor) cal = floor;
+  cal = Math.max(cal, S.sex === "Male" ? 1500 : 1200);
   const protein = Math.min((+S.weight) * 0.8, cal * 0.40 / 4);
   const fat = Math.min(cal * 0.27 / 9, (cal - protein * 4) / 9);
   const carbs = Math.max(0, (cal - protein * 4 - fat * 9) / 4);
   return { calories: Math.round(cal / 10) * 10, protein: Math.round(protein), carbs: Math.round(carbs), fat: Math.round(fat) };
 }
-function goalLine() {
-  const dir = direction();
-  if (dir === "maintain") return `Goal: Maintain <em>${+S.weight} lbs</em>`;
-  const lbs = Math.abs((+S.goalWeight) - (+S.weight));
-  const when = new Date(Date.now() + Math.round(lbs / (+S.pace) * 7) * 864e5);
-  const date = when.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-  return `Goal: ${dir === "lose" ? "Lose" : "Gain"} <em>${lbs} lbs</em><br>by <em>${date}</em>`;
-}
+const deltaLb = () => Math.abs((+S.goalWeight) - (+S.weight));
+const weeksTo = rate => Math.round(deltaLb() / (rate || +S.pace));
+const goalDate = () => new Date(Date.now() + Math.round(deltaLb() / (+S.pace) * 7) * 864e5);
+const validGoalWeight = () => direction() === "lose" ? +S.goalWeight < +S.weight : +S.goalWeight > +S.weight;
 
-// ---- steps ----
+// ---- the H12 page order ----
 function order() {
-  const o = ["intro", "sex", "workouts", "birthday", "height", "weight", "goal"];
-  if (direction() !== "maintain") o.push("goalWeight", "pace");
-  return o.concat(["building", "plan", "account", "pay", "done"]);
+  const o = ["welcome", "sex", "workouts", "source", "triedApps", "encouragement", "height", "weight", "birthday", "pro", "goal"];
+  if (direction() !== "maintain") o.push("desiredWeight", "pace", "realistic");
+  return o.concat(["comparison", "obstacle", "diet", "accomplish", "potential", "thanks", "rollover", "rating", "referral",
+                   "ready", "generating", "plan", "firstMeal", "firstMealCamera", "pwIntro", "pwPlans", "done"]);
 }
-const QUESTIONS = 9;
-function go(step) { S.step = step; err = ""; save(); render(); window.scrollTo(0, 0); }
-function next() {
-  if (S.step === "goal" && direction() !== "maintain" && !validGoalWeight()) S.goalWeight = direction() === "lose" ? Math.max(70, +S.weight - 15) : +S.weight + 10;
-  const o = order(); go(o[Math.min(o.indexOf(S.step) + 1, o.length - 1)]);
-}
-function back() {
-  if (S.step === "account" && S.authMode) { S.authMode = ""; S.sent = false; err = ""; save(); return render(); }
-  const o = order(), i = o.indexOf(S.step);
-  let p = o[Math.max(i - 1, 0)];
-  if (p === "building") p = o[i - 2];
-  go(p);
-}
+const NOHEAD = ["welcome", "pwIntro", "done"], BARE = ["pwPlans"];
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-const IC = {
-  Male: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10" cy="14" r="5.5"/><path d="M14 10l6-6M15 4h5v5"/></svg>',
-  Female: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="5.5"/><path d="M12 14.500V22M8.500 18.500h7"/></svg>',
-  Other: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="5"/><path d="M14.500 7.500L20 2M16 2h4v4M11 16v6M8 19.500h6"/></svg>',
-  "0-2": '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="12" r="3.600"/><circle cx="17" cy="12" r="3.600"/></svg>',
-  "3-5": '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="8" cy="16" r="3"/><circle cx="16" cy="16" r="3"/></svg>',
-  "6+": '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">' + [5,12,19].map(y => [5,12,19].map(x => `<circle cx="${x}" cy="${y}" r="2.400"/>`).join("")).join("") + '</svg>',
-  "Lose weight": '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 14l6 6 6-6"/></svg>',
-  Maintain: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 12h12"/></svg>',
-  "Gain weight": '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V4M6 10l6-6 6 6"/></svg>',
-};
-const opt = (key, value, detail) =>
-  `<button class="opt ${S[key] === value ? "on" : ""}" data-pick="${key}" data-value="${esc(value)}"><span class="ic">${IC[value] || ""}</span><span class="tx">${esc(value)}${detail ? `<small>${esc(detail)}</small>` : ""}</span><span class="rad"></span></button>`;
-// A scroll wheel like the iPhone's: the row in the middle is the value.
-const wheel = (key, values) => `<div class="wheel" data-wheel="${key}" data-values='${JSON.stringify(values.map(v => v[0]))}'>${values.map(v => `<div>${v[1]}</div>`).join("")}</div>`;
-// The app's weight ruler: 10px a pound, the line in the middle is the value.
-const R_MIN = 70, R_MAX = 500;
-const ruler = (key, label) => `<div class="read"><small>${label}</small><b><span id="rv">${+S[key]}</span> lbs</b></div>
-  <div class="ruler"><div class="track" data-ruler="${key}"><div class="pad"></div><div class="ticks" style="width:${(R_MAX - R_MIN) * 10 + 2}px"></div><div class="pad"></div></div></div>`;
-const cta = (label, ok = true, id = "next") => `<button class="cta" id="${id}" ${ok && !busy ? "" : "disabled"}>${busy ? "One moment…" : label}</button>`;
-const errLine = () => `<p class="err" role="alert">${esc(err)}</p>`;
-const validBirthday = () => S.bm && S.bd && S.by && age() >= 13 && age() <= 100;
-function validGoalWeight() {
-  const g = +S.goalWeight, w = +S.weight;
-  if (!(g >= 70 && g <= 600)) return false;
-  return direction() === "lose" ? g < w : g > w;
-}
-function money(p) { return p ? new Intl.NumberFormat("en-US", { style: "currency", currency: (p.currency || "usd").toUpperCase() }).format(p.amount / 100) : "…"; }
+const ic = (name, style) => `<span class="ic" style="--m:url(a/i/${name}.png);${style || ""}"></span>`;
+const stars = () => `<span class="stars">${ic("star.fill").repeat(5)}</span>`;
+const cta = (label, ok = true, id = "next") => `<button class="cta" id="${id}" ${ok ? "" : "disabled"}>${label}</button>`;
+function money(p, div) { return new Intl.NumberFormat("en-US", { style: "currency", currency: (p.currency || "usd").toUpperCase() }).format(p.amount / 100 / (div || 1)); }
 
-function screen() {
-  const t = S.step;
-  if (t === "intro") return `
-    <div class="hero"><div class="logo">Meal Pic</div>
-      <h1>Calorie tracking<br>made easy</h1>
-      <p class="sub">Answer a few quick questions and get your custom calorie plan.</p></div>
-    <div class="fill"></div>${cta("Get Started")}`;
-  if (t === "sex") return `<h1>Choose your gender</h1><p class="sub">This helps personalize your experience.</p>
-    <div class="mid"><div class="opts">${opt("sex", "Male")}${opt("sex", "Female")}${opt("sex", "Other")}</div></div>${cta("Continue", !!S.sex)}`;
-  if (t === "workouts") return `<h1>How many workouts do you do per week?</h1><p class="sub">This will be used to calibrate your custom plan.</p>
-    <div class="mid"><div class="opts">${opt("workouts", "0-2", "Workouts now and then")}${opt("workouts", "3-5", "A few workouts per week")}${opt("workouts", "6+", "Dedicated athlete")}</div></div>
-    ${cta("Continue", !!S.workouts)}`;
-  if (t === "birthday") {
+// One answer row. {icon} an app symbol, {glyph} a text mark, {img} a brand tile, {tile} a symbol on a grey tile.
+function opt(key, o) {
+  const lead = o.img ? `<span class="lead"><img src="a/${o.img}.png" alt=""></span>` : o.tile ? `<span class="lead tile">${ic(o.tile)}</span>`
+             : o.glyph ? `<span class="lead">${o.glyph}</span>` : `<span class="lead">${ic(o.icon)}</span>`;
+  return `<button class="opt ${S[key] === o.v ? "on" : ""}" data-pick="${key}" data-value="${esc(o.v)}">${lead}<span class="tx">${esc(o.v)}${o.d ? `<small>${esc(o.d)}</small>` : ""}</span><span class="rad"></span></button>`;
+}
+const question = (title, sub, key, options) => ({
+  body: `<h1>${title}</h1>${sub ? `<p class="sub">${sub}</p>` : ""}<div class="mid"><div class="opts">${options.map(o => opt(key, o)).join("")}</div></div>`,
+  foot: cta("Continue", !!S[key]) });
+const wheel = (key, values) => `<div class="wheel" data-wheel="${key}" data-values='${JSON.stringify(values.map(v => v[0]))}'>${values.map(v => `<div>${v[1]}</div>`).join("")}</div>`;
+const KG = 2.20462;
+function ruler(key, label) {
+  const kg = S.unit === "kg", v = kg ? Math.round(+S[key] / KG) : +S[key], min = kg ? 32 : 70, max = kg ? 227 : 500;
+  return `<div class="seg"><button data-unit="lbs" class="${kg ? "" : "on"}">lbs</button><button data-unit="kg" class="${kg ? "on" : ""}">kg</button></div>
+    <div class="read"><small>${label}</small><b><span id="rv">${v}</span> ${kg ? "kg" : "lbs"}</b></div>
+    <div class="ruler"><div class="track" data-ruler="${key}" data-min="${min}" data-max="${max}"><div class="pad"></div><div class="ticks" style="width:${(max - min) * 9 + 2}px"></div><div class="pad"></div></div></div>`;
+}
+const phone = (inner, h) => `<div class="phone" style="height:${h}"><div class="scr">${inner}</div><img src="a/phone.png" alt=""></div>`;
+const dial = icon => `<div class="ring"><div class="dial">${Array.from({ length: 12 }, (_, i) => `<i style="transform:rotate(${i * 30}deg) translateY(-70px);opacity:${i % 3 ? .55 : 1}"></i>`).join("")}${icon}</div></div>`;
+const REVIEWS = [
+  ["Jack Z", "ReviewerJack", "This is the only one where the UI is nice and the macros are actually accurate."],
+  ["Avi kash", "ReviewerAvi", "I have never used a calorie tracker this good before and highly recommend 10/10"],
+  ["Jamachel", "ReviewerJamachel", "The app is so good it makes everything better"],
+  ["Daisy12384", "ReviewerDaisy", "I RECOMMEND THIS APP"],
+  ["Adamniel", "ReviewerAdamniel", "Wow"]];
+const ratingBadge = faces => `<div class="badge"><div class="rate">${ic("laurel.leading")}<div><b>4.9</b>${stars()}<small>App Store rating</small></div>${ic("laurel.trailing")}</div>
+  <div class="faces"><div>${faces.map(f => `<img src="a/${f}.jpg" alt="">`).join("")}</div><small>Real reviews</small></div></div>`;
+const clip = (name) => `<video src="a/${name}.mp4" poster="a/${name === "scan-demo" ? "scan-demo.jpg" : "first-meal-poster.jpg"}" autoplay muted loop playsinline></video>`;
+
+// ---- every screen: { body, foot, after(el) } ----
+const PAGES = {
+  welcome: () => ({
+    body: `<h1 class="center" style="font-size:34px;margin-top:max(18px,3dvh)">Calorie tracking<br>made easy</h1><div class="mid">${phone(clip("scan-demo"), "min(58dvh,560px)")}</div>`,
+    foot: `${cta("Get Started")}<button class="link" id="signin">Already have an account? <b>Sign In</b></button>` }),
+  sex: () => question("Choose your gender", "This helps personalize your experience.", "sex",
+    [{ v: "Male", glyph: "&#9794;&#xFE0E;" }, { v: "Female", glyph: "&#9792;&#xFE0E;" }, { v: "Other", glyph: "&#9893;&#xFE0E;" }]),
+  workouts: () => question("How many workouts do you do per week?", "This will be used to calibrate your custom plan.", "workouts",
+    [{ v: "0-2", icon: "circle.grid.2x1.fill", d: "Workouts now and then" }, { v: "3-5", icon: "circle.grid.2x2.fill", d: "A few workouts per week" }, { v: "6+", icon: "circle.grid.3x3.fill", d: "Dedicated athlete" }]),
+  source: () => question("Where did you hear about us?", "", "source",
+    [{ v: "Instagram", img: "b-instagram" }, { v: "TikTok", img: "b-tiktok" }, { v: "App Store", img: "b-appstore" }, { v: "Facebook", img: "b-facebook" }, { v: "Youtube", img: "b-youtube" },
+     { v: "Google", img: "b-google" }, { v: "X", img: "b-x" }, { v: "Friend or family", tile: "person.2.fill" }, { v: "TV", tile: "tv.fill" }, { v: "Other", tile: "ellipsis" }]),
+  triedApps: () => question("Have you tried other calorie tracking apps?", "", "tried", [{ v: "Yes", icon: "hand.thumbsup.fill" }, { v: "No", icon: "hand.thumbsdown.fill" }]),
+  encouragement: () => ({
+    body: `<h1>Meal Pic creates<br>long&#8209;term results</h1><div class="mid"><div class="card"><h3>Weight trend</h3>
+      <svg viewBox="0 0 320 170"><defs><linearGradient id="gk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".16"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0 60H320M0 110H320" stroke="var(--line)" stroke-dasharray="3 4"/>
+        <path d="M150 58 C190 30 250 21 318 20 L318 58 Z" fill="rgba(229,72,77,.16)"/>
+        <path d="M6 58 C40 56 70 112 100 112 C140 112 150 22 318 20" fill="none" stroke="#d9605f" stroke-width="2"/>
+        <path d="M6 58 C110 58 190 150 316 150 L316 160 L6 160 Z" fill="url(#gk)"/><path d="M6 58 C110 58 190 150 316 150" fill="none" stroke="currentColor" stroke-width="2.6"/>
+        <circle cx="6" cy="58" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.4"/><circle cx="316" cy="150" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.4"/>
+        <text x="318" y="74" text-anchor="end" font-size="12" fill="currentColor">Without a plan</text>
+        <text x="6" y="146" font-size="11.5" font-weight="700" fill="currentColor">Meal Pic</text><rect x="62" y="135" width="46" height="15" rx="7.5" fill="currentColor"/><text x="85" y="146" text-anchor="middle" font-size="9" font-weight="700" fill="var(--card)">Weight</text></svg>
+      <div class="ends" style="font-size:14px;color:var(--ink);margin-top:6px"><span>Month 1</span><span>Month 6</span></div>
+      <p class="cap">Track your habits and stay consistent over time.</p></div></div>`,
+    foot: cta("Continue") }),
+  height: () => {
+    const cm = S.hunit === "cm";
+    const ft = [3, 4, 5, 6, 7].map(v => [v, v + " ft"]), inch = Array.from({ length: 12 }, (_, i) => [i, i + " in"]);
+    const cms = Array.from({ length: 131 }, (_, i) => [100 + i, (100 + i) + " cm"]);
+    return { body: `<h1>What is your height?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p>
+      <div class="mid"><div class="seg"><button data-hunit="ft" class="${cm ? "" : "on"}">ft, in</button><button data-hunit="cm" class="${cm ? "on" : ""}">cm</button></div>
+      <div class="wheels two">${cm ? wheel("cm", cms) : wheel("ft", ft) + wheel("inch", inch)}</div></div>`, foot: cta("Continue") };
+  },
+  weight: () => ({ body: `<h1>What is your<br>current weight?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p><div class="mid">${ruler("weight", "Current weight")}</div>`, foot: cta("Continue") }),
+  birthday: () => {
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"].map((m, i) => [i + 1, m]);
     const days = Array.from({ length: 31 }, (_, i) => [i + 1, i + 1]);
-    const y0 = NOW.getFullYear() - 13, years = Array.from({ length: 88 }, (_, i) => [y0 - 87 + i, y0 - 87 + i]);
-    return `<h1>When were you born?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p>
-      <div class="mid"><div class="wheels">${wheel("bm", months)}${wheel("bd", days)}${wheel("by", years)}</div></div>${cta("Continue")}`;
-  }
-  if (t === "height") {
-    const ft = [3, 4, 5, 6, 7].map(v => [v, v + " ft"]), inch = Array.from({ length: 12 }, (_, i) => [i, i + " in"]);
-    return `<h1>What is your height?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p>
-      <div class="mid"><div class="wheels two">${wheel("ft", ft)}${wheel("inch", inch)}</div></div>${cta("Continue")}`;
-  }
-  if (t === "weight") return `<h1>What is your<br>current weight?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p>
-    <div class="mid">${ruler("weight", "Current weight")}</div>${cta("Continue")}`;
-  if (t === "goal") return `<h1>What is your goal?</h1><p class="sub">This helps us generate a plan for your calorie intake.</p>
-    <div class="mid"><div class="opts">${opt("goal", "Lose weight")}${opt("goal", "Maintain")}${opt("goal", "Gain weight")}</div></div>${cta("Continue", !!S.goal)}`;
-  if (t === "goalWeight") return `<h1>What is your<br>desired weight?</h1><p class="sub">We'll build a plan that gets you there safely.</p>
-    <div class="mid">${ruler("goalWeight", "Desired weight")}</div>${cta("Continue", validGoalWeight())}`;
-  if (t === "pace") return `<h1>How fast do you want to reach your goal?</h1>
-    <div class="mid"><div class="read"><small>${direction() === "lose" ? "Weight loss" : "Weight gain"} speed per week</small><b><span id="pv">${(+S.pace).toFixed(1)}</span> lbs</b></div>
-      <div class="pacehead"><span id="p0">Slow</span><span id="p1">Recommended</span><span id="p2">Fast</span></div>
-      <input type="range" id="pace" min="0.2" max="3" step="0.1" value="${+S.pace}" aria-label="Pounds per week">
-      <div class="tip" id="tip"></div></div>${cta("Continue")}`;
-  if (t === "building") return `<div class="mid center"><h1>We're building your<br>custom plan</h1><p class="sub" id="stage">Crunching your numbers…</p>
-      <div class="ringbox"><svg width="210" height="210" viewBox="0 0 210 210"><circle cx="105" cy="105" r="93" fill="none" stroke="rgba(120,120,128,.16)" stroke-width="16"/>
-        <circle id="arc" cx="105" cy="105" r="93" fill="none" stroke="#34c759" stroke-width="16" stroke-linecap="round" stroke-dasharray="584.300" stroke-dashoffset="584.300"/></svg><b><span id="pct">0</span><i>%</i></b></div>
-      <ul class="checks">${["Profile", "Calories", "Activity", "Protein, Carbs, Fat", "Health Score"].map(x => `<li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4.500" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></i>${x}</li>`).join("")}</ul></div>`;
-  if (t === "plan") {
-    const p = targets(), dir = direction();
-    const lbs = Math.abs((+S.goalWeight) - (+S.weight));
-    const when = new Date(Date.now() + Math.round(lbs / (+S.pace) * 7) * 864e5).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-    const head = dir === "maintain" ? `Goal: Maintain <em>${+S.weight} lbs</em>` : `Goal: ${dir === "lose" ? "Lose" : "Gain"} <em>${lbs} lbs</em><br>by <em>${when}</em>`;
-    const down = dir === "lose", y0 = down ? 14 : 96, y1 = down ? 96 : 14;
-    const curve = `M8 ${y0} C 120 ${y0}, 200 ${y1}, 312 ${y1}`;
-    const chart = dir === "maintain" ? "" : `<p class="sec">Estimated progress</p><div class="chart">
-        <svg viewBox="0 0 320 112"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".22"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+    const y1 = NOW.getFullYear() - 13, years = Array.from({ length: 88 }, (_, i) => [y1 - 87 + i, y1 - 87 + i]);
+    return { body: `<h1>When were you born?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p>
+      <div class="mid"><div class="wheels" style="max-width:310px"><div class="pill"></div>${wheel("bm", months)}${wheel("bd", days)}${wheel("by", years)}</div></div>`, foot: cta("Continue") };
+  },
+  pro: () => question("Do you currently work with a personal trainer or registered dietitian?", "", "pro", [{ v: "Yes", icon: "hand.thumbsup.fill" }, { v: "No", icon: "hand.thumbsdown.fill" }]),
+  goal: () => question("What is your goal?", "This helps us generate a plan for your calorie intake.", "goal",
+    [{ v: "Lose weight", icon: "arrow.down" }, { v: "Maintain", icon: "minus" }, { v: "Gain weight", icon: "arrow.up" }]),
+  desiredWeight: () => ({ body: `<h1>What is your<br>desired weight?</h1><p class="sub">We'll build a plan that gets you there safely.</p><div class="mid">${ruler("goalWeight", "Desired weight")}</div>`, foot: cta("Continue", validGoalWeight()) }),
+  pace: () => ({
+    body: `<h1>How fast do you want to reach your goal?</h1><div class="mid"><div class="read"><small>${direction() === "lose" ? "Weight loss" : "Weight gain"} speed per week</small><b><span id="pv"></span> lbs</b></div>
+      <div class="pacehead"><span id="p0">${ic("tortoise.fill")}Slow</span><span id="p1">${ic("hare.fill")}Recommended</span><span id="p2">${ic("bolt.fill", "width:20px")}Fast</span></div>
+      <input type="range" id="pace" min="0.2" max="3" step="0.1" value="${+S.pace}" aria-label="Pounds per week"><div class="tip" id="tip"></div></div>`,
+    foot: cta("Continue"),
+    after(el) {
+      const pace = el.querySelector("#pace"); let last = +S.pace;
+      const paint = () => {
+        const v = +pace.value; S.pace = v; save();
+        if (v !== last) { last = v; haptic(); }
+        el.querySelector("#pv").textContent = v.toFixed(1);
+        pace.style.setProperty("--fill", ((v - 0.2) / 2.8 * 100) + "%");
+        const zone = v < 0.9 ? 0 : v < 1.5 ? 1 : 2, w = weeksTo(v), losing = direction() === "lose";
+        [0, 1, 2].forEach(i => el.querySelector("#p" + i).classList.toggle("on", i === zone));
+        const eta = w >= 9 ? Math.max(2, Math.round(w / 4.345)) + " months" : w + " week" + (w === 1 ? "" : "s");
+        const line = zone === 0 ? "A gentle pace — the easiest to sustain long term." : zone === 1 ? "This is the most balanced pace, motivating and ideal for most users."
+                   : losing ? "Ambitious — takes strict consistency, and risks muscle loss." : "Ambitious — gaining this fast tends to add more fat than muscle.";
+        el.querySelector("#tip").innerHTML = `<b>You should reach your goal in <em>${eta}</em></b><p>${line}</p>Daily calorie goal: ${targets(v).calories.toLocaleString("en-US")} cal`;
+      };
+      pace.addEventListener("input", paint); paint();
+    } }),
+  realistic: () => ({
+    body: `<div class="mid center"><p class="big">${direction() === "lose" ? "Losing" : "Gaining"} <span class="tan">${deltaLb()} lbs</span> is a realistic target. It's not hard at all!</p>
+      <p class="sub" style="font-size:16px;margin-top:16px">${(+S.pace).toFixed(1)} lbs a week is the steady pace health guidelines recommend, and it puts you there by ${goalDate().toLocaleDateString("en-US", { month: "long", day: "numeric" })}.</p></div>`,
+    foot: cta("Continue") }),
+  comparison: () => ({
+    body: `<h1>A simpler way to stay<br>on track</h1><p class="sub">Log meals in seconds, follow your plan, and see your progress add up.</p>
+      <div class="mid"><div class="cmp"><div class="cols"><div class="col"><span>Without<br>Meal Pic</span><div style="height:30%;background:var(--well)">${ic("person.fill", "width:18px;height:18px")}</div></div>
+        <div class="col"><span>With<br>Meal Pic</span><div style="height:70%;background:var(--pick);color:var(--pickink)">${ic("person.fill.checkmark", "width:22px;height:18px")}</div></div></div>
+        <p>${ic("checkmark", "width:12px;height:12px;margin-right:8px")}Small daily actions lead to progress</p></div></div>`,
+    foot: cta("Continue") }),
+  obstacle: () => question("What's stopping you from reaching your goals?", "", "obstacle",
+    [{ v: "Lack of consistency", icon: "chart.bar.fill" }, { v: "Unhealthy eating habits", icon: "takeoutbag.and.cup.and.straw.fill" }, { v: "Lack of support", icon: "person.2.fill" },
+     { v: "Busy schedule", icon: "calendar" }, { v: "Lack of meal inspiration", icon: "lightbulb.fill" }]),
+  diet: () => question("Do you follow a specific diet?", "", "diet",
+    [{ v: "Balanced", icon: "fork.knife" }, { v: "Whole-food focus", icon: "leaf.fill" }, { v: "Mediterranean", icon: "fish.fill" }, { v: "Flexitarian", icon: "arrow.triangle.2.circlepath" }, { v: "Pescatarian", icon: "fish" },
+     { v: "Vegetarian", icon: "carrot.fill" }, { v: "Vegan", icon: "leaf" }, { v: "Low-carb", icon: "flame.fill" }, { v: "Keto", icon: "drop.fill" }]),
+  accomplish: () => question("What would you like to accomplish?", "", "accomplish",
+    [{ v: "Eat and live healthier", icon: "apple.logo" }, { v: "Boost my energy and mood", icon: "sun.max.fill" }, { v: "Stay motivated and consistent", icon: "flame.fill" }, { v: "Feel better about my body", icon: "heart.fill" }]),
+  potential: () => ({
+    body: `<h1>You have great potential to crush your goal</h1><div class="mid"><div class="card"><h3>Your weight transition</h3>
+      <svg viewBox="0 0 320 190" style="margin-top:8px"><path d="M10 10V170H310M10 60H310M10 120H310M88 10V170M166 10V170M310 10V170" stroke="var(--line)" stroke-dasharray="3 4" fill="none"/>
+        <path d="M10 124 C40 122 60 120 88 116 C120 112 130 78 166 74 C220 62 260 30 310 26 L310 170 L10 170Z" fill="rgba(200,145,92,.16)"/>
+        <path d="M10 124 C40 122 60 120 88 116 C120 112 130 78 166 74 C220 62 260 30 310 26" fill="none" stroke="var(--tan)" stroke-width="2.6"/>
+        <circle cx="10" cy="124" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/><circle cx="88" cy="116" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/><circle cx="166" cy="74" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/>
+        <circle cx="306" cy="26" r="13" fill="var(--tan)"/><image href="a/i/trophy.fill.png" x="298" y="18" width="16" height="16" style="filter:invert(1)"/>
+        <text x="48" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">3 Days</text><text x="127" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">7 Days</text><text x="238" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">30 Days</text></svg>
+      <p class="cap">Weight change takes time. Consistency in the early weeks matters most</p></div></div>`,
+    foot: cta("Continue") }),
+  thanks: () => ({
+    body: `<h1>Thank you for trusting us</h1><p class="sub">Now let's personalize Meal Pic for you.</p><div class="mid">${dial(ic("hands.clap.fill"))}
+      <div class="perso"><span class="dot">${ic("person.crop.circle.fill")}</span><b>Personalized to your goals</b><p>We'll use your answers to tailor your plan, targets, and recommendations.</p></div></div>`,
+    foot: cta("Continue") }),
+  rollover: () => ({
+    body: `<h1>Rollover extra calories to the next day?</h1><p class="sub">Come in under your goal and we'll add up to 200 calories to tomorrow.</p>
+      <div class="mid"><div class="roll"><div><small>Yesterday</small><b>2,350</b><em>150 left</em></div>${ic("arrow.right", "width:14px;height:14px;color:var(--soft)")}<div><small>Today</small><b>2,500</b><em style="color:var(--green)">+150 rolled over</em></div></div>
+      <div class="opts">${opt("rollover", { v: "Yes", icon: "hand.thumbsup.fill" })}${opt("rollover", { v: "No", icon: "hand.thumbsdown.fill" })}</div></div>`,
+    foot: cta("Continue") }),
+  rating: () => ({
+    body: `<h1>Meal Pic is loved<br>by people like you</h1>${ratingBadge(["ReviewerJack", "ReviewerAvi", "ReviewerJamachel"])}
+      ${REVIEWS.map(r => `<div class="rev"><div class="who"><img src="a/${r[1]}.jpg" alt="">${r[0]}${stars()}</div><p>${esc(r[2])}</p></div>`).join("")}`,
+    foot: cta("Continue") }),
+  referral: () => ({
+    body: `<h1>Enter referral code (optional)</h1><p class="sub">You can skip this step</p><div class="mid"><div class="codebox"><input id="code" placeholder="Referral Code" autocapitalize="off" autocorrect="off" spellcheck="false" value="${esc(S.code)}"><button id="submitcode" class="${S.code ? "ready" : ""}">Submit</button></div><p class="err" id="codemsg" style="color:var(--soft)">${S.codeName ? "Code applied." : ""}</p></div>`,
+    foot: cta(S.codeName ? "Continue" : "Skip"),
+    after(el) {
+      const input = el.querySelector("#code"), btn = el.querySelector("#submitcode"), msg = el.querySelector("#codemsg"), nx = el.querySelector("#next");
+      input.addEventListener("input", () => { btn.classList.toggle("ready", !!input.value.trim()); S.code = ""; S.codeName = ""; save(); nx.textContent = "Skip"; });
+      btn.addEventListener("click", async () => {
+        const code = input.value.trim(); if (!code) return; haptic(); input.blur(); msg.textContent = "…";
+        try {
+          const r = await sb.rpc("creator_code_lookup", { code });
+          if (r.error) throw r.error;
+          if (r.data) { S.code = code; S.codeName = String(r.data); msg.textContent = "Code applied."; nx.textContent = "Continue"; } else { S.code = ""; S.codeName = ""; msg.textContent = "That code isn't recognised."; }
+        } catch (e) { S.code = code; S.codeName = "saved"; msg.textContent = "Code saved."; nx.textContent = "Continue"; }
+        save();
+      });
+    } }),
+  ready: () => ({
+    body: `<div class="mid center">${dial(ic("heart.fill", "color:#e5484d"))}<p style="margin:32px 0 10px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px"><span style="width:20px;height:20px;border-radius:50%;background:var(--tan);color:#fff;display:inline-flex;align-items:center;justify-content:center">${ic("checkmark", "width:10px;height:10px")}</span>All done!</p><p class="big">Time to generate<br>your custom plan!</p></div>`,
+    foot: cta("Generate my plan") }),
+  generating: () => ({
+    body: `<div class="mid center"><p class="big">We're building your<br>custom plan</p><p class="sub" id="stg" style="font-size:16px">Reading your answers…</p>
+      <div class="load"><svg width="216" height="216" viewBox="0 0 216 216"><circle cx="108" cy="108" r="98" fill="none" stroke="var(--well)" stroke-width="16"/><circle id="arc" cx="108" cy="108" r="98" fill="none" stroke="#34c759" stroke-width="16" stroke-linecap="round" stroke-dasharray="615.75" stroke-dashoffset="615.75"/></svg><b><span id="pct">0</span><i>%</i></b></div>
+      <ul class="checks">${["Profile", "Calories", "Activity", "Protein, Carbs, Fat", "Health Score"].map(x => `<li><i></i>${x}</li>`).join("")}</ul></div>`,
+    foot: cta("Continue", false),
+    after(el) {
+      const STG = [["Reading your answers…", 18], ["Applying the Mifflin-St Jeor formula…", 42], ["Calibrating for your activity level…", 63], ["Balancing your macros…", 84], ["Finalizing your plan…", 100]];
+      const arc = el.querySelector("#arc"), pct = el.querySelector("#pct"), stg = el.querySelector("#stg"), rows = el.querySelectorAll(".checks li"), t0 = performance.now(), dur = 6200; let cur = -1;
+      (function tick(now) {
+        if (!el.isConnected) return;
+        const k = Math.min(1, Math.max(0, (now - t0) / dur)), n = Math.round(k * 100);
+        arc.setAttribute("stroke-dashoffset", 615.75 * (1 - k)); pct.textContent = n;
+        let i = STG.findIndex(s => n < s[1]); if (i < 0) i = 4;
+        if (i !== cur) { cur = i; stg.textContent = STG[i][0]; haptic(); }
+        rows.forEach((li, j) => { li.className = k >= 1 || j < i ? "on" : j === i ? "now" : ""; });
+        if (k < 1) requestAnimationFrame(tick); else { el.querySelector("#next").disabled = false; haptic(); }
+      })(t0);
+    } }),
+  plan: () => {
+    const p = targets(), dir = direction(), when = goalDate().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+    const headline = dir === "maintain" ? `Goal: Maintain <span class="tan">${+S.weight} lbs</span>` : `Goal: ${dir === "lose" ? "Lose" : "Gain"} <span class="tan">${deltaLb()} lbs</span><br>by <span class="tan">${when}</span>`;
+    const down = dir === "lose", y0 = down ? 14 : 96, y1 = down ? 96 : 14, curve = `M8 ${y0} C 120 ${y0}, 200 ${y1}, 312 ${y1}`;
+    const chart = dir === "maintain" ? "" : `<p class="sec">Estimated progress</p><div style="margin:8px 0 26px">
+        <svg viewBox="0 0 320 112" style="display:block;width:100%"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".22"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
           <path d="${curve} L312 110 L8 110 Z" fill="url(#g)"/><path d="${curve}" fill="none" stroke="currentColor" stroke-width="2"/>
-          <circle cx="8" cy="${y0}" r="4.500" fill="var(--bg)" stroke="currentColor" stroke-width="2"/><circle cx="312" cy="${y1}" r="4.500" fill="var(--bg)" stroke="currentColor" stroke-width="2"/>
-          <g transform="translate(244 ${down ? y1 - 46 : y1 + 12})"><rect width="62" height="36" rx="8" fill="var(--card)" stroke="currentColor" stroke-width="1.200"/><text x="31" y="14" text-anchor="middle" font-size="9.500" fill="var(--soft)">Target</text><text x="31" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">${+S.goalWeight} lbs</text></g></svg>
+          <circle cx="8" cy="${y0}" r="4.5" fill="var(--bg)" stroke="currentColor" stroke-width="2"/><circle cx="312" cy="${y1}" r="4.5" fill="var(--bg)" stroke="currentColor" stroke-width="2"/>
+          <g transform="translate(244 ${down ? y1 - 46 : y1 + 12})"><rect width="62" height="36" rx="8" fill="var(--card)" stroke="currentColor" stroke-width="1.2"/><text x="31" y="14" text-anchor="middle" font-size="9.5" fill="var(--soft)">Target</text><text x="31" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">${+S.goalWeight} lbs</text></g></svg>
         <div class="ends"><span>Now</span><span>${when}</span></div></div>`;
-    return `<div class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.400" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></div>
-      <p class="goalhead">${head}</p>${chart}
+    const mac = (v, name, icon, c) => `<div class="mac"><div class="dot" style="background:${c}33;color:${c}">${ic(icon)}</div><b>${v}g</b><small>${name}</small></div>`;
+    return { body: `<div class="tickbadge">${ic("checkmark")}</div><p class="big" style="margin-bottom:24px">${headline}</p>${chart}
       <p class="sec">Your daily recommendation</p><p class="secsub">You can edit this anytime</p>
-      <div class="rec"><span class="tile" style="background:rgba(255,45,85,.14)"><svg width="20" height="20" viewBox="0 0 24 24" fill="#ff2d55"><path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-2 1-3.500 2-4.500 0 2 1 3 2 3 0-4 1-7 2-10.500z"/></svg></span>
-        <span><b>${p.calories.toLocaleString("en-US")}</b><small>Calories</small></span></div>
-      <div class="macs"><div class="mac"><div class="dot" style="background:rgba(52,199,89,.22)"></div><b>${p.protein}g</b><small>Protein</small></div>
-        <div class="mac"><div class="dot" style="background:rgba(48,176,199,.24)"></div><b>${p.carbs}g</b><small>Carbs</small></div>
-        <div class="mac"><div class="dot" style="background:rgba(175,82,222,.22)"></div><b>${p.fat}g</b><small>Fats</small></div></div>
-      <p class="note">An estimate from your answers, not medical advice.</p>
-      <div class="fill"></div>${cta("Let's get started!")}`;
-  }
-  if (t === "account") return accountScreen();
-  if (t === "pay") {
-    const y = prices && prices.yearly, m = prices && prices.monthly, trial = prices ? prices.trial_days : 3;
-    const perWeek = y ? money({ amount: y.amount / 52, currency: y.currency }) : "…";
-    const yearly = S.plan === "yearly";
-    return `<h1>${trial > 0 ? `Start your ${trial}-day free trial` : "Unlock Meal Pic"}</h1><p class="sub">Your plan is saved. Unlock the app to start tracking.</p>
-      <button class="plan ${yearly ? "on" : ""}" data-plan="yearly">${trial > 0 ? `<span class="tag">${trial} DAYS FREE</span>` : ""}
-        <span><b>Yearly</b><small>${money(y)} a year</small></span><span class="px"><b>${perWeek}</b><small>per week</small></span></button>
-      <button class="plan ${yearly ? "" : "on"}" data-plan="monthly"><span><b>Monthly</b><small>billed every month</small></span><span class="px"><b>${money(m)}</b><small>per month</small></span></button>
-      ${errLine()}<div class="fill"></div>
-      ${cta(yearly && trial > 0 ? `Start My ${trial}-Day Free Trial` : "Continue", !!prices, "checkout")}
-      <p class="note">${yearly && trial > 0 ? `${trial} days free, then ${money(y)} per year.` : `${money(m)} per month.`} Renews until you cancel. Cancel any time.<br>
-        <a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a></p>`;
-  }
-  if (t === "done") return `<div class="fill"></div><div class="center"><div class="tick"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-      <h1>You're all set!</h1><p class="sub">Your plan is saved to your account.</p></div>
-    <ul class="steps"><li><i>1</i><span>Download Meal Pic on your iPhone.</span></li>
-      <li><i>2</i><span>Tap <b>Sign In</b> on the first screen.</span></li>
-      <li><i>3</i><span>Choose <b>${esc(S.method || "the same way you signed up here")}</b>. Your plan is already there.</span></li></ul>
-    <div class="fill"></div><a class="cta" style="text-decoration:none" href="${APP_STORE}">Download Meal Pic</a>`;
-  return "";
-}
+      <div class="rec"><span class="tile">${ic("flame.fill")}</span><span><b>${p.calories.toLocaleString("en-US")}</b><small>Calories</small></span></div>
+      <div class="macs">${mac(p.protein, "Protein", "fork.knife", "#34c759")}${mac(p.carbs, "Carbs", "leaf.fill", "#30b0c7")}${mac(p.fat, "Fats", "drop.fill", "#af52de")}</div>
+      <p class="sec" style="margin-top:28px">Your info</p><p class="secsub">Based on your inputs.</p>
+      <div class="info"><div>${ic("person.fill")}Starting weight: ${+S.weight} lbs</div>${dir === "maintain" ? "" : `<div>${ic("flag.fill")}Goal weight: ${+S.goalWeight} lbs</div>`}
+        <div>${ic("figure.run")}Activity level: ${ACT_TITLE[activity()]}</div><div>${ic("scope")}${dir === "maintain" ? `Target: maintain ${+S.weight} lbs` : `Target: ${dir === "lose" ? "Lose" : "Gain"} ${deltaLb()} lbs by ${when}`}</div></div>
+      <p class="sec" style="margin-top:28px;margin-bottom:10px">How to reach your goals:</p>
+      <div class="info" style="margin-bottom:20px"><div>${ic("camera.fill")}Track your food</div><div>${ic("chart.pie.fill")}Follow your daily calorie recommendation</div><div>${ic("circle.hexagongrid.fill")}Balance your carbs, protein, fat</div><div>${ic("heart.fill")}Build a routine you can keep</div></div>`,
+      foot: cta("Let's get started!") };
+  },
+  firstMeal: () => ({
+    body: `<div class="mid center"><div style="width:104px;height:104px;border-radius:26px;background:linear-gradient(180deg,#2a9bff,#007aff);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 34px;box-shadow:0 14px 30px rgba(0,122,255,.35)">${ic("camera.fill", "width:54px;height:54px")}</div><p class="big" style="font-size:32px">Let's log your<br>first meal</p></div>`,
+    foot: cta("Continue") }),
+  // One page: the camera, then the reading ring over the photo, then it turns into the result in place.
+  firstMealCamera: () => ({
+    body: `<h1 id="fmT">Snap your first meal</h1><p class="sub" id="fmS">Tap the button to snap this meal.</p><div class="mid" id="fmB">${phone(
+      `${clip("first-meal")}<div class="cam" id="fmC"><div class="br"><i></i><i></i><i></i><i></i></div></div>
+       <div class="scan" id="fmR"><div class="r"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="66" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="12"/><circle id="fmA" cx="75" cy="75" r="66" fill="none" stroke="#34c759" stroke-width="12" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/></svg><b><span id="fmP">0</span><i>%</i></b></div>
+         <ul>${["Reading the photo", "Identifying foods", "Measuring portions", "Calculating calories and macros"].map(x => `<li><i></i>${x}</li>`).join("")}</ul></div>
+       <button class="shutter" id="fmGo" aria-label="Take the photo"></button>`, "min(62dvh,600px)")}</div>`,
+    foot: `<div id="fmF" style="height:54px"></div>`,
+    after(el) {
+      const $ = id => el.querySelector(id), M = { cal: 600, p: 48, c: 69, f: 13 };
+      $("#fmGo").addEventListener("click", () => {
+        haptic(); $("video").pause(); $("#fmGo").remove(); $("#fmC").remove(); $("#fmR").classList.add("on");
+        $("#fmT").textContent = "Reading your plate";
+        const caps = ["Reading the photo…", "Identifying foods…", "Measuring portions…", "Estimating macros…"], rows = el.querySelectorAll(".scan li"), t0 = performance.now(); let cur = -1;
+        (function tick(now) {
+          if (!el.isConnected) return;
+          const k = Math.min(1, Math.max(0, (now - t0) / 3000));
+          $("#fmA").setAttribute("stroke-dashoffset", 414.7 * (1 - k)); $("#fmP").textContent = Math.round(k * 100);
+          const i = Math.min(3, Math.floor(k * 4));
+          if (i !== cur) { cur = i; $("#fmS").textContent = caps[i]; haptic(); }
+          rows.forEach((li, j) => li.classList.toggle("on", k * 4 >= j + 0.9));
+          if (k < 1) return requestAnimationFrame(tick);
+          $("#fmS").textContent = "Done!";
+          setTimeout(() => { if (el.isConnected) result(); }, 800);
+        })(t0);
+      });
+      function result() {
+        haptic(); $("#fmT").textContent = "Your first meal is logged"; $("#fmS").innerHTML = "&nbsp;";
+        const row = (k, name, icon, color, unit) => `<div>${ic(icon, "color:" + color)}${name}<b data-v="${k}">${M[k]}</b><small>${unit}</small><span class="pm"><button data-m="${k}" data-d="-1">&minus;</button><button data-m="${k}" data-d="1">+</button></span></div>`;
+        const b = $("#fmB"); b.style.transition = "opacity .25s"; b.style.opacity = 0;
+        setTimeout(() => {
+          b.innerHTML = `<div class="meal"><img src="a/first-meal.jpg" alt=""><div><b>Chicken, Rice &amp; Broccoli</b><small>Glazed chicken · White rice · Broccoli</small><em><span data-v="cal">600</span> <i>CAL</i></em><div class="m"><i>P</i><span data-v="p">48</span>g<i>C</i><span data-v="c">69</span>g<i>F</i><span data-v="f">13</span>g</div></div></div>
+            <div class="edit">${row("cal", "Calories", "bolt.fill", "#ff2d55", "cal")}${row("p", "Protein", "dumbbell.fill", "#34c759", "g")}${row("c", "Carbs", "leaf.fill", "#30b0c7", "g")}${row("f", "Fat", "drop.fill", "#af52de", "g")}</div>`;
+          b.style.opacity = 1; $("#fmF").outerHTML = cta("Continue");
+          b.addEventListener("click", e => { const t = e.target.closest("[data-m]"); if (!t) return; haptic(); const k = t.dataset.m; M[k] = Math.max(0, M[k] + (+t.dataset.d) * (k === "cal" ? 10 : 1)); b.querySelectorAll(`[data-v="${k}"]`).forEach(x => x.textContent = M[k]); });
+        }, 250);
+      }
+    } }),
+  pwIntro: () => ({
+    body: `<h1 class="center" style="font-size:32px;margin-top:max(22px,4dvh)">We want you to try<br>Meal Pic for free</h1><div class="mid">${phone(clip("scan-demo"), "min(54dvh,540px)")}</div>`,
+    foot: `<p class="nopay">${ic("checkmark")}No Payment Due Now</p>${cta("Continue")}` }),
+  pwPlans: () => {
+    const t = prices.trial_days, y = prices.yearly, m = prices.monthly, yearly = S.plan === "yearly";
+    const starts = new Date(Date.now() + t * 864e5).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    const box = (id, name, p, div, by, tag) => `<button class="plan ${S.plan === id ? "on" : ""}" data-plan="${id}">${tag ? `<span class="tag">${tag}</span>` : ""}<span class="nm">${name}<span class="rad">${ic("checkmark")}</span></span><div class="px">${money(p, div)}<small>/wk</small></div><div class="by">${by}</div></button>`;
+    return { body: `<h1 class="center" style="font-size:29px;margin-top:0">Start Your <span style="color:var(--gold)">${t}-Day</span> Free Trial</h1>${ratingBadge(["ReviewFace1", "ReviewFace2", "ReviewFace3"])}
+      <div class="tl"><div><i>${ic("checkmark")}</i><span><b>Today</b><p>Get full access to every feature.</p></span></div>
+        <div><i>${ic("fork.knife")}</i><span><b>In ${t - 1} days</b><p>Keep logging your meals every day.</p></span></div>
+        <div><i>${ic("star")}</i><span><b>In ${t} days</b><p>Your plan starts ${starts}. Cancel anytime.</p></span></div></div>
+      <div class="mid" style="padding-top:26px"><div class="plans">${box("monthly", "Monthly", m, 52 / 12, money(m) + " billed monthly", "")}${box("yearly", "Yearly", y, 52, money(y) + " billed yearly", t + " DAYS FREE")}</div></div>`,
+      foot: `<p class="nopay" style="font-size:15px">${ic("checkmark")}No commitment, cancel anytime</p>${cta(yearly ? `Start My ${t}-Day Free Trial` : "Continue", true, "checkout")}
+        <p class="note">${yearly ? `${t} days free, then ${money(y)} per year. Billed yearly.` : `${money(m)} per month. Billed monthly.`}<br>Plan auto-renews unless you cancel.<br><a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a></p>` };
+  },
+  done: () => ({
+    body: `<div class="mid"><div class="tick">${ic("checkmark")}</div><p class="big" style="font-size:30px">You're all set!</p><p class="sub center">${S.plan === "yearly" ? "Your free trial has started." : "Your plan is active."} Your plan is saved to your account.</p>
+      <ul class="steps"><li><i>1</i><span>Download Meal Pic on your iPhone.</span></li><li><i>2</i><span>Tap <b>Sign In</b> on the first screen.</span></li><li><i>3</i><span>Choose <b>${esc(S.method || "the same way you signed up here")}</b>. Your plan is already there.</span></li></ul></div>`,
+    foot: `<a class="cta" href="${APP_STORE}">Download Meal Pic</a>` }),
+};
 
-function accountScreen() {
-  if (!S.authMode) return `<h1>Save your plan</h1><p class="sub">Create your account. You'll use it to sign in to the app.</p>
-    <div class="opts">
-      <button class="cta dark" id="google" style="margin-top:0" ${busy ? "disabled" : ""}><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.800 7.200l7.600 5.900c4.500-4.100 7-10.200 7-17.600z"/><path fill="#FBBC05" d="M10.500 28.600A14.500 14.500 0 0 1 9.500 24c0-1.600.3-3.200.8-4.600l-7.900-6.200A24 24 0 0 0 0 24c0 3.900.9 7.500 2.600 10.800l7.900-6.200z"/><path fill="#34A853" d="M24 48c6.500 0 11.900-2.100 15.900-5.800l-7.600-5.900c-2.100 1.400-4.900 2.300-8.300 2.300-6.300 0-11.600-4.200-13.500-9.900l-7.900 6.200C6.500 42.600 14.600 48 24 48z"/></svg>Continue with Google</button>
-      <button class="cta line" data-auth="email" style="margin-top:0">Continue with email</button>
-      <button class="cta line" data-auth="phone" style="margin-top:0">Continue with phone</button>
-    </div>${errLine()}<div class="fill"></div>
-    <p class="note">By continuing you agree to Meal Pic's <a href="../terms.html">Terms</a> and <a href="../privacy.html">Privacy Policy</a>.</p>`;
-  const email = S.authMode === "email";
-  if (!S.sent) return `<h1>${email ? "What's your email?" : "What's your number?"}</h1>
-    <p class="sub">${email ? "We'll send you a 6-digit code. No password to remember." : "We'll text you a 6-digit code. Outside the US? Include your country code."}</p>
-    <input class="field" id="addr" data-key="address" ${email ? 'type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"' : 'type="tel" inputmode="tel" autocomplete="tel" placeholder="555 123 4567"'} value="${esc(S.address)}" autocapitalize="off" autocorrect="off">
-    ${errLine()}${cta("Send code", S.address.trim().length >= 4, "send")}<button class="link" id="other">Use another method</button><div class="fill"></div>`;
-  return `<h1>Enter your code</h1><p class="sub">We sent a 6-digit code to ${esc(S.address)}.</p>
-    <input class="field" id="code" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" placeholder="123456">
-    ${errLine()}${cta("Verify", true, "verify")}<button class="link" id="resend">${email ? "Use a different email" : "Use a different phone number"}</button><div class="fill"></div>`;
+// ---- showing a page: the new one pushes in from the right (or back in from the left) ----
+let current = null;
+function show(step, dir) {
+  S.step = step; save();
+  const def = PAGES[step](), el = document.createElement("div");
+  el.className = "page" + (NOHEAD.includes(step) ? " nohead" : ""); el.dataset.step = step;
+  el.innerHTML = `<div class="scroll">${def.body}</div><div class="foot">${def.foot}</div>`;
+  const old = current; current = el;
+  if (old && dir) {
+    el.style.transition = "none"; el.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`;
+    stage.appendChild(el); el.getBoundingClientRect(); el.style.transition = "";
+    el.style.transform = "none"; old.style.transform = `translateX(${dir > 0 ? -100 : 100}%)`; old.style.pointerEvents = "none";
+    setTimeout(() => old.remove(), 460);
+  } else { stage.innerHTML = ""; stage.appendChild(el); }
+  const o = order(), i = o.indexOf(step);
+  head.classList.toggle("off", NOHEAD.includes(step)); head.classList.toggle("bare", BARE.includes(step));
+  prog.style.width = Math.min(100, Math.round(i / o.indexOf("generating") * 100)) + "%";
+  wire(el); if (def.after) def.after(el);
 }
-
-function render() {
-  const o = order(), i = o.indexOf(S.step);
-  const chrome = !["intro", "building", "done"].includes(S.step);
-  const showBack = chrome && !(S.step === "pay");
-  const pct = Math.min(100, Math.round(Math.min(i, QUESTIONS) / QUESTIONS * 100));
-  app.innerHTML = `<div class="top">${chrome ? `<button class="back" id="back" aria-label="Back" ${showBack ? "" : "hidden"}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><div class="bar"><i style="width:${pct}%"></i></div>` : ""}</div>
-    <div class="body">${screen()}</div>`;
-  const f = app.querySelector("#addr, #code"); if (f) f.focus();
-  after();
-  if (S.step === "pay" && !prices) loadPrices();
+function next() {
+  if (S.step === "goal" && direction() !== "maintain" && !validGoalWeight()) S.goalWeight = direction() === "lose" ? Math.max(70, +S.weight - 15) : +S.weight + 10;
+  const o = order(); show(o[Math.min(o.indexOf(S.step) + 1, o.length - 1)], 1);
 }
+function back() {
+  const o = order(), i = o.indexOf(S.step); let p = o[Math.max(i - 1, 0)];
+  if (p === "generating") p = "ready";            // the loader is never a stop on the way back
+  if (p === "firstMealCamera") p = "firstMeal";
+  show(p, -1);
+}
+/// Redraws the page that is up, in place (a unit switch, a plan pick).
+const redraw = () => show(S.step, 0);
 
-/// Wires up the controls that scroll or animate, after each draw.
-function after() {
-  app.querySelectorAll("[data-wheel]").forEach(w => {
-    const key = w.dataset.wheel, vals = JSON.parse(w.dataset.values);
-    w.scrollTop = Math.max(0, vals.indexOf(+S[key])) * 44;
-    let t; w.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(() => {
-      S[key] = vals[Math.min(vals.length - 1, Math.max(0, Math.round(w.scrollTop / 44)))]; save(); }, 80); }, { passive: true });
+// ---- wheels and the ruler ----
+function wire(el) {
+  el.querySelectorAll("[data-wheel]").forEach(w => {
+    const key = w.dataset.wheel, vals = JSON.parse(w.dataset.values), rows = [...w.querySelectorAll("div")];
+    const start = key === "cm" ? Math.round(heightIn() * 2.54) : +S[key];
+    let sel = Math.max(0, vals.indexOf(start));
+    const store = v => { if (key === "cm") { const inches = Math.round(v / 2.54); S.ft = Math.floor(inches / 12); S.inch = inches % 12; } else S[key] = v; save(); };
+    const paint = () => {
+      const c = w.scrollTop / 34, idx = Math.min(vals.length - 1, Math.max(0, Math.round(c)));
+      for (let i = Math.max(0, idx - 6); i <= Math.min(rows.length - 1, idx + 6); i++) {
+        const d = i - c, a = Math.abs(d);
+        rows[i].style.transform = `rotateX(${-d * 19}deg) scale(${1 - Math.min(a, 4) * 0.035})`;
+        rows[i].style.opacity = Math.max(0, 1 - a * 0.27); rows[i].classList.toggle("sel", i === idx);
+      }
+      if (idx !== sel) { sel = idx; haptic(); store(vals[idx]); }
+    };
+    requestAnimationFrame(() => { w.scrollTop = sel * 34; paint(); });
+    w.addEventListener("scroll", paint, { passive: true });
   });
-  app.querySelectorAll("[data-ruler]").forEach(r => {
-    const key = r.dataset.ruler, out = document.getElementById("rv"), btn = app.querySelector(".cta");
-    r.scrollLeft = (+S[key] - R_MIN) * 10;
+  el.querySelectorAll("[data-ruler]").forEach(r => {
+    const key = r.dataset.ruler, min = +r.dataset.min, max = +r.dataset.max, kg = S.unit === "kg", out = el.querySelector("#rv"), btn = el.querySelector(".cta");
+    let shown = +out.textContent;
+    requestAnimationFrame(() => { r.scrollLeft = (shown - min) * 9; });
     r.addEventListener("scroll", () => {
-      const v = Math.min(R_MAX, Math.max(R_MIN, R_MIN + Math.round(r.scrollLeft / 10)));
-      if (v !== +S[key]) { S[key] = v; out.textContent = v; save(); if (key === "goalWeight") btn.disabled = !validGoalWeight(); }
+      const v = Math.min(max, Math.max(min, min + Math.round(r.scrollLeft / 9)));
+      if (v === shown) return;
+      shown = v; out.textContent = v; haptic(); S[key] = kg ? Math.round(v * KG) : v; save();
+      if (key === "goalWeight") btn.disabled = !validGoalWeight();
     }, { passive: true });
   });
-  const pace = document.getElementById("pace");
-  if (pace) {
-    const paint = () => {
-      const v = +pace.value; S.pace = v; save();
-      document.getElementById("pv").textContent = v.toFixed(1);
-      pace.style.setProperty("--fill", ((v - 0.2) / 2.8 * 100) + "%");
-      const zone = v < 0.8 ? 0 : v <= 1.5 ? 1 : 2;
-      [0, 1, 2].forEach(i => document.getElementById("p" + i).classList.toggle("on", i === zone));
-      const weeks = Math.abs((+S.goalWeight) - (+S.weight)) / v, months = Math.max(1, Math.round(weeks / 4.345));
-      const span = weeks < 6 ? `${Math.max(1, Math.round(weeks))} week${Math.round(weeks) > 1 ? "s" : ""}` : `${months} month${months > 1 ? "s" : ""}`;
-      const line = zone === 0 ? "A gentle pace that is easy to keep up." : zone === 1 ? "This is the most balanced pace, motivating and ideal for most users." : "A fast pace. It takes more discipline to keep up.";
-      document.getElementById("tip").innerHTML = `<b>You should reach your goal in <em>${span}</em></b><p>${line}</p>Daily calorie goal: ${targets().calories.toLocaleString("en-US")} cal`;
-    };
-    pace.addEventListener("input", paint); paint();
-  }
-  if (S.step === "building") {
-    const arc = document.getElementById("arc"), pct = document.getElementById("pct"), stage = document.getElementById("stage"), rows = app.querySelectorAll(".checks li");
-    const words = ["Crunching your numbers…", "Estimating your metabolism…", "Balancing your macros…", "Finalizing your plan…"], t0 = performance.now(), dur = 3600;
-    (function tick(now) {
-      if (S.step !== "building" || !arc.isConnected) return;
-      const k = Math.min(1, (now - t0) / dur), n = Math.round(k * 100);
-      arc.setAttribute("stroke-dashoffset", 584.3 * (1 - k)); pct.textContent = n;
-      stage.textContent = words[Math.min(words.length - 1, Math.floor(k * words.length))];
-      rows.forEach((li, i) => li.classList.toggle("on", k >= (i + 1) / (rows.length + 0.5)));
-      if (k < 1) requestAnimationFrame(tick); else setTimeout(() => { if (S.step === "building") next(); }, 500);
-    })(t0);
-  }
 }
 
-// ---- sign-in ----
-function normalPhone(raw) {
-  const d = raw.replace(/\D/g, "");
-  if (raw.trim().startsWith("+")) return "+" + d;
-  if (d.length === 10) return "+1" + d;
-  return "+" + d;
-}
-const friendly = e => {
-  const m = (e && e.message) || "";
-  if (/rate|too many|seconds/i.test(m)) return "Too many tries. Wait a minute and try again.";
-  if (/expired|invalid/i.test(m)) return "That code isn't right. Check it and try again.";
-  return m || "That didn't go through. Please try again.";
-};
-async function work(fn) {
-  if (busy) return; busy = true; err = ""; render();
-  try { await fn(); } catch (e) { err = friendly(e); }
-  busy = false; render();
-}
-const sendCode = () => work(async () => {
-  const a = S.address.trim();
-  const r = S.authMode === "email" ? await sb.auth.signInWithOtp({ email: a, options: { shouldCreateUser: true } })
-                                   : await sb.auth.signInWithOtp({ phone: normalPhone(a) });
-  if (r.error) throw r.error;
-  S.sent = true; save();
+// ---- taps ----
+document.getElementById("app").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b || b.disabled) return;
+  if (b.closest("#sheet")) return sheetTap(b);
+  if (b.dataset.pick) { haptic(); S[b.dataset.pick] = b.dataset.value; save(); b.parentNode.querySelectorAll(".opt").forEach(x => x.classList.toggle("on", x === b)); const c = current.querySelector("#next"); if (c) c.disabled = false; return; }
+  if (b.dataset.unit) { haptic(); S.unit = b.dataset.unit; save(); return redraw(); }
+  if (b.dataset.hunit) { haptic(); S.hunit = b.dataset.hunit; save(); return redraw(); }
+  if (b.dataset.plan) { haptic(); S.plan = b.dataset.plan; save(); return redraw(); }
+  if (b.id === "back") { haptic(); return back(); }
+  if (b.id === "next") { haptic(); return next(); }
+  if (b.id === "signin") { haptic(); return openSheet("signin"); }
+  if (b.id === "checkout") { haptic(); return startCheckout(); }
 });
-const verifyCode = () => {
-  // Read the field BEFORE `work` redraws the page.
-  const token = (document.getElementById("code").value || "").replace(/\D/g, "");
-  return work(async () => {
-  if (token.length < 6) throw new Error("Enter the 6-digit code.");
-  const a = S.address.trim();
-  const r = S.authMode === "email" ? await sb.auth.verifyOtp({ email: a, token, type: "email" })
-                                   : await sb.auth.verifyOtp({ phone: normalPhone(a), token, type: "sms" });
-  if (r.error) throw r.error;
-  await signedIn(r.data.session, S.authMode === "email" ? "Continue with email" : "Continue with phone");
+
+// ---- the account sheet: Google, email or phone, big buttons ----
+let sheetMode = "signup", auth = { way: "", address: "", sent: false }, busy = false, err = "";
+const GOOGLE = `<svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.5-4.1 7-10.2 7-17.6z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.2A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>`;
+function openSheet(mode) { sheetMode = mode; auth = { way: "", address: "", sent: false }; err = ""; drawSheet(); sheet.classList.add("up"); }
+function closeSheet() { sheet.classList.remove("up"); if (document.activeElement) document.activeElement.blur(); }
+function drawSheet() {
+  const top = `<button class="back" id="sback" aria-label="Back">${ic("chevron.left", "width:18px;height:18px")}</button>`;
+  const e = `<p class="err" role="alert">${esc(err)}</p>`, wait = busy ? "disabled" : "";
+  if (!auth.way) sheet.innerHTML = `${top}<h1>${sheetMode === "signin" ? "Sign in" : "Save your plan"}</h1><p class="sub">${sheetMode === "signin" ? "Use the way you signed up." : "Create your account. You'll use it to sign in to the app."}</p>
+    <div class="stack"><button class="cta dark" id="google" ${wait}>${GOOGLE}Continue with Google</button><button class="cta line" data-way="email" ${wait}>Continue with email</button><button class="cta line" data-way="phone" ${wait}>Continue with phone</button></div>${e}
+    <div style="flex:1"></div><p class="note">By continuing you agree to Meal Pic's <a href="../terms.html">Terms</a> and <a href="../privacy.html">Privacy Policy</a>.</p>`;
+  else if (!auth.sent) { const em = auth.way === "email";
+    sheet.innerHTML = `${top}<h1>${em ? "What's your email?" : "What's your number?"}</h1><p class="sub">${em ? "We'll send you a 6-digit code. No password to remember." : "We'll text you a 6-digit code."}</p>
+      <div class="stack"><input class="field" id="addr" ${em ? 'type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"' : 'type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567"'} value="${esc(auth.address)}" autocapitalize="off" autocorrect="off">
+      <button class="cta" id="send" ${wait}>${busy ? "One moment…" : "Send code"}</button></div>${e}`; }
+  else sheet.innerHTML = `${top}<h1>Enter your code</h1><p class="sub">We sent a 6-digit code to ${esc(auth.address)}.</p>
+      <div class="stack"><input class="field" id="otp" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" placeholder="123456"><button class="cta" id="verify" ${wait}>${busy ? "One moment…" : "Verify"}</button></div>${e}`;
+  const f = sheet.querySelector("#addr, #otp"); if (f && !busy) setTimeout(() => f.focus(), 60);
+}
+function normalPhone(raw) { const d = raw.replace(/\D/g, ""); return raw.trim().startsWith("+") ? "+" + d : d.length === 10 ? "+1" + d : "+" + d; }
+const friendly = e => { const m = (e && e.message) || ""; return /rate|too many|seconds/i.test(m) ? "Too many tries. Wait a minute and try again." : /expired|invalid/i.test(m) ? "That code isn't right. Check it and try again." : m || "That didn't go through. Please try again."; };
+async function work(fn) { if (busy) return; busy = true; err = ""; drawSheet(); try { await fn(); } catch (e) { err = friendly(e); } busy = false; if (sheet.classList.contains("up")) drawSheet(); }
+function sheetTap(b) {
+  haptic();
+  if (b.id === "sback") { if (auth.sent) auth.sent = false; else if (auth.way) auth.way = ""; else return closeSheet(); err = ""; return drawSheet(); }
+  if (b.dataset.way) { auth.way = b.dataset.way; auth.address = ""; err = ""; return drawSheet(); }
+  if (b.id === "google") return work(async () => {
+    S.pendingGoogle = sheetMode; save();
+    const r = await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname } });
+    if (r.error) { S.pendingGoogle = ""; save(); throw r.error; }
+    await new Promise(() => {});
   });
-};
-const google = () => work(async () => {
-  S.pendingGoogle = true; save();
-  const r = await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname } });
-  if (r.error) { S.pendingGoogle = false; save(); throw r.error; }
-  await new Promise(() => {});   // the page is leaving for Google
-});
-
-/// The account now exists: put the plan and the answers on it, then on to payment
-/// (or straight to "all set" for an account that already pays).
-async function signedIn(session, method) {
-  if (!session) throw new Error("That sign-in didn't go through. Please try again.");
-  const t = targets(), dir = direction();
-  const pad = n => String(n).padStart(2, "0");
-  const r = await sb.auth.updateUser({ data: {
-    plan: { calories: t.calories, protein: t.protein, carbs: t.carbs, fat: t.fat, rollover: true, updated_at: new Date().toISOString() },
-    calorie_goal: t.calories, sex: S.sex, height_in: heightIn(), weight_lb: +S.weight,
-    goal_weight_lb: dir === "maintain" ? +S.weight : +S.goalWeight, goal: S.goal,
-    weekly_rate_tenths: Math.round(+S.pace * 10), activity: activity(), dob: `${S.by}-${pad(S.bm)}-${pad(S.bd)}`,
-    terms_accepted: true, source: "web_quiz", utm: S.utm || null,
-  } });
-  if (r.error) throw r.error;
-  S.method = method; S.authMode = ""; S.sent = false; S.pendingGoogle = false;
-  const paid = await sb.rpc("stripe_entitled", { allow_test: false });
-  S.step = paid.data === true ? "done" : "pay"; save();
+  if (b.id === "send") { auth.address = sheet.querySelector("#addr").value.trim(); return work(async () => {
+    if (auth.address.length < 4) throw new Error(auth.way === "email" ? "Enter your email." : "Enter your number.");
+    const r = auth.way === "email" ? await sb.auth.signInWithOtp({ email: auth.address, options: { shouldCreateUser: true } }) : await sb.auth.signInWithOtp({ phone: normalPhone(auth.address) });
+    if (r.error) throw r.error; auth.sent = true; }); }
+  if (b.id === "verify") { const token = (sheet.querySelector("#otp").value || "").replace(/\D/g, ""); return work(async () => {
+    if (token.length < 6) throw new Error("Enter the 6-digit code.");
+    const r = auth.way === "email" ? await sb.auth.verifyOtp({ email: auth.address, token, type: "email" }) : await sb.auth.verifyOtp({ phone: normalPhone(auth.address), token, type: "sms" });
+    if (r.error) throw r.error;
+    await signedIn(r.data.session, auth.way === "email" ? "Continue with email" : "Continue with phone", sheetMode); }); }
 }
+sheet.addEventListener("keydown", e => { if (e.key === "Enter") { const b = sheet.querySelector("#send, #verify"); if (b) b.click(); } });
 
-// ---- payment ----
-async function checkoutCall(body) {
-  const { data: { session } } = await sb.auth.getSession();
-  if (!session) { S.step = "account"; save(); throw new Error("Please sign in again."); }
+/// The account exists. Sign-up: put the plan and the answers on it, then on to Stripe.
+/// Sign-in from the welcome: someone who already pays goes straight to "all set".
+async function signedIn(session, method, mode) {
+  if (!session) throw new Error("That sign-in didn't go through. Please try again.");
+  S.method = method; S.pendingGoogle = ""; save();
+  const paid = await sb.rpc("stripe_entitled", { allow_test: false });
+  if (paid.data === true) { closeSheet(); return show("done", 1); }
+  if (mode === "signin") { closeSheet(); if (S.step === "welcome") next(); return; }
+  const t = targets(), dir = direction(), pad = n => String(n).padStart(2, "0");
+  const r = await sb.auth.updateUser({ data: {
+    plan: { calories: t.calories, protein: t.protein, carbs: t.carbs, fat: t.fat, rollover: S.rollover !== "No", updated_at: new Date().toISOString() },
+    calorie_goal: t.calories, sex: S.sex, height_in: heightIn(), weight_lb: +S.weight, goal_weight_lb: dir === "maintain" ? +S.weight : +S.goalWeight, goal: S.goal,
+    weekly_rate_tenths: Math.round(+S.pace * 10), activity: activity(), dob: `${S.by}-${pad(S.bm)}-${pad(S.bd)}`,
+    heard_from: S.source, diet: S.diet, obstacle: S.obstacle, accomplish: S.accomplish, creator_code: S.code || null,
+    terms_accepted: true, source: "web_quiz", utm: S.utm || null } });
+  if (r.error) throw r.error;
+  await checkout(session);
+}
+async function checkout(session) {
   const res = await fetch(SB_URL + "/functions/v1/stripe-checkout", { method: "POST",
     headers: { "content-type": "application/json", apikey: SB_KEY, authorization: "Bearer " + session.access_token },
-    body: JSON.stringify(Object.assign({ source: "web" }, body)) });
+    body: JSON.stringify({ source: "web", plan: S.plan, email: session.user && session.user.email || undefined }) });
   const out = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error("We couldn't reach checkout. Please try again.");
-  return out;
+  if (!res.ok || !out.url) throw new Error("We couldn't reach checkout. Please try again.");
+  S.step = "pwPlans"; save(); location.href = out.url; await new Promise(() => {});
 }
-async function loadPrices() {
-  try { prices = await checkoutCall({ action: "prices" }); } catch (e) { err = friendly(e); }
-  if (S.step === "pay" || S.step === "account") render();
-}
-const checkout = () => work(async () => {
+async function startCheckout() {
   const { data: { session } } = await sb.auth.getSession();
-  const out = await checkoutCall({ plan: S.plan, email: session && session.user && session.user.email || undefined });
-  if (!out.url) throw new Error("We couldn't reach checkout. Please try again.");
-  location.href = out.url;
-  await new Promise(() => {});
-});
-
-// ---- events ----
-app.addEventListener("click", e => {
-  const b = e.target.closest("button"); if (!b || b.disabled) return;
-  if (b.dataset.pick) { S[b.dataset.pick] = b.dataset.value; save(); return render(); }
-  if (b.dataset.plan) { S.plan = b.dataset.plan; save(); return render(); }
-  if (b.dataset.auth) { S.authMode = b.dataset.auth; S.address = ""; S.sent = false; err = ""; save(); return render(); }
-  if (b.id === "back") return back();
-  if (b.id === "next") return next();
-  if (b.id === "google") return google();
-  if (b.id === "send") return sendCode();
-  if (b.id === "verify") return verifyCode();
-  if (b.id === "other") { S.authMode = ""; err = ""; save(); return render(); }
-  if (b.id === "resend") { S.sent = false; err = ""; save(); return render(); }
-  if (b.id === "checkout") return checkout();
-});
-// Typing must not rebuild the page (it would drop the keyboard): update the state and the button only.
-function typed(e) {
-  const el = e.target, key = el.dataset && el.dataset.key; if (!key) return;
-  S[key] = el.value; save();
-  const btn = app.querySelector(".cta");
-  if (S.step !== "account") return;
-  const ok = S.address.trim().length >= 4;
-  if (btn) btn.disabled = !ok;
+  if (!session || (session.user && session.user.is_anonymous)) return openSheet("signup");
+  const b = current.querySelector("#checkout"); b.disabled = true; b.textContent = "One moment…";
+  try { await signedIn(session, S.method || "the same way you signed up here", "signup"); } catch (e) { redraw(); openSheet("signup"); err = friendly(e); drawSheet(); }
 }
-app.addEventListener("input", typed);
-app.addEventListener("change", typed);
-app.addEventListener("keydown", e => { if (e.key === "Enter") { const b = app.querySelector(".cta:not([disabled])"); if (b && e.target.matches("input")) b.click(); } });
 
 // ---- start ----
 (async function start() {
   const q = new URLSearchParams(location.search);
-  // Where they came from. UTM tags (utm_source / utm_medium / utm_campaign / utm_content / utm_term) are kept
-  // from the FIRST visit, logged as one landing row (table link_clicks, source "quiz"), and saved onto the
-  // account at sign-up (`utm`), so a sale can be traced to its ad. ?ref=<name> still works on its own.
+  // Where they came from. UTM tags are kept from the FIRST visit, logged as one landing row
+  // (table link_clicks, source "quiz") and saved onto the account at sign-up (`utm`). ?ref=<name> works on its own.
   try {
     const utm = {}; ["source", "medium", "campaign", "content", "term"].forEach(k => { const v = q.get("utm_" + k); if (v) utm[k] = v.slice(0, 120); });
     const ref = q.get("ref");
     if (Object.keys(utm).length && !S.utm) { S.utm = utm; save(); }
-    const tag = ref && /^[a-z0-9._-]{1,40}$/i.test(ref) ? ref.toLowerCase()
-              : Object.keys(utm).length ? ["source", "medium", "campaign", "content"].map(k => utm[k] || "").join("|").slice(0, 300) : "";
+    const tag = ref && /^[a-z0-9._-]{1,40}$/i.test(ref) ? ref.toLowerCase() : Object.keys(utm).length ? ["source", "medium", "campaign", "content"].map(k => utm[k] || "").join("|").slice(0, 300) : "";
     if (tag && !q.get("preview")) fetch(SB_URL + "/rest/v1/link_clicks", { method: "POST",
       headers: { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
       body: JSON.stringify({ source: "quiz", path: "/quiz/", referrer: tag, ua: navigator.userAgent.slice(0, 500) }) }).catch(() => {});
   } catch (e) {}
 
-  // ?preview=<step>: that screen with sample answers, nothing saved (for screenshots).
+  // ?preview=<step>: that screen with sample answers, nothing saved (for screenshots). ?preview=sheet[:email|:phone[:sent]]
   const pv = q.get("preview");
-  if (pv) { Object.assign(S, { sex: "Male", workouts: "3-5", bm: 6, bd: 14, by: 1996, ft: 5, inch: 10, weight: 185, goal: "Lose weight", goalWeight: 170, pace: 1.2,
-      authMode: "", sent: false, method: "Sign in with Google", step: pv.split(":")[0] });
-    if (pv.includes(":")) { S.authMode = pv.split(":")[1]; S.sent = pv.split(":")[2] === "sent"; S.address = S.authMode === "email" ? "you@example.com" : "303 555 0142"; }
-    if (S.step === "pay") prices = { trial_days: 3, yearly: { amount: 5999, currency: "usd" }, monthly: { amount: 1999, currency: "usd" } };
-    save = () => {}; render(); return; }
-  if (q.get("paid") === "1") { S.step = "done"; save(); history.replaceState(null, "", location.pathname); }
-  else if (q.get("paid") === "0") { S.step = "pay"; save(); history.replaceState(null, "", location.pathname); }
-  render();
+  if (pv) {
+    save = () => {};
+    Object.assign(S, { sex: "Male", workouts: "3-5", bm: 6, bd: 14, by: 1996, ft: 5, inch: 10, weight: 185, goal: "Lose weight", goalWeight: 170, pace: 1.2, unit: "lbs", hunit: "ft", rollover: "Yes", method: "Continue with Google", plan: "yearly" });
+    const [name, way, sent] = pv.split(":");
+    if (name === "sheet") { show("pwPlans", 0); openSheet("signup"); auth.way = way || ""; auth.sent = sent === "sent"; auth.address = "you@example.com"; drawSheet(); }
+    else show(PAGES[name] ? name : "welcome", 0);
+    return;
+  }
+  if (q.get("paid") === "1") S.step = "done"; else if (q.get("paid") === "0") S.step = "pwPlans";
+  if (q.get("paid")) history.replaceState(null, "", location.pathname);
+  if (!PAGES[S.step]) S.step = "welcome";
+  if (S.step === "generating") S.step = "ready";
+  if (S.step === "firstMealCamera") S.step = "firstMeal";
+  show(S.step, 0);
 
-  const { data: { session } } = await sb.auth.getSession();
-  if (S.pendingGoogle) {
-    // Back from Google.
-    if (session) { busy = true; render(); try { await signedIn(session, "Sign in with Google"); } catch (e) { err = friendly(e); S.step = "account"; } busy = false; }
-    else { S.pendingGoogle = false; S.step = "account"; err = "That sign-in didn't go through. Please try again."; }
-    save(); history.replaceState(null, "", location.pathname); render();
-  } else if (!session && (S.step === "pay")) { go("account"); }
+  if (S.pendingGoogle) {                     // back from Google
+    const mode = S.pendingGoogle, { data: { session } } = await sb.auth.getSession();
+    history.replaceState(null, "", location.pathname);
+    if (!session) { S.pendingGoogle = ""; save(); openSheet(mode); err = "That sign-in didn't go through. Please try again."; return drawSheet(); }
+    try { await signedIn(session, "Sign in with Google", mode); } catch (e) { openSheet(mode); err = friendly(e); drawSheet(); }
+  }
 })();
 </script>
 </body>
