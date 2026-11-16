@@ -23,7 +23,7 @@
 <style>
 :root{
   --bg:#f2f2f7; --card:#ffffff; --ink:#0b0b0f; --soft:#6d6d76; --faint:#b9b9c0; --line:rgba(0,0,0,.09);
-  --blue:#007aff; --green:#34c759; --red:#e5484d; --tan:#c8915c; --gold:#e3ad45; --pick:#0b0b0f; --pickink:#fff; --well:rgba(120,120,128,.14);
+  --blue:#007aff; --green:#34c759; --red:#e5484d; --tan:#d19461; --gold:#e3ad45; --pick:#0b0b0f; --pickink:#fff; --well:rgba(120,120,128,.14);
 }
 @media (prefers-color-scheme: dark){
   :root{ --bg:#000; --card:#1c1c1e; --ink:#f5f5f7; --soft:#9a9aa3; --faint:#55555c; --line:rgba(255,255,255,.14);
@@ -40,7 +40,7 @@ button{font-family:inherit;color:inherit}
 .back{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .bar{flex:1;height:3px;border-radius:2px;background:var(--line);overflow:hidden;margin-left:6px}
 .bar i{display:block;height:100%;background:var(--ink);border-radius:2px;transition:width .35s ease}
-.page{position:absolute;inset:0;display:flex;flex-direction:column;padding-top:calc(env(safe-area-inset-top) + 48px);background:var(--bg);transition:transform .4s cubic-bezier(.32,.72,0,1);will-change:transform;backface-visibility:hidden;contain:layout paint}
+.page{position:absolute;inset:0;display:flex;flex-direction:column;padding-top:calc(env(safe-area-inset-top) + 48px);background:var(--bg);transition:transform .28s ease-in-out;will-change:transform;backface-visibility:hidden}
 .page.nohead{padding-top:env(safe-area-inset-top)}
 .scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding:0 24px;scrollbar-width:none}
 .scroll::-webkit-scrollbar{display:none}
@@ -177,7 +177,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .info{background:var(--card);border-radius:16px;padding:6px 16px}
 .info div{display:flex;align-items:center;gap:14px;padding:11px 0;font-size:15px;border-top:1px solid var(--line)}.info div:first-child{border:0}
 .info .ic{width:18px;height:18px}
-.phone{position:relative;aspect-ratio:1000/2044;margin:0 auto;height:100%;max-height:700px;max-width:100%}
+.phone{position:relative;aspect-ratio:1000/2044;margin:0 auto;width:var(--pw,70vw)}
+.phone .scr>img{width:100%;height:100%;object-fit:cover;display:block}
 .phone>img{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
 .phone .scr{position:absolute;left:5.3%;top:2.5%;width:89.4%;height:95%;border-radius:11% / 5.2%;overflow:hidden;background:#000}
 .phone video{width:100%;height:100%;object-fit:cover;display:block}
@@ -234,6 +235,77 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .steps{margin:22px 0 0;padding:0;list-style:none}
 .steps li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;font-size:16px}
 .steps i{flex:0 0 28px;height:28px;border-radius:50%;background:var(--pick);color:var(--pickink);font-style:normal;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.rnd{font-family:ui-rounded,"SF Pro Rounded",-apple-system,sans-serif;font-variant-numeric:tabular-nums}
+.ch{position:relative}
+.ch svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ch path{vector-effect:non-scaling-stroke}
+.mk{position:absolute;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:#fff;border:2px solid var(--ink)}
+.mk.big{width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-width:2.5px}
+.wipe{-webkit-clip-path:inset(-12px 100% -12px -12px);clip-path:inset(-12px 100% -12px -12px)}
+.go .wipe{-webkit-clip-path:inset(-12px -12px -12px -12px);clip-path:inset(-12px -12px -12px -12px);transition:clip-path var(--d,1.4s) var(--e,linear) var(--w,0s),-webkit-clip-path var(--d,1.4s) var(--e,linear) var(--w,0s)}
+.fi{opacity:0}.go .fi{opacity:1;transition:opacity var(--d,.35s) ease var(--w,0s)}
+.pop{opacity:0;transform:scale(.35)}.go .pop{opacity:1;transform:none;transition:transform .45s cubic-bezier(.3,1.5,.5,1) var(--w,0s),opacity .2s ease var(--w,0s)}
+.ecard{background:var(--card);border-radius:24px;padding:22px;box-shadow:0 0 0 1px var(--line);margin-top:26px}
+.ecard h3{margin:0 0 18px;font-size:20px;font-weight:600}
+.pcard{background:rgba(120,120,128,.07);border-radius:24px;padding:20px}
+.pcard h3{margin:0 0 16px;font-size:18px;font-weight:600}
+.tro{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:var(--tan);color:#fff;display:flex;align-items:center;justify-content:center}.tro .ic{width:14px;height:14px}
+.cp{border-radius:24px;padding:20px;background:radial-gradient(190px at 0 100%,#e7f4e8,transparent),radial-gradient(210px at 100% 50%,#f6eaef,transparent),#e9ebef;display:flex;flex-direction:column;align-items:center;gap:18px;color:#0b0b0f}
+.cp .cols{display:flex;gap:16px}
+.cp .c{position:relative;width:118px;height:250px;border-radius:18px;background:#fff;overflow:hidden;text-align:center;font-weight:600;font-size:15px;line-height:1.25}
+.cp .c span{position:relative;display:block;padding-top:16px;z-index:1}
+.cp .c b{position:absolute;left:0;right:0;bottom:0;height:0;border-radius:18px;background:#dbdbdb}
+.cp .c.s b{background:#121212}
+.go .cp .c b{height:var(--h);transition:height 1s cubic-bezier(0,0,.58,1) .15s}
+.cp .c i{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;opacity:0;z-index:1}
+.cp .c.s i{color:#fff}
+.go .cp .c i{opacity:1;transition:opacity .3s ease-in .45s}
+.cp p{margin:0;font-size:15px;color:#6d6d76;display:flex;align-items:center;gap:6px}
+.pl{font-size:17px;text-align:center}
+.pn{font-size:40px;font-weight:700;text-align:center;margin:6px 0 26px;font-variant-numeric:tabular-nums}
+.pmk{display:flex;justify-content:space-between;padding:0 8px 6px}
+.pmk span{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:15px;font-weight:500;transition:color .18s}
+.pmk span.on{color:var(--tan)}
+.pmk .ic{width:38px;height:30px}
+.sl{position:relative;height:44px;margin-bottom:22px;touch-action:none;cursor:pointer}
+.sl:before{content:"";position:absolute;left:0;right:0;top:18px;height:8px;border-radius:4px;background:rgba(120,120,128,.22)}
+.sl b{position:absolute;left:0;top:18px;height:8px;border-radius:4px;background:var(--ink);width:calc(14px + (100% - 28px)*var(--f,.5));transition:width .12s ease-out}
+.sl i{position:absolute;top:8px;left:calc(14px + (100% - 28px)*var(--f,.5));width:28px;height:28px;margin-left:-14px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.08);transition:left .12s ease-out}
+.tipc{background:var(--card);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px;font-size:15px;color:var(--soft)}
+.tipc b{font-size:17px;font-weight:600;color:var(--ink)}.tipc b em{font-style:normal;color:var(--tan)}
+.tipc span{min-height:2.6em}
+.gen .big{font-size:30px}
+.load{width:212px;height:212px;margin:30px auto 26px}
+#arc{transition:stroke-dashoffset .3s linear}
+.load b{font-family:ui-rounded,"SF Pro Rounded",-apple-system,sans-serif;font-variant-numeric:tabular-nums}
+.load b i{font-size:26px;font-weight:700;margin:14px 0 0 1px}
+.checks{width:auto;margin:26px 0 0;padding:8px 32px;font-weight:400}
+.checks li{padding:0 0 13px;gap:11px}
+.checks li.now,.checks li.on{font-weight:600}
+.scroll.fade{-webkit-mask-image:linear-gradient(#000 calc(100% - 44px),transparent);mask-image:linear-gradient(#000 calc(100% - 44px),transparent)}
+.pc{background:rgba(120,120,160,.06);border-radius:20px;padding:16px;margin:0 -4px 16px}
+.pc h4{margin:0;font-size:17px;font-weight:600}.pc h4+small{display:block;font-size:13px;color:var(--soft);margin-top:2px}
+.pc .in{margin-top:12px}
+.callout{position:absolute;right:0;background:var(--card);border:1.5px solid var(--ink);border-radius:10px;padding:7px 10px;text-align:center;line-height:1.25}
+.callout small{display:block;font-size:12px;color:var(--soft)}.callout b{font-size:14px;font-weight:600}
+.rec{position:relative;gap:12px}.rec b{font-family:ui-rounded,"SF Pro Rounded",-apple-system,sans-serif;font-variant-numeric:tabular-nums}.rec small{font-size:15px}
+.mac{position:relative;border-radius:14px;padding:11px}.mac .dot{margin-bottom:6px}.mac b{font-size:21px;font-family:ui-rounded,"SF Pro Rounded",-apple-system,sans-serif}.mac small{font-size:14px}
+.pen{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(120,120,128,.14);border:0;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer}.pen .ic{width:12px;height:12px}
+.inf{background:var(--card);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:11px;font-size:15px;font-weight:500}
+.inf div{display:flex;gap:10px;align-items:flex-start}.inf .ic{width:20px;height:15px;margin-top:2px}
+.inf h5{margin:0 0 -3px;font-size:15px;font-weight:600}.inf.w{gap:8px;font-size:14px;font-weight:400;margin-bottom:10px}.inf.w:last-child{margin:0}.inf.w .ic{width:16px;height:12px;margin-top:3px}
+.proof{display:flex;text-align:center}.proof div{flex:1}.proof .ic{width:22px;height:22px}.proof b{display:block;font-size:15px}.proof small{font-size:11px;color:var(--soft)}
+.goalh span.tan{background:linear-gradient(100deg,var(--tan) 40%,#fff3e6 50%,var(--tan) 60%) 120% 0/300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:sheen 3.2s ease-in-out infinite}
+@keyframes sheen{0%{background-position:120% 0}47%,100%{background-position:-20% 0}}
+.esheet{position:absolute;inset:0;z-index:30}
+.esheet .eb{position:absolute;inset:0;background:rgba(0,0,0,.3);opacity:0;transition:opacity .25s}
+.esheet .ep{position:absolute;left:0;right:0;bottom:0;background:var(--bg);border-radius:22px 22px 0 0;padding:10px 24px calc(18px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1)}
+.esheet.up .eb{opacity:1}.esheet.up .ep{transform:none}
+.grab{width:36px;height:5px;border-radius:3px;background:var(--faint);margin:0 auto 14px}
+.ep h4{text-align:center;margin:0;font-size:17px}
+.en{display:flex;align-items:center;justify-content:center;gap:22px;margin:22px 0 26px}
+.en b{font-size:48px;font-weight:700;min-width:140px;text-align:center;font-family:ui-rounded,"SF Pro Rounded",-apple-system,sans-serif}
+.en button{width:52px;height:52px;border-radius:50%;border:0;background:var(--card);font-size:28px;line-height:1;box-shadow:0 0 0 1px var(--line)}
 </style>
 </head>
 <body>
@@ -276,6 +348,32 @@ function haptic() {
   } catch (e) {}
 }
 
+// ---- tracking: the same `funnel_events` rows the app writes, so drop-off per screen can be read the same way.
+// funnel "WEB", env "web". The visitor gets a nameless account on the first row (the app does the same);
+// that account is the one that later pays and is saved.
+let PREVIEW = false, anonP = null;
+if (!S.device) { S.device = window.crypto && crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now(); save(); }
+async function token() {
+  const r = await sb.auth.getSession(); if (r.data.session) return r.data.session.access_token;
+  if (!anonP) anonP = sb.auth.signInAnonymously(); const a = await anonP; return a.data.session ? a.data.session.access_token : null;
+}
+function track(event, step, extra) {
+  if (PREVIEW) return; const o = order(), u = S.utm || {};
+  const row = { funnel: "WEB", variant: "web_quiz_h12", event, build: "web", env: "web", device: S.device,
+                props: Object.assign({ utm_source: u.source || "", utm_campaign: u.campaign || "", utm_content: u.content || "" }, extra || {}) };
+  if (step) { row.step = step; row.step_index = Math.max(0, o.indexOf(step)); row.step_total = o.length; }
+  token().then(t => t && fetch(SB_URL + "/rest/v1/funnel_events", { method: "POST", keepalive: true,
+    headers: { apikey: SB_KEY, authorization: "Bearer " + t, "content-type": "application/json", prefer: "return=minimal" }, body: JSON.stringify(row) })).catch(() => {});
+}
+/// Once per visitor per screen, like the app's `trackStep`.
+function trackStep(step) {
+  if (PREVIEW) return; S.seen = S.seen || []; if (S.seen.includes(step)) return; S.seen.push(step); save();
+  if (step === "pwIntro") { track("paywall_reached"); track("paywall_screen", "intro"); }
+  else if (step === "pwPlans") track("paywall_screen", "plans");
+  else if (step === "done") track(S.plan === "yearly" ? "trial_started" : "subscription_started", null, { plan: S.plan });
+  else track("onboarding_step", step);
+}
+
 // ---- the plan: a port of NutritionCalculator.targets (balanced diet style) ----
 function age() {
   let a = NOW.getFullYear() - (+S.by);
@@ -296,7 +394,8 @@ function targets(rate) {
   const protein = Math.min((+S.weight) * 0.8, cal * 0.40 / 4);
   const fat = Math.min(cal * 0.27 / 9, (cal - protein * 4) / 9);
   const carbs = Math.max(0, (cal - protein * 4 - fat * 9) / 4);
-  return { calories: Math.round(cal / 10) * 10, protein: Math.round(protein), carbs: Math.round(carbs), fat: Math.round(fat) };
+  const out = { calories: Math.round(cal / 10) * 10, protein: Math.round(protein), carbs: Math.round(carbs), fat: Math.round(fat) };
+  return rate ? out : Object.assign(out, S.edit || {});      // the plan page's pencils
 }
 const deltaLb = () => Math.abs((+S.goalWeight) - (+S.weight));
 const weeksTo = rate => Math.round(deltaLb() / (rate || +S.pace));
@@ -335,7 +434,8 @@ function ruler(key, label) {
     <div class="read"><small>${label}</small><b><span id="rv">${v}</span> ${kg ? "kg" : "lbs"}</b></div>
     <div class="ruler"><div class="track" data-ruler="${key}" data-min="${min}" data-max="${max}"><div class="pad"></div><div class="ticks" style="width:${(max - min) * 9 + 2}px"></div><div class="pad"></div></div></div>`;
 }
-const phone = (inner) => `<div class="phone"><div class="scr">${inner}</div><img src="a/phone.png?v=2" alt=""></div>`;
+const pt = (x, y) => `${(x * 100).toFixed(2)} ${(y * 100).toFixed(2)}`;
+const phone = (inner, w) => `<div class="phone" style="--pw:${w}"><div class="scr">${inner}</div><img src="a/phone.png?v=2" alt=""></div>`;
 const dial = icon => `<div class="ring"><div class="dial">${Array.from({ length: 12 }, (_, i) => `<i style="transform:rotate(${i * 30}deg) translateY(-70px);opacity:${i % 3 ? .55 : 1}"></i>`).join("")}${icon}</div></div>`;
 const REVIEWS = [
   ["Jack Z", "ReviewerJack", "This is the only one where the UI is nice and the macros are actually accurate."],
@@ -345,12 +445,13 @@ const REVIEWS = [
   ["Adamniel", "ReviewerAdamniel", "Wow"]];
 const ratingBadge = faces => `<div class="badge"><div class="rate">${ic("laurel.leading")}<div><b>4.9</b>${stars()}<small>App Store rating</small></div>${ic("laurel.trailing")}</div>
   <div class="faces"><div>${faces.map(f => `<img src="a/${f}.jpg" alt="">`).join("")}</div><small>Real reviews</small></div></div>`;
-const clip = (name) => `<video src="a/${name}-s.mp4" preload="auto" disablepictureinpicture poster="a/${name === "scan-demo" ? "scan-demo.jpg" : "first-meal-poster.jpg"}" autoplay muted loop playsinline></video>`;
+// A looping picture, not a video: iOS will not auto-play video in Low Power Mode (it shows a play button).
+const clip = (name) => `<img src="a/${name}.webp" alt="">`;
 
 // ---- every screen: { body, foot, after(el) } ----
 const PAGES = {
   welcome: () => ({
-    body: `<h1 class="center" style="font-size:34px;margin-top:max(18px,3dvh)">Calorie tracking<br>made easy</h1><div class="mid fill">${phone(clip("scan-demo"))}</div>`,
+    body: `<h1 class="center" style="font-size:34px;margin-top:max(18px,3dvh)">Calorie tracking<br>made easy</h1><div class="mid fill">${phone(clip("scan-demo"), "min(72vw,346px,calc((100dvh - 226px)*.489))")}</div>`,
     foot: cta("Get Started") }),
   sex: () => question("Choose your gender", "This helps personalize your experience.", "sex",
     [{ v: "Male", glyph: "&#9794;&#xFE0E;" }, { v: "Female", glyph: "&#9792;&#xFE0E;" }, { v: "Other", glyph: "&#9893;&#xFE0E;" }]),
@@ -360,21 +461,29 @@ const PAGES = {
     [{ v: "Instagram", img: "b-instagram" }, { v: "TikTok", img: "b-tiktok" }, { v: "App Store", img: "b-appstore" }, { v: "Facebook", img: "b-facebook" }, { v: "Youtube", img: "b-youtube" },
      { v: "Google", img: "b-google" }, { v: "X", img: "b-x" }, { v: "Friend or family", tile: "person.2.fill" }, { v: "TV", tile: "tv.fill" }, { v: "Other", tile: "ellipsis" }]),
   triedApps: () => question("Have you tried other calorie tracking apps?", "", "tried", [{ v: "Yes", icon: "hand.thumbsup.fill" }, { v: "No", icon: "hand.thumbsdown.fill" }]),
-  encouragement: () => ({
-    body: `<h1>Meal Pic creates<br>long&#8209;term results</h1><div class="mid"><div class="card"><h3>Weight trend</h3>
-      <svg viewBox="0 0 320 170"><defs><linearGradient id="gk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".16"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient><clipPath id="up"><rect x="0" y="0" width="320" height="58"/></clipPath></defs>
-        <path d="M0 58H320M0 108H320" stroke="var(--line)" stroke-dasharray="3 4"/>
-        <path class="fadein" d="M6 58 C50 58 70 112 104 112 C150 112 170 22 316 20 L316 58 Z" fill="rgba(217,96,95,.2)" clip-path="url(#up)"/>
-        <path class="fadein" d="M6 58 C110 58 190 150 316 150 L316 156 L6 156 Z" fill="url(#gk)"/>
-        <path class="draw" pathLength="1" d="M6 58 C50 58 70 112 104 112 C150 112 170 22 316 20" fill="none" stroke="#d9605f" stroke-width="2" stroke-linecap="round"/>
-        <path class="draw" pathLength="1" d="M6 58 C110 58 190 150 316 150" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-        <circle cx="6" cy="58" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.4"/><circle class="fadein" cx="314" cy="150" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.4"/>
-        <text class="fadein" x="316" y="74" text-anchor="end" font-size="12" fill="currentColor">Without a plan</text>
-        <text x="6" y="146" font-size="11.5" font-weight="700" fill="currentColor">Meal Pic</text><rect x="58" y="135" width="46" height="15" rx="7.5" fill="currentColor"/><text x="81" y="146" text-anchor="middle" font-size="9" font-weight="700" fill="var(--card)">Weight</text>
-        <path d="M6 157H316" stroke="var(--line)"/></svg>
-      <div class="ends" style="font-size:14px;color:var(--ink);margin-top:6px"><span>Month 1</span><span>Month 6</span></div>
-      <p class="cap">Track your habits and stay consistent over time.</p></div></div>`,
-    foot: cta("Continue") }),
+  // EncouragementScreen + WeightCurves (OnboardingFlow.swift), same fractions and timings.
+  encouragement: () => {
+    const sY = .31, eY = .97, p0 = [.38, .73], c1 = [.50, .73], c2 = [.533, .04], p3 = [1, .04];
+    const plan = `M${pt(0, sY)} C${pt(.45, sY)} ${pt(.55, eY)} ${pt(1, eY)}`;
+    const wo = `M${pt(0, sY)} C${pt(.14, sY + .02)} ${pt(.26, .73)} ${pt(.38, .73)} C${pt(...c1)} ${pt(...c2)} ${pt(...p3)}`;
+    const yAt = t => { const m = 1 - t; return m * m * m * p0[1] + 3 * m * m * t * c1[1] + 3 * m * t * t * c2[1] + t * t * t * p3[1]; };
+    let lo = 0, hi = 1; for (let i = 0; i < 40; i++) { const mid = (lo + hi) / 2; if (yAt(mid) > sY) lo = mid; else hi = mid; }
+    const k = (lo + hi) / 2, L = (a, b) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
+    const a = L(p0, c1), b = L(c1, c2), c = L(c2, p3), d = L(a, b), e = L(b, c), st = L(d, e);
+    const reb = `M${pt(...st)} C${pt(...e)} ${pt(...c)} ${pt(...p3)} L${pt(1, sY)} Z`;
+    return { body: `<h1>Meal Pic creates<br>long&#8209;term results</h1><div class="mid"><div class="ecard"><h3>Weight trend</h3>
+      <div class="ch" style="height:170px;margin-bottom:8px">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 31H100M0 67H100" fill="none" stroke="var(--line)" stroke-dasharray="3 4"/><path d="M0 100H100" stroke="#bfbfbf" fill="none"/></svg>
+        <svg class="fi" style="--w:1.2s;--d:.6s" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8c8c8c" stop-opacity=".3"/><stop offset="1" stop-color="#bfbfbf" stop-opacity=".06"/></linearGradient></defs>
+          <path d="${plan} L100 100 L0 100 Z" fill="url(#eg)"/><path d="${reb}" fill="rgba(219,92,84,.14)"/></svg>
+        <svg class="wipe" style="--w:.25s;--d:1.6s;--e:ease-in-out" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="${wo}" fill="none" stroke="#c75c54" stroke-width="3" stroke-linecap="round"/><path d="${plan}" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+        <i class="mk big" style="left:0;top:31%"></i><i class="mk big pop" style="left:100%;top:97%;--w:1.75s"></i>
+        <span class="fi" style="position:absolute;right:0;top:36.5%;transform:translateY(-50%);font-size:15px;--w:1.2s;--d:.6s">Without a plan</span>
+        <span style="position:absolute;left:2px;top:calc(100% - 26px);display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700">Meal Pic<span style="font-size:10px;font-weight:600;color:#fff;background:#262626;border-radius:9px;padding:3px 8px">Weight</span></span>
+      </div>
+      <div class="ends" style="font-size:15px;color:var(--ink);margin:0 0 22px"><span>Month 1</span><span>Month 6</span></div>
+      <p class="cap" style="font-size:16px;margin:0">Track your habits and stay consistent over time.</p></div></div>`, foot: cta("Continue") };
+  },
   height: () => {
     const cm = S.hunit === "cm";
     const ft = [3, 4, 5, 6, 7].map(v => [v, v + " ft"]), inch = Array.from({ length: 12 }, (_, i) => [i, i + " in"]);
@@ -395,36 +504,48 @@ const PAGES = {
   goal: () => question("What is your goal?", "This helps us generate a plan for your calorie intake.", "goal",
     [{ v: "Lose weight", icon: "arrow.down" }, { v: "Maintain", icon: "minus" }, { v: "Gain weight", icon: "arrow.up" }]),
   desiredWeight: () => ({ body: `<h1>What is your<br>desired weight?</h1><p class="sub">We'll build a plan that gets you there safely.</p><div class="mid">${ruler("goalWeight", "Desired weight")}</div>`, foot: cta("Continue", validGoalWeight()) }),
-  pace: () => ({
-    body: `<h1>How fast do you want to reach your goal?</h1><div class="mid"><div class="read"><small>${direction() === "lose" ? "Weight loss" : "Weight gain"} speed per week</small><b><span id="pv"></span> lbs</b></div>
-      <div class="pacehead"><span id="p0">${ic("tortoise.fill")}Slow</span><span id="p1">${ic("hare.fill")}Recommended</span><span id="p2">${ic("bolt.fill", "width:20px")}Fast</span></div>
-      <input type="range" id="pace" min="0.2" max="3" step="0.1" value="${+S.pace}" aria-label="Pounds per week"><div class="tip" id="tip"></div></div>`,
-    foot: cta("Continue"),
-    after(el) {
-      const pace = el.querySelector("#pace"); let last = +S.pace;
-      const paint = () => {
-        const v = +pace.value; S.pace = v; save();
-        if (v !== last) { last = v; haptic(); }
-        el.querySelector("#pv").textContent = v.toFixed(1);
-        pace.style.setProperty("--fill", ((v - 0.2) / 2.8 * 100) + "%");
-        const zone = v < 0.9 ? 0 : v < 1.5 ? 1 : 2, w = weeksTo(v), losing = direction() === "lose";
-        [0, 1, 2].forEach(i => el.querySelector("#p" + i).classList.toggle("on", i === zone));
-        const eta = w >= 9 ? Math.max(2, Math.round(w / 4.345)) + " months" : w + " week" + (w === 1 ? "" : "s");
-        const line = zone === 0 ? "A gentle pace — the easiest to sustain long term." : zone === 1 ? "This is the most balanced pace, motivating and ideal for most users."
-                   : losing ? "Ambitious — takes strict consistency, and risks muscle loss." : "Ambitious — gaining this fast tends to add more fat than muscle.";
-        el.querySelector("#tip").innerHTML = `<b>You should reach your goal in <em>${eta}</em></b><p>${line}</p>Daily calorie goal: ${targets(v).calories.toLocaleString("en-US")} cal`;
-      };
-      pace.addEventListener("input", paint); paint();
-    } }),
+  // PaceScreen + StepSlider: 0.8 to 1.6 lbs a week in steps of 0.2, same zones and wording.
+  pace: () => {
+    S.pace = Math.min(Math.max(Math.round(+S.pace * 5) / 5, 0.8), 1.6); save();
+    const losing = direction() === "lose";
+    return { body: `<h1>How fast do you want to reach your goal?</h1><div class="mid"><div class="pl">${losing ? "Weight loss" : "Weight gain"} speed per week</div><div class="pn"><span id="pv"></span> lbs</div>
+      <div class="pmk"><span id="p0">${ic("tortoise.fill")}Slow</span><span id="p1">${ic("hare.fill")}Recommended</span><span id="p2">${ic("bolt.fill")}Fast</span></div>
+      <div class="sl" id="sl"><b></b><i></i></div><div class="tipc" id="tip"></div></div>`,
+      foot: cta("Continue"),
+      after(el) {
+        const sl = el.querySelector("#sl");
+        const paint = () => {
+          const v = +S.pace, zone = v < 0.9 ? 0 : v < 1.5 ? 1 : 2, w = weeksTo(v);
+          el.querySelector("#pv").textContent = v.toFixed(1); sl.style.setProperty("--f", (v - 0.8) / 0.8);
+          [0, 1, 2].forEach(i => el.querySelector("#p" + i).classList.toggle("on", i === zone));
+          const eta = w >= 9 ? Math.max(2, Math.round(w / 4.345)) + " months" : w + " week" + (w === 1 ? "" : "s");
+          const line = zone === 0 ? "A gentle pace — the easiest to sustain long term." : zone === 1 ? "This is the most balanced pace, motivating and ideal for most users."
+                     : losing ? "Ambitious — takes strict consistency, and risks muscle loss." : "Ambitious — gaining this fast tends to add more fat than muscle.";
+          const tip = el.querySelector("#tip"); tip.style.display = w > 0 ? "" : "none";
+          tip.innerHTML = `<b>You should reach your goal in <em>${eta}</em></b><span>${line}</span>Daily calorie goal: ${targets(v).calories.toLocaleString("en-US")} cal`;
+        };
+        const set = x => {
+          const r = sl.getBoundingClientRect(), f = (x - r.left - 14) / Math.max(r.width - 28, 1);
+          const v = Math.round(Math.min(Math.max(Math.round((0.8 + f * 0.8) / 0.2) * 0.2, 0.8), 1.6) * 10) / 10;
+          if (v !== +S.pace) { S.pace = v; save(); haptic(); paint(); }
+        };
+        let down = false;
+        sl.addEventListener("pointerdown", e => { down = true; try { sl.setPointerCapture(e.pointerId); } catch (x) {} set(e.clientX); });
+        sl.addEventListener("pointermove", e => { if (down) set(e.clientX); });
+        ["pointerup", "pointercancel"].forEach(n => sl.addEventListener(n, () => { down = false; }));
+        paint();
+      } };
+  },
   realistic: () => ({
     body: `<div class="mid center"><p class="big">${direction() === "lose" ? "Losing" : "Gaining"} <span class="tan">${deltaLb()} lbs</span> is a realistic target. It's not hard at all!</p>
       <p class="sub" style="font-size:16px;margin-top:16px">${(+S.pace).toFixed(1)} lbs a week is the steady pace health guidelines recommend, and it puts you there by ${goalDate().toLocaleDateString("en-US", { month: "long", day: "numeric" })}.</p></div>`,
     foot: cta("Continue") }),
+  // ComparisonScreen: 118 x 250 columns, bars rise to 30% / 70% over 1 s.
   comparison: () => ({
     body: `<h1>A simpler way to stay<br>on track</h1><p class="sub">Log meals in seconds, follow your plan, and see your progress add up.</p>
-      <div class="mid"><div class="cmp"><div class="cols"><div class="col"><span>Without<br>Meal Pic</span><div style="height:30%;background:var(--well)">${ic("person.fill", "width:18px;height:18px")}</div></div>
-        <div class="col"><span>With<br>Meal Pic</span><div style="height:70%;background:var(--pick);color:var(--pickink)">${ic("person.fill.checkmark", "width:22px;height:18px")}</div></div></div>
-        <p>${ic("checkmark", "width:12px;height:12px;margin-right:8px")}Small daily actions lead to progress</p></div></div>`,
+      <div class="mid"><div class="cp"><div class="cols"><div class="c"><span>Without<br>Meal Pic</span><b style="--h:30%"></b><i>${ic("person.fill", "width:20px;height:20px")}</i></div>
+        <div class="c s"><span>With<br>Meal Pic</span><b style="--h:70%"></b><i>${ic("person.fill.checkmark", "width:26px;height:20px")}</i></div></div>
+        <p class="fi" style="--w:1.05s">${ic("checkmark", "width:12px;height:12px")}Small daily actions lead to progress</p></div></div>`,
     foot: cta("Continue") }),
   obstacle: () => question("What's stopping you from reaching your goals?", "", "obstacle",
     [{ v: "Lack of consistency", icon: "chart.bar.fill" }, { v: "Unhealthy eating habits", icon: "takeoutbag.and.cup.and.straw.fill" }, { v: "Lack of support", icon: "person.2.fill" },
@@ -434,16 +555,21 @@ const PAGES = {
      { v: "Vegetarian", icon: "carrot.fill" }, { v: "Vegan", icon: "leaf" }, { v: "Low-carb", icon: "flame.fill" }, { v: "Keto", icon: "drop.fill" }]),
   accomplish: () => question("What would you like to accomplish?", "", "accomplish",
     [{ v: "Eat and live healthier", icon: "apple.logo" }, { v: "Boost my energy and mood", icon: "sun.max.fill" }, { v: "Stay motivated and consistent", icon: "flame.fill" }, { v: "Feel better about my body", icon: "heart.fill" }]),
-  potential: () => ({
-    body: `<h1>You have great potential to crush your goal</h1><div class="mid"><div class="card"><h3>Your weight transition</h3>
-      <svg viewBox="0 0 320 190" style="margin-top:8px"><path d="M10 10V170H310M10 60H310M10 120H310M88 10V170M166 10V170M310 10V170" stroke="var(--line)" stroke-dasharray="3 4" fill="none"/>
-        <path class="fadein" d="M10 124 C40 122 60 120 88 116 C120 112 130 78 166 74 C220 62 260 30 310 26 L310 170 L10 170Z" fill="rgba(200,145,92,.16)"/>
-        <path d="M10 124 C40 122 60 120 88 116 C120 112 130 78 166 74 C220 62 260 30 310 26" class="draw" pathLength="1" fill="none" stroke="var(--tan)" stroke-width="2.6"/>
-        <circle cx="10" cy="124" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/><circle cx="88" cy="116" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/><circle cx="166" cy="74" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/>
-        <circle cx="306" cy="26" r="13" fill="var(--tan)"/><image href="a/i/trophy.fill.png" x="298" y="18" width="16" height="16" style="filter:invert(1)"/>
-        <text x="48" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">3 Days</text><text x="127" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">7 Days</text><text x="238" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">30 Days</text></svg>
-      <p class="cap">Weight change takes time. Consistency in the early weeks matters most</p></div></div>`,
-    foot: cta("Continue") }),
+  // PotentialScreen: the curve falls for a lose goal and rises otherwise; drawn left to right over 1.4 s.
+  potential: () => {
+    const fall = direction() === "lose", fy = y => fall ? 0.93 - y : y, stops = [[.02, .70, "3 Days"], [.27, .65, "7 Days"], [.52, .38, "30 Days"]], end = [.96, .07];
+    const crv = `M${pt(.02, fy(.70))} C${pt(.12, fy(.70))} ${pt(.19, fy(.66))} ${pt(.27, fy(.65))} C${pt(.36, fy(.64))} ${pt(.42, fy(.44))} ${pt(.52, fy(.38))} C${pt(.66, fy(.30))} ${pt(.82, fy(.07))} ${pt(.96, fy(.07))}`;
+    const mid = [.145, .395, .74];
+    return { body: `<h1>You have great potential to crush your goal</h1><div class="mid"><div class="pcard"><h3>Your weight transition</h3>
+      <div class="ch" style="height:175px;margin-bottom:26px">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M2 ${fy(.38) * 100}H96M2 ${fy(.70) * 100}H96M2 0V100M27 0V100M52 0V100M96 0V100" fill="none" stroke="rgba(120,120,128,.35)" stroke-dasharray="3 4"/><path d="M2 100H96" fill="none" stroke="#bfbfbf"/></svg>
+        <svg class="wipe" style="--w:.15s;--d:1.4s" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d19461" stop-opacity=".22"/><stop offset="1" stop-color="#d19461" stop-opacity=".02"/></linearGradient></defs>
+          <path d="${crv} L96 100 L2 100 Z" fill="url(#pg2)"/><path d="${crv}" fill="none" stroke="#d19461" stroke-width="3" stroke-linecap="round"/></svg>
+        ${stops.map((s, i) => `<i class="mk fi" style="left:${s[0] * 100}%;top:${fy(s[1]) * 100}%;--d:.22s;--w:${(.15 + 1.4 * s[0]).toFixed(2)}s"></i><span class="fi" style="position:absolute;left:${mid[i] * 100}%;top:calc(100% + 18px);transform:translate(-50%,-50%);font-size:13px;color:var(--soft);white-space:nowrap;--d:.22s;--w:${(.15 + 1.4 * s[0]).toFixed(2)}s">${s[2]}</span>`).join("")}
+        <span class="tro pop" style="left:96%;top:${fy(.07) * 100}%;--w:1.6s">${ic("trophy.fill")}</span>
+      </div>
+      <p class="cap fi" style="font-size:15px;margin:0;--w:1.67s">Weight change takes time. Consistency in the early weeks matters most</p></div></div>`, foot: cta("Continue") };
+  },
   thanks: () => ({
     body: `<h1>Thank you for trusting us</h1><p class="sub">Now let's personalize Meal Pic for you.</p><div class="mid">${dial(ic("hands.clap.fill"))}
       <div class="perso"><span class="dot">${ic("person.crop.circle.fill")}</span><b>Personalized to your goals</b><p>We'll use your answers to tailor your plan, targets, and recommendations.</p></div></div>`,
@@ -476,44 +602,56 @@ const PAGES = {
   ready: () => ({
     body: `<div class="mid center">${dial(ic("heart.fill", "color:#e5484d"))}<p style="margin:32px 0 10px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px"><span style="width:20px;height:20px;border-radius:50%;background:var(--tan);color:#fff;display:inline-flex;align-items:center;justify-content:center">${ic("checkmark", "width:10px;height:10px")}</span>All done!</p><p class="big">Time to generate<br>your custom plan!</p></div>`,
     foot: cta("Generate my plan") }),
+  // GeneratingScreen: same stages and the same clock (9.5 s of climbing, a 0.9 s crawl before each stage ends).
   generating: () => ({
-    body: `<div class="mid center"><p class="big">We're building your<br>custom plan</p><p class="sub" id="stg" style="font-size:16px">Reading your answers…</p>
-      <div class="load"><svg width="216" height="216" viewBox="0 0 216 216"><circle cx="108" cy="108" r="98" fill="none" stroke="var(--well)" stroke-width="16"/><circle id="arc" cx="108" cy="108" r="98" fill="none" stroke="#34c759" stroke-width="16" stroke-linecap="round" stroke-dasharray="615.75" stroke-dashoffset="615.75"/></svg><b><span id="pct">0</span><i>%</i></b></div>
+    body: `<div class="mid center gen"><p class="big">We're building your<br>custom plan</p><p class="sub" id="stg" style="font-size:16px;white-space:nowrap">Reading your answers…</p>
+      <div class="load"><svg width="212" height="212" viewBox="0 0 212 212"><circle cx="106" cy="106" r="98" fill="none" stroke="var(--well)" stroke-width="16"/><circle id="arc" cx="106" cy="106" r="98" fill="none" stroke="#34c759" stroke-width="16" stroke-linecap="round" stroke-dasharray="615.75" stroke-dashoffset="615.75"/></svg><b><span id="pct">0</span><i>%</i></b></div>
       <ul class="checks">${["Profile", "Calories", "Activity", "Protein, Carbs, Fat", "Health Score"].map(x => `<li><i></i>${x}</li>`).join("")}</ul></div>`,
     foot: cta("Continue", false),
     after(el) {
-      const STG = [["Reading your answers…", 18], ["Applying the Mifflin-St Jeor formula…", 42], ["Calibrating for your activity level…", 63], ["Balancing your macros…", 84], ["Finalizing your plan…", 100]];
-      const arc = el.querySelector("#arc"), pct = el.querySelector("#pct"), stg = el.querySelector("#stg"), rows = el.querySelectorAll(".checks li"), t0 = performance.now(), dur = 6200; let cur = -1;
-      (function tick(now) {
+      S.edit = null; save();
+      const ends = [18, 42, 63, 84, 100], caps = ["Reading your answers…", "Applying the Mifflin-St Jeor formula…", "Calibrating for your activity level…", "Balancing your macros…", "Finalizing your plan…"];
+      const spans = []; let cp = 0, ct = 0;
+      ends.forEach((end, i) => { const span = end - cp, crawl = Math.min(3, Math.max(0, span - 1)), to = end - crawl, climb = 9.5 * span / 100;
+        spans.push([cp, to, ct, ct + climb, i, true]); ct += climb; if (crawl > 0) { spans.push([to, end, ct, ct + 0.9, i, false]); ct += 0.9; } cp = end; });
+      const total = ct, t0 = performance.now(), arc = el.querySelector("#arc"), pct = el.querySelector("#pct"), stg = el.querySelector("#stg"), rows = el.querySelectorAll(".checks li"); let last = -1, shown = -1;
+      const setPct = n => { if (n === shown) return; shown = n; pct.textContent = n; arc.setAttribute("stroke-dashoffset", 615.75 * (1 - n / 100)); };
+      const setStage = i => { rows.forEach((li, j) => { li.className = j < i ? "on" : j === i ? "now" : ""; }); if (i < 5) stg.textContent = caps[i]; };
+      (function tick() {
         if (!el.isConnected) return;
-        const k = Math.min(1, Math.max(0, (now - t0) / dur)), n = Math.round(k * 100);
-        arc.setAttribute("stroke-dashoffset", 615.75 * (1 - k)); pct.textContent = n;
-        let i = STG.findIndex(s => n < s[1]); if (i < 0) i = 4;
-        if (i !== cur) { cur = i; stg.textContent = STG[i][0]; haptic(); }
-        rows.forEach((li, j) => { li.className = k >= 1 || j < i ? "on" : j === i ? "now" : ""; });
-        if (k < 1) requestAnimationFrame(tick); else { el.querySelector("#next").disabled = false; haptic(); }
-      })(t0);
+        const t = (performance.now() - t0) / 1000;
+        if (t >= total) { setPct(100); setStage(5); haptic(); return void setTimeout(() => { const b = el.querySelector("#next"); if (b) b.disabled = false; }, 350); }
+        const sp = spans.find(x => t < x[3]) || spans[spans.length - 1];
+        let p = Math.min(Math.max((t - sp[2]) / Math.max(sp[3] - sp[2], 0.001), 0), 1); if (sp[5]) p = 1 - (1 - p) * (1 - p);
+        setPct(sp[0] + Math.round((sp[1] - sp[0]) * p));
+        if (sp[4] !== last) { last = sp[4]; setStage(sp[4]); }
+        setTimeout(tick, 40);
+      })();
     } }),
+  // PlanScreen as H12 shows it: goal headline, progress chart, the daily numbers with pencils, your info,
+  // why Meal Pic, the data it is built on.
   plan: () => {
-    const p = targets(), dir = direction(), when = goalDate().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-    const headline = dir === "maintain" ? `Goal: Maintain <span class="tan">${+S.weight} lbs</span>` : `Goal: ${dir === "lose" ? "Lose" : "Gain"} <span class="tan">${deltaLb()} lbs</span><br>by <span class="tan">${when}</span>`;
-    const down = dir === "lose", y0 = down ? 14 : 96, y1 = down ? 96 : 14, curve = `M8 ${y0} C 120 ${y0}, 200 ${y1}, 312 ${y1}`;
-    const chart = dir === "maintain" ? "" : `<p class="sec">Estimated progress</p><div style="margin:8px 0 26px">
-        <svg viewBox="0 0 320 112" style="display:block;width:100%"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".22"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
-          <path d="${curve} L312 110 L8 110 Z" fill="url(#g)"/><path d="${curve}" fill="none" stroke="currentColor" stroke-width="2"/>
-          <circle cx="8" cy="${y0}" r="4.5" fill="var(--bg)" stroke="currentColor" stroke-width="2"/><circle cx="312" cy="${y1}" r="4.5" fill="var(--bg)" stroke="currentColor" stroke-width="2"/>
-          <g transform="translate(244 ${down ? y1 - 46 : y1 + 12})"><rect width="62" height="36" rx="8" fill="var(--card)" stroke="currentColor" stroke-width="1.2"/><text x="31" y="14" text-anchor="middle" font-size="9.5" fill="var(--soft)">Target</text><text x="31" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">${+S.goalWeight} lbs</text></g></svg>
-        <div class="ends"><span>Now</span><span>${when}</span></div></div>`;
-    const mac = (v, name, icon, c) => `<div class="mac"><div class="dot" style="background:${c}33;color:${c}">${ic(icon)}</div><b>${v}g</b><small>${name}</small></div>`;
-    return { body: `<div class="tickbadge">${ic("checkmark")}</div><p class="big" style="margin-bottom:24px">${headline}</p>${chart}
-      <p class="sec">Your daily recommendation</p><p class="secsub">You can edit this anytime</p>
-      <div class="rec"><span class="tile">${ic("flame.fill")}</span><span><b>${p.calories.toLocaleString("en-US")}</b><small>Calories</small></span></div>
-      <div class="macs">${mac(p.protein, "Protein", "fork.knife", "#34c759")}${mac(p.carbs, "Carbs", "leaf.fill", "#30b0c7")}${mac(p.fat, "Fats", "drop.fill", "#af52de")}</div>
-      <p class="sec" style="margin-top:28px">Your info</p><p class="secsub">Based on your inputs.</p>
-      <div class="info"><div>${ic("person.fill")}Starting weight: ${+S.weight} lbs</div>${dir === "maintain" ? "" : `<div>${ic("flag.fill")}Goal weight: ${+S.goalWeight} lbs</div>`}
-        <div>${ic("figure.run")}Activity level: ${ACT_TITLE[activity()]}</div><div>${ic("scope")}${dir === "maintain" ? `Target: maintain ${+S.weight} lbs` : `Target: ${dir === "lose" ? "Lose" : "Gain"} ${deltaLb()} lbs by ${when}`}</div></div>
-      <p class="sec" style="margin-top:28px;margin-bottom:10px">How to reach your goals:</p>
-      <div class="info" style="margin-bottom:20px"><div>${ic("camera.fill")}Track your food</div><div>${ic("chart.pie.fill")}Follow your daily calorie recommendation</div><div>${ic("circle.hexagongrid.fill")}Balance your carbs, protein, fat</div><div>${ic("heart.fill")}Build a routine you can keep</div></div>`,
+    const p = targets(), dir = direction(), losing = dir === "lose", when = goalDate().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+    const headline = dir === "maintain" ? `Goal: Maintain <span class="tan">${+S.weight} lbs</span>` : `Goal: ${losing ? "Lose" : "Gain"} <span class="tan">${deltaLb()} lbs</span><br>by <span class="tan">${when}</span>`;
+    const sY = losing ? .12 : .88, eY = losing ? .88 : .12, crv = `M${pt(0, sY)} C${pt(.42, sY)} ${pt(.70, eY)} ${pt(.95, eY)}`;
+    const chart = dir === "maintain" ? "" : `<div class="pc"><h4>Estimated progress</h4><div class="ch in" style="height:130px">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".16"/><stop offset="1" stop-color="currentColor" stop-opacity=".02"/></linearGradient></defs>
+          <path d="M0 12H100M0 50H100" fill="none" stroke="var(--line)" stroke-dasharray="3 4"/><path d="${crv} L95 100 L0 100 Z" fill="url(#pg)"/><path d="${crv}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <i class="mk" style="left:4px;top:${sY * 100}%"></i><i class="mk" style="left:95%;top:${eY * 100}%"></i>
+        <div class="callout" style="top:${Math.max(eY * 130 - 62, 0)}px"><small>Target</small><b>${+S.goalWeight} lbs</b></div></div>
+        <div class="ends" style="font-size:13px;margin-top:8px"><span>Now</span><span>${when}</span></div></div>`;
+    const pen = k => `<button class="pen" data-edit="${k}" aria-label="Edit">${ic("pencil")}</button>`;
+    const mac = (k, name, icon, c) => `<div class="mac"><div class="dot" style="background:${c}24;color:${c}">${ic(icon)}</div><b>${p[k]}g</b><small>${name}</small>${pen(k)}</div>`;
+    const why = (title, mark, color, items) => `<div class="inf w"><h5>${title}</h5>${items.map(x => `<div>${ic(mark, "color:" + color)}${x}</div>`).join("")}</div>`;
+    return { cls: "fade", body: `<div class="tickbadge" style="width:34px;height:34px">${ic("checkmark")}</div><p class="big goalh" style="font-size:30px;line-height:1.2;margin-bottom:20px">${headline}</p>${chart}
+      <div class="pc"><h4>Your daily recommendation</h4><small>You can edit this anytime</small>
+        <div class="rec in"><span class="tile">${ic("flame.fill", "width:18px;height:18px")}</span><span><b>${p.calories.toLocaleString("en-US")}</b><small>Calories</small></span>${pen("calories")}</div>
+        <div class="macs">${mac("protein", "Protein", "fork.knife", "#34c759")}${mac("carbs", "Carbs", "leaf.fill", "#30b0c7")}${mac("fat", "Fats", "drop.fill", "#af52de")}</div></div>
+      <div class="pc"><h4>Your info</h4><small>Based on your inputs.</small><div class="inf in"><div>${ic("person.fill")}Starting weight: ${+S.weight} lbs</div>${dir === "maintain" ? "" : `<div>${ic("flag.fill")}Goal weight: ${+S.goalWeight} lbs</div>`}
+        <div>${ic("figure.run")}Activity level: ${ACT_TITLE[activity()]}</div><div>${ic("scope")}${dir === "maintain" ? `Target: maintain ${+S.weight} lbs` : `Target: ${losing ? "Lose" : "Gain"} ${deltaLb()} lbs by ${when}`}</div></div></div>
+      <div class="pc"><h4>Why Meal Pic?</h4><div class="in">${why("Without Meal Pic", "xmark", "#e5484d", ["Tedious to track what you eat", "Unclear how to reach your goals", "Hard to stay motivated"])}${why("With Meal Pic", "checkmark", "#34c759", ["Log food in seconds", "Clear daily targets to follow", "AI helps you stay on track"])}</div></div>
+      <div class="pc"><h4>Built on real nutrition data:</h4><div class="proof in"><div>${ic("checkmark.seal.fill")}<b>USDA</b><small>food database</small></div><div>${ic("camera.viewfinder")}<b>Photo</b><small>scan any meal</small></div><div>${ic("lock.fill")}<b>Private</b><small>logs stay yours</small></div></div></div>
+      <div style="height:30px"></div>`,
       foot: cta("Let's get started!") };
   },
   firstMeal: () => ({
@@ -525,12 +663,12 @@ const PAGES = {
       `${clip("first-meal")}<div class="cam" id="fmC"><div class="br"><i></i><i></i><i></i><i></i></div></div>
        <div class="scan" id="fmR"><div class="r"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="66" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="12"/><circle id="fmA" cx="75" cy="75" r="66" fill="none" stroke="#34c759" stroke-width="12" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/></svg><b><span id="fmP">0</span><i>%</i></b></div>
          <ul>${["Reading the photo", "Identifying foods", "Measuring portions", "Calculating calories and macros"].map(x => `<li><i></i>${x}</li>`).join("")}</ul></div>
-       <button class="shutter" id="fmGo" aria-label="Take the photo"></button>`)}</div>`,
+       <button class="shutter" id="fmGo" aria-label="Take the photo"></button>`, "min(76vw,365px,calc((100dvh - 236px)*.489))")}</div>`,
     foot: `<div id="fmF" style="height:54px"></div>`,
     after(el) {
       const $ = id => el.querySelector(id), M = { cal: 600, p: 48, c: 69, f: 13 };
       $("#fmGo").addEventListener("click", () => {
-        haptic(); $("video").pause(); $("#fmGo").remove(); $("#fmC").remove(); $("#fmR").classList.add("on");
+        haptic(); $(".scr>img").src = "a/first-meal-poster.jpg"; $("#fmGo").remove(); $("#fmC").remove(); $("#fmR").classList.add("on");
         $("#fmT").textContent = "Reading your plate";
         const caps = ["Reading the photo…", "Identifying foods…", "Measuring portions…", "Estimating macros…"], rows = el.querySelectorAll(".scan li"), t0 = performance.now(); let cur = -1;
         (function tick(now) {
@@ -558,7 +696,7 @@ const PAGES = {
       }
     } }),
   pwIntro: () => ({
-    body: `<h1 class="center" style="font-size:32px;margin-top:max(22px,4dvh)">We want you to try<br>Meal Pic for free</h1><div class="mid fill">${phone(clip("scan-demo"))}</div>`,
+    body: `<h1 class="center" style="font-size:32px;margin-top:max(22px,4dvh)">We want you to try<br>Meal Pic for free</h1><div class="mid fill">${phone(clip("scan-demo"), "min(70vw,336px,calc((100dvh - 262px)*.489))")}</div>`,
     foot: `<p class="nopay">${ic("checkmark")}No Payment Due Now</p>${cta("Continue")}` }),
   pwPlans: () => {
     const t = prices.trial_days, y = prices.yearly, m = prices.monthly, yearly = S.plan === "yearly";
@@ -584,7 +722,8 @@ function show(step, dir) {
   S.step = step; save();
   const def = PAGES[step](), el = document.createElement("div");
   el.className = "page" + (NOHEAD.includes(step) ? " nohead" : ""); el.dataset.step = step;
-  el.innerHTML = `<div class="scroll">${def.body}</div><div class="foot">${def.foot}</div>`;
+  el.innerHTML = `<div class="scroll ${def.cls || ""}">${def.body}</div><div class="foot">${def.foot}</div>`;
+  trackStep(step); setTimeout(() => el.classList.add("go"), 40);
   const old = current; current = el;
   if (old) old.querySelectorAll("video").forEach(v => v.pause());
   if (old && dir) {
@@ -592,7 +731,7 @@ function show(step, dir) {
     stage.appendChild(el); old.style.pointerEvents = "none";
     requestAnimationFrame(() => requestAnimationFrame(() => {
       el.style.transition = ""; el.style.transform = "translate3d(0,0,0)"; old.style.transform = `translate3d(${dir > 0 ? -100 : 100}%,0,0)`;
-      setTimeout(() => old.remove(), 440);
+      setTimeout(() => old.remove(), 320);
     }));
   } else { stage.innerHTML = ""; stage.appendChild(el); }
   el.querySelectorAll("video").forEach(v => { v.muted = true; v.playsInline = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
@@ -602,7 +741,8 @@ function show(step, dir) {
   wire(el); if (def.after) def.after(el);
 }
 function next() {
-  if (S.step === "goal" && direction() !== "maintain" && !validGoalWeight()) S.goalWeight = direction() === "lose" ? Math.max(70, +S.weight - 15) : +S.weight + 10;
+  // Seed a sensible desired weight (the app: 15 under for a lose goal, 10 over for a gain).
+  if (S.step === "goal" && direction() !== "maintain" && (!(+S.goalWeight >= 70) || !validGoalWeight())) { S.goalWeight = direction() === "lose" ? Math.max(80, +S.weight - 15) : +S.weight + 10; save(); }
   const o = order(); show(o[Math.min(o.indexOf(S.step) + 1, o.length - 1)], 1);
 }
 function back() {
@@ -654,10 +794,24 @@ document.getElementById("app").addEventListener("click", e => {
   if (b.dataset.unit) { haptic(); S.unit = b.dataset.unit; save(); return redraw(); }
   if (b.dataset.hunit) { haptic(); S.hunit = b.dataset.hunit; save(); return redraw(); }
   if (b.dataset.plan) { haptic(); S.plan = b.dataset.plan; save(); return redraw(); }
+  if (b.dataset.edit) { haptic(); return openEdit(b.dataset.edit); }
   if (b.id === "back") { haptic(); return back(); }
   if (b.id === "next") { haptic(); return next(); }
   if (b.id === "checkout") { haptic(); return startCheckout(); }
 });
+
+// ---- the plan page's pencils: a small sheet with one big number and - / + (the app's PlanEditSheet)
+function openEdit(k) {
+  const step = k === "calories" ? 10 : 1, unit = k === "calories" ? "" : "g"; let v = targets()[k];
+  const d = document.createElement("div"); d.className = "esheet";
+  d.innerHTML = `<div class="eb"></div><div class="ep"><div class="grab"></div><h4>${({ calories: "Calories", protein: "Protein", carbs: "Carbs", fat: "Fats" })[k]}</h4><div class="en"><button data-d="-1">&minus;</button><b>${v.toLocaleString("en-US")}${unit}</b><button data-d="1">+</button></div>${cta("Done", true, "edone")}</div>`;
+  document.getElementById("app").appendChild(d); requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add("up")));
+  d.addEventListener("click", e => {
+    e.stopPropagation(); const b = e.target.closest("button");
+    if (e.target.classList.contains("eb") || (b && b.id === "edone")) { haptic(); d.classList.remove("up"); return void setTimeout(() => { d.remove(); redraw(); }, 280); }
+    if (b && b.dataset.d) { haptic(); v = Math.max(0, v + step * (+b.dataset.d)); S.edit = Object.assign({}, S.edit, { [k]: v }); save(); d.querySelector(".en b").textContent = v.toLocaleString("en-US") + unit; }
+  });
+}
 
 // ---- paying comes FIRST, the account after (Jack 2026-11-16: "Saving their account happens after they pay").
 // The trial button makes a nameless account, puts the plan and answers on it and goes straight to Stripe.
@@ -673,7 +827,7 @@ function answers() {
     terms_accepted: true, source: "web_quiz", utm: S.utm || null };
 }
 async function startCheckout() {
-  const b = current.querySelector("#checkout"); b.disabled = true; b.textContent = "One moment…"; payErr = "";
+  const b = current.querySelector("#checkout"); b.disabled = true; b.textContent = "One moment…"; payErr = ""; track("paywall_purchase_started", null, { plan: S.plan });
   try {
     let { data: { session } } = await sb.auth.getSession();
     if (!session) { const r = await sb.auth.signInAnonymously(); if (r.error || !r.data.session) throw r.error || new Error(""); session = r.data.session; }
@@ -753,14 +907,14 @@ sheet.addEventListener("keydown", e => { if (e.key === "Enter") { const b = shee
   // ?preview=<step>: that screen with sample answers, nothing saved (for screenshots). ?preview=sheet[:email|:phone[:sent]]
   const pv = q.get("preview");
   if (pv) {
-    save = () => {};
+    PREVIEW = true; save = () => {};
     Object.assign(S, { sex: "Male", workouts: "3-5", bm: 6, bd: 14, by: 1996, ft: 5, inch: 10, weight: 185, goal: "Lose weight", goalWeight: 170, pace: 1.2, unit: "lbs", hunit: "ft", rollover: "Yes", method: "Continue with Google", plan: "yearly" });
     const [name, way, sent] = pv.split(":");
     if (name === "sheet") { show("done", 0); openSheet(); auth.way = way || ""; auth.sent = sent === "sent"; auth.address = "you@example.com"; drawSheet(); }
     else show(PAGES[name] ? name : "welcome", 0);
     return;
   }
-  if (q.get("paid") === "1") S.step = "done"; else if (q.get("paid") === "0") S.step = "pwPlans";
+  if (q.get("paid") === "1") S.step = "done"; else if (q.get("paid") === "0") { S.step = "pwPlans"; track("paywall_purchase_cancelled", null, { plan: S.plan }); }
   if (q.get("paid")) history.replaceState(null, "", location.pathname);
   if (!PAGES[S.step]) S.step = "welcome";
   if (S.step === "generating") S.step = "ready";
