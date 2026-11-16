@@ -27,22 +27,84 @@
 html,body{margin:0;height:100%}
 body{background:var(--bg);color:var(--ink);font:17px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
 #app{max-width:480px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;padding:0 22px calc(18px + env(safe-area-inset-bottom))}
-.top{height:56px;display:flex;align-items:center;gap:12px;padding-top:env(safe-area-inset-top)}
+.top{height:52px;display:flex;align-items:center;gap:8px;padding-top:env(safe-area-inset-top);padding-right:36px}
 .back{width:44px;height:44px;margin-left:-12px;border:0;background:none;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer}
 .back[hidden]{visibility:hidden;display:flex}
-.bar{flex:1;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.bar{flex:1;height:3px;border-radius:2px;background:var(--line);overflow:hidden}
 .bar i{display:block;height:100%;background:var(--ink);border-radius:2px;transition:width .3s ease}
-h1{font-size:30px;line-height:1.14;letter-spacing:-.02em;margin:10px 0 8px;font-weight:700}
-.sub{color:var(--soft);font-size:16px;margin:0 0 22px}
+h1{font-size:30px;line-height:1.16;letter-spacing:-.02em;margin:14px 0 10px;font-weight:700}
+.sub{color:var(--soft);font-size:14px;margin:0 0 12px}
 .body{flex:1;display:flex;flex-direction:column}
 .fill{flex:1}
-.opts{display:flex;flex-direction:column;gap:12px}
-.opt{width:100%;min-height:68px;border:0;border-radius:18px;background:var(--card);color:var(--ink);font-weight:600;font-size:18px;line-height:1.2;font-family:inherit;text-align:left;padding:14px 20px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:3px}
-.opt small{font-weight:400;font-size:14px;color:var(--soft)}
-.opt.on{background:var(--pick);color:var(--pickink)}
-.opt.on small{color:var(--pickink);opacity:.7}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;padding:10px 0}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{width:100%;min-height:58px;border:1.5px solid transparent;border-radius:16px;background:var(--card);color:var(--ink);font-weight:600;font-size:17px;line-height:1.2;font-family:inherit;text-align:left;padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:0 0 0 1px var(--line)}
+.opt .ic{flex:0 0 24px;height:24px;display:flex;align-items:center;justify-content:center}
+.opt .tx{flex:1;display:flex;flex-direction:column;gap:3px}
+.opt small{font-weight:400;font-size:13px;color:var(--soft)}
+.opt .rad{flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid var(--line)}
+.opt.on{border-color:var(--ink);box-shadow:none}
+.opt.on .rad{border:7px solid var(--ink)}
+.seg{align-self:center;display:flex;background:var(--card);border-radius:22px;padding:3px;box-shadow:0 0 0 1px var(--line);margin-bottom:26px}
+.seg span{min-width:128px;text-align:center;font-size:14px;font-weight:600;padding:10px 0;border-radius:19px}
+.seg .on{background:var(--pick);color:var(--pickink)}
+.wheels{position:relative;display:flex;justify-content:center;gap:6px;height:220px}
+.wheels:before{content:"";position:absolute;left:8%;right:8%;top:88px;height:44px;border-radius:12px;background:rgba(120,120,128,.14);pointer-events:none}
+.wheels.two:before{display:none}
+.wheel{position:relative;height:220px;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  -webkit-mask-image:linear-gradient(transparent,#000 38%,#000 62%,transparent);mask-image:linear-gradient(transparent,#000 38%,#000 62%,transparent)}
+.wheel::-webkit-scrollbar{display:none}
+.wheel div{height:44px;line-height:44px;scroll-snap-align:center;text-align:center;font-size:23px;white-space:nowrap;padding:0 14px}
+.wheel:before,.wheel:after{content:"";display:block;height:88px}
+.wheels.two .wheel{flex:0 0 150px;background:linear-gradient(transparent 88px,rgba(120,120,128,.14) 88px,rgba(120,120,128,.14) 132px,transparent 132px);border-radius:12px}
+.read{text-align:center}
+.read small{display:block;font-size:17px;color:var(--ink);margin-bottom:6px}
+.read b{font-size:34px;font-weight:700;letter-spacing:-.01em}
+.ruler{position:relative;margin:14px -22px 0;height:74px}
+.ruler:after{content:"";position:absolute;left:50%;top:0;width:2.5px;margin-left:-1.25px;height:74px;background:var(--ink);pointer-events:none}
+.ruler .track{height:74px;overflow-x:scroll;scrollbar-width:none;-webkit-overflow-scrolling:touch;display:flex;align-items:flex-end}
+.ruler .track::-webkit-scrollbar{display:none}
+.ruler .pad{flex:0 0 50%}
+.ruler .ticks{flex:0 0 auto;height:52px;background:
+  linear-gradient(90deg,var(--ink) 1.5px,transparent 1.5px) 0 100%/100px 52px repeat-x,
+  linear-gradient(90deg,var(--soft) 1px,transparent 1px) 0 100%/10px 30px repeat-x}
+.pacehead{display:flex;justify-content:space-between;align-items:flex-end;margin:22px 0 12px;font-size:15px;font-weight:600}
+.pacehead span{text-align:center;color:var(--ink)}
+.pacehead span.on{color:var(--tan)}
+.pacehead svg{display:block;margin:0 auto 6px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--ink) var(--fill,33%),var(--line) var(--fill,33%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.3);margin-top:-11px}
+.tip{background:var(--card);border-radius:16px;padding:16px;margin-top:18px;font-size:15px;color:var(--soft)}
+.tip b{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}
+.tip b em{font-style:normal;color:var(--tan);font-weight:600}
+.tip p{margin:0 0 8px}
+.ringbox{position:relative;width:210px;height:210px;margin:24px auto}
+.ringbox svg{transform:rotate(-90deg)}
+.ringbox b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:700;letter-spacing:-.02em}
+.ringbox b i{font-style:normal;font-size:22px;color:var(--soft);margin:14px 0 0 2px}
+.checks{list-style:none;margin:10px auto 0;padding:0;width:210px;font-size:16px;font-weight:600}
+.checks li{display:flex;align-items:center;gap:12px;padding:6px 0;opacity:.25;transition:opacity .3s}
+.checks li.on{opacity:1}
+.checks i{flex:0 0 18px;height:18px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center}
+.badge{width:34px;height:34px;border-radius:50%;background:var(--pick);color:var(--pickink);display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.goalhead{text-align:center;font-size:28px;font-weight:700;line-height:1.2;letter-spacing:-.02em;margin:0 0 22px}
+.goalhead em{font-style:normal;color:var(--tan)}
+.sec{font-size:17px;font-weight:700;margin:0 0 2px}
+.secsub{font-size:13px;color:var(--soft);margin:0 0 10px}
+.chart{position:relative;margin:8px 0 26px}
+.chart svg{display:block;width:100%;height:auto}
+.chart .ends{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);margin-top:4px}
+.rec{background:var(--card);border-radius:16px;padding:14px;display:flex;align-items:center;gap:14px}
+.rec .tile{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.rec b{font-size:28px;display:block;line-height:1.1}
+.rec small,.mac small{color:var(--soft);font-size:13px}
+.macs{display:flex;gap:10px;margin-top:10px}
+.mac{flex:1;background:var(--card);border-radius:16px;padding:12px}
+.mac .dot{width:22px;height:22px;border-radius:50%;margin-bottom:10px}
+.mac b{font-size:21px;display:block}
 .cta{width:100%;min-height:60px;border:0;border-radius:30px;background:var(--blue);color:#fff;font-weight:600;font-size:18px;line-height:1;font-family:inherit;cursor:pointer;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:10px}
-.cta:disabled{opacity:.4;cursor:default}
+.cta:disabled{opacity:.35;cursor:default}
 .cta.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
 .cta.dark{background:var(--pick);color:var(--pickink)}
 .link{background:none;border:0;color:var(--soft);font-weight:400;font-size:15px;line-height:1;font-family:inherit;min-height:44px;width:100%;cursor:pointer}
@@ -95,7 +157,8 @@ const app = document.getElementById("app");
 const KEY = "mp-quiz-state";
 
 // ---- state (kept in the browser so a Google round trip or a reload loses nothing) ----
-let S = { step: "intro", sex: "", workouts: "", bm: "", bd: "", by: "", ft: "", inch: "", weight: "", goal: "", goalWeight: "", pace: 1.0,
+const NOW = new Date();
+let S = { step: "intro", sex: "", workouts: "", bm: NOW.getMonth() + 1, bd: NOW.getDate(), by: NOW.getFullYear() - 25, ft: 5, inch: 8, weight: 160, goal: "", goalWeight: 0, pace: 1.2,
           authMode: "", address: "", sent: false, plan: "yearly" };
 try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
 let save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
@@ -136,13 +199,16 @@ function goalLine() {
 
 // ---- steps ----
 function order() {
-  const o = ["intro", "sex", "workouts", "birthday", "body", "goal"];
+  const o = ["intro", "sex", "workouts", "birthday", "height", "weight", "goal"];
   if (direction() !== "maintain") o.push("goalWeight", "pace");
   return o.concat(["building", "plan", "account", "pay", "done"]);
 }
-const QUESTIONS = 8;
+const QUESTIONS = 9;
 function go(step) { S.step = step; err = ""; save(); render(); window.scrollTo(0, 0); }
-function next() { const o = order(); go(o[Math.min(o.indexOf(S.step) + 1, o.length - 1)]); }
+function next() {
+  if (S.step === "goal" && direction() !== "maintain" && !validGoalWeight()) S.goalWeight = direction() === "lose" ? Math.max(70, +S.weight - 15) : +S.weight + 10;
+  const o = order(); go(o[Math.min(o.indexOf(S.step) + 1, o.length - 1)]);
+}
 function back() {
   if (S.step === "account" && S.authMode) { S.authMode = ""; S.sent = false; err = ""; save(); return render(); }
   const o = order(), i = o.indexOf(S.step);
@@ -152,14 +218,27 @@ function back() {
 }
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const IC = {
+  Male: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10" cy="14" r="5.5"/><path d="M14 10l6-6M15 4h5v5"/></svg>',
+  Female: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="5.5"/><path d="M12 14.500V22M8.500 18.500h7"/></svg>',
+  Other: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="5"/><path d="M14.500 7.500L20 2M16 2h4v4M11 16v6M8 19.500h6"/></svg>',
+  "0-2": '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="12" r="3.600"/><circle cx="17" cy="12" r="3.600"/></svg>',
+  "3-5": '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="8" cy="16" r="3"/><circle cx="16" cy="16" r="3"/></svg>',
+  "6+": '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">' + [5,12,19].map(y => [5,12,19].map(x => `<circle cx="${x}" cy="${y}" r="2.400"/>`).join("")).join("") + '</svg>',
+  "Lose weight": '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 14l6 6 6-6"/></svg>',
+  Maintain: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 12h12"/></svg>',
+  "Gain weight": '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V4M6 10l6-6 6 6"/></svg>',
+};
 const opt = (key, value, detail) =>
-  `<button class="opt ${S[key] === value ? "on" : ""}" data-pick="${key}" data-value="${esc(value)}">${esc(value)}${detail ? `<small>${esc(detail)}</small>` : ""}</button>`;
-const select = (key, label, values) =>
-  `<select class="field" data-key="${key}" aria-label="${label}"><option value="">${label}</option>${values.map(v =>
-    `<option value="${v[0]}" ${String(S[key]) === String(v[0]) ? "selected" : ""}>${v[1]}</option>`).join("")}</select>`;
+  `<button class="opt ${S[key] === value ? "on" : ""}" data-pick="${key}" data-value="${esc(value)}"><span class="ic">${IC[value] || ""}</span><span class="tx">${esc(value)}${detail ? `<small>${esc(detail)}</small>` : ""}</span><span class="rad"></span></button>`;
+// A scroll wheel like the iPhone's: the row in the middle is the value.
+const wheel = (key, values) => `<div class="wheel" data-wheel="${key}" data-values='${JSON.stringify(values.map(v => v[0]))}'>${values.map(v => `<div>${v[1]}</div>`).join("")}</div>`;
+// The app's weight ruler: 10px a pound, the line in the middle is the value.
+const R_MIN = 70, R_MAX = 500;
+const ruler = (key, label) => `<div class="read"><small>${label}</small><b><span id="rv">${+S[key]}</span> lbs</b></div>
+  <div class="ruler"><div class="track" data-ruler="${key}"><div class="pad"></div><div class="ticks" style="width:${(R_MAX - R_MIN) * 10 + 2}px"></div><div class="pad"></div></div></div>`;
 const cta = (label, ok = true, id = "next") => `<button class="cta" id="${id}" ${ok && !busy ? "" : "disabled"}>${busy ? "One moment…" : label}</button>`;
 const errLine = () => `<p class="err" role="alert">${esc(err)}</p>`;
-const validBody = () => S.ft && S.inch !== "" && +S.weight >= 70 && +S.weight <= 600;
 const validBirthday = () => S.bm && S.bd && S.by && age() >= 13 && age() <= 100;
 function validGoalWeight() {
   const g = +S.goalWeight, w = +S.weight;
@@ -175,47 +254,61 @@ function screen() {
       <h1>Calorie tracking<br>made easy</h1>
       <p class="sub">Answer a few quick questions and get your custom calorie plan.</p></div>
     <div class="fill"></div>${cta("Get Started")}`;
-  if (t === "sex") return `<h1>Choose your gender</h1><p class="sub">This will be used to calibrate your custom plan.</p>
-    <div class="opts">${opt("sex", "Male")}${opt("sex", "Female")}${opt("sex", "Other")}</div><div class="fill"></div>${cta("Continue", !!S.sex)}`;
+  if (t === "sex") return `<h1>Choose your gender</h1><p class="sub">This helps personalize your experience.</p>
+    <div class="mid"><div class="opts">${opt("sex", "Male")}${opt("sex", "Female")}${opt("sex", "Other")}</div></div>${cta("Continue", !!S.sex)}`;
   if (t === "workouts") return `<h1>How many workouts do you do per week?</h1><p class="sub">This will be used to calibrate your custom plan.</p>
-    <div class="opts">${opt("workouts", "0-2", "Workouts now and then")}${opt("workouts", "3-5", "A few workouts per week")}${opt("workouts", "6+", "Dedicated athlete")}</div>
-    <div class="fill"></div>${cta("Continue", !!S.workouts)}`;
+    <div class="mid"><div class="opts">${opt("workouts", "0-2", "Workouts now and then")}${opt("workouts", "3-5", "A few workouts per week")}${opt("workouts", "6+", "Dedicated athlete")}</div></div>
+    ${cta("Continue", !!S.workouts)}`;
   if (t === "birthday") {
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"].map((m, i) => [i + 1, m]);
     const days = Array.from({ length: 31 }, (_, i) => [i + 1, i + 1]);
-    const y0 = new Date().getFullYear() - 13, years = Array.from({ length: 88 }, (_, i) => [y0 - i, y0 - i]);
-    return `<h1>When were you born?</h1><p class="sub">This will be used to calibrate your custom plan.</p>
-      <div class="row">${select("bm", "Month", months)}</div><div class="row" style="margin-top:10px">${select("bd", "Day", days)}${select("by", "Year", years)}</div>
-      <div class="fill"></div>${cta("Continue", validBirthday())}`;
+    const y0 = NOW.getFullYear() - 13, years = Array.from({ length: 88 }, (_, i) => [y0 - 87 + i, y0 - 87 + i]);
+    return `<h1>When were you born?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p>
+      <div class="mid"><div class="wheels">${wheel("bm", months)}${wheel("bd", days)}${wheel("by", years)}</div></div>${cta("Continue")}`;
   }
-  if (t === "body") {
+  if (t === "height") {
     const ft = [3, 4, 5, 6, 7].map(v => [v, v + " ft"]), inch = Array.from({ length: 12 }, (_, i) => [i, i + " in"]);
-    return `<h1>Height &amp; weight</h1><p class="sub">This will be used to calibrate your custom plan.</p>
-      <label class="cap">Height</label><div class="row">${select("ft", "Feet", ft)}${select("inch", "Inches", inch)}</div>
-      <label class="cap" for="w">Weight (lbs)</label>
-      <input class="field" id="w" data-key="weight" inputmode="numeric" pattern="[0-9]*" placeholder="160" value="${esc(S.weight)}">
-      <div class="fill"></div>${cta("Continue", validBody())}`;
+    return `<h1>What is your height?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p>
+      <div class="mid"><div class="wheels two">${wheel("ft", ft)}${wheel("inch", inch)}</div></div>${cta("Continue")}`;
   }
+  if (t === "weight") return `<h1>What is your<br>current weight?</h1><p class="sub">This will be taken into account when calculating your daily nutrition goals.</p>
+    <div class="mid">${ruler("weight", "Current weight")}</div>${cta("Continue")}`;
   if (t === "goal") return `<h1>What is your goal?</h1><p class="sub">This helps us generate a plan for your calorie intake.</p>
-    <div class="opts">${opt("goal", "Lose weight")}${opt("goal", "Maintain")}${opt("goal", "Gain weight")}</div><div class="fill"></div>${cta("Continue", !!S.goal)}`;
-  if (t === "goalWeight") return `<h1>What is your goal weight?</h1><p class="sub">You weigh ${+S.weight} lbs now.</p>
-    <input class="field" data-key="goalWeight" inputmode="numeric" pattern="[0-9]*" placeholder="${direction() === "lose" ? Math.max(70, +S.weight - 15) : +S.weight + 10}" value="${esc(S.goalWeight)}" aria-label="Goal weight in pounds">
-    <div class="fill"></div>${cta("Continue", validGoalWeight())}`;
-  if (t === "pace") {
-    const verb = direction() === "lose" ? "Lose" : "Gain";
-    const row = (v, name, d) => `<button class="opt ${+S.pace === v ? "on" : ""}" data-pace="${v}">${name}<small>${verb} ${v} lb a week${d ? " · " + d : ""}</small></button>`;
-    return `<h1>How fast do you want to reach your goal?</h1><p class="sub">You can change this any time in the app.</p>
-      <div class="opts">${row(0.5, "Slow and steady")}${row(1.0, "Recommended", "easiest to stick with")}${row(1.5, "Fast")}</div>
-      <div class="fill"></div>${cta("Continue")}`;
-  }
-  if (t === "building") return `<div class="fill"></div><div class="center"><div class="ring"></div><h1>We're building your custom plan</h1><p class="sub">Balancing your calories and macros…</p></div><div class="fill"></div>`;
+    <div class="mid"><div class="opts">${opt("goal", "Lose weight")}${opt("goal", "Maintain")}${opt("goal", "Gain weight")}</div></div>${cta("Continue", !!S.goal)}`;
+  if (t === "goalWeight") return `<h1>What is your<br>desired weight?</h1><p class="sub">We'll build a plan that gets you there safely.</p>
+    <div class="mid">${ruler("goalWeight", "Desired weight")}</div>${cta("Continue", validGoalWeight())}`;
+  if (t === "pace") return `<h1>How fast do you want to reach your goal?</h1>
+    <div class="mid"><div class="read"><small>${direction() === "lose" ? "Weight loss" : "Weight gain"} speed per week</small><b><span id="pv">${(+S.pace).toFixed(1)}</span> lbs</b></div>
+      <div class="pacehead"><span id="p0">Slow</span><span id="p1">Recommended</span><span id="p2">Fast</span></div>
+      <input type="range" id="pace" min="0.2" max="3" step="0.1" value="${+S.pace}" aria-label="Pounds per week">
+      <div class="tip" id="tip"></div></div>${cta("Continue")}`;
+  if (t === "building") return `<div class="mid center"><h1>We're building your<br>custom plan</h1><p class="sub" id="stage">Crunching your numbers…</p>
+      <div class="ringbox"><svg width="210" height="210" viewBox="0 0 210 210"><circle cx="105" cy="105" r="93" fill="none" stroke="rgba(120,120,128,.16)" stroke-width="16"/>
+        <circle id="arc" cx="105" cy="105" r="93" fill="none" stroke="#34c759" stroke-width="16" stroke-linecap="round" stroke-dasharray="584.300" stroke-dashoffset="584.300"/></svg><b><span id="pct">0</span><i>%</i></b></div>
+      <ul class="checks">${["Profile", "Calories", "Activity", "Protein, Carbs, Fat", "Health Score"].map(x => `<li><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4.500" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></i>${x}</li>`).join("")}</ul></div>`;
   if (t === "plan") {
-    const p = targets();
-    return `<h1>Your custom plan is ready</h1><p class="goal">${goalLine()}</p>
-      <div class="card"><div class="kcal">${p.calories.toLocaleString("en-US")}<span>calories a day</span></div>
-        <div class="macros"><div><b>${p.protein}g</b><small>Protein</small></div><div><b>${p.carbs}g</b><small>Carbs</small></div><div><b>${p.fat}g</b><small>Fat</small></div></div></div>
-      <p class="note">An estimate from your answers, not medical advice. You can edit every number in the app.</p>
-      <div class="fill"></div>${cta("Continue")}`;
+    const p = targets(), dir = direction();
+    const lbs = Math.abs((+S.goalWeight) - (+S.weight));
+    const when = new Date(Date.now() + Math.round(lbs / (+S.pace) * 7) * 864e5).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+    const head = dir === "maintain" ? `Goal: Maintain <em>${+S.weight} lbs</em>` : `Goal: ${dir === "lose" ? "Lose" : "Gain"} <em>${lbs} lbs</em><br>by <em>${when}</em>`;
+    const down = dir === "lose", y0 = down ? 14 : 96, y1 = down ? 96 : 14;
+    const curve = `M8 ${y0} C 120 ${y0}, 200 ${y1}, 312 ${y1}`;
+    const chart = dir === "maintain" ? "" : `<p class="sec">Estimated progress</p><div class="chart">
+        <svg viewBox="0 0 320 112"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".22"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+          <path d="${curve} L312 110 L8 110 Z" fill="url(#g)"/><path d="${curve}" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="8" cy="${y0}" r="4.500" fill="var(--bg)" stroke="currentColor" stroke-width="2"/><circle cx="312" cy="${y1}" r="4.500" fill="var(--bg)" stroke="currentColor" stroke-width="2"/>
+          <g transform="translate(244 ${down ? y1 - 46 : y1 + 12})"><rect width="62" height="36" rx="8" fill="var(--card)" stroke="currentColor" stroke-width="1.200"/><text x="31" y="14" text-anchor="middle" font-size="9.500" fill="var(--soft)">Target</text><text x="31" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">${+S.goalWeight} lbs</text></g></svg>
+        <div class="ends"><span>Now</span><span>${when}</span></div></div>`;
+    return `<div class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.400" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></div>
+      <p class="goalhead">${head}</p>${chart}
+      <p class="sec">Your daily recommendation</p><p class="secsub">You can edit this anytime</p>
+      <div class="rec"><span class="tile" style="background:rgba(255,45,85,.14)"><svg width="20" height="20" viewBox="0 0 24 24" fill="#ff2d55"><path d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-2 1-3.500 2-4.500 0 2 1 3 2 3 0-4 1-7 2-10.500z"/></svg></span>
+        <span><b>${p.calories.toLocaleString("en-US")}</b><small>Calories</small></span></div>
+      <div class="macs"><div class="mac"><div class="dot" style="background:rgba(52,199,89,.22)"></div><b>${p.protein}g</b><small>Protein</small></div>
+        <div class="mac"><div class="dot" style="background:rgba(48,176,199,.24)"></div><b>${p.carbs}g</b><small>Carbs</small></div>
+        <div class="mac"><div class="dot" style="background:rgba(175,82,222,.22)"></div><b>${p.fat}g</b><small>Fats</small></div></div>
+      <p class="note">An estimate from your answers, not medical advice.</p>
+      <div class="fill"></div>${cta("Let's get started!")}`;
   }
   if (t === "account") return accountScreen();
   if (t === "pay") {
@@ -266,8 +359,53 @@ function render() {
   app.innerHTML = `<div class="top">${chrome ? `<button class="back" id="back" aria-label="Back" ${showBack ? "" : "hidden"}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><div class="bar"><i style="width:${pct}%"></i></div>` : ""}</div>
     <div class="body">${screen()}</div>`;
   const f = app.querySelector("#addr, #code"); if (f) f.focus();
-  if (S.step === "building") setTimeout(() => { if (S.step === "building") next(); }, 2200);
+  after();
   if (S.step === "pay" && !prices) loadPrices();
+}
+
+/// Wires up the controls that scroll or animate, after each draw.
+function after() {
+  app.querySelectorAll("[data-wheel]").forEach(w => {
+    const key = w.dataset.wheel, vals = JSON.parse(w.dataset.values);
+    w.scrollTop = Math.max(0, vals.indexOf(+S[key])) * 44;
+    let t; w.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(() => {
+      S[key] = vals[Math.min(vals.length - 1, Math.max(0, Math.round(w.scrollTop / 44)))]; save(); }, 80); }, { passive: true });
+  });
+  app.querySelectorAll("[data-ruler]").forEach(r => {
+    const key = r.dataset.ruler, out = document.getElementById("rv"), btn = app.querySelector(".cta");
+    r.scrollLeft = (+S[key] - R_MIN) * 10;
+    r.addEventListener("scroll", () => {
+      const v = Math.min(R_MAX, Math.max(R_MIN, R_MIN + Math.round(r.scrollLeft / 10)));
+      if (v !== +S[key]) { S[key] = v; out.textContent = v; save(); if (key === "goalWeight") btn.disabled = !validGoalWeight(); }
+    }, { passive: true });
+  });
+  const pace = document.getElementById("pace");
+  if (pace) {
+    const paint = () => {
+      const v = +pace.value; S.pace = v; save();
+      document.getElementById("pv").textContent = v.toFixed(1);
+      pace.style.setProperty("--fill", ((v - 0.2) / 2.8 * 100) + "%");
+      const zone = v < 0.8 ? 0 : v <= 1.5 ? 1 : 2;
+      [0, 1, 2].forEach(i => document.getElementById("p" + i).classList.toggle("on", i === zone));
+      const weeks = Math.abs((+S.goalWeight) - (+S.weight)) / v, months = Math.max(1, Math.round(weeks / 4.345));
+      const span = weeks < 6 ? `${Math.max(1, Math.round(weeks))} week${Math.round(weeks) > 1 ? "s" : ""}` : `${months} month${months > 1 ? "s" : ""}`;
+      const line = zone === 0 ? "A gentle pace that is easy to keep up." : zone === 1 ? "This is the most balanced pace, motivating and ideal for most users." : "A fast pace. It takes more discipline to keep up.";
+      document.getElementById("tip").innerHTML = `<b>You should reach your goal in <em>${span}</em></b><p>${line}</p>Daily calorie goal: ${targets().calories.toLocaleString("en-US")} cal`;
+    };
+    pace.addEventListener("input", paint); paint();
+  }
+  if (S.step === "building") {
+    const arc = document.getElementById("arc"), pct = document.getElementById("pct"), stage = document.getElementById("stage"), rows = app.querySelectorAll(".checks li");
+    const words = ["Crunching your numbers…", "Estimating your metabolism…", "Balancing your macros…", "Finalizing your plan…"], t0 = performance.now(), dur = 3600;
+    (function tick(now) {
+      if (S.step !== "building" || !arc.isConnected) return;
+      const k = Math.min(1, (now - t0) / dur), n = Math.round(k * 100);
+      arc.setAttribute("stroke-dashoffset", 584.3 * (1 - k)); pct.textContent = n;
+      stage.textContent = words[Math.min(words.length - 1, Math.floor(k * words.length))];
+      rows.forEach((li, i) => li.classList.toggle("on", k >= (i + 1) / (rows.length + 0.5)));
+      if (k < 1) requestAnimationFrame(tick); else setTimeout(() => { if (S.step === "building") next(); }, 500);
+    })(t0);
+  }
 }
 
 // ---- sign-in ----
@@ -360,7 +498,6 @@ const checkout = () => work(async () => {
 app.addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b || b.disabled) return;
   if (b.dataset.pick) { S[b.dataset.pick] = b.dataset.value; save(); return render(); }
-  if (b.dataset.pace) { S.pace = +b.dataset.pace; save(); return render(); }
   if (b.dataset.plan) { S.plan = b.dataset.plan; save(); return render(); }
   if (b.dataset.auth) { S.authMode = b.dataset.auth; S.address = ""; S.sent = false; err = ""; save(); return render(); }
   if (b.id === "back") return back();
@@ -377,8 +514,8 @@ function typed(e) {
   const el = e.target, key = el.dataset && el.dataset.key; if (!key) return;
   S[key] = el.value; save();
   const btn = app.querySelector(".cta");
-  const ok = S.step === "birthday" ? validBirthday() : S.step === "body" ? validBody() : S.step === "goalWeight" ? validGoalWeight()
-           : S.step === "account" ? S.address.trim().length >= 4 : true;
+  if (S.step !== "account") return;
+  const ok = S.address.trim().length >= 4;
   if (btn) btn.disabled = !ok;
 }
 app.addEventListener("input", typed);
@@ -395,7 +532,7 @@ app.addEventListener("keydown", e => { if (e.key === "Enter") { const b = app.qu
 
   // ?preview=<step>: that screen with sample answers, nothing saved (for screenshots).
   const pv = q.get("preview");
-  if (pv) { Object.assign(S, { sex: "Male", workouts: "3-5", bm: 6, bd: 14, by: 1996, ft: 5, inch: 10, weight: "185", goal: "Lose weight", goalWeight: "170", pace: 1.0,
+  if (pv) { Object.assign(S, { sex: "Male", workouts: "3-5", bm: 6, bd: 14, by: 1996, ft: 5, inch: 10, weight: 185, goal: "Lose weight", goalWeight: 170, pace: 1.2,
       authMode: "", sent: false, method: "Sign in with Google", step: pv.split(":")[0] });
     if (pv.includes(":")) { S.authMode = pv.split(":")[1]; S.sent = pv.split(":")[2] === "sent"; S.address = S.authMode === "email" ? "you@example.com" : "303 555 0142"; }
     if (S.step === "pay") prices = { trial_days: 3, yearly: { amount: 5999, currency: "usd" }, monthly: { amount: 1999, currency: "usd" } };
