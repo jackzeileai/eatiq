@@ -463,7 +463,7 @@ async function signedIn(session, method) {
     calorie_goal: t.calories, sex: S.sex, height_in: heightIn(), weight_lb: +S.weight,
     goal_weight_lb: dir === "maintain" ? +S.weight : +S.goalWeight, goal: S.goal,
     weekly_rate_tenths: Math.round(+S.pace * 10), activity: activity(), dob: `${S.by}-${pad(S.bm)}-${pad(S.bd)}`,
-    terms_accepted: true, source: "web_quiz",
+    terms_accepted: true, source: "web_quiz", utm: S.utm || null,
   } });
   if (r.error) throw r.error;
   S.method = method; S.authMode = ""; S.sent = false; S.pendingGoogle = false;
@@ -525,10 +525,19 @@ app.addEventListener("keydown", e => { if (e.key === "Enter") { const b = app.qu
 // ---- start ----
 (async function start() {
   const q = new URLSearchParams(location.search);
-  // One row per landing, so each ad's clicks can be counted (same table /join uses). ?ref=ad-<id>.
-  try { const ref = q.get("ref"); if (ref && /^[a-z0-9._-]{1,40}$/i.test(ref)) fetch(SB_URL + "/rest/v1/link_clicks", { method: "POST",
-    headers: { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
-    body: JSON.stringify({ source: "quiz", path: "/quiz/", referrer: ref.toLowerCase(), ua: navigator.userAgent.slice(0, 500) }) }).catch(() => {}); } catch (e) {}
+  // Where they came from. UTM tags (utm_source / utm_medium / utm_campaign / utm_content / utm_term) are kept
+  // from the FIRST visit, logged as one landing row (table link_clicks, source "quiz"), and saved onto the
+  // account at sign-up (`utm`), so a sale can be traced to its ad. ?ref=<name> still works on its own.
+  try {
+    const utm = {}; ["source", "medium", "campaign", "content", "term"].forEach(k => { const v = q.get("utm_" + k); if (v) utm[k] = v.slice(0, 120); });
+    const ref = q.get("ref");
+    if (Object.keys(utm).length && !S.utm) { S.utm = utm; save(); }
+    const tag = ref && /^[a-z0-9._-]{1,40}$/i.test(ref) ? ref.toLowerCase()
+              : Object.keys(utm).length ? ["source", "medium", "campaign", "content"].map(k => utm[k] || "").join("|").slice(0, 300) : "";
+    if (tag && !q.get("preview")) fetch(SB_URL + "/rest/v1/link_clicks", { method: "POST",
+      headers: { apikey: SB_KEY, Authorization: "Bearer " + SB_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ source: "quiz", path: "/quiz/", referrer: tag, ua: navigator.userAgent.slice(0, 500) }) }).catch(() => {});
+  } catch (e) {}
 
   // ?preview=<step>: that screen with sample answers, nothing saved (for screenshots).
   const pv = q.get("preview");
