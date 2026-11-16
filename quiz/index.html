@@ -40,13 +40,18 @@ button{font-family:inherit;color:inherit}
 .back{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .bar{flex:1;height:3px;border-radius:2px;background:var(--line);overflow:hidden;margin-left:6px}
 .bar i{display:block;height:100%;background:var(--ink);border-radius:2px;transition:width .35s ease}
-.page{position:absolute;inset:0;display:flex;flex-direction:column;padding-top:calc(env(safe-area-inset-top) + 48px);background:var(--bg);transition:transform .42s cubic-bezier(.32,.72,0,1);will-change:transform}
+.page{position:absolute;inset:0;display:flex;flex-direction:column;padding-top:calc(env(safe-area-inset-top) + 48px);background:var(--bg);transition:transform .4s cubic-bezier(.32,.72,0,1);will-change:transform;backface-visibility:hidden;contain:layout paint}
 .page.nohead{padding-top:env(safe-area-inset-top)}
 .scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding:0 24px;scrollbar-width:none}
 .scroll::-webkit-scrollbar{display:none}
 .scroll>*{flex-shrink:0}
 .foot{padding:10px 24px calc(18px + env(safe-area-inset-bottom))}
 .mid{margin:auto 0;padding:14px 0}
+.mid.fill{flex:1 1 0;min-height:0;margin:0;padding:10px 0;display:flex;align-items:center;justify-content:center}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s .5s ease-out forwards}
+.fadein{opacity:0;animation:fadein .5s 1.3s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes fadein{to{opacity:1}}
+@keyframes grow{from{height:0;padding-bottom:0;opacity:0}}
 h1{font-size:28px;line-height:1.18;letter-spacing:-.02em;margin:10px 0 0;font-weight:700}
 .sub{color:var(--soft);font-size:14px;margin:8px 0 0}
 .center{text-align:center}
@@ -104,7 +109,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .tip{background:var(--card);border-radius:16px;padding:16px;margin-top:16px;font-size:14px;color:var(--soft)}
 .tip b{display:block;color:var(--ink);font-size:16px;margin-bottom:6px;font-weight:600}
 .tip em,.tan{font-style:normal;color:var(--tan)}
-.tip p{margin:0 0 8px}
+.tip p{margin:0 0 8px;min-height:2.7em}
 .card{background:var(--card);border-radius:22px;padding:20px}
 .card h3{margin:0 0 6px;font-size:18px;font-weight:600}
 .card .cap{font-size:15px;color:var(--soft);text-align:center;margin:12px 0 0}
@@ -123,9 +128,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .cmp .cols{display:flex;gap:16px;justify-content:center}
 .cmp .col{width:112px;height:240px;border-radius:16px;background:var(--card);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;text-align:center;font-weight:600;font-size:15px}
 .cmp .col span{padding-top:16px}
-.cmp .col div{border-radius:16px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px}
+.cmp .col div{animation:grow .7s .5s cubic-bezier(.2,.8,.2,1) both;border-radius:16px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px}
+.cmp .col:last-child div{animation-delay:.8s}
 .cmp p{text-align:center;margin:16px 0 0;font-size:14px;color:var(--soft)}
-.badge{display:flex;align-items:center;justify-content:center;gap:26px;margin:14px 0 18px}
+.badge{display:flex;align-items:center;justify-content:center;gap:26px;margin:10px 0 10px}
 .rate{display:flex;align-items:center;gap:8px;color:var(--soft)}
 .rate>.ic{width:26px;height:46px;opacity:.7}
 .rate b{display:block;font-size:28px;color:var(--ink);line-height:1;text-align:center}
@@ -171,7 +177,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .info{background:var(--card);border-radius:16px;padding:6px 16px}
 .info div{display:flex;align-items:center;gap:14px;padding:11px 0;font-size:15px;border-top:1px solid var(--line)}.info div:first-child{border:0}
 .info .ic{width:18px;height:18px}
-.phone{position:relative;aspect-ratio:1000/2044;margin:0 auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.18))}
+.phone{position:relative;aspect-ratio:1000/2044;margin:0 auto;height:100%;max-height:700px;max-width:100%}
 .phone>img{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
 .phone .scr{position:absolute;left:5.3%;top:2.5%;width:89.4%;height:95%;border-radius:11% / 5.2%;overflow:hidden;background:#000}
 .phone video{width:100%;height:100%;object-fit:cover;display:block}
@@ -202,12 +208,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .edit .ic{width:16px;height:18px}.edit b{margin-left:auto;font-size:18px}.edit small{width:22px;color:var(--soft);font-size:12px}
 .edit .pm{display:flex;background:var(--well);border-radius:16px;overflow:hidden}.edit .pm button{border:0;background:none;width:46px;height:32px;font-size:22px;line-height:1}
 .nopay{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:16px;margin:0 0 12px}.nopay .ic{width:14px;height:14px}
-.tl{position:relative;margin:18px 0 0 4px}
+.tl{position:relative;margin:10px 0 0 4px}
 .tl:before{content:"";position:absolute;left:11px;top:6px;bottom:20px;width:20px;border-radius:10px;background:rgba(0,122,255,.14)}
-.tl>div{position:relative;display:flex;gap:16px;padding-bottom:22px}
+.tl>div{position:relative;display:flex;gap:16px;padding-bottom:14px}
 .tl i{flex:0 0 42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid var(--bg)}
 .tl i .ic{width:18px;height:18px}
-.tl b{display:block;font-size:20px;font-weight:600}.tl p{margin:2px 0 0;color:var(--soft);font-size:16px}
+.tl b{display:block;font-size:18px;font-weight:600}.tl p{margin:1px 0 0;color:var(--soft);font-size:15px}
 .plans{display:flex;gap:12px;margin-top:6px}
 .plan{position:relative;flex:1;border:0;border-radius:18px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:16px 14px;text-align:left;cursor:pointer}
 .plan.on{box-shadow:0 0 0 2px var(--ink)}
@@ -256,11 +262,19 @@ try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (
 let save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 // What the two plans cost. Shown before there is an account, and the server only quotes prices to a
 // signed-in caller, so these are written here. KEEP IN STEP WITH STRIPE (yearly carries the free trial).
+let payErr = "";
 const prices = { trial_days: 3, yearly: { amount: 5999, currency: "usd" }, monthly: { amount: 2999, currency: "usd" } };
 
 // ---- a tap you can feel: iOS Safari ticks when a "switch" checkbox flips; Android vibrates ----
 const hapLabel = document.getElementById("haplabel");
-function haptic() { try { if (navigator.vibrate) navigator.vibrate(8); else hapLabel.click(); } catch (e) {} }
+function haptic() {
+  try {
+    if (navigator.vibrate) return void navigator.vibrate(8);
+    const l = document.createElement("label"), i = document.createElement("input");
+    l.style.display = "none"; i.type = "checkbox"; i.setAttribute("switch", ""); l.appendChild(i);
+    document.head.appendChild(l); l.click(); document.head.removeChild(l);
+  } catch (e) {}
+}
 
 // ---- the plan: a port of NutritionCalculator.targets (balanced diet style) ----
 function age() {
@@ -321,7 +335,7 @@ function ruler(key, label) {
     <div class="read"><small>${label}</small><b><span id="rv">${v}</span> ${kg ? "kg" : "lbs"}</b></div>
     <div class="ruler"><div class="track" data-ruler="${key}" data-min="${min}" data-max="${max}"><div class="pad"></div><div class="ticks" style="width:${(max - min) * 9 + 2}px"></div><div class="pad"></div></div></div>`;
 }
-const phone = (inner, h) => `<div class="phone" style="height:${h}"><div class="scr">${inner}</div><img src="a/phone.png?v=2" alt=""></div>`;
+const phone = (inner) => `<div class="phone"><div class="scr">${inner}</div><img src="a/phone.png?v=2" alt=""></div>`;
 const dial = icon => `<div class="ring"><div class="dial">${Array.from({ length: 12 }, (_, i) => `<i style="transform:rotate(${i * 30}deg) translateY(-70px);opacity:${i % 3 ? .55 : 1}"></i>`).join("")}${icon}</div></div>`;
 const REVIEWS = [
   ["Jack Z", "ReviewerJack", "This is the only one where the UI is nice and the macros are actually accurate."],
@@ -331,13 +345,13 @@ const REVIEWS = [
   ["Adamniel", "ReviewerAdamniel", "Wow"]];
 const ratingBadge = faces => `<div class="badge"><div class="rate">${ic("laurel.leading")}<div><b>4.9</b>${stars()}<small>App Store rating</small></div>${ic("laurel.trailing")}</div>
   <div class="faces"><div>${faces.map(f => `<img src="a/${f}.jpg" alt="">`).join("")}</div><small>Real reviews</small></div></div>`;
-const clip = (name) => `<video src="a/${name}.mp4?v=2" poster="a/${name === "scan-demo" ? "scan-demo.jpg" : "first-meal-poster.jpg"}" autoplay muted loop playsinline></video>`;
+const clip = (name) => `<video src="a/${name}-s.mp4" preload="auto" disablepictureinpicture poster="a/${name === "scan-demo" ? "scan-demo.jpg" : "first-meal-poster.jpg"}" autoplay muted loop playsinline></video>`;
 
 // ---- every screen: { body, foot, after(el) } ----
 const PAGES = {
   welcome: () => ({
-    body: `<h1 class="center" style="font-size:34px;margin-top:max(18px,3dvh)">Calorie tracking<br>made easy</h1><div class="mid">${phone(clip("scan-demo"), "min(58dvh,560px)")}</div>`,
-    foot: `${cta("Get Started")}<button class="link" id="signin">Already have an account? <b>Sign In</b></button>` }),
+    body: `<h1 class="center" style="font-size:34px;margin-top:max(18px,3dvh)">Calorie tracking<br>made easy</h1><div class="mid fill">${phone(clip("scan-demo"))}</div>`,
+    foot: cta("Get Started") }),
   sex: () => question("Choose your gender", "This helps personalize your experience.", "sex",
     [{ v: "Male", glyph: "&#9794;&#xFE0E;" }, { v: "Female", glyph: "&#9792;&#xFE0E;" }, { v: "Other", glyph: "&#9893;&#xFE0E;" }]),
   workouts: () => question("How many workouts do you do per week?", "This will be used to calibrate your custom plan.", "workouts",
@@ -348,14 +362,16 @@ const PAGES = {
   triedApps: () => question("Have you tried other calorie tracking apps?", "", "tried", [{ v: "Yes", icon: "hand.thumbsup.fill" }, { v: "No", icon: "hand.thumbsdown.fill" }]),
   encouragement: () => ({
     body: `<h1>Meal Pic creates<br>long&#8209;term results</h1><div class="mid"><div class="card"><h3>Weight trend</h3>
-      <svg viewBox="0 0 320 170"><defs><linearGradient id="gk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".16"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
-        <path d="M0 60H320M0 110H320" stroke="var(--line)" stroke-dasharray="3 4"/>
-        <path d="M150 58 C190 30 250 21 318 20 L318 58 Z" fill="rgba(229,72,77,.16)"/>
-        <path d="M6 58 C40 56 70 112 100 112 C140 112 150 22 318 20" fill="none" stroke="#d9605f" stroke-width="2"/>
-        <path d="M6 58 C110 58 190 150 316 150 L316 160 L6 160 Z" fill="url(#gk)"/><path d="M6 58 C110 58 190 150 316 150" fill="none" stroke="currentColor" stroke-width="2.6"/>
-        <circle cx="6" cy="58" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.4"/><circle cx="316" cy="150" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.4"/>
-        <text x="318" y="74" text-anchor="end" font-size="12" fill="currentColor">Without a plan</text>
-        <text x="6" y="146" font-size="11.5" font-weight="700" fill="currentColor">Meal Pic</text><rect x="62" y="135" width="46" height="15" rx="7.5" fill="currentColor"/><text x="85" y="146" text-anchor="middle" font-size="9" font-weight="700" fill="var(--card)">Weight</text></svg>
+      <svg viewBox="0 0 320 170"><defs><linearGradient id="gk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".16"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient><clipPath id="up"><rect x="0" y="0" width="320" height="58"/></clipPath></defs>
+        <path d="M0 58H320M0 108H320" stroke="var(--line)" stroke-dasharray="3 4"/>
+        <path class="fadein" d="M6 58 C50 58 70 112 104 112 C150 112 170 22 316 20 L316 58 Z" fill="rgba(217,96,95,.2)" clip-path="url(#up)"/>
+        <path class="fadein" d="M6 58 C110 58 190 150 316 150 L316 156 L6 156 Z" fill="url(#gk)"/>
+        <path class="draw" pathLength="1" d="M6 58 C50 58 70 112 104 112 C150 112 170 22 316 20" fill="none" stroke="#d9605f" stroke-width="2" stroke-linecap="round"/>
+        <path class="draw" pathLength="1" d="M6 58 C110 58 190 150 316 150" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="6" cy="58" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.4"/><circle class="fadein" cx="314" cy="150" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.4"/>
+        <text class="fadein" x="316" y="74" text-anchor="end" font-size="12" fill="currentColor">Without a plan</text>
+        <text x="6" y="146" font-size="11.5" font-weight="700" fill="currentColor">Meal Pic</text><rect x="58" y="135" width="46" height="15" rx="7.5" fill="currentColor"/><text x="81" y="146" text-anchor="middle" font-size="9" font-weight="700" fill="var(--card)">Weight</text>
+        <path d="M6 157H316" stroke="var(--line)"/></svg>
       <div class="ends" style="font-size:14px;color:var(--ink);margin-top:6px"><span>Month 1</span><span>Month 6</span></div>
       <p class="cap">Track your habits and stay consistent over time.</p></div></div>`,
     foot: cta("Continue") }),
@@ -421,8 +437,8 @@ const PAGES = {
   potential: () => ({
     body: `<h1>You have great potential to crush your goal</h1><div class="mid"><div class="card"><h3>Your weight transition</h3>
       <svg viewBox="0 0 320 190" style="margin-top:8px"><path d="M10 10V170H310M10 60H310M10 120H310M88 10V170M166 10V170M310 10V170" stroke="var(--line)" stroke-dasharray="3 4" fill="none"/>
-        <path d="M10 124 C40 122 60 120 88 116 C120 112 130 78 166 74 C220 62 260 30 310 26 L310 170 L10 170Z" fill="rgba(200,145,92,.16)"/>
-        <path d="M10 124 C40 122 60 120 88 116 C120 112 130 78 166 74 C220 62 260 30 310 26" fill="none" stroke="var(--tan)" stroke-width="2.6"/>
+        <path class="fadein" d="M10 124 C40 122 60 120 88 116 C120 112 130 78 166 74 C220 62 260 30 310 26 L310 170 L10 170Z" fill="rgba(200,145,92,.16)"/>
+        <path d="M10 124 C40 122 60 120 88 116 C120 112 130 78 166 74 C220 62 260 30 310 26" class="draw" pathLength="1" fill="none" stroke="var(--tan)" stroke-width="2.6"/>
         <circle cx="10" cy="124" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/><circle cx="88" cy="116" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/><circle cx="166" cy="74" r="5" fill="var(--card)" stroke="currentColor" stroke-width="2.2"/>
         <circle cx="306" cy="26" r="13" fill="var(--tan)"/><image href="a/i/trophy.fill.png" x="298" y="18" width="16" height="16" style="filter:invert(1)"/>
         <text x="48" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">3 Days</text><text x="127" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">7 Days</text><text x="238" y="186" text-anchor="middle" font-size="11.5" fill="var(--soft)">30 Days</text></svg>
@@ -505,11 +521,11 @@ const PAGES = {
     foot: cta("Continue") }),
   // One page: the camera, then the reading ring over the photo, then it turns into the result in place.
   firstMealCamera: () => ({
-    body: `<h1 id="fmT">Snap your first meal</h1><p class="sub" id="fmS">Tap the button to snap this meal.</p><div class="mid" id="fmB">${phone(
+    body: `<h1 id="fmT">Snap your first meal</h1><p class="sub" id="fmS">Tap the button to snap this meal.</p><div class="mid fill" id="fmB">${phone(
       `${clip("first-meal")}<div class="cam" id="fmC"><div class="br"><i></i><i></i><i></i><i></i></div></div>
        <div class="scan" id="fmR"><div class="r"><svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="66" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="12"/><circle id="fmA" cx="75" cy="75" r="66" fill="none" stroke="#34c759" stroke-width="12" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/></svg><b><span id="fmP">0</span><i>%</i></b></div>
          <ul>${["Reading the photo", "Identifying foods", "Measuring portions", "Calculating calories and macros"].map(x => `<li><i></i>${x}</li>`).join("")}</ul></div>
-       <button class="shutter" id="fmGo" aria-label="Take the photo"></button>`, "min(62dvh,600px)")}</div>`,
+       <button class="shutter" id="fmGo" aria-label="Take the photo"></button>`)}</div>`,
     foot: `<div id="fmF" style="height:54px"></div>`,
     after(el) {
       const $ = id => el.querySelector(id), M = { cal: 600, p: 48, c: 69, f: 13 };
@@ -534,7 +550,7 @@ const PAGES = {
         const row = (k, name, icon, color, unit) => `<div>${ic(icon, "color:" + color)}${name}<b data-v="${k}">${M[k]}</b><small>${unit}</small><span class="pm"><button data-m="${k}" data-d="-1">&minus;</button><button data-m="${k}" data-d="1">+</button></span></div>`;
         const b = $("#fmB"); b.style.transition = "opacity .25s"; b.style.opacity = 0;
         setTimeout(() => {
-          b.innerHTML = `<div class="meal"><img src="a/first-meal.jpg" alt=""><div><b>Chicken, Rice &amp; Broccoli</b><small>Glazed chicken · White rice · Broccoli</small><em><span data-v="cal">600</span> <i>CAL</i></em><div class="m"><i>P</i><span data-v="p">48</span>g<i>C</i><span data-v="c">69</span>g<i>F</i><span data-v="f">13</span>g</div></div></div>
+          b.classList.remove("fill"); b.innerHTML = `<div class="meal"><img src="a/first-meal.jpg" alt=""><div><b>Chicken, Rice &amp; Broccoli</b><small>Glazed chicken · White rice · Broccoli</small><em><span data-v="cal">600</span> <i>CAL</i></em><div class="m"><i>P</i><span data-v="p">48</span>g<i>C</i><span data-v="c">69</span>g<i>F</i><span data-v="f">13</span>g</div></div></div>
             <div class="edit">${row("cal", "Calories", "bolt.fill", "#ff2d55", "cal")}${row("p", "Protein", "dumbbell.fill", "#34c759", "g")}${row("c", "Carbs", "leaf.fill", "#30b0c7", "g")}${row("f", "Fat", "drop.fill", "#af52de", "g")}</div>`;
           b.style.opacity = 1; $("#fmF").outerHTML = cta("Continue");
           b.addEventListener("click", e => { const t = e.target.closest("[data-m]"); if (!t) return; haptic(); const k = t.dataset.m; M[k] = Math.max(0, M[k] + (+t.dataset.d) * (k === "cal" ? 10 : 1)); b.querySelectorAll(`[data-v="${k}"]`).forEach(x => x.textContent = M[k]); });
@@ -542,7 +558,7 @@ const PAGES = {
       }
     } }),
   pwIntro: () => ({
-    body: `<h1 class="center" style="font-size:32px;margin-top:max(22px,4dvh)">We want you to try<br>Meal Pic for free</h1><div class="mid">${phone(clip("scan-demo"), "min(54dvh,540px)")}</div>`,
+    body: `<h1 class="center" style="font-size:32px;margin-top:max(22px,4dvh)">We want you to try<br>Meal Pic for free</h1><div class="mid fill">${phone(clip("scan-demo"))}</div>`,
     foot: `<p class="nopay">${ic("checkmark")}No Payment Due Now</p>${cta("Continue")}` }),
   pwPlans: () => {
     const t = prices.trial_days, y = prices.yearly, m = prices.monthly, yearly = S.plan === "yearly";
@@ -554,7 +570,7 @@ const PAGES = {
         <div><i>${ic("star")}</i><span><b>In ${t} days</b><p>Your plan starts ${starts}. Cancel anytime.</p></span></div></div>
       <div class="mid" style="padding-top:26px"><div class="plans">${box("monthly", "Monthly", m, 52 / 12, money(m) + " billed monthly", "")}${box("yearly", "Yearly", y, 52, money(y) + " billed yearly", t + " DAYS FREE")}</div></div>`,
       foot: `<p class="nopay" style="font-size:15px">${ic("checkmark")}No commitment, cancel anytime</p>${cta(yearly ? `Start My ${t}-Day Free Trial` : "Continue", true, "checkout")}
-        <p class="note">${yearly ? `${t} days free, then ${money(y)} per year. Billed yearly.` : `${money(m)} per month. Billed monthly.`}<br>Plan auto-renews unless you cancel.<br><a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a></p>` };
+        <p class="note">${yearly ? `${t} days free, then ${money(y)} per year. Billed yearly.` : `${money(m)} per month. Billed monthly.`}<br>Plan auto-renews unless you cancel.${payErr ? `<br><span style="color:var(--red)">${esc(payErr)}</span>` : ""}<br><a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a></p>` };
   },
   done: () => ({
     body: `<div class="mid"><div class="tick">${ic("checkmark")}</div><p class="big" style="font-size:30px">You're all set!</p><p class="sub center">${S.plan === "yearly" ? "Your free trial has started." : "Your plan is active."} Your plan is saved to your account.</p>
@@ -570,12 +586,16 @@ function show(step, dir) {
   el.className = "page" + (NOHEAD.includes(step) ? " nohead" : ""); el.dataset.step = step;
   el.innerHTML = `<div class="scroll">${def.body}</div><div class="foot">${def.foot}</div>`;
   const old = current; current = el;
+  if (old) old.querySelectorAll("video").forEach(v => v.pause());
   if (old && dir) {
-    el.style.transition = "none"; el.style.transform = `translateX(${dir > 0 ? 100 : -100}%)`;
-    stage.appendChild(el); el.getBoundingClientRect(); el.style.transition = "";
-    el.style.transform = "none"; old.style.transform = `translateX(${dir > 0 ? -100 : 100}%)`; old.style.pointerEvents = "none";
-    setTimeout(() => old.remove(), 460);
+    el.style.transition = "none"; el.style.transform = `translate3d(${dir > 0 ? 100 : -100}%,0,0)`;
+    stage.appendChild(el); old.style.pointerEvents = "none";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.transition = ""; el.style.transform = "translate3d(0,0,0)"; old.style.transform = `translate3d(${dir > 0 ? -100 : 100}%,0,0)`;
+      setTimeout(() => old.remove(), 440);
+    }));
   } else { stage.innerHTML = ""; stage.appendChild(el); }
+  el.querySelectorAll("video").forEach(v => { v.muted = true; v.playsInline = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
   const o = order(), i = o.indexOf(step);
   head.classList.toggle("off", NOHEAD.includes(step)); head.classList.toggle("bare", BARE.includes(step));
   prog.style.width = Math.min(100, Math.round(i / o.indexOf("generating") * 100)) + "%";
@@ -636,19 +656,50 @@ document.getElementById("app").addEventListener("click", e => {
   if (b.dataset.plan) { haptic(); S.plan = b.dataset.plan; save(); return redraw(); }
   if (b.id === "back") { haptic(); return back(); }
   if (b.id === "next") { haptic(); return next(); }
-  if (b.id === "signin") { haptic(); return openSheet("signin"); }
   if (b.id === "checkout") { haptic(); return startCheckout(); }
 });
 
-// ---- the account sheet: Google, email or phone, big buttons ----
-let sheetMode = "signup", auth = { way: "", address: "", sent: false }, busy = false, err = "";
+// ---- paying comes FIRST, the account after (Jack 2026-11-16: "Saving their account happens after they pay").
+// The trial button makes a nameless account, puts the plan and answers on it and goes straight to Stripe.
+// Back from Stripe, the sheet below turns that SAME account into one they can sign in to (a Google link,
+// or an email / phone code), so the purchase and the plan stay on it.
+function answers() {
+  const t = targets(), dir = direction(), pad = n => String(n).padStart(2, "0");
+  return {
+    plan: { calories: t.calories, protein: t.protein, carbs: t.carbs, fat: t.fat, rollover: S.rollover !== "No", updated_at: new Date().toISOString() },
+    calorie_goal: t.calories, sex: S.sex, height_in: heightIn(), weight_lb: +S.weight, goal_weight_lb: dir === "maintain" ? +S.weight : +S.goalWeight, goal: S.goal,
+    weekly_rate_tenths: Math.round(+S.pace * 10), activity: activity(), dob: `${S.by}-${pad(S.bm)}-${pad(S.bd)}`,
+    heard_from: S.source, diet: S.diet, obstacle: S.obstacle, accomplish: S.accomplish, creator_code: S.code || null,
+    terms_accepted: true, source: "web_quiz", utm: S.utm || null };
+}
+async function startCheckout() {
+  const b = current.querySelector("#checkout"); b.disabled = true; b.textContent = "One moment…"; payErr = "";
+  try {
+    let { data: { session } } = await sb.auth.getSession();
+    if (!session) { const r = await sb.auth.signInAnonymously(); if (r.error || !r.data.session) throw r.error || new Error(""); session = r.data.session; }
+    const paid = await sb.rpc("stripe_entitled", { allow_test: false });
+    if (paid.data === true) { show("done", 1); return askToSave(); }
+    const r = await sb.auth.updateUser({ data: answers() }); if (r.error) throw r.error;
+    const res = await fetch(SB_URL + "/functions/v1/stripe-checkout", { method: "POST",
+      headers: { "content-type": "application/json", apikey: SB_KEY, authorization: "Bearer " + session.access_token },
+      body: JSON.stringify({ source: "web", plan: S.plan, email: session.user && session.user.email || undefined }) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.url) throw new Error("");
+    location.href = out.url;
+  } catch (e) { payErr = "We couldn't reach checkout. Please try again."; redraw(); }
+}
+
+let auth = { way: "", address: "", sent: false }, busy = false, err = "";
 const GOOGLE = `<svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.5-4.1 7-10.2 7-17.6z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.2A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>`;
-function openSheet(mode) { sheetMode = mode; auth = { way: "", address: "", sent: false }; err = ""; drawSheet(); sheet.classList.add("up"); }
+function openSheet() { auth = { way: "", address: "", sent: false }; err = ""; drawSheet(); sheet.classList.add("up"); }
 function closeSheet() { sheet.classList.remove("up"); if (document.activeElement) document.activeElement.blur(); }
+/// After paying: a buyer whose account still has no sign-in gets the sheet (it cannot be dismissed).
+async function askToSave() { const { data: { session } } = await sb.auth.getSession(); if (session && session.user && session.user.is_anonymous) openSheet(); }
+function saved(method) { S.method = method; S.pendingGoogle = ""; save(); closeSheet(); show("done", 0); }
 function drawSheet() {
-  const top = `<button class="back" id="sback" aria-label="Back">${ic("chevron.left", "width:18px;height:18px")}</button>`;
+  const top = auth.way ? `<button class="back" id="sback" aria-label="Back">${ic("chevron.left", "width:18px;height:18px")}</button>` : `<div style="height:44px"></div>`;
   const e = `<p class="err" role="alert">${esc(err)}</p>`, wait = busy ? "disabled" : "";
-  if (!auth.way) sheet.innerHTML = `${top}<h1>${sheetMode === "signin" ? "Sign in" : "Save your plan"}</h1><p class="sub">${sheetMode === "signin" ? "Use the way you signed up." : "Create your account. You'll use it to sign in to the app."}</p>
+  if (!auth.way) sheet.innerHTML = `${top}<h1>Save your account</h1><p class="sub">You're in. Pick how you'll sign in to the app.</p>
     <div class="stack"><button class="cta dark" id="google" ${wait}>${GOOGLE}Continue with Google</button><button class="cta line" data-way="email" ${wait}>Continue with email</button><button class="cta line" data-way="phone" ${wait}>Continue with phone</button></div>${e}
     <div style="flex:1"></div><p class="note">By continuing you agree to Meal Pic's <a href="../terms.html">Terms</a> and <a href="../privacy.html">Privacy Policy</a>.</p>`;
   else if (!auth.sent) { const em = auth.way === "email";
@@ -660,62 +711,29 @@ function drawSheet() {
   const f = sheet.querySelector("#addr, #otp"); if (f && !busy) setTimeout(() => f.focus(), 60);
 }
 function normalPhone(raw) { const d = raw.replace(/\D/g, ""); return raw.trim().startsWith("+") ? "+" + d : d.length === 10 ? "+1" + d : "+" + d; }
-const friendly = e => { const m = (e && e.message) || ""; return /rate|too many|seconds/i.test(m) ? "Too many tries. Wait a minute and try again." : /expired|invalid/i.test(m) ? "That code isn't right. Check it and try again." : m || "That didn't go through. Please try again."; };
+const friendly = e => { const m = (e && e.message) || ""; return /already|registered|exists|linked/i.test(m) ? "That one already has a Meal Pic account. Try another." : /rate|too many|seconds/i.test(m) ? "Too many tries. Wait a minute and try again." : /expired|invalid/i.test(m) ? "That code isn't right. Check it and try again." : m || "That didn't go through. Please try again."; };
 async function work(fn) { if (busy) return; busy = true; err = ""; drawSheet(); try { await fn(); } catch (e) { err = friendly(e); } busy = false; if (sheet.classList.contains("up")) drawSheet(); }
 function sheetTap(b) {
   haptic();
-  if (b.id === "sback") { if (auth.sent) auth.sent = false; else if (auth.way) auth.way = ""; else return closeSheet(); err = ""; return drawSheet(); }
+  if (b.id === "sback") { if (auth.sent) auth.sent = false; else auth.way = ""; err = ""; return drawSheet(); }
   if (b.dataset.way) { auth.way = b.dataset.way; auth.address = ""; err = ""; return drawSheet(); }
   if (b.id === "google") return work(async () => {
-    S.pendingGoogle = sheetMode; save();
-    const r = await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: location.origin + location.pathname } });
+    S.pendingGoogle = "save"; save();
+    const r = await sb.auth.linkIdentity({ provider: "google", options: { redirectTo: location.origin + location.pathname } });
     if (r.error) { S.pendingGoogle = ""; save(); throw r.error; }
     await new Promise(() => {});
   });
   if (b.id === "send") { auth.address = sheet.querySelector("#addr").value.trim(); return work(async () => {
     if (auth.address.length < 4) throw new Error(auth.way === "email" ? "Enter your email." : "Enter your number.");
-    const r = auth.way === "email" ? await sb.auth.signInWithOtp({ email: auth.address, options: { shouldCreateUser: true } }) : await sb.auth.signInWithOtp({ phone: normalPhone(auth.address) });
+    const r = await sb.auth.updateUser(auth.way === "email" ? { email: auth.address } : { phone: normalPhone(auth.address) });
     if (r.error) throw r.error; auth.sent = true; }); }
   if (b.id === "verify") { const token = (sheet.querySelector("#otp").value || "").replace(/\D/g, ""); return work(async () => {
     if (token.length < 6) throw new Error("Enter the 6-digit code.");
-    const r = auth.way === "email" ? await sb.auth.verifyOtp({ email: auth.address, token, type: "email" }) : await sb.auth.verifyOtp({ phone: normalPhone(auth.address), token, type: "sms" });
+    const r = auth.way === "email" ? await sb.auth.verifyOtp({ email: auth.address, token, type: "email_change" }) : await sb.auth.verifyOtp({ phone: normalPhone(auth.address), token, type: "phone_change" });
     if (r.error) throw r.error;
-    await signedIn(r.data.session, auth.way === "email" ? "Continue with email" : "Continue with phone", sheetMode); }); }
+    saved(auth.way === "email" ? "Continue with email" : "Continue with phone"); }); }
 }
 sheet.addEventListener("keydown", e => { if (e.key === "Enter") { const b = sheet.querySelector("#send, #verify"); if (b) b.click(); } });
-
-/// The account exists. Sign-up: put the plan and the answers on it, then on to Stripe.
-/// Sign-in from the welcome: someone who already pays goes straight to "all set".
-async function signedIn(session, method, mode) {
-  if (!session) throw new Error("That sign-in didn't go through. Please try again.");
-  S.method = method; S.pendingGoogle = ""; save();
-  const paid = await sb.rpc("stripe_entitled", { allow_test: false });
-  if (paid.data === true) { closeSheet(); return show("done", 1); }
-  if (mode === "signin") { closeSheet(); if (S.step === "welcome") next(); return; }
-  const t = targets(), dir = direction(), pad = n => String(n).padStart(2, "0");
-  const r = await sb.auth.updateUser({ data: {
-    plan: { calories: t.calories, protein: t.protein, carbs: t.carbs, fat: t.fat, rollover: S.rollover !== "No", updated_at: new Date().toISOString() },
-    calorie_goal: t.calories, sex: S.sex, height_in: heightIn(), weight_lb: +S.weight, goal_weight_lb: dir === "maintain" ? +S.weight : +S.goalWeight, goal: S.goal,
-    weekly_rate_tenths: Math.round(+S.pace * 10), activity: activity(), dob: `${S.by}-${pad(S.bm)}-${pad(S.bd)}`,
-    heard_from: S.source, diet: S.diet, obstacle: S.obstacle, accomplish: S.accomplish, creator_code: S.code || null,
-    terms_accepted: true, source: "web_quiz", utm: S.utm || null } });
-  if (r.error) throw r.error;
-  await checkout(session);
-}
-async function checkout(session) {
-  const res = await fetch(SB_URL + "/functions/v1/stripe-checkout", { method: "POST",
-    headers: { "content-type": "application/json", apikey: SB_KEY, authorization: "Bearer " + session.access_token },
-    body: JSON.stringify({ source: "web", plan: S.plan, email: session.user && session.user.email || undefined }) });
-  const out = await res.json().catch(() => ({}));
-  if (!res.ok || !out.url) throw new Error("We couldn't reach checkout. Please try again.");
-  S.step = "pwPlans"; save(); location.href = out.url; await new Promise(() => {});
-}
-async function startCheckout() {
-  const { data: { session } } = await sb.auth.getSession();
-  if (!session || (session.user && session.user.is_anonymous)) return openSheet("signup");
-  const b = current.querySelector("#checkout"); b.disabled = true; b.textContent = "One moment…";
-  try { await signedIn(session, S.method || "the same way you signed up here", "signup"); } catch (e) { redraw(); openSheet("signup"); err = friendly(e); drawSheet(); }
-}
 
 // ---- start ----
 (async function start() {
@@ -738,7 +756,7 @@ async function startCheckout() {
     save = () => {};
     Object.assign(S, { sex: "Male", workouts: "3-5", bm: 6, bd: 14, by: 1996, ft: 5, inch: 10, weight: 185, goal: "Lose weight", goalWeight: 170, pace: 1.2, unit: "lbs", hunit: "ft", rollover: "Yes", method: "Continue with Google", plan: "yearly" });
     const [name, way, sent] = pv.split(":");
-    if (name === "sheet") { show("pwPlans", 0); openSheet("signup"); auth.way = way || ""; auth.sent = sent === "sent"; auth.address = "you@example.com"; drawSheet(); }
+    if (name === "sheet") { show("done", 0); openSheet(); auth.way = way || ""; auth.sent = sent === "sent"; auth.address = "you@example.com"; drawSheet(); }
     else show(PAGES[name] ? name : "welcome", 0);
     return;
   }
@@ -749,12 +767,15 @@ async function startCheckout() {
   if (S.step === "firstMealCamera") S.step = "firstMeal";
   show(S.step, 0);
 
-  if (S.pendingGoogle) {                     // back from Google
-    const mode = S.pendingGoogle, { data: { session } } = await sb.auth.getSession();
-    history.replaceState(null, "", location.pathname);
-    if (!session) { S.pendingGoogle = ""; save(); openSheet(mode); err = "That sign-in didn't go through. Please try again."; return drawSheet(); }
-    try { await signedIn(session, "Sign in with Google", mode); } catch (e) { openSheet(mode); err = friendly(e); drawSheet(); }
+  if (S.pendingGoogle) {                     // back from linking Google
+    const { data: { session } } = await sb.auth.getSession(), bad = q.get("error_description");
+    history.replaceState(null, "", location.pathname); S.pendingGoogle = ""; save();
+    if (session && session.user && !session.user.is_anonymous) return saved("Sign in with Google");
+    openSheet(); err = /already|linked/i.test(bad || "") ? "That Google account already has a Meal Pic account. Try another way." : "That sign-in didn't go through. Please try again."; return drawSheet();
   }
+  if (S.step === "done") askToSave();
+  // warm the icons so no page pops in piece by piece
+  setTimeout(() => "circle.grid.2x1.fill circle.grid.2x2.fill circle.grid.3x3.fill person.2.fill tv.fill ellipsis hand.thumbsup.fill hand.thumbsdown.fill arrow.down minus arrow.up chart.bar.fill takeoutbag.and.cup.and.straw.fill calendar lightbulb.fill fork.knife leaf.fill fish.fill arrow.triangle.2.circlepath fish carrot.fill leaf flame.fill drop.fill apple.logo sun.max.fill heart.fill tortoise.fill hare.fill bolt.fill checkmark camera.fill star star.fill person.fill person.fill.checkmark hands.clap.fill trophy.fill laurel.leading laurel.trailing flag.fill figure.run scope chart.pie.fill circle.hexagongrid.fill person.crop.circle.fill arrow.right dumbbell.fill".split(" ").forEach(n => { new Image().src = "a/i/" + n + ".png"; }), 600);
 })();
 </script>
 </body>
