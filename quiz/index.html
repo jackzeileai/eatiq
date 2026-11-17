@@ -316,6 +316,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 </div>
 <label id="haplabel" for="hapsw"></label><input type="checkbox" switch id="hapsw" tabindex="-1" aria-hidden="true" style="position:absolute;opacity:0;pointer-events:none;left:-99px">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://js.stripe.com/v3/" async></script>
 <script>
 "use strict";
 const SB_URL = "https://bvaumyrtcuehlipiaxlv.supabase.co";
@@ -724,6 +725,7 @@ function show(step, dir) {
   el.className = "page" + (NOHEAD.includes(step) ? " nohead" : ""); el.dataset.step = step;
   el.innerHTML = `<div class="scroll ${def.cls || ""}">${def.body}</div><div class="foot">${def.foot}</div>`;
   trackStep(step); setTimeout(() => el.classList.add("go"), 40);
+  if (step === "pwIntro" || step === "pwPlans") prepWallet();
   const old = current; current = el;
   if (old) old.querySelectorAll("video").forEach(v => v.pause());
   if (old && dir) {
@@ -826,8 +828,50 @@ function answers() {
     heard_from: S.source, diet: S.diet, obstacle: S.obstacle, accomplish: S.accomplish, creator_code: S.code || null,
     terms_accepted: true, source: "web_quiz", utm: S.utm || null };
 }
+// ---- Apple Pay: the wallet sheet comes up over the page (no trip to Stripe's site). Where the phone has
+// no Apple Pay, or anything goes wrong before the sheet shows, the hosted checkout page is the fallback.
+const STRIPE_PK = "pk_live_51UKXDxJPXucx2816dPYuvU5LJBdfPuAuddeMJodPxV75XeraYXaAFN4IMfJ3mZhqQW85WkI37U7pipOSOKLYQUmP00ihY1QsjD";
+let stripeJs = null, wallet = {};
+const cents = plan => (prices[plan] && prices[plan].amount) || (plan === "yearly" ? 5999 : 2999);
+function walletTotal(plan) {
+  return plan === "yearly" ? { label: `Meal Pic · 3 days free, then $${(cents(plan) / 100).toFixed(2)}/year`, amount: 0, pending: true }
+                           : { label: "Meal Pic · monthly", amount: cents(plan) };
+}
+/// Called when the prices page shows, so the sheet is ready by the time they tap (it must open inside the tap).
+function prepWallet() {
+  try {
+    if (!window.Stripe) return; stripeJs = stripeJs || Stripe(STRIPE_PK);
+    ["yearly", "monthly"].forEach(plan => {
+      if (wallet[plan]) return;
+      const pr = stripeJs.paymentRequest({ country: "US", currency: "usd", total: walletTotal(plan), requestPayerEmail: true });
+      const w = wallet[plan] = { pr, ok: false };
+      pr.canMakePayment().then(r => { w.ok = !!(r && r.applePay); }).catch(() => {});
+      pr.on("paymentmethod", ev => payWithWallet(plan, ev));
+      pr.on("cancel", () => { track("paywall_purchase_cancelled", null, { plan, via: "apple_pay" }); redraw(); });
+    });
+  } catch (e) {}
+}
+async function payWithWallet(plan, ev) {
+  try {
+    let { data: { session } } = await sb.auth.getSession();
+    if (!session) { const r = await sb.auth.signInAnonymously(); if (r.error || !r.data.session) throw new Error(""); session = r.data.session; }
+    await sb.auth.updateUser({ data: answers() });
+    const res = await fetch(SB_URL + "/functions/v1/stripe-checkout", { method: "POST",
+      headers: { "content-type": "application/json", apikey: SB_KEY, authorization: "Bearer " + session.access_token },
+      body: JSON.stringify({ source: "web", action: "subscribe", plan, payment_method: ev.paymentMethod.id, email: ev.payerEmail || undefined }) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.id) throw new Error("");
+    ev.complete("success");
+    if (out.confirm) { const r = out.confirm.kind === "payment" ? await stripeJs.confirmCardPayment(out.confirm.secret) : await stripeJs.confirmCardSetup(out.confirm.secret); if (r.error) throw new Error(""); }
+    else if (out.status !== "trialing" && out.status !== "active") throw new Error("");
+    S.plan = plan; S.step = "done"; save(); show("done", 1); askToSave();
+  } catch (e) { try { ev.complete("fail"); } catch (x) {} payErr = "That payment didn't go through. Please try again."; redraw(); }
+}
 async function startCheckout() {
-  const b = current.querySelector("#checkout"); b.disabled = true; b.textContent = "One moment…"; payErr = ""; track("paywall_purchase_started", null, { plan: S.plan });
+  const b = current.querySelector("#checkout"); payErr = ""; track("paywall_purchase_started", null, { plan: S.plan });
+  const w = wallet[S.plan];
+  if (w && w.ok) { try { w.pr.show(); return; } catch (e) {} }
+  b.disabled = true; b.textContent = "One moment…";
   try {
     let { data: { session } } = await sb.auth.getSession();
     if (!session) { const r = await sb.auth.signInAnonymously(); if (r.error || !r.data.session) throw r.error || new Error(""); session = r.data.session; }
