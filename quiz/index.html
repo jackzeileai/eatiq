@@ -865,7 +865,8 @@ async function payWithWallet(plan, ev) {
     if (out.confirm) { const r = out.confirm.kind === "payment" ? await stripeJs.confirmCardPayment(out.confirm.secret) : await stripeJs.confirmCardSetup(out.confirm.secret); if (r.error) throw new Error(""); }
     else if (out.status !== "trialing" && out.status !== "active") throw new Error("");
     S.plan = plan; S.step = "done"; save(); show("done", 1); askToSave();
-  } catch (e) { try { ev.complete("fail"); } catch (x) {} payErr = "That payment didn't go through. Please try again."; redraw(); }
+  } catch (e) { try { ev.complete("fail"); } catch (x) {} wallet[plan].ok = false;   // the next tap goes to the hosted checkout page
+    track("paywall_purchase_failed", null, { plan, via: "apple_pay" }); payErr = "That payment didn't go through. Please try again."; redraw(); }
 }
 async function startCheckout() {
   const b = current.querySelector("#checkout"); payErr = ""; track("paywall_purchase_started", null, { plan: S.plan });
