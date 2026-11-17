@@ -20,6 +20,8 @@
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preload" as="image" href="a/phone.png?v=2">
+<link rel="preload" as="image" href="a/scan2.jpg">
+<link rel="preload" as="image" href="a/scan2.webp">
 <style>
 :root{
   --bg:#f2f2f7; --card:#ffffff; --ink:#0b0b0f; --soft:#6d6d76; --faint:#b9b9c0; --line:rgba(0,0,0,.09);
@@ -447,7 +449,9 @@ const REVIEWS = [
 const ratingBadge = faces => `<div class="badge"><div class="rate">${ic("laurel.leading")}<div><b>4.9</b>${stars()}<small>App Store rating</small></div>${ic("laurel.trailing")}</div>
   <div class="faces"><div>${faces.map(f => `<img src="a/${f}.jpg" alt="">`).join("")}</div><small>Real reviews</small></div></div>`;
 // A looping picture, not a video: iOS will not auto-play video in Low Power Mode (it shows a play button).
-const clip = (name) => `<img src="a/${name}.webp" alt="">`;
+const CLIP = { "scan-demo": "scan2", "first-meal": "meal2" };
+// The still shows at once (it is tiny); the moving picture draws over it when it has loaded.
+const clip = (name) => `<img src="a/${CLIP[name]}.webp" alt="" style="background:#000 url(a/${CLIP[name]}.jpg) center/cover">`;
 
 // ---- every screen: { body, foot, after(el) } ----
 const PAGES = {
@@ -974,7 +978,9 @@ sheet.addEventListener("keydown", e => { if (e.key === "Enter") { const b = shee
   }
   if (S.step === "done") askToSave();
   // warm the icons so no page pops in piece by piece
-  setTimeout(() => "circle.grid.2x1.fill circle.grid.2x2.fill circle.grid.3x3.fill person.2.fill tv.fill ellipsis hand.thumbsup.fill hand.thumbsdown.fill arrow.down minus arrow.up chart.bar.fill takeoutbag.and.cup.and.straw.fill calendar lightbulb.fill fork.knife leaf.fill fish.fill arrow.triangle.2.circlepath fish carrot.fill leaf flame.fill drop.fill apple.logo sun.max.fill heart.fill tortoise.fill hare.fill bolt.fill checkmark camera.fill star star.fill person.fill person.fill.checkmark hands.clap.fill trophy.fill laurel.leading laurel.trailing flag.fill figure.run scope chart.pie.fill circle.hexagongrid.fill person.crop.circle.fill arrow.right dumbbell.fill".split(" ").forEach(n => { new Image().src = "a/i/" + n + ".png"; }), 600);
+  // Fetch every icon and the pictures later screens need now, so no screen waits on the network.
+  setTimeout(() => { "apple.logo arrow.down arrow.right arrow.triangle.2.circlepath arrow.up bell bell.fill bolt.fill calendar camera.fill camera.viewfinder carrot.fill chart.bar.fill chart.pie.fill checkmark checkmark.seal.fill chevron.left circle.grid.2x1.fill circle.grid.2x2.fill circle.grid.3x3.fill circle.hexagongrid.fill drop.fill dumbbell.fill ellipsis figure.run fish fish.fill flag.fill flame.fill fork.knife hand.thumbsdown.fill hand.thumbsup.fill hands.clap.fill hare.fill heart.fill laurel.leading laurel.trailing leaf leaf.fill lightbulb.fill lock.fill minus pencil person.2.fill person.crop.circle.fill person.fill person.fill.checkmark plus scope star star.fill sun.max.fill takeoutbag.and.cup.and.straw.fill tortoise.fill trophy.fill tv.fill xmark".split(" ").forEach(n => { new Image().src = "a/i/" + n + ".png"; });
+    "meal2.jpg meal2.webp first-meal-poster.jpg ReviewFace1.jpg ReviewFace2.jpg ReviewFace3.jpg".split(" ").forEach(n => { new Image().src = "a/" + n; }); }, 150);
 })();
 </script>
 </body>
