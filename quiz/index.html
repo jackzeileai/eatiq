@@ -239,7 +239,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 #sheet.up{transform:none}
 #sheet .back{margin-left:-12px}
 #sheet .stack{display:flex;flex-direction:column;gap:14px;margin-top:26px}
-#sheet .cta{height:62px;border-radius:31px;font-size:19px}
+#sheet .cta{height:58px;border-radius:29px;font-size:17px;gap:10px}
+#sheet .stack{gap:12px}
+#sheet .paid{text-align:center;font-size:14px;font-weight:600;color:var(--green);margin:0 0 6px}
+#sheet .tick{width:76px;height:76px;margin-bottom:16px}#sheet .tick .ic{width:34px;height:34px}
 .tick{width:86px;height:86px;border-radius:50%;background:rgba(52,199,89,.16);color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}.tick .ic{width:38px;height:38px}
 .steps{margin:22px 0 0;padding:0;list-style:none}
 .steps li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;font-size:16px}
@@ -943,6 +946,10 @@ async function startCheckout() {
 
 let auth = { way: "", address: "", sent: false }, busy = false, err = "";
 const GOOGLE = `<svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.5-4.1 7-10.2 7-17.6z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.2A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>`;
+// Apple on the web needs its own setup on Apple's side (a web sign-in ID + key) before the button can work; off until then.
+const APPLE_WEB = false;
+const MAIL = `<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="m3.5 7.5 8.5 6 8.5-6"/></svg>`;
+const PHONE = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3.5h2.6l1.5 4.2-2 1.5a12 12 0 0 0 6.1 6.1l1.5-2 4.2 1.5v2.6a2 2 0 0 1-2.1 2A16.5 16.5 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1z"/></svg>`;
 function openSheet(instant) { auth = { way: "", address: "", sent: false }; err = ""; drawSheet();
   if (instant) { sheet.style.transition = "none"; sheet.classList.add("up"); void sheet.offsetWidth; sheet.style.transition = ""; } else sheet.classList.add("up"); }
 function closeSheet() { sheet.classList.remove("up"); if (document.activeElement) document.activeElement.blur(); }
@@ -954,9 +961,12 @@ function saved(method) { S.method = method; S.pendingGoogle = ""; save(); closeS
 function drawSheet() {
   const top = auth.way ? `<button class="back" id="sback" aria-label="Back">${ic("chevron.left", "width:18px;height:18px")}</button>` : `<div style="height:44px"></div>`;
   const e = `<p class="err" role="alert">${esc(err)}</p>`, wait = busy ? "disabled" : "";
-  if (!auth.way) sheet.innerHTML = `${top}<h1>Create your account</h1><p class="sub">${S.plan === "yearly" ? "Your free trial has started." : "Your plan is active."} Pick how you'll sign in to the app.</p>
-    <div class="stack"><button class="cta dark" id="google" ${wait}>${GOOGLE}Continue with Google</button><button class="cta line" data-way="email" ${wait}>Continue with email</button><button class="cta line" data-way="phone" ${wait}>Continue with phone</button></div>${e}
-    <div style="flex:1"></div><p class="note">By continuing you agree to Meal Pic's <a href="../terms.html">Terms</a> and <a href="../privacy.html">Privacy Policy</a>.</p>`;
+  // The app's AccountScreen order and look: Apple filled, then Google / email / phone outlined, each with its mark.
+  if (!auth.way) sheet.innerHTML = `<div style="flex:1;min-height:12px;max-height:13dvh"></div><div class="tick">${ic("checkmark")}</div>
+    <p class="paid">${S.plan === "yearly" ? "Your free trial has started" : "Your plan is active"}</p><h1 class="center" style="font-size:32px">Create your account</h1><p class="sub center" style="margin-top:8px">One last step. This is how you'll sign in to the app.</p>
+    <div style="flex:1.4;min-height:16px"></div>
+    <div class="stack" style="margin-top:0">${APPLE_WEB ? `<button class="cta dark" id="apple" ${wait}>${ic("apple.logo", "width:19px;height:19px;margin-top:-3px")}Continue with Apple</button>` : ""}<button class="cta ${APPLE_WEB ? "line" : "dark"}" id="google" ${wait}>${GOOGLE}Continue with Google</button><button class="cta line" data-way="email" ${wait}>${MAIL}Continue with email</button><button class="cta line" data-way="phone" ${wait}>${PHONE}Continue with phone</button></div>${e}
+    <p class="note" style="margin-top:4px">By continuing you agree to Meal Pic's <a href="../terms.html">Terms</a> and <a href="../privacy.html">Privacy Policy</a>.</p>`;
   else if (!auth.sent) { const em = auth.way === "email";
     sheet.innerHTML = `${top}<h1>${em ? "What's your email?" : "What's your number?"}</h1><p class="sub">${em ? "We'll send you a 6-digit code. No password to remember." : "We'll text you a 6-digit code."}</p>
       <div class="stack"><input class="field" id="addr" ${em ? 'type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"' : 'type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567"'} value="${esc(auth.address)}" autocapitalize="off" autocorrect="off">
@@ -972,9 +982,9 @@ function sheetTap(b) {
   haptic();
   if (b.id === "sback") { if (auth.sent) auth.sent = false; else auth.way = ""; err = ""; return drawSheet(); }
   if (b.dataset.way) { auth.way = b.dataset.way; auth.address = ""; err = ""; return drawSheet(); }
-  if (b.id === "google") return work(async () => {
-    S.pendingGoogle = "save"; save();
-    const r = await sb.auth.linkIdentity({ provider: "google", options: { redirectTo: location.origin + location.pathname } });
+  if (b.id === "google" || b.id === "apple") return work(async () => {
+    S.pendingGoogle = b.id; save();
+    const r = await sb.auth.linkIdentity({ provider: b.id, options: { redirectTo: location.origin + location.pathname } });
     if (r.error) { S.pendingGoogle = ""; save(); throw r.error; }
     await new Promise(() => {});
   });
@@ -1032,9 +1042,10 @@ sheet.addEventListener("keydown", e => { if (e.key === "Enter") { const b = shee
 
   if (S.pendingGoogle) {                     // back from linking Google
     const { data: { session } } = await sb.auth.getSession(), bad = q.get("error_description");
+    const via = S.pendingGoogle === "apple" ? "Apple" : "Google";
     history.replaceState(null, "", location.pathname); S.pendingGoogle = ""; save();
-    if (session && session.user && !session.user.is_anonymous) return saved("Sign in with Google");
-    openSheet(); err = /already|linked/i.test(bad || "") ? "That Google account already has a Meal Pic account. Try another way." : "That sign-in didn't go through. Please try again."; return drawSheet();
+    if (session && session.user && !session.user.is_anonymous) return saved("Sign in with " + via);
+    openSheet(true); err = /already|linked/i.test(bad || "") ? "That " + via + " account already has a Meal Pic account. Try another way." : "That sign-in didn't go through. Please try again."; return drawSheet();
   }
   if (S.step === "done") askToSave();
   // warm the icons so no page pops in piece by piece
