@@ -21,7 +21,6 @@
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preload" as="image" href="a/phone.png?v=2">
 <link rel="preload" as="image" href="a/scan2.jpg">
-<link rel="preload" as="image" href="a/scan2.webp">
 <style>
 :root{
   --bg:#f2f2f7; --card:#ffffff; --ink:#0b0b0f; --soft:#6d6d76; --faint:#b9b9c0; --line:rgba(0,0,0,.09);
@@ -133,15 +132,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .cmp .col div{animation:grow .7s .5s cubic-bezier(.2,.8,.2,1) both;border-radius:16px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px}
 .cmp .col:last-child div{animation-delay:.8s}
 .cmp p{text-align:center;margin:16px 0 0;font-size:14px;color:var(--soft)}
-.badge{display:flex;align-items:center;justify-content:center;gap:26px;margin:10px 0 10px}
-.rate{display:flex;align-items:center;gap:8px;color:var(--soft)}
-.rate>.ic{width:26px;height:46px;opacity:.7}
-.rate b{display:block;font-size:28px;color:var(--ink);line-height:1;text-align:center}
+.badge{display:flex;align-items:flex-end;justify-content:center;gap:28px;margin:12px 0 10px}
+.rate{color:var(--soft)}
+.rate .lr{display:flex;align-items:center;justify-content:center;gap:2px}
+.rate .lr>.ic{width:50px;height:50px;margin:0 -8px;opacity:.75}
+.rate b{display:block;font-size:30px;color:var(--ink);line-height:1;text-align:center}
 .stars{color:var(--gold);display:flex;gap:2px}
-.rate .stars{margin:4px 0}.rate .stars .ic{width:14px;height:14px}
-.rate small,.faces small{display:block;font-size:12px;color:var(--soft);text-align:center}
-.faces div{display:flex;justify-content:center;margin-bottom:8px}
-.faces img{width:42px;height:42px;border-radius:50%;border:2px solid var(--bg);margin-left:-12px;object-fit:cover}.faces img:first-child{margin-left:0}
+.rate .stars{margin:5px 0 0}.rate .stars .ic{width:15px;height:15px}
+.rate small,.faces small{display:block;font-size:13px;color:var(--soft);text-align:center;margin-top:6px}
+.faces div{display:flex;justify-content:center}
+.faces img{width:46px;height:46px;border-radius:50%;border:2px solid var(--bg);margin-left:-13px;object-fit:cover}.faces img:first-child{margin-left:0}
 .rev{background:var(--card);border-radius:18px;padding:16px 18px;margin-bottom:12px}
 .rev .who{display:flex;align-items:center;gap:12px;font-weight:600;font-size:16px}
 .rev .who img{width:38px;height:38px;border-radius:50%;object-fit:cover}
@@ -183,7 +183,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .phone .scr>img{width:100%;height:100%;object-fit:cover;display:block}
 .phone>img{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
 .phone .scr{position:absolute;left:5.3%;top:2.5%;width:89.4%;height:95%;border-radius:11% / 5.2%;overflow:hidden;background:#000}
-.phone video{width:100%;height:100%;object-fit:cover;display:block}
+.phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.phone video::-webkit-media-controls,.phone video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
 .cam{position:absolute;inset:0;z-index:1}
 .cam .br{position:absolute;left:14%;right:14%;top:18%;height:56%}
 .cam .br i{position:absolute;width:42px;height:42px;border:3px solid #fff}
@@ -211,23 +212,29 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .edit .ic{width:16px;height:18px}.edit b{margin-left:auto;font-size:18px}.edit small{width:22px;color:var(--soft);font-size:12px}
 .edit .pm{display:flex;background:var(--well);border-radius:16px;overflow:hidden}.edit .pm button{border:0;background:none;width:46px;height:32px;font-size:22px;line-height:1}
 .nopay{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:16px;margin:0 0 12px}.nopay .ic{width:14px;height:14px}
-.tl{position:relative;margin:10px 0 0 4px}
-.tl:before{content:"";position:absolute;left:11px;top:6px;bottom:20px;width:20px;border-radius:10px;background:rgba(0,122,255,.14)}
-.tl>div{position:relative;display:flex;gap:16px;padding-bottom:14px}
-.tl i{flex:0 0 42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid var(--bg)}
-.tl i .ic{width:18px;height:18px}
-.tl b{display:block;font-size:18px;font-weight:600}.tl p{margin:1px 0 0;color:var(--soft);font-size:15px}
-.plans{display:flex;gap:12px;margin-top:6px}
-.plan{position:relative;flex:1;border:0;border-radius:18px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:16px 14px;text-align:left;cursor:pointer}
-.plan.on{box-shadow:0 0 0 2px var(--ink)}
-.plan .tag{position:absolute;top:-22px;right:14px;background:var(--faint);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:8px 8px 0 0}
+.tl{position:relative;padding:5px 0 0 4px;display:flex;flex-direction:column;gap:var(--tg,clamp(18px,4.4dvh,42px))}
+.tl:before{content:"";position:absolute;left:0;top:0;bottom:-16px;width:40px;border-radius:20px;background:linear-gradient(rgba(0,122,255,.22) 55%,rgba(0,122,255,0))}
+.tl>div{position:relative;display:flex;align-items:center;gap:20px}
+.tl i{flex:0 0 32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center}
+.tl i .ic{width:16px;height:16px}
+.tl b{display:block;font-size:19px;font-weight:600;line-height:1.2}.tl p{margin:3px 0 0;color:var(--soft);font-size:15px;line-height:1.25}
+.sp{flex:1 1 0!important;min-height:6px}
+.plans{display:flex;gap:12px;padding-top:22px}
+.plan{position:relative;flex:1 1 0;min-width:0;border:0;border-radius:18px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);padding:15px 14px 16px;text-align:left;cursor:pointer;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
+.plan.on{box-shadow:inset 0 0 0 2px var(--ink)}
+.plan .tag{position:absolute;top:-22px;right:16px;height:22px;line-height:22px;background:#8e8e93;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:0 11px;border-radius:8px 8px 0 0;white-space:nowrap}
 .plan.on .tag{background:var(--pick);color:var(--pickink)}
 .plan .nm{display:flex;justify-content:space-between;font-size:18px;font-weight:500}
 .plan .rad{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line)}
 .plan.on .rad{border:0;background:var(--pick);color:var(--pickink);display:flex;align-items:center;justify-content:center}
 .plan .rad .ic{display:none;width:11px;height:11px}.plan.on .rad .ic{display:block}
-.plan .px{font-size:30px;font-weight:700;letter-spacing:-.02em;margin:10px 0 6px}.plan .px small{font-size:17px;font-weight:600}
-.plan .by{font-size:14px;color:var(--soft)}
+.plan .px{font-size:30px;font-weight:700;letter-spacing:-.02em;margin:9px 0 5px;white-space:nowrap}.plan .px small{font-size:17px;font-weight:600}
+.plan .by{font-size:13px;color:var(--soft);white-space:nowrap}
+@media (max-height:700px){.pwp .tl{--tg:14px}.pwp .tl p{font-size:14px}.pwp .plans{padding-top:20px}.pwp .badge{margin:6px 0 4px}}
+@media (max-height:680px){.pwp .tl{--tg:10px}}
+@media (max-height:650px){.pwp .badge{display:none}}
+@media (max-height:600px){.pwp .tl{--tg:6px}.pwp .tl b{font-size:17px}.pwp .plan{padding:11px 14px 12px}.pwp .plan .px{margin:5px 0 3px;font-size:27px}}
+@media (max-width:380px){.tl p{font-size:14px}}
 #sheet{position:absolute;inset:0;z-index:20;background:var(--bg);transform:translateY(100%);transition:transform .42s cubic-bezier(.32,.72,0,1);display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 4px) 24px calc(18px + env(safe-area-inset-bottom))}
 #sheet.up{transform:none}
 #sheet .back{margin-left:-12px}
@@ -446,12 +453,24 @@ const REVIEWS = [
   ["Jamachel", "ReviewerJamachel", "The app is so good it makes everything better"],
   ["Daisy12384", "ReviewerDaisy", "I RECOMMEND THIS APP"],
   ["Adamniel", "ReviewerAdamniel", "Wow"]];
-const ratingBadge = faces => `<div class="badge"><div class="rate">${ic("laurel.leading")}<div><b>4.9</b>${stars()}<small>App Store rating</small></div>${ic("laurel.trailing")}</div>
+const ratingBadge = faces => `<div class="badge"><div class="rate"><div class="lr">${ic("laurel.leading")}<div><b>4.9</b>${stars()}</div>${ic("laurel.trailing")}</div><small>App Store rating</small></div>
   <div class="faces"><div>${faces.map(f => `<img src="a/${f}.jpg" alt="">`).join("")}</div><small>Real reviews</small></div></div>`;
 // A looping picture, not a video: iOS will not auto-play video in Low Power Mode (it shows a play button).
-const CLIP = { "scan-demo": "scan2", "first-meal": "meal2" };
+const CLIP = { "scan-demo": "scan2", "first-meal": "meal3" };
+const VID = { "scan-demo": "scan-demo-s", "first-meal": "first-meal-2" };   // first-meal-2 = the app's clip, forward then backward (its 1.9 s loop)
 // The still shows at once (it is tiny); the moving picture draws over it when it has loaded.
-const clip = (name) => `<img src="a/${CLIP[name]}.webp" alt="" style="background:#000 url(a/${CLIP[name]}.jpg) center/cover">`;
+// 2026-11-18 (Jack: "all the animations are super choppy"): the looping pictures run at ~7 frames a second,
+// so the phone now plays the real 30 fps clip. The picture is only the fallback when the browser refuses
+// to auto-play (Low Power Mode): see `playClips`.
+const clip = (name) => `<img src="a/${CLIP[name]}.jpg" alt=""><video muted playsinline loop autoplay preload="auto" disablepictureinpicture poster="a/${CLIP[name]}.jpg" src="a/${VID[name]}.mp4" data-still="a/${CLIP[name]}.webp"></video>`;
+function playClips(el) {
+  el.querySelectorAll("video").forEach(v => {
+    v.muted = true; v.defaultMuted = true; v.playsInline = true;
+    const fallback = () => { const i = v.parentNode && v.parentNode.querySelector("img"); if (i && v.isConnected) { i.src = v.dataset.still; v.remove(); } };
+    const p = v.play(); if (p && p.catch) p.catch(fallback);
+    setTimeout(() => { if (v.isConnected && v.paused && !v.dataset.held) fallback(); }, 1200);
+  });
+}
 
 // ---- every screen: { body, foot, after(el) } ----
 const PAGES = {
@@ -673,7 +692,7 @@ const PAGES = {
     after(el) {
       const $ = id => el.querySelector(id), M = { cal: 600, p: 48, c: 69, f: 13 };
       $("#fmGo").addEventListener("click", () => {
-        haptic(); $(".scr>img").src = "a/first-meal-poster.jpg"; $("#fmGo").remove(); $("#fmC").remove(); $("#fmR").classList.add("on");
+        haptic(); { const v = $(".scr>video"); if (v) { v.dataset.held = "1"; v.pause(); } else $(".scr>img").src = "a/meal3.jpg"; } $("#fmGo").remove(); $("#fmC").remove(); $("#fmR").classList.add("on");
         $("#fmT").textContent = "Reading your plate";
         const caps = ["Reading the photo…", "Identifying foods…", "Measuring portions…", "Estimating macros…"], rows = el.querySelectorAll(".scan li"), t0 = performance.now(); let cur = -1;
         (function tick(now) {
@@ -693,7 +712,7 @@ const PAGES = {
         const row = (k, name, icon, color, unit) => `<div>${ic(icon, "color:" + color)}${name}<b data-v="${k}">${M[k]}</b><small>${unit}</small><span class="pm"><button data-m="${k}" data-d="-1">&minus;</button><button data-m="${k}" data-d="1">+</button></span></div>`;
         const b = $("#fmB"); b.style.transition = "opacity .25s"; b.style.opacity = 0;
         setTimeout(() => {
-          b.classList.remove("fill"); b.innerHTML = `<div class="meal"><img src="a/first-meal.jpg" alt=""><div><b>Chicken, Rice &amp; Broccoli</b><small>Glazed chicken · White rice · Broccoli</small><em><span data-v="cal">600</span> <i>CAL</i></em><div class="m"><i>P</i><span data-v="p">48</span>g<i>C</i><span data-v="c">69</span>g<i>F</i><span data-v="f">13</span>g</div></div></div>
+          b.classList.remove("fill"); b.innerHTML = `<div class="meal"><img src="a/first-meal-3.jpg" alt=""><div><b>Chicken, Rice &amp; Broccoli</b><small>Glazed chicken · White rice · Broccoli</small><em><span data-v="cal">600</span> <i>CAL</i></em><div class="m"><i>P</i><span data-v="p">48</span>g<i>C</i><span data-v="c">69</span>g<i>F</i><span data-v="f">13</span>g</div></div></div>
             <div class="edit">${row("cal", "Calories", "bolt.fill", "#ff2d55", "cal")}${row("p", "Protein", "dumbbell.fill", "#34c759", "g")}${row("c", "Carbs", "leaf.fill", "#30b0c7", "g")}${row("f", "Fat", "drop.fill", "#af52de", "g")}</div>`;
           b.style.opacity = 1; $("#fmF").outerHTML = cta("Continue");
           b.addEventListener("click", e => { const t = e.target.closest("[data-m]"); if (!t) return; haptic(); const k = t.dataset.m; M[k] = Math.max(0, M[k] + (+t.dataset.d) * (k === "cal" ? 10 : 1)); b.querySelectorAll(`[data-v="${k}"]`).forEach(x => x.textContent = M[k]); });
@@ -707,13 +726,17 @@ const PAGES = {
     const t = prices.trial_days, y = prices.yearly, m = prices.monthly, yearly = S.plan === "yearly";
     const starts = new Date(Date.now() + t * 864e5).toLocaleDateString("en-US", { month: "short", day: "numeric" });
     const box = (id, name, p, div, by, tag) => `<button class="plan ${S.plan === id ? "on" : ""}" data-plan="${id}">${tag ? `<span class="tag">${tag}</span>` : ""}<span class="nm">${name}<span class="rad">${ic("checkmark")}</span></span><div class="px">${money(p, div)}<small>/wk</small></div><div class="by">${by}</div></button>`;
-    return { body: `<h1 class="center" style="font-size:29px;margin-top:0">Start Your <span style="color:var(--gold)">${t}-Day</span> Free Trial</h1>${ratingBadge(["ReviewFace1", "ReviewFace2", "ReviewFace3"])}
+    return { cls: "pwp", body: `<h1 class="center" style="font-size:clamp(24px,7.4vw,29px);margin-top:0;white-space:nowrap">Start Your <span style="color:var(--gold)">${t}-Day</span> Free Trial</h1>${ratingBadge(["ReviewFace1", "ReviewFace2", "ReviewFace3"])}
+      <div class="sp" style="max-height:18px"></div>
       <div class="tl"><div><i>${ic("checkmark")}</i><span><b>Today</b><p>Get full access to every feature.</p></span></div>
-        <div><i>${ic("fork.knife")}</i><span><b>In ${t - 1} days</b><p>Keep logging your meals every day.</p></span></div>
+        <div><i>${ic("bell")}</i><span><b>In ${t - 1} days</b><p>Keep logging your meals every day.</p></span></div>
         <div><i>${ic("star")}</i><span><b>In ${t} days</b><p>Your plan starts ${starts}. Cancel anytime.</p></span></div></div>
-      <div class="mid" style="padding-top:26px"><div class="plans">${box("monthly", "Monthly", m, 52 / 12, money(m) + " billed monthly", "")}${box("yearly", "Yearly", y, 52, money(y) + " billed yearly", t + " DAYS FREE")}</div></div>`,
-      foot: `<p class="nopay" style="font-size:15px">${ic("checkmark")}No commitment, cancel anytime</p>${cta(yearly ? `Start My ${t}-Day Free Trial` : "Continue", true, "checkout")}
-        <p class="note">${yearly ? `${t} days free, then ${money(y)} per year. Billed yearly.` : `${money(m)} per month. Billed monthly.`}<br>Plan auto-renews unless you cancel.${payErr ? `<br><span style="color:var(--red)">${esc(payErr)}</span>` : ""}<br><a href="../terms.html">Terms</a> · <a href="../privacy.html">Privacy</a></p>` };
+      <div class="sp"></div>
+      <div class="plans">${box("monthly", "Monthly", m, 52 / 12, money(m) + " billed monthly", "")}${box("yearly", "Yearly", y, 52, money(y) + " billed yearly", t + " DAYS FREE")}</div>
+      <div style="height:8px"></div>`,
+      foot: `<p class="nopay" style="font-size:15px;margin-bottom:10px">${ic("checkmark")}No commitment, cancel anytime</p>${cta(yearly ? `Start My ${t}-Day Free Trial` : "Continue", true, "checkout")}
+        <p class="note">${yearly ? `${t} days free, then ${money(y)} per year. Billed yearly.` : `Just ${money(m)} per month. Billed monthly.`}<br>Plan auto-renews unless you cancel.${payErr ? `<br><span style="color:var(--red)">${esc(payErr)}</span>` : ""}</p>
+        <p class="note" style="margin-top:8px"><a href="../terms.html" style="text-decoration:none">Terms</a> &nbsp;·&nbsp; <a href="../privacy.html" style="text-decoration:none">Privacy</a></p>` };
   },
   done: () => ({
     body: `<div class="mid"><div class="tick">${ic("checkmark")}</div><p class="big" style="font-size:30px">You're all set!</p><p class="sub center">${S.plan === "yearly" ? "Your free trial has started." : "Your plan is active."} Your plan is saved to your account.</p>
@@ -740,7 +763,7 @@ function show(step, dir) {
       setTimeout(() => old.remove(), 320);
     }));
   } else { stage.innerHTML = ""; stage.appendChild(el); }
-  el.querySelectorAll("video").forEach(v => { v.muted = true; v.playsInline = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+  playClips(el);
   const o = order(), i = o.indexOf(step);
   head.classList.toggle("off", NOHEAD.includes(step)); head.classList.toggle("bare", BARE.includes(step));
   prog.style.width = Math.min(100, Math.round(i / o.indexOf("generating") * 100)) + "%";
@@ -980,7 +1003,7 @@ sheet.addEventListener("keydown", e => { if (e.key === "Enter") { const b = shee
   // warm the icons so no page pops in piece by piece
   // Fetch every icon and the pictures later screens need now, so no screen waits on the network.
   setTimeout(() => { "apple.logo arrow.down arrow.right arrow.triangle.2.circlepath arrow.up bell bell.fill bolt.fill calendar camera.fill camera.viewfinder carrot.fill chart.bar.fill chart.pie.fill checkmark checkmark.seal.fill chevron.left circle.grid.2x1.fill circle.grid.2x2.fill circle.grid.3x3.fill circle.hexagongrid.fill drop.fill dumbbell.fill ellipsis figure.run fish fish.fill flag.fill flame.fill fork.knife hand.thumbsdown.fill hand.thumbsup.fill hands.clap.fill hare.fill heart.fill laurel.leading laurel.trailing leaf leaf.fill lightbulb.fill lock.fill minus pencil person.2.fill person.crop.circle.fill person.fill person.fill.checkmark plus scope star star.fill sun.max.fill takeoutbag.and.cup.and.straw.fill tortoise.fill trophy.fill tv.fill xmark".split(" ").forEach(n => { new Image().src = "a/i/" + n + ".png"; });
-    "meal2.jpg meal2.webp first-meal-poster.jpg ReviewFace1.jpg ReviewFace2.jpg ReviewFace3.jpg".split(" ").forEach(n => { new Image().src = "a/" + n; }); }, 150);
+    "meal3.jpg first-meal-3.jpg ReviewFace1.jpg ReviewFace2.jpg ReviewFace3.jpg".split(" ").forEach(n => { new Image().src = "a/" + n; }); }, 150);
 })();
 </script>
 </body>
