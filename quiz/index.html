@@ -20,7 +20,7 @@
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="preload" as="image" href="a/phone.png?v=2">
-<link rel="preload" as="image" href="a/scan2.jpg">
+<link rel="preload" as="image" href="a/scan-hd.jpg">
 <style>
 :root{
   --bg:#f2f2f7; --card:#ffffff; --ink:#0b0b0f; --soft:#6d6d76; --faint:#b9b9c0; --line:rgba(0,0,0,.09);
@@ -467,8 +467,8 @@ const REVIEWS = [
 const ratingBadge = faces => `<div class="badge"><div class="rate"><div class="lr">${ic("laurel.leading")}<div><b>4.9</b>${stars()}</div>${ic("laurel.trailing")}</div><small>App Store rating</small></div>
   <div class="faces"><div>${faces.map(f => `<img src="a/${f}.jpg" alt="">`).join("")}</div><small>Real reviews</small></div></div>`;
 // A looping picture, not a video: iOS will not auto-play video in Low Power Mode (it shows a play button).
-const CLIP = { "scan-demo": "scan2", "first-meal": "meal3" };
-const VID = { "scan-demo": "scan-demo-s", "first-meal": "first-meal-2" };   // first-meal-2 = the app's clip, forward then backward (its 1.9 s loop)
+const CLIP = { "scan-demo": "scan-hd", "first-meal": "meal-hd" };
+const VID = { "scan-demo": "scan-demo-hd", "first-meal": "first-meal-hd" };   // first-meal-2 = the app's clip, forward then backward (its 1.9 s loop)
 // The still shows at once (it is tiny); the moving picture draws over it when it has loaded.
 // 2026-11-18 (Jack: "all the animations are super choppy"): the looping pictures run at ~7 frames a second,
 // so the phone now plays the real 30 fps clip. The picture is only the fallback when the browser refuses
@@ -704,7 +704,7 @@ const PAGES = {
     after(el) {
       const $ = id => el.querySelector(id), M = { cal: 600, p: 48, c: 69, f: 13 };
       $("#fmGo").addEventListener("click", () => {
-        haptic(); { const v = $(".scr>video"); if (v) { v.dataset.held = "1"; v.pause(); } else $(".scr>img").src = "a/meal3.jpg"; } $("#fmGo").remove(); $("#fmC").remove(); $("#fmR").classList.add("on");
+        haptic(); { const v = $(".scr>video"); if (v) { v.dataset.held = "1"; v.pause(); } else $(".scr>img").src = "a/meal-hd.jpg"; } $("#fmGo").remove(); $("#fmC").remove(); $("#fmR").classList.add("on");
         $("#fmT").textContent = "Reading your plate"; $("#fmS").textContent = "This only takes a few seconds.";
         const rows = el.querySelectorAll(".scan li"), t0 = performance.now(); let shown = 0, lit = -1;
         const put = n => { shown = n; $("#fmA").setAttribute("stroke-dashoffset", 414.7 * (1 - n / 100)); $("#fmP").textContent = n;
@@ -1037,7 +1037,7 @@ sheet.addEventListener("keydown", e => { if (e.key === "Enter") { const b = shee
   // warm the icons so no page pops in piece by piece
   // Fetch every icon and the pictures later screens need now, so no screen waits on the network.
   setTimeout(() => { "apple.logo arrow.down arrow.right arrow.triangle.2.circlepath arrow.up bell bell.fill bolt.fill calendar camera.fill camera.viewfinder carrot.fill chart.bar.fill chart.pie.fill checkmark checkmark.seal.fill chevron.left circle.grid.2x1.fill circle.grid.2x2.fill circle.grid.3x3.fill circle.hexagongrid.fill drop.fill dumbbell.fill ellipsis figure.run fish fish.fill flag.fill flame.fill fork.knife hand.thumbsdown.fill hand.thumbsup.fill hands.clap.fill hare.fill heart.fill laurel.leading laurel.trailing leaf leaf.fill lightbulb.fill lock.fill minus pencil person.2.fill person.crop.circle.fill person.fill person.fill.checkmark plus scope star star.fill sun.max.fill takeoutbag.and.cup.and.straw.fill tortoise.fill trophy.fill tv.fill xmark".split(" ").forEach(n => { new Image().src = "a/i/" + n + ".png"; });
-    "meal3.jpg first-meal-3.jpg ReviewFace1.jpg ReviewFace2.jpg ReviewFace3.jpg".split(" ").forEach(n => { new Image().src = "a/" + n; }); }, 150);
+    "meal-hd.jpg first-meal-3.jpg ReviewFace1.jpg ReviewFace2.jpg ReviewFace3.jpg".split(" ").forEach(n => { new Image().src = "a/" + n; }); }, 150);
 })();
 </script>
 </body>
