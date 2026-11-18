@@ -39,8 +39,8 @@ button{font-family:inherit;color:inherit}
 #head.off{opacity:0;pointer-events:none}
 #head.bare .bar{visibility:hidden}
 .back{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.bar{flex:1;height:3px;border-radius:2px;background:var(--line);overflow:hidden;margin-left:6px}
-.bar i{display:block;height:100%;background:var(--ink);border-radius:2px;transition:width .35s ease}
+.bar{flex:1;height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-left:6px}
+.bar i{display:block;height:100%;min-width:6px;background:var(--ink);border-radius:3px;transition:width .25s ease-out}
 .page{position:absolute;inset:0;display:flex;flex-direction:column;padding-top:calc(env(safe-area-inset-top) + 48px);background:var(--bg);transition:transform .28s ease-in-out;will-change:transform;backface-visibility:hidden}
 .page.nohead{padding-top:env(safe-area-inset-top)}
 .scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding:0 24px;scrollbar-width:none}
@@ -53,7 +53,7 @@ button{font-family:inherit;color:inherit}
 .fadein{opacity:0;animation:fadein .5s 1.3s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}@keyframes fadein{to{opacity:1}}
 @keyframes grow{from{height:0;padding-bottom:0;opacity:0}}
-h1{font-size:28px;line-height:1.18;letter-spacing:-.02em;margin:10px 0 0;font-weight:700}
+h1{font-size:30px;line-height:1.16;letter-spacing:-.02em;margin:10px 0 0;font-weight:700}
 .sub{color:var(--soft);font-size:14px;margin:8px 0 0}
 .center{text-align:center}
 .ic{display:inline-block;width:22px;height:22px;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;flex:0 0 auto}
@@ -291,6 +291,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 .checks{width:auto;margin:26px 0 0;padding:8px 32px;font-weight:400}
 .checks li{padding:0 0 13px;gap:11px}
 .checks li.now,.checks li.on{font-weight:600}
+@media (max-height:720px){.gen .load{zoom:.76;margin:16px auto}.gen .checks{margin-top:8px}.gen .checks li{padding-bottom:9px}.gen .big{font-size:26px}}
+@media (max-height:610px){.gen .load{zoom:.56;margin:8px auto}.gen .checks{margin-top:2px;padding:4px 32px}.gen .checks li{padding-bottom:6px}.gen .big{font-size:24px}.gen{padding:4px 0}}
 .scroll.fade{-webkit-mask-image:linear-gradient(#000 calc(100% - 44px),transparent);mask-image:linear-gradient(#000 calc(100% - 44px),transparent)}
 .pc{background:rgba(120,120,160,.06);border-radius:20px;padding:16px;margin:0 -4px 16px}
 .pc h4{margin:0;font-size:17px;font-weight:600}.pc h4+small{display:block;font-size:13px;color:var(--soft);margin-top:2px}
@@ -331,7 +333,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:27px;heigh
 const SB_URL = "https://bvaumyrtcuehlipiaxlv.supabase.co";
 const SB_KEY = "sb_publishable_WwcAtQ0r_O-YyxFM97ciKg_eRIaQxe7";
 const APP_STORE = "https://apps.apple.com/app/id6802901402";
-const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { storageKey: "mp-quiz" } });
+const OFF = { data: { session: null, user: null }, error: new Error("offline") }, offP = async () => OFF;
+const sb = window.supabase ? supabase.createClient(SB_URL, SB_KEY, { auth: { storageKey: "mp-quiz" } })
+  : { auth: { getSession: offP, signInAnonymously: offP, updateUser: offP, linkIdentity: offP, verifyOtp: offP }, rpc: offP };
 const stage = document.getElementById("stage"), head = document.getElementById("head"), prog = document.getElementById("prog"), sheet = document.getElementById("sheet");
 const KEY = "mp-quiz-h12";
 const NOW = new Date();
@@ -379,18 +383,20 @@ function track(event, step, extra) {
 function trackStep(step) {
   if (PREVIEW) return; S.seen = S.seen || []; if (S.seen.includes(step)) return; S.seen.push(step); save();
   if (step === "pwIntro") { track("paywall_reached"); track("paywall_screen", "intro"); }
+  else if (step === "pwReviews") track("paywall_screen", "reviews");
   else if (step === "pwPlans") track("paywall_screen", "plans");
   else if (step === "done") track(S.plan === "yearly" ? "trial_started" : "subscription_started", null, { plan: S.plan });
   else track("onboarding_step", step);
 }
 
 // ---- the plan: a port of NutritionCalculator.targets (balanced diet style) ----
+const bday = () => Math.min(+S.bd, new Date(+S.by, +S.bm, 0).getDate());
 function age() {
   let a = NOW.getFullYear() - (+S.by);
-  if (NOW.getMonth() + 1 < +S.bm || (NOW.getMonth() + 1 === +S.bm && NOW.getDate() < +S.bd)) a--;
+  if (NOW.getMonth() + 1 < +S.bm || (NOW.getMonth() + 1 === +S.bm && NOW.getDate() < bday())) a--;
   return Math.min(100, Math.max(13, a));
 }
-const heightIn = () => (+S.ft) * 12 + (+S.inch);
+const heightIn = () => S.hunit === "cm" && +S.cmv ? (+S.cmv) / 2.54 : (+S.ft) * 12 + (+S.inch);
 const direction = () => S.goal === "Lose weight" ? "lose" : S.goal === "Gain weight" ? "gain" : "maintain";
 const activity = () => ({ "0-2": "light", "3-5": "moderate", "6+": "active" })[S.workouts] || "light";
 const ACT_TITLE = { light: "Lightly active", moderate: "Moderately active", active: "Very active" };
@@ -401,8 +407,9 @@ function targets(rate) {
   const dir = direction(), delta = (dir === "maintain" ? 0 : (rate || +S.pace)) * 3500 / 7;
   let cal = dir === "lose" ? maintenance - delta : dir === "gain" ? maintenance + delta : maintenance;
   cal = Math.max(cal, S.sex === "Male" ? 1500 : 1200);
-  const protein = Math.min((+S.weight) * 0.8, cal * 0.40 / 4);
-  const fat = Math.min(cal * 0.27 / 9, (cal - protein * 4) / 9);
+  const st = S.diet === "Keto" ? [0.9, 0.70] : S.diet === "Low-carb" ? [0.9, 0.40] : (S.diet === "Whole-food focus" || S.diet === "Mediterranean") ? [1.0, 0.25] : [0.8, 0.27];
+  const protein = Math.min((+S.weight) * st[0], cal * 0.40 / 4);
+  const fat = Math.min(cal * st[1] / 9, (cal - protein * 4) / 9);
   const carbs = Math.max(0, (cal - protein * 4 - fat * 9) / 4);
   const out = { calories: Math.round(cal / 10) * 10, protein: Math.round(protein), carbs: Math.round(carbs), fat: Math.round(fat) };
   return rate ? out : Object.assign(out, S.edit || {});      // the plan page's pencils
@@ -410,16 +417,16 @@ function targets(rate) {
 const deltaLb = () => Math.abs((+S.goalWeight) - (+S.weight));
 const weeksTo = rate => Math.round(deltaLb() / (rate || +S.pace));
 const goalDate = () => new Date(Date.now() + Math.round(deltaLb() / (+S.pace) * 7) * 864e5);
-const validGoalWeight = () => direction() === "lose" ? +S.goalWeight < +S.weight : +S.goalWeight > +S.weight;
+const shownW = lb => S.unit === "kg" ? Math.round(lb / KG) : +lb;       // what the ruler shows for a weight
+const validGoalWeight = () => direction() === "lose" ? shownW(S.goalWeight) < shownW(S.weight) : shownW(S.goalWeight) > shownW(S.weight);
 
 // ---- the H12 page order ----
-function order() {
-  const o = ["welcome", "sex", "workouts", "source", "triedApps", "encouragement", "height", "weight", "birthday", "pro", "goal"];
-  if (direction() !== "maintain") o.push("desiredWeight", "pace", "realistic");
-  return o.concat(["comparison", "obstacle", "diet", "accomplish", "potential", "thanks", "rollover", "rating", "referral",
-                   "ready", "generating", "plan", "firstMeal", "firstMealCamera", "pwIntro", "pwPlans", "done"]);
-}
-const NOHEAD = ["welcome", "pwIntro", "done"], BARE = ["pwPlans"];
+const HEADSTEPS = ["welcome", "sex", "workouts", "source", "triedApps", "encouragement", "height", "weight", "birthday", "pro", "goal"];
+const TAILSTEPS = ["comparison", "obstacle", "diet", "accomplish", "potential", "thanks", "rollover", "rating", "referral",
+                   "ready", "generating", "plan", "firstMeal", "firstMealCamera", "pwIntro", "pwReviews", "pwPlans", "done"];
+const FULL = HEADSTEPS.concat(["desiredWeight", "pace", "realistic"], TAILSTEPS);
+function order() { return direction() === "maintain" && S.goal ? HEADSTEPS.concat(TAILSTEPS) : FULL.slice(); }
+const NOHEAD = ["welcome", "pwIntro", "done"], BARE = ["pwReviews", "pwPlans"];
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const ic = (name, style) => `<span class="ic" style="--m:url(a/i/${name}.png);${style || ""}"></span>`;
@@ -438,8 +445,12 @@ const question = (title, sub, key, options) => ({
   foot: cta("Continue", !!S[key]) });
 const wheel = (key, values) => `<div class="wheel" data-wheel="${key}" data-values='${JSON.stringify(values.map(v => v[0]))}'>${values.map(v => `<div>${v[1]}</div>`).join("")}</div>`;
 const KG = 2.20462;
+const gwHint = () => `Pick a weight ${direction() === "lose" ? "below" : "above"} your current ${shownW(S.weight)} ${S.unit === "kg" ? "kg" : "lbs"}.`;
 function ruler(key, label) {
-  const kg = S.unit === "kg", v = kg ? Math.round(+S[key] / KG) : +S[key], min = kg ? 32 : 70, max = kg ? 227 : 500;
+  // The app's ruler: 70-500 lbs, 30-250 kg. The desired weight reaches a little past both ends so the lightest
+  // person can still pick a lower target and the heaviest a higher one.
+  const kg = S.unit === "kg", gw = key === "goalWeight", min = kg ? (gw ? 23 : 30) : (gw ? 50 : 70), max = kg ? (gw ? 260 : 250) : (gw ? 560 : 500);
+  const v = Math.min(max, Math.max(min, kg ? Math.round(+S[key] / KG) : +S[key]));
   return `<div class="seg"><button data-unit="lbs" class="${kg ? "" : "on"}">lbs</button><button data-unit="kg" class="${kg ? "on" : ""}">kg</button></div>
     <div class="read"><small>${label}</small><b><span id="rv">${v}</span> ${kg ? "kg" : "lbs"}</b></div>
     <div class="ruler"><div class="track" data-ruler="${key}" data-min="${min}" data-max="${max}"><div class="pad"></div><div class="ticks" style="width:${(max - min) * 9 + 2}px"></div><div class="pad"></div></div></div>`;
@@ -475,7 +486,7 @@ function playClips(el) {
 // ---- every screen: { body, foot, after(el) } ----
 const PAGES = {
   welcome: () => ({
-    body: `<h1 class="center" style="font-size:34px;margin-top:max(18px,3dvh)">Calorie tracking<br>made easy</h1><div class="mid fill">${phone(clip("scan-demo"), "min(72vw,346px,calc((100dvh - 226px)*.489))")}</div>`,
+    body: `<h1 class="center" style="font-size:36px;margin-top:max(18px,3dvh)">Calorie tracking<br>made easy</h1><div class="mid fill">${phone(clip("scan-demo"), "min(72vw,346px,calc((100dvh - 226px)*.489))")}</div>`,
     foot: cta("Get Started") }),
   sex: () => question("Choose your gender", "This helps personalize your experience.", "sex",
     [{ v: "Male", glyph: "&#9794;&#xFE0E;" }, { v: "Female", glyph: "&#9792;&#xFE0E;" }, { v: "Other", glyph: "&#9893;&#xFE0E;" }]),
@@ -503,7 +514,7 @@ const PAGES = {
         <svg class="wipe" style="--w:.25s;--d:1.6s;--e:ease-in-out" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="${wo}" fill="none" stroke="#c75c54" stroke-width="3" stroke-linecap="round"/><path d="${plan}" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
         <i class="mk big" style="left:0;top:31%"></i><i class="mk big pop" style="left:100%;top:97%;--w:1.75s"></i>
         <span class="fi" style="position:absolute;right:0;top:36.5%;transform:translateY(-50%);font-size:15px;--w:1.2s;--d:.6s">Without a plan</span>
-        <span style="position:absolute;left:2px;top:calc(100% - 26px);display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700">Meal Pic<span style="font-size:10px;font-weight:600;color:#fff;background:#262626;border-radius:9px;padding:3px 8px">Weight</span></span>
+        <span style="position:absolute;left:2px;top:calc(100% - 26px);display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700">Meal Pic<span style="font-size:10px;font-weight:600;color:var(--pickink);background:var(--pick);border-radius:9px;padding:3px 8px">Weight</span></span>
       </div>
       <div class="ends" style="font-size:15px;color:var(--ink);margin:0 0 22px"><span>Month 1</span><span>Month 6</span></div>
       <p class="cap" style="font-size:16px;margin:0">Track your habits and stay consistent over time.</p></div></div>`, foot: cta("Continue") };
@@ -527,7 +538,7 @@ const PAGES = {
   pro: () => question("Do you currently work with a personal trainer or registered dietitian?", "", "pro", [{ v: "Yes", icon: "hand.thumbsup.fill" }, { v: "No", icon: "hand.thumbsdown.fill" }]),
   goal: () => question("What is your goal?", "This helps us generate a plan for your calorie intake.", "goal",
     [{ v: "Lose weight", icon: "arrow.down" }, { v: "Maintain", icon: "minus" }, { v: "Gain weight", icon: "arrow.up" }]),
-  desiredWeight: () => ({ body: `<h1>What is your<br>desired weight?</h1><p class="sub">We'll build a plan that gets you there safely.</p><div class="mid">${ruler("goalWeight", "Desired weight")}</div>`, foot: cta("Continue", validGoalWeight()) }),
+  desiredWeight: () => ({ body: `<h1>What is your<br>desired weight?</h1><p class="sub">We'll build a plan that gets you there ${direction() === "lose" ? "safely" : "steadily"}.</p><div class="mid">${ruler("goalWeight", "Desired weight")}<p class="err center" id="gwmsg" style="color:var(--soft);margin-top:14px">${validGoalWeight() ? "" : gwHint()}</p></div>`, foot: cta("Continue", validGoalWeight()) }),
   // PaceScreen + StepSlider: 0.8 to 1.6 lbs a week in steps of 0.2, same zones and wording.
   pace: () => {
     S.pace = Math.min(Math.max(Math.round(+S.pace * 5) / 5, 0.8), 1.6); save();
@@ -585,7 +596,7 @@ const PAGES = {
     const crv = `M${pt(.02, fy(.70))} C${pt(.12, fy(.70))} ${pt(.19, fy(.66))} ${pt(.27, fy(.65))} C${pt(.36, fy(.64))} ${pt(.42, fy(.44))} ${pt(.52, fy(.38))} C${pt(.66, fy(.30))} ${pt(.82, fy(.07))} ${pt(.96, fy(.07))}`;
     const mid = [.145, .395, .74];
     return { body: `<h1>You have great potential to crush your goal</h1><div class="mid"><div class="pcard"><h3>Your weight transition</h3>
-      <div class="ch" style="height:175px;margin-bottom:26px">
+      <div class="ch" style="height:175px;margin-bottom:40px">
         <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M2 ${fy(.38) * 100}H96M2 ${fy(.70) * 100}H96M2 0V100M27 0V100M52 0V100M96 0V100" fill="none" stroke="rgba(120,120,128,.35)" stroke-dasharray="3 4"/><path d="M2 100H96" fill="none" stroke="#bfbfbf"/></svg>
         <svg class="wipe" style="--w:.15s;--d:1.4s" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d19461" stop-opacity=".22"/><stop offset="1" stop-color="#d19461" stop-opacity=".02"/></linearGradient></defs>
           <path d="${crv} L96 100 L2 100 Z" fill="url(#pg2)"/><path d="${crv}" fill="none" stroke="#d19461" stroke-width="3" stroke-linecap="round"/></svg>
@@ -612,7 +623,8 @@ const PAGES = {
     foot: cta(S.codeName ? "Continue" : "Skip"),
     after(el) {
       const input = el.querySelector("#code"), btn = el.querySelector("#submitcode"), msg = el.querySelector("#codemsg"), nx = el.querySelector("#next");
-      input.addEventListener("input", () => { btn.classList.toggle("ready", !!input.value.trim()); S.code = ""; S.codeName = ""; save(); nx.textContent = "Skip"; });
+      input.addEventListener("input", () => { btn.classList.toggle("ready", !!input.value.trim()); S.code = ""; S.codeName = ""; save(); nx.textContent = "Skip"; msg.textContent = ""; });
+      input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); btn.click(); } });
       btn.addEventListener("click", async () => {
         const code = input.value.trim(); if (!code) return; haptic(); input.blur(); msg.textContent = "…";
         try {
@@ -693,19 +705,18 @@ const PAGES = {
       const $ = id => el.querySelector(id), M = { cal: 600, p: 48, c: 69, f: 13 };
       $("#fmGo").addEventListener("click", () => {
         haptic(); { const v = $(".scr>video"); if (v) { v.dataset.held = "1"; v.pause(); } else $(".scr>img").src = "a/meal3.jpg"; } $("#fmGo").remove(); $("#fmC").remove(); $("#fmR").classList.add("on");
-        $("#fmT").textContent = "Reading your plate";
-        const caps = ["Reading the photo…", "Identifying foods…", "Measuring portions…", "Estimating macros…"], rows = el.querySelectorAll(".scan li"), t0 = performance.now(); let cur = -1;
-        (function tick(now) {
+        $("#fmT").textContent = "Reading your plate"; $("#fmS").textContent = "This only takes a few seconds.";
+        const rows = el.querySelectorAll(".scan li"), t0 = performance.now(); let shown = 0, lit = -1;
+        const put = n => { shown = n; $("#fmA").setAttribute("stroke-dashoffset", 414.7 * (1 - n / 100)); $("#fmP").textContent = n;
+          const i = n >= 100 ? 3 : n >= 75 ? 2 : n >= 50 ? 1 : n >= 25 ? 0 : -1; if (i !== lit) { lit = i; haptic(); } rows.forEach((li, j) => li.classList.toggle("on", j <= i)); };
+        $("#fmA").style.transition = "stroke-dashoffset .3s linear";
+        (function tick() {
           if (!el.isConnected) return;
-          const k = Math.min(1, Math.max(0, (now - t0) / 3000));
-          $("#fmA").setAttribute("stroke-dashoffset", 414.7 * (1 - k)); $("#fmP").textContent = Math.round(k * 100);
-          const i = Math.min(3, Math.floor(k * 4));
-          if (i !== cur) { cur = i; $("#fmS").textContent = caps[i]; haptic(); }
-          rows.forEach((li, j) => li.classList.toggle("on", k * 4 >= j + 0.9));
-          if (k < 1) return requestAnimationFrame(tick);
-          $("#fmS").textContent = "Done!";
-          setTimeout(() => { if (el.isConnected) result(); }, 800);
-        })(t0);
+          const t = (performance.now() - t0) / 1000;
+          if (t >= 3) { put(100); $("#fmT").textContent = "Done!"; return void setTimeout(() => { if (el.isConnected) result(); }, 500); }
+          put(Math.max(shown, Math.min(Math.floor(93 * (1 - Math.exp(-t / 3))), shown + 4)));
+          setTimeout(tick, 83);
+        })();
       });
       function result() {
         haptic(); $("#fmT").textContent = "Your first meal is logged"; $("#fmS").innerHTML = "&nbsp;";
@@ -720,8 +731,10 @@ const PAGES = {
       }
     } }),
   pwIntro: () => ({
-    body: `<h1 class="center" style="font-size:32px;margin-top:max(22px,4dvh)">We want you to try<br>Meal Pic for free</h1><div class="mid fill">${phone(clip("scan-demo"), "min(70vw,336px,calc((100dvh - 262px)*.489))")}</div>`,
+    body: `<h1 class="center" style="font-size:33px;margin-top:max(22px,4dvh)">We want you to try<br>Meal Pic for free</h1><div class="mid fill">${phone(clip("scan-demo"), "min(70vw,336px,calc((100dvh - 262px)*.489))")}</div>`,
     foot: `<p class="nopay">${ic("checkmark")}No Payment Due Now</p>${cta("Continue")}` }),
+  // The app's second paywall page on its "reviews" arm (ReviewsScreen): the same block as the rating page.
+  pwReviews: () => PAGES.rating(),
   pwPlans: () => {
     const t = prices.trial_days, y = prices.yearly, m = prices.monthly, yearly = S.plan === "yearly";
     const starts = new Date(Date.now() + t * 864e5).toLocaleDateString("en-US", { month: "short", day: "numeric" });
@@ -736,7 +749,7 @@ const PAGES = {
       <div style="height:8px"></div>`,
       foot: `<p class="nopay" style="font-size:15px;margin-bottom:10px">${ic("checkmark")}No commitment, cancel anytime</p>${cta(yearly ? `Start My ${t}-Day Free Trial` : "Continue", true, "checkout")}
         <p class="note">${yearly ? `${t} days free, then ${money(y)} per year. Billed yearly.` : `Just ${money(m)} per month. Billed monthly.`}<br>Plan auto-renews unless you cancel.${payErr ? `<br><span style="color:var(--red)">${esc(payErr)}</span>` : ""}</p>
-        <p class="note" style="margin-top:8px"><a href="../terms.html" style="text-decoration:none">Terms</a> &nbsp;·&nbsp; <a href="../privacy.html" style="text-decoration:none">Privacy</a></p>` };
+        <p class="note" style="margin-top:8px"><a href="../terms.html" style="text-decoration:none;padding:8px 6px">Terms</a> · <a href="../privacy.html" style="text-decoration:none;padding:8px 6px">Privacy</a></p>` };
   },
   done: () => ({
     body: `<div class="mid"><div class="tick">${ic("checkmark")}</div><p class="big" style="font-size:30px">You're all set!</p><p class="sub center">${S.plan === "yearly" ? "Your free trial has started." : "Your plan is active."} Your plan is saved to your account.</p>
@@ -752,7 +765,7 @@ function show(step, dir) {
   el.className = "page" + (NOHEAD.includes(step) ? " nohead" : ""); el.dataset.step = step;
   el.innerHTML = `<div class="scroll ${def.cls || ""}">${def.body}</div><div class="foot">${def.foot}</div>`;
   trackStep(step); setTimeout(() => el.classList.add("go"), 40);
-  if (step === "pwIntro" || step === "pwPlans") prepWallet();
+  if (step === "pwIntro" || step === "pwReviews" || step === "pwPlans") prepWallet();
   const old = current; current = el;
   if (old) old.querySelectorAll("video").forEach(v => v.pause());
   if (old && dir) {
@@ -766,30 +779,37 @@ function show(step, dir) {
   playClips(el);
   const o = order(), i = o.indexOf(step);
   head.classList.toggle("off", NOHEAD.includes(step)); head.classList.toggle("bare", BARE.includes(step));
-  prog.style.width = Math.min(100, Math.round(i / o.indexOf("generating") * 100)) + "%";
+  // The app's bar: from "sex" to "ready", measured on the FULL list so a Maintain path is credited the three
+  // pages it skips right after the goal (and the bar can never step backward).
+  { const a = FULL.indexOf("sex"), z = FULL.indexOf("ready"); prog.style.width = Math.min(100, Math.max(0, (FULL.indexOf(step) - a) / (z - a) * 100)) + "%"; }
   wire(el); if (def.after) def.after(el);
 }
+let heldUntil = 0;
+const held = () => { const n = Date.now(); if (n < heldUntil) return true; heldUntil = n + 450; return false; };
 function next() {
+  if (held()) return;
   // Seed a sensible desired weight (the app: 15 under for a lose goal, 10 over for a gain).
-  if (S.step === "goal" && direction() !== "maintain" && (!(+S.goalWeight >= 70) || !validGoalWeight())) { S.goalWeight = direction() === "lose" ? Math.max(80, +S.weight - 15) : +S.weight + 10; save(); }
+  if (S.step === "goal" && direction() !== "maintain" && (!(+S.goalWeight >= 70) || !validGoalWeight())) { S.goalWeight = direction() === "lose" ? Math.max(50, +S.weight - 15) : +S.weight + 10; save(); }
   const o = order(); show(o[Math.min(o.indexOf(S.step) + 1, o.length - 1)], 1);
 }
 function back() {
+  if (held()) return;
   const o = order(), i = o.indexOf(S.step); let p = o[Math.max(i - 1, 0)];
   if (p === "generating") p = "ready";            // the loader is never a stop on the way back
   if (p === "firstMealCamera") p = "firstMeal";
+  if (S.step === "pwIntro") return;                 // the app's trial intro is forward-only
   show(p, -1);
 }
 /// Redraws the page that is up, in place (a unit switch, a plan pick).
-const redraw = () => show(S.step, 0);
+const redraw = () => { const sc = current && current.querySelector(".scroll"), y = sc ? sc.scrollTop : 0; show(S.step, 0); const n = current.querySelector(".scroll"); if (n) n.scrollTop = y; };
 
 // ---- wheels and the ruler ----
 function wire(el) {
   el.querySelectorAll("[data-wheel]").forEach(w => {
     const key = w.dataset.wheel, vals = JSON.parse(w.dataset.values), rows = [...w.querySelectorAll("div")];
-    const start = key === "cm" ? Math.round(heightIn() * 2.54) : +S[key];
+    const start = key === "cm" ? Math.min(230, Math.max(100, Math.round(heightIn() * 2.54))) : +S[key];
     let sel = Math.max(0, vals.indexOf(start));
-    const store = v => { if (key === "cm") { const inches = Math.round(v / 2.54); S.ft = Math.floor(inches / 12); S.inch = inches % 12; } else S[key] = v; save(); };
+    const store = v => { if (key === "cm") { S.cmv = v; const inches = Math.round(v / 2.54); S.ft = Math.min(7, Math.max(3, Math.floor(inches / 12))); S.inch = inches % 12; } else { S[key] = v; if (key === "ft" || key === "inch") S.cmv = 0; } save(); };
     const paint = () => {
       const c = w.scrollTop / 34, idx = Math.min(vals.length - 1, Math.max(0, Math.round(c)));
       for (let i = Math.max(0, idx - 6); i <= Math.min(rows.length - 1, idx + 6); i++) {
@@ -810,7 +830,7 @@ function wire(el) {
       const v = Math.min(max, Math.max(min, min + Math.round(r.scrollLeft / 9)));
       if (v === shown) return;
       shown = v; out.textContent = v; haptic(); S[key] = kg ? Math.round(v * KG) : v; save();
-      if (key === "goalWeight") btn.disabled = !validGoalWeight();
+      if (key === "goalWeight") { btn.disabled = !validGoalWeight(); const m = el.querySelector("#gwmsg"); if (m) m.textContent = validGoalWeight() ? "" : gwHint(); }
     }, { passive: true });
   });
 }
@@ -822,7 +842,7 @@ document.getElementById("app").addEventListener("click", e => {
   if (b.dataset.pick) { haptic(); S[b.dataset.pick] = b.dataset.value; save(); b.parentNode.querySelectorAll(".opt").forEach(x => x.classList.toggle("on", x === b)); const c = current.querySelector("#next"); if (c) c.disabled = false; return; }
   if (b.dataset.unit) { haptic(); S.unit = b.dataset.unit; save(); return redraw(); }
   if (b.dataset.hunit) { haptic(); S.hunit = b.dataset.hunit; save(); return redraw(); }
-  if (b.dataset.plan) { haptic(); S.plan = b.dataset.plan; save(); return redraw(); }
+  if (b.dataset.plan) { haptic(); S.plan = b.dataset.plan; payErr = ""; save(); return redraw(); }
   if (b.dataset.edit) { haptic(); return openEdit(b.dataset.edit); }
   if (b.id === "back") { haptic(); return back(); }
   if (b.id === "next") { haptic(); return next(); }
@@ -831,14 +851,18 @@ document.getElementById("app").addEventListener("click", e => {
 
 // ---- the plan page's pencils: a small sheet with one big number and - / + (the app's PlanEditSheet)
 function openEdit(k) {
-  const step = k === "calories" ? 10 : 1, unit = k === "calories" ? "" : "g"; let v = targets()[k];
+  const cal = k === "calories", step = cal ? 50 : 5, lo = cal ? 1000 : 0, hi = cal ? 5000 : 500, unit = cal ? "kcal" : "g", rec = targets(+S.pace)[k]; let v = targets()[k];
   const d = document.createElement("div"); d.className = "esheet";
-  d.innerHTML = `<div class="eb"></div><div class="ep"><div class="grab"></div><h4>${({ calories: "Calories", protein: "Protein", carbs: "Carbs", fat: "Fats" })[k]}</h4><div class="en"><button data-d="-1">&minus;</button><b>${v.toLocaleString("en-US")}${unit}</b><button data-d="1">+</button></div>${cta("Done", true, "edone")}</div>`;
+  d.innerHTML = `<div class="eb"></div><div class="ep"><div class="grab"></div><h4 style="font-size:20px">${({ calories: "Calories", protein: "Protein", carbs: "Carbs", fat: "Fats" })[k]}</h4><p class="sub center" style="margin-top:2px">Your daily goal</p>
+    <div class="en" style="margin:20px 0 0"><button data-d="-1">&minus;</button><b><span id="ev">${v}</span><small style="font-size:18px;font-weight:600;color:var(--soft);margin-left:4px">${unit}</small></b><button data-d="1">+</button></div>
+    <button class="link" id="ereset" style="color:var(--blue);font-weight:500;margin:6px 0 8px;visibility:${v === rec ? "hidden" : "visible"}">Reset to recommended (${rec} ${unit})</button>${cta("Done", true, "edone")}</div>`;
   document.getElementById("app").appendChild(d); requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add("up")));
+  const put = n => { v = n; S.edit = Object.assign({}, S.edit, { [k]: v }); if (v === rec) delete S.edit[k]; save(); d.querySelector("#ev").textContent = v; d.querySelector("#ereset").style.visibility = v === rec ? "hidden" : "visible"; };
   d.addEventListener("click", e => {
     e.stopPropagation(); const b = e.target.closest("button");
     if (e.target.classList.contains("eb") || (b && b.id === "edone")) { haptic(); d.classList.remove("up"); return void setTimeout(() => { d.remove(); redraw(); }, 280); }
-    if (b && b.dataset.d) { haptic(); v = Math.max(0, v + step * (+b.dataset.d)); S.edit = Object.assign({}, S.edit, { [k]: v }); save(); d.querySelector(".en b").textContent = v.toLocaleString("en-US") + unit; }
+    if (b && b.id === "ereset") { haptic(); return put(rec); }
+    if (b && b.dataset.d) { const n = Math.min(hi, Math.max(lo, v + step * (+b.dataset.d))); if (n !== v) { haptic(); put(n); } }
   });
 }
 
@@ -850,8 +874,8 @@ function answers() {
   const t = targets(), dir = direction(), pad = n => String(n).padStart(2, "0");
   return {
     plan: { calories: t.calories, protein: t.protein, carbs: t.carbs, fat: t.fat, rollover: S.rollover !== "No", updated_at: new Date().toISOString() },
-    calorie_goal: t.calories, sex: S.sex, height_in: heightIn(), weight_lb: +S.weight, goal_weight_lb: dir === "maintain" ? +S.weight : +S.goalWeight, goal: S.goal,
-    weekly_rate_tenths: Math.round(+S.pace * 10), activity: activity(), dob: `${S.by}-${pad(S.bm)}-${pad(S.bd)}`,
+    calorie_goal: t.calories, sex: S.sex, height_in: Math.round(heightIn()), weight_lb: +S.weight, goal_weight_lb: dir === "maintain" ? +S.weight : +S.goalWeight, goal: S.goal,
+    weekly_rate_tenths: Math.round(+S.pace * 10), activity: activity(), dob: `${S.by}-${pad(S.bm)}-${pad(bday())}`,
     heard_from: S.source, diet: S.diet, obstacle: S.obstacle, accomplish: S.accomplish, creator_code: S.code || null,
     terms_accepted: true, source: "web_quiz", utm: S.utm || null };
 }
@@ -891,7 +915,7 @@ async function payWithWallet(plan, ev) {
     ev.complete("success");
     if (out.confirm) { const r = out.confirm.kind === "payment" ? await stripeJs.confirmCardPayment(out.confirm.secret) : await stripeJs.confirmCardSetup(out.confirm.secret); if (r.error) throw new Error(""); }
     else if (out.status !== "trialing" && out.status !== "active") throw new Error("");
-    S.plan = plan; S.step = "done"; save(); show("done", 1); askToSave();
+    S.plan = plan; S.paid = true; S.step = "done"; save(); show("done", 1); askToSave();
   } catch (e) { try { ev.complete("fail"); } catch (x) {} wallet[plan].ok = false;   // the next tap goes to the hosted checkout page
     track("paywall_purchase_failed", null, { plan, via: "apple_pay" }); payErr = "That payment didn't go through. Please try again."; redraw(); }
 }
@@ -900,19 +924,21 @@ async function startCheckout() {
   const w = wallet[S.plan];
   if (w && w.ok) { try { w.pr.show(); return; } catch (e) {} }
   b.disabled = true; b.textContent = "One moment…";
+  const slow = setTimeout(() => { if (current && current.querySelector("#checkout") === b && b.disabled) { payErr = "We couldn't reach checkout. Please try again."; redraw(); } }, 20000);
   try {
     let { data: { session } } = await sb.auth.getSession();
     if (!session) { const r = await sb.auth.signInAnonymously(); if (r.error || !r.data.session) throw r.error || new Error(""); session = r.data.session; }
     const paid = await sb.rpc("stripe_entitled", { allow_test: false });
-    if (paid.data === true) { show("done", 1); return askToSave(); }
+    if (paid.data === true) { clearTimeout(slow); S.paid = true; save(); show("done", 1); return askToSave(); }
     const r = await sb.auth.updateUser({ data: answers() }); if (r.error) throw r.error;
     const res = await fetch(SB_URL + "/functions/v1/stripe-checkout", { method: "POST",
       headers: { "content-type": "application/json", apikey: SB_KEY, authorization: "Bearer " + session.access_token },
       body: JSON.stringify({ source: "web", plan: S.plan, email: session.user && session.user.email || undefined }) });
     const out = await res.json().catch(() => ({}));
     if (!res.ok || !out.url) throw new Error("");
+    clearTimeout(slow); S.checkout = Date.now(); save();        // proof, for the trip back, that THIS browser went to pay
     location.href = out.url;
-  } catch (e) { payErr = "We couldn't reach checkout. Please try again."; redraw(); }
+  } catch (e) { clearTimeout(slow); payErr = "We couldn't reach checkout. Please try again."; redraw(); }
 }
 
 let auth = { way: "", address: "", sent: false }, busy = false, err = "";
@@ -933,11 +959,11 @@ function drawSheet() {
       <div class="stack"><input class="field" id="addr" ${em ? 'type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"' : 'type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 123-4567"'} value="${esc(auth.address)}" autocapitalize="off" autocorrect="off">
       <button class="cta" id="send" ${wait}>${busy ? "One moment…" : "Send code"}</button></div>${e}`; }
   else sheet.innerHTML = `${top}<h1>Enter your code</h1><p class="sub">We sent a 6-digit code to ${esc(auth.address)}.</p>
-      <div class="stack"><input class="field" id="otp" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" placeholder="123456"><button class="cta" id="verify" ${wait}>${busy ? "One moment…" : "Verify"}</button></div>${e}`;
+      <div class="stack"><input class="field" id="otp" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" placeholder="123456" value="${esc(auth.code || "")}"><button class="cta" id="verify" ${wait}>${busy ? "One moment…" : "Verify"}</button></div>${e}`;
   const f = sheet.querySelector("#addr, #otp"); if (f && !busy) setTimeout(() => f.focus(), 60);
 }
 function normalPhone(raw) { const d = raw.replace(/\D/g, ""); return raw.trim().startsWith("+") ? "+" + d : d.length === 10 ? "+1" + d : "+" + d; }
-const friendly = e => { const m = (e && e.message) || ""; return /already|registered|exists|linked/i.test(m) ? "That one already has a Meal Pic account. Try another." : /rate|too many|seconds/i.test(m) ? "Too many tries. Wait a minute and try again." : /expired|invalid/i.test(m) ? "That code isn't right. Check it and try again." : m || "That didn't go through. Please try again."; };
+const friendly = e => { const m = (e && e.message) || ""; if (/fetch|network|offline|session missing|load failed/i.test(m)) return "We couldn't connect. Check your signal and try again."; return /already|registered|exists|linked/i.test(m) ? "That one already has a Meal Pic account. Try another." : /rate|too many|seconds/i.test(m) ? "Too many tries. Wait a minute and try again." : /expired|invalid/i.test(m) ? "That code isn't right. Check it and try again." : m || "That didn't go through. Please try again."; };
 async function work(fn) { if (busy) return; busy = true; err = ""; drawSheet(); try { await fn(); } catch (e) { err = friendly(e); } busy = false; if (sheet.classList.contains("up")) drawSheet(); }
 function sheetTap(b) {
   haptic();
@@ -950,10 +976,10 @@ function sheetTap(b) {
     await new Promise(() => {});
   });
   if (b.id === "send") { auth.address = sheet.querySelector("#addr").value.trim(); return work(async () => {
-    if (auth.address.length < 4) throw new Error(auth.way === "email" ? "Enter your email." : "Enter your number.");
+    if (auth.way === "email" ? !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(auth.address) : auth.address.replace(/\D/g, "").length < 10) throw new Error(auth.way === "email" ? "Enter a valid email." : "Enter your full number.");
     const r = await sb.auth.updateUser(auth.way === "email" ? { email: auth.address } : { phone: normalPhone(auth.address) });
-    if (r.error) throw r.error; auth.sent = true; }); }
-  if (b.id === "verify") { const token = (sheet.querySelector("#otp").value || "").replace(/\D/g, ""); return work(async () => {
+    if (r.error) throw r.error; auth.sent = true; auth.code = ""; }); }
+  if (b.id === "verify") { const token = (sheet.querySelector("#otp").value || "").replace(/\D/g, ""); auth.code = token; return work(async () => {
     if (token.length < 6) throw new Error("Enter the 6-digit code.");
     const r = auth.way === "email" ? await sb.auth.verifyOtp({ email: auth.address, token, type: "email_change" }) : await sb.auth.verifyOtp({ phone: normalPhone(auth.address), token, type: "phone_change" });
     if (r.error) throw r.error;
@@ -986,7 +1012,15 @@ sheet.addEventListener("keydown", e => { if (e.key === "Enter") { const b = shee
     else show(PAGES[name] ? name : "welcome", 0);
     return;
   }
-  if (q.get("paid") === "1") S.step = "done"; else if (q.get("paid") === "0") { S.step = "pwPlans"; track("paywall_purchase_cancelled", null, { plan: S.plan }); }
+  if (q.get("paid") === "1" && S.checkout) { S.paid = true; S.step = "done"; }
+  else if (q.get("paid") === "0") { S.step = "pwPlans"; track("paywall_purchase_cancelled", null, { plan: S.plan }); }
+  // "done" is only for a buyer. Anyone parked there without a purchase from this browser is checked with the
+  // server (an older buyer, or a sign-in elsewhere) and otherwise put back on the prices.
+  if (S.step === "done" && !S.paid) {
+    let ok = false; try { const s0 = await sb.auth.getSession(); if (s0.data.session) { const r = await sb.rpc("stripe_entitled", { allow_test: false }); ok = r.data === true; } } catch (e) {}
+    if (ok) S.paid = true; else S.step = PAGES[(S.seen || []).includes("pwPlans") ? "pwPlans" : "welcome"] ? ((S.seen || []).includes("pwPlans") ? "pwPlans" : "welcome") : "welcome";
+  }
+  save();
   if (q.get("paid")) history.replaceState(null, "", location.pathname);
   if (!PAGES[S.step]) S.step = "welcome";
   if (S.step === "generating") S.step = "ready";
