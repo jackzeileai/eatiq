@@ -752,8 +752,8 @@ const PAGES = {
         <p class="note" style="margin-top:8px"><a href="../terms.html" style="text-decoration:none;padding:8px 6px">Terms</a> · <a href="../privacy.html" style="text-decoration:none;padding:8px 6px">Privacy</a></p>` };
   },
   done: () => ({
-    body: `<div class="mid"><div class="tick">${ic("checkmark")}</div><p class="big" style="font-size:30px">You're all set!</p><p class="sub center">${S.plan === "yearly" ? "Your free trial has started." : "Your plan is active."} Your plan is saved to your account.</p>
-      <ul class="steps"><li><i>1</i><span>Download Meal Pic on your iPhone.</span></li><li><i>2</i><span>Tap <b>Sign In</b> on the first screen.</span></li><li><i>3</i><span>Choose <b>${esc(S.method || "the same way you signed up here")}</b>. Your plan is already there.</span></li></ul></div>`,
+    body: `<div class="mid"><div class="tick">${ic("checkmark")}</div><p class="big" style="font-size:30px">Now get the app</p><p class="sub center">Your account is ready. Download Meal Pic and tap <b>Sign In</b>.</p>
+      <ul class="steps"><li><i>1</i><span>Tap <b>Download Meal Pic</b> below.</span></li><li><i>2</i><span>Open the app and tap <b>Sign In</b> on the first screen.</span></li><li><i>3</i><span>Choose <b>${esc(S.method || "the same way you signed up here")}</b>. Your plan is already there.</span></li></ul></div>`,
     foot: `<a class="cta" href="${APP_STORE}">Download Meal Pic</a>` }),
 };
 
@@ -943,15 +943,18 @@ async function startCheckout() {
 
 let auth = { way: "", address: "", sent: false }, busy = false, err = "";
 const GOOGLE = `<svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.5-4.1 7-10.2 7-17.6z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.2A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>`;
-function openSheet() { auth = { way: "", address: "", sent: false }; err = ""; drawSheet(); sheet.classList.add("up"); }
+function openSheet(instant) { auth = { way: "", address: "", sent: false }; err = ""; drawSheet();
+  if (instant) { sheet.style.transition = "none"; sheet.classList.add("up"); void sheet.offsetWidth; sheet.style.transition = ""; } else sheet.classList.add("up"); }
 function closeSheet() { sheet.classList.remove("up"); if (document.activeElement) document.activeElement.blur(); }
 /// After paying: a buyer whose account still has no sign-in gets the sheet (it cannot be dismissed).
-async function askToSave() { const { data: { session } } = await sb.auth.getSession(); if (session && session.user && session.user.is_anonymous) openSheet(); }
+/// Jack: straight after paying they make the account; only then the "download the app and tap Sign In" page.
+/// So the account page is put up at once (no slide, nothing else seen first) and only taken down if the account already has a sign-in.
+async function askToSave() { if (!S.method) openSheet(true); const { data: { session } } = await sb.auth.getSession(); if (session && session.user && session.user.is_anonymous) { if (!sheet.classList.contains("up")) openSheet(true); } else closeSheet(); }
 function saved(method) { S.method = method; S.pendingGoogle = ""; save(); closeSheet(); show("done", 0); }
 function drawSheet() {
   const top = auth.way ? `<button class="back" id="sback" aria-label="Back">${ic("chevron.left", "width:18px;height:18px")}</button>` : `<div style="height:44px"></div>`;
   const e = `<p class="err" role="alert">${esc(err)}</p>`, wait = busy ? "disabled" : "";
-  if (!auth.way) sheet.innerHTML = `${top}<h1>Save your account</h1><p class="sub">You're in. Pick how you'll sign in to the app.</p>
+  if (!auth.way) sheet.innerHTML = `${top}<h1>Create your account</h1><p class="sub">${S.plan === "yearly" ? "Your free trial has started." : "Your plan is active."} Pick how you'll sign in to the app.</p>
     <div class="stack"><button class="cta dark" id="google" ${wait}>${GOOGLE}Continue with Google</button><button class="cta line" data-way="email" ${wait}>Continue with email</button><button class="cta line" data-way="phone" ${wait}>Continue with phone</button></div>${e}
     <div style="flex:1"></div><p class="note">By continuing you agree to Meal Pic's <a href="../terms.html">Terms</a> and <a href="../privacy.html">Privacy Policy</a>.</p>`;
   else if (!auth.sent) { const em = auth.way === "email";
